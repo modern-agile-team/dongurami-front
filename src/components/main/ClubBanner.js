@@ -36,13 +36,13 @@ const ClubBanner = () => {
 
   return (
     <div className={styles.wrap}>
-      {/* <Slider className={styles.slider} {...settings}>
+      <Slider className={styles.slider} {...settings}>
         {ClubList.map((k, idx) => <div key={idx}>
           <img src={k.img} className={styles.logo} /><br/>
           {k.category}<br/>
           {k.name}
         </div>)}
-      </Slider> */}
+      </Slider>
     </div>
     );
 }
