@@ -1,16 +1,14 @@
 import React from "react";
-import styles from "./ServiceLogo.module.css";
+import styles from "./ServiceLogo.module.sass";
 
 function ServiceLogo() {
   return (
     <div className={styles.container}>
-      <h1>S</h1>
-      <h1>E</h1>
-      <h1>R</h1>
-      <h1>V</h1>
-      <h1>I</h1>
-      <h1>C</h1>
-      <h1>E</h1>
+      <h1>
+        SERVICE <br />
+        OF <br />
+        WOOAHAN
+      </h1>
     </div>
   );
 }
