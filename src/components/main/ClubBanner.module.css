@@ -1,0 +1,14 @@
+.wrap {
+  width: 70vw;
+  height: 30vh;
+  border: 1px solid #4444;
+}
+
+.slider {
+  border: 1px solid red;
+}
+
+.logo {
+  width: 50%;
+  height: 50%;
+}

@@ -1,5 +1,13 @@
+import ClubBanner from "../components/main/ClubBanner";
+import Intro from "../components/main/intro";
+
 function Home() {
-  return <h1>Hello, world!</h1>;
+  return (
+    <>
+      <ClubBanner />
+      <Intro />
+    </>
+  )
 }
 
 export default Home;
