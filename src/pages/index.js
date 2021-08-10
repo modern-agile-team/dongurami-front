@@ -1,6 +1,6 @@
-import ClubBanner from "../components/main/ClubBanner";
-import Intro from "../components/main/intro";
-import ServiceLogo from "../components/main/ServiceLogo";
+import ClubBanner from "../components/Main/ClubBanner";
+import Intro from "../components/Main/intro";
+import ServiceLogo from "../components/Main/ServiceLogo";
 
 function Home() {
   return (
@@ -9,7 +9,7 @@ function Home() {
       <ClubBanner />
       <Intro />
     </>
-  )
+  );
 }
 
 export default Home;
