@@ -1,9 +1,7 @@
-import Frame from '../components/ClubHome/common/frame';
+import Frame from "../components/ClubHome/common/frame";
 
 const ClubHome = () => {
-  return (
-    <Frame />
-  )
-}
+  return <Frame />;
+};
 
 export default ClubHome;
