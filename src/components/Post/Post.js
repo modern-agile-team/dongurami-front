@@ -1,4 +1,5 @@
 import React from "react";
+import CommentContainer from "../Common/Comment/CommentContainer";
 import Header from "../Common/Header";
 import PostDesc from "./PostDesc";
 import PostHeader from "./PostHeader";
@@ -9,6 +10,7 @@ function Posts() {
       <Header />
       <PostHeader />
       <PostDesc />
+      <CommentContainer />
     </>
   );
 }
