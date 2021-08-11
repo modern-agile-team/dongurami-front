@@ -1,9 +1,8 @@
 import Header from "../Common/Header";
 import NoticeTable from "./NoticeTable";
 import NoticeSearch from "./NoticeSearch";
-import NoticePagination from './NoticePagination';
-import styles from './Notice.module.sass';
-
+import NoticePagination from "./NoticePagination";
+import styles from "./Notice.module.sass";
 
 function Notice() {
   return (
