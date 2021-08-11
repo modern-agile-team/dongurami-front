@@ -1,16 +1,21 @@
 import Header from "../Common/Header";
 import NoticeTable from "./NoticeTable";
-import NoticePagination from "./NoticePagination";
 import NoticeSearch from "./NoticeSearch";
+import NoticePagination from './NoticePagination';
+import styles from './Notice.module.sass';
+
 
 function Notice() {
   return (
     <div>
       <Header />
-      <div>
+      <div className={styles.container}>
         <NoticeTable />
+        <div>
+          <NoticeSearch />
+          <button>✏️ 글쓰기</button>
+        </div>
         <NoticePagination />
-        <NoticeSearch />
       </div>
     </div>
   );
