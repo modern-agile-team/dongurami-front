@@ -1,9 +1,15 @@
+import Header from '../Common/Header';
 import NoticeTable from "./NoticeTable";
+import NoticePagination from './NoticePagination';
 
 function Notice() {
   return (
     <div>
-      <NoticeTable />
+      <Header />
+      <div>
+        <NoticeTable />
+        <NoticePagination />
+      </div>
     </div>
   );
 }
