@@ -1,6 +1,7 @@
-import Header from '../Common/Header';
+import Header from "../Common/Header";
 import NoticeTable from "./NoticeTable";
-import NoticePagination from './NoticePagination';
+import NoticePagination from "./NoticePagination";
+import NoticeSearch from "./NoticeSearch";
 
 function Notice() {
   return (
@@ -9,6 +10,7 @@ function Notice() {
       <div>
         <NoticeTable />
         <NoticePagination />
+        <NoticeSearch />
       </div>
     </div>
   );
