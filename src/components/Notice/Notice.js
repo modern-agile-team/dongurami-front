@@ -15,6 +15,7 @@ function Notice() {
           <button>✏️ 글쓰기</button>
         </div>
         <NoticePagination />
+        <NoticeSearch />
       </div>
     </div>
   );
