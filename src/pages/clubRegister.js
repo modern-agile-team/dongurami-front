@@ -1,8 +1,7 @@
-import ClubRegister from "../components/ClubRegister/ClubRegister";
-import Container from "../components/ClubRegister/Container"
+import ClubRegister from "../components/ClubRegister/ClubRegister"
 const clubRegister = () => { 
   return (
-      <Container />
+      <ClubRegister />
   )
 }
 
