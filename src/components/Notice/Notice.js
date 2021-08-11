@@ -12,11 +12,10 @@ function Notice() {
       <div className={styles.container}>
         <NoticeTable />
         <div>
-          <p>test</p>
+          <NoticeSearch />
           <button>✏️ 글쓰기</button>
         </div>
         <NoticePagination />
-        <NoticeSearch />
       </div>
     </div>
   );
