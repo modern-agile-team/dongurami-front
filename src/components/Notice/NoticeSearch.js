@@ -1,6 +1,6 @@
 import React from "react";
-import { FiSearch } from "react-icons/fi";
 import styles from "./NoticeSearch.module.sass";
+import { FiSearch } from "react-icons/fi";
 
 function NoticeSearch() {
   return (
@@ -10,5 +10,4 @@ function NoticeSearch() {
     </div>
   );
 }
-
 export default NoticeSearch;
