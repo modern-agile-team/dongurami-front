@@ -1,0 +1,54 @@
+.login {
+    width: 400px;
+    height: 450px;
+
+    margin: 0 auto;
+    border-style: groove;
+    border-radius: 15px;
+}
+
+.loginBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginTitle {
+    width: 84px;
+    margin: 0 auto;
+    
+    margin-top: 45px;
+    margin-bottom: 45px;
+}
+
+.idInput {
+    width: 280px;
+    height: 35px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.pwInput {
+    width: 280px;
+    height: 35px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+
+.loginSubmit {
+    font-size: 15px;
+    width: 290px;
+    height: 40px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.loginFotter {
+    font-size: 10px;
+    color: cornflowerblue;
+    width: 400px;
+}
+
+.findIDPW {
+    margin-right: 30px;
+    margin-left: 105px;
+}

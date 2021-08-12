@@ -1,0 +1,13 @@
+.container {
+    width: 73vh;
+    height: 100vh;
+    margin: 0  auto;
+    border: solid;
+    background: #fff;
+    padding: 20px;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
