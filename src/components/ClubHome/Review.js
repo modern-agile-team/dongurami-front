@@ -1,7 +1,14 @@
 import React from 'react';
 import styles from "./Review.module.sass";
+import MyPage from '../myPage/myPage';
+import { useState } from 'react';
 
 export const Review = () => {
+    const [ MPOPen, setMPOpen] = useState(false);
+
+    const openPopup = () => { setMPOpen(true) }
+    const closePopup = () => { setMPOpen(false) }
+
     return (
         <div className={styles.reviewAll}>
             <header className={styles.reviewHeader}>
@@ -15,7 +22,10 @@ export const Review = () => {
                 <button className={styles.reviewAdd}>후기 작성하기</button>
                 <hr className={styles.Line}/>
                 <div className={styles.reviewer}>
-                    <span className={styles.reviewAuthor}>심**</span>
+                    <span onClick={ openPopup } className={styles.reviewAuthor}>
+                        심**
+                    </span>
+                    
                         <div className={styles.authorStar}>
                             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                         </div>                
@@ -23,6 +33,7 @@ export const Review = () => {
                     <span className={styles.reviewDay}>2021-08-11</span>
                 </div>
             </body>
+            <MyPage open={MPOPen} close={closePopup} />
         </div>
     )
 }

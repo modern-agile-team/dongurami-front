@@ -23,6 +23,9 @@ const SideBar = ({ comp, setComp }) => {
           공지게시판
         </span> <br/>
         <span onClick={() => setComp(5)}>
+          자유게시판
+        </span> <br/>
+        <span onClick={() => setComp(6)}>
           동아리 후기
         </span> <br/>
       </ul>

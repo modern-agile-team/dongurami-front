@@ -14,7 +14,8 @@ const Frame = () => {
     else if (comp === 2) return <Activities />
     else if (comp === 3) return <Calendar />
     else if (comp === 4) return <div>공지게시판</div>
-    else if (comp === 5) return <Review />
+    else if (comp === 5) return <div>자유게시판</div>
+    else if (comp === 6) return <Review />
   }
 
   return (
