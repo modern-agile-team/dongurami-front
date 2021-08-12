@@ -1,6 +1,6 @@
 import ClubNoticeTable from "./ClubNoticeTable";
-import ClubNoticeSearch from "./NoticeSearch";
-import ClubNoticePagination from "./NoticePagination";
+import ClubNoticeSearch from "./ClubNoticeSearch";
+import ClubNoticePagination from "./ClubNoticePagination";
 import styles from "./ClubNotice.module.sass";
 
 function ClubNotice() {
