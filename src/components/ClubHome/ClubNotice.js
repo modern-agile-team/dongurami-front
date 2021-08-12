@@ -19,4 +19,4 @@ function ClubNotice() {
   );
 }
 
-export default ClubNotice;
+export default ClubNotice
