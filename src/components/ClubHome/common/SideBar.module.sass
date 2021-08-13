@@ -1,25 +1,35 @@
-.sideBar 
-  display: flex
-  flex-direction: column
-
-  span
+.sideBar
+  ul
+    margin: 0
+    padding: 10px 0 0 15px
+    list-style: none
+    li
+      margin-bottom: 4vh
+  span, a
     font-size: 150%
+    cursor: pointer
 
-  img
-    width: 15%
-    
-.show 
-  width: 15vw
-  height: 80vh
-  border: 1px solid red
+.show
+  width: 14vw
+  height: 100vh
   position: absolute
   left: 0px
   transition: 1s
-  
-.hide 
+  background-color: skyblue
+
+.hide
   width: 15vw
-  height: 80vh
-  border: 1px solid red
+  height: 100%
   position: absolute
-  left: -15vw
+  left: -10vw
   transition: 1s
+
+.hamb
+  text-align: right
+  margin-right: 1rem
+  svg
+    cursor: pointer
+
+.menu
+  display: flex
+  flex-direction: column
