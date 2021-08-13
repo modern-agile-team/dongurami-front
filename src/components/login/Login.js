@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './Login.module.css';
 
 export const Login = () => {
@@ -15,17 +16,23 @@ export const Login = () => {
                     type='password' 
                     placeholder='비밀번호를 입력해 주세요.' 
                 />
-                <button className={styles.loginSubmit}>
-                    Login
+                <Link href="/" passHref>
+                    <button className={styles.loginSubmit}>
+                        Login
                     </button>
+                </Link>
             </body>
            <footer className={styles.loginFotter}>
-                <span className={styles.findIDPW}>
-                    아이디/비밀번호 찾기
+                <Link href="/findAuth" passHref>
+                    <span className={styles.findIDPW}>
+                        아이디/비밀번호 찾기
                     </span>
-                <span className={styles.signUp}>
-                    회원가입
+                </Link>
+                <Link href="signup" passHref>
+                    <span className={styles.signUp}>
+                        회원가입
                     </span>
+                </Link>
            </footer>
         </div>
     )

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import ClubNoticeTable from "./ClubNoticeTable";
 import ClubNoticeSearch from "./ClubNoticeSearch";
 import ClubNoticePagination from "./ClubNoticePagination";
@@ -10,7 +11,9 @@ function ClubNotice() {
         <ClubNoticeTable />
         <div>
           <ClubNoticeSearch />
-          <button>✏️ 글쓰기</button>
+          <Link href="/write" passHref>
+            <button>✏️ 글쓰기</button>          
+          </Link>
         </div>
         <ClubNoticePagination />
         <ClubNoticeSearch />

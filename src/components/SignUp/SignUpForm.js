@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './SignUpForm.module.css';
 
 function SignUpForm() {
@@ -9,7 +10,9 @@ function SignUpForm() {
       <input className={styles.input} type="email" placeholder="이메일" />
       <input className={styles.input} type="password" placeholder="비밀번호" />
       <input className={styles.input} type="password" placeholder="비밀번호 확인" />
-      <input className={styles.input} type="submit" value="회원가입" />
+      <Link href="/LoginPage" passHref>
+        <input className={styles.button} type="submit" value="회원가입" />
+      </Link>
     </form>
   );
 }

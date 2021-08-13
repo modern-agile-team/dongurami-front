@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from "./NoticeTable.module.sass";
 
 function NoticeTable() {
@@ -13,12 +14,14 @@ function NoticeTable() {
       </thead>
       <tbody>
         {Array.from({ length: 10 }, (_, i) => (
-          <tr key={i}>
-            <td>{i}</td>
-            <td>제목입니다</td>
-            <td>글쓴2</td>
-            <td>15분전</td>
-          </tr>
+          <Link href="/post" key={i} passHref>
+            <tr>
+              <td>{i}</td>
+              <td>제목입니다</td>
+              <td>글쓴2</td>
+              <td>15분전</td>
+            </tr>
+          </Link>
         ))}
       </tbody>
     </table>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from "react";
 import Slider from "react-slick";
 import styles from "./ClubBanner.module.sass";
@@ -39,9 +40,13 @@ const ClubBanner = () => {
           <div key={idx}>
             {<k.icons cursor="pointer" size="40%" />}
             <br />
-            {k.category}
-            <br />
-            {k.name}
+            <Link href="/ClubHome" passHref>
+              <div>
+                {k.category}
+                <br />
+                {k.name}
+              </div>
+            </Link>
           </div>
         ))}
       </Slider>
