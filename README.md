@@ -1,7 +1,7 @@
 # 💻 동그라미 (CIRCLE)
-###  인덕대학교 학생들을 동아리 서비스
-> 개발 일자 : 2021.08.01 ~
 [![Deploy](https://github.com/wooahan-agile/dongurami-front/actions/workflows/main.yml/badge.svg?branch=develop)](https://github.com/wooahan-agile/dongurami-front/actions/workflows/main.yml)
+###  인덕대학교 학생들을 동아리 서비스
+> 개발 일자 : 2021.08.01 ~ 
 <br/>
 <br/>
 <br />
