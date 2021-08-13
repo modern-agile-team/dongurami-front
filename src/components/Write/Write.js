@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './Write.module.sass';
 import ReactQuillContainer from './ReactQuillContainer';
 
@@ -6,7 +7,9 @@ function Write() {
     <div className={styles.container}>
       <input placeholder="제목을 입력하세요" />
       <ReactQuillContainer />
-      <button>글 작성</button>
+      <Link href="/notice" passHref>
+        <button>글 작성</button>
+      </Link>
     </div>
   );
 }

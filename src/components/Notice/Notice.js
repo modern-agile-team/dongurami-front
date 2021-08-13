@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Header from "../Common/Header";
 import NoticeTable from "./NoticeTable";
 import NoticeSearch from "./NoticeSearch";
@@ -12,7 +13,9 @@ function Notice() {
         <NoticeTable />
         <div>
           <NoticeSearch />
-          <button>✏️ 글쓰기</button>
+          <Link href="/write" passHref>
+            <button>✏️ 글쓰기</button>
+          </Link>
         </div>
         <NoticePagination />
         <NoticeSearch />
