@@ -1,0 +1,17 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{89cfcf67-b5d9-4e93-b6a0-8abfa508331e}}
+          heroku_app_name: "dongurami-front" #Must be unique in Heroku
+          heroku_email: "junsang.yu3@gmail.com"
