@@ -1,12 +1,12 @@
-import style from './ClubRegister.module.css'
-import ClubRegisterForm from './ClubRegisterForm';
+import style from "../../styles/Club/Resister/ClubRegister.module.sass";
+import ClubRegisterForm from "./ClubRegisterForm";
 
 const ClubRegister = () => {
   return (
-      <div className={style.container}>
-          <ClubRegisterForm />
-      </div>
-   ) 
-}
+    <div className={style.container}>
+      <ClubRegisterForm />
+    </div>
+  );
+};
 
 export default ClubRegister;

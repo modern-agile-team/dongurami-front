@@ -1,8 +1,8 @@
-import Link from 'next/link';
+import Link from "next/link";
 import ClubNoticeTable from "./ClubNoticeTable";
 import ClubNoticeSearch from "./ClubNoticeSearch";
 import ClubNoticePagination from "./ClubNoticePagination";
-import styles from "./ClubNotice.module.sass";
+import styles from "../../styles/Club/Notice/ClubNotice.module.sass";
 
 function ClubNotice() {
   return (
@@ -12,7 +12,7 @@ function ClubNotice() {
         <div>
           <ClubNoticeSearch />
           <Link href="/write" passHref>
-            <button>✏️ 글쓰기</button>          
+            <button>✏️ 글쓰기</button>
           </Link>
         </div>
         <ClubNoticePagination />
@@ -22,4 +22,4 @@ function ClubNotice() {
   );
 }
 
-export default ClubNotice
+export default ClubNotice;

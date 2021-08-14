@@ -1,4 +1,4 @@
-import styles from "./SideBar.module.sass";
+import styles from "../../../styles/Club/Home/SideBar.module.sass";
 import React, { useState } from "react";
 import Router from "next/router";
 import { HiMenu } from "react-icons/hi";

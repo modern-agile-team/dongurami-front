@@ -1,4 +1,4 @@
-import styles from "./ClubNoticeTable.module.sass";
+import styles from "../../styles/Club/Notice/ClubNoticeTable.module.sass";
 
 function NoticeTable() {
   return (

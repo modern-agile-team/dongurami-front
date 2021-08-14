@@ -1,4 +1,4 @@
-import styles from "./Schedule.module.sass";
+import styles from "../../styles/Club/Schedule/Schedule.module.sass";
 
 const Schedule = () => {
   return (
