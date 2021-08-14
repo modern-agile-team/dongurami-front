@@ -2,7 +2,7 @@ import Header from "../Common/Header";
 import FreeBoardTable from "./FreeBoardTable";
 import FreeBoardSearch from "./FreeBoardSearch";
 import FreeBoardPagination from "./FreeBoardPagination";
-import styles from "./FreeBoard.module.sass";
+import styles from "../../styles/Board/Free/FreeBoard.module.sass";
 
 function FreeBoard() {
   return (

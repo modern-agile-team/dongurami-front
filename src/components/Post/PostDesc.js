@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PostDesc.module.sass";
+import styles from "../../styles/Board/Posts/PostDesc.module.sass";
 import { CgProfile } from "react-icons/cg";
 function PostDesc() {
   return (

@@ -1,4 +1,4 @@
-import styles from "./FreeBoardTable.module.sass";
+import styles from "../../styles/Board/Free/FreeBoardTable.module.sass";
 
 function FreeBoardTable() {
   return (

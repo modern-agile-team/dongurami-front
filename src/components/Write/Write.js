@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import styles from './Write.module.sass';
-import ReactQuillContainer from './ReactQuillContainer';
+import Link from "next/link";
+import styles from "../../styles/Board/Write.module.sass";
+import ReactQuillContainer from "./ReactQuillContainer";
 
 function Write() {
   return (

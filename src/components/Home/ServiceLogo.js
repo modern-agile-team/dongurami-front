@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ServiceLogo.module.sass";
+import styles from "../../styles/Home/ServiceLogo.module.sass";
 
 function ServiceLogo() {
   return (

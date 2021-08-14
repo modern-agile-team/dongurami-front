@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./FreeBoardPagination.module.sass";
+import styles from "../../styles/Board/Free/FreeBoardPagination.module.sass";
 
 function FreeBoardPagination() {
   return (

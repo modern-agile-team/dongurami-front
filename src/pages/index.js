@@ -1,6 +1,6 @@
-import ClubBanner from "../components/main/ClubBanner";
-import Intro from "../components/main/Intro";
-import ServiceLogo from "../components/main/ServiceLogo";
+import ClubBanner from "../components/Home/ClubBanner";
+import Intro from "../components/Home/Intro";
+import ServiceLogo from "../components/Home/ServiceLogo";
 import Header from "../components/Common/Header";
 
 function Home() {

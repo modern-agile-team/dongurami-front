@@ -1,9 +1,9 @@
-import Link from 'next/link';
+import Link from "next/link";
 import Header from "../Common/Header";
 import NoticeTable from "./NoticeTable";
 import NoticeSearch from "./NoticeSearch";
 import NoticePagination from "./NoticePagination";
-import styles from "./Notice.module.sass";
+import styles from "../../styles/Board/Notice/Notice.module.sass";
 
 function Notice() {
   return (

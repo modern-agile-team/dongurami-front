@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PostHeader.module.sass";
+import styles from "../../styles/Board/Posts/PostHeader.module.sass";
 
 function PostHeader() {
   return (

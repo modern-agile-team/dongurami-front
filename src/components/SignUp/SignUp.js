@@ -1,11 +1,11 @@
-import styles from './SignUp.module.css'
-import SignUpForm from './SignUpForm';
+import styles from "./SignUp.module.sass";
+import SignUpForm from "./SignUpForm";
 
 function SignUp() {
   return (
-  <div className={styles.container}>
-    <SignUpForm />
-  </div>
+    <div className={styles.container}>
+      <SignUpForm />
+    </div>
   );
 }
 

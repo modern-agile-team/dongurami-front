@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./NoticePagination.module.sass";
+import styles from "../../styles/Board/Notice/NoticePagination.module.sass";
 
 function NoticePagination() {
   return (
