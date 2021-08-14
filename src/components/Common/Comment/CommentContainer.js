@@ -1,7 +1,6 @@
-import style from './CommentContainer.module.sass';
+import style from "../../../styles/Common/CommentContainer.module.sass";
 import Comment from "./Comment";
-import AddComment from './AddComment';
-
+import AddComment from "./AddComment";
 
 function CommentContainer() {
   return (

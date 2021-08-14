@@ -1,4 +1,4 @@
-import styles from './Comment.module.sass';
+import styles from "../../../styles/Common/Comment.module.sass";
 
 function Comment() {
   return (
@@ -9,7 +9,15 @@ function Comment() {
           <p>닉네임</p>
           <p>2021.08.11 15:31</p>
         </div>
-        <div>본문본문본문본문본문본문본문본문본문본문본문본문본문본문본문<br />test<br />test<br />test</div>
+        <div>
+          본문본문본문본문본문본문본문본문본문본문본문본문본문본문본문
+          <br />
+          test
+          <br />
+          test
+          <br />
+          test
+        </div>
       </div>
     </div>
   );
