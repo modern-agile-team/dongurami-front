@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Check.module.sass";
+import styles from "../../styles/User/ChangePW/Check.module.sass";
 
 function Check({ onClick }) {
   return (

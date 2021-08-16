@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "./Login.module.sass";
+import styles from "../../styles/User/Login/Login.module.sass";
 
 export const Login = () => {
   return (

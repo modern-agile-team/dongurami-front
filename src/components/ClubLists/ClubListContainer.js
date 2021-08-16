@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import Link from "next/link";
 import React from "react";
-import styles from "./ClubListContainer.module.sass";
+import styles from "../../styles/Board/Club/ClubListContainer.module.sass";
 import wooae from "./wooae.jpeg";
 import Image from "next/image";
 

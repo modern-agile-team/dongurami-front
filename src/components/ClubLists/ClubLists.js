@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../Common/Header";
-import styles from "./ClubLists.module.sass";
+import styles from "../../styles/Board/Club/ClubLists.module.sass";
 import ClubListContainer from "./ClubListContainer";
 const list = [
   {

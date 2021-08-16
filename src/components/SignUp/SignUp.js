@@ -1,5 +1,5 @@
 import styles from "./SignUp.module.sass";
-import SignUpForm from "./SignUpForm";
+import SignUpForm from "../../styles/User/SignUp/SignUpForm";
 
 function SignUp() {
   return (

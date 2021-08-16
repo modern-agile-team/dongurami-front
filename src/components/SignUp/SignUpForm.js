@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "./SignUpForm.module.sass";
+import styles from "../../styles/User/SignUp/SignUpForm.module.sass";
 
 function SignUpForm() {
   return (

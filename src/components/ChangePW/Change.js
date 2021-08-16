@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Change.module.sass";
+import styles from "../../styles/User/ChangePW/Change.module.sass";
 function Change({ onClick }) {
   return (
     <div className={styles.wrap}>
