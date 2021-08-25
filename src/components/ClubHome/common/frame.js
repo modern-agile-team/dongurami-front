@@ -1,4 +1,4 @@
-import styles from "./frame.module.sass";
+import styles from "../../../styles/Club/Home/Common/frame.module.scss";
 import SideBar from "./SideBar";
 import ClubIntro from "../ClubIntro";
 import Activities from "../Activities";

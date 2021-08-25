@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Manager.module.sass';
+import styles from '../../styles/Club/Home/Manager/Manager.module.scss';
 
 export const Manager = () => {
     return (

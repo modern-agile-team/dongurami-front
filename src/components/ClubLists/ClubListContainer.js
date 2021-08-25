@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from './ClubListContainer.module.sass';
+import styles from '../../styles/Club/Lists/ClubListContainer.module.scss';
 
 const ClubListContainer = ({list}) => {
     const {title, categories} = list

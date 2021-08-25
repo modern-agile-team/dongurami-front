@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ClubNoticeSearch.module.sass";
+import styles from "../../styles/Club/Home/Notice/ClubNoticeSearch.module.scss";
 import { FiSearch } from "react-icons/fi";
 
 function NoticeSearch() {

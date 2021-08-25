@@ -1,4 +1,4 @@
-import styles from "./Calendar.module.sass";
+import styles from "../../styles/Club/Home/Schedule/Calendar.module.scss";
 
 const makeCalandar = (year, month) => {
   const calendarDays = [];

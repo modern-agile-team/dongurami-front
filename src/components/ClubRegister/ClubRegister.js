@@ -1,4 +1,4 @@
-import style from './ClubRegister.module.css'
+import style from '../../styles/Club/Resister/ClubRegister.module.scss'
 import ClubRegisterForm from './ClubRegisterForm';
 
 const ClubRegister = () => {

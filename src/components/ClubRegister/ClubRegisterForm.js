@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from "react";
-import style from './ClubRegisterForm.module.css';
+import style from '../../styles/Club/Resister/ClubRegisterForm.module.scss';
 
 
 const ClubRegisterForm = () => {

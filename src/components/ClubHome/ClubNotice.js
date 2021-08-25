@@ -2,7 +2,7 @@ import Link from 'next/link';
 import ClubNoticeTable from "./ClubNoticeTable";
 import ClubNoticeSearch from "./ClubNoticeSearch";
 import ClubNoticePagination from "./ClubNoticePagination";
-import styles from "./ClubNotice.module.sass";
+import styles from "../../styles/Club/Home/Notice/ClubNotice.module.scss";
 
 function ClubNotice() {
   return (
