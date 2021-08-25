@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Header.module.sass";
+import styles from "../../styles/Common/Header.module.scss";
 import { useRouter } from "next/router";
 
 function Header() {

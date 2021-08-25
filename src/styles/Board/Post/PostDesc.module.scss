@@ -1,0 +1,23 @@
+.postDesc {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  margin-top: 10px;
+  width: 70%;
+  border: 1px solid black;
+  p {
+    width: 90%;
+    white-space: wrap;
+  }
+}
+.profile {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  width: 90%;
+  padding: 10px;
+  h3 {
+    margin-left: 1rem;
+  }
+}

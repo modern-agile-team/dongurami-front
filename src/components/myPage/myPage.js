@@ -1,4 +1,4 @@
-import styles from './myPage.module.sass';
+import styles from '../../styles/User/MyPage/myPage.module.scss';
 import { ImUser } from 'react-icons/im';
 import Router from 'next/router';
 

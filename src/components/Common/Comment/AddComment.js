@@ -1,4 +1,4 @@
-import styles from './AddComment.module.sass';
+import styles from '../../../styles/Common/Comment/AddComment.module.scss';
 
 function AddComment() {
   return (
