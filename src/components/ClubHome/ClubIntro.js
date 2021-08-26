@@ -1,4 +1,4 @@
-import styles from './ClubIntro.module.sass'
+import styles from '../../styles/Club/Home/Intro/ClubIntro.module.scss'
 
 const ClubIntro = () => {
   return (

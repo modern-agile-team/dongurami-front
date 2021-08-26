@@ -1,4 +1,4 @@
-import styles from './SignUp.module.css'
+import styles from '../../styles/User/SignUp/SignUp.module.scss'
 import SignUpForm from './SignUpForm';
 
 function SignUp() {

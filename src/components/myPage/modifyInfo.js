@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './modifyInfo.module.sass';
+import styles from '../../styles/User/MyPage/modifyInfo.module.scss';
 
 const ModifyInfo = () => {
   const userData = {

@@ -1,4 +1,4 @@
-import styles from "./Intro.module.sass";
+import styles from "../../styles/Main/Intro.module.scss";
 import React from "react";
 
 const Intro = () => {

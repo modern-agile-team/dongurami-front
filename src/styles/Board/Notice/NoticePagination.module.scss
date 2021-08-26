@@ -1,0 +1,37 @@
+.paginationLists {
+  display: flex;
+  justify-content: center;
+}
+.num {
+  padding: 0.3rem 0.6rem;
+  margin: 0;
+  &:hover {
+    text-align: center;
+    border-radius: 20px;
+    background-color: skyblue;
+    cursor: pointer;
+  }
+}
+.start,
+.end {
+  padding: 0.3rem 0.5rem;
+  margin: 0;
+
+  &:hover {
+    text-align: center;
+    border-radius: 20px;
+    background-color: skyblue;
+    cursor: pointer;
+  }
+}
+.startArrow,
+.endArrow {
+  padding: 0.3rem 0.5rem;
+  margin: 0;
+  &:hover {
+    text-align: center;
+    border-radius: 20px;
+    background-color: skyblue;
+    cursor: pointer;
+  }
+}

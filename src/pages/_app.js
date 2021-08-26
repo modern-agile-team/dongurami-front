@@ -1,4 +1,4 @@
-import '../../styles/global.css';
+import '../styles/global.scss';
 import 'react-quill/dist/quill.snow.css';
 
 function MyApp({ Component, pageProps }) {

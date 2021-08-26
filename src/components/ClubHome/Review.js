@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./Review.module.sass";
+import styles from "../../styles/Club/Home/Review/Review.module.scss";
 import MyPage from '../myPage/myPage';
 import { useState } from 'react';
 

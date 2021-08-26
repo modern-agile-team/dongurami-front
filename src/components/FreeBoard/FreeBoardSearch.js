@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./FreeBoardSearch.module.sass";
+import styles from "../../styles/Board/FreeBoard/FreeBoardSearch.module.scss";
 import { FiSearch } from "react-icons/fi";
 
 function FreeBoardSearch() {

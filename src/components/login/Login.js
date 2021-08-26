@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './Login.module.css';
+import styles from '../../styles/User/Login/Login.module.scss';
 
 export const Login = () => {
     return (

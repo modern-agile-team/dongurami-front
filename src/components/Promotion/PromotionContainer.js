@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './PromotionContainer.module.sass';
+import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
 import { data } from './data';
 import Image from 'next/image'
 import Header from '../Common/Header';
