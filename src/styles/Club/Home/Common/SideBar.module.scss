@@ -1,0 +1,64 @@
+@font-face {
+  font-family: "twayair";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.sideBar {
+  background-color: white;
+  position: fixed;
+  height: 100vh;
+  span {
+    font-family: "twayair";
+    margin-left: 1vh;
+  }
+}
+
+.menu,
+#show {
+  display: flex;
+  flex-direction: column;
+  div {
+    display: flex;
+    align-items: center;
+    padding: 0 2vh;
+    height: 8vh;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(243, 243, 243);
+      color: #6dc4b5;
+    }
+    svg {
+      margin: 0 1vh;
+    }
+  }
+}
+
+#hide {
+  position: absolute;
+  div {
+    span {
+      display: none;
+    }
+  }
+}
+
+#hamb {
+  cursor: pointer;
+  padding: 2vh 2.5vh;
+}
+
+@media (max-width: 767px) {
+  #show {
+    width: 100vw;
+    font-size: 150%;
+  }
+
+  #hide {
+    div {
+      display: none;
+    }
+  }
+}

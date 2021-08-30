@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Activities.module.sass'
+import styles from '../../styles/Club/Home/Activities/Activities.module.scss'
 
 export const Activities = () => {
     return (

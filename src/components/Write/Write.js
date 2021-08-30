@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './Write.module.sass';
+import styles from '../../styles/Board/Write/Write.module.scss';
 import ReactQuillContainer from './ReactQuillContainer';
 
 function Write() {

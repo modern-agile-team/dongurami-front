@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ClubNoticePagination.module.sass";
+import styles from "../../styles/Club/Home/Notice/ClubNoticePagination.module.scss";
 
 function ClubNoticePagination() {
   return (

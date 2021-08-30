@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 15vh;
+  align-items: center;
+  width: 70%;
+  height: 10vh;
+  border: 1px solid black;
+
+  h1 {
+    margin-left: 30px;
+    font-size: 1.5rem;
+  }
+}
