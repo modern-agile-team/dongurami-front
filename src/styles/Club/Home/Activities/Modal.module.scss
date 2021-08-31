@@ -15,11 +15,17 @@
   height: 99vh;
   z-index: 999;
   background-color: rgba(#616161, 0.9);
+
   svg {
     margin: 0 15vw;
     cursor: pointer;
     &:hover {
       color: white;
+    }
+    &:active {
+      border-radius: 50%;
+      background-color: #616161;
+      transition: 0.15s;
     }
   }
 }
@@ -40,6 +46,7 @@
   margin-top: 3vh;
   font-weight: bold;
   span {
+    font-size: 120%;
     margin: 0 20vw;
   }
 }
@@ -51,5 +58,22 @@
   img {
     width: 50vw;
     height: 70vh;
+    cursor: zoom-out;
+  }
+}
+
+@media (max-width: 580px) {
+  .container {
+    justify-content: center;
+  }
+  .img {
+    img {
+      width: 50vw;
+      height: 60vw;
+      cursor: zoom-out;
+    }
+    svg {
+      margin: 0 5vw;
+    }
   }
 }

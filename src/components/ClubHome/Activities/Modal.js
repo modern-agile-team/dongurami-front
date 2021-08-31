@@ -32,7 +32,7 @@ const Modal = ({ onClose, imgURL, setImgURL }) => {
       </div>
       <div className={styles.img}>
         <IoIosArrowBack size={iconSize} onClick={back} />
-        <img src={imgURL} />
+        <img src={imgURL} onClick={onClose} />
         <IoIosArrowForward size={iconSize} onClick={foward} />
       </div>
       <div className={styles.footer}>

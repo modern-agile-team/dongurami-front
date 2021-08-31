@@ -88,6 +88,28 @@
 
 @media (max-width: 580px) {
   .sideBar {
+    display: flex;
+    height: 6vh;
+    background-color: rgba(#fff, 0);
+    margin-top: 1vh;
+  }
+  #show {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    div {
+      height: 6vh;
+      padding: 0 1vw;
+      &:hover {
+        border-radius: 50%;
+      }
+    }
+    #now {
+      border-radius: 50%;
+    }
+  }
+
+  #hide {
     display: none;
   }
 }
