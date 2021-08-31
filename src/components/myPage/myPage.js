@@ -1,6 +1,7 @@
 import styles from '../../styles/User/MyPage/myPage.module.scss';
-import { ImUser } from 'react-icons/im';
-import Router from 'next/router';
+import Router from 'next/router'; 
+import { FiSettings, FiUser } from 'react-icons/fi'
+import { ImCancelCircle } from 'react-icons/Im'
 
 const MyPage = ({ open, close }) => {
   const movePage = () => {
@@ -12,21 +13,25 @@ const MyPage = ({ open, close }) => {
   }
 
   return (
-    <div>
+    <>
       {open ? (
-        <div className={styles.wrap}>
-          <ImUser className={styles.icon} />
-          <h4>심서현</h4>
-          <p>컴퓨터전자공학과</p>
-          <ul>
-            소속 동아리<br/>
-            <li><span onClick={movePage}>우아한 애자일</span></li>
-          </ul>
-          <a onClick={moveInfo}>개인정보 수정</a>
-          <button onClick={close}>X</button>
+        <div className={styles.container}>
+          <div className={styles.myHeader}>
+            <FiSettings className={styles.setting} onClick={moveInfo} />
+            <FiUser className={styles.user} />
+            <ImCancelCircle className={styles.cancel} onClick={close}/>
+          </div>
+          <div className={styles.wrap}>
+            <h4>심서현</h4>
+            <hr />
+            <p>학과</p>
+            <p>컴퓨터전자공학과</p>
+            <p>소속 동아리</p><br/>
+            <span onClick={movePage}>우아한 애자일</span>
+          </div>
         </div>
       ) : null}
-    </div>
+    </>
   )
 }
 
