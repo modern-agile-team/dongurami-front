@@ -1,4 +1,4 @@
-import styles from "../../styles/Club/Home/Intro/ClubIntro.module.scss";
+import styles from "../../../styles/Club/Home/Intro/ClubIntro.module.scss";
 import ClubInfo from "./ClubInfo";
 
 const ClubIntro = () => {
