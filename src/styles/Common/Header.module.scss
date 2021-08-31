@@ -1,9 +1,17 @@
-.original_header {
+@font-face {
+  font-family: 'twayair';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.myHeader {
+  font-family: 'twayair';
   display: flex;
-  width: 100vw;
-  height: 10vh;
+  width: 100%;
+  height: 10%;
   justify-content: center;
-  background-color: #82d9c9;
+  background-color: #fff;
   position: fixed;
   align-items: center;
   top: 0;
@@ -12,29 +20,69 @@
   z-index: 9999;
   margin: 0 auto;
   list-style-type: none;
-  color: white;
+  color: black;
+  li {
+    margin-left: 1em;
+    margin-right: 1em;
+    cursor: pointer;
+    &:hover {
+      color: #3FCDB8;
+    }
+    img {
+      width: 81px;
+      height: 36px;
+      object-fit: cover;
+      margin-right: 38em;
+      margin-left: -5em;
+    }
+  }  
 }
-.change_header {
+
+.user {
   display: flex;
-  width: 100vw;
-  height: 10vh;
-  justify-content: center;
-  background-color: #c2f2dc;
-  position: fixed;
-  align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  margin: 0 auto;
-  list-style-type: none;
-  color: white;
-}
-.headerContent {
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-  cursor: pointer;
-  &:hover {
-    color: gray;
+  margin-left: 3.5em;
+  .login {
+    line-height: 32px;
   }
+  .signUp {
+    width: 80px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #90E2D6;
+    text-align: center;
+    line-height: 31.5px;
+    margin-left: -0.5em;
+  }
+}
+
+.dropdown {
+  margin-top: 0.25vh;
+  text-align: center;
+  position: relative;
+  &:hover {
+    .dropdownMenu {
+      display: block;
+      color: black;
+    }
+  }
+  .dropdownMenu {
+    width: 7.5vw;
+    padding: 16px;
+    margin-left: -3.3vw;
+    list-style-type: none;
+    position: absolute;
+    min-width: 50px;
+    box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    display: none;
+  }
+  .notice {
+    margin-top: 1vh;
+    margin-bottom: 3vh;
+  }
+}
+
+li #now {
+  color:#3FCDB8;
 }
