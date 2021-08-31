@@ -11,15 +11,15 @@ import Modal from "../Activities/Modal";
 const Frame = () => {
   const [comp, setComp] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
-
-  const onClick = () => {
+  const [imgURL, setImgURL] = useState("");
+  const onClick = (e) => {
+    setImgURL(e.target.src);
     setModalOpen(true);
   };
 
   const onModalClose = () => {
     setModalOpen(false);
   };
-
   const Comp = () => {
     if (comp === 1) return <ClubIntro />;
     if (comp === 2) return <ClubNotice />;
@@ -32,7 +32,11 @@ const Frame = () => {
     <>
       <div className={styles.container}>
         <SideBar setComp={setComp} comp={comp} />
-        {modalOpen ? <Modal onClose={onModalClose} /> : false}
+        {modalOpen ? (
+          <Modal imgURL={imgURL} setImgURL={setImgURL} onClose={onModalClose} />
+        ) : (
+          false
+        )}
         <div className={styles.wrap}>
           <Comp comp={comp} />
         </div>

@@ -21,7 +21,7 @@
 #show {
   display: flex;
   flex-direction: column;
-
+  width: 11vw;
   div {
     display: flex;
     align-items: center;
@@ -49,6 +49,7 @@
 
 #hide {
   position: absolute;
+  width: 100%;
   div {
     span {
       display: none;
@@ -77,13 +78,15 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1080px) {
   #show {
-    display: none;
+    span {
+      display: none;
+    }
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 580px) {
   .sideBar {
     display: none;
   }
