@@ -10,6 +10,7 @@
   background-color: white;
   position: fixed;
   height: 100vh;
+
   span {
     font-family: "twayair";
     margin-left: 1vh;
@@ -20,6 +21,7 @@
 #show {
   display: flex;
   flex-direction: column;
+
   div {
     display: flex;
     align-items: center;
@@ -27,12 +29,21 @@
     height: 8vh;
     cursor: pointer;
     &:hover {
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
       background-color: rgb(243, 243, 243);
       color: #6dc4b5;
     }
     svg {
       margin: 0 1vh;
     }
+  }
+  #now {
+    font-weight: bold;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: rgb(122, 122, 122);
+    color: #6dc4b5;
   }
 }
 
@@ -42,20 +53,37 @@
     span {
       display: none;
     }
+    &:hover {
+      width: 50%;
+      border-radius: 50%;
+    }
+  }
+  #now {
+    width: 50%;
+    border-radius: 50%;
+    background-color: rgb(122, 122, 122);
+    color: #6dc4b5;
   }
 }
 
 #hamb {
   cursor: pointer;
   padding: 2vh 2.5vh;
-}
-
-#now {
-  background-color: rgb(122, 122, 122);
-  color: #6dc4b5;
+  &:active {
+    border-radius: 50%;
+    background-color: rgba(gray, 0.2);
+    color: #6dc4b5;
+    transition: 0.14s;
+  }
 }
 
 @media (max-width: 767px) {
+  #show {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
   .sideBar {
     display: none;
   }

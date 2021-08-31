@@ -1,4 +1,4 @@
-import styles from "../../styles/Club/Home/Intro/ClubInfo.module.scss";
+import styles from "../../../styles/Club/Home/Intro/ClubInfo.module.scss";
 import { AiOutlineMan, AiOutlineWoman } from "react-icons/ai";
 
 const ClubInfo = () => {
