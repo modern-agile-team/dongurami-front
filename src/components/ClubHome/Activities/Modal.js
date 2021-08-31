@@ -13,7 +13,10 @@ const Modal = ({ onClose }) => {
       </div>
       <div className={styles.img}>
         <IoIosArrowBack size={iconSize} />
-        <img src="https://wooahan-agile.s3.ap-northeast-2.amazonaws.com/HomePage/circles.jpg"></img>
+        <img
+          src="https://wooahan-agile.s3.ap-northeast-2.amazonaws.com/HomePage/circles.jpg"
+          alt="사진"
+        />
         <IoIosArrowForward size={iconSize} />
       </div>
       <div className={styles.footer}>
