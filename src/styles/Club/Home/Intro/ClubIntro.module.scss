@@ -1,5 +1,27 @@
-.Intro {
-  width: 50vw;
-  height: 10%;
-  border: 1px solid black;
+@font-face {
+  font-family: "twayair";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  height: 70%;
+  span {
+    font-family: "twayair";
+    font-size: 200%;
+    margin: 5vh 4vw;
+  }
+  p {
+    margin: 1vh 4vw;
+  }
 }
