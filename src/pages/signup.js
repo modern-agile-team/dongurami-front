@@ -1,7 +1,13 @@
 import SignUp from "../components/SignUp/SignUp";
+import Header from "../components/Common/Header";
 
 function signup() {
-  return <SignUp />;
+  return (
+    <>
+    <Header />
+    <SignUp />
+    </>
+  ); 
 }
 
 export default signup;
