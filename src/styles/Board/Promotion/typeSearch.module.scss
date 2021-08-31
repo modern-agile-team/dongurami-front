@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5em;
+
+  .searchContainer {
+    margin-top: 8px;
+    margin-right: 0.8em;
+    width: 33%;
+    height: 50px;
+    border: solid #c2f2dc;
+    border-radius: 60px;
+    .searchElement {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: row;
+      align-items: center;
+
+      input {
+        border: none;
+        width: 90%;
+        height: 90%;
+        margin-left: 20px;
+        font-size: 15px;
+
+        outline: none;
+      }
+      svg {
+        border-left: solid black;
+        width: 10%;
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    font-size: 20px;
+
+    li {
+      margin-right: 3em;
+    }
+  }
+}
