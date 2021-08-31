@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "twayair";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  width: 99vw;
+  height: 99vh;
+  z-index: 999;
+  background-color: rgba(rgb(66, 66, 66), 0.9);
+  svg {
+    margin: 0 15vw;
+    cursor: pointer;
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.header {
+  margin-top: 3vh;
+  display: flex;
+  span {
+    font-family: "twayair";
+    margin: 0 15vw;
+    font-size: 200%;
+  }
+}
+
+.footer {
+  padding: 2vh 0;
+  display: flex;
+  margin-top: 3vh;
+  font-weight: bold;
+  span {
+    margin: 0 20vw;
+  }
+}
+
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 50vw;
+    height: 70vh;
+  }
+}
