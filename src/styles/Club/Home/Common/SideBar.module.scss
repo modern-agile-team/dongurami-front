@@ -50,15 +50,13 @@
   padding: 2vh 2.5vh;
 }
 
-@media (max-width: 767px) {
-  #show {
-    width: 100vw;
-    font-size: 150%;
-  }
+#now {
+  background-color: rgb(122, 122, 122);
+  color: #6dc4b5;
+}
 
-  #hide {
-    div {
-      display: none;
-    }
+@media (max-width: 767px) {
+  .sideBar {
+    display: none;
   }
 }

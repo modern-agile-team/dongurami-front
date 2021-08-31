@@ -12,16 +12,16 @@ const Frame = () => {
 
   const Modal = () => {
     if (comp === 1) return <ClubIntro />;
-    else if (comp === 2) return <Activities />;
-    else if (comp === 3) return <Calendar />;
-    else if (comp === 4) return <ClubNotice />;
-    else if (comp === 5) return <div>자유게시판</div>;
-    else if (comp === 6) return <Review />;
+    else if (comp === 2) return <ClubNotice />;
+    else if (comp === 3) return <Activities />;
+    else if (comp === 4) return <Calendar />;
+    else if (comp === 5) return <Review />;
+    else if (comp === 6) return <div>자유게시판</div>;
   };
 
   return (
     <>
-      <SideBar comp={comp} setComp={setComp} />
+      <SideBar setComp={setComp} comp={comp} />
       <div className={styles.wrap}>
         <Modal comp={comp} />
       </div>

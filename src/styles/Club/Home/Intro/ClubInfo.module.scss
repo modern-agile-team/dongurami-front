@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "twayair";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.info {
+  display: flex;
+  margin-top: 5vh;
+  height: 30%;
+  padding: 3vh 0;
+  img {
+    margin: 0 3vw;
+    height: 100%;
+  }
+  box-shadow: 0 10px 5px -10px #111;
+}
+
+.club {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0 6vw;
+}
+
+#clubName {
+  font-family: "twayair";
+  font-size: 200%;
+}
+
+#categori {
+  font-size: 120%;
+  color: gray;
+}
+
+.sex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  div {
+    display: flex;
+    margin: 1vh 1vw;
+    span {
+      margin: 0 0.5vw;
+      font-size: 120%;
+    }
+  }
+}
