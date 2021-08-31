@@ -21,7 +21,7 @@
 #show {
   display: flex;
   flex-direction: column;
-
+  width: 11vw;
   div {
     display: flex;
     align-items: center;
@@ -49,6 +49,7 @@
 
 #hide {
   position: absolute;
+  width: 100%;
   div {
     span {
       display: none;
@@ -77,14 +78,38 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1080px) {
   #show {
-    display: none;
+    span {
+      display: none;
+    }
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 580px) {
   .sideBar {
+    display: flex;
+    height: 6vh;
+    background-color: rgba(#fff, 0);
+    margin-top: 1vh;
+  }
+  #show {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    div {
+      height: 6vh;
+      padding: 0 1vw;
+      &:hover {
+        border-radius: 50%;
+      }
+    }
+    #now {
+      border-radius: 50%;
+    }
+  }
+
+  #hide {
     display: none;
   }
 }
