@@ -31,7 +31,9 @@ const Frame = () => {
   return (
     <>
       <div className={styles.container}>
-        <SideBar setComp={setComp} comp={comp} />
+        <div className={styles.sidebar}>
+          <SideBar setComp={setComp} comp={comp} />
+        </div>
         {modalOpen ? (
           <Modal imgURL={imgURL} setImgURL={setImgURL} onClose={onModalClose} />
         ) : (

@@ -1,14 +1,24 @@
 .container {
-  height: 100%;
+  display: flex;
   background-color: #c2f2dc8e;
+  justify-content: center;
+  margin-top: 10vh;
+  overflow: auto;
 }
-
 .sidebar {
   background-color: white;
+  position: fixed;
+  left: 0;
+  height: 100%;
 }
-
 .wrap {
   display: flex;
-  margin-top: 10vh;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 580px) {
+  .sidebar {
+    background-color: rgba(#fff, 0);
+  }
 }
