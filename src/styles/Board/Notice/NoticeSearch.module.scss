@@ -1,16 +1,16 @@
-.inputForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.input {
-  width: 100%;
-  margin-right: 0.5rem;
-  margin-left: 0.5rem;
-}
-.FiSearch {
-  width: 2rem;
-  &:hover {
-    cursor: pointer;
+.container {
+  text-align: center;
+  select {
+    border-radius: 1rem;
+    height: 2rem;
+    padding: 0 1rem;
+    border: 1px solid lightgray;
+  }
+  input {
+    border-radius: 1rem;
+    width: 50%;
+    height: 2rem;
+    margin: 0 1rem;
+    border: 1px solid lightgray;
   }
 }
