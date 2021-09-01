@@ -4,17 +4,22 @@ import { data } from './data';
 import Image from 'next/image'
 import Header from '../Common/Header';
 import TypeSearch from './TypeSearch';
+import { BsPencil } from 'react-icons/bs';
 
 const PromotionContainer = () => {
     return (
      <>
         <Header />
         <TypeSearch />
+        <button className={styles.writeBtn}>
+            <BsPencil />
+            글쓰기
+        </button>
         <div className={styles.section}>
             {data.map(el => (
                 <div className={styles.promotion} key={el.key}>
                   <div className={styles.img} >
-                    <img src={el.img} />
+                    <img src={el.img} alt="poster" />
                     <div className={styles.creationInfo}>
                         <div className={styles.writerInfo}>
                             <div className={styles.writer}>최두리</div>
