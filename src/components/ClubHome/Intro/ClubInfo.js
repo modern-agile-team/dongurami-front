@@ -2,7 +2,7 @@ import styles from "../../../styles/Club/Home/Intro/ClubInfo.module.scss";
 import { AiOutlineMan, AiOutlineWoman } from "react-icons/ai";
 
 const ClubInfo = () => {
-  const iconSize = 40;
+  const iconSize = 30;
   return (
     <div className={styles.info}>
       <div id={styles.logo}>
@@ -14,6 +14,8 @@ const ClubInfo = () => {
       <div className={styles.club}>
         <div>
           <p id={styles.clubName}>우아한 애자일</p>
+        </div>
+        <div>
           <p id={styles.categori}>IT 동아리</p>
         </div>
         <div className={styles.sex}>
@@ -27,7 +29,6 @@ const ClubInfo = () => {
           </div>
         </div>
       </div>
-      <div></div>
     </div>
   );
 };

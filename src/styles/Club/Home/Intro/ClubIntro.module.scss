@@ -9,19 +9,13 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100vh;
+  width: 70vw;
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  height: 70%;
-  span {
-    font-family: "twayair";
-    font-size: 200%;
-    margin: 5vh 4vw;
-  }
-  p {
-    margin: 1vh 4vw;
+@media (max-width: 580px) {
+  .container {
+    width: 100vw;
   }
 }
