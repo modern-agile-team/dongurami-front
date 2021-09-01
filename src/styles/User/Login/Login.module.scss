@@ -1,54 +1,81 @@
+@font-face {
+  font-family: 'twayair';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .login {
-  width: 400px;
-  height: 450px;
+  font-family: 'twayair';
+  width: 42em;
+  height: 28rem;
 
-  margin: 0 auto;
-  border-style: groove;
-  border-radius: 15px;
+  margin: 16vh auto;
+  border-style: solid;
+  border-color: #C2F2DC;
+  border-radius: 70px;
+  .body {
+    display: flex;
+    flex-direction: column;
+  }
+  h1 {
+    margin: 0 auto;
+    font-size: 2.5em;
+    margin-top: 45px;
+    margin-bottom: 35px;
+  }
+  .idInput {
+    font-size: 1rem;
+    width: 30rem;
+    height: 3.3rem;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #dadada;
+    outline-style: none;
+  }
+  .pwInput {
+    font-size: 1rem;
+    width: 30rem;
+    height: 3.3rem;
+    margin: 0 auto;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #dadada;
+    outline-style: none;
+  }
+  button {
+    font-family: 'twayair';
+    zoom: 1.4;
+    width: 4.5rem;
+    height: 2.3rem;
+    margin: 0 auto;
+    border-radius: 8px;
+    border-style: solid;
+    border-color: #3FCDB8 ;
+    background-color: #fff;
+    color: #3FCDB8;
+    cursor: pointer;
+  }
 }
 
-.loginBody {
-  display: flex;
-  flex-direction: column;
+.find {
+  padding: 1rem;
+  margin-left: 23rem;
+  cursor: pointer;
+  .findID {
+    margin-right: 1.5rem;
+  }
 }
 
-.loginTitle {
-  width: 84px;
-  margin: 0 auto;
-
-  margin-top: 45px;
-  margin-bottom: 45px;
+.buttons {
+  padding: 1rem;
+  margin-left: 21rem;
+  .loginBtn {
+    margin-right: 1.5rem;
+  }
 }
 
-.idInput {
-  width: 280px;
-  height: 35px;
-  margin: 0 auto;
-  margin-bottom: 10px;
-}
-
-.pwInput {
-  width: 280px;
-  height: 35px;
-  margin: 0 auto;
-  margin-bottom: 25px;
-}
-
-.loginSubmit {
-  font-size: 15px;
-  width: 290px;
-  height: 40px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
-
-.loginFotter {
-  font-size: 10px;
-  color: cornflowerblue;
-  width: 400px;
-}
-
-.findIDPW {
-  margin-right: 30px;
-  margin-left: 105px;
-}
