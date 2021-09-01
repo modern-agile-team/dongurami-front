@@ -2,7 +2,7 @@ import styles from "../../../styles/Club/Home/Common/frame.module.scss";
 import SideBar from "./SideBar";
 import ClubIntro from "../Intro/ClubIntro";
 import Activities from "../Activities/Activities";
-import Review from "../Review";
+import Review from "../Review/Review";
 import Calendar from "../Calendar";
 import ClubNotice from "../ClubNotice";
 import { useState } from "react";

@@ -12,8 +12,9 @@
   align-items: center;
   position: fixed;
   width: 99vw;
-  height: 99vh;
-  z-index: 999;
+  height: 100vh;
+  z-index: 99999;
+  top: 0;
   background-color: rgba(#616161, 0.9);
 
   svg {
