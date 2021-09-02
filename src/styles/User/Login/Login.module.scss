@@ -30,10 +30,8 @@
     height: 3.3rem;
     margin: 0 auto;
     margin-bottom: 20px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-color: #dadada;
+    border: none;
+    border-bottom: 2px solid #dadada;
     outline-style: none;
   }
   .pwInput {
@@ -41,10 +39,8 @@
     width: 30rem;
     height: 3.3rem;
     margin: 0 auto;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-color: #dadada;
+    border: none;
+    border-bottom: 2px solid #dadada;
     outline-style: none;
   }
   button {

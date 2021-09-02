@@ -27,10 +27,8 @@
     height: 1vh;
     margin: 0 auto;
     padding: 20px;
-    border: solid #dadada;
-    border-top: none;
-    border-left: none;
-    border-right: none;
+    border: none;
+    border-bottom: 2px solid #dadada;
     outline-style: none;
   }
   select {
