@@ -1,0 +1,31 @@
+.mine {
+  display: flex;
+  margin: 0 auto;
+  width: 60%;
+  p {
+    margin: 0.5em 0;
+  }
+  border-bottom: 1px solid rgba(97, 97, 97, 0.575);
+  padding: 2em 0;
+}
+
+.star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+}
+
+.update {
+  display: flex;
+  align-items: center;
+  margin-left: 1em;
+  height: 30%;
+
+  svg {
+    cursor: pointer;
+    &:hover {
+      color: red;
+    }
+  }
+}

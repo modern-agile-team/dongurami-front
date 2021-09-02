@@ -1,0 +1,12 @@
+.intro {
+  display: flex;
+  flex-direction: column;
+  padding: 5em;
+  width: 65%;
+  height: 100%;
+  span {
+    font-family: "twayair";
+    margin-bottom: 3vh;
+    font-size: 200%;
+  }
+}

@@ -7,6 +7,9 @@
 }
 
 .sideBar {
+  background-color: white;
+  position: fixed;
+  height: 100vh;
   span {
     font-family: "twayair";
     margin-left: 1vh;
@@ -26,17 +29,19 @@
     &:hover {
       border-top-right-radius: 15px;
       border-bottom-right-radius: 15px;
-      background-color: rgb(204, 204, 204);
+      background-color: rgb(243, 243, 243);
+      color: #6dc4b5;
     }
     svg {
       margin: 0 1vh;
     }
   }
   #now {
+    font-weight: bold;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: rgb(122, 122, 122);
-    color: white;
+    color: #6dc4b5;
   }
 }
 
@@ -82,7 +87,8 @@
 @media (max-width: 580px) {
   .sideBar {
     display: flex;
-    width: 100%;
+    background-color: rgba(#fff, 0);
+    margin-top: 1vh;
   }
   #show {
     display: flex;

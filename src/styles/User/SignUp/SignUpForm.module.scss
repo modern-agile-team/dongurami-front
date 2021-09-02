@@ -1,23 +1,63 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 50%;
+@font-face {
+  font-family: 'twayair';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.input {
-  padding: 20px;
-  border: 1px solid lightgray;
-  border-radius: 0.25rem;
+.form {
+  font-family: 'twayair';
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 15vh;
+  gap: 15px;
+  width: 50%;
+  height: 95vh;
+  border: solid;
+  border-color: #C2F2DC;
+  border-radius: 70px;
+  h1 {
+    margin: 0 auto;
+    margin-top: 5.5vh;
+    margin-bottom: 4vh;
+  }
+  .input {
+    width: 25vw;
+    height: 1vh;
+    margin: 0 auto;
+    padding: 20px;
+    border: none;
+    border-bottom: 2px solid #dadada;
+    outline-style: none;
+  }
+  select {
+    width: 28.5vw;
+    height: 8vh;
+    margin: 0 auto;
+    margin-top: 3vh;
+    border: solid #dadada;
+    border-radius: 0.5em;
+  }
 }
 
 .button {
-  padding: 20px;
-  border: 1px solid lightgray;
-  border-radius: 0.25rem;
+  font-family: 'twayair';
+  zoom: 1.4;
+  width: 4.5rem;
+  height: 2.3rem;
+  margin: 0 auto;
+  margin-top: 1.5vh;
+  margin-bottom: 1.5vh;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #3FCDB8 ;
+  background-color: #fff;
+  color: #3FCDB8;
+  cursor: pointer;
 }
 .button:hover {
-  filter: brightness(90%);
+  filter: brightness(96%);
 }
 
 .input::-webkit-inner-spin-button, 
