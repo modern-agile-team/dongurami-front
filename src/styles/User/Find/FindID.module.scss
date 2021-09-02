@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'twayair';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .find {
+    font-family: 'twayair';
+    width: 42em;
+    height: 28rem;
+  
+    margin: 16vh auto;
+    border-style: solid;
+    border-color: #C2F2DC;
+    border-radius: 70px;
+    .body {
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      margin: 0 auto;
+      font-size: 2.5em;
+      margin-top: 45px;
+      margin-bottom: 35px;
+    }
+    .name {
+      font-size: 1rem;
+      width: 30rem;
+      height: 3.3rem;
+      margin: 0 auto;
+      margin-bottom: 20px;
+      border: none;
+      border-bottom: 2px solid #dadada;
+      outline-style: none;
+    }
+    .email {
+      font-size: 1rem;
+      width: 30rem;
+      height: 3.3rem;
+      margin: 0 auto;
+      border: none;
+      border-bottom: 2px solid #dadada;
+      outline-style: none;
+    }
+    .findPW {
+      width: 5.8rem;
+      padding: 1rem;
+      margin-left: 4.5rem;
+      cursor: pointer;
+    }
+    button {
+        font-family: 'twayair';
+        zoom: 1.4;
+        width: 6rem;
+        height: 2.3rem;
+        margin: 0 auto;
+        margin-top: 2vh;
+        border-radius: 8px;
+        border-style: solid;
+        border-color: #3FCDB8 ;
+        background-color: #fff;
+        color: #3FCDB8;
+        cursor: pointer;
+        margin-left: 21rem;
+        &:hover {
+          filter: brightness(96%);
+        }
+    }
+}
+  

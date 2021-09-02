@@ -16,12 +16,12 @@ export const Login = () => {
                 />
             </div>
             <div className={styles.find}>
-                <Link href="/findAuth" passHref>
+                <Link href="/findID" passHref>
                     <span className={styles.findID}>
                         아이디 찾기
                     </span>
                 </Link>
-                <Link href="/findAuth" passHref>
+                <Link href="/findPW" passHref>
                     <span className={styles.findPW}>
                         비밀번호 찾기
                     </span>
