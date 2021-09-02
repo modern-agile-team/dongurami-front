@@ -1,10 +1,24 @@
-.sidebar {
-  background-color: white;
+.container {
+  display: flex;
+  // background-color: #daffee48;
+  justify-content: center;
+  margin-top: 10vh;
+  min-height: 100vh;
 }
-
+.sidebar {
+  background-color: #3fcdb8;
+  position: fixed;
+  left: 0;
+  height: 100%;
+}
 .wrap {
   display: flex;
-  margin-top: 10vh;
-  justify-content: center;
-  background-color: #f4faf7;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 580px) {
+  .sidebar {
+    background-color: rgba(#fff, 0);
+  }
 }
