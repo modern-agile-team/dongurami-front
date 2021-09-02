@@ -1,5 +1,5 @@
 import styles from "../../../styles/Club/Home/Common/SideBar.module.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Router from "next/router";
 import { HiMenu, HiPencil } from "react-icons/hi";
 import {
@@ -20,7 +20,9 @@ const SideBar = ({ setComp, comp }) => {
     Router.push("/manager");
   };
 
-  window.scrollTo(0, 0);
+  if (typeof window !== "undefined") {
+    window.scrollTo(0, 0);
+  }
 
   return (
     <div className={styles.sideBar}>
