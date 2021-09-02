@@ -1,8 +1,28 @@
 .container {
   padding-top: 10vh;
-  div {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+}
+
+.innerContainer {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.orderBy {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  button {
+    background: inherit;
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  select {
+    border-radius: 1rem;
+    height: 2rem;
+    padding-left: 1rem;
+    border: 1px solid lightgray;
   }
 }
