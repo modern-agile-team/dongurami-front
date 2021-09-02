@@ -16,9 +16,7 @@
   z-index: 99999;
   top: 0;
   background-color: rgba(#616161, 0.9);
-
   svg {
-    margin: 0 15vw;
     cursor: pointer;
     &:hover {
       color: white;
@@ -32,19 +30,20 @@
 }
 
 .header {
-  margin-top: 3vh;
   display: flex;
+  width: 50vw;
+  margin-bottom: 3vh;
+  justify-content: space-between;
   span {
     font-family: "twayair";
-    margin: 0 15vw;
-    font-size: 200%;
+    font-size: 150%;
   }
 }
 
 .footer {
   padding: 2vh 0;
   display: flex;
-  margin-top: 3vh;
+  margin-top: 1vh;
   font-weight: bold;
   span {
     font-size: 120%;
@@ -60,6 +59,9 @@
     width: 50vw;
     height: 70vh;
     cursor: zoom-out;
+  }
+  svg {
+    margin: 0 3vw;
   }
 }
 
@@ -77,4 +79,10 @@
       margin: 0 5vw;
     }
   }
+}
+
+#close {
+  margin: 2vh 0;
+  width: 98%;
+  text-align: right;
 }

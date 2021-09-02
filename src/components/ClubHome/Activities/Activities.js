@@ -61,7 +61,7 @@ export const actData = [
   },
 ];
 
-export const Activities = ({ onClick }) => {
+const Activities = ({ onClick }) => {
   return (
     <div className={styles.container}>
       <div id={styles.clubName}>

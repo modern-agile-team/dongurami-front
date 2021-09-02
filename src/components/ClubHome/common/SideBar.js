@@ -13,12 +13,14 @@ import { MdRateReview } from "react-icons/md";
 
 const SideBar = ({ setComp, comp }) => {
   const [isOpen, setOpen] = useState(true);
+  const iconSize = 25;
   const toggle = () => setOpen(!isOpen);
+
   const movePage = () => {
     Router.push("/manager");
   };
 
-  const iconSize = 25;
+  window.scrollTo(0, 0);
 
   return (
     <div className={styles.sideBar}>
