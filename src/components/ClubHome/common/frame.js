@@ -4,7 +4,7 @@ import ClubIntro from "../Intro/ClubIntro";
 import Activities from "../Activities/Activities";
 import Review from "../Review/Review";
 import Calendar from "../Calendar";
-import ClubNotice from "../ClubNotice";
+import ClubNotice from "../Notice/ClubNotice";
 import { useState } from "react";
 import Modal from "../Activities/Modal";
 
