@@ -18,4 +18,10 @@
   thead {
     background-color: #ddf7ec;
   }
+
+  tbody {
+    td:nth-child(2) {
+      cursor: pointer;
+    }
+  }
 }
