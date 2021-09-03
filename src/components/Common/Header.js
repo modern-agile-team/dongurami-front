@@ -1,7 +1,7 @@
 import styles from "../../styles/Common/Header.module.scss";
 import { useRouter } from "next/router";
 import { useState, useEffect } from 'react';
-import { RiMenuLine } from "react-icons/Ri";
+import { RiMenuLine } from "react-icons/ri";
 
 function Header() {
   const [open, setOpen] = useState(false);
