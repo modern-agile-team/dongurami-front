@@ -40,7 +40,7 @@ const ReactQuill = dynamic(import("react-quill"), {
 });
 
 function ReactQuillContainer() {
-  return <ReactQuill modules={modules} formats={formats} />;
+  return <ReactQuill modules={modules} formats={formats} placeholder="본문을 입력하세요..." />;
 }
 
 export default ReactQuillContainer;
