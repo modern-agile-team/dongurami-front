@@ -1,0 +1,32 @@
+.additional {
+  display: flex;
+  justify-content: center;
+  ul {
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      margin: 2vh 0;
+    }
+  }
+  textarea {
+    margin-top: 1em;
+    width: 100%;
+    height: 5vh;
+  }
+
+  svg {
+    cursor: pointer;
+    color: white;
+    margin-left: 5px;
+    &:hover {
+      color: black;
+    }
+  }
+  #remove {
+    &:hover {
+      color: red;
+    }
+  }
+}
