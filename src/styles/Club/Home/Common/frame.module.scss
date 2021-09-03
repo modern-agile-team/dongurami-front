@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  // background-color: #daffee48;
   justify-content: center;
   margin-top: 10vh;
   min-height: 100vh;
@@ -20,5 +19,6 @@
 @media (max-width: 580px) {
   .sidebar {
     background-color: rgba(#fff, 0);
+    height: 6vh;
   }
 }

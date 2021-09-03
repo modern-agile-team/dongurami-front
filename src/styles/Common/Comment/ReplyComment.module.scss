@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  background-color: gainsboro;
+  border-radius: 1rem;
+  align-items: center;
+  & > svg {
+    transform: scale(2);
+    margin-left: 5%;
+  }
+}

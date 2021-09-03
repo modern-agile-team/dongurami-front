@@ -1,5 +1,5 @@
 import styles from "../../../styles/Club/Home/Common/SideBar.module.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Router from "next/router";
 import { HiMenu, HiPencil } from "react-icons/hi";
 import {
@@ -13,12 +13,16 @@ import { MdRateReview } from "react-icons/md";
 
 const SideBar = ({ setComp, comp }) => {
   const [isOpen, setOpen] = useState(true);
+  const iconSize = 25;
   const toggle = () => setOpen(!isOpen);
+
   const movePage = () => {
     Router.push("/manager");
   };
 
-  const iconSize = 25;
+  if (typeof window !== "undefined") {
+    window.scrollTo(0, 0);
+  }
 
   return (
     <div className={styles.sideBar}>

@@ -1,16 +1,11 @@
-import React from "react";
-import CommentContainer from "../Common/Comment/CommentContainer";
 import Header from "../Common/Header";
-import PostDesc from "./PostDesc";
-import PostHeader from "./PostHeader";
+import PostContent from './PostContent';
 
 function Posts() {
   return (
     <>
       <Header />
-      <PostHeader />
-      <PostDesc />
-      <CommentContainer />
+      <PostContent />
     </>
   );
 }
