@@ -1,9 +1,18 @@
 .container {
   padding-top: 10vh;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;
+  }
 }
 
 .innerContainer {
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
 }
 
@@ -16,7 +25,7 @@
   button {
     background: inherit;
     border: 1px solid lightgray;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     cursor: pointer;
   }
   select {
