@@ -4,9 +4,10 @@ import ClubIntro from "../Intro/ClubIntro";
 import Activities from "../Activities/Activities";
 import Review from "../Review/Review";
 import Calendar from "../Calendar";
-import ClubNotice from "../ClubNotice";
+import ClubNotice from "../Notice/ClubNotice";
 import { useState } from "react";
 import Modal from "../Activities/Modal";
+import Apply from "../Apply/Apply";
 
 const Frame = () => {
   const [comp, setComp] = useState(1);
@@ -20,13 +21,14 @@ const Frame = () => {
   const onModalClose = () => {
     setModalOpen(false);
   };
+
   const Comp = () => {
     if (comp === 1) return <ClubIntro />;
     if (comp === 2) return <ClubNotice />;
     if (comp === 3) return <Activities onClick={onClick} />;
     if (comp === 4) return <Calendar />;
     if (comp === 5) return <Review />;
-    if (comp === 6) return <div>자유게시판</div>;
+    if (comp === 6) return <Apply />;
   };
   return (
     <>

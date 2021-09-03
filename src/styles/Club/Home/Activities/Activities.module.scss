@@ -13,8 +13,8 @@ $color-light-mint: #c2f2dc;
 .container {
   display: flex;
   flex-direction: column;
-  margin: 5vh 0 10vh 0;
-  width: 60%;
+  margin: 5vh 0 10vh 5vw;
+  width: 80%;
 }
 
 #clubName {
@@ -39,7 +39,7 @@ $color-light-mint: #c2f2dc;
 
 .activities {
   display: flex;
+  padding-left: 7vw;
   margin-top: 2vh;
-  height: 100%;
   flex-wrap: wrap;
 }

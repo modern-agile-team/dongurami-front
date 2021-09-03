@@ -14,15 +14,17 @@
   align-items: center;
   justify-content: center;
   width: 20%;
+  color: #ffc949;
 }
-
 .update {
   display: flex;
   align-items: center;
   margin-left: 1em;
   height: 30%;
+  margin-top: 1vh;
 
   svg {
+    margin: 0 5px;
     cursor: pointer;
     &:hover {
       color: red;

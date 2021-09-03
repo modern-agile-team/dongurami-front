@@ -2,6 +2,8 @@ import React from "react";
 import styles from "../../../styles/Club/Home/Review/ReviewMine.module.scss";
 import { AiFillStar } from "react-icons/ai";
 import { HiPencil } from "react-icons/hi";
+import { FaTrashAlt } from "react-icons/fa";
+
 export const ReviewMine = () => {
   return (
     <div className={styles.mine}>
@@ -18,6 +20,7 @@ export const ReviewMine = () => {
       </div>
       <div className={styles.update}>
         <HiPencil />
+        <FaTrashAlt />
       </div>
     </div>
   );
