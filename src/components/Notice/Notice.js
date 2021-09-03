@@ -2,7 +2,7 @@ import Header from "../Common/Header";
 import styles from "../../styles/Board/Notice/Notice.module.scss";
 import NoticeTable from './NoticeTable';
 import NoticePagination from './NoticePagination';
-import NoticeSearch from '../Notice/NoticeSearch';
+import NoticeSearch from './NoticeSearch';
 
 function Notice() {
   return (
