@@ -1,0 +1,21 @@
+.questions {
+  display: flex;
+  justify-content: center;
+  ul {
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      margin: 2vh 0;
+    }
+  }
+  p {
+    margin: 5px 0;
+    color: gray;
+  }
+  input,
+  select {
+    margin-top: 1em;
+  }
+}
