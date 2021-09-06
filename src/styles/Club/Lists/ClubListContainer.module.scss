@@ -1,23 +1,27 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.clubdata {
-  width: 100%;
-  background-color: #96e0ac;
+  width: 28%;
+  height: 30%;
   text-align: center;
-  padding: 0.5rem 0;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
-  h4 {
-    margin: 0;
+  border-radius: 16px;
+  margin: 2vh;
+  div {
+    width: 100%;
+    padding: 1vh 0;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border: 1px solid black;
+    background-color: white;
   }
-}
-.img {
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  cursor: pointer;
+  img {
+    border: 1px solid black;
+    width: 100%;
+    height: 30vh;
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+    cursor: pointer;
+  }
+
+  p {
+    font-size: 70%;
+  }
 }

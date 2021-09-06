@@ -12,7 +12,7 @@ const PromotionContainer = () => {
     
     return (
      <>
-    {openModal && <Modal value={value} setOpenModal={setOpenModal} />}
+      {openModal && <Modal value={value} setOpenModal={setOpenModal} />}
         <Header />
         <TypeSearch />
         <button className={styles.writeBtn}>
