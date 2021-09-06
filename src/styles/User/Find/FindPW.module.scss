@@ -31,7 +31,7 @@
       margin: 0 auto;
       margin-bottom: 20px;
       border: none;
-      border-bottom: 2px solid #dadada;
+      border-bottom: 1.4px solid #dadada;
       outline-style: none;
     }
     .email {
@@ -40,7 +40,7 @@
       height: 3.3rem;
       margin: 0 auto;
       border: none;
-      border-bottom: 2px solid #dadada;
+      border-bottom: 1.4px solid #dadada;
       outline-style: none;
     }
     .findID {
@@ -69,3 +69,27 @@
     }
 }
   
+
+@media screen and (max-width: 768px) {
+  .find {
+    width: 90%;
+    font-size: 85%;
+    .num {
+      width: 65%;
+      margin-top: 2%;
+    }
+    .email {width: 65%;}
+    .findID {
+      width: 50%;
+      font-size: 110%;
+      margin: 0;
+      margin-left: 14%;
+    }
+    button {
+      width: 30%;
+      margin: 0;
+      margin-top: 2rem;
+      margin-left: 60%;
+    }
+  }
+}
