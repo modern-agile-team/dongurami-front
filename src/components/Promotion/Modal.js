@@ -10,7 +10,8 @@ const Modal = ({ value, setOpenModal }) => {
             <MdClose className={styles.close} onClick={() => setOpenModal(false)}/>
             <div className={styles.image}>
                 <img src={value} />
-            </div>
+              </div>
+            
             <div className={styles.post}>
                   <h3>🖤CFM 수화찬양 동아리🖤</h3>
                 <article>
