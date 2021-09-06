@@ -1,13 +1,37 @@
-.container {
+.wrap {
+  font-family: twayair;
+  background-color: #faece1;
   display: flex;
-  border: 1px solid black;
-  width: 40vw;
-  height: 70vh;
+  border: 0.3rem solid #F0BF9A;
+  border-radius: 10%;
+  width: 30vw;
+  height: 40vh;
   flex-direction: column;
   align-items: center;
   justify-items: center;
-
-  input {
-    width: 200px;
+  
+  hr {
+    border: 0.1rem solid #F0BF9A;
+    width: 25vw;
   }
+}
+
+.header {
+  display: flex;
+}
+.user {
+  border: 0.3vw solid #F0BF9A;
+  border-radius: 70%;
+  color: black;
+  font-size: 6vw;
+  background-color: white;
+}
+
+.button {
+  font-family: twayair;
+  border: 0.3vw solid #F0BF9A;
+  border-radius: 10%;
+  background-color: #faece1;
+  width: 13vw;
+  height: 6vh;
 }

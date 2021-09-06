@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from '../../styles/User/MyPage/modifyInfo.module.scss';
+import { FiSettings, FiUser } from 'react-icons/fi'
 
 const ModifyInfo = () => {
   const userData = {
@@ -10,31 +11,31 @@ const ModifyInfo = () => {
   const [input, setInput] = useState(false);
 
   return (
-    <div className={styles.container}>
-      <img src={userData.img} />
-      <p>사진옆에 쪼마난 연필같은 아이콘으로 수정 기능 추가할 예정</p>
-      <form>
-        <label>이름 : {userData.name}</label><br/>
-        <input type='text' placeholder='변경할 이름을 입력해 주세요.'/>
-        <button>수정</button>
-      </form>
-      <form>
-        <label>학과 : {userData.department}</label><br/>
-        <select>
-          <option value=''>학과선택</option>
-          <option value='ㅇㅇ과'>ㅇㅇ과</option>
-          <option value='ㅁㅁ과'>ㅁㅁ과</option>
-          <option value='ㄷㄷ과'>ㄷㄷ과</option>
-          <option value='ㄴㄴ과'>ㄴㄴ과</option>
-        </select>
-        <button>수정</button>
-      </form><br/>
-      <span>아이디 / 비밀번호 변경</span><br/>
-      <div>
-        <button>완료</button> &nbsp;
-        <button>닫기</button>
+    <>
+      <div className={styles.wrap}>
+        <div className={styles.header}>
+          <FiUser className={styles.user} />
+          <FiSettings />
+        </div>
+        <input type='text' placeholder='심서현'/>
+        <hr/>
+        <form>
+          <label>학과</label><br/>
+          <select>
+            <option value=''>학과선택</option>
+            <option value='ㅇㅇ과'>ㅇㅇ과</option>
+            <option value='ㅁㅁ과'>ㅁㅁ과</option>
+            <option value='ㄷㄷ과'>ㄷㄷ과</option>
+            <option value='ㄴㄴ과'>ㄴㄴ과</option>
+          </select>
+        </form><br/>
+        <p>소속동아리</p><br/>
+        <span>우아한 애자일</span>
       </div>
-    </div>
+      <div>
+        <button className={styles.button}>수정</button>
+      </div>
+    </>
   )
 }
 

@@ -1,10 +1,3 @@
-@font-face {
-  font-family: 'twayair';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .form {
   font-family: 'twayair';
   display: flex;
@@ -12,31 +5,31 @@
   position: absolute;
   top: 15vh;
   gap: 15px;
-  width: 50%;
-  height: 95vh;
+  width: 35em;
+  height: 42em;
   border: solid;
   border-color: #C2F2DC;
-  border-radius: 70px;
+  border-radius: 40px;
   h1 {
     margin: 0 auto;
     margin-top: 5.5vh;
     margin-bottom: 4vh;
   }
   .input {
-    width: 25vw;
+    width: 20em;
     height: 1vh;
     margin: 0 auto;
     padding: 20px;
     border: none;
-    border-bottom: 2px solid #dadada;
+    border-bottom: 1.4px solid #dadada;
     outline-style: none;
   }
   select {
-    width: 28.5vw;
-    height: 8vh;
+    width: 23.5em;
+    height: 3.5em;
     margin: 0 auto;
-    margin-top: 3vh;
-    border: solid #dadada;
+    margin-top: 2vh;
+    border: 1.5px solid #dadada;
     border-radius: 0.5em;
   }
 }
@@ -44,15 +37,13 @@
 .button {
   font-family: 'twayair';
   zoom: 1.4;
-  width: 4.5rem;
-  height: 2.3rem;
+  width: 6em;
+  height: 3em;
   margin: 0 auto;
-  margin-top: 1.5vh;
-  margin-bottom: 1.5vh;
+  margin-top: 2vh;
   border-radius: 8px;
-  border-style: solid;
-  border-color: #3FCDB8 ;
-  background-color: #fff;
+  border: 1.5px solid #3FCDB8;
+  background-color: #fff; 
   color: #3FCDB8;
   cursor: pointer;
 }
@@ -60,8 +51,40 @@
   filter: brightness(96%);
 }
 
+.login {
+  width: 100%;
+  margin-top: 2rem;
+  text-align: center;
+  .loginRouting {
+    margin-left: 1rem;
+    cursor: pointer;
+    &:hover {color: #3FCDB8;}
+  }
+}
+
 .input::-webkit-inner-spin-button, 
 .input::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+
+@media screen and (max-width: 768px) {
+  .form {
+    width: 75%;
+    .input {
+      width: 52%;
+    }
+    .select {
+      width: 63%;
+    } 
+    .button {
+      width: 22%;
+      height: 7%;
+      font-size: 70%;
+    }
+    .login {
+      font-size: 90%;
+    }
+  }
 }
