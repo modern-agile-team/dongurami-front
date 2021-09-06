@@ -1,10 +1,3 @@
-@font-face {
-  font-family: 'twayair';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .login {
   font-family: 'twayair';
   width: 42em;
@@ -31,7 +24,7 @@
     margin: 0 auto;
     margin-bottom: 20px;
     border: none;
-    border-bottom: 2px solid #dadada;
+    border-bottom: 1.4px solid #dadada;
     outline-style: none;
   }
   .pwInput {
@@ -40,7 +33,7 @@
     height: 3.3rem;
     margin: 0 auto;
     border: none;
-    border-bottom: 2px solid #dadada;
+    border-bottom: 1.4px solid #dadada;
     outline-style: none;
   }
   button {
@@ -73,5 +66,27 @@
   .loginBtn {
     margin-right: 1.5rem;
   }
+  .loginBtn:hover {filter: brightness(96%);}
+  .signupBtn:hover {filter: brightness(96%);}
 }
 
+
+@media screen and (max-width: 768px) {
+  .login {
+    width: 90%;
+    font-size: 90%;
+    .idInput {width: 65%;}
+    .pwInput {width: 65%;}
+    .find {
+      width: 50%;
+      margin: 0;
+      margin-left: 47%;
+    }
+    .buttons {
+      width: 60%;
+      margin: 0;
+      margin-top: 1rem;
+      margin-left: 38%;
+    }
+  }
+}

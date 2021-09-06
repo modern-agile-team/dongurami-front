@@ -32,7 +32,7 @@ export const Login = () => {
                     <button className={styles.loginBtn}>로그인</button>
                 </Link>
                 <Link href="signup" passHref>
-                    <button>회원가입</button>
+                    <button className={styles.signupBtn}>회원가입</button>
                 </Link>
             </div>
         </div>
