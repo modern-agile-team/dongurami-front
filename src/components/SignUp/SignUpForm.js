@@ -19,6 +19,12 @@ function SignUpForm() {
       <Link href="/LoginPage" passHref>
         <input className={styles.button} type="submit" value="가입하기" />
       </Link>
+      <div className={styles.login}>
+        <span>계정이 있으신가요?</span>
+        <Link href='/LoginPage' passHref>
+          <span className={styles.loginRouting}>로그인하러가기~</span>
+        </Link>
+      </div>
     </form>
   );
 }
