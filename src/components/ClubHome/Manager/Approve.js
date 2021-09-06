@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Manager/Approve.module.scss";
 import ApproveHeader from "./ApproveHeader";
+import ApproveList from "./ApproveList";
 
 const questions = [
   "이름",
@@ -54,33 +55,7 @@ export const Approve = () => {
   return (
     <div className={styles.container}>
       <ApproveHeader answers={answers} />
-      {answers.map((e, index) => {
-        return (
-          <div key={index}>
-            <div className={styles.kkk}>
-              <div id={styles.q}>
-                {questions.map((q, i) => {
-                  return (
-                    <div key={i}>
-                      <span>{q}</span>
-                    </div>
-                  );
-                })}
-              </div>
-              <div id={styles.a}>
-                {e.map((a, i) => {
-                  return (
-                    <div key={i}>
-                      <span>{a}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            <hr />
-          </div>
-        );
-      })}
+      <ApproveList answers={answers} questions={questions} />
     </div>
   );
 };
