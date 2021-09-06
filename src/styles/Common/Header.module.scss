@@ -1,11 +1,3 @@
-@font-face {
-  font-family: "twayair";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
 .myHeader {
   font-family: "twayair";
   display: flex;
@@ -128,8 +120,8 @@
       height: 6rem;
       flex-direction: column;
       position: absolute;
-      left: -70px;
-      top: 52px;
+      left: -60px;
+      top: 43px;
       padding: 1rem;
       background: #f8f8f8;
       cursor: default;
@@ -141,7 +133,7 @@
         list-style: none;
         text-align: center;
         margin-top: -1vh;
-        margin-right: 2.5em;
+        margin-right: 2.6em;
         cursor: pointer;
         .notice {
           margin-bottom: 2vh;
@@ -157,19 +149,18 @@
       flex-direction: column;
       background:#f8f8f8;;
       position: absolute;
-      top: 165px;
-      left: -55px;
+      top: 158px;
+      left: -47px;
       cursor: default;
       .login {
-        margin-top: 0.5vh;
-        margin-left: 0.5vw;
+        margin-top: 0.2vh;
+        margin-left: 0.8vw;
         cursor: pointer;
       }
       .signUp {
         background: none;
-        margin-top: -0.5vh;
+        margin-top: -0.8vh;
         margin-right: 1.5vw;
-        border-bottom: 0.1px solid #e9e9e9;
         cursor: pointer;      
       }
       #nowSign {
