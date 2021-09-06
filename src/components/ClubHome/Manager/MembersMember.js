@@ -3,7 +3,7 @@ import styles from "../../../styles/Club/Home/Manager/ManagerMember.module.scss"
 
 const status = ["회장", "부회장", "동아리원"];
 
-const ManagerMember = ({ name, stat }) => {
+const MembersMember = ({ name, stat }) => {
   return (
     <div className={styles.member}>
       <div>
@@ -32,4 +32,4 @@ const ManagerMember = ({ name, stat }) => {
   );
 };
 
-export default ManagerMember;
+export default MembersMember;
