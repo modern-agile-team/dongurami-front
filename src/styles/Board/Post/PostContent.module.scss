@@ -1,5 +1,5 @@
 .container {
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
   margin-top: calc(10vh + 1rem);
   border: 2px solid #90E2D6;
@@ -7,7 +7,10 @@
   & > div:nth-child(1) {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 1rem;
+    & > div:nth-of-type(2) {
+      font-size: 1.3rem;
+    }
     & > div:nth-child(3) {
       display: flex;
       justify-content: space-between;
@@ -18,6 +21,6 @@
     border: .5px solid #90E2D6;
   }
   & > div:nth-of-type(2) {
-    margin: 1rem;
+    margin: 2rem;
   }
 }

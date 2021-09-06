@@ -2,18 +2,12 @@ import styles from '../../../styles/Common/Comment/AddComment.module.scss';
 
 function AddComment() {
   return (
-    <div className={styles.comment}>
-      <img src="https://picsum.photos/500" alt="profile" />
-      <div>
-        <div>
-          <p>닉네임</p>
-          <p>2021.08.11 15:31</p>
-        </div>
-        <div>
-          <textarea />
-          <button>등록</button>
-        </div>
-      </div>
+    <div className={styles.container}>
+      <div>닉네임</div>
+      <form>
+        <input type="text" placeholder="댓글을 남겨보세요" />
+        <button type="submit">등록</button>
+      </form>
     </div>
   );
 }

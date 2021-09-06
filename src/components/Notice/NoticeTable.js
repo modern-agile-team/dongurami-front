@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 import styles from "../../styles/Board/Notice/NoticeTable.module.scss";
 
 function NoticeTable() {
@@ -15,15 +15,17 @@ function NoticeTable() {
       </thead>
       <tbody>
         {Array.from({ length: 9 }, (_, i) => (
-          <Link href="/post" key={i} passHref>
-            <tr>
-              <td>{i + 1}</td>
-              <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</td>
-              <td>21-08-27</td>
-              <td>관리자 관리자</td>
-              <td>9999999</td>
-            </tr>
-          </Link>
+          <tr key={i}>
+            <td>{i + 1}</td>
+            <td>
+              <Link href="/post" key={i} passHref>
+                <a>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</a>
+              </Link>
+            </td>
+            <td>21-08-27</td>
+            <td>관리자 관리자</td>
+            <td>9999999</td>
+          </tr>
         ))}
       </tbody>
     </table>
