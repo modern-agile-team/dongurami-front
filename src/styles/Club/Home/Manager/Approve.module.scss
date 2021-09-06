@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+}
+.questions {
+  display: flex;
+  flex-direction: column;
+}
+.kkk {
+  display: flex;
+}
+
+#q,
+#a {
+  margin: 6vh 2vw;
+  div {
+    margin: 4vh 0;
+  }
+}

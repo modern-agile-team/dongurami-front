@@ -1,6 +1,6 @@
 import React from "react";
 
-const ManagerHeader = () => {
+const MembersHeader = () => {
   return (
     <div>
       <h1>동아리원 관리</h1>
@@ -10,4 +10,4 @@ const ManagerHeader = () => {
   );
 };
 
-export default ManagerHeader;
+export default MembersHeader;
