@@ -1,19 +1,25 @@
-import styles from "../../styles/Club/Home/Schedule/Calendar.module.scss";
+import styles from "../../../styles/Club/Home/Schedule/Calendar.module.scss";
 import React from 'react';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
-
-
+import DailyModal from "./DailyModal";
+import Schedule from "./Schedule";
 
 const Calendar =()=>{
+  const info = {
+    startDate: "2021-09-07",
+    endDate: "2021-09-09",
+    title: '살려주세요',
+    color: '#44444'
+  }
   const [getMoment, setMoment]=useState(moment());    
   const [date, setDate] = useState("");
+  const [pop, setPop] = useState(0);
+  
   const today = getMoment;  
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek = today.clone().endOf('month').week() === 1 ? 53 : today.clone().endOf('month').week();
-
   const calendarArr=()=>{
-
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -50,10 +56,12 @@ const Calendar =()=>{
   }
    return (
     <div className={styles.wrap}>
+      <Schedule />
         <div className={styles.control}>
           <button className={styles.lastmonthBtn} onClick={()=>{ setMoment(getMoment.clone().subtract(1, 'month')) }} >이전달</button>
-          <span onClick={() => setcomp(12)}>{today.format('YYYY 년 MM 월')}</span>
+          <span>{today.format('YYYY 년 MM 월')}</span>
           <button className={styles.nextmonthBtn} onClick={()=>{ setMoment(getMoment.clone().add(1, 'month')) }} >다음달</button>
+          <button onClick={() => setPop(1)}>일정 추가하기</button>
         </div>
         <div className={styles.days}>
           <h2>일</h2>
@@ -69,8 +77,12 @@ const Calendar =()=>{
             {calendarArr()}
           </tbody>
         </table>
+        <DailyModal 
+          setPop={setPop}
+          today={today.format('YYYY-MM-DD')}
+          pop={pop}
+        />
     </div>
-    
   );
 }
 export default Calendar;
