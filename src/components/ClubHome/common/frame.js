@@ -3,7 +3,7 @@ import SideBar from "./SideBar";
 import ClubIntro from "../Intro/ClubIntro";
 import Activities from "../Activities/Activities";
 import Review from "../Review/Review";
-import Calendar from "../Calendar";
+import Calendar from "../Daily/Calendar";
 import ClubNotice from "../Notice/ClubNotice";
 import { useState } from "react";
 import Modal from "../Activities/Modal";
@@ -24,11 +24,11 @@ const Frame = () => {
 
   const Comp = () => {
     if (comp === 1) return <ClubIntro />;
-    if (comp === 2) return <ClubNotice />;
-    if (comp === 3) return <Activities onClick={onClick} />;
-    if (comp === 4) return <Calendar />;
-    if (comp === 5) return <Review />;
-    if (comp === 6) return <Apply />;
+    else if (comp === 2) return <ClubNotice />;
+    else if (comp === 3) return <Activities onClick={onClick} />;
+    else if (comp === 4) return <Calendar />;
+    else if (comp === 5) return <Review />;
+    else if (comp === 6) return <Apply />;
   };
   return (
     <>
