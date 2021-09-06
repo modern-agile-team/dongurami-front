@@ -1,10 +1,10 @@
 import Container from "./Container";
-import WriteContent from './WriteContent';
+import WritePromotionContent from './WritePromotionContent';
 
 function Write() {
   return (
     <Container>
-      <WriteContent />
+      <WritePromotionContent />
     </Container>
   );
 }

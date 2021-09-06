@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
 import { data } from './data';
-import Image from 'next/image'
+import Link from 'next/link';
 import Header from '../Common/Header';
 import TypeSearch from './TypeSearch';
 import { BsPencil } from 'react-icons/bs';
@@ -15,10 +15,12 @@ const PromotionContainer = () => {
     {openModal && <Modal value={value} setOpenModal={setOpenModal} />}
         <Header />
         <TypeSearch />
-        <button className={styles.writeBtn}>
-            <BsPencil />
-            글쓰기
-        </button>
+        <Link href="/write" passHref>
+            <button className={styles.writeBtn}>
+                <BsPencil />
+                글쓰기
+            </button>
+        </Link>
        <div className={styles.section}>
             {data.map(el => (
                 <div className={styles.promotion} key={el.key} >
