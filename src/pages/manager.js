@@ -1,11 +1,13 @@
-import Manager from "../components/ClubHome/Manager"
+import Manager from "../components/ClubHome/Manager/Manager";
+import Header from "../components/Common/Header";
 
 export const manager = () => {
-    return (
-        <div>
-            <Manager/>
-        </div>
-    )
-}
+  return (
+    <>
+      <Header />
+      <Manager />
+    </>
+  );
+};
 
 export default manager;
