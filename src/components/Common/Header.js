@@ -13,7 +13,6 @@ function Header() {
 
   const menuToggle = (menu) => {
     setMenu(menu);
-    console.log(menu);
   };
 
   useEffect(() => {
