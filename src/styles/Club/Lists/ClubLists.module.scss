@@ -14,7 +14,7 @@ $color-light-mint: #c2f2dc;
   display: flex;
   flex-direction: column;
   margin: 5vh 0 10vh 0;
-  width: 60%;
+  width: 100%;
 }
 
 #clubName {
@@ -39,7 +39,9 @@ $color-light-mint: #c2f2dc;
 
 .activities {
   display: flex;
-  margin-top: 2vh;
+  margin-top: 10vh;
+  width: 100%;
   height: 100%;
   flex-wrap: wrap;
+  justify-content: center;
 }

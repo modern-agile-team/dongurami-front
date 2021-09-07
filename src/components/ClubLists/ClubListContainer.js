@@ -7,7 +7,7 @@ const ClubListContainer = ({img, categories, title}) => {
            <img src={img} />
            <div>
              <p id={styles.desc}>{title}</p>
-             <p>{categories}</p>
+             <p>#{categories}</p>
            </div>
         </div>
     )
