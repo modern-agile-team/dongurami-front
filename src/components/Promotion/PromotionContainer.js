@@ -12,8 +12,7 @@ const PromotionContainer = () => {
     
     return (
      <>
-      {openModal && <Modal value={value} setOpenModal={setOpenModal} />}
-        <Header />
+      <Header />
         <TypeSearch />
         <Link href="/write" passHref>
             <button className={styles.writeBtn}>
@@ -27,14 +26,12 @@ const PromotionContainer = () => {
                   <div className={styles.img}>
                     <img src={el.img} alt="poster" />
                     <div className={styles.creationInfo} onClick={(e) => {
-                    setOpenModal(true),
-                    setValue(e.target.parentNode.childNodes[0].getAttribute('src'))}}>
-                        <div className={styles.writerInfo}>
-                            <div className={styles.writer}>최두리</div>
+                    setValue(e.target.parentNode.childNodes[0].getAttribute('src')), setOpenModal(true)}}>
+                        <div className={styles.writerInfo} onClick={(e) => {e.stopPropagation()}} >
+                            <div className={styles.writer} >최두리</div>
                             <div className={styles.writer}>우아한애자일</div>
                         </div>
-                        <div className={styles.date}>21-08-21</div>
-                        
+                        <div className={styles.date} onClick={(e) => {e.stopPropagation()}}>21-08-21</div>
                     </div>
                 </div>
                     <div className={styles.promotionInfo}>
@@ -48,7 +45,7 @@ const PromotionContainer = () => {
         </div>
 
       
-     
+        {openModal && <Modal value={value} setOpenModal={setOpenModal} />}
     </>  
     )
 }

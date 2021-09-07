@@ -30,7 +30,7 @@
     }
   }
   .image {
-    height: 80vh;
+    height: 90vh;
     position: relative;
     display: flex;
     justify-content: center;
@@ -38,14 +38,13 @@
     img {
       width: auto;
       height: 100%;
-      border-top-left-radius: 50px;
-      border-bottom-left-radius: 50px;
+      margin-right: 50px;
     }
   }
 
   .post {
     width: 40vw;
-    height: 80vh;
+    height: 90vh;
     border: solid black;
     background: white;
     border: none;
