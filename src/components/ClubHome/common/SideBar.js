@@ -25,13 +25,13 @@ const board = [
 ];
 
 const icons = [
-  <AiOutlineHome size={iconSize} />,
-  <AiOutlineNotification size={iconSize} />,
-  <AiOutlinePicLeft size={iconSize} />,
-  <AiOutlineSchedule size={iconSize} />,
-  <MdRateReview size={iconSize} />,
-  <HiPencil size={iconSize} />,
-  <AiOutlineSetting size={iconSize} />,
+  <AiOutlineHome size={iconSize} key="0" />,
+  <AiOutlineNotification size={iconSize} key="1" />,
+  <AiOutlinePicLeft size={iconSize} key="2" />,
+  <AiOutlineSchedule size={iconSize} key="3" />,
+  <MdRateReview size={iconSize} key="4" />,
+  <HiPencil size={iconSize} key="5" />,
+  <AiOutlineSetting size={iconSize} key="6" />,
 ];
 
 const SideBar = ({ setComp, comp }) => {
@@ -49,6 +49,7 @@ const SideBar = ({ setComp, comp }) => {
             <div
               id={comp === i + 1 ? styles.now : 0}
               onClick={() => (i === 6 ? movePage() : setComp(i + 1))}
+              key={i}
             >
               {icons[i]}
               <span>{el}</span>
