@@ -1,12 +1,11 @@
-import style from '../../../styles/Common/Comment/ReplyComment.module.scss';
-import Comment from './Comment';
+import style from '../../../styles/Common/Comment/ReplyContainer.module.scss';
 import { BsArrowReturnRight } from 'react-icons/bs';
 
-function ReplyComment() {
+function ReplyComment({ children }) {
   return (
     <div className={style.container}>
       <BsArrowReturnRight />
-      <Comment />
+      {children}
     </div>
   );
 }
