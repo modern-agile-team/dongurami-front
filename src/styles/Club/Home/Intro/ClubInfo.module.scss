@@ -6,6 +6,7 @@
     height: 100%;
     width: 100%;
   }
+  margin-bottom: 2em;
 }
 
 .desc {
@@ -19,9 +20,11 @@
   div {
     padding-top: 0.5em;
   }
-  span {
-    margin-right: 1em;
-  }
+}
+
+.categori,
+.population {
+  font-size: 95%;
 }
 
 @media (max-width: 1023px) {
