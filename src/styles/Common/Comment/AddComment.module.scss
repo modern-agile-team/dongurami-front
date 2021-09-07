@@ -5,12 +5,15 @@
   border: 2px solid #90E2D6;
   border-radius: 1rem;
   padding: 1rem;
+  margin: 0 1rem;
+  flex: 1;
   & > form {
     display: flex;
     gap: 1rem;
     & > input {
       flex: 1;
       border: none;
+      background-color: inherit;
     }
     & > button {
       background-color: #F3BE96;

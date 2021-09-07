@@ -16,12 +16,13 @@
       cursor: pointer;
     }
   }
-  li:nth-child(5) > button {
-    color: white;
-    background-color: #6AE8DF;
-    border-radius: 50%;
-  }
-  li:nth-child(7) > button {
-    cursor: default;
-  }
+}
+
+.pagination .selected {
+  background-color: #6AE8DF;
+  border-radius: 50%;
+}
+
+.pagination .collapse {
+  cursor: default;
 }

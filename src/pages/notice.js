@@ -1,7 +1,7 @@
-import Notice from "../components/Notice/Notice";
+import Board from "../components/Board/Board";
 
 function notice() {
-  return <Notice />;
+  return <Board />;
 }
 
 export default notice;

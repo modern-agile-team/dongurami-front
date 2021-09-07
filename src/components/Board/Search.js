@@ -1,4 +1,4 @@
-import styles from "../../styles/Board/Notice/NoticeSearch.module.scss";
+import styles from "../../styles/Board/Board/Search.module.scss";
 
 function NoticeSearch() {
   return (

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../../styles/Board/Notice/NoticeTable.module.scss";
+import styles from "../../styles/Board/Board/Table.module.scss";
 
 function NoticeTable() {
   return (
