@@ -47,7 +47,7 @@ const Calendar =()=>{
                 }else{
                   return(
                       <td key={index} className={styles.dayblock}>
-                        <a className={styles.monthdays} id={days.format('YYYYMMDD')} onClick={() => setDate(days.format('YYYYMMDD'))}>{days.format('D')}</a>
+                        <span className={styles.monthdays} id={days.format('YYYYMMDD')} onClick={() => setDate(days.format('YYYYMMDD'))}>{days.format('D')}</span>
                       </td>
                   );
                 }
@@ -64,8 +64,8 @@ const Calendar =()=>{
           <button className={styles.lastmonthBtn} onClick={()=>{ setMoment(getMoment.clone().subtract(1, 'month')) }} >이전달</button>
           <span>{today.format('YYYY 년 MM 월')}</span>
           <button className={styles.nextmonthBtn} onClick={()=>{ setMoment(getMoment.clone().add(1, 'month')) }} >다음달</button>
-          <button onClick={() => setPop(1)}>일정 추가하기</button>
         </div>
+        <button className={styles.addBtn} onClick={() => setPop(1)}>일정 추가하기</button>
         <div className={styles.days}>
           <h2>일</h2>
           <h2>월</h2>
