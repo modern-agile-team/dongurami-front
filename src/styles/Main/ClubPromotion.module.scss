@@ -1,0 +1,47 @@
+.container {
+    width: 100%;
+    background-color: #fff;
+    margin-top: 11%;
+    h1 {
+        font-size: 3.5rem;
+        font-weight: 100;
+        padding: 2rem;
+        margin-left: 14%;
+        margin-bottom: 0px;
+    }
+    .list {
+        display: flex;
+        .club {
+            margin-left: 20px;
+            color: #3FCDB8;
+        }
+    }
+    .promotion {
+        display: flex;
+        .recruit {
+            margin-left: 22px;
+            color: #3FCDB8;
+        }
+    }
+    button {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 3px;
+        font-weight: 800;
+        width: 13%;
+        margin-left: 70%;
+        margin-bottom: 8%;
+        zoom: 2.5;
+        border-radius: 15px;
+        border-style: hidden;
+        background-color: #90E2D6;
+        color: #fff;
+        cursor: pointer;
+        &:hover {background-color: #3FCDB8;}
+    }
+    .listBtn {
+        margin-top: 0.5%;
+    }
+    .promotionBtn {
+        margin-top: -1.5%;
+    }
+}

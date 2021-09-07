@@ -1,6 +1,13 @@
 .footer {
   margin-top: 4rem;
   width: 100%;
-  height: 30vh;
-  background-color: #596e6a;
+  height: 20vh;
+  background-color: #f2f2f2;
+  span {
+    font-family: 'Noto Sans KR', sans-serif;
+    color: rgb(116, 116, 116);
+    margin-top: 2em;
+    margin-left: 5%;   
+    position: absolute; 
+  }
 }

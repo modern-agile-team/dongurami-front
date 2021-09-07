@@ -1,15 +1,47 @@
-.container {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-  background-color: #ffffff;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
 
+.container {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 4.5%;
   h1 {
-    color: #c8d89a98;
-    font-family: Roboto, sans-serif;
-    font-weight: 100;
-    font-size: 6.2rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 4.3rem;
     padding: 2rem;
-    text-transform: uppercase;
+    margin-left: 13%;
+    margin-bottom: -1.5%;
+    .title {
+      font-family: 'Noto Sans KR', sans-serif;
+      display: flex;
+      flex-direction: row;
+      .logo {
+        font-family: 'Noto Sans KR', sans-serif;
+        color: #3FCDB8;
+      }
+    }
+  }
+  span {
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 2rem;
+    margin-left: 13.5%;
+    margin-bottom: 30%;
+  }
+  img {
+    width: 550px;
+    margin-top: -50%;
+    margin-left: 48%;
+
+  }
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    img {
+      width: 100vw;
+      margin-top: 10%;
+    }
   }
 }

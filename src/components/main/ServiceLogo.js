@@ -4,11 +4,23 @@ import styles from "../../styles/Main/ServiceLogo.module.scss";
 function ServiceLogo() {
   return (
     <div className={styles.container}>
+       <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      />
       <h1>
-        SERVICE <br />
-        OF <br />
-        WOOAHAN
+        <div className={styles.title}>
+        <div className={styles.logo}>동그라미</div>에서 <br />
+        </div>
+        원하는 <br />
+        동아리를 <br />
+        찾아보세요 :)
       </h1>
+      <span>인덕대학교의 모든 동아리들을 동그라미에서 만나보세요</span>
+      <img 
+      class="animate__animated animate__fadeInDown"
+      src='https://cdn.pixabay.com/photo/2021/02/08/16/45/stick-kids-5995514_1280.png'
+      />
     </div>
   );
 }
