@@ -1,0 +1,23 @@
+.wrap {
+    width: 90%;
+    background-color: #fff;
+    margin-top: 10%;
+    margin-bottom: 13%;
+    display: flex;
+    justify-content: center;
+    margin-left: 8%;
+    img {
+      width: 310px;
+      height: 310px;
+      border-radius: 70%;
+      overflow: hidden;
+    }
+    .text {
+        padding: 2rem;
+        margin-top: 3%;
+        margin-left: 3%;
+        h1 {
+            font-weight: 500;
+        }
+    }
+  }
