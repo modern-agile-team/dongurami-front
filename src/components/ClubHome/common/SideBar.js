@@ -1,7 +1,8 @@
 import styles from "../../../styles/Club/Home/Common/SideBar.module.scss";
 import React, { useState } from "react";
 import Router from "next/router";
-import { HiMenu, HiPencil } from "react-icons/hi";
+import { HiPencil } from "react-icons/hi";
+import { BsLayoutSidebar } from "react-icons/bs";
 import {
   AiOutlineHome,
   AiOutlineNotification,
@@ -11,49 +12,52 @@ import {
 } from "react-icons/ai";
 import { MdRateReview } from "react-icons/md";
 
-const SideBar = ({ setComp }) => {
+const iconSize = 25;
+
+const board = [
+  "우아한 애자일",
+  "공지 사항",
+  "활동 내용",
+  "일정",
+  "동아리 후기",
+  "동아리 지원하기",
+  "관리자 페이지",
+];
+
+const icons = [
+  <AiOutlineHome size={iconSize} key="0" />,
+  <AiOutlineNotification size={iconSize} key="1" />,
+  <AiOutlinePicLeft size={iconSize} key="2" />,
+  <AiOutlineSchedule size={iconSize} key="3" />,
+  <MdRateReview size={iconSize} key="4" />,
+  <HiPencil size={iconSize} key="5" />,
+  <AiOutlineSetting size={iconSize} key="6" />,
+];
+
+const SideBar = ({ setComp, comp }) => {
   const [isOpen, setOpen] = useState(true);
-  const toggle = () => setOpen((isOpen) => !isOpen);
-  const iconSize = 25;
+  const toggle = () => setOpen(!isOpen);
   const movePage = () => {
     Router.push("/manager");
   };
-
   return (
-    <div className={styles.sideBar}>
-      <HiMenu id={styles.hamb} onClick={() => toggle()} size="30" />
+    <div className={styles.sideBar} id={isOpen ? styles.open : styles.close}>
+      <BsLayoutSidebar id={styles.hamb} onClick={() => toggle()} size="30" />
       <div className={styles.menu} id={isOpen ? styles.show : styles.hide}>
-        <div onClick={() => setComp(1)}>
-          <AiOutlineHome size={iconSize} />
-          <span>우아한 애자일</span>
-        </div>
-        <div onClick={() => setComp(2)}>
-          <AiOutlineNotification size={iconSize} />
-          <span>공지 사항</span>
-        </div>
-        <div onClick={() => setComp(3)}>
-          <AiOutlinePicLeft size={iconSize} />
-          <span>활동내용</span>
-        </div>
-        <div onClick={() => setComp(4)}>
-          <AiOutlineSchedule size={iconSize} />
-          <span>일정</span>
-        </div>
-        <div onClick={() => setComp(5)}>
-          <MdRateReview size={iconSize} />
-          <span>동아리 후기</span>
-        </div>
-        <div onClick={() => setComp(6)}>
-          <HiPencil size={iconSize} />
-          <span>동아리 지원하기</span>
-        </div>
-        <div onClick={movePage}>
-          <AiOutlineSetting size={iconSize} />
-          <span>관리자 창</span>
-        </div>
+        {board.map((el, i) => {
+          return (
+            <div
+              id={comp === i + 1 ? styles.now : 0}
+              onClick={() => (i === 6 ? movePage() : setComp(i + 1))}
+              key={i}
+            >
+              {icons[i]}
+              <span>{el}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 };
-
 export default SideBar;

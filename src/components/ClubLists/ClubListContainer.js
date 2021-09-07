@@ -1,16 +1,14 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/Club/Lists/ClubListContainer.module.scss';
 
-const ClubListContainer = ({list}) => {
-    const {title, categories} = list
-    
+const ClubListContainer = ({img, categories, title}) => {   
     return (
         <div className={styles.container}>
-            <div className={styles.img}>s이미지</div>
-            <div className={styles.clubdata}>
-                <h2 className="clubtitle">{title}</h2>
-                <h4 className="clubcategories">{categories}</h4>
-            </div>
+           <img src={img} />
+           <div>
+             <p id={styles.desc}>{title}</p>
+             <p>#{categories}</p>
+           </div>
         </div>
     )
 }

@@ -1,52 +1,66 @@
 import React from "react";
-import Header from "../Common/Header";
 import styles from "../../styles/Club/Lists/ClubLists.module.scss";
 import ClubListContainer from "./ClubListContainer";
 const list = [
   {
     title: "우아한 애자일",
     categories: "IT",
+    img: 'https://i.pinimg.com/236x/5b/4f/3f/5b4f3f801c99430ef0189e0fd8bc5855.jpg'
   },
   {
     title: "프리버드",
     categories: "음악",
+    img:  'https://i.pinimg.com/236x/82/13/43/82134367f8d18218a5175b9778ec97e4.jpg'
   },
   {
-    title: "둘리",
-    categories: "맛집",
+    title: "소리상공",
+    categories: "음악",
+    img: 'https://i.pinimg.com/236x/06/19/93/061993aa61c91040f93157bfc6f373f8.jpg'
   },
   {
-    title: "학식",
-    categories: "맛집",
+    title: "우아한 애자일",
+    categories: "IT",
+    img: 'https://i.pinimg.com/236x/5b/4f/3f/5b4f3f801c99430ef0189e0fd8bc5855.jpg'
   },
   {
-    title: "월계국밥",
-    categories: "맛집",
+    title: "우아한 애자일",
+    categories: "IT",
+    img: 'https://i.pinimg.com/236x/5b/4f/3f/5b4f3f801c99430ef0189e0fd8bc5855.jpg'
   },
   {
-    title: "용궁",
-    categories: "맛집",
+    title: "우아한 애자일",
+    categories: "IT",
+    img: 'https://i.pinimg.com/236x/5b/4f/3f/5b4f3f801c99430ef0189e0fd8bc5855.jpg'
   },
   {
-    title: "다온",
-    categories: "맛집",
+    title: "우아한 애자일",
+    categories: "IT",
+    img: 'https://i.pinimg.com/236x/5b/4f/3f/5b4f3f801c99430ef0189e0fd8bc5855.jpg'
   },
   {
-    title: "밥은",
-    categories: "맛집",
+    title: "우아한 애자일",
+    categories: "IT",
+    img: 'https://i.pinimg.com/236x/5b/4f/3f/5b4f3f801c99430ef0189e0fd8bc5855.jpg'
   },
 ];
-function ClubLists() {
+const ClubList = () => {
   return (
-    <>
-      <Header />
-      <div className={styles.body}>
-        {list.map((lists, idx) => (
-          <ClubListContainer list={lists} key={idx} />
-        ))}
+    <div className={styles.container}>
+      <div className={styles.activities}>
+        {list.map((el) => {
+          return (
+            <ClubListContainer
+              img={el.img}
+              title={el.title}
+              categories={el.categories}
+              key={el.key}
+            />
+          );
+        })}
       </div>
-    </>
+    </div>
   );
-}
+};
 
-export default ClubLists;
+export default ClubList;
+

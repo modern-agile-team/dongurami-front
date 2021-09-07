@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  & > div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  & > button {
+    width: 5rem;
+    border: 2px solid #90e2d6;
+    color: #90e2d6;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+  }
+}
+
+.uploadContainer {
+  flex: 1;
+  & > label {
+    cursor: pointer;
+    & > img {
+      width: 100%;
+    }
+    & > p {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+  }
+  & > input {
+    display: none;
+  }
+}
+
+.selectContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  & > select {
+    border: 2px solid #90e2d6;
+    border-radius: 1rem;
+    height: 3rem;
+    margin: 3rem;
+    padding-left: 1rem;
+  }
+}

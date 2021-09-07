@@ -1,12 +1,47 @@
-.body {
+@font-face {
+  font-family: "twayair";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+$color-mint: #90e2d6;
+$color-heavy-mint: #3fcdb8;
+$color-light-mint: #c2f2dc;
+
+.container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  width: 90vw;
-  margin-top: 14vh;
-  flex-wrap: wrap;
-  div {
-    margin: 0.7rem 1.5rem;
+  flex-direction: column;
+  margin: 5vh 0 10vh 0;
+  width: 100%;
+}
+
+#clubName {
+  font-family: "twayair";
+  font-size: 200%;
+  text-align: center;
+}
+
+#add {
+  height: 5vh;
+  text-align: right;
+  svg {
+    position: fixed;
+    height: 5vh;
+    width: 5vh;
+    cursor: pointer;
+    &:hover {
+      color: $color-heavy-mint;
+    }
   }
+}
+
+.activities {
+  display: flex;
+  margin-top: 10vh;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
 }
