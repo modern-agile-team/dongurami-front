@@ -57,19 +57,45 @@
   }
 }
 
+@media (max-width: 1023px) {
+  .img {
+    img {
+      width: 80vw;
+      height: 45vw;
+      cursor: zoom-out;
+    }
+    svg {
+      margin: 0 5vw;
+    }
+  }
+}
+
 @media (max-width: 767px) {
   .container {
     justify-content: center;
   }
   .img {
     img {
-      width: 50vw;
-      height: 60vw;
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      height: 60vh;
       cursor: zoom-out;
     }
     svg {
-      margin: 0 5vw;
+      position: absolute;
+      top: 70vh;
     }
+    #back {
+      left: 10vw;
+    }
+    #foward {
+      right: 10vw;
+    }
+  }
+  .footer {
+    position: fixed;
+    top: 80vh;
   }
 }
 
