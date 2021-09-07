@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../styles/Main/ServiceLogo.module.scss";
+import "animate.css";
 
 function ServiceLogo() {
   return (
@@ -14,6 +15,7 @@ function ServiceLogo() {
       </h1>
       <span>인덕대학교의 모든 동아리들을 동그라미에서 만나보세요</span>
       <img 
+      class="animate__animated animate__fadeInDown"
       src='https://cdn.pixabay.com/photo/2021/02/08/16/45/stick-kids-5995514_1280.png'
       />
     </div>
