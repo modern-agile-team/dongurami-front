@@ -1,7 +1,7 @@
 import styles from "../../styles/Club/Home/Schedule/Calendar.module.scss";
 import React from 'react';
 import { useState, useEffect } from 'react';
-import moment from 'moment';
+// import moment from 'moment';
 
 
 
