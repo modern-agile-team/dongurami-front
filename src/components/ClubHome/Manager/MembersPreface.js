@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Manager/ManagerPreface.module.scss";
 
-const ManagerPreface = () => {
+const MembersPreface = () => {
   return (
     <div className={styles.preface}>
       <div>
@@ -20,4 +20,4 @@ const ManagerPreface = () => {
   );
 };
 
-export default ManagerPreface;
+export default MembersPreface;
