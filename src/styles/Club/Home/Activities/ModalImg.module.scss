@@ -1,0 +1,47 @@
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 50vw;
+    height: 70vh;
+    cursor: zoom-out;
+  }
+  svg {
+    margin: 0 3vw;
+  }
+}
+@media (max-width: 1023px) {
+  .img {
+    img {
+      width: 80vw;
+      height: 45vw;
+      cursor: zoom-out;
+    }
+    svg {
+      margin: 0 5vw;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .img {
+    img {
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      height: 60vh;
+      cursor: zoom-out;
+    }
+    svg {
+      position: absolute;
+      top: 70vh;
+    }
+    #back {
+      left: 10vw;
+    }
+    #foward {
+      right: 10vw;
+    }
+  }
+}

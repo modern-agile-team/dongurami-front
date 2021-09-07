@@ -21,87 +21,9 @@
   }
 }
 
-.header {
-  display: flex;
-  width: 50vw;
-  margin-bottom: 3vh;
-  justify-content: space-between;
-  span {
-    font-family: "twayair";
-    font-size: 150%;
-  }
-}
-
-.footer {
-  padding: 2vh 0;
-  display: flex;
-  margin-top: 1vh;
-  font-weight: bold;
-  span {
-    font-size: 120%;
-    margin: 0 20vw;
-  }
-}
-
-.img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 50vw;
-    height: 70vh;
-    cursor: zoom-out;
-  }
-  svg {
-    margin: 0 3vw;
-  }
-}
-
 #delete {
   &:hover {
     color: red;
-  }
-}
-
-@media (max-width: 1023px) {
-  .img {
-    img {
-      width: 80vw;
-      height: 45vw;
-      cursor: zoom-out;
-    }
-    svg {
-      margin: 0 5vw;
-    }
-  }
-}
-
-@media (max-width: 767px) {
-  .container {
-    justify-content: center;
-  }
-  .img {
-    img {
-      position: fixed;
-      top: 0;
-      width: 100vw;
-      height: 60vh;
-      cursor: zoom-out;
-    }
-    svg {
-      position: absolute;
-      top: 70vh;
-    }
-    #back {
-      left: 10vw;
-    }
-    #foward {
-      right: 10vw;
-    }
-  }
-  .footer {
-    position: fixed;
-    top: 80vh;
   }
 }
 
@@ -109,4 +31,10 @@
   margin: 2vh 0;
   width: 98%;
   text-align: right;
+}
+
+@media (max-width: 767px) {
+  .container {
+    justify-content: center;
+  }
 }

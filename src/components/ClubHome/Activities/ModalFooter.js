@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../../styles/Club/Home/Activities/Modal.module.scss";
+import styles from "../../../styles/Club/Home/Activities/ModalFooter.module.scss";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 import { MdRemoveCircleOutline } from "react-icons/md";
 
