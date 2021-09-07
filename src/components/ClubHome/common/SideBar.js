@@ -11,39 +11,44 @@ import {
 } from "react-icons/ai";
 import { MdRateReview } from "react-icons/md";
 
-const SideBar = ({ setComp }) => {
+const SideBar = ({ setComp, comp }) => {
   const [isOpen, setOpen] = useState(true);
-  const toggle = () => setOpen((isOpen) => !isOpen);
   const iconSize = 25;
+  const toggle = () => setOpen(!isOpen);
+
   const movePage = () => {
     Router.push("/manager");
   };
+
+  if (typeof window !== "undefined") {
+    window.scrollTo(0, 0);
+  }
 
   return (
     <div className={styles.sideBar}>
       <HiMenu id={styles.hamb} onClick={() => toggle()} size="30" />
       <div className={styles.menu} id={isOpen ? styles.show : styles.hide}>
-        <div onClick={() => setComp(1)}>
+        <div id={comp === 1 ? styles.now : 0} onClick={() => setComp(1)}>
           <AiOutlineHome size={iconSize} />
           <span>우아한 애자일</span>
         </div>
-        <div onClick={() => setComp(2)}>
+        <div id={comp === 2 ? styles.now : 0} onClick={() => setComp(2)}>
           <AiOutlineNotification size={iconSize} />
           <span>공지 사항</span>
         </div>
-        <div onClick={() => setComp(3)}>
+        <div id={comp === 3 ? styles.now : 0} onClick={() => setComp(3)}>
           <AiOutlinePicLeft size={iconSize} />
           <span>활동내용</span>
         </div>
-        <div onClick={() => setComp(4)}>
+        <div id={comp === 4 ? styles.now : 0} onClick={() => setComp(4)}>
           <AiOutlineSchedule size={iconSize} />
           <span>일정</span>
         </div>
-        <div onClick={() => setComp(5)}>
+        <div id={comp === 5 ? styles.now : 0} onClick={() => setComp(5)}>
           <MdRateReview size={iconSize} />
           <span>동아리 후기</span>
         </div>
-        <div onClick={() => setComp(6)}>
+        <div id={comp === 6 ? styles.now : 0} onClick={() => setComp(6)}>
           <HiPencil size={iconSize} />
           <span>동아리 지원하기</span>
         </div>
@@ -55,5 +60,4 @@ const SideBar = ({ setComp }) => {
     </div>
   );
 };
-
 export default SideBar;
