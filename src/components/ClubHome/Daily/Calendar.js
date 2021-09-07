@@ -1,15 +1,12 @@
 import styles from "../../../styles/Club/Home/Schedule/Calendar.module.scss";
 import React from 'react';
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD:src/components/ClubHome/Calendar.js
-// import moment from 'moment';
-
-
-=======
 import moment from 'moment';
 import DailyModal from "./DailyModal";
 import Schedule from "./Schedule";
->>>>>>> 7e5eea96bd4fb1d34c984cf56f98dcd20fbbe1e0:src/components/ClubHome/Daily/Calendar.js
+
+
+
 
 const Calendar =()=>{
   const info = {
