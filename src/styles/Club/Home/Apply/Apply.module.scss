@@ -1,7 +1,11 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 60vw;
+  width: 40vw;
+  border: 2px solid #3fcdb8;
+  border-radius: 16px;
+  padding: 1em;
+  margin-bottom: 1em;
 }
 
 .add,
@@ -18,4 +22,16 @@
 
 .none {
   display: none;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
 }

@@ -1,8 +1,8 @@
 .additional {
   display: flex;
-  justify-content: center;
+  margin-left: 2em;
   ul {
-    width: 50%;
+    width: 95%;
     margin: 0;
     padding: 0;
     li {
@@ -14,6 +14,8 @@
     margin-top: 1em;
     width: 100%;
     height: 5vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
 
   svg {
@@ -27,6 +29,30 @@
   #remove {
     &:hover {
       color: red;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .additional {
+    justify-content: flex-start;
+    ul {
+      width: 100%;
+    }
+    textarea {
+      width: 90%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .additional {
+    justify-content: flex-start;
+    ul {
+      width: 100%;
+    }
+    textarea {
+      width: 90%;
     }
   }
 }
