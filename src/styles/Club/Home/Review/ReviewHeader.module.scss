@@ -3,7 +3,16 @@
   justify-content: space-between;
   width: 60%;
   margin: 0 auto;
-  font-size: 150%;
+  font-size: 120%;
   border-bottom: 2px solid #c9eee8;
   padding: 1em;
+  svg {
+    color: #ffc949;
+    margin-right: 5px;
+  }
+}
+
+.star {
+  display: flex;
+  align-items: center;
 }
