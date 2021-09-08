@@ -5,7 +5,7 @@ import Activities from "../Activities/Activities";
 import Review from "../Review/Review";
 import Calendar from "../Daily/Calendar";
 import ClubNotice from "../Notice/ClubNotice";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "../Activities/Modal";
 import Apply from "../Apply/Apply";
 
@@ -21,9 +21,7 @@ const Frame = () => {
   const onModalClose = () => {
     setModalOpen(false);
   };
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+
   const Comp = () => {
     if (comp === 1) return <ClubIntro />;
     else if (comp === 2) return <ClubNotice />;
@@ -32,6 +30,7 @@ const Frame = () => {
     else if (comp === 5) return <Review />;
     else if (comp === 6) return <Apply />;
   };
+
   return (
     <>
       <div className={styles.container}>

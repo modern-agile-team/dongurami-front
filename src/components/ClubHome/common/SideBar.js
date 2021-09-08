@@ -48,7 +48,10 @@ const SideBar = ({ setComp, comp }) => {
           return (
             <div
               id={comp === i + 1 ? styles.now : 0}
-              onClick={() => (i === 6 ? movePage() : setComp(i + 1))}
+              onClick={() => {
+                i === 6 ? movePage() : setComp(i + 1);
+                window.scrollTo(0, 0);
+              }}
               key={i}
             >
               {icons[i]}
