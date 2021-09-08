@@ -25,14 +25,15 @@
 
 .club {
   display: flex;
+  span {
+    margin-top: 0.5em;
+  }
 }
 
 #date {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   margin-left: 1em;
-  p {
-    margin: 0;
-  }
 }
