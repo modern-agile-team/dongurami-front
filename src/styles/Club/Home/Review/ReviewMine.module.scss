@@ -1,5 +1,6 @@
 .mine {
   display: flex;
+  flex-direction: column;
   margin: 0 auto;
   width: 60%;
   p {
@@ -10,10 +11,6 @@
 }
 
 .star {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
   color: #ffc949;
 }
 .update {
@@ -29,5 +26,19 @@
     &:hover {
       color: red;
     }
+  }
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  img {
+    width: 20%;
+  }
+}
+.club {
+  display: flex;
+  span {
+    margin-top: 0.5em;
   }
 }
