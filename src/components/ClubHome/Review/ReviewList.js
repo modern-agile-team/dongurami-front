@@ -3,8 +3,9 @@ import styles from "../../../styles/Club/Home/Review/ReviewList.module.scss";
 import { AiFillStar } from "react-icons/ai";
 
 export const ReviewList = ({ rate, desc, date }) => {
-  const stars = new Array(rate).fill(Math.random());
+  const stars = new Array(rate).fill(rate);
   console.log(stars);
+
   return (
     <div className={styles.list}>
       <div className={styles.header}>
@@ -19,8 +20,8 @@ export const ReviewList = ({ rate, desc, date }) => {
           </div>
         </div>
         <div className={styles.star}>
-          {stars.map((el) => {
-            return <AiFillStar key={el[0]} />;
+          {stars.map((el, i) => {
+            return <AiFillStar key={i} />;
           })}
         </div>
       </div>

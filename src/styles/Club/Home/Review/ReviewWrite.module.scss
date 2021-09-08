@@ -49,3 +49,15 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .write {
+    width: 100%;
+  }
+  .comment {
+    width: 100%;
+    input {
+      width: 90%;
+    }
+  }
+}

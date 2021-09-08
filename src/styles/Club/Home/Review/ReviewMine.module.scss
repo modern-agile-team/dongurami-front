@@ -64,3 +64,18 @@
     font-size: 90%;
   }
 }
+
+@media (max-width: 1024px) {
+  .mine {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .star {
+    display: flex;
+    svg {
+      width: 10px;
+    }
+  }
+}
