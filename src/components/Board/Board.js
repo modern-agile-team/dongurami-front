@@ -15,6 +15,8 @@ function Notice() {
       case 'previous':
         if (state.page < 2) return state;
         return { page: state.page - 1 };
+      case 'change':
+        return { page: action.payload }
     }
   }, { page: 1 });
 
