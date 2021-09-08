@@ -26,8 +26,6 @@ function Notice() {
     });
   }
 
-  console.log(router);
-
   return (
     <div className={styles.container}>
       <Header />
