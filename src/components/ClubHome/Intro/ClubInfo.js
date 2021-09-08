@@ -11,9 +11,9 @@ const ClubInfo = () => {
           <p>IT 동아리</p>
         </div>
         <div className={styles.population}>
-          <span>총: 9명</span>
-          <span>남자: 6명</span>
-          <span>여자: 3명</span>
+          <span>Total: (9) </span>
+          <span> male: (6) </span>
+          <span> female: (3)</span>
         </div>
       </div>
       <div>
