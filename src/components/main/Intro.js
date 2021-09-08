@@ -1,9 +1,11 @@
 import styles from "../../styles/Main/Intro.module.scss";
 import React from "react";
+import Fade from "react-reveal/Fade";
 
 const Intro = () => {
   return (
   <div className={styles.wrap}>
+    <Fade bottom>
     <h1>이런 서비스를 제공해요</h1>
     <div className={styles.imgs}>
       <div className={styles.list}>
@@ -19,6 +21,7 @@ const Intro = () => {
         <span>동아리에 대한 더 많은 정보가 필요하다면 <br/>각 동아리 홈을 이용해보세요</span>
       </div>
     </div>
+    </Fade>
   </div>
   );
 };
