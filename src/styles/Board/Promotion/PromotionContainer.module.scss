@@ -121,3 +121,15 @@
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .writeBtn {
+    width: 17vw;
+    right: 10%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .writeBtn {
+    display: none;
+  }
+}
