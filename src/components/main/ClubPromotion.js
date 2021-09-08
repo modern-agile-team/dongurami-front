@@ -4,11 +4,10 @@ import Link from 'next/link';
 import Fade from "react-reveal/Fade";
 
 function ClubPromotion() {
-
   return (
     <div className={styles.container}>
       <Fade bottom>
-        <h1 className={styles.list}>어떤<div className={styles.club}>동아리</div>가 있는지 궁금했다면</h1>
+        <h1 className={styles.list}>어떤<div className={styles.club}>동아리</div>가 있는지 <div className={styles.br}>궁금했다면</div></h1>
         <Link href="/clublists" passHref>
         <button className={styles.listBtn}>Let&apos;s go</button>
         </Link>

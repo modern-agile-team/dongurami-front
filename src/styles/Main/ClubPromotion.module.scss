@@ -15,6 +15,9 @@
             margin-left: 20px;
             color: #3FCDB8;
         }
+        .br {
+            margin-left: 20px;
+        }
     }
     .promotion {
         display: flex;
@@ -46,15 +49,40 @@
     }
 }
 
-// .first {
-//     animation-duration: 1s;
-//     animation-name: wakeUp;
-//     @keyframes wakeUp {
-//         from {
-//             margin-top: 40%;
-//         }
-//         to {
-//             margin-top: 0%;
-//         }        
-//     }
-// }
+@media screen and (max-width: 768px) {
+    .container {
+      width: 100%;
+      margin-top: 19%;
+      h1 {
+          font-size: 3.2rem;
+          margin-left: 5%;
+      }
+      .list {
+        width: 100%;
+        .club {
+            margin-left: 2%;
+        }
+        .br {
+            margin-top: 12%;
+            margin-left: -448px;
+        }
+      }
+      .listBtn {
+          width: 9vw;
+          margin-top: -10%;
+          margin-left: 65%;
+      }
+      .promotion {
+          margin-left: 3%;
+          margin-top: 4%;
+          .recruit {
+              margin-left: 15px;
+          }
+      }
+      .promotionBtn {
+        width: 9vw;
+        margin-top: 1%;
+        margin-left: 65%;
+      }
+    }
+  }

@@ -51,3 +51,45 @@
     overflow: hidden;
   }
 }
+
+
+@media screen and (max-width: 768px) {
+  .wrap {
+    width: 100%;
+    margin-top: 12%;
+    h1 {
+      width: 88%;
+      text-align: center;
+    }
+    .imgs {
+      display: flex;
+      flex-direction: column;
+      margin-left: 5px;
+      .list {
+        width: 100%;
+        align-items: center;
+        zoom: 1.1;
+        pointer-events: none;
+        span {
+          margin-top: 25px;
+        }
+      }
+      .promotion {
+        margin-top: 120px;
+        zoom: 1.1;
+        pointer-events: none;
+        span {
+          margin-top: 25px;
+        }
+      }
+      .home {
+        margin-top: 120px;
+        zoom: 1.1;
+        pointer-events: none;
+        span {
+          margin-top: 25px;
+        }
+      }
+    }
+  }
+}
