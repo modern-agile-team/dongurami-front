@@ -78,6 +78,7 @@ const Apply = () => {
           token.studentID === clubInfo.ownerID ? styles.add : styles.none
         }
       >
+        <span>새로운 질문</span>
         <input type="text" onChange={handleChange} />
         <IoIosAddCircleOutline onClick={onQuestionAdd} size={iconSize} />
       </div>

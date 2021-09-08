@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../../../styles/Club/Home/Apply/Additional.module.scss";
 import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
