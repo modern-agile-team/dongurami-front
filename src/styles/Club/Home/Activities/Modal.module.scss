@@ -26,6 +26,8 @@
 }
 
 .contents {
+  display: flex;
+  flex-direction: column;
   padding-left: calc(126px + env(safe-area-inset-left));
   padding-right: calc(126px + env(safe-area-inset-right));
   padding-bottom: 80px;
@@ -61,11 +63,14 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .contents {
     padding: 0;
+    align-items: center;
   }
+}
 
+@media (max-width: 767px) {
   .box {
     top: 0;
     left: 0;
