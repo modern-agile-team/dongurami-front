@@ -20,7 +20,10 @@
   align-items: center;
   img {
     width: 20%;
+    height: 100%;
   }
+  padding-bottom: 1em;
+  border-bottom: 1px solid #c9eee8;
 }
 
 .club {
@@ -36,4 +39,11 @@
   justify-content: space-between;
   align-items: center;
   margin-left: 1em;
+}
+
+.review {
+  margin-top: 1.5em;
+  p {
+    margin: 0;
+  }
 }
