@@ -1,16 +1,15 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Activities/Modal.module.scss";
-import { MdClose } from "react-icons/md";
 import { actData } from "./Activities";
 import ModalHeader from "./ModalHeader";
 import ModalImg from "./ModalImg";
-import ModalFooter from "./ModalFooter";
 
 const Modal = ({ onClose, imgURL, setImgURL }) => {
-  const iconSize = 30;
+  const iconSize = 20;
 
   const date = actData.filter((el) => el.img === imgURL)[0].date;
   const desc = actData.filter((el) => el.img === imgURL)[0].desc;
+  const title = actData.filter((el) => el.img === imgURL)[0].title;
 
   const present = actData.filter((el) => {
     if (el.img === imgURL) {
@@ -30,19 +29,24 @@ const Modal = ({ onClose, imgURL, setImgURL }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <div id={styles.close}>
-        <MdClose onClick={onClose} size={iconSize} />
+    <div className={styles.container} onClick={onClose}>
+      <div
+        className={styles.box}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
+        <div className={styles.contents}>
+          <ModalHeader title={title} desc={desc} date={date} />
+          <ModalImg
+            onClose={onClose}
+            imgURL={imgURL}
+            back={back}
+            foward={foward}
+            iconSize={iconSize}
+          />
+        </div>
       </div>
-      <ModalHeader desc={desc} />
-      <ModalImg
-        onClose={onClose}
-        imgURL={imgURL}
-        back={back}
-        foward={foward}
-        iconSize={iconSize}
-      />
-      <ModalFooter date={date} />
     </div>
   );
 };
