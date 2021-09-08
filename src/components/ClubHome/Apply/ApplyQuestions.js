@@ -37,7 +37,7 @@ const ApplyQuestions = () => {
         <li>
           <span>휴대전화</span>
           <br />
-          <input type="text" placeholder="전화번호" id="phone" />
+          <input type="text" placeholder="전화번호 ( - 제외 )" id="phone" />
         </li>
       </ul>
     </div>
