@@ -3,11 +3,11 @@
   flex-direction: column;
   margin: 0 auto;
   width: 60%;
-  p {
-    margin: 0.5em 0;
-  }
-  border-bottom: 1px solid rgba(97, 97, 97, 0.575);
-  padding: 2em 0;
+  border: 2px solid #3fcdb8;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em;
+  border-radius: 15px;
 }
 
 .star {
@@ -15,14 +15,11 @@
 }
 .update {
   display: flex;
-  align-items: center;
-  margin-left: 1em;
-  height: 30%;
-  margin-top: 1vh;
-
+  justify-content: center;
   svg {
     margin: 0 5px;
     cursor: pointer;
+    color: black;
     &:hover {
       color: red;
     }
@@ -40,5 +37,16 @@
   display: flex;
   span {
     margin-top: 0.5em;
+  }
+}
+
+#date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1em;
+  p {
+    margin: 5px 0;
   }
 }
