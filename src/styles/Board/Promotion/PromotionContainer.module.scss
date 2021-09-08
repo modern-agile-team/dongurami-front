@@ -130,6 +130,11 @@
 
 @media screen and (max-width: 480px) {
   .writeBtn {
-    display: none;
+    width: 30vw;
+    top: 35%;
+  }
+  .section {
+    display: flex;
+    flex-direction: column;
   }
 }
