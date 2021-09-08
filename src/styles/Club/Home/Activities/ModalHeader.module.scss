@@ -10,12 +10,15 @@
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
+  .header {
+    width: 70vw;
+  }
 }
 
 @media (max-width: 767px) {
   .header {
+    width: 90vw;
     border-bottom: none;
-    margin-left: 5vw;
   }
 }

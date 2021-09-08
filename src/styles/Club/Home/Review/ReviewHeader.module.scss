@@ -1,13 +1,24 @@
 .header {
   display: flex;
   justify-content: space-between;
-  font-size: 150%;
-  border-bottom: 1px solid rgba(97, 97, 97, 0.575);
-  font-family: "twayair";
-  div {
-    text-align: center;
-    width: 50%;
+  width: 60%;
+  margin: 0 auto;
+  font-size: 120%;
+  border-bottom: 2px solid #c9eee8;
+  padding: 1em;
+  svg {
+    color: #ffc949;
+    margin-right: 5px;
   }
-  padding-bottom: 1.5em;
-  margin-bottom: 1.5em;
+}
+
+.star {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    width: 100%;
+  }
 }
