@@ -60,7 +60,7 @@ function Pagination({ page, setPage }) {
         <Item itemPage={page - 1} />
         <Item itemPage={page} />
         <Item itemPage={page + 1} />
-        <li><button className={styles.collapse}>...</button></li>
+        <Collapse />
         <Item itemPage={10} />
         <NextPage />
       </ul>
