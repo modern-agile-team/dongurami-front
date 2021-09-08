@@ -8,7 +8,7 @@ function test() {
     <>
       <Header />
       <TypeSearch />
-     <ClubLists />
+      <ClubLists />
       
     </>
   );

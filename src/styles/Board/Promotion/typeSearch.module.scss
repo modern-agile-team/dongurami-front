@@ -46,3 +46,16 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .searchContainer {
+    .searchElement {
+      svg {
+        border-left: solid black;
+        padding-left: 4px;
+        padding-right: 5px;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
