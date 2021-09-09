@@ -8,11 +8,9 @@ const ReviewHeader = () => {
       <div>
         <span>우아한 애자일 후기</span>
       </div>
-      <div>
-        <span>
-          <AiFillStar />
-          4.6
-        </span>
+      <div className={styles.star}>
+        <AiFillStar />
+        <span>4.6</span>
       </div>
     </div>
   );

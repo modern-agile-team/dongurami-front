@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/Club/Home/Manager/Approve.module.scss";
 import ApproveHeader from "./ApproveHeader";
 import ApproveList from "./ApproveList";
@@ -52,10 +52,18 @@ const answers = [
 ];
 
 export const Approve = () => {
+  const [listOpen, setListOpen] = useState(false);
+  const onClick = () => {
+    setListOpen(!listOpen);
+  };
   return (
     <div className={styles.container}>
-      <ApproveHeader answers={answers} />
-      <ApproveList answers={answers} questions={questions} />
+      <ApproveHeader listOpen={listOpen} onClick={onClick} answers={answers} />
+      {listOpen ? (
+        <ApproveList answers={answers} questions={questions} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

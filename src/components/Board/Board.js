@@ -4,19 +4,27 @@ import styles from "../../styles/Board/Board/Board.module.scss";
 import Table from './Table';
 import Pagination from './Pagination';
 import Search from './Search';
-import { useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
+import { useRouter } from 'next/router';
 
 function Notice() {
-  const [{ page }, dispatchPage] = useReducer((state, action) => {
-    switch (action.type) {
-      case 'next':
-        if (state.page > 9) return state;
-        return { page: state.page + 1 };
-      case 'previous':
-        if (state.page < 2) return state;
-        return { page: state.page - 1 };
-    }
-  }, { page: 1 });
+  const router = useRouter();
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (!router.query.page) return; 
+    setPage(Number(router.query.page));
+  }, [router]);
+
+  const setPageToUrl = (nextPage) => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        page: nextPage
+      }
+    });
+  }
 
   return (
     <div className={styles.container}>
@@ -32,7 +40,7 @@ function Notice() {
           </select>
         </div>
         <Table />
-        <Pagination page={page} dispatch={dispatchPage} />
+        <Pagination page={page} setPage={setPageToUrl} />
         <Search />
       </div>
     </div>

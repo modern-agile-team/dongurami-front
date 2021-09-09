@@ -1,17 +1,18 @@
 .write {
-  height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid rgba(97, 97, 97, 0.575);
-  padding-bottom: 1.5em;
+  border-bottom: 2px solid #c9eee8;
+  width: 60%;
+  margin: 0 auto;
+  padding: 19.2px;
 }
 
 .star {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30%;
+  margin-top: 1em;
   svg {
     color: #ffc949;
     height: 30px;
@@ -20,26 +21,43 @@
 }
 
 .comment {
-  margin-top: 30px;
-  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-top: 1em;
+  padding-bottom: 2em;
   input {
-    width: 40vw;
-    height: 5em;
-    border-radius: 5px;
-    border: 1px solid black;
+    width: 70%;
+    height: 3em;
+    border-radius: 16px;
+    border: 2px solid #3fcdb8;
+    &:focus {
+      outline: none;
+    }
   }
   button {
     margin-left: 1em;
-    width: 5vw;
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid rgba(#f0bf9a, 0);
+    height: 3em;
+    border-radius: 3px;
     cursor: pointer;
-    background-color: #0752b6;
-    color: white;
-    font-weight: bold;
+    font-weight: lighter;
+    background-color: #c9eee8;
+    border: none;
     &:hover {
-      background-color: #68462d;
+      background-color: #3fcdb8;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .write {
+    width: 100%;
+  }
+  .comment {
+    width: 100%;
+    input {
+      width: 90%;
     }
   }
 }

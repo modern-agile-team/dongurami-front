@@ -4,3 +4,9 @@
   margin-top: 5em;
   width: 70vw;
 }
+
+@media (max-width: 767px) {
+  .container {
+    width: 98%;
+  }
+}

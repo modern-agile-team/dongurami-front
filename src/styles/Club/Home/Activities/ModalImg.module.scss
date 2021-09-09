@@ -3,23 +3,15 @@
   justify-content: center;
   align-items: center;
   img {
-    width: 50vw;
-    height: 70vh;
+    width: 100%;
     cursor: zoom-out;
   }
-  svg {
-    margin: 0 3vw;
-  }
 }
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .img {
     img {
-      width: 80vw;
-      height: 45vw;
+      width: 70vw;
       cursor: zoom-out;
-    }
-    svg {
-      margin: 0 5vw;
     }
   }
 }
@@ -27,21 +19,9 @@
 @media (max-width: 767px) {
   .img {
     img {
-      position: fixed;
-      top: 0;
-      width: 100vw;
-      height: 60vh;
+      width: 90vw;
       cursor: zoom-out;
-    }
-    svg {
-      position: absolute;
-      top: 70vh;
-    }
-    #back {
-      left: 10vw;
-    }
-    #foward {
-      right: 10vw;
+      margin-bottom: 1em;
     }
   }
 }
