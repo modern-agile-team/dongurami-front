@@ -4,7 +4,7 @@ import { AiFillStar } from "react-icons/ai";
 import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 
-export const ReviewMine = () => {
+const ReviewMine = () => {
   return (
     <div className={styles.mine}>
       <div className={styles.header}>

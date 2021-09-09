@@ -27,6 +27,28 @@ const reviewData = [
 const Review = () => {
   const [reviewInput, setReviewInput] = useState("");
   const [reviewList, setReviewList] = useState(reviewData);
+  const [reviewRate, setReviewRate] = useState(0);
+  const [starState, setStarState] = useState(new Array(5).fill(false));
+
+  const onStarHandleFalse = (index) => {
+    const newStarState = [...starState];
+    for (let i = index + 1; i <= 4; i++) {
+      newStarState[i] = false;
+    }
+    const rate = newStarState.filter((el) => el === true).length;
+    setReviewRate(rate);
+    setStarState(newStarState);
+  };
+
+  const onStarHandleTrue = (index) => {
+    const newStarState = [...starState];
+    for (let i = 0; i <= index; i++) {
+      newStarState[i] = true;
+    }
+    const rate = newStarState.filter((el) => el === true).length;
+    setReviewRate(rate);
+    setStarState(newStarState);
+  };
 
   const onReviewInput = (e) => {
     setReviewInput(e.target.value);
@@ -41,7 +63,7 @@ const Review = () => {
     const newReviewList = [
       ...reviewList,
       {
-        rate: 5,
+        rate: reviewRate,
         desc: reviewInput,
         date: today,
       },
@@ -53,6 +75,9 @@ const Review = () => {
     <div className={styles.container}>
       <ReviewHeader />
       <ReviewWrite
+        starState={starState}
+        onStarHandleFalse={onStarHandleFalse}
+        onStarHandleTrue={onStarHandleTrue}
         onReviewInput={onReviewInput}
         onReviewSubmit={onReviewSubmit}
       />
