@@ -4,7 +4,7 @@ import styles from "../../styles/Board/Board/Board.module.scss";
 import Table from './Table';
 import Pagination from './Pagination';
 import Search from './Search';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 function Notice() {
@@ -13,7 +13,7 @@ function Notice() {
 
   useEffect(() => {
     if (!router.isReady) return;
-    if (!router.query.page) return; 
+    if (!router.query.page) return;
     setPage(Number(router.query.page));
   }, [router]);
 
