@@ -128,6 +128,14 @@
   }
 }
 
+@media (max-width: 770px) {
+  .writeBtn {
+    width: 18%;
+    right: 10%;
+    top: 100%;
+  }
+}
+
 @media (max-width: 1050px) {
   .writeBtn {
     width: 12%;
@@ -135,9 +143,10 @@
     top: 21%;
   }
 }
-@media (max-width: 768px) {
+
+@media (max-width: 1024px) {
   .writeBtn {
-    width: 18%;
+    width: 12%;
     right: 10%;
   }
 }
@@ -147,6 +156,7 @@
     width: 19%;
     right: 10%;
     top: 22%;
+    position: fixed;
   }
 
   .section {

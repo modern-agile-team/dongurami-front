@@ -1,15 +1,36 @@
-import React from 'react';
+import { useState } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import { MdClose } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
+import { data } from './data';
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 
 const Modal = ({ value, setOpenModal }) => {
+    const [index, setIndex] = useState(data.findIndex((el) => el.img === value));
+    const [zoom, setZoom] = useState(false);
+    
+    const forward = () => {
+        let idx = index;
+        if (idx !== data.length - 1) {idx += 1; console.log(index)}
+        else if (idx === data.length - 1) { idx = 0; console.log(index) }
+        setIndex(idx);
+    }
+    const back = () => {
+        let idx = index;
+        if (idx === 0) idx = data.length - 1;
+        else idx -= 1;
+        setIndex(idx);
+    }
     return (
         <div className={styles.background}>
+            {!zoom &&
+             <>
             <MdClose className={styles.close} onClick={() => setOpenModal(false)}/>
             <div className={styles.image}>
-                <img src={value} />
+                <IoIosArrowBack size={95} onClick={back} />
+                <img src={data[index].img} />
+                <IoIosArrowForward size={95}  onClick={forward} />
               </div>
             
             <div className={styles.post}>
@@ -63,8 +84,8 @@ const Modal = ({ value, setOpenModal }) => {
                     </div>
                     <hr /> 
                  </div>
-            </div>
-        </div>
+            </div> </>}
+    </div>
     );
 }
 
