@@ -29,7 +29,7 @@ const Calendar =()=>{
     const weekDays = ["일", "월", "화", "수", "목", "금", "토"]
     for (week; week <= lastWeek; week++) {
       result = result.concat(
-        <tr key={week}>
+        <tr className={styles.num} key={week}>
             {
               Array(7).fill(0).map((data, index) => {
                 let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day');
@@ -37,20 +37,20 @@ const Calendar =()=>{
                 if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){
                   return(
                       <td className={styles.dayblock} key={index}>
-                        <span className={styles.today} onClick={() => setDate(days.format('YYYYMMDD'))}>{days.format('D')}{weekDays[days.day()]}</span>
-                        {/* <span>{weekDays[days.day()]}</span> */}
+                        <span className={styles.today} onClick={() => setDate(days.format('YYYYMMDD'))}>{days.format('D')}</span>
+                        {/* <span></span> */}
                       </td>
                   );
                 }else if(days.format('MM') !== today.format('MM')){
                   return(
                       <td key={index} className={styles.dayblock}>
-                        <span onClick={() => setDate(days.format('YYYYMMDD'))} className={styles.otherday}>{days.format('D')}{weekDays[days.day()]}</span>
+                        <span onClick={() => setDate(days.format('YYYYMMDD'))} className={styles.otherday}>{days.format('D')}</span>
                       </td>
                   );
                 }else{
                   return(
                       <td key={index} className={styles.dayblock}>
-                        <span className={styles.monthdays} id={days.format('YYYYMMDD')} onClick={() => setDate(days.format('YYYYMMDD'))}>{days.format('D')}{weekDays[days.day()]}</span>
+                        <span className={styles.monthdays} id={days.format('YYYYMMDD')} onClick={() => setDate(days.format('YYYYMMDD'))}>{days.format('D')}</span>
                       </td>
                   );
                 }
@@ -74,6 +74,15 @@ const Calendar =()=>{
           </div>
           <table className={styles.calendar}>
             <tbody>
+              <tr className={styles.days}>
+                  <td className={styles.daysblock}><span>일</span></td>
+                  <td className={styles.daysblock}><span>월</span></td>
+                  <td className={styles.daysblock}><span>화</span></td>
+                  <td className={styles.daysblock}><span>수</span></td>
+                  <td className={styles.daysblock}><span>목</span></td>
+                  <td className={styles.daysblock}><span>금</span></td>
+                  <td className={styles.daysblock}><span>토  </span></td>
+              </tr>
               {calendarArr()}
             </tbody>
           </table>  
