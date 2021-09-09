@@ -1,3 +1,4 @@
+import Footer from "../components/Common/Footer";
 import Header from "../components/Common/Header";
 import FindPW from "../components/Find/FindPW";
 
@@ -6,6 +7,7 @@ export const findPW = () => {
     <>
     <Header />
     <FindPW />
+    <Footer />
     </>
   );
 }

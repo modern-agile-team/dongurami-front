@@ -1,4 +1,5 @@
 import Manager from "../components/ClubHome/Manager/Manager";
+import Footer from "../components/Common/Footer";
 import Header from "../components/Common/Header";
 
 export const manager = () => {
@@ -6,6 +7,7 @@ export const manager = () => {
     <>
       <Header />
       <Manager />
+      <Footer/>
     </>
   );
 };
