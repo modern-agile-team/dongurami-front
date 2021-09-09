@@ -6,24 +6,38 @@
 
 }
 .calendar {
+  display: flex;
+  justify-content: center;
+  // align-items: center;
   width: 50vw;
-  height: 50vh;
-  border: solid 1px #90E2D6;
-  border-radius: 7%;
+  height: 60vh;
   z-index: 999;
   margin-bottom: 5%;
+
+  .num {
+    td {
+      span {
+        position: relative;
+        bottom: 30%;
+      }
+    }
+  }
 } 
 
 .control {
-  width: 50vw;
+  width: 20vw;
   display: flex;
   justify-content: center;
   font-size: 1.4vw;
+  margin-bottom: -3vh;
+  margin-top: 3vh;
+  z-index: 99;
 
   .lastmonth {
     cursor: pointer;
     margin-right: 2%;
-    &hover {
+    color: black;
+    &:hover {
       color: #90E2D6;
     }
   }
@@ -33,7 +47,8 @@
   .nextmonth {
     cursor: pointer;
     margin-left: 2%;
-    &hover {
+    color: black;
+    &:hover {
       color: #90E2D6;
     }
   }
@@ -43,6 +58,13 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: 3%;
+  span {
+    color: black;
+    cursor: pointer;
+    &:hover {
+      color: #3FCDB8;
+    }
+  }
 }
 
 .today {
@@ -53,17 +75,21 @@
   color: rgb(196, 196, 196);
 }
 
-.days {
-  display: flex;
-  justify-content: center;
-  justify-content: space-between;
-  font-size: 0.8vw;
+.dayblock {
+  width: 6vw;
+  height: 8vh;
+  border: solid 1px #afe2db;
 }
 
-.dayblock {
-  width: 4vw;
-  height: 4vh;
-  span {
+.days {
+  margin-bottom: -5vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  td {
+    width: 6vw;
+    height: 8vh;
     display: flex;
+    justify-content: center;
   }
 }
