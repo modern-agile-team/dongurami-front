@@ -1,21 +1,48 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
 .calendar {
   width: 50vw;
   height: 50vh;
   border: solid 1px #90E2D6;
   border-radius: 7%;
   z-index: 999;
+  margin-bottom: 5%;
 } 
 
 .control {
+  width: 50vw;
   display: flex;
   justify-content: center;
-}
+  font-size: 1.4vw;
 
-.addBtn {
-  // justify-content: flex-end;
-  float: right;
-  position: relative;
-  bottom: 4vh;
+  .lastmonth {
+    cursor: pointer;
+    margin-right: 2%;
+    &hover {
+      color: #90E2D6;
+    }
+  }
+  .thisMonth {
+    align-items: stretch;
+  }
+  .nextmonth {
+    cursor: pointer;
+    margin-left: 2%;
+    &hover {
+      color: #90E2D6;
+    }
+  }
+}
+.add {
+  width: 50vw;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 3%;
 }
 
 .today {
@@ -31,12 +58,11 @@
   justify-content: center;
   justify-content: space-between;
   font-size: 0.8vw;
-} 
+}
 
 .dayblock {
-  width: 5vw;
-  height: 5vh;
-  background-color: white;
+  width: 4vw;
+  height: 4vh;
   span {
     display: flex;
   }
