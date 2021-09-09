@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Review/ReviewFilter.module.scss";
 
-export const ReviewFilter = () => {
+const ReviewFilter = () => {
   return (
     <div className={styles.filter}>
       <select name="filter">

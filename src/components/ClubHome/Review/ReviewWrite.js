@@ -1,20 +1,28 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Review/ReviewWrite.module.scss";
-import { AiFillStar } from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
-export const ReviewWrite = () => {
+const ReviewWrite = ({
+  onReviewInput,
+  onReviewSubmit,
+  onStarHandleFalse,
+  onStarHandleTrue,
+  starState,
+}) => {
   return (
     <div className={styles.write}>
       <div className={styles.star}>
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
+        {starState.map((el, i) => {
+          return el ? (
+            <AiFillStar onClick={() => onStarHandleFalse(i)} />
+          ) : (
+            <AiOutlineStar onClick={() => onStarHandleTrue(i)} />
+          );
+        })}
       </div>
       <div className={styles.comment}>
-        <input />
-        <button>등록</button>
+        <input onChange={onReviewInput} />
+        <button onClick={onReviewSubmit}>등록</button>
       </div>
     </div>
   );

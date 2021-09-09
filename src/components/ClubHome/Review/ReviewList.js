@@ -2,9 +2,8 @@ import React from "react";
 import styles from "../../../styles/Club/Home/Review/ReviewList.module.scss";
 import { AiFillStar } from "react-icons/ai";
 
-export const ReviewList = ({ rate, desc, date }) => {
+const ReviewList = ({ rate, desc, date }) => {
   const stars = new Array(rate).fill(rate);
-  console.log(stars);
 
   return (
     <div className={styles.list}>
