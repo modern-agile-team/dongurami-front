@@ -93,3 +93,19 @@
     }
   }
 }
+
+
+@media screen and (max-width: 480px) {
+  .wrap {
+    width: 100%;
+    .find {
+      width: 90%;
+      font-size: 75%;
+      button {
+        zoom: 1.1;
+        margin-top: 8%;
+        font-size: 60%;
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@
   margin-bottom: 5%;
   gap: 15px;
   width: 35em;
-  height: 42em;
+  height: 45em;
   border: solid;
   border-color: #C2F2DC;
   border-radius: 40px;
@@ -68,10 +68,19 @@
   margin: 0; 
 }
 
+@media screen and (max-width: 1024px) {
+  .form {
+    margin-top: 18%;
+    width: 35rem;
+    height: 55rem;
+  }
+}
 
 @media screen and (max-width: 768px) {
   .form {
-    width: 75%;
+    width: 90%;
+    height: 50rem;
+    margin-top: 20%;
     .input {
       width: 52%;
     }
@@ -85,6 +94,18 @@
     }
     .login {
       font-size: 90%;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form {
+    margin-top: 6rem;
+    width: 90%;
+    height: 48rem;
+    .button {
+      width: 5.5rem;
+      height: 2.5rem;
     }
   }
 }
