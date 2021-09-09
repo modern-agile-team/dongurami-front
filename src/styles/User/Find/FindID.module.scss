@@ -71,25 +71,43 @@
   
 
 @media screen and (max-width: 768px) {
-  .find {
-    width: 90%;
-    font-size: 85%;
-    .name {
-      width: 65%;
-      margin-top: 2%;
+  .wrap {
+    width: 100%;
+    .find {
+      width: 80%;
+      font-size: 85%;
+      .name {
+        width: 65%;
+        margin-top: 2%;
+      }
+      .email {width: 65%;}
+      .findPW {
+        width: 50%;
+        font-size: 110%;
+        margin: 0;
+        margin-left: 14%;
+      }
+      button {
+        width: 30%;
+        margin: 0;
+        margin-top: 2rem;
+        margin-left: 60%;
+      }
     }
-    .email {width: 65%;}
-    .findPW {
-      width: 50%;
-      font-size: 110%;
-      margin: 0;
-      margin-left: 14%;
-    }
-    button {
-      width: 30%;
-      margin: 0;
-      margin-top: 2rem;
-      margin-left: 60%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wrap {
+    width: 100%;
+    .find {
+      width: 90%;
+      font-size: 75%;
+      button {
+        zoom: 1.1;
+        margin-top: 8%;
+        font-size: 60%;
+      }
     }
   }
 }
