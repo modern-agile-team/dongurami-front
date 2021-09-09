@@ -25,11 +25,12 @@ const reviewData = [
 ];
 
 const Review = () => {
-  const [reviewInput, setReviewInput] = useState("");
-  const [reviewList, setReviewList] = useState(reviewData);
-  const [reviewRate, setReviewRate] = useState(0);
-  const [starState, setStarState] = useState(new Array(5).fill(false));
+  const [reviewInput, setReviewInput] = useState(""); // 후기 글
+  const [reviewList, setReviewList] = useState(reviewData); // 후기 리스트
+  const [reviewRate, setReviewRate] = useState(0); // 별점 점수
+  const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
 
+  // 별점 비우기
   const onStarHandleFalse = (index) => {
     const newStarState = [...starState];
     for (let i = index + 1; i <= 4; i++) {
@@ -40,6 +41,7 @@ const Review = () => {
     setStarState(newStarState);
   };
 
+  // 별점 채우기
   const onStarHandleTrue = (index) => {
     const newStarState = [...starState];
     for (let i = 0; i <= index; i++) {
@@ -50,11 +52,22 @@ const Review = () => {
     setStarState(newStarState);
   };
 
+  // 후기 글 입력
   const onReviewInput = (e) => {
     setReviewInput(e.target.value);
   };
 
+  // 별점 평균
+  const reviewAvg =
+    reviewList
+      .map((el) => el.rate)
+      .reduce((sum, cur) => {
+        return sum + cur;
+      }, 0) / reviewList.length;
+
+  // 후기 + 별점 입력
   const onReviewSubmit = () => {
+    // 오늘 날짜
     const year = new Date().getFullYear();
     const month = new Date().getMonth() + 1;
     const date = new Date().getDate();
@@ -71,9 +84,10 @@ const Review = () => {
 
     setReviewList(newReviewList);
   };
+
   return (
     <div className={styles.container}>
-      <ReviewHeader />
+      <ReviewHeader reviewAvg={reviewAvg} />
       <ReviewWrite
         starState={starState}
         onStarHandleFalse={onStarHandleFalse}

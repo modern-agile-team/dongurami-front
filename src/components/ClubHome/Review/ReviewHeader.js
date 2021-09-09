@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillStar } from "react-icons/ai";
 import styles from "../../../styles/Club/Home/Review/ReviewHeader.module.scss";
 
-const ReviewHeader = () => {
+const ReviewHeader = ({ reviewAvg }) => {
   return (
     <div className={styles.header}>
       <div>
@@ -10,7 +10,7 @@ const ReviewHeader = () => {
       </div>
       <div className={styles.star}>
         <AiFillStar />
-        <span>4.6</span>
+        <span>{reviewAvg.toFixed(1)}</span>
       </div>
     </div>
   );
