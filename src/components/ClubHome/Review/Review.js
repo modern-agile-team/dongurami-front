@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/Club/Home/Review/Review.module.scss";
 import ReviewFilter from "./ReviewFilter";
 import ReviewHeader from "./ReviewHeader";
@@ -24,17 +24,44 @@ const reviewData = [
   },
 ];
 
-export const Review = () => {
+const Review = () => {
+  const [reviewInput, setReviewInput] = useState("");
+  const [reviewList, setReviewList] = useState(reviewData);
+
+  const onReviewInput = (e) => {
+    setReviewInput(e.target.value);
+  };
+
+  const onReviewSubmit = () => {
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth() + 1;
+    const date = new Date().getDate();
+    const today = `${year}-${month}-${date}`;
+
+    const newReviewList = [
+      ...reviewList,
+      {
+        rate: 5,
+        desc: reviewInput,
+        date: today,
+      },
+    ];
+
+    setReviewList(newReviewList);
+  };
   return (
     <div className={styles.container}>
       <ReviewHeader />
-      <ReviewWrite />
+      <ReviewWrite
+        onReviewInput={onReviewInput}
+        onReviewSubmit={onReviewSubmit}
+      />
       <ReviewFilter />
       <ReviewMine />
-      {reviewData.map((el) => {
+      {reviewList.map((el) => {
         return (
           <ReviewList
-            key={reviewData.indexOf(el)}
+            key={reviewList.indexOf(el)}
             rate={el.rate}
             desc={el.desc}
             date={el.date}
