@@ -1,10 +1,11 @@
 import PromotionContainer from "../components/Promotion/PromotionContainer";
-import Header from "../components/Common/Header";
+import Footer from "../components/Common/Footer";
 
 function promotion() {
   return(
     <> 
       <PromotionContainer />;
+      <Footer/>
     </>
   )
 }
