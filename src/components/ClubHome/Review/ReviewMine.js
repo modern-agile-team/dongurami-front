@@ -15,7 +15,7 @@ const ReviewMine = ({ description, score, inDate }) => {
             alt="우아한 애자일"
           />
           <div id={styles.date}>
-            <span>우아한 애자일</span>
+            <span>내가 작성한 후기</span>
             <p>{inDate}</p>
           </div>
         </div>

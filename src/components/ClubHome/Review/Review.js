@@ -26,6 +26,7 @@ const Review = () => {
   }, []);
 
   const reviewMine = reviewList.filter((el) => el.studentId === "test7");
+  const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
 
   // 별점 비우기
   const onStarHandleFalse = (index) => {
@@ -64,20 +65,22 @@ const Review = () => {
 
   // 후기 + 별점 입력
   const onReviewSubmit = () => {
-    return fetch("http://3.36.72.145:8080/api/club/review/1", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbNSwxXSwiaWQiOiJ0ZXN0NyIsIm5hbWUiOiJ0ZXN0NyIsImVtYWlsIjoidGVzdDdAbmF2ZXJjb20iLCJwcm9maWxlUGF0aCI6bnVsbCwiaXNBZG1pbiI6MCwiaWF0IjoxNjMxMjQ3NDgwLCJleHAiOjE2MzEzMzM4ODAsImlzcyI6Indvb2FoYW4gYWdpbGUifQ.c17y7l8vzRZq1N3f0FE7NhPiP6YfD__Tv2gAv9sb1eI",
-      },
-      body: JSON.stringify({
-        description: reviewInput,
-        score: reviewRate,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => alert(data.msg));
+    return reviewInput === ""
+      ? alert("빈 칸은 입력할 수 없습니다.")
+      : fetch("http://3.36.72.145:8080/api/club/review/1", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json; charset=utf-8",
+            "x-auth-token":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbNSwxXSwiaWQiOiJ0ZXN0NyIsIm5hbWUiOiJ0ZXN0NyIsImVtYWlsIjoidGVzdDdAbmF2ZXJjb20iLCJwcm9maWxlUGF0aCI6bnVsbCwiaXNBZG1pbiI6MCwiaWF0IjoxNjMxMjQ3NDgwLCJleHAiOjE2MzEzMzM4ODAsImlzcyI6Indvb2FoYW4gYWdpbGUifQ.c17y7l8vzRZq1N3f0FE7NhPiP6YfD__Tv2gAv9sb1eI",
+          },
+          body: JSON.stringify({
+            description: reviewInput,
+            score: reviewRate,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => alert(data.msg));
   };
 
   return (
@@ -96,13 +99,14 @@ const Review = () => {
         description={reviewMine.length ? reviewMine[0].description : 0}
         inDate={reviewMine.length ? reviewMine[0].inDate.substring(0, 10) : 0}
       />
-      {reviewList.map((el) => {
+      {reviewNotMine.map((el, i) => {
         return (
           <ReviewList
-            key={reviewList.indexOf(el)}
+            key={i}
             rate={el.score}
             desc={el.description}
             date={el.inDate.substring(0, 10)}
+            no={i + 1}
           />
         );
       })}
