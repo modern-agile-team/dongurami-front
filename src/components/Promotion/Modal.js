@@ -33,7 +33,7 @@ const Modal = ({ value, setOpenModal }) => {
     
     return (
         <div className={styles.background}>
-            {zoom && <ZoomImage imgUrl={imgUrl}/>}
+            {zoom && <ZoomImage imgUrl={imgUrl} setZoom={setZoom} />}
             {!zoom &&
              <>
             <MdClose className={styles.close} onClick={() => setOpenModal(false)}/>

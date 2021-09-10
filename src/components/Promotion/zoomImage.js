@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styles from '../../styles/Board/Promotion/zoomImage.module.scss';
-const ZoomImage = ({imgUrl}) => {
+const ZoomImage = ({ imgUrl, setZoom }) => {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} onClick={() => setZoom(false)}>
         <div className={styles.image}>
             <img src={imgUrl}/>
         </div>
