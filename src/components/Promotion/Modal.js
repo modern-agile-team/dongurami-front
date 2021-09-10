@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { data } from './data';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import ZoomImage from './ZoomImage';
+import ZoomImg from './ZoomImg';
 
 
 const Modal = ({ value, setOpenModal }) => {
@@ -33,7 +33,7 @@ const Modal = ({ value, setOpenModal }) => {
     
     return (
         <div className={styles.background}>
-            {zoom && <ZoomImage imgUrl={imgUrl} setZoom={setZoom} />}
+            {zoom && <ZoomImg imgUrl={imgUrl} setZoom={setZoom} />}
             {!zoom &&
              <>
             <MdClose className={styles.close} onClick={() => setOpenModal(false)}/>

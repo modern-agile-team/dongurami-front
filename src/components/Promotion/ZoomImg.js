@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../../styles/Board/Promotion/zoomImage.module.scss';
-const ZoomImage = ({ imgUrl, setZoom }) => {
+const ZoomImg = ({ imgUrl, setZoom }) => {
     return (
       <div className={styles.container} onClick={() => setZoom(false)}>
         <div className={styles.image}>
@@ -10,4 +10,4 @@ const ZoomImage = ({ imgUrl, setZoom }) => {
     )
 }
 
-export default ZoomImage;
+export default ZoomImg;
