@@ -6,9 +6,9 @@
   margin-top: 4.5%;
   h1 {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 4.3rem;
+    font-size: 5.5vw;
     padding: 2rem;
-    margin-left: 13%;
+    margin-left: 12%;
     margin-bottom: -1.5%;
     .title {
       font-family: 'Noto Sans KR', sans-serif;
@@ -23,7 +23,7 @@
   span {
     font-family: 'Noto Sans KR', sans-serif;
     padding: 2rem;
-    margin-left: 13.5%;
+    margin-left: 12.2%;
     margin-bottom: 30%;
   }
   img {
@@ -35,17 +35,18 @@
 
 @media screen and (max-width: 1024px) {
   .container {
-    width: 100%;
+    width: 80%;
     margin: 0%;
     margin-top: 12%;
     h1 {
-      margin-left: 8%;
+      margin-left: 11%;
     }
     span {
-      margin-left: 8%;
+      margin-left: 11%;
     }
     img {
-      width: 45%;
+      width: 55%;
+      margin-left: 62%;
     }
   }
 }
@@ -53,17 +54,37 @@
 @media screen and (max-width: 768px) {
   .container {
     width: 100%;
-    margin: 0%;
-    margin-top: 15%;
-    h1 {
-      margin-left: 2%;
+    h1{
+      font-size: 4.3rem;
+      padding: 1rem;
     }
     span {
-      margin-left: 2%;
+      margin-left: 9.5%;
     }
     img {
-      width: 55%;
-      margin-left: 55%;
+      width: 100vw;
+      margin-top: 10%;
+      width: 85%;
+      margin-top: 13%;
+      margin-left: 10%;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    width: 100%;
+    margin-top: 20%;
+    h1 {
+      font-size: 12vw;
+      margin-left: 9%;
+    }
+    span {
+      font-size: 2vw;
+      margin-left: 5%;
+    }
+    img {
+      margin-left: 9%;
     }
   }
 }
