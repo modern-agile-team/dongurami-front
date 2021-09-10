@@ -11,8 +11,8 @@ const Review = () => {
   const [reviewList, setReviewList] = useState([]); // 후기 리스트
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
-  const [reviewUpdate, setReviewUpdate] = useState(false);
 
+  // 후기 불러오기
   useEffect(() => {
     fetch("http://3.36.72.145:8080/api/club/review/1", {
       headers: {
@@ -26,6 +26,7 @@ const Review = () => {
       });
   }, []);
 
+  // 내 후기와 내 후기가 아닌 것들
   const reviewMine = reviewList.filter((el) => el.studentId === "test7");
   const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
 
@@ -84,10 +85,7 @@ const Review = () => {
           .then((data) => alert(data.msg));
   };
 
-  const onToggleReviewUpdate = () => {
-    setReviewUpdate(!reviewUpdate);
-  };
-
+  // 내 후기 삭제
   const onReviewDelete = () => {
     fetch(`http://3.36.72.145:8080/api/club/review/1/${reviewMine[0].no}`, {
       method: "DELETE",
@@ -116,8 +114,6 @@ const Review = () => {
       {reviewMine.length ? (
         <ReviewMine
           onReviewDelete={onReviewDelete}
-          onToggleReviewUpdate={onToggleReviewUpdate}
-          reviewUpdate={reviewUpdate}
           score={reviewMine[0].score}
           description={reviewMine[0].description}
           inDate={reviewMine[0].inDate.substring(0, 10)}

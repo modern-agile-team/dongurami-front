@@ -1,17 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../../../styles/Club/Home/Review/ReviewMine.module.scss";
 import { AiFillStar } from "react-icons/ai";
-import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 
-const ReviewMine = ({
-  description,
-  score,
-  inDate,
-  onToggleReviewUpdate,
-  reviewUpdate,
-  onReviewDelete,
-}) => {
+const ReviewMine = ({ description, score, inDate, onReviewDelete }) => {
   const stars = new Array(score).fill(score);
 
   return (
@@ -32,17 +24,12 @@ const ReviewMine = ({
             return <AiFillStar key={i} />;
           })}
           <div className={styles.update}>
-            <HiPencil onClick={onToggleReviewUpdate} />
             <FaTrashAlt onClick={onReviewDelete} />
           </div>
         </div>
       </div>
       <div className={styles.review}>
-        {reviewUpdate ? (
-          <input defaultValue={description} />
-        ) : (
-          <p>{description}</p>
-        )}
+        <p>{description}</p>
       </div>
     </div>
   );
