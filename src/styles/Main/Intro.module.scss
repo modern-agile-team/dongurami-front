@@ -52,44 +52,86 @@
   }
 }
 
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .wrap {
     width: 100%;
-    margin-top: 12%;
     h1 {
-      width: 88%;
-      text-align: center;
+      padding-left: 0%;
     }
     .imgs {
-      display: flex;
-      flex-direction: column;
-      margin-left: 5px;
+      width: 100%;
       .list {
         width: 100%;
         align-items: center;
-        zoom: 1.1;
-        pointer-events: none;
-        span {
-          margin-top: 25px;
-        }
-      }
-      .promotion {
-        margin-top: 120px;
-        zoom: 1.1;
-        pointer-events: none;
-        span {
-          margin-top: 25px;
-        }
-      }
-      .home {
-        margin-top: 120px;
-        zoom: 1.1;
-        pointer-events: none;
-        span {
-          margin-top: 25px;
+        img {
+          width: 250px;
+          height: 250px;
         }
       }
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .wrap{
+    width: 100%;
+    h1 {
+      padding-left: 0%;
+    }
+    .imgs {
+      width: 100%;
+      margin-top: 0%;
+      gap: 0%;
+      margin-left: 6%;
+      .list {
+        width: 100%;
+        img {
+          width: 200px;
+          height: 200px;
+        }
+      }
+    }
+  }
+}
+
+
+// @media screen and (max-width: 768px) {
+//   .wrap {
+//     width: 100%;
+//     margin-top: 12%;
+//     h1 {
+//       width: 88%;
+//       text-align: center;
+//     }
+//     .imgs {
+//       display: flex;
+//       flex-direction: column;
+//       margin-left: 5px;
+//       .list {
+//         width: 100%;
+//         align-items: center;
+//         zoom: 1.1;
+//         pointer-events: none;
+//         span {
+//           margin-top: 25px;
+//         }
+//       }
+//       .promotion {
+//         margin-top: 120px;
+//         zoom: 1.1;
+//         pointer-events: none;
+//         span {
+//           margin-top: 25px;
+//         }
+//       }
+//       .home {
+//         margin-top: 120px;
+//         zoom: 1.1;
+//         pointer-events: none;
+//         span {
+//           margin-top: 25px;
+//         }
+//       }
+//     }
+//   }
+// }

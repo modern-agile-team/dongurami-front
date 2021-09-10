@@ -33,14 +33,37 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 100%;
+    margin: 0%;
+    margin-top: 12%;
+    h1 {
+      margin-left: 8%;
+    }
+    span {
+      margin-left: 8%;
+    }
+    img {
+      width: 45%;
+    }
+  }
+}
 
 @media screen and (max-width: 768px) {
   .container {
     width: 100%;
+    margin: 0%;
+    margin-top: 15%;
+    h1 {
+      margin-left: 2%;
+    }
+    span {
+      margin-left: 2%;
+    }
     img {
-      width: 85%;
-      margin-top: 13%;
-      margin-left: 10%;
+      width: 55%;
+      margin-left: 55%;
     }
   }
 }

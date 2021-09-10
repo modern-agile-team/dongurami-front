@@ -49,12 +49,24 @@
     }
 }
 
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 100%;
+        h1 {
+            margin-left: 8%;
+        }
+        button {
+            margin-left: 80%;
+        }
+    }
+}
+
 @media screen and (max-width: 768px) {
     .container {
       width: 100%;
-      margin-top: 19%;
+      margin-top: 20%;
       h1 {
-          font-size: 3.2rem;
+          font-size: 300%;
           margin-left: 5%;
       }
       .list {
@@ -62,15 +74,11 @@
         .club {
             margin-left: 2%;
         }
-        .br {
-            margin-top: 12%;
-            margin-left: -448px;
-        }
       }
       .listBtn {
           width: 9vw;
           margin-top: -10%;
-          margin-left: 65%;
+          margin-left: 80%;
       }
       .promotion {
           margin-left: 3%;
@@ -82,7 +90,28 @@
       .promotionBtn {
         width: 9vw;
         margin-top: 1%;
-        margin-left: 65%;
+        margin-left: 80%;
       }
+    }
+  }
+
+  @media screen and (max-width: 660px) {
+    .container {
+        width: 100%;
+        margin-top: 20%;
+        h1 {
+            font-size: 300%;
+            margin-left: 5%;
+        }
+        .list {
+          width: 100%;
+          .club {
+              margin-left: 2%;
+          }
+          .br {
+              margin-top: 12%;
+              margin-left: -415px;
+          }
+        }
     }
   }
