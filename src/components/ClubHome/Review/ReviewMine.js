@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Review/ReviewMine.module.scss";
 import { AiFillStar } from "react-icons/ai";
-import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 
-const ReviewMine = ({ description, score, inDate }) => {
+const ReviewMine = ({ description, score, inDate, onReviewDelete }) => {
   const stars = new Array(score).fill(score);
+
   return (
     <div className={styles.mine}>
       <div className={styles.header}>
@@ -24,8 +24,7 @@ const ReviewMine = ({ description, score, inDate }) => {
             return <AiFillStar key={i} />;
           })}
           <div className={styles.update}>
-            <HiPencil />
-            <FaTrashAlt />
+            <FaTrashAlt onClick={onReviewDelete} />
           </div>
         </div>
       </div>
