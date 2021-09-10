@@ -17,6 +17,7 @@ const ClubIntro = () => {
       genderWomen: 3,
     },
   ];
+
   const [descUpdate, setDescUpdate] = useState(false);
   const [introDesc, setIntroDesc] = useState(info[0].introduce);
 
