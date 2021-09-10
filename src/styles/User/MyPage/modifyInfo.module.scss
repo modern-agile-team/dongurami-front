@@ -1,11 +1,23 @@
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6%;
+  flex-direction: column;
+}
+
+.input {
+  margin: 3.5% 0;
+  width: 10vw;
+  text-align: center;
+}
 .wrap {
-  font-family: twayair;
   background-color: #faece1;
   display: flex;
   border: 0.3rem solid #F0BF9A;
   border-radius: 10%;
   width: 30vw;
-  height: 40vh;
+  height: 55vh;
   flex-direction: column;
   align-items: center;
   justify-items: center;
@@ -25,13 +37,20 @@
   color: black;
   font-size: 6vw;
   background-color: white;
+  margin-top: 7%;
+  cursor: pointer;
 }
 
 .button {
-  font-family: twayair;
   border: 0.3vw solid #F0BF9A;
   border-radius: 10%;
   background-color: #faece1;
   width: 13vw;
   height: 6vh;
+  margin-top: 4%;
+  cursor: pointer;
+}
+
+.setting {
+  cursor: pointer;
 }
