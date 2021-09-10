@@ -33,54 +33,54 @@ function Header() {
               <ul className={styles.menus} id={open ? styles.show : styles.hide}>
                 <ul className={styles.mobile}>
                       <li
-                      className={styles.notice} 
-                      id={menu === 1 ? styles.now : 0} 
+                      className={styles.notice}
+                      id={menu === 1 ? styles.now : 0}
                       onClick={() => {router.push('/notice'); menuToggle(1)}}
                       >공지게시판
                       </li>
                       <li
-                      className={styles.free} 
+                      className={styles.free}
                       id={menu === 2 ? styles.now : 0}
-                      onClick={() => {router.push('/notice'); menuToggle(2)}}
+                      onClick={() => {router.push('/freeboard'); menuToggle(2)}}
                       >자유게시판
                       </li>
                 </ul>
                 <li className={styles.dropdown}>게시판
                   <ul className={styles.dropdownMenu}>
                     <li
-                    className={styles.notice} 
-                    id={menu === 1 ? styles.now : 0} 
+                    className={styles.notice}
+                    id={menu === 1 ? styles.now : 0}
                     onClick={() => {router.push('/notice'); menuToggle(1)}}
                     >공지게시판
                     </li>
                     <li
-                    className={styles.free} 
+                    className={styles.free}
                     id={menu === 2 ? styles.now : 0}
-                    onClick={() => {router.push('/notice'); menuToggle(2)}}
+                    onClick={() => {router.push('/freeboard'); menuToggle(2)}}
                     >자유게시판
                     </li>
                   </ul>
                 </li>
-                <li 
+                <li
                 id={menu === 3 ? styles.now : 0}
                 onClick={() => {router.push('/clublists'); menuToggle(3)}}
                 >동아리 목록
                 </li>
-                <li 
+                <li
                 id={menu === 4 ? styles.now : 0}
                 onClick={() => {router.push('/promotion'); menuToggle(4)}}
                 >동아리 홍보
                 </li>
               </ul>
               <ul className={styles.user} id={open ? styles.show : styles.hide}>
-                <li 
-                className={styles.login} 
+                <li
+                className={styles.login}
                 id={menu === 5 ? styles.now : 0}
                 onClick={() => {router.push('/LoginPage'); menuToggle(5)}}
                 >로그인
                 </li>
-                <li 
-                className={styles.signUp} 
+                <li
+                className={styles.signUp}
                 id={menu === 6 ? styles.nowSign : 0}
                 onClick={() => {router.push('/signup'); menuToggle(6)}}
                 >회원가입
