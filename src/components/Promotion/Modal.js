@@ -4,32 +4,42 @@ import { MdClose } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { data } from './data';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import ZoomImg from './ZoomImg';
 
 
 const Modal = ({ value, setOpenModal }) => {
     const [index, setIndex] = useState(data.findIndex((el) => el.img === value));
     const [zoom, setZoom] = useState(false);
+    const [imgUrl, setImgUrl] = useState(data[index].img);
     
     const forward = () => {
         let idx = index;
+        
         if (idx !== data.length - 1) {idx += 1; console.log(index)}
         else if (idx === data.length - 1) { idx = 0; console.log(index) }
+        
         setIndex(idx);
+        setImgUrl(data[index].img);
     }
     const back = () => {
         let idx = index;
+        
         if (idx === 0) idx = data.length - 1;
         else idx -= 1;
+        
         setIndex(idx);
+        setImgUrl(data[index].img);
     }
+    
     return (
         <div className={styles.background}>
+            {zoom && <ZoomImg imgUrl={imgUrl} setZoom={setZoom} />}
             {!zoom &&
              <>
             <MdClose className={styles.close} onClick={() => setOpenModal(false)}/>
             <div className={styles.image}>
                 <IoIosArrowBack size={95} onClick={back} />
-                <img src={data[index].img} />
+                <img src={imgUrl} onClick={() => setZoom(true)}/>
                 <IoIosArrowForward size={95}  onClick={forward} />
               </div>
             
