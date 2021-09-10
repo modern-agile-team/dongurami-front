@@ -24,11 +24,16 @@
       height: 36px;
       object-fit: cover;
       margin-right: 42%;
-      margin-left: 1em;
+      margin-left: 7%;
       cursor: pointer;
     }
   .icon {
     display: none;
+  }
+  .topMenu {
+    width: 50%;
+    margin-left: 6%;
+    display: flex;
   }
   .menus {
     width: 15em;
@@ -36,7 +41,7 @@
     align-items: center;
     list-style: none;
     justify-content: space-between;
-    margin-right: 6%;
+    margin-right: 15%;
     padding-left: 0;
     cursor: pointer;
     .mobile {
@@ -55,7 +60,6 @@
   text-align: center;
   list-style: none;
   cursor: pointer;
-  // margin-right: -10%;
   .login {
     line-height: 32px;
   }
@@ -74,7 +78,6 @@
 }
 
 .dropdown {
-  // margin-top: 0.25vh;
   text-align: center;
   position: relative;
   &:hover {
@@ -106,16 +109,19 @@
   .myHeader {
     width: 100%;
     img {
-      margin-right: 33%;
+      margin-right: 35%;
+      margin-left: 2%;
+    }
+    .topMenu {
+      margin-left: -5%;
     }
   }
 }
 
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 768px) {
   .myHeader {
     width: 100%;
-    height: 15%;
     flex-direction: column;
     img {
       position: absolute;
@@ -128,31 +134,39 @@
       right: 35px;
       cursor: pointer;
     }
+    .topMenu {
+      width: 40%;
+      margin: 0%;
+      margin-left: 60%;
+      font-size: 120%;
+    }
     .menus {
       width: 100%;
-      height: 6rem;
+      justify-content: flex-start;
       flex-direction: column;
       padding: 0.5rem;
-      position: absolute;
-      top: 49px;
-      margin-right: 0%;
-      // margin: 16% 0% 0% 0%;
-      gap: 13px;
-      justify-content: center;
-      background: #f8f8f8;
-      cursor: default;
+      padding-bottom: 0%;
+      margin: 0%;
+      margin-top: 50%;
       li {
+        width: 90%;
+        padding: 1rem;
         cursor: pointer;
+        border-bottom: 0.1px solid #dddbdb;
+        &:hover {
+          background-color: #bfe7e17e;
+          color: black;
+        }
       }
       .mobile {
         display: inline;
         list-style: none;
-        text-align: center;
-        margin-top: -1vh;
-        margin-right: 2.6em;
-        cursor: pointer;
+        width: 100%;
+        padding: 0%;
+        margin-top: 60%;
+        margin-left: -11%;
         .notice {
-          margin-bottom: 19%;
+          border-top: 0.1px solid #dddbdb;
         }
       }
       .dropdown {
@@ -161,29 +175,21 @@
     }
     .user {
       width: 100%;
-      height: 4rem;
       flex-direction: column;
-      background:#f8f8f8;;
-      // margin-top: -3%;
-      cursor: default;
-      position: absolute;
-      top: 150px;
+      justify-content: flex-end;
+      margin-bottom: 0%;
+      border-left: 0.1px solid #dddbdb;
+      border-bottom: 0.1px solid #dddbdb;
       .login {
-        cursor: pointer;
-        margin-right: 0%;
+        margin-left: 28%;
       }
       .signUp {
-        background: none;
-        margin-top: -0.8vh;
-        margin-right: 2.5%;
-        cursor: pointer;      
-      }
-      #nowSign {
-        color: #3FCDB8;
+        margin-bottom: 10%;
       }
     }
     #show {
       display: flex;
+      background-color: #f8f8f8;
     }
     #hide {
       display: none;
@@ -193,6 +199,17 @@
 
 @media screen and (max-width: 480px) {
   .myHeader {
-    height: 8%;
+    .topMenu {
+      font-size: 80%;
+      margin-top: 5%;
+      .mobile {
+        margin-left: -20%;
+      }
+      .user {
+        .signUp {
+          width: 70%;
+        }
+      }
+    }
   }
 }
