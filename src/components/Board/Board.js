@@ -18,11 +18,6 @@ function Notice({ type, getPosts }) {
   }, [router]);
 
   useEffect(() => {
-    if (!page) return;
-    console.log('page is changed!!');
-  }, [page]);
-
-  useEffect(() => {
     getPosts().then((response) => {
       setPosts(response.boards);
     });
