@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../../styles/Club/Home/Review/Review.module.scss";
 import ReviewFilter from "./ReviewFilter";
 import ReviewHeader from "./ReviewHeader";
@@ -6,29 +6,26 @@ import ReviewWrite from "./ReviewWrite";
 import ReviewMine from "./ReviewMine";
 import ReviewList from "./ReviewList";
 
-const reviewData = [
-  {
-    rate: 5,
-    desc: "힘내세요 제가 도와드릴게요",
-    date: "2021-08-25",
-  },
-  {
-    rate: 3,
-    desc: "힘내세요 쟤가 도와드릴게요",
-    date: "2021-08-26",
-  },
-  {
-    rate: 4,
-    desc: "할 수 있습니다 여러분",
-    date: "2021-08-27",
-  },
-];
-
 const Review = () => {
   const [reviewInput, setReviewInput] = useState(""); // 후기 글
-  const [reviewList, setReviewList] = useState(reviewData); // 후기 리스트
+  const [reviewList, setReviewList] = useState([]); // 후기 리스트
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
+
+  useEffect(() => {
+    fetch("http://3.36.72.145:8080/api/club/review/1", {
+      headers: {
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbMV0sImlkIjoidGVzdDEiLCJuYW1lIjoidGVzdDEiLCJlbWFpbCI6InRlc3QxQG5hdmVyY29tIiwicHJvZmlsZVBhdGgiOm51bGwsImlzQWRtaW4iOjAsImlhdCI6MTYzMTI0MjMzOSwiZXhwIjoxNjMxMzI4NzM5LCJpc3MiOiJ3b29haGFuIGFnaWxlIn0.E9ryaA_BRmkInWxSO3A3PLKb5LsRkBXjjnrflB0U3hU",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setReviewList(data.reviewList);
+      });
+  }, []);
+
+  const reviewMine = reviewList.filter((el) => el.studentId === "test7");
 
   // 별점 비우기
   const onStarHandleFalse = (index) => {
@@ -60,34 +57,29 @@ const Review = () => {
   // 별점 평균
   const reviewAvg =
     reviewList
-      .map((el) => el.rate)
+      .map((el) => el.score)
       .reduce((sum, cur) => {
         return sum + cur;
       }, 0) / reviewList.length;
 
   // 후기 + 별점 입력
   const onReviewSubmit = () => {
-    // 오늘 날짜
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth() + 1;
-    const date = new Date().getDate();
-    const today = `${year}-${month}-${date}`;
-
-    const newReviewList = [
-      ...reviewList,
-      {
-        rate: reviewRate,
-        desc: reviewInput,
-        date: today,
+    return fetch("http://3.36.72.145:8080/api/club/review/1", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbNSwxXSwiaWQiOiJ0ZXN0NyIsIm5hbWUiOiJ0ZXN0NyIsImVtYWlsIjoidGVzdDdAbmF2ZXJjb20iLCJwcm9maWxlUGF0aCI6bnVsbCwiaXNBZG1pbiI6MCwiaWF0IjoxNjMxMjQ3NDgwLCJleHAiOjE2MzEzMzM4ODAsImlzcyI6Indvb2FoYW4gYWdpbGUifQ.c17y7l8vzRZq1N3f0FE7NhPiP6YfD__Tv2gAv9sb1eI",
       },
-    ];
-
-    setReviewList(newReviewList);
+      body: JSON.stringify({
+        description: reviewInput,
+        score: reviewRate,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => alert(data.msg));
   };
 
-  // fetch("http://3.36.72.145:8080/api/club/reviewh/3").then((res) => {
-  //   console.log(res);
-  // });
   return (
     <div className={styles.container}>
       <ReviewHeader reviewAvg={reviewAvg} />
@@ -99,14 +91,18 @@ const Review = () => {
         onReviewSubmit={onReviewSubmit}
       />
       <ReviewFilter />
-      <ReviewMine />
+      <ReviewMine
+        score={reviewMine.length ? reviewMine[0].score : 0}
+        description={reviewMine.length ? reviewMine[0].description : 0}
+        inDate={reviewMine.length ? reviewMine[0].inDate.substring(0, 10) : 0}
+      />
       {reviewList.map((el) => {
         return (
           <ReviewList
             key={reviewList.indexOf(el)}
-            rate={el.rate}
-            desc={el.desc}
-            date={el.date}
+            rate={el.score}
+            desc={el.description}
+            date={el.inDate.substring(0, 10)}
           />
         );
       })}

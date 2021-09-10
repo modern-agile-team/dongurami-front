@@ -11,12 +11,17 @@
     margin-bottom: 3vh;
     font-size: 200%;
   }
-  p {
+  pre {
+    border: 1px solid;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
   button {
     margin-bottom: 2em;
+  }
+  p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   }
   textarea {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -24,6 +29,10 @@
     width: 100%;
     height: 80vh;
   }
+}
+
+#desc {
+  white-space: pre-wrap;
 }
 
 @media (max-width: 1023px) {

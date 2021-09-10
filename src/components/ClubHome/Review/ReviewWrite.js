@@ -14,9 +14,9 @@ const ReviewWrite = ({
       <div className={styles.star}>
         {starState.map((el, i) => {
           return el ? (
-            <AiFillStar onClick={() => onStarHandleFalse(i)} />
+            <AiFillStar key={i} onClick={() => onStarHandleFalse(i)} />
           ) : (
-            <AiOutlineStar onClick={() => onStarHandleTrue(i)} />
+            <AiOutlineStar key={i} onClick={() => onStarHandleTrue(i)} />
           );
         })}
       </div>
