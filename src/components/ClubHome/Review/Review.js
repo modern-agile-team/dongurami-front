@@ -11,6 +11,7 @@ const Review = () => {
   const [reviewList, setReviewList] = useState([]); // 후기 리스트
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
+  const [reviewUpdate, setReviewUpdate] = useState(false);
 
   useEffect(() => {
     fetch("http://3.36.72.145:8080/api/club/review/1", {
@@ -83,6 +84,24 @@ const Review = () => {
           .then((data) => alert(data.msg));
   };
 
+  const onToggleReviewUpdate = () => {
+    setReviewUpdate(!reviewUpdate);
+  };
+
+  const onReviewDelete = () => {
+    fetch(`http://3.36.72.145:8080/api/club/review/1/${reviewMine[0].no}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbNSwxXSwiaWQiOiJ0ZXN0NyIsIm5hbWUiOiJ0ZXN0NyIsImVtYWlsIjoidGVzdDdAbmF2ZXJjb20iLCJwcm9maWxlUGF0aCI6bnVsbCwiaXNBZG1pbiI6MCwiaWF0IjoxNjMxMjQ3NDgwLCJleHAiOjE2MzEzMzM4ODAsImlzcyI6Indvb2FoYW4gYWdpbGUifQ.c17y7l8vzRZq1N3f0FE7NhPiP6YfD__Tv2gAv9sb1eI",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+    alert("후기가 삭제되었습니다.");
+  };
+
   return (
     <div className={styles.container}>
       <ReviewHeader reviewAvg={reviewAvg} />
@@ -94,11 +113,19 @@ const Review = () => {
         onReviewSubmit={onReviewSubmit}
       />
       <ReviewFilter />
-      <ReviewMine
-        score={reviewMine.length ? reviewMine[0].score : 0}
-        description={reviewMine.length ? reviewMine[0].description : 0}
-        inDate={reviewMine.length ? reviewMine[0].inDate.substring(0, 10) : 0}
-      />
+      {reviewMine.length ? (
+        <ReviewMine
+          onReviewDelete={onReviewDelete}
+          onToggleReviewUpdate={onToggleReviewUpdate}
+          reviewUpdate={reviewUpdate}
+          score={reviewMine[0].score}
+          description={reviewMine[0].description}
+          inDate={reviewMine[0].inDate.substring(0, 10)}
+        />
+      ) : (
+        <></>
+      )}
+
       {reviewNotMine.map((el, i) => {
         return (
           <ReviewList
