@@ -72,21 +72,40 @@
 
 
 @media screen and (max-width: 768px) {
-  .login {
-    width: 90%;
-    font-size: 90%;
-    .idInput {width: 65%;}
-    .pwInput {width: 65%;}
-    .find {
-      width: 50%;
-      margin: 0;
-      margin-left: 47%;
+  .wrap {
+    width: 100%;
+    .login {
+      width: 80%;
+      font-size: 90%;
+      .idInput {width: 65%;}
+      .pwInput {width: 65%;}
+      .find {
+        font-size: 90%;
+        width: 80%;
+        margin: 0;
+        text-align: right;
+      }
+      .buttons {
+        width: 85%;
+        margin: 0;
+        text-align: right;
+      }
     }
-    .buttons {
-      width: 60%;
-      margin: 0;
-      margin-top: 1rem;
-      margin-left: 38%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wrap {
+    width: 100%;
+    .login {
+      width: 90%;
+      font-size: 80%;
+      .idInput {font-size: 100%;}
+      .pwInput {font-size: 100%;}
+      button {
+        zoom: 1.2;
+        margin-top: 8%;
+      }
     }
   }
 }

@@ -85,6 +85,9 @@ const Review = () => {
     setReviewList(newReviewList);
   };
 
+  // fetch("http://3.36.72.145:8080/api/club/reviewh/3").then((res) => {
+  //   console.log(res);
+  // });
   return (
     <div className={styles.container}>
       <ReviewHeader reviewAvg={reviewAvg} />
