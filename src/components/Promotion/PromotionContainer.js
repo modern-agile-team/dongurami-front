@@ -6,6 +6,7 @@ import Header from '../Common/Header';
 import TypeSearch from './TypeSearch';
 import { BsPencil } from 'react-icons/bs';
 import Modal from './Modal';
+
 const PromotionContainer = () => {
     const [openModal, setOpenModal] = useState(false);
     const [value, setValue] = useState('');
@@ -26,7 +27,7 @@ const PromotionContainer = () => {
                   <div className={styles.img}>
                     <img src={el.img} alt="poster" />
                     <div className={styles.creationInfo} onClick={(e) => {
-                    setValue(e.target.parentNode.childNodes[0].getAttribute('src')), setOpenModal(true)}}>
+                        setValue(e.target.parentNode.childNodes[0].getAttribute('src')), setOpenModal(true)}}>
                         <div className={styles.writerInfo} onClick={(e) => {e.stopPropagation()}} >
                             <div className={styles.writer} >최두리</div>
                             <div className={styles.writer}>우아한애자일</div>
