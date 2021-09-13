@@ -1,28 +1,50 @@
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
 import CommentContainer from '../Common/Comment/CommentContainer';
 
-function PostContent() {
+function PostContent({ category, getPost }) {
+  const router = useRouter();
+  const [pid, setPid] = useState();
+  const [post, setPost] = useState();
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    setPid(router.query.pid);
+  }, [router]);
+  useEffect(() => {
+    if (!pid) return;
+    getPost(pid).then((response) => {
+      setPost(response);
+    });
+  }, [pid, getPost]);
+
+  const title = (
+    (category === 'notice') ? '공지 게시판' :
+    (category === 'free') ? '자유 게시판' :
+    undefined
+  );
+
+  if (!post) return null;
+
   return (
     <div className={styles.container}>
       <div>
-        <div>공지 게시판</div>
-        <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+        <div>{title}</div>
+        <div>{post.board[0].title}</div>
         <div>
-          <div>관리자 관리자</div>
+          <div>{post.board[0].name}</div>
           <div>
-            <div>21-08-27</div>
-            <div>조회 99999</div>
+            <div>{post.board[0].inDate}</div>
+            <div>조회 {post.board[0].hit}</div>
           </div>
         </div>
       </div>
       <hr />
       <div>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque est
-        accusantium placeat fugiat hic consectetur saepe eveniet nam odit.
-        Accusantium sequi molestias maxime similique temporibus, beatae
-        cupiditate iste asperiores debitis.
+        {post.board[0].description}
       </div>
-      <CommentContainer />
+      <CommentContainer comments={post.comments} />
     </div>
   );
 }

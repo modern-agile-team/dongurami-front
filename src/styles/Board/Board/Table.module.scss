@@ -3,10 +3,11 @@
   border-collapse: collapse;
   th,
   td {
-    padding: .75rem;
+    padding: 1.5vmin;
     border-bottom: 1px solid #d3d3d3;
     text-align: center;
     word-break: break-all;
+    font-size: calc(.5rem + 1vmin);
   }
 
   th:nth-child(2),

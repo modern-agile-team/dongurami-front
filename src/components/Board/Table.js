@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "../../styles/Board/Board/Table.module.scss";
 
-function NoticeTable({ posts, page }) {
+function NoticeTable({ posts, page, category }) {
   const postsByPage = posts.slice(10 * (page - 1), 10 * page);
 
   return (
@@ -20,7 +20,7 @@ function NoticeTable({ posts, page }) {
           <tr key={post.no}>
             <td>{post.no}</td>
             <td>
-              <Link href="/post" passHref>
+              <Link href={{ pathname: `/${category}/[pid]`, query: { pid: post.no } }} passHref>
                 <a>{post.title}</a>
               </Link>
             </td>
