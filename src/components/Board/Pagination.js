@@ -43,7 +43,7 @@ function Pagination({ posts, page, setPage }) {
     return (
       <ul className={styles.pagination}>
         <PreviousPage />
-        {Array.from(new Array(lastPage), (_, i) => <Item itemPage={i + 1} />)}
+        {Array.from(new Array(lastPage), (_, i) => <Item key={i} itemPage={i + 1} />)}
         <NextPage />
       </ul>
     )

@@ -1,5 +1,5 @@
-import Board from "../components/Board/Board";
-import Footer from "../components/Common/Footer";
+import Board from "../../components/Board/Board";
+import Footer from "../../components/Common/Footer";
 
 async function getNoticeBoardPosts() {
   const noticeBoardPosts = await fetch('http://3.36.72.145:8080/api/board/wholeNotice')
@@ -10,7 +10,7 @@ async function getNoticeBoardPosts() {
 function notice() {
   return (
     <>
-      <Board type="notice" getPosts={getNoticeBoardPosts} />
+      <Board category="notice" getPosts={getNoticeBoardPosts} />
       <Footer/>
     </>
   );

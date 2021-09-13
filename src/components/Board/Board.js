@@ -7,7 +7,7 @@ import Search from './Search';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-function Notice({ type, getPosts }) {
+function Notice({ category, getPosts }) {
   const router = useRouter();
   const [page, setPage] = useState();
   const [posts, setPosts] = useState([]);
@@ -32,8 +32,8 @@ function Notice({ type, getPosts }) {
     });
   }
   const title = (
-    (type === 'notice') ? '공지 게시판' :
-    (type === 'free') ? '자유 게시판' :
+    (category === 'notice') ? '공지 게시판' :
+    (category === 'freeboard') ? '자유 게시판' :
     undefined
   );
 
@@ -51,7 +51,7 @@ function Notice({ type, getPosts }) {
             <option>조회수순</option>
           </select>
         </div>
-        <Table posts={posts} page={page} />
+        <Table posts={posts} page={page} category={category} />
         <Pagination posts={posts} page={page} setPage={setPageToUrl} />
         <Search />
       </div>

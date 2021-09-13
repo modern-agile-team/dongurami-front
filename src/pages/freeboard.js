@@ -7,7 +7,7 @@ async function getFreeBoardPosts() {
 }
 
 function freeboard() {
-  return <Board type="free" getPosts={getFreeBoardPosts} />;
+  return <Board category="freeboard" getPosts={getFreeBoardPosts} />;
 }
 
 export default freeboard;
