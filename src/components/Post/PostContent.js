@@ -31,18 +31,18 @@ function PostContent({ category, getPost }) {
     <div className={styles.container}>
       <div>
         <div>{title}</div>
-        <div>{post.board[0].title}</div>
+        <div>{post.board.title}</div>
         <div>
-          <div>{post.board[0].name}</div>
+          <div>{post.board.name}</div>
           <div>
-            <div>{post.board[0].inDate}</div>
-            <div>조회 {post.board[0].hit}</div>
+            <div>{post.board.inDate}</div>
+            <div>조회 {post.board.hit}</div>
           </div>
         </div>
       </div>
       <hr />
       <div>
-        {post.board[0].description}
+        {post.board.description}
       </div>
       <CommentContainer comments={post.comments} />
     </div>
