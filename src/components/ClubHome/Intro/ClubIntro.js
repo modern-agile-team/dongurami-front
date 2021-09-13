@@ -35,20 +35,23 @@ const ClubIntro = () => {
     setDescUpdate(!descUpdate);
   };
 
-  useEffect(() => {
-    fetch("http://3.36.72.145:8080/api/club/home/1", {
+  const getClubData = async () => {
+    await fetch("http://3.36.72.145:8080/api/club/home/1", {
       headers: {
         "Content-type": "application/json; charset=utf-8",
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbMV0sImlkIjoidGVzdDEiLCJuYW1lIjoidGVzdDEiLCJlbWFpbCI6InRlc3QxQG5hdmVyY29tIiwicHJvZmlsZVBhdGgiOm51bGwsImlzQWRtaW4iOjAsImlhdCI6MTYzMTI0MjMzOSwiZXhwIjoxNjMxMzI4NzM5LCJpc3MiOiJ3b29haGFuIGFnaWxlIn0.E9ryaA_BRmkInWxSO3A3PLKb5LsRkBXjjnrflB0U3hU",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.result);
+        console.log(data);
         setInfo(data.result);
         setIntroDesc(data.result[0].introduce);
       });
+  };
+  useEffect(() => {
+    getClubData();
   }, []);
 
   return (
