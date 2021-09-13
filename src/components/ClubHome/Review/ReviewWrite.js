@@ -8,6 +8,8 @@ const ReviewWrite = ({
   onStarHandleFalse,
   onStarHandleTrue,
   starState,
+  isReviewMine,
+  onReviewUpdate,
 }) => {
   return (
     <div className={styles.write}>
@@ -22,7 +24,11 @@ const ReviewWrite = ({
       </div>
       <div className={styles.comment}>
         <input onChange={onReviewInput} />
-        <button onClick={onReviewSubmit}>등록</button>
+        {isReviewMine ? (
+          <button onClick={onReviewUpdate}>수정</button>
+        ) : (
+          <button onClick={onReviewSubmit}>등록</button>
+        )}
       </div>
     </div>
   );
