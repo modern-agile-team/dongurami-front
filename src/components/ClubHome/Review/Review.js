@@ -12,20 +12,6 @@ const Review = () => {
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
 
-  // 후기 불러오기
-  useEffect(() => {
-    fetch("http://3.36.72.145:8080/api/club/review/1", {
-      headers: {
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setReviewList(data.reviewList);
-      });
-  }, []);
-
   // 내 후기와 내 후기가 아닌 것들
   const reviewMine = reviewList.filter((el) => el.studentId === "test7");
   const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
@@ -99,6 +85,24 @@ const Review = () => {
       .then((data) => console.log(data));
     alert("후기가 삭제되었습니다.");
   };
+
+  // 후기 불러오기
+  const getReviewData = async () => {
+    await fetch("http://3.36.72.145:8080/api/club/review/1", {
+      headers: {
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setReviewList(data.reviewList);
+      });
+  };
+
+  useEffect(() => {
+    getReviewData();
+  }, []);
 
   return (
     <div className={styles.container}>
