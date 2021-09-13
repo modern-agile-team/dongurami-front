@@ -56,7 +56,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .write {
     width: 100%;
   }
@@ -65,5 +65,12 @@
     input {
       width: 90%;
     }
+  }
+}
+
+@media (max-width: 767px) {
+  .write {
+    width: 100%;
+    padding: 1em 0;
   }
 }

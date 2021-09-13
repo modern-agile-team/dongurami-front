@@ -64,3 +64,15 @@
     display: none;
   }
 }
+
+@media (max-width: 767px) {
+  #show {
+    div {
+      padding: 0 1px;
+    }
+  }
+
+  #hamb {
+    padding: 0 1em;
+  }
+}
