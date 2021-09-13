@@ -5,14 +5,16 @@ import { CgProfile } from "react-icons/cg";
 import { data } from './data';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import ZoomImg from './ZoomImg';
+import next from 'next';
 
 
 const Modal = ({ value, setOpenModal }) => {
     const [index, setIndex] = useState(data.findIndex((el) => el.img === value));
+    const [indexLocation, setIndexLocation] = useState(index + 1);
     const [zoom, setZoom] = useState(false);
     const [imgUrl, setImgUrl] = useState(data[index].img);
     
-    const forward = () => {
+    const nextSlide = () => {
         let idx = index;
         
         if (idx !== data.length - 1) {idx += 1; console.log(index)}
@@ -20,8 +22,9 @@ const Modal = ({ value, setOpenModal }) => {
         
         setIndex(idx);
         setImgUrl(data[index].img);
+        setIndexLocation(index + 1);
     }
-    const back = () => {
+    const prevSlide = () => {
         let idx = index;
         
         if (idx === 0) idx = data.length - 1;
@@ -38,9 +41,9 @@ const Modal = ({ value, setOpenModal }) => {
              <>
             <MdClose className={styles.close} onClick={() => setOpenModal(false)}/>
             <div className={styles.image}>
-                <IoIosArrowBack size={95} onClick={back} />
+                <IoIosArrowBack size={95} onClick={prevSlide} />
                 <img src={imgUrl} onClick={() => setZoom(true)}/>
-                <IoIosArrowForward size={95}  onClick={forward} />
+                <IoIosArrowForward size={95}  onClick={nextSlide} />
               </div>
             
             <div className={styles.post}>
