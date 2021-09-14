@@ -1,7 +1,7 @@
 import Post from "../../components/Post/Post";
 
 function NoticePost() {
-  return <Post category="notice" />
+  return <Post category="free" />
 }
 
 export default NoticePost;

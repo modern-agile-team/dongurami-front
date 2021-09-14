@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
 import CommentContainer from '../Common/Comment/CommentContainer';
 
-function PostContent({ category, getPost }) {
+function PostContent({ category }) {
   const router = useRouter();
   const [pid, setPid] = useState();
   const [post, setPost] = useState();
@@ -14,10 +14,10 @@ function PostContent({ category, getPost }) {
   }, [router]);
   useEffect(() => {
     if (!pid) return;
-    getPost(pid).then((response) => {
-      setPost(response);
-    });
-  }, [pid, getPost]);
+    fetch(`http://3.36.72.145:8080/api/board/${category}`)
+      .then((response) => response.json())
+      .then((data) => setPost(data));
+  }, [category, pid]);
 
   const title = (
     (category === 'notice') ? '공지 게시판' :
@@ -41,9 +41,7 @@ function PostContent({ category, getPost }) {
         </div>
       </div>
       <hr />
-      <div>
-        {post.board.description}
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div>
       <CommentContainer comments={post.comments} />
     </div>
   );

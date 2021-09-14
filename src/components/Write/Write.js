@@ -1,10 +1,10 @@
 import Container from "./Container";
 import WriteContent from './WriteContent';
 
-function Write() {
+function Write(props) {
   return (
     <Container>
-      <WriteContent />
+      <WriteContent {...props} />
     </Container>
   );
 }
