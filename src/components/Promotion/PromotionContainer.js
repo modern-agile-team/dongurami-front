@@ -18,7 +18,6 @@ const PromotionContainer = () => {
     let item = 8;
 
     const getData = async() => {
-             
         try {
             await axios.get('http://3.36.72.145:8080/api/board/wholeNotice/inDate/DESC')
             .then((response) => {
@@ -31,17 +30,15 @@ const PromotionContainer = () => {
             console.log(e);
         }
     }
+
     const infiniteScroll  = () => {
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop =  Math.max(document.documentElement.scrollTop, document.body.scrollTop);
         let clientHeight = document.documentElement.clientHeight;
 
-        console.log(boarddata);
-
         if (scrollTop + clientHeight >= scrollHeight) {
              preitem = item;
              item += 8;
-
              getData();
         }
     } 
@@ -53,10 +50,7 @@ const PromotionContainer = () => {
 
      },[]);
 
-     
-      
-    
-   return (
+     return (
      <>
       <Header />
         <TypeSearch />
