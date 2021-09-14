@@ -15,7 +15,8 @@
     margin-top: 5.5vh;
     margin-bottom: 4vh;
   }
-  .input {
+  input {
+    font-family: 'Noto Sans KR', sans-serif;
     width: 20em;
     height: 1vh;
     margin: 0 auto;
@@ -31,6 +32,15 @@
     margin-top: 2vh;
     border: 1.5px solid #dadada;
     border-radius: 0.5em;
+  }
+  .notSame {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1vw;
+    width: 25em;
+    height: 1vh;
+    margin-left: 23%;
+    margin-bottom: 3%;
+    color: red;
   }
 }
 
