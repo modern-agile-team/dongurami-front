@@ -4,6 +4,7 @@ import styles from "../../../styles/Club/Home/Apply/Apply.module.scss";
 import ApplyQuestions from "./ApplyQuestions";
 import Additional from "./Additional";
 import { IoIosAddCircleOutline, IoIosCheckmark } from "react-icons/io";
+import Router from "next/router";
 
 const token = {
   studentID: 201708051,
@@ -45,6 +46,10 @@ const Apply = () => {
   const [sex, setSex] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [addQuestion, setAddQuestion] = useState([]);
+
+  const reloadPage = () => {
+    Router.push("/ClubHome");
+  };
 
   const iconSize = 40;
 
@@ -102,6 +107,7 @@ const Apply = () => {
       ...addQuestion,
     ];
     setResume(result);
+    reloadPage();
   };
 
   // 추가 질문 저장
