@@ -8,14 +8,7 @@ import Schedule from "./Schedule";
 
 
 
-const Calendar =()=>{
-  const info = {
-    startDate: "2021-09-07",
-    endDate: "2021-09-09",
-    term: 3,
-    title: '살려주세요',
-    color: '#44444'
-  }
+const Calendar =()=> {
   const [getMoment, setMoment]=useState(moment());    
   const [date, setDate] = useState("");
   const [pop, setPop] = useState(0);
@@ -33,12 +26,20 @@ const Calendar =()=>{
             {
               Array(7).fill(0).map((data, index) => {
                 let days = today.clone().startOf('year').week(week).startOf('week').add(index, 'day');
-                console.log(days)
                 if(moment().format('YYYYMMDD') === days.format('YYYYMMDD')){
                   return(
                       <td className={styles.dayblock} key={index}>
                         <span className={styles.today} onClick={() => setDate(days.format('YYYYMMDD'))}>{days.format('D')}</span>
-                        {/* <span></span> */}
+                        <span onClick={() => 
+                        fetch('http://3.36.72.145:8080/api/club/schedule/1', {
+                        method: 'GET',
+                        headers : {
+                          "Content-type": "application/json; charset=utf-8",
+                          "x-auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk" 
+                        }
+                      })
+                      .then((res) => res.json())
+                      .then((res) => console.log(res))}>asdf</span>
                       </td>
                   );
                 }else if(days.format('MM') !== today.format('MM')){
