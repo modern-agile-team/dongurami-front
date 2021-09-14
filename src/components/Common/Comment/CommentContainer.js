@@ -13,8 +13,14 @@ function CommentContainer({ comments }) {
       <hr />
       <div className={style.container}>
         {comments.map((comment, i) => (
-          <React.Fragment key={i}>
-            <Comment comment={comment} index={i} setAddReplyIndex={setAddReplyIndex} />
+          <React.Fragment key={comment.no}>
+            {(comment.depth) ? (
+              <ReplyContainer>
+                <Comment comment={comment} index={i} setAddReplyIndex={setAddReplyIndex} />
+              </ReplyContainer>
+            ) : (
+              <Comment comment={comment} index={i} setAddReplyIndex={setAddReplyIndex} />
+            )}
             {(addReplyIndex === i) && (
               <ReplyContainer>
                 <AddComment />

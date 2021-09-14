@@ -41,7 +41,7 @@ function Header() {
                       <li
                       className={styles.free}
                       id={menu === 2 ? styles.now : 0}
-                      onClick={() => {router.push('/freeboard'); menuToggle(2)}}
+                      onClick={() => {router.push('/free'); menuToggle(2)}}
                       >자유게시판
                       </li>
                 </ul>
@@ -56,7 +56,7 @@ function Header() {
                     <li
                     className={styles.free}
                     id={menu === 2 ? styles.now : 0}
-                    onClick={() => {router.push('/freeboard'); menuToggle(2)}}
+                    onClick={() => {router.push('/free'); menuToggle(2)}}
                     >자유게시판
                     </li>
                   </ul>
