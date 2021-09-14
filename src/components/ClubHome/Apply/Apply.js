@@ -13,6 +13,13 @@ const clubInfo = {
   name: "우아한 애자일",
   owner: "민순기",
   ownerID: 201708051,
+  department: "컴퓨터전자공학과",
+};
+
+export const user = {
+  name: "민순기",
+  studentID: 201708051,
+  department: "컴퓨터전자공학과",
 };
 
 export const list = [
@@ -33,6 +40,10 @@ const Apply = () => {
   const [newQuestion, setNewQuestion] = useState("");
   const [questions, setQuestions] = useState(list);
   const [isUpdate, setIsUpdate] = useState(updateState);
+  const [resume, setResume] = useState([]);
+  const [grade, setGrade] = useState("");
+  const [sex, setSex] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const iconSize = 40;
 
@@ -63,10 +74,42 @@ const Apply = () => {
     setNewQuestion(e.target.value);
   };
 
+  // 학년
+  const onGradeChange = (e) => {
+    setGrade(e.target.value);
+  };
+
+  // 성별
+  const onSexChange = (e) => {
+    setSex(e.target.value);
+  };
+
+  // 핸드폰 번호
+  const onPhoneNumberInput = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+
+  // 지원서 제출
+  const onResumeSubmit = () => {
+    const result = [
+      user.name,
+      user.studentID,
+      user.department,
+      grade,
+      sex,
+      phoneNumber,
+    ];
+    setResume(result);
+  };
+  console.log(resume);
   return (
     <div className={styles.container}>
       <ApplyHeader />
-      <ApplyQuestions />
+      <ApplyQuestions
+        onGradeChange={onGradeChange}
+        onSexChange={onSexChange}
+        onPhoneNumberInput={onPhoneNumberInput}
+      />
       <Additional
         isUpdate={isUpdate}
         onUpdate={onUpdate}
@@ -83,7 +126,7 @@ const Apply = () => {
         <IoIosAddCircleOutline onClick={onQuestionAdd} size={iconSize} />
       </div>
       <div className={styles.submit}>
-        <IoIosCheckmark size={iconSize} />
+        <IoIosCheckmark size={iconSize} onClick={onResumeSubmit} />
       </div>
     </div>
   );

@@ -62,23 +62,20 @@ const Review = () => {
 
   // 후기 + 별점 입력
   const onReviewSubmit = () => {
-    reviewInput === ""
-      ? alert("빈 칸은 입력할 수 없습니다.")
-      : fetch("http://3.36.72.145:8080/api/club/review/1", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json; charset=utf-8",
-            "x-auth-token":
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
-          },
-          body: JSON.stringify({
-            description: reviewInput,
-            score: reviewRate,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => alert(data.msg));
-    reloadPage();
+    fetch("http://3.36.72.145:8080/api/club/review/1", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+      },
+      body: JSON.stringify({
+        description: reviewInput,
+        score: reviewRate,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => alert(data.msg));
   };
 
   // 내 후기 삭제
@@ -88,7 +85,7 @@ const Review = () => {
       headers: {
         "Content-type": "application/json; charset=utf-8",
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
     })
       .then((res) => res.json())
@@ -104,7 +101,7 @@ const Review = () => {
       headers: {
         "Content-type": "application/json; charset=utf-8",
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
       body: JSON.stringify({
         description: reviewInput,
@@ -121,7 +118,7 @@ const Review = () => {
     await fetch("http://3.36.72.145:8080/api/club/review/1", {
       headers: {
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
     })
       .then((res) => res.json())
