@@ -21,8 +21,9 @@ const PromotionContainer = () => {
   const getData = async () => {
     try {
       await axios
-        .get("http://3.36.72.145:8080/api/board/wholeNotice/inDate/DESC")
+        .get("http://3.36.72.145:8080/api/board/notice/inDate/DESC")
         .then((response) => {
+          console.log(response);
           const result = response.data.boards.slice(preitem, item);
           const extraData = boarddata.concat(result);
 
