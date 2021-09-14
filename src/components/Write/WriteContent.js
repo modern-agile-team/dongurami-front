@@ -9,7 +9,7 @@ function Write({ category }) {
   const router = useRouter();
 
   const onSubmit = () => {
-    fetch(`http://3.36.72.145:8080/api/board/wholeNotice`, {
+    fetch(`http://3.36.72.145:8080/api/board/${category}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -18,8 +18,7 @@ function Write({ category }) {
         id: 'test1',
         clubNo: '1',
         title,
-        description: body,
-        images: [{ path: 'asdf', name: 'asdf' }]
+        description: body
       })
     }).then(() => {
       router.push(`/${category}`)

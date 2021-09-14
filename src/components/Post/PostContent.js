@@ -14,7 +14,7 @@ function PostContent({ category }) {
   }, [router]);
   useEffect(() => {
     if (!pid) return;
-    fetch(`http://3.36.72.145:8080/api/board/${category}`)
+    fetch(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
       .then((response) => response.json())
       .then((data) => setPost(data));
   }, [category, pid]);
@@ -26,6 +26,8 @@ function PostContent({ category }) {
   );
 
   if (!post) return null;
+
+  console.log(post);
 
   return (
     <div className={styles.container}>

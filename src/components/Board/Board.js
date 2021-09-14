@@ -45,7 +45,7 @@ function Notice({ category }) {
   }
   const title = (
     (category === 'notice') ? '공지 게시판' :
-    (category === 'freeboard') ? '자유 게시판' :
+    (category === 'free') ? '자유 게시판' :
     undefined
   );
   
