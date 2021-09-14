@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 .calendar {
   display: flex;
@@ -19,10 +18,11 @@
       span {
         position: relative;
         bottom: 30%;
+        cursor: pointer;
       }
     }
   }
-} 
+}
 
 .control {
   width: 20vw;
@@ -31,14 +31,14 @@
   font-size: 1.4vw;
   margin-bottom: -3vh;
   margin-top: 3vh;
-  z-index: 99;
+  z-index: 9;
 
   .lastmonth {
     cursor: pointer;
     margin-right: 2%;
     color: black;
     &:hover {
-      color: #90E2D6;
+      color: #90e2d6;
     }
   }
   .thisMonth {
@@ -49,7 +49,7 @@
     margin-left: 2%;
     color: black;
     &:hover {
-      color: #90E2D6;
+      color: #90e2d6;
     }
   }
 }
@@ -62,7 +62,7 @@
     color: black;
     cursor: pointer;
     &:hover {
-      color: #3FCDB8;
+      color: #3fcdb8;
     }
   }
 }
