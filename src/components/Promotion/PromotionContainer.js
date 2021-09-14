@@ -16,27 +16,47 @@ const PromotionContainer = () => {
     
     let preitem = 0;
     let item = 8;
+
+    const getData = async() => {
+             
+        try {
+            await axios.get('http://3.36.72.145:8080/api/board/wholeNotice/inDate/DESC')
+            .then((response) => {
+                const result = response.data.boards.slice(preitem, item);
+                const extraData = boarddata.concat(result);
+
+                setBoardData(prev => prev.concat(extraData));
+            })
+        } catch(e) {
+            console.log(e);
+        }
+    }
+    const infiniteScroll  = () => {
+        let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+        let scrollTop =  Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+        let clientHeight = document.documentElement.clientHeight;
+
+        console.log(boarddata);
+
+        if (scrollTop + clientHeight >= scrollHeight) {
+             preitem = item;
+             item += 8;
+
+             getData();
+        }
+    } 
+    
     
     useEffect(() => {
-       const fetchData = async() => {
-            
-            try {
-                await axios.get('http://3.36.72.145:8080/api/board/wholeNotice/inDate/DESC')
-                .then((response) => {
-                    let result = response.data.boards.slice(preitem, item)
-                    console.log(result);
-                })
-            } catch(e) {
-                console.log(e);
-            }
-        } 
-        fetchData();
-    },[]);
+        getData();
+        window.addEventListener('scroll', infiniteScroll);
+
+     },[]);
+
+     
       
     
-
-
-    return (
+   return (
      <>
       <Header />
         <TypeSearch />
