@@ -1,43 +1,49 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Apply/ApplyQuestions.module.scss";
+import { user } from "./Apply";
 
-const ApplyQuestions = () => {
+const ApplyQuestions = ({ onGradeChange, onSexChange, onPhoneNumberInput }) => {
   return (
     <div className={styles.questions}>
       <ul>
         <li>
           <span>이름</span>
-          <p id="name">민순기</p>
+          <p id="name">{user.name}</p>
         </li>
         <li>
           <span>학번</span>
-          <p id="studentID">201708051</p>
+          <p id="studentID">{user.studentID}</p>
         </li>
         <li>
           <span>학과</span>
-          <p id="department">컴퓨터전자공학과</p>
+          <p id="department">{user.department}</p>
         </li>
         <li>
           <span>학년</span>
           <br />
-          <select name="학년" id="grade">
-            <option value="1">1학년</option>
-            <option value="2">2학년</option>
-            <option value="3">3학년</option>
+          <select name="학년" id="grade" onChange={onGradeChange}>
+            <option value="1학년">1학년</option>
+            <option value="2학년">2학년</option>
+            <option value="3학년">3학년</option>
           </select>
         </li>
         <li>
           <span>성별</span>
           <br />
-          <select name="성별" id="sex">
-            <option value="male">남자</option>
-            <option value="female">여자</option>
+          <select name="성별" id="sex" onChange={onSexChange}>
+            <option value="남자">남자</option>
+            <option value="여자">여자</option>
           </select>
         </li>
         <li>
           <span>휴대전화</span>
           <br />
-          <input type="text" placeholder="전화번호 ( - 제외 )" id="phone" />
+          <input
+            type="text"
+            placeholder="전화번호 ( - 제외 )"
+            id="phone"
+            onChange={onPhoneNumberInput}
+          />
         </li>
       </ul>
     </div>

@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Review/ReviewMine.module.scss";
 import { AiFillStar } from "react-icons/ai";
-import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 
-const ReviewMine = () => {
+const ReviewMine = ({ description, score, inDate, onReviewDelete }) => {
+  const stars = new Array(score).fill(score);
+
   return (
     <div className={styles.mine}>
       <div className={styles.header}>
@@ -14,24 +15,21 @@ const ReviewMine = () => {
             alt="우아한 애자일"
           />
           <div id={styles.date}>
-            <span>우아한 애자일</span>
-            <p>2021-08-30</p>
+            <span>내가 작성한 후기</span>
+            <p>{inDate}</p>
           </div>
         </div>
         <div className={styles.star}>
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
+          {stars.map((el, i) => {
+            return <AiFillStar key={i} />;
+          })}
           <div className={styles.update}>
-            <HiPencil />
-            <FaTrashAlt />
+            <FaTrashAlt onClick={onReviewDelete} />
           </div>
         </div>
       </div>
       <div className={styles.review}>
-        <p>우아한 애자일 최고! 이런점은 좋았구요 이런점도 좋았어용</p>
+        <p>{description}</p>
       </div>
     </div>
   );

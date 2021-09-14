@@ -2,27 +2,31 @@ import style from '../../../styles/Common/Comment/CommentContainer.module.scss';
 import Comment from "./Comment";
 import AddComment from './AddComment';
 import ReplyContainer from './ReplyContainer';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const comments = ['test', 'lorem ipsum', 'afdsssssssssssssssssssssssssssssssssssssssssssssssssssss', 'asdf', '본문본문본문'];
-
-function CommentContainer() {
+function CommentContainer({ comments }) {
   const [addReplyIndex, setAddReplyIndex] = useState();
 
   return (
     <>
-      <p>댓글 3</p>
+      <p>댓글 {comments.length}</p>
       <hr />
       <div className={style.container}>
         {comments.map((comment, i) => (
-          <>
-            <Comment key={i} index={i} body={comment} setAddReplyIndex={setAddReplyIndex} />
+          <React.Fragment key={comment.no}>
+            {(comment.depth) ? (
+              <ReplyContainer>
+                <Comment comment={comment} index={i} setAddReplyIndex={setAddReplyIndex} />
+              </ReplyContainer>
+            ) : (
+              <Comment comment={comment} index={i} setAddReplyIndex={setAddReplyIndex} />
+            )}
             {(addReplyIndex === i) && (
               <ReplyContainer>
                 <AddComment />
               </ReplyContainer>
             )}
-          </>
+          </React.Fragment>
         ))}
         <AddComment />
       </div>

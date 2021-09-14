@@ -1,6 +1,6 @@
 .myHeader {
   font-family: "twayair";
-  font-size: 85%;
+  font-size: 1.1vw;
   display: flex;
   width: 100%;
   height: 10%;
@@ -23,7 +23,7 @@
       width: 81px;
       height: 36px;
       object-fit: cover;
-      margin-right: 42%;
+      margin-right: 43%;
       margin-left: 7%;
       cursor: pointer;
     }
@@ -36,7 +36,7 @@
     display: flex;
   }
   .menus {
-    width: 15em;
+    width: 17vw;
     display: flex;
     align-items: center;
     list-style: none;
@@ -64,7 +64,7 @@
     line-height: 32px;
   }
   .signUp {
-    width: 80px;
+    width: 5.5vw;
     height: 32px;
     border-radius: 8px;
     background-color: #90e2d6;
@@ -87,7 +87,6 @@
     }
   }
   .dropdownMenu {
-    font-size: 85%;
     width: 7vw;
     padding: 16px;
     margin-left: -3.3vw;
@@ -105,19 +104,6 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
-  .myHeader {
-    width: 100%;
-    img {
-      margin-right: 35%;
-      margin-left: 2%;
-    }
-    .topMenu {
-      margin-left: -5%;
-    }
-  }
-}
-
 
 @media screen and (max-width: 768px) {
   .myHeader {
@@ -125,7 +111,7 @@
     flex-direction: column;
     img {
       position: absolute;
-      left: 15px;
+      left: -15px;
     }
     .icon {
       display: inline;
@@ -135,12 +121,12 @@
       cursor: pointer;
     }
     .topMenu {
-      width: 40%;
+      width: 40vw;
       margin: 0%;
       margin-left: 60%;
-      font-size: 120%;
     }
     .menus {
+      font-size: 2.2vw;
       width: 100%;
       justify-content: flex-start;
       flex-direction: column;
@@ -174,16 +160,22 @@
       }
     }
     .user {
+      font-size: 2.2vw;
       width: 100%;
       flex-direction: column;
       justify-content: flex-end;
       margin-bottom: 0%;
+      padding-right: 6%;
       border-left: 0.1px solid #dddbdb;
       border-bottom: 0.1px solid #dddbdb;
       .login {
-        margin-left: 28%;
+        width: 100%;
+        text-align: right;
       }
       .signUp {
+        width: 100%;
+        text-align: right;
+        background-color: #f8f8f8;
         margin-bottom: 10%;
       }
     }
@@ -199,17 +191,15 @@
 
 @media screen and (max-width: 480px) {
   .myHeader {
+    width: 100%;
     .topMenu {
-      font-size: 80%;
-      margin-top: 5%;
-      .mobile {
-        margin-left: -20%;
-      }
-      .user {
-        .signUp {
-          width: 70%;
-        }
-      }
+      width: 55vw;
+      margin: 0%;
+      margin-left: 60%;
+    }
+    .user {
+      width: 100%;
+      margin-right: 6vw;
     }
   }
 }

@@ -61,7 +61,7 @@
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    font-size: 90%;
+    font-size: 85%;
   }
 }
 
@@ -72,6 +72,13 @@
 }
 
 @media (max-width: 767px) {
+  .mine {
+    width: 100%;
+    padding: 1em 0;
+    p {
+      margin-left: 10px;
+    }
+  }
   .star {
     display: flex;
     svg {

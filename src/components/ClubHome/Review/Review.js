@@ -1,34 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../../styles/Club/Home/Review/Review.module.scss";
 import ReviewFilter from "./ReviewFilter";
 import ReviewHeader from "./ReviewHeader";
 import ReviewWrite from "./ReviewWrite";
 import ReviewMine from "./ReviewMine";
 import ReviewList from "./ReviewList";
-
-const reviewData = [
-  {
-    rate: 5,
-    desc: "힘내세요 제가 도와드릴게요",
-    date: "2021-08-25",
-  },
-  {
-    rate: 3,
-    desc: "힘내세요 쟤가 도와드릴게요",
-    date: "2021-08-26",
-  },
-  {
-    rate: 4,
-    desc: "할 수 있습니다 여러분",
-    date: "2021-08-27",
-  },
-];
+import Router from "next/router";
+import axios from "axios";
 
 const Review = () => {
   const [reviewInput, setReviewInput] = useState(""); // 후기 글
-  const [reviewList, setReviewList] = useState(reviewData); // 후기 리스트
+  const [reviewList, setReviewList] = useState([]); // 후기 리스트
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
+
+  // 버튼 클릭 시 페이지 리로딩
+  const reloadPage = () => {
+    Router.push("/ClubHome");
+  };
+
+  // 내 후기와 내 후기가 아닌 것들
+  const reviewMine = reviewList.filter((el) => el.studentId === "test1");
+  const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
+
+  // 내 리뷰 번호
+  const myReviewNum = reviewMine.length ? reviewMine[0].no : null;
 
   // 별점 비우기
   const onStarHandleFalse = (index) => {
@@ -60,38 +56,100 @@ const Review = () => {
   // 별점 평균
   const reviewAvg =
     reviewList
-      .map((el) => el.rate)
+      .map((el) => el.score)
       .reduce((sum, cur) => {
         return sum + cur;
       }, 0) / reviewList.length;
 
   // 후기 + 별점 입력
-  const onReviewSubmit = () => {
-    // 오늘 날짜
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth() + 1;
-    const date = new Date().getDate();
-    const today = `${year}-${month}-${date}`;
-
-    const newReviewList = [
-      ...reviewList,
-      {
-        rate: reviewRate,
-        desc: reviewInput,
-        date: today,
+  const onReviewSubmit = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
-    ];
+      data: {
+        description: reviewInput,
+        score: reviewRate,
+      },
+    };
+    await axios("http://3.36.72.145:8080/api/club/review/1", options)
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
 
-    setReviewList(newReviewList);
+    await reloadPage();
   };
 
-  // fetch("http://3.36.72.145:8080/api/club/reviewh/3").then((res) => {
-  //   console.log(res);
-  // });
+  // 내 후기 삭제
+  const onReviewDelete = async () => {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+      },
+    };
+    await axios(
+      `http://3.36.72.145:8080/api/club/review/1/${reviewMine[0].no}`,
+      options
+    )
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+    reloadPage();
+  };
+
+  // 내 후기 수정
+  const onReviewUpdate = async () => {
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+      },
+      body: {
+        description: reviewInput,
+        score: reviewRate,
+      },
+    };
+    await axios(
+      `http://3.36.72.145:8080/api/club/review/1/${myReviewNum}`,
+      options
+    )
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+
+    await reloadPage();
+  };
+
+  // 후기 불러오기
+  const getReviewData = async () => {
+    const options = {
+      headers: {
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+      },
+    };
+    await axios("http://3.36.72.145:8080/api/club/review/1", options)
+      .then((res) => {
+        setReviewList(res.data.reviewList);
+      })
+      .catch((err) => console.log(err.response.data.msg));
+  };
+
+  useEffect(() => {
+    getReviewData();
+  }, []);
+
   return (
     <div className={styles.container}>
       <ReviewHeader reviewAvg={reviewAvg} />
       <ReviewWrite
+        onReviewUpdate={onReviewUpdate}
+        isReviewMine={reviewMine.length}
         starState={starState}
         onStarHandleFalse={onStarHandleFalse}
         onStarHandleTrue={onStarHandleTrue}
@@ -99,14 +157,25 @@ const Review = () => {
         onReviewSubmit={onReviewSubmit}
       />
       <ReviewFilter />
-      <ReviewMine />
-      {reviewList.map((el) => {
+      {reviewMine.length ? (
+        <ReviewMine
+          onReviewDelete={onReviewDelete}
+          score={reviewMine[0].score}
+          description={reviewMine[0].description}
+          inDate={reviewMine[0].inDate.substring(0, 10)}
+        />
+      ) : (
+        <></>
+      )}
+
+      {reviewNotMine.map((el, i) => {
         return (
           <ReviewList
-            key={reviewList.indexOf(el)}
-            rate={el.rate}
-            desc={el.desc}
-            date={el.date}
+            key={i}
+            rate={el.score}
+            desc={el.description}
+            date={el.inDate.substring(0, 10)}
+            no={i + 1}
           />
         );
       })}

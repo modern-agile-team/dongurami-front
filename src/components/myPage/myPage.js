@@ -1,11 +1,12 @@
 import styles from '../../styles/User/MyPage/myPage.module.scss';
 import Router from 'next/router'; 
-import { FiSettings, FiUser } from 'react-icons/fi'
-import { ImCancelCircle } from 'react-icons/Im'
+import { FiUser } from 'react-icons/fi'
+import { MdClose } from "react-icons/md";
 
-const MyPage = ({ open, close }) => {
+const MyPage = () => {
   const movePage = () => {
     document.location.href = "/ClubHome"
+    //history 상 이전 페이지로 이동하는 함수 작성해야됨
   }
 
   const moveInfo = () => {
@@ -13,25 +14,23 @@ const MyPage = ({ open, close }) => {
   }
 
   return (
-    <>
-      {open ? (
-        <div className={styles.container}>
-          <div className={styles.myHeader}>
-            <FiSettings className={styles.setting} onClick={moveInfo} />
-            <FiUser className={styles.user} />
-            <ImCancelCircle className={styles.cancel} onClick={close}/>
-          </div>
-          <div className={styles.wrap}>
-            <h4>심서현</h4>
-            <hr />
-            <p>학과</p>
-            <p>컴퓨터전자공학과</p>
-            <p>소속 동아리</p><br/>
-            <span onClick={movePage}>우아한 애자일</span>
-          </div>
+    <div className={styles.back}>
+      <div className={styles.container}>
+        <div className={styles.myHeader}>
+          <FiUser className={styles.user} />
         </div>
-      ) : null}
-    </>
+        <span className={styles.setting} onClick={moveInfo}>개인정보 수정</span>
+        <div className={styles.wrap}>
+          <h4>박현우</h4>
+          <hr />
+          <p>학과</p>
+          <p>정보통신공학과</p>
+          <p>소속 동아리</p><br/>
+          <span onClick={movePage}>우아한 애자일</span>
+        </div>
+      </div>
+      <button className={styles.button} onClick={movePage}>돌아가기</button>
+    </div>
   )
 }
 

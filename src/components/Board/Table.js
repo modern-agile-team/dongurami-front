@@ -1,7 +1,9 @@
 import Link from "next/link";
 import styles from "../../styles/Board/Board/Table.module.scss";
 
-function NoticeTable() {
+function NoticeTable({ posts, page, category }) {
+  const postsByPage = posts.slice(10 * (page - 1), 10 * page);
+
   return (
     <table className={styles.table}>
       <thead>
@@ -14,17 +16,17 @@ function NoticeTable() {
         </tr>
       </thead>
       <tbody>
-        {Array.from({ length: 9 }, (_, i) => (
-          <tr key={i}>
-            <td>{i + 1}</td>
+        {postsByPage.map((post) => (
+          <tr key={post.no}>
+            <td>{post.no}</td>
             <td>
-              <Link href="/post" key={i} passHref>
-                <a>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</a>
+              <Link href={{ pathname: `/${category}/[pid]`, query: { pid: post.no } }} passHref>
+                <a>{post.title}</a>
               </Link>
             </td>
-            <td>21-08-27</td>
-            <td>관리자 관리자</td>
-            <td>9999999</td>
+            <td>{post.inDate}</td>
+            <td>{post.studentName}</td>
+            <td>{post.hit}</td>
           </tr>
         ))}
       </tbody>

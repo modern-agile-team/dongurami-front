@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/Club/Home/Apply/Additional.module.scss";
 import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 
 const Additional = ({ list, onRemove, onUpdate, isUpdate }) => {
+  const [a, setA] = useState("");
+
+  const onChange = (e) => {
+    console.log(e.target.value);
+  };
+
   return (
     <div className={styles.additional}>
       <ul>
@@ -17,7 +23,7 @@ const Additional = ({ list, onRemove, onUpdate, isUpdate }) => {
               )}
               <HiPencil onClick={() => onUpdate(i)} />
               <FaTrashAlt id={styles.remove} onClick={() => onRemove(i)} />
-              <textarea />
+              <textarea onChange={onChange} />
             </li>
           );
         })}

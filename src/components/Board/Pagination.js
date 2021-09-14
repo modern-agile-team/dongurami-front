@@ -1,7 +1,9 @@
 import { GrPrevious, GrNext } from 'react-icons/gr';
 import styles from "../../styles/Board/Board/Pagination.module.scss";
 
-function Pagination({ page, setPage }) {
+function Pagination({ posts, page, setPage }) {
+  const lastPage = Math.ceil(posts.length / 10);
+
   const Item = ({ itemPage }) => {
     return (
       <li>
@@ -14,7 +16,7 @@ function Pagination({ page, setPage }) {
   const NextPage = () => {
     return (
       <li>
-        <button onClick={() => { (page < 10) && setPage(page + 1) }}>
+        <button onClick={() => { (page < lastPage) && setPage(page + 1) }}>
           <GrNext />
         </button>
       </li>
@@ -37,7 +39,15 @@ function Pagination({ page, setPage }) {
     );
   };
 
-  if (page < 5) {
+  if (lastPage < 8) {
+    return (
+      <ul className={styles.pagination}>
+        <PreviousPage />
+        {Array.from(new Array(lastPage), (_, i) => <Item key={i} itemPage={i + 1} />)}
+        <NextPage />
+      </ul>
+    )
+  } else if (page < 5) {
     return (
       <ul className={styles.pagination}>
         <PreviousPage />
@@ -47,11 +57,11 @@ function Pagination({ page, setPage }) {
         <Item itemPage={4} />
         <Item itemPage={5} />
         <Collapse />
-        <Item itemPage={10} />
+        <Item itemPage={lastPage} />
         <NextPage />
       </ul>
     )
-  } else if (page >= 5 && page <= 6) {
+  } else if (page >= 5 && page <= lastPage - 4) {
     return (
       <ul className={styles.pagination}>
         <PreviousPage />
@@ -61,21 +71,21 @@ function Pagination({ page, setPage }) {
         <Item itemPage={page} />
         <Item itemPage={page + 1} />
         <Collapse />
-        <Item itemPage={10} />
+        <Item itemPage={lastPage} />
         <NextPage />
       </ul>
     )
-  } else if (page > 6) {
+  } else if (page > lastPage - 4) {
     return (
       <ul className={styles.pagination}>
         <PreviousPage />
         <Item itemPage={1} />
         <Collapse />
-        <Item itemPage={6} />
-        <Item itemPage={7} />
-        <Item itemPage={8} />
-        <Item itemPage={9} />
-        <Item itemPage={10} />
+        <Item itemPage={lastPage - 4} />
+        <Item itemPage={lastPage - 3} />
+        <Item itemPage={lastPage - 2} />
+        <Item itemPage={lastPage - 1} />
+        <Item itemPage={lastPage} />
         <NextPage />
       </ul>
     );

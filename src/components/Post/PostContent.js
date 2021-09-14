@@ -1,28 +1,50 @@
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
 import CommentContainer from '../Common/Comment/CommentContainer';
 
-function PostContent() {
+function PostContent({ category }) {
+  const router = useRouter();
+  const [pid, setPid] = useState();
+  const [post, setPost] = useState();
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    setPid(router.query.pid);
+  }, [router]);
+  useEffect(() => {
+    if (!pid) return;
+    axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
+      .then((response) => setPost(response.data));
+  }, [category, pid]);
+
+  const title = (
+    (category === 'notice') ? '공지 게시판' :
+    (category === 'free') ? '자유 게시판' :
+    undefined
+  );
+
+  if (!post) return null;
+
+  console.log(post);
+
   return (
     <div className={styles.container}>
       <div>
-        <div>공지 게시판</div>
-        <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</div>
+        <div>{title}</div>
+        <div>{post.board.title}</div>
         <div>
-          <div>관리자 관리자</div>
+          <div>{post.board.name}</div>
           <div>
-            <div>21-08-27</div>
-            <div>조회 99999</div>
+            <div>{post.board.inDate}</div>
+            <div>조회 {post.board.hit}</div>
           </div>
         </div>
       </div>
       <hr />
-      <div>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque est
-        accusantium placeat fugiat hic consectetur saepe eveniet nam odit.
-        Accusantium sequi molestias maxime similique temporibus, beatae
-        cupiditate iste asperiores debitis.
-      </div>
-      <CommentContainer />
+      <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div>
+      <CommentContainer comments={post.comments} />
     </div>
   );
 }

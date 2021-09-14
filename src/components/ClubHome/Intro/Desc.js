@@ -1,6 +1,12 @@
 import styles from "../../../styles/Club/Home/Intro/Desc.module.scss";
 
-const Desc = ({ onDescChange, introDesc, onDescUpdate, descUpdate }) => {
+const Desc = ({
+  onDescChange,
+  introDesc,
+  onDescUpdate,
+  descUpdate,
+  onDescSubnmit,
+}) => {
   return (
     <div className={styles.intro}>
       <span>동아리 소개</span>
@@ -12,7 +18,11 @@ const Desc = ({ onDescChange, introDesc, onDescUpdate, descUpdate }) => {
         )}
       </div>
       <div>
-        <button onClick={onDescUpdate}>{descUpdate ? "완료" : "수정"}</button>
+        {descUpdate ? (
+          <button onClick={onDescSubnmit}>완료</button>
+        ) : (
+          <button onClick={onDescUpdate}>수정</button>
+        )}
       </div>
     </div>
   );

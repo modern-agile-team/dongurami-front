@@ -3,10 +3,10 @@
     background-color: #fff;
     margin-top: 11%;
     h1 {
-        font-size: 3.5rem;
+        font-size: 4.5vw;
         font-weight: 100;
         padding: 2rem;
-        margin-left: 14%;
+        margin-left: 13%;
         margin-bottom: 0px;
     }
     .list {
@@ -28,10 +28,10 @@
     }
     button {
         font-family: 'Noto Sans KR', sans-serif;
-        font-size: 3px;
+        font-size: 0.8vw;
         font-weight: 800;
-        width: 13%;
-        margin-left: 70%;
+        width: 5.5vw;
+        margin-left: 75%;
         margin-bottom: 8%;
         zoom: 2.5;
         border-radius: 15px;
@@ -49,40 +49,80 @@
     }
 }
 
+@media screen and (max-width: 1024px) {
+    .container {
+        width: 100%;
+        h1 {
+            margin-left: 7%;
+        }
+        button {
+            margin-left: 80%;
+        }
+    }
+}
+
 @media screen and (max-width: 768px) {
     .container {
-      width: 100%;
-      margin-top: 19%;
-      h1 {
-          font-size: 3.2rem;
-          margin-left: 5%;
-      }
-      .list {
-        width: 100%;
-        .club {
-            margin-left: 2%;
+        width: 80%;
+        margin-top: 19%;
+        h1 {
+            font-size: 6.7vw;
+            margin-left: 5%;
+            padding: 0%;
+            padding-left: 10%;
+            margin-right: -25%;
         }
-        .br {
-            margin-top: 12%;
-            margin-left: -448px;
+        .list {
+            width: 100%;
+            .club {
+                margin-left: 2%;
+            }
+            .br {
+                margin-top: 12%;
+                margin-left: -58.5vw;
+            }
         }
-      }
-      .listBtn {
-          width: 9vw;
-          margin-top: -10%;
-          margin-left: 65%;
-      }
-      .promotion {
-          margin-left: 3%;
-          margin-top: 4%;
-          .recruit {
-              margin-left: 15px;
-          }
-      }
-      .promotionBtn {
-        width: 9vw;
-        margin-top: 1%;
-        margin-left: 65%;
-      }
+        .listBtn {
+            width: 9vw;
+            margin-top: -10%;
+            margin-left: 85%;
+        }
+        .promotion {
+            margin-left: 3%;
+            margin-top: 15%;
+            .recruit {
+                margin-left: 15px;
+            }
+        }
+        .promotionBtn {
+            width: 9vw;
+            margin-top: 5%;
+            margin-left: 85%;
+        }
     }
-  }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 80%;
+        .promotion {
+            margin-left: 3%;
+            .recruit {
+                margin-left: 10px;
+            }
+        }
+        .listBtn {
+            width: 20%;
+            font-weight: 200;
+            zoom: 0;
+            margin-left: 90%;
+        }
+        .promotionBtn {
+            width: 20%;
+            font-weight: 200;
+            zoom: 0;
+            margin-left: 90%;
+            margin-top: 5%;
+        }
+    }
+}

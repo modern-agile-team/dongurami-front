@@ -1,3 +1,14 @@
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6%;
+  flex-direction: column;
+
+  span {
+    cursor: pointer;
+    }
+  }
 .container {
   display: flex;
   align-items: center;
@@ -14,6 +25,9 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  span {
+    cursor: pointer;
+  }
   hr {
     border: 0.1rem solid #F0BF9A;
     width: 25vw;
@@ -28,11 +42,18 @@
     font-size: 6vw;
     background-color: white;
   }
-
-  .cancel {
-    font-size: 2.5vw;
-  }
   .setting {
-    font-size: 2.5vw;
+    cursor: pointer;
+    color: rgb(182, 180, 180);
   }
+}
+
+.button {
+  border: 0.3vw solid #F0BF9A;
+  border-radius: 10%;
+  background-color: #faece1;
+  width: 13vw;
+  height: 6vh;
+  margin-top: 2%;
+  cursor: pointer;
 }
