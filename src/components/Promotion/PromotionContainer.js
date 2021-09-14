@@ -1,16 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
-import { data } from './data';
-import Link from 'next/link';
 import Header from '../Common/Header';
 import TypeSearch from './TypeSearch';
 import { BsPencil } from 'react-icons/bs';
 import Modal from './Modal';
+import Promotion from './Promotion';
+import Link from 'next/dist/client/link';
+import axios from 'axios';
 
 const PromotionContainer = () => {
     const [openModal, setOpenModal] = useState(false);
     const [value, setValue] = useState('');
+    const [boarddata, setBoardData ] = useState([]);
+    const img = 'https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg'
     
+    let preitem = 0;
+    let item = 8;
+    
+    useEffect(() => {
+       const fetchData = async() => {
+            
+            try {
+                await axios.get('http://3.36.72.145:8080/api/board/wholeNotice/inDate/DESC')
+                .then((response) => {
+                    let result = response.data.boards.slice(preitem, item)
+                    console.log(result);
+                })
+            } catch(e) {
+                console.log(e);
+            }
+        } 
+        fetchData();
+    },[]);
+      
+    
+
+
     return (
      <>
       <Header />
@@ -22,30 +47,11 @@ const PromotionContainer = () => {
             </button>
         </Link>
        <div className={styles.section}>
-            {data.map(el => (
-                <div className={styles.promotion} key={el.key} >
-                  <div className={styles.img}>
-                    <img src={el.img} alt="poster" />
-                    <div className={styles.creationInfo} onClick={(e) => {
-                        setValue(e.target.parentNode.childNodes[0].getAttribute('src')), setOpenModal(true)}}>
-                        <div className={styles.writerInfo} onClick={(e) => {e.stopPropagation()}} >
-                            <div className={styles.writer} >최두리</div>
-                            <div className={styles.writer}>우아한애자일</div>
-                        </div>
-                        <div className={styles.date} onClick={(e) => {e.stopPropagation()}}>21-08-21</div>
-                    </div>
-                </div>
-                    <div className={styles.promotionInfo}>
-                       <p className={styles.description}>{el.user_name}</p>
-                       <p className={styles.hashtag}>#IT</p>
-                       <p className={styles.time}>2일전</p>
-                    </div>
-                </div>
+            {boarddata.map(el => (
+                <Promotion key={el.no} date={el.inDate} clubName={el.clubName} img={img} setOpenModal={setOpenModal} setValue={ setValue } />
             ))}
            
         </div>
-
-      
         {openModal && <Modal value={value} setOpenModal={setOpenModal} />}
     </>  
     )

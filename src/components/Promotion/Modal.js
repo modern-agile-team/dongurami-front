@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import { MdClose } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-import { data } from './data';
+
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import ZoomImg from './ZoomImg';
 import next from 'next';
