@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../../styles/Board/Write/WriteContent.module.scss";
@@ -9,17 +10,11 @@ function Write({ category }) {
   const router = useRouter();
 
   const onSubmit = () => {
-    fetch(`http://3.36.72.145:8080/api/board/${category}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: 'test1',
-        clubNo: '1',
-        title,
-        description: body
-      })
+    axios.post(`http://3.36.72.145:8080/api/board/${category}`, {
+      id: 'test1',
+      clubNo: '1',
+      title,
+      description: body
     }).then(() => {
       router.push(`/${category}`)
     });

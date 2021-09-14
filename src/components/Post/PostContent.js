@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
@@ -14,9 +15,8 @@ function PostContent({ category }) {
   }, [router]);
   useEffect(() => {
     if (!pid) return;
-    fetch(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
-      .then((response) => response.json())
-      .then((data) => setPost(data));
+    axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
+      .then((response) => setPost(response.data));
   }, [category, pid]);
 
   const title = (

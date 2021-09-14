@@ -6,6 +6,7 @@ import Pagination from './Pagination';
 import Search from './Search';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 function Notice({ category }) {
   const router = useRouter();
@@ -20,9 +21,8 @@ function Notice({ category }) {
   }, [router]);
   useEffect(() => {
     if (!order) return;
-    fetch(`http://3.36.72.145:8080/api/board/${category}/${order.split(' ').join('/')}`)
-      .then((response) => response.json())
-      .then((json) => { setPosts(json.boards); });
+    axios.get(`http://3.36.72.145:8080/api/board/${category}/${order.split(' ').join('/')}`)
+      .then((response) => setPosts(response.data.boards));
   }, [category, order]);
 
   const setPageToUrl = (nextPage) => {
