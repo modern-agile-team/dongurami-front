@@ -1,15 +1,16 @@
 import React from 'react';
 import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
 import { FaSearch } from "react-icons/fa";
-const TypeSearch = () => {
+const TypeSearch = ({onCategorySearch}) => {
+    
     return (
         <div className={styles.container}>
-           <ul className={styles.tagList}>
-               <li>#IT</li>
-               <li>#음악</li>
-               <li>#친목</li>
-               <li>#게임</li>
-               <li>#운동</li>
+           <ul className={styles.tagList} onClick={(event) => onCategorySearch(event.target.getAttribute('name'))}>
+               <li name='IT'>#IT</li>
+               <li name='음악'>#음악</li>
+               <li name='친목'>#친목</li>
+               <li name='게임'>#게임</li>
+               <li name='운동'>#운동</li>
            </ul>
            <div className={styles.searchContainer}>
                <div className={styles.searchElement}>
