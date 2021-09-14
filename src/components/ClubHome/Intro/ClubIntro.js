@@ -22,7 +22,7 @@ const ClubIntro = () => {
       headers: {
         "Content-type": "application/json; charset=utf-8",
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbMV0sImlkIjoidGVzdDEiLCJuYW1lIjoidGVzdDEiLCJlbWFpbCI6InRlc3QxQG5hdmVyY29tIiwicHJvZmlsZVBhdGgiOm51bGwsImlzQWRtaW4iOjAsImlhdCI6MTYzMTI0MjMzOSwiZXhwIjoxNjMxMzI4NzM5LCJpc3MiOiJ3b29haGFuIGFnaWxlIn0.E9ryaA_BRmkInWxSO3A3PLKb5LsRkBXjjnrflB0U3hU",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
       body: JSON.stringify({
         logoUrl: info[0].logoUrl,
@@ -40,7 +40,7 @@ const ClubIntro = () => {
       headers: {
         "Content-type": "application/json; charset=utf-8",
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
     })
       .then((res) => res.json())
