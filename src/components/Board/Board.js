@@ -11,14 +11,15 @@ function Notice({ category, baseAPI }) {
   const router = useRouter();
   const [page, setPage] = useState();
   const [posts, setPosts] = useState([]);
-  const [order, setOrder] = useState('inDate DESC');
+  const [order, setOrder] = useState();
 
   useEffect(() => {
     if (!router.isReady) return;
     setPage(Number(router.query.page) || 1);
+    setOrder(router.query.order || 'inDate DESC');
   }, [router]);
   useEffect(() => {
-    console.log('request')
+    if (!order) return;
     fetch(`${baseAPI}/${order.split(' ').join('/')}`)
       .then((response) => response.json())
       .then((json) => { setPosts(json.boards); });
@@ -28,12 +29,19 @@ function Notice({ category, baseAPI }) {
     router.push({
       pathname: router.pathname,
       query: {
-        page: nextPage
+        page: nextPage,
+        order
       }
     });
   };
   const onOrderChange = (e) => {
-    setOrder(e.target.value);
+    router.push({
+      pathname: router.pathname,
+      query: {
+        page,
+        order: e.target.value
+      }
+    });
   }
   const title = (
     (category === 'notice') ? '공지 게시판' :
@@ -41,8 +49,10 @@ function Notice({ category, baseAPI }) {
     undefined
   );
   
-
+  if (!page) return null;
   if (!posts) return null;
+  if (!order) return null;
+  
   return (
     <div className={styles.container}>
       <Header />
