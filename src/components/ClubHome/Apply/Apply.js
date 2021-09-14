@@ -44,6 +44,7 @@ const Apply = () => {
   const [grade, setGrade] = useState("");
   const [sex, setSex] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [addQuestion, setAddQuestion] = useState([]);
 
   const iconSize = 40;
 
@@ -98,10 +99,20 @@ const Apply = () => {
       grade,
       sex,
       phoneNumber,
+      ...addQuestion,
     ];
     setResume(result);
   };
-  console.log(resume);
+
+  // 추가 질문 저장
+  const onQuestionInputChange = (e) => {
+    const index = e.target.parentNode.id;
+    const input = e.target.value;
+    const temp = [...addQuestion];
+    temp[index] = input;
+    setAddQuestion(temp);
+  };
+
   return (
     <div className={styles.container}>
       <ApplyHeader />
@@ -111,6 +122,7 @@ const Apply = () => {
         onPhoneNumberInput={onPhoneNumberInput}
       />
       <Additional
+        onQuestionInputChange={onQuestionInputChange}
         isUpdate={isUpdate}
         onUpdate={onUpdate}
         onRemove={onRemove}

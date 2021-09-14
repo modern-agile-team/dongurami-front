@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Activities/Activities.module.scss";
-
 import Act from "./Act";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
@@ -61,14 +60,18 @@ export const actData = [
   },
 ];
 
-const Activities = ({ onClick }) => {
+const Activities = ({ onModalOpen }) => {
+  const onCreateActivies = () => {
+    console.log("클릭됨");
+  };
+
   return (
     <div className={styles.container}>
       <div id={styles.clubName}>
         <p>우아한 애자일의 활동</p>
       </div>
       <div id={styles.add}>
-        <IoIosAddCircleOutline />
+        <IoIosAddCircleOutline onClick={onCreateActivies} />
       </div>
       <div className={styles.activities}>
         {actData.map((el, i) => {
@@ -77,7 +80,7 @@ const Activities = ({ onClick }) => {
               img={el.img}
               title={el.title}
               date={el.date}
-              onClick={onClick}
+              onClick={onModalOpen}
               key={i}
             />
           );
