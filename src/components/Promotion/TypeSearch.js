@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../styles/Board/Promotion/typeSearch.module.scss";
 import { FaSearch } from "react-icons/fa";
-const TypeSearch = ({ onCategorySearch }) => {
+
+const TypeSearch = ({ onCategorySearch, onSearch }) => {
+  const [search, setSearch] = useState("");
+  const onChange = (e) => {
+    setSearch(e.target.value);
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onSearch(search);
+    setSearch("");
+    console.log(e);
+  };
+
   return (
     <div className={styles.container}>
       <ul
@@ -14,11 +26,17 @@ const TypeSearch = ({ onCategorySearch }) => {
         <li name="게임">#게임</li>
         <li name="운동">#운동</li>
       </ul>
+
       <div className={styles.searchContainer}>
-        <div className={styles.searchElement}>
-          <input type="text" placeholder="동아리명을 검색해주세요" />
-          <FaSearch />
-        </div>
+        <form className={styles.searchElement} onSubmit={onSubmit}>
+          <input
+            type="text"
+            value={search}
+            onChange={onChange}
+            placeholder="동아리명을 검색해주세요"
+          />
+          <FaSearch onClick={onSubmit} />
+        </form>
       </div>
     </div>
   );

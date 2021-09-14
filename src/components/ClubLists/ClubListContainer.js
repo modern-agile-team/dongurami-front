@@ -16,6 +16,11 @@ const ClubListContainer = () => {
     setClubData(searchData);
   };
 
+  const onSearch = (data) => {
+    const searchData = originData.filter((el) => el.name.includes(data));
+    setClubData(searchData);
+  };
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -34,7 +39,7 @@ const ClubListContainer = () => {
   return (
     <>
       <Header />
-      <TypeSearch onCategorySearch={onCategorySearch} />
+      <TypeSearch onCategorySearch={onCategorySearch} onSearch={onSearch} />
       <div className={styles.container}>
         <div className={styles.activities}>
           {clubData.map((el) => {
