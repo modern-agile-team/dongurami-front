@@ -17,6 +17,8 @@ const Calendar = () => {
   const [period, setPeriod] = useState([]);
   const [title, setTitle] = useState("");
   const [color, setColor] = useState("");
+  const [nowDay, setNowDay] = useState("");
+  const nowDate = useRef();
   const today = getMoment;
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
@@ -24,6 +26,7 @@ const Calendar = () => {
       ? 53
       : today.clone().endOf("month").week();
   useEffect(() => {
+    setNowDay(nowDate.current.id);
     axios(
       `http://3.36.72.145:8080/api/club/schedule/1/${today.format("YYYY-MM")}`,
       {
@@ -36,7 +39,6 @@ const Calendar = () => {
       }
     ).then((res) => setSchedule(res.data.result));
   }, [getMoment]);
-  console.log(schedule);
   const calendarArr = () => {
     let result = [];
     let week = firstWeek;
@@ -57,6 +59,7 @@ const Calendar = () => {
                   <td
                     className={styles.dayblock}
                     key={index}
+                    ref={nowDate}
                     id={days.format("YYYY-MM-DD")}
                   >
                     <span
@@ -161,11 +164,14 @@ const Calendar = () => {
     }
     return result;
   };
-
   return (
     <>
       <div className={styles.wrap}>
-        <Schedule className={styles.scheduleComp} />
+        <Schedule
+          className={styles.scheduleComp}
+          schedule={schedule}
+          nowDay={nowDay}
+        />
         <div className={styles.control}>
           <span
             className={styles.lastmonth}
