@@ -13,7 +13,10 @@ const Calendar = () => {
   const [date, setDate] = useState("");
   const [pop, setPop] = useState(0);
   const [schedule, setSchedule] = useState([]);
-
+  const [no, setNo] = useState(0);
+  const [period, setPeriod] = useState([]);
+  const [title, setTitle] = useState("");
+  const [color, setColor] = useState("");
   const today = getMoment;
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
@@ -223,8 +226,24 @@ const Calendar = () => {
         today={today.format("YYYY-MM-DD")}
         pop={pop}
       />
-      <DailyControl schedule={schedule} date={date} setPop={setPop} pop={pop} />
-      <ScheduleModify setPop={setPop} pop={pop} />
+      <DailyControl
+        setNo={setNo}
+        schedule={schedule}
+        date={date}
+        setPop={setPop}
+        pop={pop}
+        setPeriod={setPeriod}
+        setTitle={setTitle}
+        setColor={setColor}
+      />
+      <ScheduleModify
+        title={title}
+        period={period}
+        no={no}
+        setPop={setPop}
+        pop={pop}
+        color={color}
+      />
     </>
   );
 };

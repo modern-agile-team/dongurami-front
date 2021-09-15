@@ -3,12 +3,22 @@ import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import Router from "next/router";
-import ScheduleModify from "./ScheduleModify";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
-const DailyControl = ({ schedule, date, setPop, pop }) => {
+const DailyControl = ({
+  setTitle,
+  setPeriod,
+  setNo,
+  schedule,
+  date,
+  setPop,
+  pop,
+  setColor,
+}) => {
   const moveCal = () => {
     Router.push("/ClubHome");
   };
+
   if (pop === 2)
     return (
       <div>
@@ -24,7 +34,15 @@ const DailyControl = ({ schedule, date, setPop, pop }) => {
                 <span style={{ color: `${el.colorCode}` }} key={el.no}>
                   {el.title}
                 </span>
-                <HiPencil onClick={() => setPop(3)} />
+                <HiPencil
+                  onClick={() => {
+                    setTitle(el.title);
+                    setPeriod([el.startDate, el.endDate]);
+                    setNo(el.no);
+                    setColor(el.colorCode);
+                    setPop(3);
+                  }}
+                />
                 <FaTrashAlt
                   onClick={() => {
                     axios(
@@ -41,7 +59,7 @@ const DailyControl = ({ schedule, date, setPop, pop }) => {
                     moveCal();
                   }}
                 />
-                {/* <>아이콘 수정 삭제 버튼 중요도 버튼 </> */}
+                <AiOutlineStar />
               </>
             ) : null;
           })}
