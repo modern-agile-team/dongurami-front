@@ -10,8 +10,8 @@ function NoticeTable({ posts, page, category }) {
         <tr>
           <th>번호</th>
           <th>제목</th>
-          <th>작성일</th>
           <th>작성자</th>
+          <th>작성일</th>
           <th>조회수</th>
         </tr>
       </thead>
@@ -24,8 +24,8 @@ function NoticeTable({ posts, page, category }) {
                 <a>{post.title}</a>
               </Link>
             </td>
-            <td>{post.inDate}</td>
             <td>{post.studentName}</td>
+            <td>{post.inDate}</td>
             <td>{post.hit}</td>
           </tr>
         ))}
