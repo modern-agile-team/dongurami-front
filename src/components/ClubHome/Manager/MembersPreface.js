@@ -5,10 +5,7 @@ const MembersPreface = () => {
   return (
     <div className={styles.preface}>
       <div>
-        <span>직급</span>
-      </div>
-      <div>
-        <span>이름</span>
+        <span></span>
       </div>
       <div>
         <span>가입 신청 관리</span>
