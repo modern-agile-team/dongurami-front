@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
 import CommentContainer from '../Common/Comment/CommentContainer';
+import Link from 'next/link';
 
 function PostContent({ category }) {
   const router = useRouter();
@@ -24,6 +25,10 @@ function PostContent({ category }) {
     (category === 'free') ? '자유 게시판' :
     undefined
   );
+  const onDelete = () => {
+    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
+      .then(() => router.push(`/${category}`));
+  };
 
   if (!post) return null;
 
@@ -32,11 +37,13 @@ function PostContent({ category }) {
   return (
     <div className={styles.container}>
       <div>
-        <div>{title}</div>
+      <Link href={`/${category}`} passHref><a>{title}</a></Link>
         <div>{post.board.title}</div>
         <div>
           <div>{post.board.name}</div>
           <div>
+            <Link href={`/${category}/${pid}/edit`} passHref><button>수정하기</button></Link>
+            <button onClick={onDelete}>삭제하기</button>
             <div>{post.board.inDate}</div>
             <div>조회 {post.board.hit}</div>
           </div>

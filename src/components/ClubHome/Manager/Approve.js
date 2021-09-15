@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "../../../styles/Club/Home/Manager/Approve.module.scss";
 import ApproveHeader from "./ApproveHeader";
 import ApproveList from "./ApproveList";
@@ -52,14 +52,39 @@ const answers = [
 
 export const Approve = () => {
   const [listOpen, setListOpen] = useState(false);
-  const onClick = () => {
+  const [applyList, setApplyList] = useState(answers);
+
+  const onApplyDelete = (e) => {
+    const index = e.target.id;
+    const deleteApplyList = applyList.filter((el) => el !== applyList[index]);
+    setApplyList(deleteApplyList);
+    alert("가입이 거절되었습니다.");
+  };
+  const onApplyAccept = (e) => {
+    const index = e.target.id;
+    const deleteApplyList = applyList.filter((el) => el !== applyList[index]);
+    setApplyList(deleteApplyList);
+    alert("가입이 승인되었습니다.");
+  };
+
+  const onApplyListOpen = () => {
     setListOpen(!listOpen);
   };
+
   return (
     <div className={styles.container}>
-      <ApproveHeader listOpen={listOpen} onClick={onClick} answers={answers} />
+      <ApproveHeader
+        listOpen={listOpen}
+        onClick={onApplyListOpen}
+        answers={applyList}
+      />
       {listOpen ? (
-        <ApproveList answers={answers} questions={questions} />
+        <ApproveList
+          onApplyDelete={onApplyDelete}
+          onApplyAccept={onApplyAccept}
+          answers={applyList}
+          questions={questions}
+        />
       ) : (
         <></>
       )}
