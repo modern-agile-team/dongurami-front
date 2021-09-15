@@ -4,11 +4,22 @@ import { FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import Router from "next/router";
 import ScheduleModify from "./ScheduleModify";
+import { StepTitle } from "semantic-ui-react";
 
-const DailyControl = ({ schedule, date, setPop, pop }) => {
+const DailyControl = ({
+  setTitle,
+  setPeriod,
+  setNo,
+  schedule,
+  date,
+  setPop,
+  pop,
+  setColor,
+}) => {
   const moveCal = () => {
     Router.push("/ClubHome");
   };
+
   if (pop === 2)
     return (
       <div>
@@ -24,7 +35,15 @@ const DailyControl = ({ schedule, date, setPop, pop }) => {
                 <span style={{ color: `${el.colorCode}` }} key={el.no}>
                   {el.title}
                 </span>
-                <HiPencil onClick={() => setPop(3)} />
+                <HiPencil
+                  onClick={() => {
+                    setTitle(el.title);
+                    setPeriod([el.startDate, el.endDate]);
+                    setNo(el.no);
+                    setColor(el.colorCode);
+                    setPop(3);
+                  }}
+                />
                 <FaTrashAlt
                   onClick={() => {
                     axios(
