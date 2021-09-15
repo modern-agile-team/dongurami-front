@@ -3,8 +3,7 @@ import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import Router from "next/router";
-import ScheduleModify from "./ScheduleModify";
-import { StepTitle } from "semantic-ui-react";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 const DailyControl = ({
   setTitle,
@@ -60,7 +59,7 @@ const DailyControl = ({
                     moveCal();
                   }}
                 />
-                {/* <>아이콘 수정 삭제 버튼 중요도 버튼 </> */}
+                <AiOutlineStar />
               </>
             ) : null;
           })}
