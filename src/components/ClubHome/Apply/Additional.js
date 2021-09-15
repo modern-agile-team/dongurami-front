@@ -3,19 +3,21 @@ import styles from "../../../styles/Club/Home/Apply/Additional.module.scss";
 import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 
-const Additional = ({ list, onRemove, onUpdate, isUpdate }) => {
-  const [a, setA] = useState("");
-
-  const onChange = (e) => {
-    console.log(e.target.value);
-  };
+const Additional = ({
+  list,
+  onRemove,
+  onUpdate,
+  isUpdate,
+  onQuestionInputChange,
+}) => {
+  const [addQuestion, setAddQuestion] = useState([]);
 
   return (
     <div className={styles.additional}>
       <ul>
         {list.map((el, i) => {
           return (
-            <li key={i}>
+            <li id={i} key={i}>
               {isUpdate[i] ? (
                 <input type="text" defaultValue={el.question} />
               ) : (
@@ -23,7 +25,7 @@ const Additional = ({ list, onRemove, onUpdate, isUpdate }) => {
               )}
               <HiPencil onClick={() => onUpdate(i)} />
               <FaTrashAlt id={styles.remove} onClick={() => onRemove(i)} />
-              <textarea onChange={onChange} />
+              <textarea onChange={onQuestionInputChange} />
             </li>
           );
         })}
