@@ -20,7 +20,7 @@ function Write({ category }) {
   };
 
   return (
-    <Container>
+    <Container category={category}>
       <WriteContent title={title} body={body} setTitle={setTitle} setBody={setBody} onSubmit={onSubmit} />
     </Container>
   );
