@@ -21,7 +21,7 @@ function displayedAt(createdAt) {
   return `${Math.floor(years)}년 전`;
 }
 
-const Promotion = ({ img, clubName, setOpenModal, setValue, date }) => {
+const Promotion = ({ img, clubName, setOpenModal, date }) => {
   return (
     <div className={styles.promotion}>
       <div className={styles.img}>
@@ -29,8 +29,7 @@ const Promotion = ({ img, clubName, setOpenModal, setValue, date }) => {
         <div
           className={styles.creationInfo}
           onClick={(e) => {
-            setValue(e.target.parentNode.childNodes[0].getAttribute("src")),
-              setOpenModal(true);
+            setOpenModal(true);
           }}
         >
           <div
