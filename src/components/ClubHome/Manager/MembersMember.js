@@ -1,32 +1,53 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "../../../styles/Club/Home/Manager/ManagerMember.module.scss";
+import { RiVipCrownFill, RiVipCrownLine } from "react-icons/ri";
 
-const status = ["회장", "부회장", "동아리원"];
+const MembersMember = ({ name }) => {
+  const applyAuth = useRef();
+  const boardAuth = useRef();
+  const changeLeader = useRef();
 
-const MembersMember = ({ name, stat }) => {
+  const onApplyAuthClick = () => {
+    console.log(applyAuth.current.checked);
+  };
+  const onBoardAuth = () => {
+    console.log(boardAuth.current.checked);
+  };
+  const onLeaderChange = () => {
+    console.log(changeLeader.current.id);
+  };
+
   return (
     <div className={styles.member}>
       <div>
-        <select defaultValue={stat}>
-          <option value={status[0]} key={0}>
-            {status[0]}
-          </option>
-          <option value={status[1]} key={1}>
-            {status[1]}
-          </option>
-          <option value={status[2]} key={2}>
-            {status[2]}
-          </option>
-        </select>
+        {name === "오창훈" ? (
+          <RiVipCrownFill />
+        ) : (
+          <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
+        )}
+        <span ref={changeLeader} id={name}>
+          {name}
+        </span>
       </div>
       <div>
-        <span>{name}</span>
+        <input
+          type="checkBox"
+          className={styles.appManage}
+          defaultChecked={name === "오창훈" ? true : false}
+          disabled={name === "오창훈" ? true : false}
+          ref={applyAuth}
+          onClick={onApplyAuthClick}
+        />
       </div>
       <div>
-        <input type="checkBox" className={styles.appManage} />
-      </div>
-      <div>
-        <input type="checkBox" className={styles.boardManage} />
+        <input
+          type="checkBox"
+          className={styles.appManage}
+          defaultChecked={name === "오창훈" ? true : false}
+          disabled={name === "오창훈" ? true : false}
+          ref={boardAuth}
+          onClick={onBoardAuth}
+        />
       </div>
     </div>
   );

@@ -18,6 +18,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      & > div:nth-of-type(2) {
+        text-align: center;
+      }
+      & button {
+        background: inherit;
+        border: 2px solid #90E2D6;
+        border-radius: 1rem;
+        margin: .25rem;
+        cursor: pointer;
+      }
     }
   }
   & > hr {
@@ -26,4 +36,10 @@
   & > div:nth-of-type(2) {
     margin: 2rem;
   }
+}
+
+.container a {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

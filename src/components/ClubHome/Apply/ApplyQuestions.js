@@ -22,6 +22,7 @@ const ApplyQuestions = ({ onGradeChange, onSexChange, onPhoneNumberInput }) => {
           <span>학년</span>
           <br />
           <select name="학년" id="grade" onChange={onGradeChange}>
+            <option value="선택 안함">선택</option>
             <option value="1학년">1학년</option>
             <option value="2학년">2학년</option>
             <option value="3학년">3학년</option>
@@ -31,6 +32,7 @@ const ApplyQuestions = ({ onGradeChange, onSexChange, onPhoneNumberInput }) => {
           <span>성별</span>
           <br />
           <select name="성별" id="sex" onChange={onSexChange}>
+            <option value="선택 안함">선택</option>
             <option value="남자">남자</option>
             <option value="여자">여자</option>
           </select>

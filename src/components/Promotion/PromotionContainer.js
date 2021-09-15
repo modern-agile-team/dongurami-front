@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import Promotion from "./Promotion";
 import Link from "next/dist/client/link";
 import axios from "axios";
+import { getdata } from "./getdata";
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -23,10 +24,8 @@ const PromotionContainer = () => {
       await axios
         .get("http://3.36.72.145:8080/api/board/notice/inDate/DESC")
         .then((response) => {
-          console.log(response);
           const result = response.data.boards.slice(preitem, item);
           const extraData = boarddata.concat(result);
-
           setBoardData((prev) => prev.concat(extraData));
         });
     } catch (e) {
@@ -54,6 +53,8 @@ const PromotionContainer = () => {
 
   useEffect(() => {
     getData();
+    console.log(getdata[0].image);
+
     window.addEventListener("scroll", infiniteScroll);
   }, []);
 
@@ -79,7 +80,7 @@ const PromotionContainer = () => {
           />
         ))}
       </div>
-      {openModal && <Modal value={value} setOpenModal={setOpenModal} />}
+      {openModal && <Modal setOpenModal={setOpenModal} />}
     </>
   );
 };
