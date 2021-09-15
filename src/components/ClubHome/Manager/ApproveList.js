@@ -4,10 +4,10 @@ import styles from "../../../styles/Club/Home/Manager/ApproveList.module.scss";
 const ApproveList = ({ answers, questions }) => {
   return (
     <>
-      {answers.map((e) => {
+      {answers.map((e, i) => {
         return (
           <>
-            <div className={styles.kkk}>
+            <div key={i} className={styles.kkk}>
               <div id={styles.q}>
                 {questions.map((q, i) => {
                   return (

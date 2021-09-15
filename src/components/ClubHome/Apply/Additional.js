@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../../../styles/Club/Home/Apply/Additional.module.scss";
 import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
@@ -10,8 +10,6 @@ const Additional = ({
   isUpdate,
   onQuestionInputChange,
 }) => {
-  const [addQuestion, setAddQuestion] = useState([]);
-
   return (
     <div className={styles.additional}>
       <ul>
@@ -23,7 +21,7 @@ const Additional = ({
               ) : (
                 <span>{el.question}</span>
               )}
-              <HiPencil onClick={() => onUpdate(i)} />
+              <HiPencil onClick={(e) => onUpdate(i, e)} />
               <FaTrashAlt id={styles.remove} onClick={() => onRemove(i)} />
               <textarea onChange={onQuestionInputChange} />
             </li>

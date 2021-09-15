@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../../styles/Club/Home/Manager/Approve.module.scss";
 import ApproveHeader from "./ApproveHeader";
 import ApproveList from "./ApproveList";
+import { list } from "../Apply/Apply";
 
 const questions = [
   "이름",
@@ -10,9 +11,7 @@ const questions = [
   "학년",
   "성별",
   "휴대전화",
-  "지원동기",
-  "다룰 줄 아는 프로그래밍 언어는?",
-  "하고 싶은 프로젝트",
+  ...list.map((el) => el.question),
 ];
 
 const answers = [

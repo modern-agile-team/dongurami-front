@@ -56,6 +56,8 @@ const Apply = () => {
   // 질문 추가
   const onQuestionAdd = () => {
     const newList = [...questions, { question: newQuestion }];
+    const a = [...isUpdate, false];
+    setIsUpdate(a);
     setQuestions(newList);
   };
 
@@ -64,11 +66,15 @@ const Apply = () => {
     const b = questions.filter((el, index) => {
       return i !== index;
     });
+    const a = isUpdate.slice(1);
+    setIsUpdate(a);
     setQuestions(b);
   };
 
   // 질문 업데이트
-  const onUpdate = (i) => {
+  const onUpdate = (i, e) => {
+    console.log(e.target.parentNode);
+    console.log(isUpdate);
     const update = isUpdate.map((el, index) => {
       return i === index ? !el : el;
     });
@@ -118,7 +124,7 @@ const Apply = () => {
     temp[index] = input;
     setAddQuestion(temp);
   };
-
+  console.log(resume);
   return (
     <div className={styles.container}>
       <ApplyHeader />
