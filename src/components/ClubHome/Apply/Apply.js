@@ -124,7 +124,7 @@ const Apply = () => {
     temp[index] = input;
     setAddQuestion(temp);
   };
-  console.log(resume);
+
   return (
     <div className={styles.container}>
       <ApplyHeader />
