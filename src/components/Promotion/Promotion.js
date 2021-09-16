@@ -21,7 +21,7 @@ function displayedAt(createdAt) {
   return `${Math.floor(years)}년 전`;
 }
 
-const Promotion = ({ img, clubName, setOpenModal, date }) => {
+const Promotion = ({ img, clubName, setOpenModal, date, pId, setPostId }) => {
   return (
     <div className={styles.promotion}>
       <div className={styles.img}>
@@ -29,6 +29,7 @@ const Promotion = ({ img, clubName, setOpenModal, date }) => {
         <div
           className={styles.creationInfo}
           onClick={(e) => {
+            setPostId(pId);
             setOpenModal(true);
           }}
         >
