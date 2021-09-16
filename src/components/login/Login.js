@@ -10,6 +10,7 @@ export const Login = () => {
   const onChange = (e) => {
     const { name, value } = e.target;
     name === "id" ? setId(value) : setPassword(value);
+    console.log(name, value);
   };
 
   const onSubmit = () => {
