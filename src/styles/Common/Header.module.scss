@@ -41,7 +41,7 @@
     align-items: center;
     list-style: none;
     justify-content: space-between;
-    margin-right: 15%;
+    margin-right: 10%;
     padding-left: 0;
     cursor: pointer;
     .mobile {
@@ -52,7 +52,14 @@
     color: #3fcdb8;
   }
 }
-
+.tokenIcons {
+  width: 30%;
+  margin: auto;
+  cursor: pointer;
+  .bell {
+    margin-right: 30%;
+  }
+}
 .user {
   display: flex;
   padding-left: 0;

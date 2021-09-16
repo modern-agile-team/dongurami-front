@@ -148,7 +148,14 @@ function SignUpForm() {
           major,
         },
       })
-        .then((res) => alert(res.data.msg), router.push("/LoginPage"))
+        .then((res) => {
+          if (res.data.success === true) {
+            alert(res.data.msg);
+            router.push("/LoginPage");
+          } else {
+            alert(res.data.msg);
+          }
+        })
         .catch((err) => alert(err.response.data.msg));
     }
   };
