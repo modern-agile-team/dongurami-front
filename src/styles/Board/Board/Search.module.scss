@@ -13,4 +13,9 @@
     margin: 0 1rem;
     border: 1px solid lightgray;
   }
+  button {
+    border: none;
+    background: inherit;
+    cursor: pointer;
+  }
 }
