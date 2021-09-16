@@ -8,7 +8,7 @@ const Additional = ({
   onRemove,
   onUpdate,
   isUpdate,
-  onQuestionInputChange,
+  onAnswerInputChange,
   updateQuestionInput,
   onUpdateInputChange,
 }) => {
@@ -30,7 +30,7 @@ const Additional = ({
               )}
               <HiPencil onClick={() => onUpdate(i, el.no)} />
               <FaTrashAlt id={styles.remove} onClick={() => onRemove(el.no)} />
-              <textarea onChange={onQuestionInputChange} />
+              <textarea onChange={onAnswerInputChange} />
             </li>
           );
         })}
