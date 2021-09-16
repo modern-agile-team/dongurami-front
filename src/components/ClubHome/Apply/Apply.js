@@ -34,10 +34,11 @@ const Apply = () => {
   const [isUpdate, setIsUpdate] = useState([]);
   const [resume, setResume] = useState([]);
   const [addQuestion, setAddQuestion] = useState([]);
+  const [updateQuestion, setUpdateQuestion] = useState("");
 
   const { grade, sex, phoneNumber } = userInfo;
 
-  const input = useRef();
+  const newQuestionInput = useRef();
 
   const iconSize = 40;
 
@@ -62,12 +63,11 @@ const Apply = () => {
     await getApplyQuestions();
 
     // input 비우기
-    input.current.value = "";
+    newQuestionInput.current.value = "";
   };
 
   // 질문 제거
-  const onRemove = async (i, delQuestions) => {
-    console.log(delQuestions);
+  const onRemove = async (i) => {
     const options = {
       method: "DELETE",
       headers: {
@@ -80,19 +80,44 @@ const Apply = () => {
       },
     };
     await axios(`http://3.36.72.145:8080/api/club/application/1/${i}`, options)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err.response.data));
+      .then((res) => res.data)
+      .catch((err) => alert(err.response.data));
     await getApplyQuestions();
   };
 
-  // 질문 업데이트
-  const onUpdate = (i, e) => {
-    console.log(e.target.parentNode);
-    console.log(isUpdate);
+  // 질문 수정
+  const onUpdateQuestionClick = async (i, no) => {
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbMV0sImlkIjoiMjAxNzA4MDUxIiwibmFtZSI6IiIsImVtYWlsIjoiYWxzdG5zcmw5OEBnbWFpbC5jb20iLCJwcm9maWxlUGF0aCI6bnVsbCwiaXNBZG1pbiI6MCwiaWF0IjoxNjMxNzEwMjczLCJleHAiOjE2MzE3OTY2NzMsImlzcyI6Indvb2FoYW4gYWdpbGUifQ.MkUGAY12I6epQ7YGO-BI_HjIJwei39-G6IXTjkH7zJ0",
+      },
+      data: {
+        description: updateQuestion,
+      },
+    };
+
     const update = isUpdate.map((el, index) => {
       return i === index ? !el : el;
     });
+
+    if (isUpdate[i]) {
+      await axios(
+        `http://3.36.72.145:8080/api/club/application/1/${no}`,
+        options
+      )
+        .then((res) => res.data)
+        .catch((err) => alert(err.response.data.msg));
+      await getApplyQuestions();
+    }
     setIsUpdate(update);
+  };
+
+  // 질문 수정할 입력창
+  const onUpdateInputChange = (e) => {
+    setUpdateQuestion(e.target.value);
   };
 
   // 질문 입력창 변화 감지
@@ -100,8 +125,8 @@ const Apply = () => {
     setNewQuestion(e.target.value);
   };
 
-  // 유저 정보
-  const onUserInfoChange = (e) => {
+  // 학년
+  const onGradeChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
     console.log(userInfo);
@@ -124,9 +149,9 @@ const Apply = () => {
   // 추가 질문 저장
   const onQuestionInputChange = (e) => {
     const index = e.target.parentNode.id;
-    const answerInput = e.target.value;
+    const input = e.target.value;
     const temp = [...addQuestion];
-    temp[index] = answerInput;
+    temp[index] = input;
     setAddQuestion(temp);
   };
 
@@ -145,7 +170,8 @@ const Apply = () => {
         const updateState = new Array(res.data.questions.length).fill(false);
         setIsUpdate(updateState);
         setQuestions(res.data.questions);
-      });
+      })
+      .catch((err) => alert(err.response.data.msg));
   };
 
   useEffect(() => {
@@ -155,13 +181,18 @@ const Apply = () => {
   return (
     <div className={styles.container}>
       <ApplyHeader />
-      <ApplyQuestions onUserInfoChange={onUserInfoChange} />
+      <ApplyQuestions
+        onUserInfoChange={onGradeChange}
+        onUserInfoChange={onGradeChange}
+        onUserInfoChange={onGradeChange}
+      />
       <Additional
         onQuestionInputChange={onQuestionInputChange}
         isUpdate={isUpdate}
-        onUpdate={onUpdate}
+        onUpdate={onUpdateQuestionClick}
         onRemove={onRemove}
         questions={questions}
+        onUpdateInputChange={onUpdateInputChange}
       />
       <div
         className={
@@ -169,7 +200,7 @@ const Apply = () => {
         }
       >
         <span>새로운 질문</span>
-        <input ref={input} type="text" onChange={handleChange} />
+        <input ref={newQuestionInput} type="text" onChange={handleChange} />
         <IoIosAddCircleOutline onClick={onQuestionAdd} size={iconSize} />
       </div>
       <div className={styles.submit}>
