@@ -41,7 +41,6 @@ function Header() {
           />
           <RiMenuLine className={styles.icon} onClick={() => toggle()} />
           <div className={styles.topMenu}>
-<<<<<<< HEAD
             <ul className={styles.menus} id={open ? styles.show : styles.hide}>
               <ul className={styles.mobile}>
                 <li
@@ -69,26 +68,6 @@ function Header() {
                 게시판
                 <ul className={styles.dropdownMenu}>
                   <li
-=======
-              <ul className={styles.menus} id={open ? styles.show : styles.hide}>
-                <ul className={styles.mobile}>
-                      <li
-                      className={styles.notice}
-                      id={menu === 1 ? styles.now : 0}
-                      onClick={() => {router.push('/notice'); menuToggle(1)}}
-                      >공지게시판
-                      </li>
-                      <li
-                      className={styles.free}
-                      id={menu === 2 ? styles.now : 0}
-                      onClick={() => {router.push('/free'); menuToggle(2)}}
-                      >자유게시판
-                      </li>
-                </ul>
-                <li className={styles.dropdown}>게시판
-                  <ul className={styles.dropdownMenu}>
-                    <li
->>>>>>> b409d0efeb1199a27f1cab55cb07e9237ecef9db
                     className={styles.notice}
                     id={menu === 1 ? styles.now : 0}
                     onClick={() => {
@@ -101,7 +80,6 @@ function Header() {
                   <li
                     className={styles.free}
                     id={menu === 2 ? styles.now : 0}
-<<<<<<< HEAD
                     onClick={() => {
                       router.push("/freeboard");
                       menuToggle(2);
@@ -112,14 +90,6 @@ function Header() {
                 </ul>
               </li>
               <li
-=======
-                    onClick={() => {router.push('/free'); menuToggle(2)}}
-                    >자유게시판
-                    </li>
-                  </ul>
-                </li>
-                <li
->>>>>>> b409d0efeb1199a27f1cab55cb07e9237ecef9db
                 id={menu === 3 ? styles.now : 0}
                 onClick={() => {
                   router.push("/clublists");
