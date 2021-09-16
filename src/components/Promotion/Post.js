@@ -1,23 +1,25 @@
 import React from "react";
 import styles from "../../styles/Board/Promotion/Post.module.scss";
 
-const Post = () => {
+const Post = ({ postData }) => {
+  const { name, hit, title, studentId, clubName, inDate, description } =
+    postData;
   return (
     <div className={styles.post}>
       <div className={styles.container}>
         <div>
-          <div>안녕</div>
-          <div>친구야</div>
+          <div>홍보게시판</div>
+          <div>{title}</div>
           <div>
-            <div>내이름은</div>
+            <div>{name}</div>
             <div>
-              <div>너야</div>
-              <div>조회</div>
+              <div>{inDate}</div>
+              <div>조회 {hit}</div>
             </div>
           </div>
         </div>
         <hr />
-        <div></div>
+        <div dangerouslySetInnerHTML={{ __html: description }}></div>
       </div>
     </div>
   );

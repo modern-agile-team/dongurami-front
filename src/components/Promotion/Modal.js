@@ -52,7 +52,7 @@ const Modal = ({ setOpenModal, postId }) => {
     };
 
     getData();
-  });
+  }, []);
 
   return (
     <div className={styles.background}>
