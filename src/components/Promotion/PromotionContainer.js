@@ -11,7 +11,7 @@ import { getdata } from "./getdata";
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [value, setValue] = useState("");
+  const [postId, setPostId] = useState("");
   const [boarddata, setBoardData] = useState([]);
   const img =
     "https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg";
@@ -72,15 +72,16 @@ const PromotionContainer = () => {
         {boarddata.map((el) => (
           <Promotion
             key={el.no}
+            pId={el.no}
             date={el.inDate}
             clubName={el.clubName}
             img={img}
             setOpenModal={setOpenModal}
-            setValue={setValue}
+            setPostId={setPostId}
           />
         ))}
       </div>
-      {openModal && <Modal setOpenModal={setOpenModal} />}
+      {openModal && <Modal setOpenModal={setOpenModal} postId={postId} />}
     </>
   );
 };
