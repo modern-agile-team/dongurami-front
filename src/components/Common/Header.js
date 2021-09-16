@@ -24,9 +24,9 @@ function Header() {
   }, [menu]);
 
   // console.log(localStorage.jwt);
-  const token = localStorage.getItem("jwt");
+  // const token = localStorage.getItem("jwt");
 
-  console.log("토큰 :", token);
+  // console.log("토큰 :", token);
 
   return (
     <header>
