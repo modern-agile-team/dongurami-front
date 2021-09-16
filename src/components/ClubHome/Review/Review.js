@@ -6,6 +6,7 @@ import ReviewWrite from "./ReviewWrite";
 import ReviewMine from "./ReviewMine";
 import ReviewList from "./ReviewList";
 import Router from "next/router";
+import axios from "axios";
 
 const Review = () => {
   const [reviewInput, setReviewInput] = useState(""); // 후기 글
@@ -61,73 +62,82 @@ const Review = () => {
       }, 0) / reviewList.length;
 
   // 후기 + 별점 입력
-  const onReviewSubmit = () => {
-    reviewInput === ""
-      ? alert("빈 칸은 입력할 수 없습니다.")
-      : fetch("http://3.36.72.145:8080/api/club/review/1", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json; charset=utf-8",
-            "x-auth-token":
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
-          },
-          body: JSON.stringify({
-            description: reviewInput,
-            score: reviewRate,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => alert(data.msg));
-    reloadPage();
+  const onReviewSubmit = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+      },
+      data: {
+        description: reviewInput,
+        score: reviewRate,
+      },
+    };
+    await axios("http://3.36.72.145:8080/api/club/review/1", options)
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+
+    await reloadPage();
   };
 
   // 내 후기 삭제
-  const onReviewDelete = () => {
-    fetch(`http://3.36.72.145:8080/api/club/review/1/${reviewMine[0].no}`, {
+  const onReviewDelete = async () => {
+    const options = {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=utf-8",
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-    alert("후기가 삭제되었습니다.");
+    };
+    await axios(
+      `http://3.36.72.145:8080/api/club/review/1/${reviewMine[0].no}`,
+      options
+    )
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
     reloadPage();
   };
 
   // 내 후기 수정
-  const onReviewUpdate = () => {
-    fetch(`http://3.36.72.145:8080/api/club/review/1/${myReviewNum}`, {
+  const onReviewUpdate = async () => {
+    const options = {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=utf-8",
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
-      body: JSON.stringify({
+      body: {
         description: reviewInput,
         score: reviewRate,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => alert(data.msg));
-    reloadPage();
+      },
+    };
+    await axios(
+      `http://3.36.72.145:8080/api/club/review/1/${myReviewNum}`,
+      options
+    )
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+
+    await reloadPage();
   };
 
   // 후기 불러오기
   const getReviewData = async () => {
-    await fetch("http://3.36.72.145:8080/api/club/review/1", {
+    const options = {
       headers: {
         "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setReviewList(data.reviewList);
-      });
+    };
+    await axios("http://3.36.72.145:8080/api/club/review/1", options)
+      .then((res) => {
+        setReviewList(res.data.reviewList);
+      })
+      .catch((err) => console.log(err.response.data.msg));
   };
 
   useEffect(() => {
