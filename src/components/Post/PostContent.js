@@ -4,6 +4,11 @@ import { useCallback, useEffect, useState } from 'react';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
 import CommentContainer from '../Common/Comment/CommentContainer';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(import("react-quill"), {
+  ssr: false,
+});
 
 function PostContent({ category }) {
   const router = useRouter();
