@@ -4,7 +4,7 @@ import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 
 const Additional = ({
-  list,
+  questions,
   onRemove,
   onUpdate,
   isUpdate,
@@ -13,7 +13,7 @@ const Additional = ({
   return (
     <div className={styles.additional}>
       <ul>
-        {list.map((el, i) => {
+        {questions.map((el, i) => {
           return (
             <li id={i} key={i}>
               {isUpdate[i] ? (
@@ -22,7 +22,10 @@ const Additional = ({
                 <span>{el.description}</span>
               )}
               <HiPencil onClick={(e) => onUpdate(i, e)} />
-              <FaTrashAlt id={styles.remove} onClick={() => onRemove(i)} />
+              <FaTrashAlt
+                id={styles.remove}
+                onClick={() => onRemove(el.no, el)}
+              />
               <textarea onChange={onQuestionInputChange} />
             </li>
           );

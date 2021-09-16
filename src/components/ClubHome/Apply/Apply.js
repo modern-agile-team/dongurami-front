@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ApplyHeader from "./ApplyHeader";
 import styles from "../../../styles/Club/Home/Apply/Apply.module.scss";
 import ApplyQuestions from "./ApplyQuestions";
 import Additional from "./Additional";
 import { IoIosAddCircleOutline, IoIosCheckmark } from "react-icons/io";
-import Router from "next/router";
 import axios from "axios";
 
 const token = {
@@ -24,50 +23,66 @@ export const user = {
   department: "컴퓨터전자공학과",
 };
 
-export const list = [
-  {
-    question: "지원 동기",
-  },
-  {
-    question: "다룰 줄 아는 프로그래밍 언어는?",
-  },
-  {
-    question: "하고 싶은 프로젝트",
-  },
-];
-
 const Apply = () => {
+  const [userInfo, setUserInfo] = useState({
+    grade: "",
+    sex: "",
+    phoneNumber: "",
+  });
   const [newQuestion, setNewQuestion] = useState("");
   const [questions, setQuestions] = useState([]);
   const [isUpdate, setIsUpdate] = useState([]);
   const [resume, setResume] = useState([]);
-  const [grade, setGrade] = useState("");
-  const [sex, setSex] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [addQuestion, setAddQuestion] = useState([]);
 
-  const reloadPage = () => {
-    Router.push("/ClubHome");
-  };
+  const { grade, sex, phoneNumber } = userInfo;
+
+  const input = useRef();
 
   const iconSize = 40;
 
   // 질문 추가
-  const onQuestionAdd = () => {
-    const newList = [...questions, { question: newQuestion }];
-    const a = [...isUpdate, false];
-    setIsUpdate(a);
-    setQuestions(newList);
+  const onQuestionAdd = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbMV0sImlkIjoiMjAxNzA4MDUxIiwibmFtZSI6IiIsImVtYWlsIjoiYWxzdG5zcmw5OEBnbWFpbC5jb20iLCJwcm9maWxlUGF0aCI6bnVsbCwiaXNBZG1pbiI6MCwiaWF0IjoxNjMxNzEwMjczLCJleHAiOjE2MzE3OTY2NzMsImlzcyI6Indvb2FoYW4gYWdpbGUifQ.MkUGAY12I6epQ7YGO-BI_HjIJwei39-G6IXTjkH7zJ0",
+      },
+      data: {
+        description: newQuestion,
+      },
+    };
+    await axios("http://3.36.72.145:8080/api/club/application/1", options)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err.response.data));
+
+    // GET
+    await getApplyQuestions();
+
+    // input 비우기
+    input.current.value = "";
   };
 
   // 질문 제거
-  const onRemove = (i) => {
-    const b = questions.filter((el, index) => {
-      return i !== index;
-    });
-    const a = isUpdate.slice(1);
-    setIsUpdate(a);
-    setQuestions(b);
+  const onRemove = async (i, delQuestions) => {
+    console.log(delQuestions);
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbMV0sImlkIjoiMjAxNzA4MDUxIiwibmFtZSI6IiIsImVtYWlsIjoiYWxzdG5zcmw5OEBnbWFpbC5jb20iLCJwcm9maWxlUGF0aCI6bnVsbCwiaXNBZG1pbiI6MCwiaWF0IjoxNjMxNzEwMjczLCJleHAiOjE2MzE3OTY2NzMsImlzcyI6Indvb2FoYW4gYWdpbGUifQ.MkUGAY12I6epQ7YGO-BI_HjIJwei39-G6IXTjkH7zJ0",
+      },
+      data: {
+        description: newQuestion,
+      },
+    };
+    await axios(`http://3.36.72.145:8080/api/club/application/1/${i}`, options)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err.response.data));
+    await getApplyQuestions();
   };
 
   // 질문 업데이트
@@ -85,19 +100,11 @@ const Apply = () => {
     setNewQuestion(e.target.value);
   };
 
-  // 학년
-  const onGradeChange = (e) => {
-    setGrade(e.target.value);
-  };
-
-  // 성별
-  const onSexChange = (e) => {
-    setSex(e.target.value);
-  };
-
-  // 핸드폰 번호
-  const onPhoneNumberInput = (e) => {
-    setPhoneNumber(e.target.value);
+  // 유저 정보
+  const onUserInfoChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo({ ...userInfo, [name]: value });
+    console.log(userInfo);
   };
 
   // 지원서 제출
@@ -112,15 +119,14 @@ const Apply = () => {
       ...addQuestion,
     ];
     setResume(result);
-    reloadPage();
   };
 
   // 추가 질문 저장
   const onQuestionInputChange = (e) => {
     const index = e.target.parentNode.id;
-    const input = e.target.value;
+    const answerInput = e.target.value;
     const temp = [...addQuestion];
-    temp[index] = input;
+    temp[index] = answerInput;
     setAddQuestion(temp);
   };
 
@@ -149,17 +155,13 @@ const Apply = () => {
   return (
     <div className={styles.container}>
       <ApplyHeader />
-      <ApplyQuestions
-        onGradeChange={onGradeChange}
-        onSexChange={onSexChange}
-        onPhoneNumberInput={onPhoneNumberInput}
-      />
+      <ApplyQuestions onUserInfoChange={onUserInfoChange} />
       <Additional
         onQuestionInputChange={onQuestionInputChange}
         isUpdate={isUpdate}
         onUpdate={onUpdate}
         onRemove={onRemove}
-        list={questions}
+        questions={questions}
       />
       <div
         className={
@@ -167,7 +169,7 @@ const Apply = () => {
         }
       >
         <span>새로운 질문</span>
-        <input type="text" onChange={handleChange} />
+        <input ref={input} type="text" onChange={handleChange} />
         <IoIosAddCircleOutline onClick={onQuestionAdd} size={iconSize} />
       </div>
       <div className={styles.submit}>

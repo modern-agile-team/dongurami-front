@@ -79,7 +79,7 @@ const Review = () => {
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
 
-    await reloadPage();
+    reloadPage();
   };
 
   // 내 후기 삭제
@@ -110,7 +110,7 @@ const Review = () => {
         "x-auth-token":
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
       },
-      body: {
+      data: {
         description: reviewInput,
         score: reviewRate,
       },
@@ -122,7 +122,7 @@ const Review = () => {
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
 
-    await reloadPage();
+    reloadPage();
   };
 
   // 후기 불러오기
