@@ -4,7 +4,7 @@ import AddComment from './AddComment';
 import ReplyContainer from './ReplyContainer';
 import React, { useState } from 'react';
 
-function CommentContainer({ comments }) {
+function CommentContainer({ comments, postComment, putComment, deleteComment }) {
   const [addReplyIndex, setAddReplyIndex] = useState();
 
   return (
@@ -16,10 +16,10 @@ function CommentContainer({ comments }) {
           <React.Fragment key={comment.no}>
             {(comment.depth) ? (
               <ReplyContainer>
-                <Comment comment={comment} index={i} setAddReplyIndex={setAddReplyIndex} />
+                <Comment comment={comment} index={i} setAddReplyIndex={setAddReplyIndex} putComment={putComment} deleteComment={deleteComment} />
               </ReplyContainer>
             ) : (
-              <Comment comment={comment} index={i} setAddReplyIndex={setAddReplyIndex} />
+              <Comment comment={comment} index={i} setAddReplyIndex={setAddReplyIndex} putComment={putComment} deleteComment={deleteComment} />
             )}
             {(addReplyIndex === i) && (
               <ReplyContainer>
@@ -28,7 +28,7 @@ function CommentContainer({ comments }) {
             )}
           </React.Fragment>
         ))}
-        <AddComment />
+        <AddComment postComment={postComment} />
       </div>
     </>
   );
