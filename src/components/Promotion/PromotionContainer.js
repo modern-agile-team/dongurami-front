@@ -5,7 +5,7 @@ import TypeSearch from "./TypeSearch";
 import { BsPencil } from "react-icons/bs";
 import Modal from "./Modal";
 import Promotion from "./Promotion";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 import axios from "axios";
 import { getdata } from "./getdata";
 
@@ -62,7 +62,7 @@ const PromotionContainer = () => {
     <>
       <Header />
       <TypeSearch />
-      <Link href="/write" passHref>
+      <Link href={`/notice/write`} passHref>
         <button className={styles.writeBtn}>
           <BsPencil />
           글쓰기
