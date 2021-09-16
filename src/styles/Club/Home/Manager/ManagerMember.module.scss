@@ -1,11 +1,23 @@
 .member {
   width: 70vw;
   margin: 0 auto;
-  margin-top: 1vh;
+  margin-top: 2vh;
   display: flex;
   justify-content: space-between;
   div {
     text-align: center;
     width: 25%;
+  }
+  svg {
+    color: #f7e600;
+    margin-right: 10px;
+  }
+}
+
+#changeLeader {
+  color: white;
+  cursor: pointer;
+  &:hover {
+    color: black;
   }
 }

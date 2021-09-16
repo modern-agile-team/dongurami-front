@@ -46,7 +46,7 @@ export const members = [
 export const Members = () => {
   return (
     <div>
-      <MembersHeader />
+      <MembersHeader members={members.length} />
       <MembersPreface />
       {members.map((el, i) => {
         return (

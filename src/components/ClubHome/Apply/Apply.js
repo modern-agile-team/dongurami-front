@@ -4,6 +4,7 @@ import styles from "../../../styles/Club/Home/Apply/Apply.module.scss";
 import ApplyQuestions from "./ApplyQuestions";
 import Additional from "./Additional";
 import { IoIosAddCircleOutline, IoIosCheckmark } from "react-icons/io";
+import Router from "next/router";
 
 const token = {
   studentID: 201708051,
@@ -44,12 +45,19 @@ const Apply = () => {
   const [grade, setGrade] = useState("");
   const [sex, setSex] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [addQuestion, setAddQuestion] = useState([]);
+
+  const reloadPage = () => {
+    Router.push("/ClubHome");
+  };
 
   const iconSize = 40;
 
   // 질문 추가
   const onQuestionAdd = () => {
     const newList = [...questions, { question: newQuestion }];
+    const a = [...isUpdate, false];
+    setIsUpdate(a);
     setQuestions(newList);
   };
 
@@ -58,11 +66,15 @@ const Apply = () => {
     const b = questions.filter((el, index) => {
       return i !== index;
     });
+    const a = isUpdate.slice(1);
+    setIsUpdate(a);
     setQuestions(b);
   };
 
   // 질문 업데이트
-  const onUpdate = (i) => {
+  const onUpdate = (i, e) => {
+    console.log(e.target.parentNode);
+    console.log(isUpdate);
     const update = isUpdate.map((el, index) => {
       return i === index ? !el : el;
     });
@@ -98,10 +110,21 @@ const Apply = () => {
       grade,
       sex,
       phoneNumber,
+      ...addQuestion,
     ];
     setResume(result);
+    reloadPage();
   };
-  console.log(resume);
+
+  // 추가 질문 저장
+  const onQuestionInputChange = (e) => {
+    const index = e.target.parentNode.id;
+    const input = e.target.value;
+    const temp = [...addQuestion];
+    temp[index] = input;
+    setAddQuestion(temp);
+  };
+
   return (
     <div className={styles.container}>
       <ApplyHeader />
@@ -111,6 +134,7 @@ const Apply = () => {
         onPhoneNumberInput={onPhoneNumberInput}
       />
       <Additional
+        onQuestionInputChange={onQuestionInputChange}
         isUpdate={isUpdate}
         onUpdate={onUpdate}
         onRemove={onRemove}

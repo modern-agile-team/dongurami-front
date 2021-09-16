@@ -1,35 +1,25 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Manager/ApproveList.module.scss";
+import AnswerList from "./AnswerList";
+import QuestionList from "./QuestionList";
 
-const ApproveList = ({ answers, questions }) => {
+const ApproveList = ({ answers, questions, onApplyAccept, onApplyDelete }) => {
   return (
     <>
-      {answers.map((e) => {
+      {answers.map((e, i) => {
         return (
           <>
-            <div className={styles.kkk}>
-              <div id={styles.q}>
-                {questions.map((q, i) => {
-                  return (
-                    <div key={i}>
-                      <span>{q}</span>
-                    </div>
-                  );
-                })}
-              </div>
-              <div id={styles.a}>
-                {e.map((a, i) => {
-                  return (
-                    <div key={i}>
-                      <span>{a}</span>
-                    </div>
-                  );
-                })}
-              </div>
+            <div key={i} id={i} className={styles.kkk}>
+              <QuestionList questions={questions} />
+              <AnswerList answers={e} />
             </div>
-            <div className={styles.button}>
-              <button>승인</button>
-              <button>거절</button>
+            <div key={i + 100} className={styles.button}>
+              <button id={i} onClick={onApplyAccept}>
+                승인
+              </button>
+              <button id={i} onClick={onApplyDelete}>
+                거절
+              </button>
               <hr />
             </div>
           </>

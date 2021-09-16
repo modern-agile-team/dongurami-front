@@ -23,7 +23,11 @@ export const Login = () => {
         password: password,
       },
     })
-      .then((res) => console.log(res.data))
+      .then((res) => {
+        if (res.data.jwt) {
+          localStorage.setItem("jwt", res.data.jwt);
+        }
+      })
       .catch((err) => alert(err.response.data.msg));
   };
 
@@ -63,7 +67,7 @@ export const Login = () => {
             로그인
           </button>
           {/* </Link> */}
-          <Link href="signup" passHref>
+          <Link href="/signup" passHref>
             <button className={styles.signupBtn}>회원가입</button>
           </Link>
         </div>
