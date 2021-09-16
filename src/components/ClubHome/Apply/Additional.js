@@ -19,7 +19,7 @@ const Additional = ({
               {isUpdate[i] ? (
                 <input type="text" defaultValue={el.question} />
               ) : (
-                <span>{el.question}</span>
+                <span>{el.description}</span>
               )}
               <HiPencil onClick={(e) => onUpdate(i, e)} />
               <FaTrashAlt id={styles.remove} onClick={() => onRemove(i)} />

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ApplyHeader from "./ApplyHeader";
 import styles from "../../../styles/Club/Home/Apply/Apply.module.scss";
 import ApplyQuestions from "./ApplyQuestions";
 import Additional from "./Additional";
 import { IoIosAddCircleOutline, IoIosCheckmark } from "react-icons/io";
 import Router from "next/router";
+import axios from "axios";
 
 const token = {
   studentID: 201708051,
@@ -36,11 +37,9 @@ export const list = [
 ];
 
 const Apply = () => {
-  const updateState = new Array(list.length).fill(false);
-
   const [newQuestion, setNewQuestion] = useState("");
-  const [questions, setQuestions] = useState(list);
-  const [isUpdate, setIsUpdate] = useState(updateState);
+  const [questions, setQuestions] = useState([]);
+  const [isUpdate, setIsUpdate] = useState([]);
   const [resume, setResume] = useState([]);
   const [grade, setGrade] = useState("");
   const [sex, setSex] = useState("");
@@ -124,6 +123,28 @@ const Apply = () => {
     temp[index] = input;
     setAddQuestion(temp);
   };
+
+  // 지원서 불러오기
+  const getApplyQuestions = async () => {
+    const options = {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbMV0sImlkIjoiMjAxNzA4MDUxIiwibmFtZSI6IiIsImVtYWlsIjoiYWxzdG5zcmw5OEBnbWFpbC5jb20iLCJwcm9maWxlUGF0aCI6bnVsbCwiaXNBZG1pbiI6MCwiaWF0IjoxNjMxNzEwMjczLCJleHAiOjE2MzE3OTY2NzMsImlzcyI6Indvb2FoYW4gYWdpbGUifQ.MkUGAY12I6epQ7YGO-BI_HjIJwei39-G6IXTjkH7zJ0",
+      },
+    };
+    await axios
+      .get("http://3.36.72.145:8080/api/club/application/1", options)
+      .then((res) => {
+        const updateState = new Array(res.data.questions.length).fill(false);
+        setIsUpdate(updateState);
+        setQuestions(res.data.questions);
+      });
+  };
+
+  useEffect(() => {
+    getApplyQuestions();
+  }, []);
 
   return (
     <div className={styles.container}>
