@@ -49,6 +49,21 @@ function PostContent({ category }) {
     axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`)
       .then(() => updatePost());
   }
+  const postReplyComment = (description) => {
+    axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}`, {
+      id: 'test1', description
+    }).then(() => updatePost());
+  }
+  const putReplyComment = (description, no) => {
+    axios.put(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`, {
+      description
+    }).then(() => updatePost());
+  }
+  const deleteReplyComment = (no) => {
+    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`)
+      .then(() => updatePost());
+  }
+  
 
   if (!post) return null;
 
@@ -57,12 +72,16 @@ function PostContent({ category }) {
   return (
     <div className={styles.container}>
       <div>
-      <Link href={`/${category}`} passHref><a>{title}</a></Link>
-        <div>{post.board.title}</div>
+        <Link href={`/${category}`} passHref>
+          <a>{title}</a>
+        </Link>
+        <h1>{post.board.title}</h1>
         <div>
           <div>{post.board.name}</div>
           <div>
-            <Link href={`/${category}/${pid}/edit`} passHref><button>수정하기</button></Link>
+            <Link href={`/${category}/${pid}/edit`} passHref>
+              <button>수정하기</button>
+            </Link>
             <button onClick={onDelete}>삭제하기</button>
             <div>{post.board.inDate}</div>
             <div>조회 {post.board.hit}</div>
@@ -71,7 +90,15 @@ function PostContent({ category }) {
       </div>
       <hr />
       <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div>
-      <CommentContainer comments={post.comments} postComment={postComment} putComment={putComment} deleteComment={deleteComment} />
+      <CommentContainer
+        comments={post.comments}
+        postComment={postComment}
+        putComment={putComment}
+        deleteComment={deleteComment}
+        postReplyComment={postReplyComment}
+        putReplyComment={putReplyComment}
+        deleteReplyComment={deleteReplyComment}
+      />
     </div>
   );
 }
