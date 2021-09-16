@@ -4,6 +4,11 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
 import CommentContainer from '../Common/Comment/CommentContainer';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(import("react-quill"), {
+  ssr: false,
+});
 
 function PostContent({ category }) {
   const router = useRouter();
@@ -38,7 +43,7 @@ function PostContent({ category }) {
     <div className={styles.container}>
       <div>
       <Link href={`/${category}`} passHref><a>{title}</a></Link>
-        <div>{post.board.title}</div>
+        <h1>{post.board.title}</h1>
         <div>
           <div>{post.board.name}</div>
           <div>
@@ -50,7 +55,8 @@ function PostContent({ category }) {
         </div>
       </div>
       <hr />
-      <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div>
+      {/* <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div> */}
+      <ReactQuill value={post.board.description} readOnly={true} theme={'bubble'} />
       <CommentContainer comments={post.comments} />
     </div>
   );

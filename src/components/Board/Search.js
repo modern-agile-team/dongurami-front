@@ -1,4 +1,5 @@
 import styles from "../../styles/Board/Board/Search.module.scss";
+import { BsSearch } from 'react-icons/bs';
 
 function NoticeSearch() {
   return (
@@ -9,7 +10,7 @@ function NoticeSearch() {
         <option>댓글</option>
       </select>
       <input />
-      <button>?</button>
+      <button><BsSearch /></button>
     </div>
   );
 }
