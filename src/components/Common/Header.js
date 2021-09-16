@@ -62,9 +62,9 @@ function Header() {
                 </li>
                 <li
                   className={styles.free}
-                  id={nowPath === "/freeboard" ? styles.now : 0}
+                  id={nowPath === "/free" ? styles.now : 0}
                   onClick={() => {
-                    router.push("/freeboard");
+                    router.push("/free");
                   }}
                 >
                   자유게시판
@@ -84,9 +84,9 @@ function Header() {
                   </li>
                   <li
                     className={styles.free}
-                    id={nowPath === "/freeboard" ? styles.now : 0}
+                    id={nowPath === "/free" ? styles.now : 0}
                     onClick={() => {
-                      router.push("/freeboard");
+                      router.push("/free");
                     }}
                   >
                     자유게시판
