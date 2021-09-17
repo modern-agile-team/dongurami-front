@@ -27,7 +27,7 @@
     margin-left: 7%;
     cursor: pointer;
   }
-  .icon {
+  & > div:nth-of-type(1) {
     display: none;
   }
   .topMenu {
@@ -117,32 +117,31 @@
     flex-direction: column;
     img {
       position: absolute;
-      left: -15px;
+      left: -5px;
     }
-    .icon {
+    & > div:nth-of-type(1) {
       display: inline;
-      font-size: 28px;
-      position: absolute;
+      position: absolute !important;
       right: 35px;
-      cursor: pointer;
     }
     .topMenu {
-      width: 40vw;
+      width: 60%;
       margin: 0%;
-      margin-left: 60%;
+      margin-left: 108%;
     }
     .menus {
       font-size: 2.2vw;
       width: 100%;
+      height: 100%;
       justify-content: flex-start;
       flex-direction: column;
-      padding: 0.5rem;
       padding-bottom: 0%;
       margin: 0%;
-      margin-top: 50%;
+      margin-top: 150%;
+      margin-bottom: 60%;
       li {
-        width: 90%;
-        padding: 1rem;
+        width: 55%;
+        padding: 1.5rem;
         cursor: pointer;
         border-bottom: 0.1px solid #dddbdb;
         &:hover {
@@ -155,39 +154,61 @@
         list-style: none;
         width: 100%;
         padding: 0%;
-        margin-top: 60%;
-        margin-left: -11%;
-        .notice {
-          border-top: 0.1px solid #dddbdb;
-        }
+        margin-top: 100%;
+        text-align: center;
       }
       .dropdown {
         display: none;
       }
+      .clublist {
+        margin-left: -22%;
+        text-align: center;
+      }
+      .promotion {
+        margin-left: -22%;
+        text-align: center;
+      }
+    }
+    .users {
+      width: 100%;
+      height: 100%;
+      margin-top: 90%;
+      margin-left: -11%;
     }
     .user {
-      font-size: 2.2vw;
       width: 100%;
-      flex-direction: column;
-      justify-content: flex-end;
-      margin-bottom: 0%;
-      padding-right: 6%;
-      border-left: 0.1px solid #dddbdb;
-      border-bottom: 0.1px solid #dddbdb;
+      height: 10%;
+      margin-top: 150%;
+      margin-left: -70%;
+      font-size: 2.2vw;
       .login {
-        width: 100%;
-        text-align: right;
+        margin-right: 2%;
       }
       .signUp {
-        width: 100%;
-        text-align: right;
-        background-color: #f8f8f8;
-        margin-bottom: 10%;
+        width: 12vw;
+      }
+    }
+    .tokenIcons {
+      width: 100%;
+      height: 100%;
+      margin-top: 90%;
+      margin-left: -11%;
+      .bell {
+        width: 15%;
+        height: 10%;
+        margin-top: 150%;
+        margin-left: -64%;
+      }
+      .Profile {
+        width: 15%;
+        height: 10%;
+        margin-top: 150%;
+        margin-left: -15%;
       }
     }
     #show {
       display: flex;
-      background-color: #f8f8f8;
+      background-color: #fafafaf5;
     }
     #hide {
       display: none;
@@ -198,14 +219,21 @@
 @media screen and (max-width: 480px) {
   .myHeader {
     width: 100%;
-    .topMenu {
-      width: 55vw;
-      margin: 0%;
-      margin-left: 60%;
+    img {
+      padding-left: 2%;
     }
-    .user {
-      width: 100%;
-      margin-right: 6vw;
+    .topMenu {
+      width: 90vw;
+      .user {
+        margin-top: 150%;
+        margin-left: -62%;
+      }
+      .signUp {
+        width: 15vw;
+      }
+      .tokenIcons {
+        margin-top: 92%;
+      }
     }
   }
 }

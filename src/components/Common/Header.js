@@ -1,17 +1,33 @@
 import styles from "../../styles/Common/Header.module.scss";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import { RiMenuLine } from "react-icons/ri";
+import { useState, useEffect, useRef } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { BiBell } from "react-icons/bi";
+import Hamburger from "hamburger-react";
 
 function Header() {
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState("");
   const [nowPath, setNowPath] = useState("");
-  const toggle = () => setOpen(!open);
 
   const router = useRouter();
+  const closeRef = useRef(null);
+
+  //영역밖 클릭 시 사이드바 제거
+  const closeSidebar = (ref) => {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setOpen(false);
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
+  closeSidebar(closeRef);
 
   //현재경로 표시
   useEffect(() => {
@@ -40,14 +56,14 @@ function Header() {
   return (
     <header>
       <nav>
-        <div className={styles.myHeader}>
+        <div className={styles.myHeader} ref={closeRef}>
           <img
             onClick={() => {
               router.push("/");
             }}
             src="https://lovelyoch.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F439c0672-c274-4f90-b273-9928548c4081%2Flogo.jpg?table=block&id=99568f38-6c02-4bbc-b04b-1b7152648016&spaceId=69eb8ea8-3d04-47ec-8bb7-004e8aa31f9e&width=7460&userId=&cache=v2"
           />
-          <RiMenuLine className={styles.icon} onClick={() => toggle()} />
+          <Hamburger rounded toggled={open} toggle={setOpen} size={25} />
           <div className={styles.topMenu}>
             <ul className={styles.menus} id={open ? styles.show : styles.hide}>
               <ul className={styles.mobile}>
@@ -94,6 +110,7 @@ function Header() {
                 </ul>
               </li>
               <li
+                className={styles.clublist}
                 id={nowPath === "/clublists" ? styles.now : 0}
                 onClick={() => {
                   router.push("/clublists");
@@ -102,6 +119,7 @@ function Header() {
                 동아리 목록
               </li>
               <li
+                className={styles.promotion}
                 id={nowPath === "/promotion" ? styles.now : 0}
                 onClick={() => {
                   router.push("/promotion");
@@ -123,11 +141,11 @@ function Header() {
                 />
               </div>
             ) : (
-              <div className={styles.users}>
-                <ul
-                  className={styles.user}
-                  id={open ? styles.show : styles.hide}
-                >
+              <div
+                className={styles.users}
+                id={open ? styles.show : styles.hide}
+              >
+                <ul className={styles.user}>
                   <li
                     className={styles.login}
                     id={nowPath === "/LoginPage" ? styles.now : 0}

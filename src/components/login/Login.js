@@ -15,6 +15,12 @@ export const Login = () => {
 
   const router = useRouter();
 
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSubmit();
+    }
+  };
+
   const onSubmit = () => {
     axios("http://3.36.72.145:8080/api/login", {
       method: "POST",
@@ -55,6 +61,7 @@ export const Login = () => {
             onChange={onChange}
             name="password"
             value={password}
+            onKeyPress={onKeyPress}
           />
         </div>
         <div className={styles.find}>
