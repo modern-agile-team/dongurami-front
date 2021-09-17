@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
 import CommentContainer from '../Common/Comment/CommentContainer';
 import Link from 'next/link';
@@ -15,15 +15,20 @@ function PostContent({ category }) {
   const [pid, setPid] = useState();
   const [post, setPost] = useState();
 
+  const updatePost = useCallback(() => {
+    axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
+      .then((response) => setPost(response.data));
+  }, [category, pid]);
+
+
   useEffect(() => {
     if (!router.isReady) return;
     setPid(router.query.pid);
   }, [router]);
   useEffect(() => {
     if (!pid) return;
-    axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
-      .then((response) => setPost(response.data));
-  }, [category, pid]);
+    updatePost();
+  }, [pid, updatePost]);
 
   const title = (
     (category === 'notice') ? '공지 게시판' :
@@ -35,6 +40,36 @@ function PostContent({ category }) {
       .then(() => router.push(`/${category}`));
   };
 
+  const postComment = (description) => {
+    axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}`, {
+      id: 'test1', description
+    }).then(() => updatePost());
+  }
+  const putComment = (description, no) => {
+    axios.put(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`, {
+      description
+    }).then(() => updatePost());
+  }
+  const deleteComment = (no) => {
+    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`)
+      .then(() => updatePost());
+  }
+  const postReplyComment = (description) => {
+    axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}`, {
+      id: 'test1', description
+    }).then(() => updatePost());
+  }
+  const putReplyComment = (description, no) => {
+    axios.put(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`, {
+      description
+    }).then(() => updatePost());
+  }
+  const deleteReplyComment = (no) => {
+    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`)
+      .then(() => updatePost());
+  }
+  
+
   if (!post) return null;
 
   console.log(post);
@@ -42,12 +77,16 @@ function PostContent({ category }) {
   return (
     <div className={styles.container}>
       <div>
-      <Link href={`/${category}`} passHref><a>{title}</a></Link>
+        <Link href={`/${category}`} passHref>
+          <a>{title}</a>
+        </Link>
         <h1>{post.board.title}</h1>
         <div>
           <div>{post.board.name}</div>
           <div>
-            <Link href={`/${category}/${pid}/edit`} passHref><button>수정하기</button></Link>
+            <Link href={`/${category}/${pid}/edit`} passHref>
+              <button>수정하기</button>
+            </Link>
             <button onClick={onDelete}>삭제하기</button>
             <div>{post.board.inDate}</div>
             <div>조회 {post.board.hit}</div>
@@ -55,9 +94,16 @@ function PostContent({ category }) {
         </div>
       </div>
       <hr />
-      {/* <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div> */}
-      <ReactQuill value={post.board.description} readOnly={true} theme={'bubble'} />
-      <CommentContainer comments={post.comments} />
+      <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div>
+      <CommentContainer
+        comments={post.comments}
+        postComment={postComment}
+        putComment={putComment}
+        deleteComment={deleteComment}
+        postReplyComment={postReplyComment}
+        putReplyComment={putReplyComment}
+        deleteReplyComment={deleteReplyComment}
+      />
     </div>
   );
 }

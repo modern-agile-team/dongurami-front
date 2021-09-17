@@ -8,31 +8,6 @@
   margin-bottom: 1em;
 }
 
-.add {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  input {
-    margin: 1em 0;
-  }
-}
-
-.add,
-.submit {
-  svg {
-    &:hover {
-      color: #3fcdb8;
-      cursor: pointer;
-    }
-  }
-  margin: 0 auto;
-  margin-bottom: 1em;
-}
-
-.none {
-  display: none;
-}
-
 @media (max-width: 1024px) {
   .container {
     width: 70%;

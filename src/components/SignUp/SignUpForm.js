@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "../../styles/User/SignUp/SignUpForm.module.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 function SignUpForm() {
   const [id, setId] = useState("");
@@ -94,12 +95,22 @@ function SignUpForm() {
     setMajor(majorCategory.find((el) => el.value === majorNum)?.label);
   };
 
+  const FeedbackMessage = () => {
+    return (
+      <div className={styles.feedback}>
+        &#8251;&#32;자신의 학과가 맞는지 확인해 주세요.
+      </div>
+    );
+  };
+
   const checkEmail = (e) => {
     const regExp =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     let result = regExp.test(e.target.value);
     setEmailCheck(result);
   };
+
+  const router = useRouter();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -137,7 +148,14 @@ function SignUpForm() {
           major,
         },
       })
-        .then((res) => alert(res.data.msg))
+        .then((res) => {
+          if (res.data.success === true) {
+            alert(res.data.msg);
+            router.push("/LoginPage");
+          } else {
+            alert(res.data.msg);
+          }
+        })
         .catch((err) => alert(err.response.data.msg));
     }
   };
@@ -146,8 +164,9 @@ function SignUpForm() {
     <form className={styles.form}>
       <h1>회원가입</h1>
       <input
+        className={styles.inputNum}
         type="number"
-        placeholder="학번"
+        placeholder="학번&#32;&#40;아이디로 사용됩니다.&#41;"
         onChange={onChange}
         name="id"
         value={id}
@@ -172,6 +191,7 @@ function SignUpForm() {
           </option>
         ))}
       </select>
+      {major === undefined || majorNum === "" ? "" : FeedbackMessage()}
       <input
         type="email"
         placeholder="이메일"

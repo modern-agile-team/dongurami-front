@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../../styles/Club/Home/Apply/ApplyQuestions.module.scss";
 import { user } from "./Apply";
 
-const ApplyQuestions = ({ onGradeChange, onSexChange, onPhoneNumberInput }) => {
+const ApplyQuestions = ({ onUserInfoChange }) => {
   return (
     <div className={styles.questions}>
       <ul>
@@ -21,7 +21,7 @@ const ApplyQuestions = ({ onGradeChange, onSexChange, onPhoneNumberInput }) => {
         <li>
           <span>학년</span>
           <br />
-          <select name="학년" id="grade" onChange={onGradeChange}>
+          <select name="grade" id="grade" onChange={onUserInfoChange}>
             <option value="선택 안함">선택</option>
             <option value="1학년">1학년</option>
             <option value="2학년">2학년</option>
@@ -31,7 +31,7 @@ const ApplyQuestions = ({ onGradeChange, onSexChange, onPhoneNumberInput }) => {
         <li>
           <span>성별</span>
           <br />
-          <select name="성별" id="sex" onChange={onSexChange}>
+          <select name="sex" id="sex" onChange={onUserInfoChange}>
             <option value="선택 안함">선택</option>
             <option value="남자">남자</option>
             <option value="여자">여자</option>
@@ -41,10 +41,11 @@ const ApplyQuestions = ({ onGradeChange, onSexChange, onPhoneNumberInput }) => {
           <span>휴대전화</span>
           <br />
           <input
+            name="phoneNumber"
             type="text"
             placeholder="전화번호 ( - 제외 )"
             id="phone"
-            onChange={onPhoneNumberInput}
+            onChange={onUserInfoChange}
           />
         </li>
       </ul>

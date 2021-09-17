@@ -51,125 +51,35 @@
     }
   }
 
-  .post {
+  .container {
     width: 40vw;
-    height: 90vh;
+    height: 80vh;
     right: 0;
-    border: solid black;
     background: white;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-
-    article {
-      margin-top: 5%;
-      margin-left: 20%;
-      width: 100%;
-
-      P {
-        color: blue;
-      }
-      hr {
-        width: 100%;
-      }
+    margin: 0 auto;
+    border: 2px solid #90e2d6;
+    padding: 1rem 2rem;
+    @media screen and (max-width: 768px) {
+      width: 80%;
     }
-    .commentTittle {
-      margin-left: 20%;
-      width: 100%;
-    }
-    .writeComment {
-      width: 90%;
-      margin-left: 10%;
+    & > div:nth-child(1) {
       display: flex;
       flex-direction: column;
-      .writer {
+      gap: 1rem;
+      & > div:nth-of-type(2) {
+        font-size: 1.3rem;
+      }
+      & > div:nth-child(3) {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        position: relative;
-        margin-left: 50px;
-        svg {
-          position: relative;
-
-          color: black;
-        }
-        span {
-          flex: 1;
-          position: relative;
-          font-size: 13px;
-          font-weight: bold;
-        }
-        button {
-          font-family: "twayair";
-          padding: 9px;
-          width: 10%;
-          background: #c2f2dc;
-          border: none;
-          border-radius: 10px;
-
-          cursor: pointer;
-
-          &:hover {
-            background: #3fcdb8;
-          }
-        }
-      }
-
-      textarea {
-        margin-top: 3%;
-        margin-left: 8%;
-        width: 80%;
-        border-radius: 13px;
-        border: solid;
-        outline: none;
-        padding: 10px;
-        border-color: #3fcdb8;
-      }
-      hr {
-        width: 100%;
       }
     }
-    .commentContainer {
-      width: 90%;
-      margin-left: 1%;
-      .writer {
-        left: 14%;
-        position: relative;
-        display: flex;
-        align-items: center;
-
-        svg {
-          position: relative;
-          color: black;
-        }
-        span {
-          font-size: 13px;
-          font-weight: bold;
-        }
-      }
-      .comment {
-        position: relative;
-        top: 10%;
-        left: 19%;
-        font-size: 11px;
-        font-weight: bold;
-
-        .commentInfo {
-          margin-top: 9px;
-          font-size: 9px;
-          font-weight: bold;
-
-          span {
-            margin-right: 10px;
-          }
-        }
-      }
-      hr {
-        width: 100%;
-        margin-top: 5%;
-        margin-left: 30px;
-      }
+    & > hr {
+      border: 0.5px solid #90e2d6;
+    }
+    & > div:nth-of-type(2) {
+      margin: 2rem;
     }
   }
 }
