@@ -14,6 +14,58 @@ const Review = () => {
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
 
+  let jwtTocken = "";
+
+  let preLoad = 0;
+  let scrollLoad = 4;
+
+  if (typeof window !== "undefined") {
+    jwtTocken = localStorage.getItem("jwt");
+  }
+
+  // 무한 스크롤
+  const infiniteScroll = () => {
+    const scrollHeight = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    );
+    const scrollTop = Math.max(
+      document.documentElement.scrollTop,
+      document.body.scrollTop
+    );
+    const clientHeight = document.documentElement.clientHeight;
+
+    if (scrollTop + clientHeight >= scrollHeight) {
+      preLoad = scrollLoad;
+      scrollLoad += scrollLoad;
+      getReviewData();
+    }
+  };
+
+  // 별점 평균
+  const reviewAvg =
+    reviewList
+      .map((el) => el.score)
+      .reduce((sum, cur) => {
+        return sum + cur;
+      }, 0) / reviewList.length;
+
+  // 후기 불러오기
+  const getReviewData = async () => {
+    const options = {
+      headers: {
+        "x-auth-token": jwtTocken,
+      },
+    };
+    await axios("http://3.36.72.145:8080/api/club/review/1", options)
+      .then((res) => {
+        const result = res.data.reviewList.slice(preLoad, scrollLoad);
+        const extraData = reviewList.concat(result);
+        setReviewList((prev) => prev.concat(extraData));
+      })
+      .catch((err) => console.log(err.response.data.msg));
+  };
+
   // 버튼 클릭 시 페이지 리로딩
   const reloadPage = () => {
     Router.push("/ClubHome");
@@ -53,22 +105,13 @@ const Review = () => {
     setReviewInput(e.target.value);
   };
 
-  // 별점 평균
-  const reviewAvg =
-    reviewList
-      .map((el) => el.score)
-      .reduce((sum, cur) => {
-        return sum + cur;
-      }, 0) / reviewList.length;
-
   // 후기 + 별점 입력
   const onReviewSubmit = async () => {
     const options = {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbMV0sImlkIjoiMjAxNzA4MDUxIiwibmFtZSI6IiIsImVtYWlsIjoiYWxzdG5zcmw5OEBnbWFpbC5jb20iLCJwcm9maWxlUGF0aCI6bnVsbCwiaXNBZG1pbiI6MCwiaWF0IjoxNjMxNzEwMjczLCJleHAiOjE2MzE3OTY2NzMsImlzcyI6Indvb2FoYW4gYWdpbGUifQ.MkUGAY12I6epQ7YGO-BI_HjIJwei39-G6IXTjkH7zJ0",
+        "x-auth-token": jwtTocken,
       },
       data: {
         description: reviewInput,
@@ -88,8 +131,7 @@ const Review = () => {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+        "x-auth-token": jwtTocken,
       },
     };
     await axios(
@@ -107,8 +149,7 @@ const Review = () => {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+        "x-auth-token": jwtTocken,
       },
       data: {
         description: reviewInput,
@@ -125,23 +166,9 @@ const Review = () => {
     reloadPage();
   };
 
-  // 후기 불러오기
-  const getReviewData = async () => {
-    const options = {
-      headers: {
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
-      },
-    };
-    await axios("http://3.36.72.145:8080/api/club/review/1", options)
-      .then((res) => {
-        setReviewList(res.data.reviewList);
-      })
-      .catch((err) => console.log(err.response.data.msg));
-  };
-
   useEffect(() => {
     getReviewData();
+    window.addEventListener("scroll", infiniteScroll);
   }, []);
 
   return (
@@ -175,7 +202,6 @@ const Review = () => {
             rate={el.score}
             desc={el.description}
             date={el.inDate.substring(0, 10)}
-            no={i + 1}
           />
         );
       })}
