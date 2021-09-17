@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../../styles/Club/Home/Review/ReviewList.module.scss";
 import { AiFillStar } from "react-icons/ai";
 
-const ReviewList = ({ rate, desc, date, no }) => {
+const ReviewList = ({ rate, desc, date }) => {
   const stars = new Array(rate).fill(rate);
 
   return (
@@ -14,7 +14,7 @@ const ReviewList = ({ rate, desc, date, no }) => {
             alt="우아한 애자일"
           />
           <div id={styles.date}>
-            <span>우아한 애자일 {no}</span>
+            <span>우아한 애자일 </span>
             <p>{date}</p>
           </div>
         </div>
