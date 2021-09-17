@@ -15,30 +15,20 @@ function PostContent({ category }) {
   const [pid, setPid] = useState();
   const [post, setPost] = useState();
 
-  const updatePost = useCallback(() => {
-    axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
-      .then((response) => setPost(response.data));
-  }, [category, pid]);
-
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    setPid(router.query.pid);
-  }, [router]);
-  useEffect(() => {
-    if (!pid) return;
-    updatePost();
-  }, [pid, updatePost]);
-
   const title = (
     (category === 'notice') ? '공지 게시판' :
     (category === 'free') ? '자유 게시판' :
     undefined
   );
-  const onDelete = () => {
+
+  const updatePost = useCallback(() => {
+    axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
+      .then((response) => setPost(response.data));
+  }, [category, pid]);
+  const deletePost = useCallback(() => {
     axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
       .then(() => router.push(`/${category}`));
-  };
+  }, [category, pid, router]);
 
   const postComment = (description) => {
     axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}`, {
@@ -68,7 +58,16 @@ function PostContent({ category }) {
     axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`)
       .then(() => updatePost());
   }
-  
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    setPid(router.query.pid);
+  }, [router]);
+  useEffect(() => {
+    if (!pid) return;
+    updatePost();
+  }, [pid, updatePost]);
+
 
   if (!post) return null;
 
@@ -87,14 +86,14 @@ function PostContent({ category }) {
             <Link href={`/${category}/${pid}/edit`} passHref>
               <button>수정하기</button>
             </Link>
-            <button onClick={onDelete}>삭제하기</button>
+            <button onClick={deletePost}>삭제하기</button>
             <div>{post.board.inDate}</div>
             <div>조회 {post.board.hit}</div>
           </div>
         </div>
       </div>
       <hr />
-      <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div>
+      <ReactQuill value={post.board.description} theme="bubble" readOnly />
       <CommentContainer
         comments={post.comments}
         postComment={postComment}

@@ -69,7 +69,7 @@ function Notice({ category }) {
         </div>
         <Table posts={posts} page={page} category={category} />
         <Pagination posts={posts} page={page} setPage={setPageToUrl} />
-        <Search />
+        <Search category={category} />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ function search() {
   return (
     <>
       <Header />
-      <Board category="notice" baseAPI="http://3.36.72.145:8080/api/board/wholeNotice" />
+      <Board category="free" baseAPI="http://3.36.72.145:8080/api/board/wholeFree" />
       <Footer/>
     </>
   );
