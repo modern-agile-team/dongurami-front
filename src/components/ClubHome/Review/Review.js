@@ -16,31 +16,9 @@ const Review = () => {
 
   let jwtTocken = "";
 
-  let preLoad = 0;
-  let scrollLoad = 4;
-
   if (typeof window !== "undefined") {
     jwtTocken = localStorage.getItem("jwt");
   }
-
-  // 무한 스크롤
-  const infiniteScroll = () => {
-    const scrollHeight = Math.max(
-      document.documentElement.scrollHeight,
-      document.body.scrollHeight
-    );
-    const scrollTop = Math.max(
-      document.documentElement.scrollTop,
-      document.body.scrollTop
-    );
-    const clientHeight = document.documentElement.clientHeight;
-
-    if (scrollTop + clientHeight >= scrollHeight) {
-      preLoad = scrollLoad;
-      scrollLoad += scrollLoad;
-      getReviewData();
-    }
-  };
 
   // 별점 평균
   const reviewAvg =
@@ -59,9 +37,7 @@ const Review = () => {
     };
     await axios("http://3.36.72.145:8080/api/club/review/1", options)
       .then((res) => {
-        const result = res.data.reviewList.slice(preLoad, scrollLoad);
-        const extraData = reviewList.concat(result);
-        setReviewList((prev) => prev.concat(extraData));
+        setReviewList(res.data.reviewList);
       })
       .catch((err) => console.log(err.response.data.msg));
   };
@@ -166,9 +142,21 @@ const Review = () => {
     reloadPage();
   };
 
+  // 필터링
+  const onFilterChange = (e) => {
+    const filter = e.target.value;
+    const dateFilter = reviewList.slice(0).sort((a, b) => {
+      return a.no - b.no;
+    });
+    const starFilter = reviewList.slice(0).sort((a, b) => {
+      return b.score - a.score;
+    });
+
+    filter === "1" ? setReviewList(dateFilter) : setReviewList(starFilter);
+  };
+
   useEffect(() => {
     getReviewData();
-    window.addEventListener("scroll", infiniteScroll);
   }, []);
 
   return (
@@ -183,7 +171,7 @@ const Review = () => {
         onReviewInput={onReviewInput}
         onReviewSubmit={onReviewSubmit}
       />
-      <ReviewFilter />
+      <ReviewFilter onFilterChange={onFilterChange} />
       {reviewMine.length ? (
         <ReviewMine
           onReviewDelete={onReviewDelete}
