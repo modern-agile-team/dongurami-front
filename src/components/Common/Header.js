@@ -14,7 +14,7 @@ function Header() {
   const closeRef = useRef(null);
 
   //영역밖 클릭 시 사이드바 제거
-  const closeSidebar = (ref) => {
+  const CloseSidebar = (ref) => {
     useEffect(() => {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
@@ -27,7 +27,7 @@ function Header() {
       };
     }, [ref]);
   };
-  closeSidebar(closeRef);
+  CloseSidebar(closeRef);
 
   //현재경로 표시
   useEffect(() => {
