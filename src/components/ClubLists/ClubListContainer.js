@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Common/Header";
-import TypeSearch from "../Promotion/TypeSearch";
+import TypeSearch from "./TypeSearch";
 import styles from "../../styles/Club/Lists/ClubLists.module.scss";
 import ClubList from "./ClubList";
 import axios from "axios";
