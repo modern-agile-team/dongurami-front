@@ -2,8 +2,7 @@ import React from "react";
 import styles from "../../styles/Board/Promotion/Post.module.scss";
 
 const Post = ({ postData }) => {
-  const { name, hit, title, studentId, clubName, inDate, description } =
-    postData;
+  const { name, hit, title, inDate, description } = postData;
   return (
     <div className={styles.post}>
       <div className={styles.container}>
