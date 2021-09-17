@@ -51,6 +51,17 @@ const PromotionContainer = () => {
     }
   };
 
+  const onCategorySearch = async (item) => {
+    item = "";
+    try {
+      await axios
+        .get(`http://3.36.72.145:8080/api/board/promotion/${item}/inDate/desc`)
+        .then((res) => setBoardData(res.data.boards));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
     getData();
     console.log(getdata[0].image);
