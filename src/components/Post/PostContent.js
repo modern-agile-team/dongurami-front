@@ -19,6 +19,10 @@ function PostContent({ category }) {
     axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
       .then((response) => setPost(response.data));
   }, [category, pid]);
+  const deletePost = () => {
+    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
+      .then(() => router.push(`/${category}`));
+  };
 
 
   useEffect(() => {
@@ -35,10 +39,6 @@ function PostContent({ category }) {
     (category === 'free') ? '자유 게시판' :
     undefined
   );
-  const onDelete = () => {
-    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
-      .then(() => router.push(`/${category}`));
-  };
 
   const postComment = (description) => {
     axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}`, {
@@ -87,7 +87,7 @@ function PostContent({ category }) {
             <Link href={`/${category}/${pid}/edit`} passHref>
               <button>수정하기</button>
             </Link>
-            <button onClick={onDelete}>삭제하기</button>
+            <button onClick={deletePost}>삭제하기</button>
             <div>{post.board.inDate}</div>
             <div>조회 {post.board.hit}</div>
           </div>
