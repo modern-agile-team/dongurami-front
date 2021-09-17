@@ -10,8 +10,23 @@
   align-items: center;
   & > div {
     background-color: white;
-    width: 80%;
+    width: 50%;
     height: 60%;
+    padding: 2rem;
+  }
+  & > button {
+    position: fixed;
+    top: 3rem;
+    right: 3rem;
+    background: none;
+    border: none;
+    transform: scale(2);
+    color: white;
+    padding: 0;
+    cursor: pointer;
+    &:hover {
+      color: black;
+    }
   }
 }
 
