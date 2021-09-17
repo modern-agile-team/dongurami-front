@@ -34,9 +34,9 @@
 
 .comment .action-button {
   border: none;
-  background: white;
+  background: inherit;
   cursor: pointer;
   &:hover {
-    filter: brightness(90%);
+    background-color: lightgray;
   }
 }

@@ -44,18 +44,18 @@ function PostContent({ category }) {
     axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`)
       .then(() => updatePost());
   }
-  const postReplyComment = (description) => {
-    axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}`, {
+  const postReplyComment = (description, parentCommentID) => {
+    axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}/${parentCommentID}`, {
       id: 'test1', description
     }).then(() => updatePost());
   }
-  const putReplyComment = (description, no) => {
-    axios.put(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`, {
+  const putReplyComment = (description, no, parentCommentID) => {
+    axios.put(`http://3.36.72.145:8080/api/board/${category}/${pid}/${parentCommentID}/${no}`, {
       description
     }).then(() => updatePost());
   }
-  const deleteReplyComment = (no) => {
-    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`)
+  const deleteReplyComment = (no, parentCommentID) => {
+    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${parentCommentID}/${no}`)
       .then(() => updatePost());
   }
 
