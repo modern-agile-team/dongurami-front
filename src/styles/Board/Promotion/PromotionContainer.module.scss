@@ -31,10 +31,12 @@
 }
 .section {
   padding: 20px;
-  margin-left: 5%;
+  margin-left: 15%;
   margin-top: 5em;
   -moz-column-width: 18em;
   -webkit-column-width: 21em;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 1300px) {
