@@ -4,7 +4,7 @@ import axios from "axios";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 
-const ScheduleModify = ({ color, title, period, no, setPop, pop }) => {
+const ScheduleModify = ({ token, color, title, period, no, setPop, pop }) => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [colorCode, setColorCode] = useState();
@@ -24,15 +24,13 @@ const ScheduleModify = ({ color, title, period, no, setPop, pop }) => {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+        "x-auth-token": token,
       },
       data: {
         colorCode: colorCode,
         title: newTitle,
         startDate: startDate,
         endDate: endDate,
-        period: 3,
       },
     })
       .then((res) => console.log(res))

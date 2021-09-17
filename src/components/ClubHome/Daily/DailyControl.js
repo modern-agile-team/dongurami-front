@@ -2,11 +2,10 @@ import styles from "../../../styles/Club/Home/Schedule/DailyControl.module.scss"
 import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
-import Router from "next/router";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { useEffect } from "react";
 
 const DailyControl = ({
+  token,
   setTitle,
   setPeriod,
   setNo,
@@ -17,10 +16,13 @@ const DailyControl = ({
   setColor,
   getInfo,
 }) => {
-  const moveCal = () => {
-    Router.push("/ClubHome");
+  const onClickModify = () => {
+    setTitle(el.title);
+    setPeriod([el.startDate, el.endDate]);
+    setNo(el.no);
+    setColor(el.colorCode);
+    setPop(3);
   };
-
   if (pop === 2)
     return (
       <div>
@@ -36,15 +38,7 @@ const DailyControl = ({
                 <span style={{ color: `${el.colorCode}` }} key={el.no}>
                   {el.title}
                 </span>
-                <HiPencil
-                  onClick={() => {
-                    setTitle(el.title);
-                    setPeriod([el.startDate, el.endDate]);
-                    setNo(el.no);
-                    setColor(el.colorCode);
-                    setPop(3);
-                  }}
-                />
+                <HiPencil onClick={() => onClickModify()} />
                 <FaTrashAlt
                   onClick={() => {
                     axios(
@@ -53,12 +47,10 @@ const DailyControl = ({
                         method: "DELETE",
                         headers: {
                           "Content-type": "application/json; charset=utf-8",
-                          "x-auth-token":
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+                          "x-auth-token": token,
                         },
                       }
                     ).then((res) => getInfo());
-                    // moveCal();
                   }}
                 />
                 {el.important ? (

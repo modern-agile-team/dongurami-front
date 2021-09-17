@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 import axios from "axios";
 import Router from "next/router";
 
-const DailyModal = ({ setPop, pop, today }) => {
+const DailyModal = ({ token, setPop, pop, today }) => {
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(today);
   const [color, setColor] = useState("#000000");
@@ -20,20 +20,20 @@ const DailyModal = ({ setPop, pop, today }) => {
   const moveCal = () => {
     Router.push("/ClubHome");
   };
+
+  //추가하는 함수
   const axiosPOST = async () => {
     await axios(`http://3.36.72.145:8080/api/club/schedule/1`, {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+        "x-auth-token": token,
       },
       data: {
         colorCode: color,
         title: title.current.value,
         startDate: startDate,
         endDate: endDate,
-        period: 3,
       },
     })
       .then((res) => console.log(res))
@@ -94,7 +94,6 @@ const DailyModal = ({ setPop, pop, today }) => {
               alert("날짜가 이상함");
             else if (title.current.value.length <= 0) {
               alert("제목이 이상함");
-              console.log(123013202418);
             }
           }}
         >
