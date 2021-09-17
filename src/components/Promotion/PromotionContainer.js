@@ -62,7 +62,7 @@ const PromotionContainer = () => {
     <>
       <Header />
       <TypeSearch />
-      <Link href={`/notice/write`} passHref>
+      <Link href={`/promotion/write`} passHref>
         <button className={styles.writeBtn}>
           <BsPencil />
           글쓰기
