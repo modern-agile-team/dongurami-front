@@ -37,9 +37,9 @@ function WritePromition({ title, body }) {
             <option>개발</option>
             <option>친목</option>
           </select>
+          <button onClick={onSubmit}>등록</button>
         </div>
       </div>
-      <button onClick={onSubmit}>등록</button>
     </div>
   );
 }
