@@ -1,0 +1,16 @@
+.leader,
+.submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  input {
+    margin: 20px 0;
+  }
+  svg {
+    &:hover {
+      color: #3fcdb8;
+      cursor: pointer;
+    }
+  }
+}

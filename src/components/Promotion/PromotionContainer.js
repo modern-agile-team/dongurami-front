@@ -72,8 +72,8 @@ const PromotionContainer = () => {
   return (
     <>
       <Header />
-      <TypeSearch onCategorySearch={onCategorySearch} />
-      <Link href={`/notice/write`} passHref>
+      <TypeSearch />
+      <Link href={`/promotion/write`} passHref>
         <button className={styles.writeBtn}>
           <BsPencil />
           글쓰기

@@ -1,18 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/Club/Home/Manager/Approve.module.scss";
 import ApproveHeader from "./ApproveHeader";
 import ApproveList from "./ApproveList";
-import { list } from "../Apply/Apply";
 
-const questions = [
-  "이름",
-  "학번",
-  "학과",
-  "학년",
-  "성별",
-  "휴대전화",
-  ...list.map((el) => el.question),
-];
+const questions = ["이름", "학번", "학과", "학년", "성별"];
 
 const answers = [
   [

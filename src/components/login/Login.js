@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "../../styles/User/Login/Login.module.scss";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export const Login = () => {
   const [id, setId] = useState("");
@@ -11,6 +12,8 @@ export const Login = () => {
     const { name, value } = e.target;
     name === "id" ? setId(value) : setPassword(value);
   };
+
+  const router = useRouter();
 
   const onSubmit = () => {
     axios("http://3.36.72.145:8080/api/login", {
@@ -27,6 +30,7 @@ export const Login = () => {
         if (res.data.jwt) {
           localStorage.setItem("jwt", res.data.jwt);
         }
+        router.push("/");
       })
       .catch((err) => alert(err.response.data.msg));
   };
@@ -62,11 +66,9 @@ export const Login = () => {
           </Link>
         </div>
         <div className={styles.buttons}>
-          {/* <Link href="/" passHref> */}
           <button className={styles.loginBtn} onClick={onSubmit}>
             로그인
           </button>
-          {/* </Link> */}
           <Link href="/signup" passHref>
             <button className={styles.signupBtn}>회원가입</button>
           </Link>
