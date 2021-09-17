@@ -25,8 +25,8 @@ const Calendar = () => {
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
-  useEffect(() => {
-    setNowDay(nowDate.current.id);
+
+  const getInfo = () => {
     axios(
       `http://3.36.72.145:8080/api/club/schedule/1/${today.format("YYYY-MM")}`,
       {
@@ -38,7 +38,17 @@ const Calendar = () => {
         },
       }
     ).then((res) => setSchedule(res.data.result));
+    console.log(1);
+  };
+
+  let month = new Date();
+  let nowMonth = `${month.getMonth() + 1}`;
+  if (nowMonth.length === 1) nowMonth = "0" + nowMonth;
+  useEffect(() => {
+    if (today.format("MM") === nowMonth) setNowDay(nowDate.current.id);
+    getInfo();
   }, [getMoment]);
+
   const calendarArr = () => {
     let result = [];
     let week = firstWeek;
@@ -241,6 +251,7 @@ const Calendar = () => {
         setPeriod={setPeriod}
         setTitle={setTitle}
         setColor={setColor}
+        getInfo={getInfo}
       />
       <ScheduleModify
         title={title}
@@ -254,3 +265,4 @@ const Calendar = () => {
   );
 };
 export default Calendar;
+// export default getInfo;

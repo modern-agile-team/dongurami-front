@@ -7,7 +7,7 @@ import Router from "next/router";
 const DailyModal = ({ setPop, pop, today }) => {
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState("끝나는 날짜");
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState("#000000");
   const startInput = useRef();
   const endInput = useRef();
   const colorCode = useRef();
@@ -15,7 +15,6 @@ const DailyModal = ({ setPop, pop, today }) => {
   const moveCal = () => {
     Router.push("/ClubHome");
   };
-
   if (pop === 1) {
     return (
       <div className={styles.wrap}>
@@ -75,7 +74,9 @@ const DailyModal = ({ setPop, pop, today }) => {
                 endDate: endDate,
                 period: 3,
               },
-            }).then((res) => console.log(res));
+            })
+              .then((res) => console.log(res))
+              .catch((err) => console.log(err));
             moveCal();
           }}
         >

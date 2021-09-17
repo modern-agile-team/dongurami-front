@@ -5,16 +5,18 @@ import Router from "next/router";
 import { useEffect, useState } from "react";
 
 const ScheduleModify = ({ color, title, period, no, setPop, pop }) => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  let putTitle = title;
-  let colorCode = "#44444";
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [colorCode, setColorCode] = useState();
+  const [newTitle, setNewTitle] = useState();
   const moveCal = () => {
     Router.push("/ClubHome");
   };
   useEffect(() => {
     setStartDate(period[0]);
     setEndDate(period[1]);
+    setNewTitle(title);
+    setColorCode(color);
   }, [pop]);
 
   if (pop === 3)
@@ -50,15 +52,16 @@ const ScheduleModify = ({ color, title, period, no, setPop, pop }) => {
               type="text"
               placeholder={title}
               onChange={(e) => {
-                putTitle = e.target.value;
+                setNewTitle(e.target.value);
               }}
             />
             <br />
             <p>일정 색상</p>
             <input
               type="color"
+              value={colorCode}
               onChange={(e) => {
-                colorCode = e.target.value;
+                setColorCode(e.target.value);
               }}
             />
           </div>
@@ -75,7 +78,7 @@ const ScheduleModify = ({ color, title, period, no, setPop, pop }) => {
               },
               data: {
                 colorCode: colorCode,
-                title: putTitle,
+                title: newTitle,
                 startDate: startDate,
                 endDate: endDate,
                 period: 3,
