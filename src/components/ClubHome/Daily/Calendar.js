@@ -15,7 +15,7 @@ const Calendar = () => {
   const [schedule, setSchedule] = useState([]);
   const [no, setNo] = useState(0);
   const [period, setPeriod] = useState([]);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(null);
   const [color, setColor] = useState("");
   const [nowDay, setNowDay] = useState("");
   const nowDate = useRef();

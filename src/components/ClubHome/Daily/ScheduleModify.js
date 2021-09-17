@@ -19,6 +19,25 @@ const ScheduleModify = ({ color, title, period, no, setPop, pop }) => {
     setColorCode(color);
   }, [pop]);
 
+  const axiosPUT = async () => {
+    await axios(`http://3.36.72.145:8080/api/club/schedule/1/${no}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+      },
+      data: {
+        colorCode: colorCode,
+        title: newTitle,
+        startDate: startDate,
+        endDate: endDate,
+        period: 3,
+      },
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err.response));
+  };
   if (pop === 3)
     return (
       <div>
@@ -68,24 +87,10 @@ const ScheduleModify = ({ color, title, period, no, setPop, pop }) => {
         </div>
         <button
           onClick={() => {
-            moveCal();
-            axios(`http://3.36.72.145:8080/api/club/schedule/1/${no}`, {
-              method: "PUT",
-              headers: {
-                "Content-type": "application/json; charset=utf-8",
-                "x-auth-token":
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
-              },
-              data: {
-                colorCode: colorCode,
-                title: newTitle,
-                startDate: startDate,
-                endDate: endDate,
-                period: 3,
-              },
-            })
-              .then((res) => console.log(res))
-              .catch((err) => console.log(err.response));
+            if (Date.parse(startDate) <= Date.parse(endDate)) {
+              axiosPUT();
+              moveCal();
+            } else alert("날짜가 이상함");
           }}
         >
           수정하기
