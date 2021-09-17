@@ -15,6 +15,12 @@ function PostContent({ category }) {
   const [pid, setPid] = useState();
   const [post, setPost] = useState();
 
+  const title = (
+    (category === 'notice') ? '공지 게시판' :
+    (category === 'free') ? '자유 게시판' :
+    undefined
+  );
+
   const updatePost = useCallback(() => {
     axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
       .then((response) => setPost(response.data));
@@ -23,22 +29,6 @@ function PostContent({ category }) {
     axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
       .then(() => router.push(`/${category}`));
   }, [category, pid, router]);
-
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    setPid(router.query.pid);
-  }, [router]);
-  useEffect(() => {
-    if (!pid) return;
-    updatePost();
-  }, [pid, updatePost]);
-
-  const title = (
-    (category === 'notice') ? '공지 게시판' :
-    (category === 'free') ? '자유 게시판' :
-    undefined
-  );
 
   const postComment = (description) => {
     axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}`, {
@@ -68,7 +58,16 @@ function PostContent({ category }) {
     axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`)
       .then(() => updatePost());
   }
-  
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    setPid(router.query.pid);
+  }, [router]);
+  useEffect(() => {
+    if (!pid) return;
+    updatePost();
+  }, [pid, updatePost]);
+
 
   if (!post) return null;
 
@@ -94,7 +93,6 @@ function PostContent({ category }) {
         </div>
       </div>
       <hr />
-      {/* <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div> */}
       <ReactQuill value={post.board.description} theme="bubble" readOnly />
       <CommentContainer
         comments={post.comments}
