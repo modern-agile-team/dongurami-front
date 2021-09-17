@@ -26,13 +26,16 @@ function Write({ category }) {
       router.push(`/${category}`);
     });
   };
+  const onClose = () => {
+    setShowModal(!showModal);
+  }
 
   return (
     <>
     <Container category={category}>
       <WriteContent title={title} body={body} setTitle={setTitle} setBody={setBody} onSubmit={onSubmit} />
     </Container>
-    <Modal show={showModal}>
+    <Modal show={showModal} onClose={onClose}>
       <WritePromotion title={title} body={body} />
     </Modal>
     </>

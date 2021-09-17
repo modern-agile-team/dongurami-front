@@ -13,7 +13,7 @@ function setEndOfContenteditable(contentEditableElement) {
   selection.addRange(range); //make the range you have just created the visible selection
 }
 
-function Comment({ comment, index, setAddReplyIndex, putComment, deleteComment }) {
+function Comment({ comment, setAddReplyID, putComment, deleteComment }) {
   const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
 
@@ -24,13 +24,13 @@ function Comment({ comment, index, setAddReplyIndex, putComment, deleteComment }
 
   const onEdit = () => {
     if (isContentEditable) {
-      putComment(descriptionDiv.current.textContent, comment.no);
+      putComment(descriptionDiv.current.textContent, comment.no, comment.groupNo);
     }
     setIsContentEditable(!isContentEditable);
     setEndOfContenteditable(descriptionDiv.current);
   }
   const onDelete = () => {
-    deleteComment(comment.no);
+    deleteComment(comment.no, comment.groupNo);
   }
 
 
@@ -49,7 +49,9 @@ function Comment({ comment, index, setAddReplyIndex, putComment, deleteComment }
         <div ref={descriptionDiv} contentEditable={isContentEditable} suppressContentEditableWarning={true}>{comment.description}</div>
         <div>
           <p>{comment.inDate}</p>
-          <p onClick={() => { setAddReplyIndex(index); }}>답글 쓰기</p>
+          {(comment.no === comment.groupNo) && (
+            <p onClick={() => { setAddReplyID(comment.no); }}>답글 쓰기</p>
+          )}
         </div>
       </div>
     </div>
