@@ -1,5 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
+import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import styles from '../../../styles/Common/Comment/Comment.module.scss';
+
+// https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
+function setEndOfContenteditable(contentEditableElement) {
+  let range, selection;
+  range = document.createRange(); //Create a range (a range is a like the selection but invisible)
+  range.selectNodeContents(contentEditableElement); //Select the entire contents of the element with the range
+  range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+  selection = window.getSelection(); //get the selection object (allows you to change selection)
+  selection.removeAllRanges(); //remove any selections already made
+  selection.addRange(range); //make the range you have just created the visible selection
+}
 
 function Comment({ comment, index, setAddReplyIndex, putComment, deleteComment }) {
   const [isContentEditable, setIsContentEditable] = useState(false);
@@ -15,6 +27,7 @@ function Comment({ comment, index, setAddReplyIndex, putComment, deleteComment }
       putComment(descriptionDiv.current.textContent, comment.no);
     }
     setIsContentEditable(!isContentEditable);
+    setEndOfContenteditable(descriptionDiv.current);
   }
   const onDelete = () => {
     deleteComment(comment.no);
@@ -28,8 +41,10 @@ function Comment({ comment, index, setAddReplyIndex, putComment, deleteComment }
         <div>
           <p>{comment.studentName}</p>
           <p>작성자</p>
-          <button onClick={onEdit}>{(isContentEditable) ? '수정 완료' : '수정'}</button>
-          <button onClick={onDelete}>삭제</button>
+          <div>
+            <button onClick={onEdit} className={styles['action-button']}>{(isContentEditable) ? <AiOutlineCheck /> : <AiOutlineEdit />}</button>
+            <button onClick={onDelete} className={styles['action-button']}><AiOutlineDelete /></button>
+          </div>
         </div>
         <div ref={descriptionDiv} contentEditable={isContentEditable} suppressContentEditableWarning={true}>{comment.description}</div>
         <div>

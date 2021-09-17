@@ -94,7 +94,8 @@ function PostContent({ category }) {
         </div>
       </div>
       <hr />
-      <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div>
+      {/* <div dangerouslySetInnerHTML={{ __html: post.board.description }}></div> */}
+      <ReactQuill value={post.board.description} theme="bubble" readOnly />
       <CommentContainer
         comments={post.comments}
         postComment={postComment}

@@ -1,12 +1,12 @@
 import Header from '../../components/Common/Header';
 import Footer from '../../components/Common/Footer';
-import Search from '../../components/Search/Search';
+import Board from 'components/Board/Board';
 
 function search() {
   return (
     <>
       <Header />
-      <Search />
+      <Board category="notice" baseAPI="http://3.36.72.145:8080/api/board/wholeNotice" />
       <Footer/>
     </>
   );

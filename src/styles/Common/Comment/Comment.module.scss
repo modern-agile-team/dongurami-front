@@ -31,3 +31,12 @@
     }
   }
 }
+
+.comment .action-button {
+  border: none;
+  background: white;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(90%);
+  }
+}
