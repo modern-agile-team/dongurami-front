@@ -19,10 +19,10 @@ function PostContent({ category }) {
     axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
       .then((response) => setPost(response.data));
   }, [category, pid]);
-  const deletePost = () => {
+  const deletePost = useCallback(() => {
     axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
       .then(() => router.push(`/${category}`));
-  };
+  }, [category, pid, router]);
 
 
   useEffect(() => {
