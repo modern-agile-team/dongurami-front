@@ -8,6 +8,7 @@ const ClubIntro = () => {
   const [info, setInfo] = useState([]);
   const [descUpdate, setDescUpdate] = useState(false);
   const [introDesc, setIntroDesc] = useState("");
+  const [leader, setLeader] = useState("");
 
   let jwtTocken = "";
 
@@ -25,7 +26,7 @@ const ClubIntro = () => {
 
   const onDescSubnmit = async () => {
     const options = {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-type": "application/json; charset=utf-8",
         "x-auth-token": jwtTocken,
@@ -57,10 +58,20 @@ const ClubIntro = () => {
     await axios
       .get("http://3.36.72.145:8080/api/club/home/1", options)
       .then((res) => {
+        setLeader(res.data.result[0].leader);
         setInfo(res.data.result);
         setIntroDesc(res.data.result[0].introduce);
       })
       .catch((err) => alert(err.response.data.msg));
+  };
+
+  const onClubLogoChange = (e) => {
+    const img = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", img);
+    for (const keyValue of formData) {
+      console.log(keyValue);
+    }
   };
 
   useEffect(() => {
@@ -70,11 +81,11 @@ const ClubIntro = () => {
   return (
     <div className={styles.container}>
       <ClubInfo
-        name={info[0] ? info[0].name : 0}
-        logoUrl={info[0] ? info[0].logoUrl : 0}
-        fileId={info[0] ? info[0].fileId : 0}
-        genderMan={info[0] ? info[0].genderMan : 0}
-        genderWomen={info[0] ? info[0].genderWomen : 0}
+        name={info[0] ? info[0].name : null}
+        logoUrl={info[0] ? info[0].logoUrl : null}
+        fileId={info[0] ? info[0].fileId : null}
+        genderMan={info[0] ? info[0].genderMan : null}
+        genderWomen={info[0] ? info[0].genderWomen : null}
       />
       <Desc
         onDescSubnmit={onDescSubnmit}
@@ -82,6 +93,8 @@ const ClubIntro = () => {
         introDesc={introDesc}
         onDescUpdate={onDescUpdate}
         descUpdate={descUpdate}
+        onClubLogoChange={onClubLogoChange}
+        leader={leader}
       />
     </div>
   );
