@@ -2,27 +2,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
   & > div {
     flex: 1;
     display: flex;
     align-items: center;
+    width: 100%;
+    flex-direction: column;
   }
-  & > button {
-    width: 5rem;
-    border: 2px solid #90e2d6;
-    color: #90e2d6;
-    background-color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-  }
+  
 }
 
 .uploadContainer {
-  flex: 1;
+  height: 50%;
   & > label {
     cursor: pointer;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
     & > img {
-      width: 100%;
+      height: 70%;
     }
     & > p {
       text-align: center;
@@ -35,15 +35,23 @@
 }
 
 .selectContainer {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   & > select {
     border: 2px solid #90e2d6;
     border-radius: 1rem;
-    height: 3rem;
-    margin: 3rem;
+    height: 30%;
+    margin: 1rem .25rem;
     padding-left: 1rem;
+  }
+  & > button {
+    width: 5rem;
+    border: 2px solid #90e2d6;
+    color: #90e2d6;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    align-self: center;
   }
 }

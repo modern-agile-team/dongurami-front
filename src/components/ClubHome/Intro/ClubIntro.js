@@ -9,6 +9,12 @@ const ClubIntro = () => {
   const [descUpdate, setDescUpdate] = useState(false);
   const [introDesc, setIntroDesc] = useState("");
 
+  let jwtTocken = "";
+
+  if (typeof window !== "undefined") {
+    jwtTocken = localStorage.getItem("jwt");
+  }
+
   const onDescUpdate = () => {
     setDescUpdate(!descUpdate);
   };
@@ -22,8 +28,7 @@ const ClubIntro = () => {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+        "x-auth-token": jwtTocken,
       },
       data: {
         logoUrl: info[0].logoUrl,
@@ -46,8 +51,7 @@ const ClubIntro = () => {
     const options = {
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
+        "x-auth-token": jwtTocken,
       },
     };
     await axios

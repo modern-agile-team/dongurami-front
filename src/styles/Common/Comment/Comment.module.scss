@@ -31,3 +31,12 @@
     }
   }
 }
+
+.comment .action-button {
+  border: none;
+  background: inherit;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+  }
+}

@@ -5,6 +5,7 @@ function Container({ children, category }) {
   const title = (
     (category === 'notice') ? '공지 게시판' :
     (category === 'free') ? '자유 게시판' :
+    (category === 'promotion') ? '홍보 게시판' :
     undefined
   );
 
