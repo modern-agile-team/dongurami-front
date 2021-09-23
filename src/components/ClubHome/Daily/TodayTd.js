@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Schedule/Calendar.module.scss";
 
-const TodayTd = ({ nowDate, index, days, schedule }) => {
+const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
   return (
     <td
       className={styles.dayblock}

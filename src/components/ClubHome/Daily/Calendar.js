@@ -74,6 +74,8 @@ const Calendar = () => {
           nowDate={nowDate}
           today={today}
           week={week}
+          setPop={setPop}
+          setDate={setDate}
         />
       );
     }
@@ -96,13 +98,11 @@ const Calendar = () => {
         />
       </div>
       <DailyModal
-        token={token}
         setPop={setPop}
         today={today.format("YYYY-MM-DD")}
         pop={pop}
       />
       <DailyControl
-        token={token}
         setNo={setNo}
         schedule={schedule}
         date={date}

@@ -5,7 +5,7 @@ import MonthDays from "./MonthDays";
 import TodayTd from "./TodayTd";
 import moment from "moment";
 
-const MakeTd = ({ schedule, nowDate, today, week }) => {
+const MakeTd = ({ setDate, setPop, schedule, nowDate, today, week }) => {
   return (
     <tr className={styles.num} key={week}>
       {Array(7)
@@ -24,12 +24,30 @@ const MakeTd = ({ schedule, nowDate, today, week }) => {
                 days={days}
                 schedule={schedule}
                 nowDate={nowDate}
+                setPop={setPop}
+                setDate={setDate}
               />
             );
           } else if (days.format("MM") !== today.format("MM")) {
-            return <OtherDays index={index} days={days} schedule={schedule} />;
+            return (
+              <OtherDays
+                setPop={setPop}
+                index={index}
+                days={days}
+                schedule={schedule}
+                setDate={setDate}
+              />
+            );
           } else {
-            return <MonthDays index={index} schedule={schedule} days={days} />;
+            return (
+              <MonthDays
+                setPop={setPop}
+                index={index}
+                schedule={schedule}
+                days={days}
+                setDate={setDate}
+              />
+            );
           }
         })}
     </tr>
