@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 import axios from "axios";
 import Router from "next/router";
 
-const DailyModal = ({ token, setPop, pop, today }) => {
+const DailyModal = ({ setPop, pop, today }) => {
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(today);
   const [color, setColor] = useState("#000000");
@@ -23,6 +23,7 @@ const DailyModal = ({ token, setPop, pop, today }) => {
 
   //추가하는 함수
   const axiosPOST = async () => {
+    let token = localStorage.getItem("jwt");
     await axios(`http://3.36.72.145:8080/api/club/schedule/1`, {
       method: "POST",
       headers: {
@@ -37,12 +38,12 @@ const DailyModal = ({ token, setPop, pop, today }) => {
       },
     })
       .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.response.data.msg));
   };
   if (pop === 1) {
     return (
-      <div className={styles.wrap}>
-        <div className={styles.modal}>
+      <div className={styles.wrap} onClick={() => setPop(0)}>
+        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
           <div className={styles.header}>
             <h3>일정 작성</h3>
           </div>
@@ -83,7 +84,8 @@ const DailyModal = ({ token, setPop, pop, today }) => {
         </div>
         <button
           className={styles.addBtn}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             if (
               Date.parse(startDate) <= Date.parse(endDate) &&
               title.current.value.length > 0

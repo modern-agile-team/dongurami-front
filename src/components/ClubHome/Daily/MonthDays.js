@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Schedule/Calendar.module.scss";
 
-const MonthDays = ({ index, schedule, days }) => {
+const MonthDays = ({ setDate, setPop, index, schedule, days }) => {
   return (
     <td key={index} className={styles.dayblock} id={days.format("YYYY-MM-DD")}>
       <span
