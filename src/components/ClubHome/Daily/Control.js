@@ -24,7 +24,7 @@ const Control = ({ setMoment, getMoment, today, setPop }) => {
         </span>
       </div>
       <div className={styles.add}>
-        <span className={styles.addBtn} onClick={() => setPop(1)}>
+        <span className={styles.addBtn} onClick={() => setPop("DailyModal")}>
           일정 추가하기
         </span>
       </div>

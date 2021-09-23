@@ -13,7 +13,7 @@ import MakeTd from "./MakeTd";
 const Calendar = () => {
   const [getMoment, setMoment] = useState(moment());
   const [date, setDate] = useState("");
-  const [pop, setPop] = useState(0);
+  const [pop, setPop] = useState("Calendar");
   const [schedule, setSchedule] = useState([]);
   const [no, setNo] = useState(0);
   const [period, setPeriod] = useState([]);
@@ -114,7 +114,6 @@ const Calendar = () => {
         getInfo={getInfo}
       />
       <ScheduleModify
-        token={token}
         title={title}
         period={period}
         no={no}

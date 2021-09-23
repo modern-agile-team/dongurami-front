@@ -11,7 +11,7 @@ const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
     >
       <span
         onClick={() => {
-          setPop(2);
+          setPop("DailyControl");
           setDate(days.format("YYYY-MM-DD"));
         }}
         className={styles.today}

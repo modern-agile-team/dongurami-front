@@ -40,14 +40,17 @@ const DailyModal = ({ setPop, pop, today }) => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response.data.msg));
   };
-  if (pop === 1) {
+  if (pop === "DailyModal") {
     return (
-      <div className={styles.wrap} onClick={() => setPop(0)}>
+      <div className={styles.wrap} onClick={() => setPop("Calendar")}>
         <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
           <div className={styles.header}>
             <h3>일정 작성</h3>
           </div>
-          <MdClose className={styles.closeBtn} onClick={() => setPop(0)} />
+          <MdClose
+            className={styles.closeBtn}
+            onClick={() => setPop("Calendar")}
+          />
           <div className={styles.body}>
             <p>시작하는 날짜</p>
             <input

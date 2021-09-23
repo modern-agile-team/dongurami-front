@@ -36,14 +36,17 @@ const ScheduleModify = ({ token, color, title, period, no, setPop, pop }) => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response));
   };
-  if (pop === 3)
+  if (pop === "ScheduleModify")
     return (
       <div>
         <div>
           <div>
             <h3>일정 수정하기</h3>
           </div>
-          <MdClose className={styles.closeBtn} onClick={() => setPop(0)} />
+          <MdClose
+            className={styles.closeBtn}
+            onClick={() => setPop("Calendar")}
+          />
           <div>
             <p>시작하는 날짜</p>
             <input

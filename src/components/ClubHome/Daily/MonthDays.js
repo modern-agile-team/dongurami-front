@@ -6,7 +6,7 @@ const MonthDays = ({ setDate, setPop, index, schedule, days }) => {
     <td key={index} className={styles.dayblock} id={days.format("YYYY-MM-DD")}>
       <span
         onClick={() => {
-          setPop(2);
+          setPop("DailyControl");
           setDate(days.format("YYYY-MM-DD"));
         }}
         className={styles.monthdays}
