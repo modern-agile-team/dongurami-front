@@ -23,9 +23,9 @@ const ApplyQuestions = ({ onUserInfoChange }) => {
           <br />
           <select name="grade" id="grade" onChange={onUserInfoChange}>
             <option value="선택 안함">선택</option>
-            <option value="1학년">1학년</option>
-            <option value="2학년">2학년</option>
-            <option value="3학년">3학년</option>
+            <option value={1}>1학년</option>
+            <option value={2}>2학년</option>
+            <option value={3}>3학년</option>
           </select>
         </li>
         <li>
@@ -33,8 +33,8 @@ const ApplyQuestions = ({ onUserInfoChange }) => {
           <br />
           <select name="sex" id="sex" onChange={onUserInfoChange}>
             <option value="선택 안함">선택</option>
-            <option value="남자">남자</option>
-            <option value="여자">여자</option>
+            <option value={1}>남자</option>
+            <option value={2}>여자</option>
           </select>
         </li>
         <li>
