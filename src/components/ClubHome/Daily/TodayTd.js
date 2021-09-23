@@ -18,7 +18,7 @@ const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
       >
         {days.format("D")}
       </span>
-      {schedule.map((el, i) => {
+      {schedule.map((el) => {
         return Date.parse(el.startDate) <=
           Date.parse(days.format("YYYY-MM-DD")) &&
           Date.parse(days.format("YYYY-MM-DD")) <= Date.parse(el.endDate) ? (

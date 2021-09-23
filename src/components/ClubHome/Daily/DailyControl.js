@@ -64,7 +64,7 @@ const DailyControl = ({
           />
           <div className={styles.body}>
             <div className={styles.schedule}>
-              {schedule.map((el, i) => {
+              {schedule.map((el) => {
                 return Date.parse(el.startDate) <= Date.parse(date) &&
                   Date.parse(date) <= Date.parse(el.endDate) ? (
                   <>

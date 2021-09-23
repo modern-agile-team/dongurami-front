@@ -40,6 +40,20 @@ const DailyModal = ({ setPop, pop, today }) => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response.data.msg));
   };
+  const onAddBtn = (e) => {
+    e.stopPropagation();
+    if (
+      Date.parse(startDate) <= Date.parse(endDate) &&
+      title.current.value.length > 0
+    ) {
+      axiosPOST();
+      moveCal();
+    } else if (Date.parse(startDate) > Date.parse(endDate))
+      alert("날짜가 이상함");
+    else if (title.current.value.length <= 0) {
+      alert("제목이 이상함");
+    }
+  };
   if (pop === "DailyModal") {
     return (
       <div className={styles.wrap} onClick={() => setPop("Calendar")}>
@@ -85,23 +99,7 @@ const DailyModal = ({ setPop, pop, today }) => {
             />
           </div>
         </div>
-        <button
-          className={styles.addBtn}
-          onClick={(e) => {
-            e.stopPropagation();
-            if (
-              Date.parse(startDate) <= Date.parse(endDate) &&
-              title.current.value.length > 0
-            ) {
-              axiosPOST();
-              moveCal();
-            } else if (Date.parse(startDate) > Date.parse(endDate))
-              alert("날짜가 이상함");
-            else if (title.current.value.length <= 0) {
-              alert("제목이 이상함");
-            }
-          }}
-        >
+        <button className={styles.addBtn} onClick={(e) => onAddBtn(e)}>
           추가하기
         </button>
       </div>

@@ -1,0 +1,52 @@
+.wrap {
+  background-color: rgba(#616161, 0.9);
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  z-index: 9999;
+
+  .modal {
+    border-radius: 3%;
+    background-color: white;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+
+    .header {
+      display: flex;
+      justify-content: center;
+    }
+
+    .closeBtn {
+      position: absolute;
+      top: 5%;
+      right: 2%;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+
+      &:hover {
+        color: black;
+      }
+    }
+    .body {
+      margin-left: 2%;
+      margin-bottom: 2%;
+    }
+  }
+
+  .modifyBtn {
+    margin-top: 4%;
+    width: 11vw;
+    height: 6vh;
+    border-radius: 10%;
+    background-color: white;
+    cursor: pointer;
+  }
+}

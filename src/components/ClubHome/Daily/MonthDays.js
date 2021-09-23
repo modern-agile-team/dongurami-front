@@ -13,7 +13,7 @@ const MonthDays = ({ setDate, setPop, index, schedule, days }) => {
       >
         {days.format("D")}
       </span>
-      {schedule.map((el, i) => {
+      {schedule.map((el) => {
         return Date.parse(el.startDate) <=
           Date.parse(days.format("YYYY-MM-DD")) &&
           Date.parse(days.format("YYYY-MM-DD")) <= Date.parse(el.endDate) ? (

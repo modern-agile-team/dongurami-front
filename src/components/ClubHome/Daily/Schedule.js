@@ -24,7 +24,7 @@ const Schedule = ({ schedule, nowDay }) => {
       </div>
       <div className={styles.schedule}>
         <h4>오늘의 일정</h4>
-        {schedule.map((el, i) => {
+        {schedule.map((el) => {
           return Date.parse(el.startDate) <= Date.parse(nowDay) &&
             Date.parse(nowDay) <= Date.parse(el.endDate) ? (
             <div key={el.no}>

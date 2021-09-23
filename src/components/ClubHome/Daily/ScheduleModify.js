@@ -38,16 +38,16 @@ const ScheduleModify = ({ token, color, title, period, no, setPop, pop }) => {
   };
   if (pop === "ScheduleModify")
     return (
-      <div>
-        <div>
-          <div>
+      <div className={styles.wrap}>
+        <div className={styles.modal}>
+          <div className={styles.header}>
             <h3>일정 수정하기</h3>
           </div>
           <MdClose
             className={styles.closeBtn}
             onClick={() => setPop("Calendar")}
           />
-          <div>
+          <div className={styles.body}>
             <p>시작하는 날짜</p>
             <input
               type="date"
@@ -87,6 +87,7 @@ const ScheduleModify = ({ token, color, title, period, no, setPop, pop }) => {
           </div>
         </div>
         <button
+          className={styles.modifyBtn}
           onClick={() => {
             if (Date.parse(startDate) <= Date.parse(endDate)) {
               axiosPUT();
