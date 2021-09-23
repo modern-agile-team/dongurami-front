@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input {
+    margin-bottom: 1em;
+    font-size: 50%;
+  }
+  button {
+    font-size: 50%;
+    padding: 5px 0;
+    cursor: pointer;
+  }
+}
