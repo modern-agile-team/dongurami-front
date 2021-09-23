@@ -1,6 +1,6 @@
 import styles from "../../../styles/Club/Home/Intro/ClubInfo.module.scss";
 
-const ClubInfo = ({ name, logoUrl, fileId, genderMan, genderWomen }) => {
+const ClubInfo = ({ name, categori, fileId, genderMan, genderWomen }) => {
   return (
     <div className={styles.container}>
       <div className={styles.desc}>
@@ -8,7 +8,7 @@ const ClubInfo = ({ name, logoUrl, fileId, genderMan, genderWomen }) => {
           <h1>{name}</h1>
         </div>
         <div className={styles.categori}>
-          <p>IT 동아리</p>
+          <p>{categori} 동아리</p>
         </div>
         <div className={styles.population}>
           <span>Total: ({genderWomen + genderMan}) </span>

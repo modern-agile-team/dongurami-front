@@ -3,11 +3,16 @@ import ClubInfo from "./ClubInfo";
 import Desc from "./Desc";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const ClubIntro = () => {
   const [info, setInfo] = useState([]);
   const [descUpdate, setDescUpdate] = useState(false);
   const [introDesc, setIntroDesc] = useState("");
+  const [categori, setCategori] = useState("");
+  const [leader, setLeader] = useState("");
+
+  const toLogin = useRouter();
 
   let jwtTocken = "";
 
@@ -23,6 +28,7 @@ const ClubIntro = () => {
     setIntroDesc(e.target.value);
   };
 
+  // 동아리 소개 수정
   const onDescSubnmit = async () => {
     const options = {
       method: "PUT",
@@ -47,6 +53,7 @@ const ClubIntro = () => {
     setDescUpdate(!descUpdate);
   };
 
+  // 동아리 정보 불러오기
   const getClubData = async () => {
     const options = {
       headers: {
@@ -57,10 +64,15 @@ const ClubIntro = () => {
     await axios
       .get("http://3.36.72.145:8080/api/club/home/1", options)
       .then((res) => {
+        setLeader(res.data.result[0].leader);
+        setCategori(res.data.result[0].category);
         setInfo(res.data.result);
         setIntroDesc(res.data.result[0].introduce);
       })
-      .catch((err) => alert(err.response.data.msg));
+      .catch((err) => {
+        alert(err.response.data.msg);
+        toLogin.push("/LoginPage");
+      });
   };
 
   useEffect(() => {
@@ -75,6 +87,7 @@ const ClubIntro = () => {
         fileId={info[0] ? info[0].fileId : 0}
         genderMan={info[0] ? info[0].genderMan : 0}
         genderWomen={info[0] ? info[0].genderWomen : 0}
+        categori={categori}
       />
       <Desc
         onDescSubnmit={onDescSubnmit}
@@ -82,6 +95,7 @@ const ClubIntro = () => {
         introDesc={introDesc}
         onDescUpdate={onDescUpdate}
         descUpdate={descUpdate}
+        leader={leader}
       />
     </div>
   );

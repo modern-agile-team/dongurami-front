@@ -4,7 +4,7 @@ import { IoIosAddCircleOutline, IoIosCheckmark } from "react-icons/io";
 import { clubInfo } from "./Apply";
 
 const token = {
-  studentID: 201708051,
+  studentID: 20170051,
 };
 
 const ApplySubmit = ({
