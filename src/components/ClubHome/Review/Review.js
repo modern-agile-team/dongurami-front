@@ -48,7 +48,7 @@ const Review = () => {
   };
 
   // 내 후기와 내 후기가 아닌 것들
-  const reviewMine = reviewList.filter((el) => el.studentId === "test1");
+  const reviewMine = reviewList.filter((el) => el.studentId === "201708051");
   const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
 
   // 내 리뷰 번호
