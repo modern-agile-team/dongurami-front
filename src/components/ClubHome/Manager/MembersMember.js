@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import styles from "../../../styles/Club/Home/Manager/ManagerMember.module.scss";
 import { RiVipCrownFill, RiVipCrownLine } from "react-icons/ri";
 
-const MembersMember = ({ name }) => {
+const MembersMember = ({ name, leader, auth1, auth2 }) => {
   const applyAuth = useRef();
   const boardAuth = useRef();
   const changeLeader = useRef();
@@ -20,7 +20,7 @@ const MembersMember = ({ name }) => {
   return (
     <div className={styles.member}>
       <div>
-        {name === "오창훈" ? (
+        {name === leader ? (
           <RiVipCrownFill />
         ) : (
           <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
@@ -33,8 +33,8 @@ const MembersMember = ({ name }) => {
         <input
           type="checkBox"
           className={styles.appManage}
-          defaultChecked={name === "오창훈" ? true : false}
-          disabled={name === "오창훈" ? true : false}
+          defaultChecked={auth1 ? true : false}
+          disabled={name === leader ? true : false}
           ref={applyAuth}
           onClick={onApplyAuthClick}
         />
@@ -43,8 +43,8 @@ const MembersMember = ({ name }) => {
         <input
           type="checkBox"
           className={styles.appManage}
-          defaultChecked={name === "오창훈" ? true : false}
-          disabled={name === "오창훈" ? true : false}
+          defaultChecked={auth2 ? true : false}
+          disabled={name === leader ? true : false}
           ref={boardAuth}
           onClick={onBoardAuth}
         />

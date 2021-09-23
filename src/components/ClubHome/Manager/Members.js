@@ -1,49 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../../styles/Club/Home/Manager/Manager.module.scss";
 import MembersMeber from "./MembersMember";
 import MembersHeader from "./MembersHeader";
 import MembersPreface from "./MembersPreface";
-
-export const members = [
-  {
-    name: "오창훈",
-    status: "회장",
-  },
-  {
-    name: "민순기",
-    status: "부회장",
-  },
-  {
-    name: "이석호",
-    status: "동아리원",
-  },
-  {
-    name: "박현우",
-    status: "동아리원",
-  },
-  {
-    name: "배범수",
-    status: "동아리원",
-  },
-  {
-    name: "류가희",
-    status: "동아리원",
-  },
-  {
-    name: "유준상",
-    status: "동아리원",
-  },
-  {
-    name: "심서현",
-    status: "동아리원",
-  },
-  {
-    name: "김지수",
-    status: "동아리원",
-  },
-];
+import axios from "axios";
 
 export const Members = () => {
+  const [members, setMembers] = useState([]);
+  const [leader, setLeader] = useState("");
+  let jwtTocken = "";
+
+  if (typeof window !== "undefined") {
+    jwtTocken = localStorage.getItem("jwt");
+  }
+
+  const getMembersData = async () => {
+    const options = {
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token": jwtTocken,
+      },
+    };
+    await axios
+      .get("http://3.36.72.145:8080/api/club/admin-option/1", options)
+      .then((res) => {
+        setLeader(res.data.clubAdminOption.leader);
+        setMembers(res.data.clubAdminOption.memberAndAuthList);
+      })
+      .catch((err) => console.log(err.response.data.msg[0]));
+  };
+
+  useEffect(() => {
+    getMembersData();
+  }, []);
+
   return (
     <div>
       <MembersHeader members={members.length} />
@@ -51,10 +41,11 @@ export const Members = () => {
       {members.map((el, i) => {
         return (
           <MembersMeber
-            stat={el.status}
             key={i}
             name={el.name}
-            bool={el.status}
+            leader={leader}
+            auth1={el.joinAdminFlag}
+            auth2={el.boardAdminFlag}
           />
         );
       })}
