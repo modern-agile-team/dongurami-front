@@ -28,7 +28,7 @@ const Apply = () => {
   const [newQuestion, setNewQuestion] = useState("");
   const [questions, setQuestions] = useState([]);
   const [isUpdate, setIsUpdate] = useState([]);
-  const [resume, setResume] = useState([]);
+  const [resume, setResume] = useState({});
   const [addQuestion, setAddQuestion] = useState([]);
   const [updateQuestion, setUpdateQuestion] = useState("");
 
@@ -38,7 +38,7 @@ const Apply = () => {
 
   const iconSize = 40;
 
-  let jwtTocken = "";
+  let jwtToken = "";
 
   if (typeof window !== "undefined") {
     jwtTocken = localStorage.getItem("jwt");
@@ -62,7 +62,6 @@ const Apply = () => {
       })
       .catch((err) => alert(err.response.data.msg));
   };
-
   // 질문 추가
   const onQuestionAdd = async () => {
     const options = {
@@ -150,18 +149,31 @@ const Apply = () => {
   };
 
   // 지원서 제출
-  const onResumeSubmit = () => {
-    const result = [
-      user.name,
-      user.studentID,
-      user.department,
-      grade,
-      sex,
-      phoneNumber,
-      ...addQuestion,
-    ];
+  const onResumeSubmit = async () => {
+    const result = {
+      basic: {
+        grade: parseInt(grade),
+        gender: parseInt(sex),
+        phoneNum: phoneNumber,
+      },
+      extra: questions,
+    };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token": jwtTocken,
+      },
+      data: result,
+    };
+    await axios(
+      `http://3.36.72.145:8080/api/club/application/1/answer`,
+      options
+    )
+      .then((res) => res.data)
+      .catch((err) => alert(err.response.data.msg));
     setResume(result);
-    console.log(resume);
+    console.log(result);
   };
 
   // 추가 질문 답변 저장
