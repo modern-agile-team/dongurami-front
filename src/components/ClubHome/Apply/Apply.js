@@ -38,7 +38,7 @@ const Apply = () => {
 
   const iconSize = 40;
 
-  let jwtTocken = "";
+  let jwtToken = "";
 
   if (typeof window !== "undefined") {
     jwtTocken = localStorage.getItem("jwt");
