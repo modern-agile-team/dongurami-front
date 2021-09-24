@@ -41,7 +41,7 @@
     align-items: center;
     list-style: none;
     justify-content: space-between;
-    margin-right: 10%;
+    margin-right: 15%;
     padding-left: 0;
     cursor: pointer;
     .mobile {
@@ -58,7 +58,8 @@
   margin: auto;
   svg {
     cursor: pointer;
-    margin: 0 15%;
+    margin: 0 18%;
+    font-size: 1.7vw;
   }
   .bell {
     margin-right: 150%;
@@ -251,7 +252,7 @@
         width: 17vw;
       }
       .tokenIcons {
-        margin-top: 130%;
+        margin-top: 140%;
       }
     }
   }

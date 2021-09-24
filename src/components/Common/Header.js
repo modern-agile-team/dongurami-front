@@ -141,18 +141,10 @@ function Header() {
                 id={open ? styles.show : styles.hide}
               >
                 <div className={styles.alam}>
-                  <BiBell
-                    size="2vw"
-                    onClick={alamOpen}
-                    className={styles.bell}
-                  />
+                  <BiBell onClick={alamOpen} className={styles.bell} />
                   {isAlamOpen ? <AlamContainer /> : null}
                 </div>
-                <FaUserCircle
-                  size="2vw"
-                  className={styles.Profile}
-                  onClick={logout}
-                />
+                <FaUserCircle className={styles.Profile} onClick={logout} />
               </div>
             ) : (
               <div
