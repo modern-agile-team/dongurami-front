@@ -55,9 +55,9 @@ function Header() {
     return setToken("");
   };
 
+  //알람 열람
   const alamOpen = () => {
     setIsAlamOpen(!isAlamOpen);
-    console.log("알람 열림");
   };
 
   return (

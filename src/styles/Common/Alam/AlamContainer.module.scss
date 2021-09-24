@@ -3,11 +3,12 @@
   flex-direction: column;
   position: absolute;
   margin-top: 2em;
+  margin-left: -3%;
   width: 15vw;
   height: 15vw;
   border: 2px solid bisque;
   border-radius: 16px;
-  background-color: rgb(250, 244, 235);
+  background-color: rgba(250, 244, 235, 0.678);
 }
 .icons {
   text-align: right;
@@ -48,4 +49,10 @@
 #big {
   font-size: 70%;
   font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    position: fixed;
+  }
 }
