@@ -6,14 +6,14 @@ const OtherDays = ({ setPop, setDate, index, days, schedule }) => {
     <td key={index} className={styles.dayblock} id={days.format("YYYY-MM-DD")}>
       <span
         onClick={() => {
-          setPop(2);
+          setPop("DailyControl");
           setDate(days.format("YYYY-MM-DD"));
         }}
         className={styles.otherday}
       >
         {days.format("D")}
       </span>
-      {schedule.map((el, i) => {
+      {schedule.map((el) => {
         return Date.parse(el.startDate) <=
           Date.parse(days.format("YYYY-MM-DD")) &&
           Date.parse(days.format("YYYY-MM-DD")) <= Date.parse(el.endDate) ? (

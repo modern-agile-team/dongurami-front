@@ -11,14 +11,14 @@ const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
     >
       <span
         onClick={() => {
-          setPop(2);
+          setPop("DailyControl");
           setDate(days.format("YYYY-MM-DD"));
         }}
         className={styles.today}
       >
         {days.format("D")}
       </span>
-      {schedule.map((el, i) => {
+      {schedule.map((el) => {
         return Date.parse(el.startDate) <=
           Date.parse(days.format("YYYY-MM-DD")) &&
           Date.parse(days.format("YYYY-MM-DD")) <= Date.parse(el.endDate) ? (
