@@ -27,7 +27,7 @@ export const Manager = () => {
         setLeader(res.data.clubAdminOption.leader);
         setMembers(res.data.clubAdminOption.memberAndAuthList);
       })
-      .catch((err) => console.log(err.response.data.msg[0]));
+      .catch((err) => console.log(err.response.data.clientMsg));
   };
 
   useEffect(() => {

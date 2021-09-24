@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
-import styles from "../../../styles/Club/Home/Manager/ManagerMember.module.scss";
+import styles from "../../../styles/Club/Home/Manager/MembersList.module.scss";
 import { RiVipCrownFill, RiVipCrownLine } from "react-icons/ri";
 
-const MembersMember = ({ name, leader, auth1, auth2 }) => {
+const MembersList = ({ name, leader, auth1, auth2 }) => {
   const applyAuth = useRef();
   const boardAuth = useRef();
   const changeLeader = useRef();
@@ -53,4 +53,4 @@ const MembersMember = ({ name, leader, auth1, auth2 }) => {
   );
 };
 
-export default MembersMember;
+export default MembersList;

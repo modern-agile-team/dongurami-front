@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Manager/Manager.module.scss";
-import MembersMeber from "./MembersMember";
+import MembersList from "./MembersList";
 import MembersHeader from "./MembersHeader";
 import MembersPreface from "./MembersPreface";
 
@@ -11,7 +11,7 @@ export const Members = ({ members, leader }) => {
       <MembersPreface />
       {members.map((el, i) => {
         return (
-          <MembersMeber
+          <MembersList
             key={i}
             name={el.name}
             leader={leader}
