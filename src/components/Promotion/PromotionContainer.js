@@ -21,7 +21,6 @@ const PromotionContainer = () => {
 
   const getData = async () => {
     try {
-      console.log("데이터얻어오기");
       await axios
         .get(
           `http://3.36.72.145:8080/api/board/promotion/${searchItem}/inDate/DESC`
@@ -40,7 +39,6 @@ const PromotionContainer = () => {
 
   const firstGetData = async () => {
     try {
-      console.log("시작데이터");
       await axios
         .get(
           `http://3.36.72.145:8080/api/board/promotion/${searchItem}/inDate/DESC`
