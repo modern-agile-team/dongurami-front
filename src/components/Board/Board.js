@@ -6,12 +6,11 @@ import Pagination from './Pagination';
 import Search from './Search';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 
-function Notice({ category }) {
+function Notice({ category, getPosts }) {
   const router = useRouter();
-  const [page, setPage] = useState();
   const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState();
   const [order, setOrder] = useState();
 
   useEffect(() => {
@@ -21,9 +20,9 @@ function Notice({ category }) {
   }, [router]);
   useEffect(() => {
     if (!order) return;
-    axios.get(`http://3.36.72.145:8080/api/board/${category}/${order.split(' ').join('/')}`)
+    getPosts(order)
       .then((response) => setPosts(response.data.boards));
-  }, [category, order]);
+  }, [order, getPosts]);
 
   const setPageToUrl = (nextPage) => {
     router.push({
@@ -38,7 +37,7 @@ function Notice({ category }) {
     router.push({
       pathname: router.pathname,
       query: {
-        page,
+        page: 1,
         order: e.target.value
       }
     });
@@ -48,11 +47,11 @@ function Notice({ category }) {
     (category === 'free') ? '자유 게시판' :
     undefined
   );
-  
+
   if (!page) return null;
   if (!posts) return null;
   if (!order) return null;
-  
+
   return (
     <div className={styles.container}>
       <Header />

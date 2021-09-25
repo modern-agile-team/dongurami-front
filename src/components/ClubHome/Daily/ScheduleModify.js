@@ -4,28 +4,50 @@ import axios from "axios";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 
-const ScheduleModify = ({ color, title, period, no, setPop, pop }) => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  let putTitle = title;
-  let colorCode = "#44444";
+const ScheduleModify = ({ token, color, title, period, no, setPop, pop }) => {
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+  const [colorCode, setColorCode] = useState();
+  const [newTitle, setNewTitle] = useState();
   const moveCal = () => {
     Router.push("/ClubHome");
   };
   useEffect(() => {
     setStartDate(period[0]);
     setEndDate(period[1]);
+    setNewTitle(title);
+    setColorCode(color);
   }, [pop]);
 
-  if (pop === 3)
+  const axiosPUT = async () => {
+    await axios(`http://3.36.72.145:8080/api/club/schedule/1/${no}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token": token,
+      },
+      data: {
+        colorCode: colorCode,
+        title: newTitle,
+        startDate: startDate,
+        endDate: endDate,
+      },
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err.response));
+  };
+  if (pop === "ScheduleModify")
     return (
-      <div>
-        <div>
-          <div>
+      <div className={styles.wrap}>
+        <div className={styles.modal}>
+          <div className={styles.header}>
             <h3>일정 수정하기</h3>
           </div>
-          <MdClose className={styles.closeBtn} onClick={() => setPop(0)} />
-          <div>
+          <MdClose
+            className={styles.closeBtn}
+            onClick={() => setPop("Calendar")}
+          />
+          <div className={styles.body}>
             <p>시작하는 날짜</p>
             <input
               type="date"
@@ -50,39 +72,27 @@ const ScheduleModify = ({ color, title, period, no, setPop, pop }) => {
               type="text"
               placeholder={title}
               onChange={(e) => {
-                putTitle = e.target.value;
+                setNewTitle(e.target.value);
               }}
             />
             <br />
             <p>일정 색상</p>
             <input
               type="color"
+              value={colorCode}
               onChange={(e) => {
-                colorCode = e.target.value;
+                setColorCode(e.target.value);
               }}
             />
           </div>
         </div>
         <button
+          className={styles.modifyBtn}
           onClick={() => {
-            moveCal();
-            axios(`http://3.36.72.145:8080/api/club/schedule/1/${no}`, {
-              method: "PUT",
-              headers: {
-                "Content-type": "application/json; charset=utf-8",
-                "x-auth-token":
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QxIiwibmFtZSI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.1u6k5cJuaUlZj14CJJZiI8guHnlZXf1uuU6vZjl9jNk",
-              },
-              data: {
-                colorCode: colorCode,
-                title: putTitle,
-                startDate: startDate,
-                endDate: endDate,
-                period: 3,
-              },
-            })
-              .then((res) => console.log(res))
-              .catch((err) => console.log(err.response));
+            if (Date.parse(startDate) <= Date.parse(endDate)) {
+              axiosPUT();
+              moveCal();
+            } else alert("날짜가 이상함");
           }}
         >
           수정하기

@@ -3,10 +3,11 @@
   display: flex;
   justify-content: center;
   position: fixed;
-  background-color: #a4f0e4;
   width: 100%;
   z-index: 99;
   border-bottom: 1px solid #e6e6e6;
+  background-color: white;
+  align-items: center;
 }
 
 #close {
@@ -21,12 +22,12 @@
     align-items: center;
     padding: 0 1vw;
     cursor: pointer;
-    border-radius: 16px;
+    border-radius: 60px;
     &:hover {
       background-color: rgb(204, 204, 204);
     }
     svg {
-      margin: 0 0.5em;
+      padding: 1.5vh 0;
     }
   }
   #now {
@@ -44,8 +45,7 @@
 
 #hamb {
   cursor: pointer;
-  padding: 0 1.5em;
-  height: 8vh;
+  padding: 1em;
   &:active {
     border-radius: 50%;
     background-color: rgba(gray, 0.8);
@@ -56,6 +56,16 @@
 
 @media (max-width: 1023px) {
   #show {
+    div {
+      padding: 0 1px;
+    }
+    svg {
+      width: 25px;
+      height: 25px;
+      padding-top: 0.3em;
+      padding-bottom: 0.3em;
+      margin: 0 20px;
+    }
     span {
       display: none;
     }
@@ -63,16 +73,34 @@
   #hide {
     display: none;
   }
+  #hamb {
+    width: 30px;
+    height: 30px;
+    margin-right: 1.5em;
+  }
 }
 
 @media (max-width: 767px) {
+  .sideBar {
+    margin-top: 1px;
+    height: 5vh;
+  }
   #show {
     div {
       padding: 0 1px;
     }
+    svg {
+      width: 15px;
+      height: 15px;
+      padding-top: 0.3em;
+      padding-bottom: 0.3em;
+      margin: 0 10px;
+    }
   }
-
   #hamb {
-    padding: 0 1em;
+    padding: 0.5em;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
   }
 }
