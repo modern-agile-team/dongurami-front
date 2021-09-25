@@ -7,12 +7,12 @@ import Modal from "./Modal";
 import Promotion from "./Promotion";
 import Link from "next/link";
 import axios from "axios";
-import { getdata } from "./getdata";
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
   const [postId, setPostId] = useState("");
   const [boarddata, setBoardData] = useState([]);
+  const [searchItem, setSearchItem] = useState("whole");
   const img =
     "https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg";
 
@@ -22,11 +22,32 @@ const PromotionContainer = () => {
   const getData = async () => {
     try {
       await axios
-        .get("http://3.36.72.145:8080/api/board/notice/inDate/DESC")
+        .get(
+          `http://3.36.72.145:8080/api/board/promotion/${searchItem}/inDate/DESC`
+        )
         .then((response) => {
           const result = response.data.boards.slice(preitem, item);
-          const extraData = boarddata.concat(result);
-          setBoardData((prev) => prev.concat(extraData));
+          if (result.length) {
+            const extraData = boarddata.concat(result);
+            setBoardData((prev) => prev.concat(extraData));
+          }
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const firstGetData = async () => {
+    try {
+      await axios
+        .get(
+          `http://3.36.72.145:8080/api/board/promotion/${searchItem}/inDate/DESC`
+        )
+        .then((response) => {
+          preitem = 0;
+          item = 8;
+          const result = response.data.boards.slice(preitem, item);
+          setBoardData(result);
         });
     } catch (e) {
       console.log(e);
@@ -51,28 +72,18 @@ const PromotionContainer = () => {
     }
   };
 
-  const onCategorySearch = async (item) => {
-    item = "";
-    try {
-      await axios
-        .get(`http://3.36.72.145:8080/api/board/promotion/${item}/inDate/desc`)
-        .then((res) => setBoardData(res.data.boards));
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   useEffect(() => {
-    getData();
-    console.log(getdata[0].image);
-
+    firstGetData();
     window.addEventListener("scroll", infiniteScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", infiniteScroll);
+    };
+  }, [searchItem]);
 
   return (
     <>
       <Header />
-      <TypeSearch />
+      <TypeSearch setSearchItem={setSearchItem} getData={getData} />
       <Link href={`/promotion/write`} passHref>
         <button className={styles.writeBtn}>
           <BsPencil />

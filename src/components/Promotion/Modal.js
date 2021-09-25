@@ -41,7 +41,7 @@ const Modal = ({ setOpenModal, postId }) => {
     const getData = async () => {
       try {
         await axios
-          .get(`http://3.36.72.145:8080/api/board/notice/${postId}`)
+          .get(`http://3.36.72.145:8080/api/board/promotion/${postId}`)
           .then((res) => {
             if (res.data.success) setPostData(res.data.board);
             else alert(res.data.msg);
