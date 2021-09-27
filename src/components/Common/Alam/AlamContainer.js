@@ -85,20 +85,20 @@ const AlamContainer = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.icons}>
-        <FaTrashAlt onClick={onAlamDeleteAll} />
-      </div>
+      <div className={styles.icons}></div>
       <div className={styles.alams}>
         {alamList.slice(0, 3).map((el, i) => {
           return (
             <div key={i}>
               <p id={styles.big}>{el.big}</p>
-              <p>{el.small}</p>
+              <p className={styles.des}>{el.small}</p>
               <p id={styles.date}>{el.date}</p>
             </div>
           );
         })}
       </div>
+      <hr />
+      <FaTrashAlt onClick={onAlamDeleteAll} />
     </div>
   );
 };
