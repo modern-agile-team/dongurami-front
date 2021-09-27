@@ -7,6 +7,9 @@ import axios from "axios";
 export const Manager = () => {
   const [members, setMembers] = useState([]);
   const [leader, setLeader] = useState("");
+  const [applicantInfo, setApplicantInfo] = useState([]);
+  const [applicantQNA, setApplicantQNA] = useState([]);
+
   let jwtTocken = "";
 
   if (typeof window !== "undefined") {
@@ -24,7 +27,8 @@ export const Manager = () => {
     await axios
       .get("http://3.36.72.145:8080/api/club/admin-option/1", options)
       .then((res) => {
-        console.log(res.data.applicant);
+        setApplicantQNA(res.data.applicant.questionAndAnswer);
+        setApplicantInfo(res.data.applicant.applicantInfo);
         setLeader(res.data.clubAdminOption.leader);
         setMembers(res.data.clubAdminOption.memberAndAuthList);
       })
@@ -37,7 +41,7 @@ export const Manager = () => {
   return (
     <div className={styles.container}>
       <Members members={members} leader={leader} />
-      <Approve />
+      <Approve applicantInfo={applicantInfo} applicantQNA={applicantQNA} />
     </div>
   );
 };
