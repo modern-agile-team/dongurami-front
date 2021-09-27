@@ -41,7 +41,11 @@ export const Manager = () => {
   return (
     <div className={styles.container}>
       <Members members={members} leader={leader} />
-      <Approve applicantInfo={applicantInfo} applicantQNA={applicantQNA} />
+      <Approve
+        jwtTocken={jwtTocken}
+        applicantInfo={applicantInfo}
+        applicantQNA={applicantQNA}
+      />
     </div>
   );
 };

@@ -1,9 +1,10 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styles from "../../../styles/Club/Home/Manager/Approve.module.scss";
 import ApproveHeader from "./ApproveHeader";
 import ApproveList from "./ApproveList";
 
-const Approve = ({ applicantInfo, applicantQNA }) => {
+const Approve = ({ applicantInfo, applicantQNA, jwtTocken }) => {
   const [listOpen, setListOpen] = useState(false);
   const mergedApplicantQNA = mergeApplicantQNA(applicantQNA);
   const mergedApplicantInfo = mergeApplicantInfo(
@@ -11,15 +12,33 @@ const Approve = ({ applicantInfo, applicantQNA }) => {
     mergedApplicantQNA
   );
 
-  console.log(mergedApplicantInfo);
-
   const onApplyDelete = (e) => {
     alert("가입이 거절되었습니다.");
   };
-  const onApplyAccept = (e) => {
-    alert("가입이 승인되었습니다.");
+
+  // 가입 승인
+  const onApplyAccept = async (e) => {
+    const index = e.target.id;
+    const applicantID = mergedApplicantInfo[index].id;
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token": jwtTocken,
+      },
+      data: {
+        applicant: applicantID,
+      },
+    };
+    await axios(
+      "http://3.36.72.145:8080/api/club/admin-option/1/accept-applicant",
+      options
+    )
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
   };
 
+  // 가입 거절
   const onApplyListOpen = () => {
     setListOpen(!listOpen);
   };
@@ -45,6 +64,7 @@ const Approve = ({ applicantInfo, applicantQNA }) => {
 };
 export default Approve;
 
+// 가입 추가 질문 데이터 가공
 const mergeApplicantQNA = (needMergeData) => {
   const merged = [];
   for (let i in needMergeData) {
@@ -70,6 +90,7 @@ const mergeApplicantQNA = (needMergeData) => {
   return merged;
 };
 
+// 가입 요청 데이터 가공
 const mergeApplicantInfo = (needMergeData, toMergeData) => {
   for (let i in needMergeData) {
     if (toMergeData[i].id === needMergeData[i].id) {
