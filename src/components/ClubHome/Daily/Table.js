@@ -7,7 +7,7 @@ const Table = ({ calendarArr }) => {
     <div>
       <div className={styles.yoil}>
         {yoil.map((el) => {
-          return <span>{el}</span>;
+          return <span >{el}</span>;
         })}
       </div>
       <table className={styles.calendar}>
