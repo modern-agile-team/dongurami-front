@@ -52,7 +52,6 @@ function Notice({ category, getPosts }) {
 
   return (
     <div className={styles.container}>
-      <Header />
       <div className={styles.innerContainer}>
         <h1>{title[category]}</h1>
         <hr />

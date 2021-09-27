@@ -1,4 +1,6 @@
 import axios from 'axios';
+import Footer from 'components/Common/Footer';
+import Header from 'components/Common/Header';
 import Board from "../../components/Board/Board";
 
 const getPosts = async (order) => {
@@ -7,7 +9,13 @@ const getPosts = async (order) => {
 }
 
 function free() {
-  return <Board category="free" getPosts={getPosts}/>;
+  return (
+    <>
+      <Header />
+      <Board category="free" getPosts={getPosts}/>
+      <Footer />
+    </>
+  );
 }
 
 export default free;
