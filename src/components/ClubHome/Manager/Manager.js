@@ -13,6 +13,7 @@ export const Manager = () => {
     jwtTocken = localStorage.getItem("jwt");
   }
 
+  // 동아리원 정보 GET
   const getMembersData = async () => {
     const options = {
       headers: {
