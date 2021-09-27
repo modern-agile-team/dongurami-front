@@ -90,6 +90,7 @@ const Calendar = () => {
           nowDay={nowDay}
         />
         <RightContainer
+          className={styles.rightContainer}
           setMoment={setMoment}
           getMoment={getMoment}
           today={today}
