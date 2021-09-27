@@ -9,9 +9,10 @@ import ScheduleModify from "./ScheduleModify";
 import axios from "axios";
 import RightContainer from "./RightContainer";
 import MakeTd from "./MakeTd";
+import Router from "next/router";
 
 const Calendar = () => {
-  const [getMoment, setMoment] = useState(moment());
+  const [momentTime, setMoment] = useState(moment());
   const [date, setDate] = useState("");
   const [pop, setPop] = useState("Calendar");
   const [schedule, setSchedule] = useState([]);
@@ -22,20 +23,18 @@ const Calendar = () => {
   const [nowDay, setNowDay] = useState("");
   const nowDate = useRef();
   const moveHref = () => {
-    document.location.href = "/ClubHome";
+    Router.push("/LoginPage");
   };
 
-  const today = getMoment;
+  const today = momentTime;
   const firstWeek = today.clone().startOf("month").week();
   const lastWeek =
     today.clone().endOf("month").week() === 1
       ? 53
       : today.clone().endOf("month").week();
 
-  let token = "";
-
   const getInfo = () => {
-    token = localStorage.getItem("jwt");
+    let token = localStorage.getItem("jwt");
     axios(
       `http://3.36.72.145:8080/api/club/schedule/1/${today.format("YYYY-MM")}`,
       {
@@ -61,7 +60,7 @@ const Calendar = () => {
   useEffect(() => {
     if (today.format("MM") === nowMonth) setNowDay(nowDate.current.id);
     getInfo();
-  }, [getMoment]);
+  }, [momentTime]);
 
   //달력만드는 함수
   const calendarArr = () => {
@@ -92,7 +91,7 @@ const Calendar = () => {
         <RightContainer
           className={styles.rightContainer}
           setMoment={setMoment}
-          getMoment={getMoment}
+          momentTime={momentTime}
           today={today}
           setPop={setPop}
           calendarArr={calendarArr}
