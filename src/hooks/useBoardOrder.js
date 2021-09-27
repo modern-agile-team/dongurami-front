@@ -5,7 +5,7 @@ function useBoardOrder(router) {
   
   useEffect(() => {
     if (!router.isReady) return;
-    setOrder(router.query.order || 'inDate DESC');
+    setOrder(router.query.order ?? 'inDate DESC');
   }, [router]);
 
   return order;

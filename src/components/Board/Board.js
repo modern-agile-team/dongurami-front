@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useBoardOrder from 'hooks/useBoardOrder';
 import useBoardPage from 'hooks/useBoardPage';
+import useBoardSearch from 'hooks/useBoardSearch';
 
 function Notice({ category, getPosts }) {
   const router = useRouter();
@@ -15,21 +16,22 @@ function Notice({ category, getPosts }) {
 
   const page = useBoardPage(router);
   const order = useBoardOrder(router);
+  const search = useBoardSearch(router);
 
   useEffect(() => {
     (async () => {
-      if (!page && !order) return;
+      if (!order) return;
       const response = await getPosts(order);
       setPosts(response.data.boards);
     })();
-  }, [page, order, getPosts]);
+  }, [order, getPosts]);
 
   const setPageToUrl = (nextPage) => {
     router.push({
       pathname: router.pathname,
       query: {
-        page: nextPage,
-        order
+        ...router.query,
+        page: nextPage
       }
     });
   };
@@ -37,16 +39,14 @@ function Notice({ category, getPosts }) {
     router.push({
       pathname: router.pathname,
       query: {
+        ...router.query,
         page: 1,
         order: e.target.value
       }
     });
   }
-  const title = (
-    (category === 'notice') ? '공지 게시판' :
-    (category === 'free') ? '자유 게시판' :
-    undefined
-  );
+
+  const title = { notice: '공지 게시판', free: '자유 게시판' }
 
   if (!posts) return null;
 
@@ -54,7 +54,7 @@ function Notice({ category, getPosts }) {
     <div className={styles.container}>
       <Header />
       <div className={styles.innerContainer}>
-        <h1>{title}</h1>
+        <h1>{title[category]}</h1>
         <hr />
         <div className={styles.orderBy}>
           <Link href={`/${category}/write`} passHref><button>✏️ 글쓰기</button></Link>
@@ -66,7 +66,7 @@ function Notice({ category, getPosts }) {
         </div>
         <Table posts={posts} page={page} category={category} />
         <Pagination posts={posts} page={page} setPage={setPageToUrl} />
-        <Search category={category} />
+        <Search />
       </div>
     </div>
   );

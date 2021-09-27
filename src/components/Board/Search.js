@@ -3,7 +3,7 @@ import { BsSearch } from 'react-icons/bs';
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-function NoticeSearch({ category }) {
+function NoticeSearch() {
   const router = useRouter();
   const [value, setValue] = useState('');
 
@@ -11,10 +11,11 @@ function NoticeSearch({ category }) {
     setValue(e.target.value);
   };
   const onClick = () => {
+    if (value === '') return;
     router.push({
       pathname: router.pathname,
       query: {
-        q: value
+        search: value
       }
     });
   };
