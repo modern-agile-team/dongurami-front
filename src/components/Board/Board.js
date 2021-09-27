@@ -6,23 +6,23 @@ import Pagination from './Pagination';
 import Search from './Search';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import useBoardOrder from 'hooks/useBoardOrder';
+import useBoardPage from 'hooks/useBoardPage';
 
 function Notice({ category, getPosts }) {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState();
-  const [order, setOrder] = useState();
+
+  const page = useBoardPage(router);
+  const order = useBoardOrder(router);
 
   useEffect(() => {
-    if (!router.isReady) return;
-    setPage(Number(router.query.page) || 1);
-    setOrder(router.query.order || 'inDate DESC');
-  }, [router]);
-  useEffect(() => {
-    if (!order) return;
-    getPosts(order)
-      .then((response) => setPosts(response.data.boards));
-  }, [order, getPosts]);
+    (async () => {
+      if (!page && !order) return;
+      const response = await getPosts(order);
+      setPosts(response.data.boards);
+    })();
+  }, [page, order, getPosts]);
 
   const setPageToUrl = (nextPage) => {
     router.push({
@@ -48,9 +48,7 @@ function Notice({ category, getPosts }) {
     undefined
   );
 
-  if (!page) return null;
   if (!posts) return null;
-  if (!order) return null;
 
   return (
     <div className={styles.container}>

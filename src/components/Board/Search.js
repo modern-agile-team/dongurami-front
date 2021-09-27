@@ -1,13 +1,22 @@
 import styles from "../../styles/Board/Board/Search.module.scss";
 import { BsSearch } from 'react-icons/bs';
 import { useState } from "react";
-import Link from 'next/link';
+import { useRouter } from "next/router";
 
 function NoticeSearch({ category }) {
+  const router = useRouter();
   const [value, setValue] = useState('');
 
   const onChange = (e) => {
     setValue(e.target.value);
+  };
+  const onClick = () => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        q: value
+      }
+    });
   };
 
   return (
@@ -18,7 +27,7 @@ function NoticeSearch({ category }) {
         <option>댓글</option>
       </select>
       <input value={value} onChange={onChange} />
-      <Link href={`/${category}/search?q=${value}`} passHref><button><BsSearch /></button></Link>
+      <button onClick={onClick}><BsSearch /></button>
     </div>
   );
 }
