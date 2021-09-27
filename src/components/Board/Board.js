@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Header from "../Common/Header";
 import styles from "../../styles/Board/Board/Board.module.scss";
 import Table from './Table';
 import Pagination from './Pagination';
@@ -10,7 +9,7 @@ import useBoardOrder from 'hooks/useBoardOrder';
 import useBoardPage from 'hooks/useBoardPage';
 import useBoardSearch from 'hooks/useBoardSearch';
 
-function Notice({ category, getPosts }) {
+function Board({ category, getPosts }) {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
 
@@ -71,4 +70,4 @@ function Notice({ category, getPosts }) {
   );
 }
 
-export default Notice;
+export default Board;
