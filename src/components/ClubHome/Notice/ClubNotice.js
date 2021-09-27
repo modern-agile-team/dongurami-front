@@ -1,6 +1,5 @@
 import axios from "axios";
 import Board from 'components/Board/Board';
-import { useEffect } from "react";
 import styles from 'styles/Club/Home/Notice/ClubNotice.module.scss';
 
 const getPosts = async (order) => {
@@ -9,10 +8,6 @@ const getPosts = async (order) => {
 }
 
 function ClubNotice() {
-  useEffect(() => {
-    console.log('frame rerendered!!!')
-  }, []);
-
   return (
     <div className={styles.container}>
       <Board category="notice" getPosts={getPosts} />
