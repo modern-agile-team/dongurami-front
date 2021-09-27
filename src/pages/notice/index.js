@@ -1,13 +1,21 @@
 import Board from "../../components/Board/Board";
 import Footer from "../../components/Common/Footer";
+import axios from 'axios';
+import Header from "components/Common/Header";
 
-function notice() {
+const getPosts = async (order) => {
+  const response = await axios.get(`http://3.36.72.145:8080/api/board/notice/${order.split(' ').join('/')}`);
+  return response;
+}
+
+function Notice() {
   return (
     <>
-      <Board category="notice" baseAPI="http://3.36.72.145:8080/api/board/wholeNotice" />
-      <Footer/>
+      <Header />
+      <Board category="notice" getPosts={getPosts} />
+      <Footer />
     </>
   );
 }
 
-export default notice;
+export default Notice;

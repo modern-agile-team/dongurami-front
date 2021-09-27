@@ -32,7 +32,7 @@ function Write({ category }) {
 
   return (
     <>
-    <Container category={category}>
+    <Container category={category} type="글 작성하기">
       <WriteContent title={title} body={body} setTitle={setTitle} setBody={setBody} onSubmit={onSubmit} />
     </Container>
     <Modal show={showModal} onClose={onClose}>

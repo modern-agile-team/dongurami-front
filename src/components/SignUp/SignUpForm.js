@@ -16,6 +16,7 @@ function SignUpForm() {
   const [majorNum, setMajorNum] = useState("");
 
   const majorCategory = [
+    { value: "00", label: "학과 선택" },
     { value: "01", label: "디지털산업디자인학과" },
     { value: "02", label: "시각디자인과" },
     { value: "03", label: "건축학과" },
@@ -122,7 +123,7 @@ function SignUpForm() {
       setCheckSignUp("이름을 입력해주세요.");
     } else if (names.includes(" ")) {
       setCheckSignUp("이름엔 공백이 없어야 합니다.");
-    } else if (major === "") {
+    } else if (major === "" || major === "학과 선택") {
       setCheckSignUp("학과를 선택해주세요.");
     } else if (email === "") {
       setCheckSignUp("이메일을 입력해 주세요.");

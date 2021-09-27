@@ -41,7 +41,7 @@
     align-items: center;
     list-style: none;
     justify-content: space-between;
-    margin-right: 10%;
+    margin-right: 15%;
     padding-left: 0;
     cursor: pointer;
     .mobile {
@@ -53,11 +53,16 @@
   }
 }
 .tokenIcons {
+  display: flex;
   width: 30%;
   margin: auto;
-  cursor: pointer;
+  svg {
+    cursor: pointer;
+    margin: 0 18%;
+    font-size: 1.7vw;
+  }
   .bell {
-    margin-right: 30%;
+    margin-right: 150%;
   }
 }
 .user {
@@ -111,6 +116,12 @@
   }
 }
 
+.alam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @media screen and (max-width: 768px) {
   .myHeader {
     width: 100%;
@@ -130,6 +141,7 @@
       margin-left: 108%;
     }
     .menus {
+      cursor: default;
       font-size: 2.2vw;
       width: 100%;
       height: 100%;
@@ -190,20 +202,22 @@
     }
     .tokenIcons {
       width: 100%;
-      height: 100%;
-      margin-top: 90%;
-      margin-left: -11%;
+      margin-top: 115%;
+      margin-left: -12%;
+      .alam {
+        width: 100%;
+      }
       .bell {
         width: 15%;
         height: 10%;
-        margin-top: 150%;
-        margin-left: -64%;
+        margin-top: 130%;
+        margin-left: -62%;
       }
       .Profile {
         width: 15%;
         height: 10%;
-        margin-top: 150%;
-        margin-left: -15%;
+        margin-top: 130%;
+        margin-left: -132%;
       }
     }
     #show {
@@ -224,15 +238,21 @@
     }
     .topMenu {
       width: 90vw;
+      li {
+        font-size: 3.5vw;
+      }
+      .notice {
+        margin-top: 50%;
+      }
       .user {
-        margin-top: 150%;
-        margin-left: -62%;
+        margin-top: 185%;
+        margin-left: -68%;
       }
       .signUp {
-        width: 15vw;
+        width: 17vw;
       }
       .tokenIcons {
-        margin-top: 92%;
+        margin-top: 140%;
       }
     }
   }

@@ -28,7 +28,7 @@ function Edit({ category }) {
   };
 
   return (
-    <Container category={category}>
+    <Container category={category} type="글 수정하기">
       <WriteContent title={title} body={body} setTitle={setTitle} setBody={setBody} onSubmit={onSubmit} />
     </Container>
   );

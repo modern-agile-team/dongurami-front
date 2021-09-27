@@ -1,7 +1,7 @@
+import { useEffect, useRef } from "react";
 import styles from "../../../styles/Club/Home/Intro/Desc.module.scss";
-import LogoUpdate from "./LogoUpdate";
 
-const userId = "test1";
+const studentId = "201708051";
 
 const Desc = ({
   onDescChange,
@@ -9,19 +9,12 @@ const Desc = ({
   onDescUpdate,
   descUpdate,
   onDescSubnmit,
-  onClubLogoChange,
   leader,
 }) => {
-  const setOnClick = descUpdate ? onDescSubnmit : onDescUpdate;
-
+  console.log(leader);
   return (
     <div className={styles.intro}>
-      <div className={styles.introHeader}>
-        <span>동아리 소개</span>
-        {userId === leader ? (
-          <LogoUpdate onClubLogoChange={onClubLogoChange} />
-        ) : null}
-      </div>
+      <span>동아리 소개</span>
       <div id={styles.desc}>
         {descUpdate ? (
           <textarea onChange={onDescChange} defaultValue={introDesc} />
@@ -29,11 +22,17 @@ const Desc = ({
           <p>{introDesc}</p>
         )}
       </div>
-      {userId === leader ? (
+      {leader === studentId ? (
         <div>
-          <button onClick={setOnClick}>수정</button>
+          {descUpdate ? (
+            <button onClick={onDescSubnmit}>완료</button>
+          ) : (
+            <button onClick={onDescUpdate}>수정</button>
+          )}
         </div>
-      ) : null}
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

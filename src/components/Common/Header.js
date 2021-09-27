@@ -4,11 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { BiBell } from "react-icons/bi";
 import Hamburger from "hamburger-react";
+import AlamContainer from "./Alam/AlamContainer";
 
 function Header() {
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState("");
   const [nowPath, setNowPath] = useState("");
+  const [isAlamOpen, setIsAlamOpen] = useState(false);
 
   const router = useRouter();
   const closeRef = useRef(null);
@@ -51,6 +53,11 @@ function Header() {
   const logout = () => {
     window.location.reload();
     return setToken("");
+  };
+
+  //알람 열람
+  const alamOpen = () => {
+    setIsAlamOpen(!isAlamOpen);
   };
 
   return (
@@ -133,12 +140,11 @@ function Header() {
                 className={styles.tokenIcons}
                 id={open ? styles.show : styles.hide}
               >
-                <BiBell size="2vw" className={styles.bell} />
-                <FaUserCircle
-                  size="2vw"
-                  className={styles.Profile}
-                  onClick={logout}
-                />
+                <div className={styles.alam}>
+                  <BiBell onClick={alamOpen} className={styles.bell} />
+                  {isAlamOpen ? <AlamContainer /> : null}
+                </div>
+                <FaUserCircle className={styles.Profile} onClick={logout} />
               </div>
             ) : (
               <div
