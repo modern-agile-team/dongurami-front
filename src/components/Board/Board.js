@@ -1,34 +1,36 @@
 import Link from "next/link";
-import Header from "../Common/Header/Header";
 import styles from "../../styles/Board/Board/Board.module.scss";
 import Table from "./Table";
 import Pagination from "./Pagination";
 import Search from "./Search";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import useBoardOrder from "hooks/useBoardOrder";
+import useBoardPage from "hooks/useBoardPage";
+import useBoardSearch from "hooks/useBoardSearch";
 
-function Notice({ category, getPosts }) {
+function Board({ category, getPosts }) {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState();
-  const [order, setOrder] = useState();
+
+  const page = useBoardPage(router);
+  const order = useBoardOrder(router);
+  const search = useBoardSearch(router);
 
   useEffect(() => {
-    if (!router.isReady) return;
-    setPage(Number(router.query.page) || 1);
-    setOrder(router.query.order || "inDate DESC");
-  }, [router]);
-  useEffect(() => {
-    if (!order) return;
-    getPosts(order).then((response) => setPosts(response.data.boards));
+    (async () => {
+      if (!order) return;
+      const response = await getPosts(order);
+      setPosts(response.data.boards);
+    })();
   }, [order, getPosts]);
 
   const setPageToUrl = (nextPage) => {
     router.push({
       pathname: router.pathname,
       query: {
+        ...router.query,
         page: nextPage,
-        order,
       },
     });
   };
@@ -36,27 +38,21 @@ function Notice({ category, getPosts }) {
     router.push({
       pathname: router.pathname,
       query: {
+        ...router.query,
         page: 1,
         order: e.target.value,
       },
     });
   };
-  const title =
-    category === "notice"
-      ? "공지 게시판"
-      : category === "free"
-      ? "자유 게시판"
-      : undefined;
 
-  if (!page) return null;
+  const title = { notice: "공지 게시판", free: "자유 게시판" };
+
   if (!posts) return null;
-  if (!order) return null;
 
   return (
     <div className={styles.container}>
-      <Header />
       <div className={styles.innerContainer}>
-        <h1>{title}</h1>
+        <h1>{title[category]}</h1>
         <hr />
         <div className={styles.orderBy}>
           <Link href={`/${category}/write`} passHref>
@@ -70,10 +66,10 @@ function Notice({ category, getPosts }) {
         </div>
         <Table posts={posts} page={page} category={category} />
         <Pagination posts={posts} page={page} setPage={setPageToUrl} />
-        <Search category={category} />
+        <Search />
       </div>
     </div>
   );
 }
 
-export default Notice;
+export default Board;

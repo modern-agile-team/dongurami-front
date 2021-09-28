@@ -10,7 +10,7 @@ const ScheduleModify = ({ token, color, title, period, no, setPop, pop }) => {
   const [colorCode, setColorCode] = useState();
   const [newTitle, setNewTitle] = useState();
   const moveCal = () => {
-    Router.push("/ClubHome");
+    Router.push("/clubhome");
   };
   useEffect(() => {
     setStartDate(period[0]);
