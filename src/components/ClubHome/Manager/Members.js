@@ -17,11 +17,16 @@ export const Members = ({
     <div>
       <MembersHeader members={members.length} />
       <MembersPreface />
-      {members.map((el, index) => {
+      {members.map((member, index) => {
         return (
           <MembersList
             key={index}
-            memberInfo={[el.name, el.id, el.joinAdminFlag, el.boardAdminFlag]}
+            memberInfo={[
+              member.name,
+              member.id,
+              member.joinAdminFlag,
+              member.boardAdminFlag,
+            ]}
             leader={leader}
             onLeaderChange={() => onLeaderChange(index)}
             onApplyAuthClick={onApplyAuthClick}
