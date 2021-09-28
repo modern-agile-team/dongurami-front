@@ -1,0 +1,39 @@
+.control {
+  width: 70vw;
+  display: flex;
+  justify-content: center;
+  font-size: 140%;
+  z-index: 9;
+  .lastmonth {
+    cursor: pointer;
+    margin-right: 2%;
+    color: black;
+    &:hover {
+      color: #90e2d6;
+    }
+  }
+  .thisMonth {
+    align-items: stretch;
+  }
+  .nextmonth {
+    cursor: pointer;
+    margin-left: 2%;
+    color: black;
+    &:hover {
+      color: #90e2d6;
+    }
+  }
+}
+
+.add {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1%;
+  span {
+    color: black;
+    cursor: pointer;
+    &:hover {
+      color: #3fcdb8;
+    }
+  }
+}
