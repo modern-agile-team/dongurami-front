@@ -15,15 +15,16 @@ function Board({ category, getPosts }) {
 
   const page = useBoardPage(router);
   const order = useBoardOrder(router);
-  const search = useBoardSearch(router);
+  const { search, searchBy } = useBoardSearch(router);
+
 
   useEffect(() => {
     (async () => {
       if (!order) return;
-      const response = await getPosts(order);
-      setPosts(response.data.boards);
+      const response = await getPosts(order, { search, searchBy });
+      setPosts(response);
     })();
-  }, [order, getPosts]);
+  }, [order, search, searchBy, getPosts]);
 
   const setPageToUrl = (nextPage) => {
     router.push({
@@ -52,7 +53,7 @@ function Board({ category, getPosts }) {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <h1>{title[category]}</h1>
+        <Link href={router.pathname} passHref><h1><a>{title[category]}</a></h1></Link>
         <hr />
         <div className={styles.orderBy}>
           <Link href={`/${category}/write`} passHref><button>✏️ 글쓰기</button></Link>
