@@ -5,12 +5,14 @@ import Container from "./Container";
 import WriteContent from './WriteContent';
 import Modal from 'components/Common/Modal';
 import WritePromotion from "./WritePromotion";
+import getToken from "utils/getToken";
 
 function Write({ category }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+  const token = getToken();
 
   const onSubmit = () => {
     if (category === 'promotion') {
@@ -22,6 +24,10 @@ function Write({ category }) {
       clubNo: '1',
       title,
       description: body
+    }, {
+      headers: {
+        'x-auth-token': token
+      }
     }).then(() => {
       router.push(`/${category}`);
     });
