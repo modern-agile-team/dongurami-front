@@ -1,13 +1,13 @@
 import SignUp from "../components/SignUp/SignUp";
-import Header from "../components/Common/Header";
+import Header from "../components/Common/Header/Header";
 
 function signup() {
   return (
     <>
-    <Header />
-    <SignUp />
+      <Header />
+      <SignUp />
     </>
-  ); 
+  );
 }
 
 export default signup;
