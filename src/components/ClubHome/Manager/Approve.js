@@ -22,14 +22,12 @@ const Approve = ({
         onClick={onApplyListOpen}
         applicantInfo={applicantInfo}
       />
-      {listOpen ? (
+      {listOpen && (
         <ApproveList
           onApplyDelete={onApplyDelete}
           onApplyAccept={onApplyAccept}
           applicantInfo={mergedApplicantInfo}
         />
-      ) : (
-        <></>
       )}
     </div>
   );
