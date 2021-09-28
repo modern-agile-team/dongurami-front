@@ -11,7 +11,8 @@ const Modal = ({ setOpenModal, postId }) => {
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
   const [imgUrl, setImgUrl] = useState(getdata[index].img);
-  const [postData, setPostData] = useState("");
+  const [postData, setPostData] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const nextSlide = () => {
     let idx = index;
@@ -43,8 +44,10 @@ const Modal = ({ setOpenModal, postId }) => {
         await axios
           .get(`http://3.36.72.145:8080/api/board/promotion/${postId}`)
           .then((res) => {
-            if (res.data.success) setPostData(res.data.board);
-            else alert(res.data.msg);
+            if (res.data.success) {
+              setPostData(res.data.board);
+              setComments(res.data.comments);
+            } else alert(res.data.msg);
           });
       } catch (e) {
         console.log(e);
@@ -68,7 +71,12 @@ const Modal = ({ setOpenModal, postId }) => {
             <img src={imgUrl} onClick={() => setZoom(true)} />
             <IoIosArrowForward size={95} onClick={nextSlide} />
           </div>
-          <Post postData={postData} />
+          <Post
+            postData={postData}
+            postId={postId}
+            setPostData={setPostData}
+            comments={comments}
+          />
         </>
       )}
     </div>
