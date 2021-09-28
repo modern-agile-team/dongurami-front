@@ -1,5 +1,5 @@
 .form {
-  font-family: 'twayair';
+  font-family: "twayair";
   display: flex;
   flex-direction: column;
   margin-top: 7%;
@@ -8,14 +8,15 @@
   width: 35em;
   height: 45em;
   border: solid;
-  border-color: #C2F2DC;
+  border-color: #c2f2dc;
   border-radius: 40px;
   h1 {
     margin: 0 auto;
     margin-top: 5.5vh;
     margin-bottom: 4vh;
   }
-  .input {
+  input {
+    font-family: "Noto Sans KR", sans-serif;
     width: 20em;
     height: 1vh;
     margin: 0 auto;
@@ -25,6 +26,7 @@
     outline-style: none;
   }
   select {
+    font-family: "Noto Sans KR", sans-serif;
     width: 23.5em;
     height: 3.5em;
     margin: 0 auto;
@@ -32,19 +34,32 @@
     border: 1.5px solid #dadada;
     border-radius: 0.5em;
   }
+  .notSame {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 1vw;
+    margin: 0 auto;
+    margin-top: 2%;
+    color: red;
+  }
+  .feedback {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.9vw;
+    margin: 0 auto;
+    color: blue;
+  }
 }
 
 .button {
-  font-family: 'twayair';
+  font-family: "twayair";
   zoom: 1.4;
   width: 6em;
   height: 3em;
   margin: 0 auto;
   margin-top: 2vh;
   border-radius: 8px;
-  border: 1.5px solid #3FCDB8;
-  background-color: #fff; 
-  color: #3FCDB8;
+  border: 1.5px solid #3fcdb8;
+  background-color: #fff;
+  color: #3fcdb8;
   cursor: pointer;
 }
 .button:hover {
@@ -53,19 +68,22 @@
 
 .login {
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 5%;
+  margin-bottom: 5%;
   text-align: center;
   .loginRouting {
     margin-left: 1rem;
     cursor: pointer;
-    &:hover {color: #3FCDB8;}
+    &:hover {
+      color: #3fcdb8;
+    }
   }
 }
 
-.input::-webkit-inner-spin-button, 
-.input::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 @media screen and (max-width: 1024px) {
@@ -86,7 +104,7 @@
     }
     .select {
       width: 63%;
-    } 
+    }
     .button {
       width: 22%;
       height: 7%;

@@ -1,8 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 1em;
+  border: 3px solid #3fcdb8;
+  background-color: #e9fffc;
+  border-radius: 15px;
+  margin-top: 3em;
+  width: 25vw;
+}
+
 .schedule {
-  border: solid 1px #90E2D6;
-  width: 43vw;
+  // border: solid 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   margin-bottom: 2%;
-  *{
-    margin-left: 1%;
+  h4 {
+    margin: 2%;
+  }
+  hr {
+    width: 60%;
+  }
+  .inSchedule {
+    width: 60%;
+    margin-bottom: 2%;
   }
 }

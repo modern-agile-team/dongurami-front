@@ -2,11 +2,23 @@ import styles from "../../../styles/Club/Home/Intro/ClubIntro.module.scss";
 import ClubInfo from "./ClubInfo";
 import Desc from "./Desc";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const ClubIntro = () => {
   const [info, setInfo] = useState([]);
   const [descUpdate, setDescUpdate] = useState(false);
   const [introDesc, setIntroDesc] = useState("");
+  const [categori, setCategori] = useState("");
+  const [leader, setLeader] = useState("");
+
+  const toLogin = useRouter();
+
+  let jwtTocken = "";
+
+  if (typeof window !== "undefined") {
+    jwtTocken = localStorage.getItem("jwt");
+  }
 
   const onDescUpdate = () => {
     setDescUpdate(!descUpdate);
@@ -16,40 +28,53 @@ const ClubIntro = () => {
     setIntroDesc(e.target.value);
   };
 
-  const onDescSubnmit = () => {
-    fetch("http://3.36.72.145:8080/api/club/home/1", {
+  // 동아리 소개 수정
+  const onDescSubnmit = async () => {
+    const options = {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbHViTnVtIjpbMV0sImlkIjoidGVzdDEiLCJuYW1lIjoidGVzdDEiLCJlbWFpbCI6InRlc3QxQG5hdmVyY29tIiwicHJvZmlsZVBhdGgiOm51bGwsImlzQWRtaW4iOjAsImlhdCI6MTYzMTI0MjMzOSwiZXhwIjoxNjMxMzI4NzM5LCJpc3MiOiJ3b29haGFuIGFnaWxlIn0.E9ryaA_BRmkInWxSO3A3PLKb5LsRkBXjjnrflB0U3hU",
+        "x-auth-token": jwtTocken,
       },
-      body: JSON.stringify({
+      data: {
         logoUrl: info[0].logoUrl,
         fileId: info[0].fileId,
         introduce: introDesc,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+      },
+    };
+    await axios("http://3.36.72.145:8080/api/club/home/1", options)
+      .then((res) =>
+        res.data
+          ? alert("글이 수정되었습니다.")
+          : alert("글 수정에 실패했습니다")
+      )
+      .catch((err) => alert(err.response.data.msg));
+
     setDescUpdate(!descUpdate);
   };
 
+  // 동아리 정보 불러오기
   const getClubData = async () => {
-    await fetch("http://3.36.72.145:8080/api/club/home/1", {
+    const options = {
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+        "x-auth-token": jwtTocken,
       },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setInfo(data.result);
-        setIntroDesc(data.result[0].introduce);
+    };
+    await axios
+      .get("http://3.36.72.145:8080/api/club/home/1", options)
+      .then((res) => {
+        setLeader(res.data.result[0].leader);
+        setCategori(res.data.result[0].category);
+        setInfo(res.data.result);
+        setIntroDesc(res.data.result[0].introduce);
+      })
+      .catch((err) => {
+        alert(err.response.data.msg);
+        toLogin.push("/LoginPage");
       });
   };
+
   useEffect(() => {
     getClubData();
   }, []);
@@ -62,6 +87,7 @@ const ClubIntro = () => {
         fileId={info[0] ? info[0].fileId : 0}
         genderMan={info[0] ? info[0].genderMan : 0}
         genderWomen={info[0] ? info[0].genderWomen : 0}
+        categori={categori}
       />
       <Desc
         onDescSubnmit={onDescSubnmit}
@@ -69,6 +95,7 @@ const ClubIntro = () => {
         introDesc={introDesc}
         onDescUpdate={onDescUpdate}
         descUpdate={descUpdate}
+        leader={leader}
       />
     </div>
   );

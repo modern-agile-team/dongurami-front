@@ -3,21 +3,34 @@ import styles from "../../../styles/Club/Home/Apply/Additional.module.scss";
 import { HiPencil } from "react-icons/hi";
 import { FaTrashAlt } from "react-icons/fa";
 
-const Additional = ({ list, onRemove, onUpdate, isUpdate }) => {
+const Additional = ({
+  questions,
+  onRemove,
+  onUpdate,
+  isUpdate,
+  onAnswerInputChange,
+  updateQuestionInput,
+  onUpdateInputChange,
+}) => {
   return (
     <div className={styles.additional}>
       <ul>
-        {list.map((el, i) => {
+        {questions.map((el, i) => {
           return (
-            <li key={i}>
+            <li id={i} key={i}>
               {isUpdate[i] ? (
-                <input type="text" defaultValue={el.question} />
+                <input
+                  ref={updateQuestionInput}
+                  type="text"
+                  defaultValue={el.question}
+                  onChange={onUpdateInputChange}
+                />
               ) : (
-                <span>{el.question}</span>
+                <span>{el.description}</span>
               )}
-              <HiPencil onClick={() => onUpdate(i)} />
-              <FaTrashAlt id={styles.remove} onClick={() => onRemove(i)} />
-              <textarea />
+              <HiPencil onClick={() => onUpdate(i, el.no)} />
+              <FaTrashAlt id={styles.remove} onClick={() => onRemove(el.no)} />
+              <textarea onChange={onAnswerInputChange} />
             </li>
           );
         })}

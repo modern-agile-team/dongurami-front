@@ -6,6 +6,7 @@ import ReviewWrite from "./ReviewWrite";
 import ReviewMine from "./ReviewMine";
 import ReviewList from "./ReviewList";
 import Router from "next/router";
+import axios from "axios";
 
 const Review = () => {
   const [reviewInput, setReviewInput] = useState(""); // 후기 글
@@ -13,13 +14,41 @@ const Review = () => {
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
 
+  let jwtTocken = "";
+
+  if (typeof window !== "undefined") {
+    jwtTocken = localStorage.getItem("jwt");
+  }
+
+  // 별점 평균
+  const reviewAvg =
+    reviewList
+      .map((el) => el.score)
+      .reduce((sum, cur) => {
+        return sum + cur;
+      }, 0) / reviewList.length;
+
+  // 후기 불러오기
+  const getReviewData = async () => {
+    const options = {
+      headers: {
+        "x-auth-token": jwtTocken,
+      },
+    };
+    await axios("http://3.36.72.145:8080/api/club/review/1", options)
+      .then((res) => {
+        setReviewList(res.data.reviewList);
+      })
+      .catch((err) => console.log(err.response.data.msg));
+  };
+
   // 버튼 클릭 시 페이지 리로딩
   const reloadPage = () => {
     Router.push("/ClubHome");
   };
 
   // 내 후기와 내 후기가 아닌 것들
-  const reviewMine = reviewList.filter((el) => el.studentId === "test1");
+  const reviewMine = reviewList.filter((el) => el.studentId === "201708051");
   const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
 
   // 내 리뷰 번호
@@ -52,82 +81,78 @@ const Review = () => {
     setReviewInput(e.target.value);
   };
 
-  // 별점 평균
-  const reviewAvg =
-    reviewList
-      .map((el) => el.score)
-      .reduce((sum, cur) => {
-        return sum + cur;
-      }, 0) / reviewList.length;
-
   // 후기 + 별점 입력
-  const onReviewSubmit = () => {
-    reviewInput === ""
-      ? alert("빈 칸은 입력할 수 없습니다.")
-      : fetch("http://3.36.72.145:8080/api/club/review/1", {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json; charset=utf-8",
-            "x-auth-token":
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
-          },
-          body: JSON.stringify({
-            description: reviewInput,
-            score: reviewRate,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => alert(data.msg));
+  const onReviewSubmit = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token": jwtTocken,
+      },
+      data: {
+        description: reviewInput,
+        score: reviewRate,
+      },
+    };
+    await axios("http://3.36.72.145:8080/api/club/review/1", options)
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+
     reloadPage();
   };
 
   // 내 후기 삭제
-  const onReviewDelete = () => {
-    fetch(`http://3.36.72.145:8080/api/club/review/1/${reviewMine[0].no}`, {
+  const onReviewDelete = async () => {
+    const options = {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+        "x-auth-token": jwtTocken,
       },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-    alert("후기가 삭제되었습니다.");
+    };
+    await axios(
+      `http://3.36.72.145:8080/api/club/review/1/${reviewMine[0].no}`,
+      options
+    )
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
     reloadPage();
   };
 
   // 내 후기 수정
-  const onReviewUpdate = () => {
-    fetch(`http://3.36.72.145:8080/api/club/review/1/${myReviewNum}`, {
+  const onReviewUpdate = async () => {
+    const options = {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
+        "x-auth-token": jwtTocken,
       },
-      body: JSON.stringify({
+      data: {
         description: reviewInput,
         score: reviewRate,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => alert(data.msg));
+      },
+    };
+    await axios(
+      `http://3.36.72.145:8080/api/club/review/1/${myReviewNum}`,
+      options
+    )
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+
     reloadPage();
   };
 
-  // 후기 불러오기
-  const getReviewData = async () => {
-    await fetch("http://3.36.72.145:8080/api/club/review/1", {
-      headers: {
-        "x-auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdDEiLCJpZCI6InRlc3QxIiwiY2x1Yk51bSI6IlsxXSJ9.CXBKbWB2zJV3PMO1FNsu-9qQjZw4Xp4Wki-bR3qvEXI",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setReviewList(data.reviewList);
-      });
+  // 필터링
+  const onFilterChange = (e) => {
+    const filter = e.target.value;
+    const dateFilter = reviewList.slice(0).sort((a, b) => {
+      return a.no - b.no;
+    });
+    const starFilter = reviewList.slice(0).sort((a, b) => {
+      return b.score - a.score;
+    });
+
+    filter === "1" ? setReviewList(dateFilter) : setReviewList(starFilter);
   };
 
   useEffect(() => {
@@ -146,7 +171,7 @@ const Review = () => {
         onReviewInput={onReviewInput}
         onReviewSubmit={onReviewSubmit}
       />
-      <ReviewFilter />
+      <ReviewFilter onFilterChange={onFilterChange} />
       {reviewMine.length ? (
         <ReviewMine
           onReviewDelete={onReviewDelete}
@@ -165,7 +190,6 @@ const Review = () => {
             rate={el.score}
             desc={el.description}
             date={el.inDate.substring(0, 10)}
-            no={i + 1}
           />
         );
       })}
