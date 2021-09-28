@@ -2,19 +2,23 @@ import React, { useRef } from "react";
 import styles from "../../../styles/Club/Home/Manager/MembersList.module.scss";
 import { RiVipCrownFill, RiVipCrownLine } from "react-icons/ri";
 
-const MembersList = ({ name, leader, auth1, auth2 }) => {
+const MembersList = ({
+  name,
+  leader,
+  auth1,
+  auth2,
+  studentId,
+  changeLeader,
+  onLeaderChange,
+}) => {
   const applyAuth = useRef();
   const boardAuth = useRef();
-  const changeLeader = useRef();
 
   const onApplyAuthClick = () => {
     console.log(applyAuth.current.checked);
   };
   const onBoardAuth = () => {
     console.log(boardAuth.current.checked);
-  };
-  const onLeaderChange = () => {
-    console.log(changeLeader.current.id);
   };
 
   return (
@@ -25,8 +29,11 @@ const MembersList = ({ name, leader, auth1, auth2 }) => {
         ) : (
           <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
         )}
-        <span ref={changeLeader} id={name}>
-          {name}
+        <span>{name}</span>
+      </div>
+      <div>
+        <span ref={changeLeader} id={studentId}>
+          {studentId}
         </span>
       </div>
       <div>

@@ -7,7 +7,7 @@ const ApproveList = ({ onApplyAccept, onApplyDelete, applicantInfo }) => {
       {applicantInfo.map((info, index) => {
         return (
           <>
-            <div key={info} className={styles.applierInfo}>
+            <div key={info.id} className={styles.applierInfo}>
               <div>
                 <span>이름: </span>
                 <span>{info.name}</span>

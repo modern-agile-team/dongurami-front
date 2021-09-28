@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/Club/Home/Manager/Approve.module.scss";
 import ApproveHeader from "./ApproveHeader";
 import ApproveList from "./ApproveList";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "../../../styles/Club/Home/Manager/Manager.module.scss";
 import Approve from "./Approve";
 import Members from "./Members";
@@ -12,10 +12,12 @@ export const Manager = () => {
   const [mergedApplicantQNA, setMergedApplicantQNA] = useState([]);
   const [mergedApplicantInfo, setMergedApplicantInfo] = useState([]);
 
-  let jwtTocken = "";
+  const changeLeader = useRef([]);
+
+  let jwtToken = "";
 
   if (typeof window !== "undefined") {
-    jwtTocken = localStorage.getItem("jwt");
+    jwtToken = localStorage.getItem("jwt");
   }
 
   // 동아리원 정보 GET
@@ -23,13 +25,13 @@ export const Manager = () => {
     const options = {
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtTocken,
+        "x-auth-token": jwtToken,
       },
     };
     await axios
       .get("http://3.36.72.145:8080/api/club/admin-option/1", options)
       .then((res) => {
-        setApplicantQNA(res.data.applicant.questionAndAnswer);
+        setApplicantQNA(res.data.applicant.questionsAnswers);
         setApplicantInfo(res.data.applicant.applicantInfo);
         setLeader(res.data.clubAdminOption.leader);
         setMembers(res.data.clubAdminOption.memberAndAuthList);
@@ -48,7 +50,7 @@ export const Manager = () => {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtTocken,
+        "x-auth-token": jwtToken,
       },
       data: {
         applicant: applicantID,
@@ -71,7 +73,7 @@ export const Manager = () => {
       method: "PUT",
       headers: {
         "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtTocken,
+        "x-auth-token": jwtToken,
       },
       data: {
         applicant: applicantID,
@@ -79,6 +81,30 @@ export const Manager = () => {
     };
     await axios(
       "http://3.36.72.145:8080/api/club/admin-option/1/reject-applicant",
+      options
+    )
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+    getMembersData();
+  };
+
+  // 회장 양도
+  const onLeaderChange = async (memberIndex) => {
+    const newLeader = changeLeader.current;
+    const newLeaderId = newLeader[memberIndex].id;
+
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token": jwtToken,
+      },
+      data: {
+        newLeader: newLeaderId,
+      },
+    };
+    await axios(
+      "http://3.36.72.145:8080/api/club/admin-option/1/leader",
       options
     )
       .then((res) => alert(res.data.msg))
@@ -100,10 +126,15 @@ export const Manager = () => {
 
   return (
     <div className={styles.container}>
-      <Members members={members} leader={leader} />
+      <Members
+        members={members}
+        leader={leader}
+        changeLeader={changeLeader}
+        onLeaderChange={onLeaderChange}
+      />
       <Approve
         onApplyAccept={onApplyAccept}
-        jwtTocken={jwtTocken}
+        jwtTocken={jwtToken}
         applicantInfo={applicantInfo}
         applicantQNA={applicantQNA}
         mergedApplicantInfo={mergedApplicantInfo}
@@ -118,22 +149,23 @@ export default Manager;
 // 가입 추가 질문 데이터 가공
 const mergeApplicantQNA = (needMergeData) => {
   const merged = [];
-  for (let i in needMergeData) {
+  for (let dataIndex in needMergeData) {
     if (
-      parseInt(i) === 0 ||
-      (parseInt(i) > 0 && needMergeData[i - 1].id !== needMergeData[i].id)
+      parseInt(dataIndex) === 0 ||
+      (parseInt(dataIndex) > 0 &&
+        needMergeData[dataIndex - 1].id !== needMergeData[dataIndex].id)
     ) {
       const obj = {
-        id: needMergeData[i].id,
-        questions: [needMergeData[i].question],
-        answers: [needMergeData[i].answer],
+        id: needMergeData[dataIndex].id,
+        questions: [needMergeData[dataIndex].question],
+        answers: [needMergeData[dataIndex].answer],
       };
       merged.push(obj);
     } else {
       for (let j of merged) {
-        if (j.id === needMergeData[i].id) {
-          j.questions.push(needMergeData[i].question);
-          j.answers.push(needMergeData[i].answer);
+        if (j.id === needMergeData[dataIndex].id) {
+          j.questions.push(needMergeData[dataIndex].question);
+          j.answers.push(needMergeData[dataIndex].answer);
         }
       }
     }
@@ -143,10 +175,10 @@ const mergeApplicantQNA = (needMergeData) => {
 
 // 가입 요청 데이터 가공
 const mergeApplicantInfo = (needMergeData, toMergeData) => {
-  for (let i in needMergeData) {
-    if (toMergeData[i].id === needMergeData[i].id) {
-      needMergeData[i].answers = toMergeData[i].answers;
-      needMergeData[i].questions = toMergeData[i].questions;
+  for (let dataIndex in needMergeData) {
+    if (toMergeData[dataIndex].id === needMergeData[dataIndex].id) {
+      needMergeData[dataIndex].answers = toMergeData[dataIndex].answers;
+      needMergeData[dataIndex].questions = toMergeData[dataIndex].questions;
     }
   }
   return needMergeData;
