@@ -18,7 +18,7 @@ const DailyModal = ({ setPop, pop, today }) => {
     setColor("#000000");
   }, [pop]);
   const moveCal = () => {
-    Router.push("/ClubHome");
+    Router.push("/clubhome");
   };
 
   //추가하는 함수
