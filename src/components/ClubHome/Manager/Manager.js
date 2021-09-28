@@ -11,8 +11,14 @@ export const Manager = () => {
   const [applicantQNA, setApplicantQNA] = useState([]);
   const [mergedApplicantQNA, setMergedApplicantQNA] = useState([]);
   const [mergedApplicantInfo, setMergedApplicantInfo] = useState([]);
+  const [applyAuth, setApplyAuth] = useState();
+  const [boardAuth, setBoardAuth] = useState();
 
-  const changeLeader = useRef([]);
+  const applyAuthRef = useRef([]);
+  const boardAuthRef = useRef([]);
+  const changeLeaderRef = useRef([]);
+
+  const refArr = [applyAuthRef, boardAuthRef, changeLeaderRef];
 
   let jwtToken = "";
 
@@ -42,7 +48,7 @@ export const Manager = () => {
       .catch((err) => console.log(err.response.data));
   };
 
-  // 가입 승인
+  // 가입 승인 POST
   const onApplyAccept = async (e) => {
     const index = e.target.id;
     const applicantID = mergedApplicantInfo[index].id;
@@ -65,7 +71,7 @@ export const Manager = () => {
     getMembersData();
   };
 
-  // 가입 거절
+  // 가입 거절 PUT
   const onApplyDelete = async (e) => {
     const index = e.target.id;
     const applicantID = mergedApplicantInfo[index].id;
@@ -88,9 +94,9 @@ export const Manager = () => {
     getMembersData();
   };
 
-  // 회장 양도
+  // 회장 양도 PUT
   const onLeaderChange = async (memberIndex) => {
-    const newLeader = changeLeader.current;
+    const newLeader = changeLeaderRef.current;
     const newLeaderId = newLeader[memberIndex].id;
 
     const options = {
@@ -112,6 +118,55 @@ export const Manager = () => {
     getMembersData();
   };
 
+  // 기능 권한 변경 PUT
+  const changeMembersAuth = async () => {
+    const adminOptions = [];
+    const tempArr = members.slice(0);
+
+    tempArr.map((member, index) => {
+      adminOptions.push({
+        id: member.id,
+        joinAdminFlag: applyAuth[index],
+        boardAdminFlag: boardAuth[index],
+      });
+    });
+
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=utf-8",
+        "x-auth-token": jwtToken,
+      },
+      data: {
+        adminOptions: adminOptions,
+      },
+    };
+
+    await axios(
+      "http://3.36.72.145:8080/api/club/admin-option/1/admin-functions",
+      options
+    )
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+    getMembersData();
+  };
+
+  //---------------------기능 권한 변경---------------------------//
+  const onApplyAuthClick = () => {
+    const newArr = applyAuthRef.current.slice(0);
+    const boolOfApplyAuth = [];
+    newArr.map((el) => boolOfApplyAuth.push(el.checked ? 1 : 0));
+    setApplyAuth(boolOfApplyAuth);
+  };
+
+  const onBoardAuth = () => {
+    const newArr = boardAuthRef.current.slice(0);
+    const boolOfBoardAuth = [];
+    newArr.map((el) => boolOfBoardAuth.push(el.checked ? 1 : 0));
+    setBoardAuth(boolOfBoardAuth);
+  };
+  //-------------------------------------------------------------//
+
   useEffect(() => {
     if (applicantInfo.length > 0 && mergedApplicantQNA.length > 0) {
       setMergedApplicantInfo(
@@ -122,6 +177,8 @@ export const Manager = () => {
 
   useEffect(() => {
     getMembersData();
+    onApplyAuthClick();
+    onBoardAuth();
   }, []);
 
   return (
@@ -129,16 +186,18 @@ export const Manager = () => {
       <Members
         members={members}
         leader={leader}
-        changeLeader={changeLeader}
         onLeaderChange={onLeaderChange}
+        onApplyAuthClick={onApplyAuthClick}
+        onBoardAuth={onBoardAuth}
+        changeMembersAuth={changeMembersAuth}
+        refArr={refArr}
       />
       <Approve
         onApplyAccept={onApplyAccept}
-        jwtTocken={jwtToken}
+        onApplyDelete={onApplyDelete}
         applicantInfo={applicantInfo}
         applicantQNA={applicantQNA}
         mergedApplicantInfo={mergedApplicantInfo}
-        onApplyDelete={onApplyDelete}
       />
     </div>
   );

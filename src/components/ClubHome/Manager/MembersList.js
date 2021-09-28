@@ -1,47 +1,38 @@
-import React, { useRef } from "react";
+import React from "react";
 import styles from "../../../styles/Club/Home/Manager/MembersList.module.scss";
 import { RiVipCrownFill, RiVipCrownLine } from "react-icons/ri";
 
 const MembersList = ({
-  name,
   leader,
-  auth1,
-  auth2,
-  studentId,
-  changeLeader,
   onLeaderChange,
+  applyAuth,
+  boardAuth,
+  changeLeader,
+  onBoardAuth,
+  onApplyAuthClick,
+  memberInfo,
 }) => {
-  const applyAuth = useRef();
-  const boardAuth = useRef();
-
-  const onApplyAuthClick = () => {
-    console.log(applyAuth.current.checked);
-  };
-  const onBoardAuth = () => {
-    console.log(boardAuth.current.checked);
-  };
-
   return (
     <div className={styles.member}>
       <div>
-        {name === leader ? (
+        {memberInfo[0] === leader ? (
           <RiVipCrownFill />
         ) : (
           <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
         )}
-        <span>{name}</span>
+        <span>{memberInfo[0]}</span>
       </div>
       <div>
-        <span ref={changeLeader} id={studentId}>
-          {studentId}
+        <span ref={changeLeader} id={memberInfo[1]}>
+          {memberInfo[1]}
         </span>
       </div>
       <div>
         <input
           type="checkBox"
           className={styles.appManage}
-          defaultChecked={auth1 ? true : false}
-          disabled={name === leader ? true : false}
+          defaultChecked={memberInfo[2] ? true : false}
+          disabled={memberInfo[0] === leader ? true : false}
           ref={applyAuth}
           onClick={onApplyAuthClick}
         />
@@ -50,8 +41,8 @@ const MembersList = ({
         <input
           type="checkBox"
           className={styles.appManage}
-          defaultChecked={auth2 ? true : false}
-          disabled={name === leader ? true : false}
+          defaultChecked={memberInfo[3] ? true : false}
+          disabled={memberInfo[0] === leader ? true : false}
           ref={boardAuth}
           onClick={onBoardAuth}
         />
