@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../../styles/Club/Home/Schedule/Calendar.module.scss";
+import styles from "../../../styles/Club/Home/Schedule/Table.module.scss";
 import OtherDays from "./OtherDays";
 import MonthDays from "./MonthDays";
 import TodayTd from "./TodayTd";

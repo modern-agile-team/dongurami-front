@@ -5,7 +5,7 @@ import Control from "./Control";
 
 const RightContainer = ({
   setMoment,
-  getMoment,
+  momentTime,
   today,
   setPop,
   calendarArr,
@@ -14,7 +14,7 @@ const RightContainer = ({
     <div className={styles.right}>
       <Control
         setMoment={setMoment}
-        getMoment={getMoment}
+        momentTime={momentTime}
         today={today}
         setPop={setPop}
       />

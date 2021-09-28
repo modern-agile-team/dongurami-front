@@ -1,25 +1,21 @@
-import ClubNoticeTable from "./ClubNoticeTable";
-import ClubNoticeSearch from "./ClubNoticeSearch";
-import ClubNoticePagination from "./ClubNoticePagination";
-import styles from "../../../styles/Club/Home/Notice/ClubNotice.module.scss";
+import axios from "axios";
+import Board from 'components/Board/Board';
+import styles from 'styles/Club/Home/Notice/ClubNotice.module.scss';
+
+const getPosts = async (order, { search, searchBy }) => {
+  if (search && searchBy) {
+    const response = await axios
+      .get(`http://3.36.72.145:8080/api/search/notice/${searchBy}/${search}`);
+    return response.data.searchByKeywordResults;
+  }
+  const response = await axios.get(`http://3.36.72.145:8080/api/board/notice/${order.split(' ').join('/')}`);
+  return response.data.boards;
+}
 
 function ClubNotice() {
   return (
     <div className={styles.container}>
-      <div className={styles.innerContainer}>
-        <h1>공지 게시판</h1>
-        <hr />
-        <div className={styles.orderBy}>
-          <button>✏️ 글쓰기</button>
-          <select>
-            <option>날짜순</option>
-            <option>조회수순</option>
-          </select>
-        </div>
-        <ClubNoticeTable />
-        <ClubNoticePagination />
-        <ClubNoticeSearch />
-      </div>
+      <Board category="notice" getPosts={getPosts} />
     </div>
   );
 }

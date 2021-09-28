@@ -1,22 +1,22 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Apply/ApplyQuestions.module.scss";
-import { user } from "./Apply";
 
-const ApplyQuestions = ({ onUserInfoChange }) => {
+const ApplyQuestions = ({ onUserInfoChange, userInfo }) => {
+  const [male, female] = [1, 2];
   return (
     <div className={styles.questions}>
       <ul>
         <li>
           <span>이름</span>
-          <p id="name">{user.name}</p>
+          <p id="name">{userInfo.name}</p>
         </li>
         <li>
           <span>학번</span>
-          <p id="studentID">{user.studentID}</p>
+          <p id="studentID">{userInfo.id}</p>
         </li>
         <li>
           <span>학과</span>
-          <p id="department">{user.department}</p>
+          <p id="department">{userInfo.major}</p>
         </li>
         <li>
           <span>학년</span>
@@ -33,8 +33,8 @@ const ApplyQuestions = ({ onUserInfoChange }) => {
           <br />
           <select name="sex" id="sex" onChange={onUserInfoChange}>
             <option value="선택 안함">선택</option>
-            <option value={1}>남자</option>
-            <option value={2}>여자</option>
+            <option value={male}>남자</option>
+            <option value={female}>여자</option>
           </select>
         </li>
         <li>

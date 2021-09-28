@@ -10,9 +10,10 @@ const Schedule = ({ schedule, nowDay }) => {
     <div className={styles.container}>
       <div className={styles.schedule}>
         <h4>주요 일정</h4>
-        {schedule.map((el, i) => {
+        <hr />
+        {schedule.map((el) => {
           return el.important === 1 ? (
-            <div key={el.no}>
+            <div key={el.no} className={styles.inSchedule}>
               <span style={{ color: `${el.colorCode}` }}>{el.title}</span>
               <br />
               <span>
@@ -24,10 +25,11 @@ const Schedule = ({ schedule, nowDay }) => {
       </div>
       <div className={styles.schedule}>
         <h4>오늘의 일정</h4>
+        <hr />
         {schedule.map((el) => {
           return Date.parse(el.startDate) <= Date.parse(nowDay) &&
             Date.parse(nowDay) <= Date.parse(el.endDate) ? (
-            <div key={el.no}>
+            <div key={el.no} className={styles.inSchedule}>
               <span style={{ color: `${el.colorCode}` }}>{el.title}</span>
               <br />
               <span>

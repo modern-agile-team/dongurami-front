@@ -1,24 +1,39 @@
 import styles from "../../styles/Board/Board/Search.module.scss";
 import { BsSearch } from 'react-icons/bs';
-import { useState } from "react";
-import Link from 'next/link';
+import { useRouter } from "next/router";
+import useBoardSearch from "hooks/useBoardSearch";
 
-function NoticeSearch({ category }) {
-  const [value, setValue] = useState('');
+function NoticeSearch() {
+  const router = useRouter();
+  const { search, searchBy, setSearch, setSearchBy } = useBoardSearch(router);
 
-  const onChange = (e) => {
-    setValue(e.target.value);
+  const onSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+  const onSearchByChange = (e) => {
+    setSearchBy(e.target.value);
+  };
+
+  const onClick = () => {
+    if (search === '') return;
+    router.push({
+      pathname: router.pathname,
+      query: {
+        search,
+        searchBy
+      }
+    });
   };
 
   return (
     <div className={styles.container}>
-      <select>
-        <option>제목</option>
-        <option>내용</option>
-        <option>댓글</option>
+      <select value={searchBy} onChange={onSearchByChange}>
+        <option value="title">제목</option>
+        <option value="content">내용</option>
+        <option value="comment">댓글</option>
       </select>
-      <input value={value} onChange={onChange} />
-      <Link href={`/${category}/search?q=${value}`} passHref><button><BsSearch /></button></Link>
+      <input value={search} onChange={onSearchChange} />
+      <button onClick={onClick}><BsSearch /></button>
     </div>
   );
 }

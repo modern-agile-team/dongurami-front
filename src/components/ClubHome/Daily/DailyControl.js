@@ -77,7 +77,10 @@ const DailyControl = ({
                       className={styles.pencil}
                     />
                     <FaTrashAlt
-                      onClick={() => onDeleteSchedule(el)}
+                      onClick={() => {
+                        if (el.important === 0) onDeleteSchedule(el);
+                        else alert("주요 일정은 삭제 할 수 없습니다.");
+                      }}
                       className={styles.delete}
                     />
                     {el.important ? (

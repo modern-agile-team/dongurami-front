@@ -1,14 +1,14 @@
 import React from "react";
-import styles from "../../../styles/Club/Home/Schedule/Calendar.module.scss";
+import styles from "../../../styles/Club/Home/Schedule/RightContainer.module.scss";
 
-const Control = ({ setMoment, getMoment, today, setPop }) => {
+const Control = ({ setMoment, momentTime, today, setPop }) => {
   return (
     <div>
       <div className={styles.control}>
         <span
           className={styles.lastmonth}
           onClick={() => {
-            setMoment(getMoment.clone().subtract(1, "month"));
+            setMoment(momentTime.clone().subtract(1, "month"));
           }}
         >
           &lt;
@@ -17,7 +17,7 @@ const Control = ({ setMoment, getMoment, today, setPop }) => {
         <span
           className={styles.nextmonth}
           onClick={() => {
-            setMoment(getMoment.clone().add(1, "month"));
+            setMoment(momentTime.clone().add(1, "month"));
           }}
         >
           &gt;
