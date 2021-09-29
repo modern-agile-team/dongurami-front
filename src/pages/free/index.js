@@ -1,6 +1,6 @@
 import axios from "axios";
 import Footer from "components/Common/Footer";
-import Header from "components/Common/Header/Header";
+import Header from "../../components/Common/Header/Header";
 import Board from "../../components/Board/Board";
 
 const getPosts = async (order) => {
