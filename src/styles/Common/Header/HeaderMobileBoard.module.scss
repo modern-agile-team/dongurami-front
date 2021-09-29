@@ -1,0 +1,22 @@
+.container {
+  display: none;
+}
+
+#now {
+  color: #3fcdb8;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    display: inline;
+    margin-top: 100%;
+    .mobile {
+      list-style: none;
+      width: 30vw;
+      padding: 0%;
+      margin-top: 100%;
+      margin-left: 0px;
+      text-align: center;
+    }
+  }
+}

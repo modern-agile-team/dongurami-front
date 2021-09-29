@@ -1,7 +1,7 @@
 import Board from "../../components/Board/Board";
 import Footer from "../../components/Common/Footer";
-import axios from 'axios';
-import Header from "components/Common/Header";
+import axios from "axios";
+import Header from "../../components/Common/Header/Header";
 
 const getPosts = async (order, { search, searchBy }) => {
   if (search && searchBy) {
