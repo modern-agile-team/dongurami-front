@@ -1,18 +1,5 @@
-import { useState } from 'react';
-import styles from '../../styles/User/MyPage/modifyInfo.module.scss';
-import { FiSettings, FiUser } from 'react-icons/fi'
-import Rouer from 'next/router'
-
-const ModifyInfo = () => {
-  const userData = {
-    img : 'https://avatars.githubusercontent.com/u/77265494?s=200&v=4',
-    name : '박현우',
-    department : '정보통신공학과'
-  }
-  const [input, setInput] = useState(false);
-
-  return (
-    <div className={styles.back}>
+{
+  /* <div className={styles.back}>
       <div className={styles.wrap}>
         <div className={styles.header}>
           <FiUser className={styles.user} />
@@ -35,7 +22,5 @@ const ModifyInfo = () => {
         <button className={styles.button} onClick={() => {}}>완료</button>
       </div>
     </div>
-  )
+  ) */
 }
-
-export default ModifyInfo;
