@@ -18,7 +18,6 @@ const MembersPreface = () => {
           <span>게시글 편집</span>
         </div>
       </div>
-      <hr />
     </>
   );
 };
