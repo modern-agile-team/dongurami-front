@@ -1,13 +1,13 @@
-import Link from 'next/link';
+import Link from "next/link";
 import styles from "../../styles/Board/Board/Board.module.scss";
-import Table from './Table';
-import Pagination from './Pagination';
-import Search from './Search';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import useBoardOrder from 'hooks/useBoardOrder';
-import useBoardPage from 'hooks/useBoardPage';
-import useBoardSearch from 'hooks/useBoardSearch';
+import Table from "./Table";
+import Pagination from "./Pagination";
+import Search from "./Search";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import useBoardOrder from "hooks/useBoardOrder";
+import useBoardPage from "hooks/useBoardPage";
+import useBoardSearch from "hooks/useBoardSearch";
 
 function Board({ category, getPosts }) {
   const router = useRouter();
@@ -31,8 +31,8 @@ function Board({ category, getPosts }) {
       pathname: router.pathname,
       query: {
         ...router.query,
-        page: nextPage
-      }
+        page: nextPage,
+      },
     });
   };
   const onOrderChange = (e) => {
@@ -41,12 +41,12 @@ function Board({ category, getPosts }) {
       query: {
         ...router.query,
         page: 1,
-        order: e.target.value
-      }
+        order: e.target.value,
+      },
     });
-  }
+  };
 
-  const title = { notice: '공지 게시판', free: '자유 게시판' }
+  const title = { notice: "공지 게시판", free: "자유 게시판" };
 
   if (!posts) return null;
 
@@ -56,7 +56,9 @@ function Board({ category, getPosts }) {
         <Link href={router.pathname} passHref><h1><a>{title[category]}</a></h1></Link>
         <hr />
         <div className={styles.orderBy}>
-          <Link href={`/${category}/write`} passHref><button>✏️ 글쓰기</button></Link>
+          <Link href={`/${category}/write`} passHref>
+            <button>✏️ 글쓰기</button>
+          </Link>
           <select value={order} onChange={onOrderChange}>
             <option value="inDate DESC">최근순</option>
             <option value="inDate ASC">오래된순</option>
