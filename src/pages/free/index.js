@@ -6,8 +6,8 @@ import Board from "../../components/Board/Board";
 const getPosts = async (order, { search, searchBy }) => {
   if (search && searchBy) {
     const response = await axios
-      .get(`http://3.36.72.145:8080/api/search/free/${searchBy}/${search}`);
-    return response.data.searchByKeywordResults;
+      .get(`http://3.36.72.145:8080/api/search/free/${searchBy}/${search}/${order.split(' ').join('/')}`);
+    return response.data.boards;
   }
   const response = await axios.get(`http://3.36.72.145:8080/api/board/free/${order.split(' ').join('/')}`);
   return response.data.boards;

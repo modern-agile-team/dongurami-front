@@ -29,8 +29,7 @@ function NoticeSearch() {
     <div className={styles.container}>
       <select value={searchBy} onChange={onSearchByChange}>
         <option value="title">제목</option>
-        <option value="content">내용</option>
-        <option value="comment">댓글</option>
+        <option value="name">작성자</option>
       </select>
       <input value={search} onChange={onSearchChange} />
       <button onClick={onClick}><BsSearch /></button>

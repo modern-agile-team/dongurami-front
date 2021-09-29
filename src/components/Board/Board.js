@@ -17,7 +17,6 @@ function Board({ category, getPosts }) {
   const order = useBoardOrder(router);
   const { search, searchBy } = useBoardSearch(router);
 
-
   useEffect(() => {
     (async () => {
       if (!order) return;
@@ -56,7 +55,7 @@ function Board({ category, getPosts }) {
         <Link href={router.pathname} passHref><h1><a>{title[category]}</a></h1></Link>
         <hr />
         <div className={styles.orderBy}>
-          <Link href={`/${category}/write`} passHref><button>✏️ 글쓰기</button></Link>
+          <Link href={`${router.pathname}/write`} passHref><button>✏️ 글쓰기</button></Link>
           <select value={order} onChange={onOrderChange}>
             <option value="inDate DESC">최근순</option>
             <option value="inDate ASC">오래된순</option>
