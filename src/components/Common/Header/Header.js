@@ -1,5 +1,4 @@
 import styles from "../../../styles/Common/Header/Header.module.scss";
-import { useRouter } from "next/router";
 import { useState, useEffect, useRef } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { BiBell } from "react-icons/bi";
@@ -8,13 +7,13 @@ import HeaderBoard from "./HeaderBoard";
 import HeaderUser from "./HeaderUser";
 import AlamContainer from "../Alam/AlamContainer";
 import HeaderMobileBoard from "./HeaderMobileBoard";
+import Link from "next/link";
 
 function Header() {
   const [open, setOpen] = useState(false);
   const [isAlamOpen, setIsAlamOpen] = useState(false);
   const [token, setToken] = useState("");
 
-  const router = useRouter();
   const closeRef = useRef(null);
 
   //영역밖 클릭 시 사이드바 제거
@@ -57,12 +56,9 @@ function Header() {
     <header>
       <nav>
         <div className={styles.myHeader} ref={closeRef}>
-          <img
-            onClick={() => {
-              router.push("/");
-            }}
-            src="https://lovelyoch.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F439c0672-c274-4f90-b273-9928548c4081%2Flogo.jpg?table=block&id=99568f38-6c02-4bbc-b04b-1b7152648016&spaceId=69eb8ea8-3d04-47ec-8bb7-004e8aa31f9e&width=7460&userId=&cache=v2"
-          />
+          <Link href="/" passHref>
+            <img src="https://lovelyoch.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F439c0672-c274-4f90-b273-9928548c4081%2Flogo.jpg?table=block&id=99568f38-6c02-4bbc-b04b-1b7152648016&spaceId=69eb8ea8-3d04-47ec-8bb7-004e8aa31f9e&width=7460&userId=&cache=v2" />
+          </Link>
           <Hamburger rounded toggled={open} toggle={setOpen} size={25} />
           <div className={styles.topMenu}>
             <ul className={styles.menus} id={open ? styles.show : styles.hide}>
@@ -76,7 +72,7 @@ function Header() {
               >
                 <div className={styles.alam}>
                   <BiBell onClick={alamOpen} className={styles.bell} />
-                  {isAlamOpen ? <AlamContainer /> : null}
+                  {isAlamOpen && <AlamContainer />}
                 </div>
                 <FaUserCircle className={styles.Profile} onClick={logout} />
               </div>

@@ -1,5 +1,5 @@
 .container {
-  font-size: 1.1vw;
+  font-size: 85%;
   ul {
     width: 17vw;
     display: flex;
@@ -41,12 +41,21 @@
   color: #3fcdb8;
 }
 
+@media screen and (max-width: 1024px) {
+  .container {
+    ul {
+      font-size: 90%;
+      padding: 0%;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .container {
     ul {
       flex-direction: column;
       width: 30vw;
-      font-size: 2.2vw;
+      font-size: 120%;
       padding: 0%;
     }
     li {
@@ -55,6 +64,14 @@
     }
     .dropdown {
       display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    ul {
+      font-size: 115%;
     }
   }
 }

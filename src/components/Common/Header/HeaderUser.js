@@ -22,7 +22,7 @@ export const HeaderUser = () => {
       <ul className={styles.user}>
         <li
           className={styles.login}
-          id={nowPath === "/LoginPage" ? styles.now : 0}
+          id={nowPath === "/LoginPage" && styles.now}
           onClick={() => {
             router.push("/LoginPage");
           }}
@@ -31,7 +31,7 @@ export const HeaderUser = () => {
         </li>
         <li
           className={styles.signUp}
-          id={nowPath === "/signup" ? styles.nowSign : 0}
+          id={nowPath === "/signup" && styles.nowSign}
           onClick={() => {
             router.push("/signup");
           }}

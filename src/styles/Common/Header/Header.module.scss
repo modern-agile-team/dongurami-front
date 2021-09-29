@@ -52,7 +52,7 @@
   svg {
     cursor: pointer;
     margin: 0 18%;
-    font-size: 1.7vw;
+    font-size: 135%;
   }
   .bell {
     margin-right: 150%;
@@ -80,11 +80,11 @@
     .topMenu {
       width: 60%;
       margin: 0%;
-      margin-left: 104%;
+      margin-left: 106%;
     }
     .menus {
       cursor: default;
-      font-size: 2.2vw;
+      font-size: 90%;
       width: 100%;
       height: 100%;
       flex-direction: column;
@@ -109,22 +109,21 @@
     }
     .tokenIcons {
       width: 100%;
-      margin-top: 120%;
-      margin-left: -11%;
+      margin-top: 150%;
       .alam {
         width: 100%;
       }
       .bell {
-        width: 15%;
-        height: 10%;
+        width: 20%;
+        height: 20%;
         margin-top: 130%;
-        margin-left: -62%;
+        margin-left: -180%;
       }
       .Profile {
-        width: 15%;
-        height: 10%;
+        width: 20%;
+        height: 20%;
         margin-top: 130%;
-        margin-left: -132%;
+        margin-left: -182%;
       }
     }
     #show {
@@ -148,7 +147,7 @@
         margin-top: 150%;
       }
       li {
-        font-size: 3.5vw;
+        font-size: 80%;
         width: 100%;
         margin-left: -27%;
       }
@@ -157,7 +156,16 @@
       }
       .tokenIcons {
         margin-top: 145%;
-        padding-left: 1.5%;
+        margin-left: 0%;
+        .bell {
+          height: 12%;
+          margin-left: -100%;
+        }
+        .Profile {
+          width: 18%;
+          height: 15%;
+          margin-left: -145%;
+        }
       }
     }
   }

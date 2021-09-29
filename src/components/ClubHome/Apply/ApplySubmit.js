@@ -3,7 +3,7 @@ import styles from "../../../styles/Club/Home/Apply/ApplySubmit.module.scss";
 import { IoIosAddCircleOutline, IoIosCheckmark } from "react-icons/io";
 
 const token = {
-  studentID: "201708051",
+  studentID: "test200",
 };
 
 const ApplySubmit = ({

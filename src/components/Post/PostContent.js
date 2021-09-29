@@ -5,6 +5,7 @@ import styles from '../../styles/Board/Post/PostContent.module.scss';
 import CommentContainer from '../Common/Comment/CommentContainer';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import getToken from 'utils/getToken';
 
 const ReactQuill = dynamic(import("react-quill"), {
   ssr: false,
@@ -20,42 +21,71 @@ function PostContent({ category }) {
     (category === 'free') ? '자유 게시판' :
     undefined
   );
+  const token = getToken();
 
   const updatePost = useCallback(() => {
     axios.get(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
       .then((response) => setPost(response.data));
   }, [category, pid]);
   const deletePost = useCallback(() => {
-    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}`)
+    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}`, {
+      headers: {
+        'x-auth-token': token
+      }
+    })
       .then(() => router.push(`/${category}`));
-  }, [category, pid, router]);
+  }, [category, pid, router, token]);
 
   const postComment = (description) => {
     axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}`, {
       id: 'test1', description
+    }, {
+      headers: {
+        'x-auth-token': token
+      }
     }).then(() => updatePost());
   }
   const putComment = (description, no) => {
     axios.put(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`, {
       description
+    }, {
+      headers: {
+        'x-auth-token': token
+      }
     }).then(() => updatePost());
   }
   const deleteComment = (no) => {
-    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`)
+    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${no}`, {
+      headers: {
+        'x-auth-token': token
+      }
+    })
       .then(() => updatePost());
   }
   const postReplyComment = (description, parentCommentID) => {
     axios.post(`http://3.36.72.145:8080/api/board/${category}/${pid}/${parentCommentID}`, {
       id: 'test1', description
+    }, {
+      headers: {
+        'x-auth-token': token
+      }
     }).then(() => updatePost());
   }
   const putReplyComment = (description, no, parentCommentID) => {
     axios.put(`http://3.36.72.145:8080/api/board/${category}/${pid}/${parentCommentID}/${no}`, {
       description
+    }, {
+      headers: {
+        'x-auth-token': token
+      }
     }).then(() => updatePost());
   }
   const deleteReplyComment = (no, parentCommentID) => {
-    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${parentCommentID}/${no}`)
+    axios.delete(`http://3.36.72.145:8080/api/board/${category}/${pid}/${parentCommentID}/${no}`, {
+      headers: {
+        'x-auth-token': token
+      }
+    })
       .then(() => updatePost());
   }
 

@@ -22,7 +22,7 @@ export const HeaderMobileBoard = () => {
       <ul className={styles.mobile}>
         <li
           className={styles.notice}
-          id={nowPath === "/notice" ? styles.now : 0}
+          id={nowPath === "/notice" && styles.now}
           onClick={() => {
             router.push("/notice");
           }}
@@ -31,7 +31,7 @@ export const HeaderMobileBoard = () => {
         </li>
         <li
           className={styles.free}
-          id={nowPath === "/free" ? styles.now : 0}
+          id={nowPath === "/free" && styles.now}
           onClick={() => {
             router.push("/free");
           }}

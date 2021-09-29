@@ -25,7 +25,7 @@ export const HeaderBoard = () => {
           <ul className={styles.dropdownMenu}>
             <li
               className={styles.notice}
-              id={nowPath === "/notice" ? styles.now : 0}
+              id={nowPath === "/notice" && styles.now}
               onClick={() => {
                 router.push("/notice");
               }}
@@ -34,7 +34,7 @@ export const HeaderBoard = () => {
             </li>
             <li
               className={styles.free}
-              id={nowPath === "/free" ? styles.now : 0}
+              id={nowPath === "/free" && styles.now}
               onClick={() => {
                 router.push("/free");
               }}
@@ -45,7 +45,7 @@ export const HeaderBoard = () => {
         </li>
         <li
           className={styles.clublist}
-          id={nowPath === "/clublists" ? styles.now : 0}
+          id={nowPath === "/clublists" && styles.now}
           onClick={() => {
             router.push("/clublists");
           }}
@@ -54,7 +54,7 @@ export const HeaderBoard = () => {
         </li>
         <li
           className={styles.promotion}
-          id={nowPath === "/promotion" ? styles.now : 0}
+          id={nowPath === "/promotion" && styles.now}
           onClick={() => {
             router.push("/promotion");
           }}
