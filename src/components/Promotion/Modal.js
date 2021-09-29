@@ -47,10 +47,11 @@ const Modal = ({ setOpenModal, postId }) => {
             if (res.data.success) {
               setPostData(res.data.board);
               setComments(res.data.comments);
+              console.log(res.data.board);
             } else alert(res.data.msg);
           });
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err.response.data.msg);
       }
     };
 

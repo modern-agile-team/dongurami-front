@@ -27,7 +27,7 @@ const PromotionContainer = () => {
         )
         .then((response) => {
           const result = response.data.boards.slice(preitem, item);
-          
+
           if (result.length) {
             const extraData = boarddata.concat(result);
             setBoardData((prev) => prev.concat(extraData));
@@ -47,6 +47,7 @@ const PromotionContainer = () => {
         .then((response) => {
           preitem = 0;
           item = 8;
+          console.log(response.data.boards);
           const result = response.data.boards.slice(preitem, item);
           setBoardData(result);
         });
