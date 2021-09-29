@@ -1,8 +1,11 @@
 import { useState } from "react";
 import styles from "../../../styles/Board/Promotion/AddComment.module.scss";
+import axios from "axios";
+import getToken from "utils/getToken";
 
-function AddComment() {
+function AddComment({ postId }) {
   const [description, setDescription] = useState("");
+  const token = getToken();
 
   const onChange = (e) => {
     console.log(e.target.value);
@@ -10,7 +13,20 @@ function AddComment() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    postComment(description, parentCommentID);
+    axios
+      .post(
+        `http://3.36.72.145:8080/api/board/promotion/${postId}`,
+        {
+          id: "test1",
+          description,
+        },
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
+      .then((res) => console.log(res));
     setDescription("");
   };
 

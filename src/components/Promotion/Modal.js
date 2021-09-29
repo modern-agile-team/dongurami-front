@@ -48,6 +48,7 @@ const Modal = ({ setOpenModal, postId }) => {
               setPostData(res.data.board);
               setComments(res.data.comments);
               console.log(res.data.board);
+              console.log(res.data.comments);
             } else alert(res.data.msg);
           });
       } catch (err) {

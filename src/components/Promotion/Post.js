@@ -6,7 +6,7 @@ import getToken from "utils/getToken";
 import axios from "axios";
 
 const Post = ({ postData, postId, setPostData, comments }) => {
-  const { name, hit, title, inDate, description } = postData;
+  const { name, hit, title, inDate, description, studentId } = postData;
   const token = getToken();
   const router = useRouter();
 
@@ -26,7 +26,11 @@ const Post = ({ postData, postId, setPostData, comments }) => {
         </div>
         <hr />
         <div dangerouslySetInnerHTML={{ __html: description }}></div>
-        <PromotionCommentContainer comments={comments} />
+        <PromotionCommentContainer
+          comments={comments}
+          postId={postId}
+          studentId={studentId}
+        />
       </div>
     </div>
   );

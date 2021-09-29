@@ -2,7 +2,7 @@ import style from "../../../styles/Board/Promotion/PromotionCommentContainer.mod
 import AddComment from "./AddComment";
 import React, { useState } from "react";
 
-const PromotionCommentContainer = ({ comments }) => {
+const PromotionCommentContainer = ({ comments, postId }) => {
   const [addReplyID, setAddReplyID] = useState();
 
   return (
@@ -10,7 +10,7 @@ const PromotionCommentContainer = ({ comments }) => {
       <p>댓글 {comments.length}</p>
       <hr />
       <div className={style.container}>
-        <AddComment />
+        <AddComment comments={comments} postId={postId} />
       </div>
     </>
   );
