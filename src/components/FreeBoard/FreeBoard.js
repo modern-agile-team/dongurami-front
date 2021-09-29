@@ -1,4 +1,4 @@
-import Header from "../Common/Header";
+import Header from "../Common/Header/Header";
 import FreeBoardTable from "./FreeBoardTable";
 import FreeBoardSearch from "./FreeBoardSearch";
 import FreeBoardPagination from "./FreeBoardPagination";

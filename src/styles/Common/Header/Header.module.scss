@@ -1,0 +1,172 @@
+.myHeader {
+  display: flex;
+  width: 100%;
+  height: 10%;
+  justify-content: center;
+  background-color: #fff;
+  position: fixed;
+  align-items: center;
+  top: 0;
+  z-index: 999;
+  color: black;
+  border-bottom: 0.1px solid #e9e9e9;
+  img {
+    width: 81px;
+    height: 36px;
+    object-fit: cover;
+    margin-right: 43%;
+    margin-left: 7%;
+    cursor: pointer;
+  }
+  & > div:nth-of-type(1) {
+    display: none;
+  }
+  .topMenu {
+    width: 50%;
+    margin-left: 2.8%;
+    display: flex;
+  }
+  .menus {
+    width: 17vw;
+    display: flex;
+    align-items: center;
+    margin-right: 15%;
+    padding-left: 0;
+    .mobile {
+      display: none;
+    }
+  }
+  li:hover {
+    color: #3fcdb8;
+  }
+}
+.users {
+  width: 100%;
+  margin-left: 4%;
+}
+.tokenIcons {
+  display: flex;
+  width: 30%;
+  margin: auto;
+  margin-left: 10%;
+  svg {
+    cursor: pointer;
+    margin: 0 18%;
+    font-size: 135%;
+  }
+  .bell {
+    margin-right: 150%;
+  }
+}
+
+.alam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .myHeader {
+    flex-direction: column;
+    img {
+      position: absolute;
+      left: -5px;
+    }
+    & > div:nth-of-type(1) {
+      display: inline;
+      position: absolute !important;
+      right: 35px;
+    }
+    .topMenu {
+      width: 60%;
+      margin: 0%;
+      margin-left: 106%;
+    }
+    .menus {
+      cursor: default;
+      font-size: 90%;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      margin: 0%;
+      margin-top: 120%;
+      margin-bottom: 60%;
+      li {
+        width: 70%;
+        padding: 1.5rem;
+        cursor: pointer;
+        border-bottom: 0.1px solid #dddbdb;
+        &:hover {
+          background-color: #bfe7e17e;
+          color: black;
+        }
+      }
+    }
+    .users {
+      width: 100%;
+      height: 100%;
+      margin-top: 90%;
+    }
+    .tokenIcons {
+      width: 100%;
+      margin-top: 150%;
+      .alam {
+        width: 100%;
+      }
+      .bell {
+        width: 20%;
+        height: 20%;
+        margin-top: 130%;
+        margin-left: -180%;
+      }
+      .Profile {
+        width: 20%;
+        height: 20%;
+        margin-top: 130%;
+        margin-left: -182%;
+      }
+    }
+    #show {
+      background-color: #fafafaf5;
+    }
+    #hide {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .myHeader {
+    width: 100%;
+    img {
+      padding-left: 2%;
+    }
+    .topMenu {
+      width: 90vw;
+      .menus {
+        margin-top: 150%;
+      }
+      li {
+        font-size: 80%;
+        width: 100%;
+        margin-left: -27%;
+      }
+      .users {
+        margin-left: -5%;
+      }
+      .tokenIcons {
+        margin-top: 145%;
+        margin-left: 0%;
+        .bell {
+          height: 12%;
+          margin-left: -100%;
+        }
+        .Profile {
+          width: 18%;
+          height: 15%;
+          margin-left: -145%;
+        }
+      }
+    }
+  }
+}
