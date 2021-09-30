@@ -13,7 +13,7 @@ export const FindID = () => {
   };
 
   const onSubmit = () => {
-    axios("http://3.36.72.145:8080/api/sign-up", {
+    axios("http://3.36.72.145:8080/api/find-id", {
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=utf-8",
@@ -24,7 +24,7 @@ export const FindID = () => {
       },
     })
       .then((res) => {
-        console.log("결과:", res);
+        alert(`${name}님의 아이디는 ${res.data.id}입니다.`);
       })
       .catch((err) => alert(err.response.data.msg));
   };
