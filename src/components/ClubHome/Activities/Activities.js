@@ -81,9 +81,6 @@ const Activities = () => {
   const [selectedID, setSelectedID] = useState();
   const router = useRouter();
 
-  const onCreateActivies = () => {
-    console.log("클릭됨");
-  };
   const onClick = (id) => {
     setSelectedID(id)
     setIsModalOpened(true);
@@ -99,7 +96,7 @@ const Activities = () => {
         <p>우아한 애자일의 활동</p>
       </div>
       <div id={styles.add}>
-        <Link href={`${router.pathname}/writeActivity`} passHref><IoIosAddCircleOutline onClick={onCreateActivies} /></Link>
+        <Link href={`${router.pathname}/writeActivity`} passHref><IoIosAddCircleOutline /></Link>
       </div>
       <div className={styles.activities}>
         {actData.map((el, i) => {
