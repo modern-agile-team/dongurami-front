@@ -3,7 +3,7 @@ import styles from "../../../styles/Board/Promotion/AddComment.module.scss";
 import axios from "axios";
 import getToken from "utils/getToken";
 
-function AddComment({ postId }) {
+function AddComment({ postId, getData }) {
   const [description, setDescription] = useState("");
   const token = getToken();
 
@@ -26,7 +26,10 @@ function AddComment({ postId }) {
           },
         }
       )
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.data.success) getData();
+        else alert(res.data.msg);
+      });
     setDescription("");
   };
 

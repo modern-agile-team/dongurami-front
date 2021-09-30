@@ -3,7 +3,7 @@ import AddComment from "./AddComment";
 import React, { useState } from "react";
 import Comment from "./Comment";
 
-const PromotionCommentContainer = ({ comments, postId }) => {
+const PromotionCommentContainer = ({ comments, postId, getData }) => {
   const [addReplyID, setAddReplyID] = useState();
 
   return (
@@ -17,7 +17,7 @@ const PromotionCommentContainer = ({ comments, postId }) => {
               <Comment key={index} comment={comment} postId={postId} />
             </>
           ))}
-        <AddComment comments={comments} postId={postId} />
+        <AddComment comments={comments} postId={postId} getData={getData} />
       </div>
     </>
   );

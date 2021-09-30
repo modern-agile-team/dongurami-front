@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import getToken from "utils/getToken";
 import axios from "axios";
 
-const Post = ({ postData, postId, setPostData, comments }) => {
+const Post = ({ postData, postId, getData, comments }) => {
   const { name, hit, title, inDate, description, studentId } = postData;
   const token = getToken();
   const router = useRouter();
@@ -30,6 +30,7 @@ const Post = ({ postData, postId, setPostData, comments }) => {
           comments={comments}
           postId={postId}
           studentId={studentId}
+          getData={getData}
         />
       </div>
     </div>

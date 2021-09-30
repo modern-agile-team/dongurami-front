@@ -38,24 +38,22 @@ const Modal = ({ setOpenModal, postId }) => {
     setImgUrl(getdata[index].img);
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        await axios
-          .get(`http://3.36.72.145:8080/api/board/promotion/${postId}`)
-          .then((res) => {
-            if (res.data.success) {
-              setPostData(res.data.board);
-              setComments(res.data.comments);
-              console.log(res.data.board);
-              console.log(res.data.comments);
-            } else alert(res.data.msg);
-          });
-      } catch (err) {
-        console.log(err.response.data.msg);
-      }
-    };
+  const getData = async () => {
+    try {
+      await axios
+        .get(`http://3.36.72.145:8080/api/board/promotion/${postId}`)
+        .then((res) => {
+          if (res.data.success) {
+            setPostData(res.data.board);
+            setComments(res.data.comments);
+          } else alert(res.data.msg);
+        });
+    } catch (err) {
+      console.log(err.response.data.msg);
+    }
+  };
 
+  useEffect(() => {
     getData();
   }, []);
 
@@ -78,6 +76,7 @@ const Modal = ({ setOpenModal, postId }) => {
             postId={postId}
             setPostData={setPostData}
             comments={comments}
+            getData={getData}
           />
         </>
       )}
