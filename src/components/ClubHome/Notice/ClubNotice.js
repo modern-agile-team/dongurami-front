@@ -5,8 +5,8 @@ import styles from 'styles/Club/Home/Notice/ClubNotice.module.scss';
 const getPosts = async (order, { search, searchBy }) => {
   if (search && searchBy) {
     const response = await axios
-      .get(`http://3.36.72.145:8080/api/search/notice/${searchBy}/${search}`);
-    return response.data.searchByKeywordResults;
+      .get(`http://3.36.72.145:8080/api/search/notice/${searchBy}/${search}/${order.split(' ').join('/')}`);
+    return response.data.boards;
   }
   const response = await axios.get(`http://3.36.72.145:8080/api/board/notice/${order.split(' ').join('/')}`);
   return response.data.boards;
