@@ -2,7 +2,7 @@ import Profile from "components/Profile/Profile";
 import Footer from "components/Common/Footer";
 import Header from "components/Common/Header/Header";
 
-export default function profile() {
+function profile() {
   return (
     <>
       <Header />
@@ -11,3 +11,5 @@ export default function profile() {
     </>
   );
 }
+
+export default profile;
