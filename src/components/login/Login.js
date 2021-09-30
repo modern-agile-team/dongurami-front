@@ -3,6 +3,7 @@ import styles from "../../styles/User/Login/Login.module.scss";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import OAuth from "./OAuth";
 
 export const Login = () => {
   const [id, setId] = useState("");
@@ -81,6 +82,7 @@ export const Login = () => {
           </Link>
         </div>
       </div>
+      <OAuth />
     </div>
   );
 };
