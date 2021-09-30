@@ -15,12 +15,16 @@ const MembersList = ({
   return (
     <div className={styles.member}>
       <div>
-        {memberInfo[0] === leader ? (
-          <RiVipCrownFill />
-        ) : (
-          <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
-        )}
-        <span>{memberInfo[0]}</span>
+        <div id={styles.crown}>
+          {memberInfo[0] === leader ? (
+            <RiVipCrownFill />
+          ) : (
+            <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
+          )}
+        </div>
+        <div id={styles.member}>
+          <span>{memberInfo[0]}</span>
+        </div>
       </div>
       <div>
         <span ref={changeLeader} id={memberInfo[1]}>
@@ -30,7 +34,6 @@ const MembersList = ({
       <div>
         <input
           type="checkBox"
-          className={styles.appManage}
           defaultChecked={memberInfo[2] ? true : false}
           disabled={memberInfo[0] === leader ? true : false}
           ref={applyAuth}
@@ -40,7 +43,6 @@ const MembersList = ({
       <div>
         <input
           type="checkBox"
-          className={styles.appManage}
           defaultChecked={memberInfo[3] ? true : false}
           disabled={memberInfo[0] === leader ? true : false}
           ref={boardAuth}

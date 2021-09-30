@@ -7,7 +7,7 @@ const ApproveHeader = ({ applicantInfo, onClick, listOpen }) => {
   return (
     <div>
       <h1>가입 승인 대기</h1>
-      <h3>{applicantInfo.length}명</h3>
+      <h2>{applicantInfo.length}명</h2>
       {listOpen ? (
         <BsToggleOn cursor={cursor} onClick={onClick} size={iconSize} />
       ) : (

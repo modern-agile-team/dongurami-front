@@ -1,9 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import styles from "../../../styles/Club/Home/Manager/Manager.module.scss";
 import MembersList from "./MembersList";
-import MembersHeader from "./MembersHeader";
 import MembersPreface from "./MembersPreface";
-
 export const Members = ({
   members,
   leader,
@@ -15,7 +13,8 @@ export const Members = ({
 }) => {
   return (
     <div>
-      <MembersHeader members={members.length} />
+      <h1>동아리원 관리</h1>
+      <h2>{members.length}명</h2>
       <MembersPreface />
       {members.map((member, index) => {
         return (
@@ -37,7 +36,6 @@ export const Members = ({
           />
         );
       })}
-      <hr />
       <button className={styles.addBtn} onClick={changeMembersAuth}>
         수정
       </button>
