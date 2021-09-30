@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function useBoardSearch(router) {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState('');
   const [searchBy, setSearchBy] = useState();
 
   useEffect(() => {

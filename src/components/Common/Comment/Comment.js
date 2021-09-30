@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import getToken from 'utils/getToken';
 import styles from '../../../styles/Common/Comment/Comment.module.scss';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
@@ -13,7 +14,7 @@ function setEndOfContenteditable(contentEditableElement) {
   selection.addRange(range); //make the range you have just created the visible selection
 }
 
-function Comment({ comment, setAddReplyID, putComment, deleteComment }) {
+function Comment({ comment, setAddReplyID, api }) {
   const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
 
@@ -24,19 +25,19 @@ function Comment({ comment, setAddReplyID, putComment, deleteComment }) {
 
   const onEdit = () => {
     if (isContentEditable) {
-      putComment(descriptionDiv.current.textContent, comment.no, comment.groupNo);
+      api.putComment(descriptionDiv.current.textContent, comment.no, comment.groupNo);
     }
     setIsContentEditable(!isContentEditable);
     setEndOfContenteditable(descriptionDiv.current);
   }
   const onDelete = () => {
-    deleteComment(comment.no, comment.groupNo);
+    api.deleteComment(comment.no, comment.groupNo);
   }
 
 
   return (
     <div className={styles.comment}>
-      <img src="https://picsum.photos/500" alt="profile" />
+      <img src={`https://picsum.photos/500?random=${Math.floor(Math.random() * 9) + 1}`} alt="profile" />
       <div>
         <div>
           <p>{comment.studentName}</p>
