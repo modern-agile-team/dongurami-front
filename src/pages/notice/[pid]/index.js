@@ -1,7 +1,7 @@
 import axios from "axios";
 import Footer from "components/Common/Footer";
 import Header from "components/Common/Header/Header";
-import Post from "components/Post/Post";
+import PostContainer from "components/Post/PostContainer";
 
 class Api {
   constructor(pid, token, setPost, category) {
@@ -99,7 +99,7 @@ function NoticePost() {
   return (
     <>
       <Header />
-      <Post category="notice" Api={Api} />
+      <PostContainer category="notice" Api={Api} />
       <Footer />
     </>
   );

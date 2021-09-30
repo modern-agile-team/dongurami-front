@@ -3,9 +3,12 @@ import styles from "../../../styles/Club/Home/Activities/Activities.module.scss"
 import Act from "./Act";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Modal from "components/Common/Modal";
-import Posts from "components/Post/Post";
+import Post from "components/Post/Post";
+import ActivityPost from "./ActivityPost";
+import Link from 'next/link';
+import router, { useRouter } from "next/router";
 
-export const actData = [
+const actData = [
   {
     "no": 236,
     "title": "ㄴㄹㅇㄴㄹ",
@@ -71,18 +74,22 @@ export const actData = [
     "fileId": null,
     "hit": 137
   }
-]
+];
 
 const Activities = () => {
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [selectedID, setSelectedID] = useState();
+  const router = useRouter();
 
   const onCreateActivies = () => {
     console.log("클릭됨");
   };
-  const onClick = (e) => {
+  const onClick = (id) => {
+    setSelectedID(id)
     setIsModalOpened(true);
   };
   const onClose = () => {
+    setSelectedID();
     setIsModalOpened(false);
   }
 
@@ -92,12 +99,13 @@ const Activities = () => {
         <p>우아한 애자일의 활동</p>
       </div>
       <div id={styles.add}>
-        <IoIosAddCircleOutline onClick={onCreateActivies} />
+        <Link href={`${router.pathname}/writeActivity`} passHref><IoIosAddCircleOutline onClick={onCreateActivies} /></Link>
       </div>
       <div className={styles.activities}>
         {actData.map((el, i) => {
           return (
             <Act
+              id={el.no}
               img={`https://picsum.photos/500?random=${i}`}
               title={el.title}
               key={el.no}
@@ -106,9 +114,11 @@ const Activities = () => {
           );
         })}
       </div>
-      <Modal show={isModalOpened} onClose={onClose}>
-        <h1>hello</h1>
-      </Modal>
+      {(isModalOpened) && (
+        <Modal show={isModalOpened} onClose={onClose}>
+          <ActivityPost />
+        </Modal>
+      )}
     </div>
   );
 };

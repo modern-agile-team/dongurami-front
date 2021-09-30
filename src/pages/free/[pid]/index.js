@@ -1,6 +1,7 @@
 import axios from "axios";
 import Footer from "components/Common/Footer";
 import Header from "components/Common/Header/Header";
+import PostContainer from "components/Post/PostContainer";
 import Post from "../../../components/Post/Post";
 
 class Api {
@@ -99,7 +100,7 @@ function FreePost() {
   return (
     <>
       <Header />
-      <Post category="notice" Api={Api} />
+      <PostContainer category="free" Api={Api} />
       <Footer />
     </>
   );
