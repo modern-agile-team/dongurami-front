@@ -1,0 +1,65 @@
+.container {
+  font-size: 1.1vw;
+  margin-left: 4%;
+  .user {
+    display: flex;
+    padding-left: 0;
+    align-items: center;
+    text-align: center;
+    list-style: none;
+    li {
+      cursor: pointer;
+    }
+    .login {
+      line-height: 32px;
+    }
+    .signUp {
+      width: 5.5vw;
+      height: 32px;
+      border-radius: 8px;
+      background-color: #90e2d6;
+      text-align: center;
+      line-height: 31.5px;
+      margin-left: 1em;
+    }
+    #nowSign {
+      color: #fff;
+    }
+  }
+}
+
+#now {
+  color: #3fcdb8;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    .user {
+      margin-top: 245%;
+      margin-left: -112%;
+      font-size: 2.2vw;
+      .login {
+        margin-right: 2%;
+      }
+      .signUp {
+        width: 11vw;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    .user {
+      margin-top: 235%;
+      margin-left: -48%;
+      .login {
+        width: 20%;
+      }
+      .signUp {
+        width: 25%;
+        margin-left: 2.5%;
+      }
+    }
+  }
+}
