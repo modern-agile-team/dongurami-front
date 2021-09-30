@@ -6,7 +6,6 @@ import Review from "../Review/Review";
 import Calendar from "../Daily/Calendar";
 import ClubNotice from "../Notice/ClubNotice";
 import { useCallback, useState } from "react";
-import Modal from "../Activities/Modal";
 import Apply from "../Apply/Apply";
 
 const Frame = () => {
