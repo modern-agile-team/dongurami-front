@@ -46,17 +46,6 @@
   }
 }
 
-#hamb {
-  cursor: pointer;
-  padding: 1em;
-  &:active {
-    border-radius: 50%;
-    background-color: rgba(gray, 0.8);
-    color: white;
-    transition: 0.14s;
-  }
-}
-
 @media (max-width: 1023px) {
   #show {
     div {
@@ -76,11 +65,6 @@
   #hide {
     display: none;
   }
-  #hamb {
-    width: 30px;
-    height: 30px;
-    margin-right: 1.5em;
-  }
 }
 
 @media (max-width: 767px) {
@@ -96,11 +80,5 @@
       height: 15px;
       margin: 0 10px;
     }
-  }
-  #hamb {
-    padding: 0.5em;
-    width: 15px;
-    height: 15px;
-    margin-right: 10px;
   }
 }

@@ -79,7 +79,6 @@ const SideBar = ({ setComp, comp }) => {
       className={hide ? styles.hide : styles.sideBar}
       id={isOpen ? styles.open : styles.close}
     >
-      <BsLayoutSidebar id={styles.hamb} onClick={() => toggle()} size="30" />
       <div className={styles.menu} id={isOpen ? styles.show : styles.hide}>
         {board.map((el, i) => {
           return (
