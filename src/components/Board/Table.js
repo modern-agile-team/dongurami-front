@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "../../styles/Board/Board/Table.module.scss";
 
 function NoticeTable({ posts, page, category }) {
+  const router = useRouter();
+
   const postsByPage = posts.slice(10 * (page - 1), 10 * page);
 
   return (
@@ -20,9 +23,15 @@ function NoticeTable({ posts, page, category }) {
           <tr key={post.no}>
             <td>{post.no}</td>
             <td>
-              <Link href={{ pathname: `/${category}/[pid]`, query: { pid: post.no } }} passHref>
-                <a>{post.title}</a>
-              </Link>
+              {(category === 'clubNotice') ? (
+                <Link href={{ pathname: `${router.pathname}/notice/${post.no}` }} passHref>
+                  <a>{post.title}</a>
+                </Link>
+              ) : (
+                <Link href={{ pathname: `${router.pathname}/${post.no}` }} passHref>
+                  <a>{post.title}</a>
+                </Link>
+              )}
             </td>
             <td>{post.studentName}</td>
             <td>{post.inDate}</td>

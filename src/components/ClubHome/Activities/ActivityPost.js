@@ -1,81 +1,65 @@
+import axios from "axios";
 import Post from "components/Post/Post";
 import { useEffect, useMemo, useState } from "react";
 import styles from 'styles/Club/Home/Activities/ActivityPost.module.scss';
+import getToken from "utils/getToken";
+import Link from 'next/link';
 
 class Api {
-  constructor(setPost) {
+  constructor(no, setPost, closeModal, updatePosts) {
+    this.no = no;
     this.setPost = setPost;
-    this.updatePost();
+    this.token = getToken();
+    this.closeModal = closeModal
+    this.updatePosts = updatePosts
   }
 
-  updatePost() {
-    const post = this.getPost();
+  async updatePost() {
+    const post = await this.getPost();
     this.setPost(post);
   }
 
-  getPost() {
-    return {
-      success: true,
-      msg: "게시글 조회 성공",
-      userInfo: "비로그인 회원입니다.",
-      board: {
-        no: 163,
-        studentId: "test1",
-        name: "test1",
-        title: "asdf",
-        description: "<p>asdf</p><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>pp",
-        clubName: "우아한 애자일",
-        category: "IT",
-        inDate: "2021-09-17 11:25:57",
-        modifyDate: "2021-09-17 11:25:57",
-        hit: 78,
-      },
-      images: [],
-      comments: [
-        {
-          studentId: "123456789",
-          studentName: "창훈창훈",
-          no: 324,
-          description: "ㄷㄲㄷㄱㄷㄱㄷ",
-          depth: 0,
-          groupNo: 324,
-          replyFlag: 0,
-          inDate: "2021-09-30 14:30:26",
-          modifyDate: "2021-09-30 14:30:26",
-          profileImageUrl: null,
-          profileImageName: null,
-        },
-        {
-          studentId: "123456789",
-          studentName: "창훈창훈",
-          no: 333,
-          description: "asdfasdf",
-          depth: 0,
-          groupNo: 333,
-          replyFlag: 0,
-          inDate: "2021-09-30 15:02:38",
-          modifyDate: "2021-09-30 15:02:38",
-          profileImageUrl: null,
-          profileImageName: null,
-        },
-      ],
-    };
+  async getPost() {
+    const response = await axios.get(`http://3.36.72.145:8080/api/club/board/clubActivity/1/${this.no}`, {
+      headers: {
+        'x-auth-token': this.token
+      }
+    });
+    return response.data;
+  }
+  async deletePost() {
+    await axios.delete(`http://3.36.72.145:8080/api/club/board/clubActivity/1/${this.no}`, {
+      headers: {
+        'x-auth-token': this.token
+      }
+    });
+    this.closeModal();
+    this.updatePosts();
   }
 }
 
-function ActivityPost() {
+function ActivityPost({ no, closeModal, updatePosts }) {
   const [post, setPost] = useState();
-  const api = useMemo(() => new Api(setPost), []);
+  const api = useMemo(() => new Api(no, setPost, closeModal, updatePosts), [no, closeModal, updatePosts]);
 
   useEffect(() => {
     api.updatePost();
   }, [api]);
 
+  if (!post) return null;
+
   return (
     <div className={styles.container}>
-      <Post post={post}></Post>
+      <Post post={post} api={api} buttons={(
+        <>
+          <Link href={`/clubhome/edit-activity?no=${no}`} passHref>
+            <button>수정하기</button>
+          </Link>
+          <button onClick={() => api.deletePost()}>삭제하기</button>
+        </>
+      )}></Post>
     </div>
-  )
+  );
 }
 
 export default ActivityPost;

@@ -1,16 +1,19 @@
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
-import getToken from "utils/getToken";
-import Post, { PostComments } from 'components/Post/Post'
+import { useCallback, useEffect, useState } from "react";
+import Post from 'components/Post/Post'
 import CommentContainer from "components/Common/Comment/CommentContainer";
+import Link from 'next/link';
 
-function PostContainer({ category, Api }) {
+function PostContainer({ category, api }) {
   const router = useRouter();
   const [pid, setPid] = useState();
   const [post, setPost] = useState();
 
-  const token = getToken();
-  const api = useMemo(() => new Api(pid, token, setPost, category), [Api, pid, token, category]);
+  const updatePost = useCallback(() => {
+    api.getPost().then((response) => {
+      setPost(response);
+    });
+  }, [api]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -18,21 +21,29 @@ function PostContainer({ category, Api }) {
   }, [router]);
   useEffect(() => {
     if (!pid) return;
-    api.updatePost();
-  }, [pid, api]);
+    updatePost();
+  }, [pid, updatePost]);
 
   const onDelete = () => {
     (async () => {
       await api.deletePost();
-      router.push(`/${category}`);
+      router.back();
     })();
   }
 
   if (!post) return null;
 
+
   return (
-    <Post category={category} post={post} onDelete={onDelete}>
-      <CommentContainer comments={post.comments} api={api} />
+    <Post category={category} post={post} onDelete={onDelete} buttons={(
+      <>
+        <Link href={{ pathname: `${router.pathname}/edit`, query: router.query }} passHref>
+          <button>수정하기</button>
+        </Link>
+        <button onClick={onDelete}>삭제하기</button>
+      </>
+    )}>
+      <CommentContainer comments={post.comments} api={api} updatePost={updatePost} />
     </Post>
   );
 }
