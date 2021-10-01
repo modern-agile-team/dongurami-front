@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import styles from '../../../styles/Common/Comment/AddComment.module.scss';
 
-function AddComment({ postComment, parentCommentID }) {
-  console.log(parentCommentID);
-
+function AddComment({ parentCommentID, api }) {
   const [description, setDescription] = useState('');
 
   const onChange = (e) => {
@@ -11,7 +9,7 @@ function AddComment({ postComment, parentCommentID }) {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    postComment(description, parentCommentID);
+    api.postComment(description, parentCommentID);
     setDescription('');
   }
 
