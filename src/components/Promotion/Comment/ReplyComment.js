@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
+import ReplyCommentContainer from "./ReplyCommentContainer";
 
-const ReplyComment = ({ commentList, parentCommentId, postId }) => {
-  const [childCommentNumber, setChildCommentNumber] = useState(0);
-  const [openReplyComment, setOpenReplyComment] = useState(false);
-
+const ReplyComment = ({ commentList, parentCommentId, postId, getData }) => {
   const renderReplyComment = (parentCommentId) => {
     return commentList.map((comment, index) => (
       <>
-        {comment.responseTo === parentCommentId && (
+        {comment.groupNo === parentCommentId && comment.no !== parentCommentId && (
           <div style={{ width: "80%", marginLeft: "40px" }}>
-            <SingleComment
+            <Comment
               comment={comment}
-              refreshFunction={refreshFunction}
+              key={index}
               postId={postId}
-            />
-            <ReplyComment
-              refreshFunction={refreshFunction}
-              parentCommentId={comment._id}
-              commentList={commentList}
-              postId={postId}
+              getData={getData}
             />
           </div>
         )}
@@ -29,16 +22,9 @@ const ReplyComment = ({ commentList, parentCommentId, postId }) => {
 
   return (
     <div>
-      {childCommentNumber > 0 && (
-        <p
-          style={{ fontSize: "14px", margin: 0, color: "gray" }}
-          onClick={onHandleChange}
-        >
-          View {childCommentNumber} more Comment(s);
-        </p>
-      )}
-
-      {openReplyComment && renderReplyComment(parentCommentId)}
+      <ReplyCommentContainer>
+        {renderReplyComment(parentCommentId)}
+      </ReplyCommentContainer>
     </div>
   );
 };

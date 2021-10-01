@@ -3,7 +3,12 @@ import styles from "../../../styles/Board/Promotion/AddComment.module.scss";
 import axios from "axios";
 import getToken from "utils/getToken";
 
-function ReplyAddComment({ postId, getData, parentCommentId }) {
+function ReplyAddComment({
+  postId,
+  getData,
+  parentCommentId,
+  setReplyComment,
+}) {
   const [description, setDescription] = useState("");
   const token = getToken();
 
@@ -28,8 +33,9 @@ function ReplyAddComment({ postId, getData, parentCommentId }) {
         }
       )
       .then((res) => {
-        if (res.data.success) console.log(res);
-        else alert(res.data.msg);
+        if (res.data.success) {
+          getData();
+        } else alert(res.data.msg);
       });
     setDescription("");
   };

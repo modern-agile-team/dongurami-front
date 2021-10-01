@@ -35,6 +35,7 @@ const Comment = ({ comment, postId, getData }) => {
             parentCommentId={comment.groupNo}
             postId={postId}
             getData={getData}
+            setReplyComment={setReplyComment}
           />
         </ReplyCommentContainer>
       )}
