@@ -41,7 +41,10 @@ function CommentContainer({
             )}
             {addReplyID === comment.no && (
               <ReplyContainer>
-                <AddComment postComment={postReplyComment} parentCommentID={comment.groupNo} />
+                <AddComment
+                  postComment={postReplyComment}
+                  parentCommentID={comment.groupNo}
+                />
               </ReplyContainer>
             )}
           </React.Fragment>

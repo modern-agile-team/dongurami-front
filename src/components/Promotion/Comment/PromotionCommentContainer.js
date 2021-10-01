@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Comment from "./Comment";
 
 const PromotionCommentContainer = ({ comments, postId, getData }) => {
-  const [addReplyID, setAddReplyID] = useState();
+  const [replyComment, setReplyComment] = useState([]);
 
   return (
     <>
@@ -14,7 +14,12 @@ const PromotionCommentContainer = ({ comments, postId, getData }) => {
         {comments &&
           comments.map((comment, index) => (
             <>
-              <Comment key={index} comment={comment} postId={postId} />
+              <Comment
+                key={index}
+                comment={comment}
+                postId={postId}
+                getData={getData}
+              />
             </>
           ))}
         <AddComment comments={comments} postId={postId} getData={getData} />

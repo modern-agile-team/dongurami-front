@@ -3,7 +3,7 @@ import styles from "../../../styles/Board/Promotion/AddComment.module.scss";
 import axios from "axios";
 import getToken from "utils/getToken";
 
-function AddComment({ postId, getData, parentCommentId }) {
+function ReplyAddComment({ postId, getData, parentCommentId }) {
   const [description, setDescription] = useState("");
   const token = getToken();
 
@@ -16,7 +16,7 @@ function AddComment({ postId, getData, parentCommentId }) {
 
     axios
       .post(
-        `http://3.36.72.145:8080/api/board/promotion/${postId}`,
+        `http://3.36.72.145:8080/api/board/promotion/${postId}/${parentCommentId}`,
         {
           id: "test1",
           description,
@@ -28,16 +28,11 @@ function AddComment({ postId, getData, parentCommentId }) {
         }
       )
       .then((res) => {
-        if (res.data.success) getData();
+        if (res.data.success) console.log(res);
         else alert(res.data.msg);
       });
     setDescription("");
   };
-
-  useEffect(() => {
-    console.log(parentCommentId);
-  }, []);
-
   return (
     <div className={styles.container}>
       <div>닉네임</div>
@@ -54,4 +49,4 @@ function AddComment({ postId, getData, parentCommentId }) {
   );
 }
 
-export default AddComment;
+export default ReplyAddComment;
