@@ -13,7 +13,7 @@ const ClubInfo = ({
   return (
     <div className={styles.container}>
       <div className={styles.desc}>
-        <div className={styles.thumnail}>
+        <div className={styles.thumbnail}>
           <h1>{clubName}</h1>
         </div>
         <div className={styles.categori}>
