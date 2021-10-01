@@ -20,7 +20,7 @@
     & > h1 {
       margin: 0;
     }
-    & > div:nth-child(3) {
+    & > div:nth-of-type(1) {
       display: flex;
       justify-content: space-between;
       align-items: center;

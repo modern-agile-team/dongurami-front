@@ -1,7 +1,13 @@
+import Header from "components/Common/Header/Header";
 import Write from "../../components/Write/Write";
 
 function write() {
-  return <Write category="free" />;
+  return (
+    <>
+      <Header />
+      <Write category="free" />
+    </>
+  );
 }
 
 export default write;

@@ -13,7 +13,6 @@ function Container({ children, category, type }) {
 
   return (
     <div className={styles.container}>
-      <Header />
       <h1>
         {title} {type}
       </h1>
