@@ -82,12 +82,13 @@ const ClubIntro = () => {
   return (
     <div className={styles.container}>
       <ClubInfo
-        name={info[0] ? info[0].name : 0}
-        logoUrl={info[0] ? info[0].logoUrl : 0}
-        fileId={info[0] ? info[0].fileId : 0}
-        genderMan={info[0] ? info[0].genderMan : 0}
-        genderWomen={info[0] ? info[0].genderWomen : 0}
+        clubName={info[0] && info[0].name}
+        logoUrl={info[0] && info[0].logoUrl}
+        fileId={info[0] && info[0].fileId}
+        genderMan={info[0] && info[0].genderMan}
+        genderWomen={info[0] && info[0].genderWomen}
         categori={categori}
+        leader={leader}
       />
       <Desc
         onDescSubnmit={onDescSubnmit}

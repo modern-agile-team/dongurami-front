@@ -1,8 +1,9 @@
-import styles from "../../../styles/Common/Alam/AlamContainer.module.scss";
+import styles from "../../../styles/Common/Alarm/AlarmContainer.module.scss";
 import { FaTrashAlt } from "react-icons/fa";
 import { useState } from "react";
+import axios from "axios";
 
-const alams = [
+const alamrs = [
   {
     big: "댓글이 달렸습니다.",
     small: "ㄹㅇㅋㅋ",
@@ -75,19 +76,34 @@ const alams = [
   },
 ];
 
-const AlamContainer = () => {
-  const [alamList, setAlamList] = useState(alams);
+const AlarmContainer = () => {
+  const [alarmList, setAlarmList] = useState(alamrs);
+  let jwtToken = "";
+  if (typeof window !== "undefined") {
+    jwtToken = localStorage.getItem("jwt");
+  }
+  // const getAlamData = async () => {
+  //   const options = {
+  //     headers: {
+  //       "Content-type": "application/json; charset=utf-8",
+  //       "x-auth-token": jwtToken,
+  //     },
+  //   };
+  //   await axios
+  //     .get("http://3.36.72.145:8080/api/notification/entire", options)
+  //     .then((res) => console.log(res.data));
+  // };
 
-  const onAlamDeleteAll = () => {
-    const deleteAlams = alamList.slice(3);
-    setAlamList(deleteAlams);
+  const onAlamrDeleteAll = () => {
+    const deleteAlarms = alarmList.slice(3);
+    setAlarmList(deleteAlarms);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.icons}></div>
-      <div className={styles.alams}>
-        {alamList.slice(0, 3).map((el, i) => {
+      <div className={styles.alarms}>
+        {alarmList.slice(0, 3).map((el, i) => {
           return (
             <div key={i}>
               <p id={styles.big}>{el.big}</p>
@@ -98,9 +114,9 @@ const AlamContainer = () => {
         })}
       </div>
       <hr />
-      <FaTrashAlt onClick={onAlamDeleteAll} />
+      <FaTrashAlt onClick={onAlamrDeleteAll} />
     </div>
   );
 };
 
-export default AlamContainer;
+export default AlarmContainer;
