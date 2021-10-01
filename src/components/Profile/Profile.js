@@ -10,7 +10,7 @@ function Profile() {
   const data = {
     info: {
       id: "test1",
-      club: [1],
+      club: [1, 0],
     },
     profile: {
       id: "test1",
