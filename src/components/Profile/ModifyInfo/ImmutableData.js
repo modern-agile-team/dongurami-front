@@ -13,10 +13,10 @@ const ImmutableData = ({ data, setGrade, grade }) => {
         <FaGraduationCap />
         <span>{data.profile.major}</span>
         <select onChange={(e) => setGrade(e.target.value)} defaultValue={grade}>
-          {gradeArr.map((el, i) => {
+          {gradeArr.map((grade, index) => {
             return (
-              <option key={i} value={el}>
-                {el === 4 ? "4(졸업생)" : el}
+              <option key={index} value={grade}>
+                {grade === 4 ? "4(졸업생)" : grade}
               </option>
             );
           })}
@@ -24,8 +24,8 @@ const ImmutableData = ({ data, setGrade, grade }) => {
         <span>학년</span>
       </div>
       <p>소속 동아리</p>
-      {data.profile.club.map((el, i) => {
-        return <span key={i}>{el}</span>;
+      {data.profile.club.map((club, index) => {
+        return <span key={index}>{club}</span>;
       })}
       <hr />
     </div>
