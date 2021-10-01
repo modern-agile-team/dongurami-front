@@ -12,7 +12,7 @@ import {
 } from "react-icons/ai";
 import { MdRateReview } from "react-icons/md";
 
-const iconSize = 25;
+const iconSize = 20;
 
 const board = [
   "우아한 애자일",

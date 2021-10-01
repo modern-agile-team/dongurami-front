@@ -19,7 +19,8 @@
   div {
     display: flex;
     align-items: center;
-    height: 62px;
+    height: 55px;
+    font-size: 90%;
     padding: 0 1vw;
     cursor: pointer;
     &:hover {
@@ -27,6 +28,7 @@
     }
     svg {
       padding: 1.5vh 0;
+      margin-right: 5px;
     }
   }
   #now {
@@ -50,7 +52,7 @@
   #show {
     div {
       padding: 0 1px;
-      height: 55px;
+      height: 50px;
     }
     svg {
       width: 25px;
@@ -69,9 +71,6 @@
 }
 
 @media (max-width: 767px) {
-  .sideBar {
-    margin-top: 1px;
-  }
   #show {
     div {
       padding: 0 1px;
