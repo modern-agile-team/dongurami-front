@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Review/ReviewWrite.module.scss";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-
+import { AiFillStar, AiOutlineStar, AiFillEdit } from "react-icons/ai";
+import { BiRevision } from "react-icons/bi";
 const ReviewWrite = ({
   onReviewInput,
   onReviewSubmit,
@@ -25,9 +25,13 @@ const ReviewWrite = ({
       <div className={styles.comment}>
         <input onChange={onReviewInput} />
         {isReviewMine ? (
-          <button onClick={onReviewUpdate}>수정</button>
+          <button onClick={onReviewUpdate}>
+            <BiRevision size={20} />
+          </button>
         ) : (
-          <button onClick={onReviewSubmit}>등록</button>
+          <button onClick={onReviewSubmit}>
+            <AiFillEdit size={20} />
+          </button>
         )}
       </div>
     </div>
