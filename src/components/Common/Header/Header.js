@@ -5,13 +5,13 @@ import { BiBell } from "react-icons/bi";
 import Hamburger from "hamburger-react";
 import HeaderBoard from "./HeaderBoard";
 import HeaderUser from "./HeaderUser";
-import AlamContainer from "../Alam/AlamContainer";
+import AlarmContainer from "../Alarm/AlarmContainer";
 import HeaderMobileBoard from "./HeaderMobileBoard";
 import Link from "next/link";
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const [isAlamOpen, setIsAlamOpen] = useState(false);
+  const [isAlarmOpen, setIsAlarmOpen] = useState(false);
   const [token, setToken] = useState("");
 
   const closeRef = useRef(null);
@@ -48,8 +48,8 @@ function Header() {
   };
 
   //알람 열람
-  const alamOpen = () => {
-    setIsAlamOpen(!isAlamOpen);
+  const alarmOpen = () => {
+    setIsAlarmOpen(!isAlarmOpen);
   };
 
   return (
@@ -70,9 +70,9 @@ function Header() {
                 className={styles.tokenIcons}
                 id={open ? styles.show : styles.hide}
               >
-                <div className={styles.alam}>
-                  <BiBell onClick={alamOpen} className={styles.bell} />
-                  {isAlamOpen && <AlamContainer />}
+                <div className={styles.alarm}>
+                  <BiBell onClick={alarmOpen} className={styles.bell} />
+                  {isAlarmOpen && <AlarmContainer />}
                 </div>
                 <FaUserCircle className={styles.Profile} onClick={logout} />
               </div>

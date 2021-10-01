@@ -23,8 +23,10 @@ $sans-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     font-family: $sans-font;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 200px;
+    border-radius: 10px;
     border: none;
+    padding: 10px;
+    background-color: #d4eee498;
     svg {
       margin-right: 5px;
     }
@@ -48,16 +50,9 @@ $sans-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
   white-space: pre-wrap;
 }
 
-@media (max-width: 1023px) {
-  .intro {
-    padding: 2em 5em;
-  }
-}
-
 @media (max-width: 767px) {
   .intro {
     padding: 2em 0 0 0;
-    width: 120%;
     span {
       font-size: 120%;
       margin-bottom: 2vh;

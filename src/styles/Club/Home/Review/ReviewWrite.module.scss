@@ -37,7 +37,7 @@
     width: 70%;
     height: 3em;
     border-radius: 16px;
-    border: 2px solid #3fcdb8;
+    border: 2px solid #64beb18c;
     &:focus {
       outline: none;
     }
@@ -49,24 +49,12 @@
     border-radius: 3px;
     cursor: pointer;
     font-weight: lighter;
-    background-color: #c9eee8;
+    background-color: #64beb18c;
     border: none;
     &:hover {
       background-color: #3fcdb8;
     }
   }
-}
-
-@media (max-width: 1024px) {
-  // .write {
-  //   width: 100%;
-  // }
-  // .comment {
-  //   width: 100%;
-  //   input {
-  //     width: 90%;
-  //   }
-  // }
 }
 
 @media (max-width: 767px) {

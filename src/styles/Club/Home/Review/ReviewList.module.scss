@@ -3,7 +3,7 @@
   flex-direction: column;
   margin: 0 auto;
   width: 80%;
-  border: 2px solid #3fcdb8;
+  border: 2px solid #64beb18c;
   margin-top: 1em;
   margin-bottom: 1em;
   padding: 1em;
@@ -54,11 +54,6 @@
     font-size: 85%;
   }
 }
-// @media (max-width: 1024px) {
-//   .list {
-//     width: 100%;
-//   }
-// }
 
 @media (max-width: 767px) {
   .list {

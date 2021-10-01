@@ -38,23 +38,18 @@
   justify-content: center;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .container {
-    padding: 0 5em;
     img {
       height: 80%;
     }
-  }
-
-  .desc {
-    align-items: center;
   }
 }
 
 @media (max-width: 767px) {
   .container {
     padding: 0;
-    width: 120%;
+    margin-top: 2em;
     h1 {
       font-size: 120%;
     }
