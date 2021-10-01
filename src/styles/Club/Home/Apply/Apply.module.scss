@@ -1,11 +1,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 40vw;
-  border: 2px solid #3fcdb8;
+  width: 45vw;
+  border: 2px solid #3fcdb83a;
   border-radius: 16px;
   padding: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 4em;
+  box-shadow: 0px 8px 8px 3px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 1024px) {

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 60%;
+  width: 80%;
   border: 2px solid #3fcdb8;
   margin-top: 1em;
   margin-bottom: 1em;
@@ -65,18 +65,19 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .mine {
-    width: 100%;
-  }
-}
+// @media (max-width: 1024px) {
+//   .mine {
+//     width: 100%;
+//   }
+// }
 
 @media (max-width: 767px) {
   .mine {
-    width: 100%;
-    padding: 1em 0;
-    p {
-      margin-left: 10px;
+    padding: 10px;
+    width: 90%;
+    p,
+    #date {
+      font-size: 60%;
     }
   }
   .star {
@@ -84,5 +85,14 @@
     svg {
       width: 10px;
     }
+  }
+  .club {
+    align-items: center;
+    img {
+      width: 10%;
+    }
+  }
+  .review {
+    margin-top: 0.5em;
   }
 }

@@ -1,7 +1,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
   font-size: 120%;
   border-bottom: 2px solid #c9eee8;
@@ -17,9 +17,17 @@
   align-items: center;
 }
 
-@media (max-width: 1024px) {
+// @media (max-width: 1024px) {
+//   .header {
+//     width: 100%;
+//     padding: 1em 0;
+//   }
+// }
+
+@media (max-width: 767px) {
   .header {
     width: 100%;
     padding: 1em 0;
+    font-size: 90%;
   }
 }

@@ -182,14 +182,13 @@ const Review = () => {
       ) : (
         <></>
       )}
-
-      {reviewNotMine.map((el, i) => {
+      {reviewNotMine.map((review, index) => {
         return (
           <ReviewList
-            key={i}
-            rate={el.score}
-            desc={el.description}
-            date={el.inDate.substring(0, 10)}
+            key={index}
+            rate={review.score}
+            desc={review.description}
+            date={review.inDate.substring(0, 10)}
           />
         );
       })}
