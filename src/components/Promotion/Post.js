@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styles from "../../styles/Board/Promotion/Post.module.scss";
+import PromotionCommentContainer from "./Comment/PromotionCommentContainer";
+import { useRouter } from "next/router";
+import getToken from "utils/getToken";
+import axios from "axios";
 
-const Post = ({ postData }) => {
-  const { name, hit, title, inDate, description } = postData;
+const Post = ({ postData, postId, getData, comments }) => {
+  const { name, hit, title, inDate, description, studentId } = postData;
+  const token = getToken();
+  const router = useRouter();
+
   return (
     <div className={styles.post}>
       <div className={styles.container}>
@@ -19,6 +26,12 @@ const Post = ({ postData }) => {
         </div>
         <hr />
         <div dangerouslySetInnerHTML={{ __html: description }}></div>
+        <PromotionCommentContainer
+          comments={comments}
+          postId={postId}
+          studentId={studentId}
+          getData={getData}
+        />
       </div>
     </div>
   );

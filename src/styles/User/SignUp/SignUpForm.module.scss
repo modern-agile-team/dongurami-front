@@ -88,9 +88,9 @@
 
 @media screen and (max-width: 1024px) {
   .form {
-    margin-top: 18%;
     width: 35rem;
     height: 55rem;
+    margin-top: 8%;
   }
 }
 
@@ -98,7 +98,7 @@
   .form {
     width: 90%;
     height: 50rem;
-    margin-top: 20%;
+    margin-top: 12%;
     .input {
       width: 52%;
     }
@@ -118,9 +118,13 @@
 
 @media screen and (max-width: 480px) {
   .form {
-    margin-top: 6rem;
     width: 90%;
     height: 48rem;
+    margin-top: 19%;
+    input {
+      width: 50%;
+      font-size: 60%;
+    }
     .button {
       width: 5.5rem;
       height: 2.5rem;
