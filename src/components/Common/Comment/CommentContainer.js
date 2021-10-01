@@ -4,7 +4,7 @@ import AddComment from "./AddComment";
 import ReplyContainer from "./ReplyContainer";
 import React, { useState } from "react";
 
-function CommentContainer({ comments, api }) {
+function CommentContainer({ comments, api, updatePost }) {
   const [addReplyID, setAddReplyID] = useState();
 
   return (
@@ -19,6 +19,7 @@ function CommentContainer({ comments, api }) {
                 <Comment
                   comment={comment}
                   api={api}
+                  updatePost={updatePost}
                 />
               </ReplyContainer>
             ) : (
@@ -26,16 +27,17 @@ function CommentContainer({ comments, api }) {
                 comment={comment}
                 setAddReplyID={setAddReplyID}
                 api={api}
+                updatePost={updatePost}
               />
             )}
             {addReplyID === comment.no && (
               <ReplyContainer>
-                <AddComment parentCommentID={comment.groupNo} api={api} />
+                <AddComment parentCommentID={comment.groupNo} api={api} updatePost={updatePost} />
               </ReplyContainer>
             )}
           </React.Fragment>
         ))}
-        <AddComment api={api} />
+        <AddComment api={api} updatePost={updatePost} />
       </div>
     </>
   );

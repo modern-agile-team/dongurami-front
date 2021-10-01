@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
-import getToken from 'utils/getToken';
 import styles from '../../../styles/Common/Comment/Comment.module.scss';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
@@ -14,7 +13,7 @@ function setEndOfContenteditable(contentEditableElement) {
   selection.addRange(range); //make the range you have just created the visible selection
 }
 
-function Comment({ comment, setAddReplyID, api }) {
+function Comment({ comment, setAddReplyID, api, updatePost }) {
   const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
 
@@ -23,15 +22,17 @@ function Comment({ comment, setAddReplyID, api }) {
     descriptionDiv.current.focus();
   }, [isContentEditable]);
 
-  const onEdit = () => {
+  const onEdit = async () => {
     if (isContentEditable) {
-      api.putComment(descriptionDiv.current.textContent, comment.no, comment.groupNo);
+      await api.putComment(descriptionDiv.current.textContent, comment.no, comment.groupNo);
+      updatePost();
     }
     setIsContentEditable(!isContentEditable);
     setEndOfContenteditable(descriptionDiv.current);
   }
-  const onDelete = () => {
-    api.deleteComment(comment.no, comment.groupNo);
+  const onDelete = async () => {
+    await api.deleteComment(comment.no, comment.groupNo);
+    updatePost();
   }
 
 

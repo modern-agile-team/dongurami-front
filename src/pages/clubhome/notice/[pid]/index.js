@@ -8,16 +8,20 @@ import getToken from "utils/getToken";
 
 class Api {
   constructor(pid) {
-    this.pid = pid;
     this.token = getToken();
+    this.pid = pid;
   }
 
   async getPost() {
-    const response = await axios.get(`http://3.36.72.145:8080/api/board/notice/${this.pid}`);
+    const response = await axios.get(`http://3.36.72.145:8080/api/club/board/clubNotice/1/${this.pid}`, {
+      headers: {
+        'x-auth-token': this.token
+      }
+    });
     return response.data;
   }
   async deletePost() {
-    await axios.delete(`http://3.36.72.145:8080/api/board/notice/${this.pid}`, {
+    await axios.delete(`http://3.36.72.145:8080/api/club/board/clubNotice/1/${this.pid}`, {
       headers: {
         'x-auth-token': this.token
       }
@@ -27,7 +31,7 @@ class Api {
     if (cid !== pcid) {
       await this.postReplyComment(...arguments);
     } else {
-      await axios.post(`http://3.36.72.145:8080/api/board/notice/${this.pid}`, {
+      await axios.post(`http://3.36.72.145:8080/api/club/board/clubNotice/1/${this.pid}`, {
           id: 'test1', description
         }, {
           headers: {
@@ -40,7 +44,7 @@ class Api {
     if (cid !== pcid) {
       await this.putReplyComment(...arguments);
     } else {
-      await axios.put(`http://3.36.72.145:8080/api/board/notice/${this.pid}/${cid}`, {
+      await axios.put(`http://3.36.72.145:8080/api/club/board/clubNotice/1/${this.pid}/${cid}`, {
           description
         }, {
           headers: {
@@ -53,7 +57,7 @@ class Api {
     if (cid !== pcid) {
       await this.deleteReplyComment(...arguments);
     } else {
-      await axios.delete(`http://3.36.72.145:8080/api/board/notice/${this.pid}/${cid}`, {
+      await axios.delete(`http://3.36.72.145:8080/api/club/board/clubNotice/1/${this.pid}/${cid}`, {
         headers: {
           "x-auth-token": this.token
         }
@@ -62,7 +66,7 @@ class Api {
   }
 
   async postReplyComment(description, pcid) {
-    await axios.post(`http://3.36.72.145:8080/api/board/notice/${this.pid}/${pcid}`, {
+    await axios.post(`http://3.36.72.145:8080/api/club/board/clubNotice/1/${this.pid}/${pcid}`, {
       id: 'test1', description
     }, {
       headers: {
@@ -71,7 +75,7 @@ class Api {
     });
   }
   async putReplyComment (description, cid, pcid) {
-    await axios.put(`http://3.36.72.145:8080/api/board/notice/${this.pid}/${pcid}/${cid}`, {
+    await axios.put(`http://3.36.72.145:8080/api/club/board/clubNotice/1/${this.pid}/${pcid}/${cid}`, {
       description
     }, {
       headers: {
@@ -80,7 +84,7 @@ class Api {
     });
   }
   async deleteReplyComment (cid, pcid) {
-    await axios.delete(`http://3.36.72.145:8080/api/board/notice/${this.pid}/${pcid}/${cid}`, {
+    await axios.delete(`http://3.36.72.145:8080/api/club/board/clubNotice/1/${this.pid}/${pcid}/${cid}`, {
       headers: {
         'x-auth-token': this.token
       }
@@ -88,7 +92,7 @@ class Api {
   }
 }
 
-function NoticePost() {
+function ClubNoticePost() {
   const [pid, setPid] = useState();
   const router = useRouter();
 
@@ -104,10 +108,10 @@ function NoticePost() {
   return (
     <>
       <Header />
-      <PostContainer category="notice" api={api} />
+      <PostContainer api={api} />
       <Footer />
     </>
-  );
+  )
 }
 
-export default NoticePost;
+export default ClubNoticePost;
