@@ -1,7 +1,7 @@
 import styles from "../../../styles/Club/Home/Intro/Desc.module.scss";
 import { IoPencil } from "react-icons/io5";
 
-const studentId = "201708051";
+export const studentId = "20170805";
 
 const Desc = ({
   onDescChange,

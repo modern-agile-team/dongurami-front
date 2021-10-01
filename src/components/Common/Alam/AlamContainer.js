@@ -1,6 +1,7 @@
 import styles from "../../../styles/Common/Alam/AlamContainer.module.scss";
 import { FaTrashAlt } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const alams = [
   {
@@ -77,12 +78,30 @@ const alams = [
 
 const AlamContainer = () => {
   const [alamList, setAlamList] = useState(alams);
+  let jwtToken = "";
+  if (typeof window !== "undefined") {
+    jwtToken = localStorage.getItem("jwt");
+  }
+  // const getAlamData = async () => {
+  //   const options = {
+  //     headers: {
+  //       "Content-type": "application/json; charset=utf-8",
+  //       "x-auth-token": jwtToken,
+  //     },
+  //   };
+  //   await axios
+  //     .get("http://3.36.72.145:8080/api/notification/entire", options)
+  //     .then((res) => console.log(res.data));
+  // };
 
   const onAlamDeleteAll = () => {
     const deleteAlams = alamList.slice(3);
     setAlamList(deleteAlams);
   };
 
+  // useEffect(() => {
+  //   getAlamData();
+  // });
   return (
     <div className={styles.container}>
       <div className={styles.icons}></div>

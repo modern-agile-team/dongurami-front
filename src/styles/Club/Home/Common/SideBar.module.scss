@@ -23,7 +23,7 @@
     padding: 0 1vw;
     cursor: pointer;
     &:hover {
-      background-color: rgb(204, 204, 204);
+      background-color: rgba(228, 228, 228, 0.37);
     }
     svg {
       padding: 1.5vh 0;
@@ -32,6 +32,10 @@
   #now {
     background-color: #d4eee498;
   }
+}
+
+.hide {
+  display: none;
 }
 
 #hide {

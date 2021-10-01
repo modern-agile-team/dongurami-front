@@ -39,22 +39,22 @@
 }
 
 @media (max-width: 1023px) {
-  .container {
-    padding: 0 5em;
-    img {
-      height: 80%;
-    }
-  }
+  // .container {
+  //   padding: 0 5em;
+  //   img {
+  //     height: 80%;
+  //   }
+  // }
 
-  .desc {
-    align-items: center;
-  }
+  // .desc {
+  //   align-items: center;
+  // }
 }
 
 @media (max-width: 767px) {
   .container {
     padding: 0;
-    width: 120%;
+    margin-top: 2em;
     h1 {
       font-size: 120%;
     }

@@ -1,5 +1,5 @@
 import styles from "../../../styles/Club/Home/Common/SideBar.module.scss";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Router from "next/router";
 import { HiPencil } from "react-icons/hi";
 import { BsLayoutSidebar } from "react-icons/bs";
@@ -34,14 +34,51 @@ const icons = [
   <AiOutlineSetting size={iconSize} key="6" />,
 ];
 
+const throttle = (callback, waitTime) => {
+  let timerId = null;
+  return (e) => {
+    if (timerId) return;
+    timerId = setTimeout(() => {
+      callback.call(this, e);
+      timerId = null;
+    }, waitTime);
+  };
+};
+
 const SideBar = ({ setComp, comp }) => {
   const [isOpen, setOpen] = useState(true);
+  const [pageY, setPageY] = useState(0);
+  const [hide, setHide] = useState(false);
+
+  const documentRef = useRef(typeof window === "object" && document);
+
   const toggle = () => setOpen(!isOpen);
+
   const movePage = () => {
     Router.push("/manager");
   };
+
+  const handleScroll = () => {
+    const { pageYOffset } = window;
+    const deltaY = pageYOffset - pageY;
+    const hide = pageYOffset !== 0 && deltaY >= 0;
+    setHide(hide);
+    setPageY(pageYOffset);
+  };
+
+  const throttleScroll = throttle(handleScroll, 50);
+
+  useEffect(() => {
+    documentRef.current.addEventListener("scroll", throttleScroll);
+    return () =>
+      documentRef.current.removeEventListener("scroll", throttleScroll);
+  }, [pageY]);
+
   return (
-    <div className={styles.sideBar} id={isOpen ? styles.open : styles.close}>
+    <div
+      className={hide ? styles.hide : styles.sideBar}
+      id={isOpen ? styles.open : styles.close}
+    >
       <BsLayoutSidebar id={styles.hamb} onClick={() => toggle()} size="30" />
       <div className={styles.menu} id={isOpen ? styles.show : styles.hide}>
         {board.map((el, i) => {
