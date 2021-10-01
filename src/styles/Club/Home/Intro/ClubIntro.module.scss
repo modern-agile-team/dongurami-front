@@ -9,10 +9,12 @@
   margin-bottom: 2em;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .container {
     align-items: center;
     width: 100%;
+    padding: 0;
+    box-shadow: none;
   }
 }
 
@@ -20,6 +22,6 @@
   .container {
     margin-top: -3em;
     align-items: center;
-    width: 70%;
+    box-shadow: none;
   }
 }

@@ -26,7 +26,7 @@
 .population {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   span {
     margin: 5px 0;
   }
@@ -38,32 +38,27 @@
   justify-content: center;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .container {
-    padding: 0 5em;
     img {
       height: 80%;
     }
-  }
-
-  .desc {
-    align-items: center;
   }
 }
 
 @media (max-width: 767px) {
   .container {
     padding: 0;
-    width: 120%;
+    margin-top: 2em;
     h1 {
-      font-size: 120%;
+      font-size: 100%;
     }
     p,
     span {
-      font-size: 90%;
+      font-size: 85%;
     }
     img {
-      height: 60%;
+      height: 50%;
     }
   }
   .categori,

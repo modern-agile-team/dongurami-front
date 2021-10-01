@@ -5,7 +5,6 @@ import ReviewHeader from "./ReviewHeader";
 import ReviewWrite from "./ReviewWrite";
 import ReviewMine from "./ReviewMine";
 import ReviewList from "./ReviewList";
-import Router from "next/router";
 import axios from "axios";
 
 const Review = () => {
@@ -40,11 +39,6 @@ const Review = () => {
         setReviewList(res.data.reviewList);
       })
       .catch((err) => console.log(err.response.data.msg));
-  };
-
-  // 버튼 클릭 시 페이지 리로딩
-  const reloadPage = () => {
-    Router.push("/ClubHome");
   };
 
   // 내 후기와 내 후기가 아닌 것들
@@ -98,7 +92,7 @@ const Review = () => {
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
 
-    reloadPage();
+    getReviewData();
   };
 
   // 내 후기 삭제
@@ -116,7 +110,7 @@ const Review = () => {
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
-    reloadPage();
+    getReviewData();
   };
 
   // 내 후기 수정
@@ -138,8 +132,7 @@ const Review = () => {
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
-
-    reloadPage();
+    getReviewData();
   };
 
   // 필터링

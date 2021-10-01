@@ -57,7 +57,6 @@ const Apply = () => {
           sex: "",
           phoneNumber: "",
         });
-        console.log(res.data.clientInfo[0]);
         setLeader(res.data.leader);
         setIsUpdate(updateState);
         setQuestions(res.data.questions);
@@ -209,6 +208,8 @@ const Apply = () => {
         onRemove={onRemove}
         questions={questions}
         onUpdateInputChange={onUpdateInputChange}
+        leader={leader}
+        userInfo={userInfo}
       />
       <ApplySubmit
         newQuestionInput={newQuestionInput}
@@ -217,6 +218,7 @@ const Apply = () => {
         iconSize={iconSize}
         onResumeSubmit={onResumeSubmit}
         leader={leader}
+        userInfo={userInfo}
       />
     </div>
   );
