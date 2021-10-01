@@ -11,7 +11,6 @@ const Desc = ({
   onDescSubnmit,
   leader,
 }) => {
-  console.log(leader);
   return (
     <div className={styles.intro}>
       <span>동아리 소개</span>
