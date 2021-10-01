@@ -5,8 +5,10 @@
   align-items: center;
 
   input {
-    margin: 20px 0;
+    margin: 1em 0;
+    width: 40%;
   }
+
   svg {
     &:hover {
       color: #3fcdb8;
