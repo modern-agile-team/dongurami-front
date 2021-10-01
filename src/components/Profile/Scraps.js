@@ -16,7 +16,7 @@ function Scraps({ data, comp, scrapData }) {
         <div className={styles.postItem}>
           {scrapData.map((data, index) => {
             return (
-              <div>
+              <div key={index}>
                 {data.fileUrl === null ? (
                   <BsFileText className={styles.thumbnail} />
                 ) : (
