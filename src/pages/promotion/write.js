@@ -1,11 +1,11 @@
 import Header from "components/Common/Header/Header";
-import Write from "../../components/Write/Write";
+import Write from 'components/Write/Write';
 
 function write() {
   return (
   <>
     <Header />
-    <Write category="promotion" />
+    {/* <Write category="promotion" /> */}
   </>
   );
 }
