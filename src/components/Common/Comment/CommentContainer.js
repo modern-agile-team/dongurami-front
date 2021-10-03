@@ -16,11 +16,7 @@ function CommentContainer({ comments, api, updatePost }) {
           <React.Fragment key={comment.no}>
             {comment.depth ? (
               <ReplyContainer>
-                <Comment
-                  comment={comment}
-                  api={api}
-                  updatePost={updatePost}
-                />
+                <Comment comment={comment} api={api} updatePost={updatePost} />
               </ReplyContainer>
             ) : (
               <Comment
@@ -32,7 +28,11 @@ function CommentContainer({ comments, api, updatePost }) {
             )}
             {addReplyID === comment.no && (
               <ReplyContainer>
-                <AddComment parentCommentID={comment.groupNo} api={api} updatePost={updatePost} />
+                <AddComment
+                  parentCommentID={comment.groupNo}
+                  api={api}
+                  updatePost={updatePost}
+                />
               </ReplyContainer>
             )}
           </React.Fragment>

@@ -2,9 +2,11 @@ import style from "../../../styles/Board/Promotion/PromotionCommentContainer.mod
 import AddComment from "./AddComment";
 import React, { useState } from "react";
 import Comment from "./Comment";
+import ReplyComment from "./ReplyComment";
+import ReplyCommentContainer from "./ReplyCommentContainer";
 
 const PromotionCommentContainer = ({ comments, postId, getData }) => {
-  const [addReplyID, setAddReplyID] = useState();
+  const [replyComment, setReplyComment] = useState([]);
 
   return (
     <>
@@ -14,7 +16,25 @@ const PromotionCommentContainer = ({ comments, postId, getData }) => {
         {comments &&
           comments.map((comment, index) => (
             <>
-              <Comment key={index} comment={comment} postId={postId} />
+              {comment.groupNo === comment.no && (
+                <>
+                  <Comment
+                    key={index}
+                    comment={comment}
+                    postId={postId}
+                    getData={getData}
+                  />
+                </>
+              )}
+              {comment.no !== comment.groupNo && (
+                <ReplyComment
+                  key={comment.no}
+                  commentList={comments}
+                  postId={postId}
+                  getData={getData}
+                  parentCommentId={comment.groupNo}
+                />
+              )}
             </>
           ))}
         <AddComment comments={comments} postId={postId} getData={getData} />
