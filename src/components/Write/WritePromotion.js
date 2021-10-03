@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "../../styles/Board/Write/WritePromotionContent.module.scss";
 
-function WritePromition({ title, body }) {
+function WritePromition({ title, body, api }) {
   const router = useRouter();
   const [image, setImage] = useState();
 
@@ -11,14 +11,7 @@ function WritePromition({ title, body }) {
     setImage(e.target.files[0]);
   }
   const onSubmit = () => {
-    axios
-      .post("http://3.36.72.145:8080/api/board/promotion", {
-        id: "test1",
-        clubNo: "1",
-        title,
-        description: body,
-      })
-      .then(() => router.push("/promotion"));
+    api.post(title, body);
   };
 
   return (
