@@ -43,7 +43,7 @@ export const Manager = () => {
         setLeader(res.data.clubAdminOption.leader);
         setMembers(res.data.clubAdminOption.memberAndAuthList);
         setMergedApplicantQNA(
-          mergeApplicantQNA(res.data.applicant.applicantInfo)
+          mergeApplicantQNA(res.data.applicant.questionsAnswers)
         );
       })
       .catch((err) => console.log(err.response.data));
@@ -110,12 +110,14 @@ export const Manager = () => {
         newLeader: newLeaderId,
       },
     };
-    await axios(
-      "http://3.36.72.145:8080/api/club/admin-option/1/leader",
-      options
-    )
-      .then((res) => alert(res.data.msg))
-      .catch((err) => alert(err.response.data.msg));
+    confirm("회장을 양도하시겠습니까?") &&
+      (await axios(
+        "http://3.36.72.145:8080/api/club/admin-option/1/leader",
+        options
+      )
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err.response.data.msg)));
+
     getMembersData();
   };
 

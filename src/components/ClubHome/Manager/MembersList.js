@@ -14,7 +14,7 @@ const MembersList = ({
 }) => {
   return (
     <div className={styles.member}>
-      <div>
+      <div className={styles.name}>
         <div id={styles.crown}>
           {memberInfo[0] === leader ? (
             <RiVipCrownFill />
@@ -22,7 +22,7 @@ const MembersList = ({
             <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
           )}
         </div>
-        <div id={styles.member}>
+        <div>
           <span>{memberInfo[0]}</span>
         </div>
       </div>
