@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/Board/Promotion/PromotionContainer.module.scss";
-import Header from "../Common/Header";
+import Header from "../Common/Header/Header";
 import TypeSearch from "./TypeSearch";
 import { BsPencil } from "react-icons/bs";
 import Modal from "./Modal";

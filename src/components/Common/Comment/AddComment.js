@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import styles from '../../../styles/Common/Comment/AddComment.module.scss';
 
-function AddComment({ postComment, parentCommentID }) {
-  console.log(parentCommentID);
-
+function AddComment({ parentCommentID, api, updatePost }) {
   const [description, setDescription] = useState('');
 
   const onChange = (e) => {
     setDescription(e.target.value);
   };
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    postComment(description, parentCommentID);
+    await api.postComment(description, parentCommentID);
+    updatePost();
     setDescription('');
   }
 

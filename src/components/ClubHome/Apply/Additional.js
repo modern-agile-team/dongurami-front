@@ -11,6 +11,8 @@ const Additional = ({
   onAnswerInputChange,
   updateQuestionInput,
   onUpdateInputChange,
+  leader,
+  userInfo,
 }) => {
   return (
     <div className={styles.additional}>
@@ -28,8 +30,16 @@ const Additional = ({
               ) : (
                 <span>{el.description}</span>
               )}
-              <HiPencil onClick={() => onUpdate(i, el.no)} />
-              <FaTrashAlt id={styles.remove} onClick={() => onRemove(el.no)} />
+              {leader === userInfo.id && (
+                <>
+                  <HiPencil onClick={() => onUpdate(i, el.no)} />
+                  <FaTrashAlt
+                    id={styles.remove}
+                    onClick={() => onRemove(el.no)}
+                  />
+                </>
+              )}
+
               <textarea onChange={onAnswerInputChange} />
             </li>
           );

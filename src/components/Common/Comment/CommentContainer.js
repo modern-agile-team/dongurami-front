@@ -4,15 +4,7 @@ import AddComment from "./AddComment";
 import ReplyContainer from "./ReplyContainer";
 import React, { useState } from "react";
 
-function CommentContainer({
-  comments,
-  postComment,
-  putComment,
-  deleteComment,
-  postReplyComment,
-  putReplyComment,
-  deleteReplyComment,
-}) {
+function CommentContainer({ comments, api, updatePost }) {
   const [addReplyID, setAddReplyID] = useState();
 
   return (
@@ -26,30 +18,33 @@ function CommentContainer({
               <ReplyContainer>
                 <Comment
                   comment={comment}
-                  setAddReplyID={setAddReplyID}
-                  putComment={putReplyComment}
-                  deleteComment={deleteReplyComment}
+                  api={api}
+                  updatePost={updatePost}
                 />
               </ReplyContainer>
             ) : (
               <Comment
                 comment={comment}
                 setAddReplyID={setAddReplyID}
-                putComment={putComment}
-                deleteComment={deleteComment}
+                api={api}
+                updatePost={updatePost}
               />
             )}
             {addReplyID === comment.no && (
               <ReplyContainer>
+<<<<<<< HEAD
                 <AddComment
                   postComment={postReplyComment}
                   parentCommentID={comment.groupNo}
                 />
+=======
+                <AddComment parentCommentID={comment.groupNo} api={api} updatePost={updatePost} />
+>>>>>>> 176bf0593ac5e36ea1042e2dee41ce4884e0332d
               </ReplyContainer>
             )}
           </React.Fragment>
         ))}
-        <AddComment postComment={postComment} />
+        <AddComment api={api} updatePost={updatePost} />
       </div>
     </>
   );

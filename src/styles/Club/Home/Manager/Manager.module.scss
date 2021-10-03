@@ -1,8 +1,37 @@
+$sans-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+$color1: #e7f9ff;
+
 .container {
-  width: 80%;
+  padding: 3em;
   margin: 0 auto;
-  margin-top: 7em;
   svg {
     cursor: pointer;
+  }
+  h1,
+  h2 {
+    margin: 0;
+    font-family: $sans-font;
+  }
+  h2 {
+    margin: 1em 0;
+  }
+  button {
+    margin-top: 1em;
+    width: 6vw;
+    height: 5vh;
+    border-radius: 6px;
+    border: none;
+    background-color: $color1;
+    font-family: $sans-font;
+    cursor: pointer;
+    &:hover {
+      background-color: #e6f2ff;
+    }
+  }
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
   }
 }

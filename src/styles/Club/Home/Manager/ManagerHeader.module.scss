@@ -1,0 +1,19 @@
+$color1: #e7f9ff;
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25vh;
+  margin-bottom: 3em;
+  border-radius: 6px;
+  background-color: $color1;
+
+  h1 {
+    cursor: pointer;
+  }
+
+  svg {
+    margin-right: 1em;
+  }
+}

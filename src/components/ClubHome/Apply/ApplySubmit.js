@@ -2,10 +2,6 @@ import React from "react";
 import styles from "../../../styles/Club/Home/Apply/ApplySubmit.module.scss";
 import { IoIosAddCircleOutline, IoIosCheckmark } from "react-icons/io";
 
-const token = {
-  studentID: "test200",
-};
-
 const ApplySubmit = ({
   newQuestionInput,
   handleChange,
@@ -13,10 +9,11 @@ const ApplySubmit = ({
   iconSize,
   onResumeSubmit,
   leader,
+  userInfo,
 }) => {
   return (
     <>
-      {token.studentID === leader ? (
+      {userInfo.id === leader ? (
         <div className={styles.leader}>
           <span>새로운 질문</span>
           <input ref={newQuestionInput} type="text" onChange={handleChange} />

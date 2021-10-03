@@ -1,8 +1,8 @@
 .container {
   width: 60%;
   margin: 0 auto;
-  margin-top: calc(10vh + 1rem);
-  border: 2px solid #90E2D6;
+  margin-top: 1rem;
+  border: 2px solid #90e2d6;
   padding: 1rem 2rem;
   @media screen and (max-width: 768px) {
     width: 80%;
@@ -20,7 +20,7 @@
     & > h1 {
       margin: 0;
     }
-    & > div:nth-child(3) {
+    & > div:nth-of-type(1) {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -29,15 +29,15 @@
       }
       & button {
         background: inherit;
-        border: 2px solid #90E2D6;
+        border: 2px solid #90e2d6;
         border-radius: 1rem;
-        margin: .25rem;
+        margin: 0.25rem;
         cursor: pointer;
       }
     }
   }
   & > hr {
-    border: .5px solid #90E2D6;
+    border: 0.5px solid #90e2d6;
   }
   & > div:nth-of-type(2) {
     margin: 2rem;

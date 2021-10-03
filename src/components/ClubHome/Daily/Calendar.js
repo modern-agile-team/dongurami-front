@@ -22,8 +22,12 @@ const Calendar = () => {
   const [color, setColor] = useState("");
   const [nowDay, setNowDay] = useState("");
   const nowDate = useRef();
-  const moveHref = () => {
+  const moveLogin = () => {
     Router.push("/LoginPage");
+  };
+
+  const moveHome = () => {
+    window.location.reload();
   };
 
   const today = momentTime;
@@ -49,7 +53,18 @@ const Calendar = () => {
       .catch((err) => {
         console.log(err);
         alert(err.response.data.msg);
-        moveHref();
+        if (
+          err.response.data.msg ===
+            "JWT 토큰이 존재하지 않습니다. 로그인 후 이용해주세요." ||
+          err.response.data.msg ===
+            "유효 시간이 만료된 토큰입니다. 다시 로그인 후 이용해주세요."
+        )
+          moveLogin();
+        else if (
+          err.response.data.msg === "해당 동아리에 가입하지 않았습니다." ||
+          err.response.data.msg === "존재하지 않는 동아리입니다."
+        )
+          moveHome();
       });
   };
 

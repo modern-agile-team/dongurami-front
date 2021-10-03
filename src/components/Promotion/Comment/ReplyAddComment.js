@@ -36,7 +36,7 @@ function ReplyAddComment({
         if (res.data.success) {
           getData();
         } else alert(res.data.msg);
-      });
+      })
     setDescription("");
   };
   return (

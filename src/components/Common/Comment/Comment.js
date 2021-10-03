@@ -13,7 +13,7 @@ function setEndOfContenteditable(contentEditableElement) {
   selection.addRange(range); //make the range you have just created the visible selection
 }
 
-function Comment({ comment, setAddReplyID, putComment, deleteComment }) {
+function Comment({ comment, setAddReplyID, api, updatePost }) {
   const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
 
@@ -22,21 +22,23 @@ function Comment({ comment, setAddReplyID, putComment, deleteComment }) {
     descriptionDiv.current.focus();
   }, [isContentEditable]);
 
-  const onEdit = () => {
+  const onEdit = async () => {
     if (isContentEditable) {
-      putComment(descriptionDiv.current.textContent, comment.no, comment.groupNo);
+      await api.putComment(descriptionDiv.current.textContent, comment.no, comment.groupNo);
+      updatePost();
     }
     setIsContentEditable(!isContentEditable);
     setEndOfContenteditable(descriptionDiv.current);
   }
-  const onDelete = () => {
-    deleteComment(comment.no, comment.groupNo);
+  const onDelete = async () => {
+    await api.deleteComment(comment.no, comment.groupNo);
+    updatePost();
   }
 
 
   return (
     <div className={styles.comment}>
-      <img src="https://picsum.photos/500" alt="profile" />
+      <img src={`https://picsum.photos/500?random=${Math.floor(Math.random() * 9) + 1}`} alt="profile" />
       <div>
         <div>
           <p>{comment.studentName}</p>

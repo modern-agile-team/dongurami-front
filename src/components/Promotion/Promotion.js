@@ -52,7 +52,12 @@ const Promotion = ({ img, clubName, setOpenModal, date, pId, setPostId }) => {
           </div>
         </div>
       </div>
-      <div className={styles.promotionInfo}>
+      <div
+        className={styles.promotionInfo}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <p className={styles.description}>{clubName}</p>
         <p className={styles.hashtag}>#IT</p>
         <p className={styles.time}>{displayedAt(date)}</p>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
 import styles from "../../../styles/Club/Home/Manager/Manager.module.scss";
 import Approve from "./Approve";
 import Members from "./Members";
 import axios from "axios";
-import { AiOutlineHome } from "react-icons/ai";
+import ManagerHeader from "./ManagerHeader";
 
 export const Manager = () => {
   const [members, setMembers] = useState([]);
@@ -15,8 +14,6 @@ export const Manager = () => {
   const [mergedApplicantInfo, setMergedApplicantInfo] = useState([]);
   const [applyAuth, setApplyAuth] = useState();
   const [boardAuth, setBoardAuth] = useState();
-
-  const router = useRouter();
 
   const applyAuthRef = useRef([]);
   const boardAuthRef = useRef([]);
@@ -187,7 +184,7 @@ export const Manager = () => {
 
   return (
     <div className={styles.container}>
-      <AiOutlineHome size={30} onClick={() => router.push("/clubhome")} />
+      <ManagerHeader />
       <Members
         members={members}
         leader={leader}

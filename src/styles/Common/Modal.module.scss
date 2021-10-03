@@ -11,8 +11,9 @@
   & > div {
     background-color: white;
     width: 50%;
-    height: 60%;
     padding: 2rem;
+    max-height: 80%;
+    overflow: auto;
   }
   & > button {
     position: fixed;

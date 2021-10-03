@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
 import styles from "../../../styles/Club/Home/Intro/Desc.module.scss";
+import { IoPencil } from "react-icons/io5";
 
-const studentId = "201708051";
+export const studentId = "20170805";
 
 const Desc = ({
   onDescChange,
@@ -11,7 +11,6 @@ const Desc = ({
   onDescSubnmit,
   leader,
 }) => {
-  console.log(leader);
   return (
     <div className={styles.intro}>
       <span>동아리 소개</span>
@@ -25,9 +24,12 @@ const Desc = ({
       {leader === studentId ? (
         <div>
           {descUpdate ? (
-            <button onClick={onDescSubnmit}>완료</button>
+            <button onClick={onDescSubnmit}>Finish</button>
           ) : (
-            <button onClick={onDescUpdate}>수정</button>
+            <button onClick={onDescUpdate}>
+              <IoPencil />
+              Edit
+            </button>
           )}
         </div>
       ) : (

@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   border-bottom: 2px solid #c9eee8;
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
   padding: 19.2px;
 }
@@ -37,18 +37,19 @@
     width: 70%;
     height: 3em;
     border-radius: 16px;
-    border: 2px solid #3fcdb8;
+    border: 2px solid #64beb18c;
     &:focus {
       outline: none;
     }
   }
   button {
+    width: 4em;
     margin-left: 1em;
     height: 3em;
     border-radius: 3px;
     cursor: pointer;
     font-weight: lighter;
-    background-color: #c9eee8;
+    background-color: #64beb18c;
     border: none;
     &:hover {
       background-color: #3fcdb8;
@@ -56,21 +57,27 @@
   }
 }
 
-@media (max-width: 1023px) {
-  .write {
-    width: 100%;
-  }
-  .comment {
-    width: 100%;
-    input {
-      width: 90%;
-    }
-  }
-}
-
 @media (max-width: 767px) {
   .write {
     width: 100%;
-    padding: 1em 0;
+    padding: 0;
+  }
+  .star {
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+  }
+  .comment {
+    input {
+      height: 1.5em;
+    }
+    button {
+      height: 2em;
+      width: 3em;
+      svg {
+        height: 100%;
+      }
+    }
   }
 }
