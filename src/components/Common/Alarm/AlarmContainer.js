@@ -26,7 +26,7 @@ const AlarmContainer = () => {
   }
 
   // 알람 불러오기
-  const getAlamData = async () => {
+  const getAlarmData = async () => {
     const options = {
       headers: {
         "Content-type": "application/json; charset=utf-8",
@@ -43,7 +43,7 @@ const AlarmContainer = () => {
   };
 
   // 알람 전체 삭제
-  const onAlamrDeleteAll = async () => {
+  const onAlarmDeleteAll = async () => {
     const options = {
       method: "PUT",
       headers: {
@@ -56,7 +56,7 @@ const AlarmContainer = () => {
       (await axios("http://3.36.72.145:8080/api/notification/entire", options)
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err.response.data)));
-    getAlamData();
+    getAlarmData();
   };
 
   // 알람 일부 삭제
@@ -72,17 +72,17 @@ const AlarmContainer = () => {
     await axios(`http://3.36.72.145:8080/api/notification/${notiNum}`, options)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err.response.data));
-    getAlamData();
+    getAlarmData();
   };
 
   useEffect(() => {
-    getAlamData();
+    getAlarmData();
   }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.icons}>
-        <FaTrashAlt size={13} onClick={onAlamrDeleteAll} />
+        <FaTrashAlt size={13} onClick={onAlarmDeleteAll} />
       </div>
       <div className={styles.alarms}>
         {alarmList.slice(0, 3).map((alarm) => {
