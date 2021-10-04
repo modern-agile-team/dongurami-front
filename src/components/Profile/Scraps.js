@@ -1,12 +1,12 @@
 import styles from "../../styles/Profile/Scraps.module.scss";
-import { BsFileText } from "react-icons/bs";
+import { BsFileText, BsPlusCircle } from "react-icons/bs";
 
-function Scraps({ data, comp, scrapData }) {
+function Scraps({ moveWriteScraps, data, comp, scrapData }) {
   if (comp === "스크랩") {
     return (
-      <div>
+      <div className={styles.wrap}>
         <div>
-          <span>게시물 추가</span>
+          <BsPlusCircle onClick={() => moveWriteScraps()} />
           <select>
             {data.profile.club.map((club, index) => {
               return <option key={index}>{club.title}</option>;
