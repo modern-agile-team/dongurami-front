@@ -16,19 +16,6 @@
   align-items: center;
   position: fixed;
   z-index: 9999;
-
-  svg {
-    position: absolute;
-    top: 5%;
-    right: 2%;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-
-    &:hover {
-      color: black;
-    }
-  }
   .image {
     height: 90vh;
     position: relative;
