@@ -45,7 +45,7 @@ function Board({ category, getPosts }) {
     });
   };
 
-  const title = { notice: "공지 게시판", free: "자유 게시판" };
+  const title = { notice: "공지 게시판", free: "자유 게시판", clubNotice: "공지 게시판" };
 
   if (!posts) return null;
 
@@ -55,7 +55,11 @@ function Board({ category, getPosts }) {
         <Link href={router.pathname} passHref><h1><a>{title[category]}</a></h1></Link>
         <hr />
         <div className={styles.orderBy}>
-          <Link href={`${router.pathname}/write`} passHref><button>✏️ 글쓰기</button></Link>
+          {(category === 'clubNotice') ? (
+            <Link href={`${router.pathname}/notice/write`} passHref><button>✏️ 글쓰기</button></Link>
+          ) : (
+            <Link href={`${router.pathname}/write`} passHref><button>✏️ 글쓰기</button></Link>
+          )}
           <select value={order} onChange={onOrderChange}>
             <option value="inDate DESC">최근순</option>
             <option value="inDate ASC">오래된순</option>

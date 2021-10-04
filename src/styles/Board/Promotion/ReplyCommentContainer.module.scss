@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  background-color: rgb(233, 233, 233);
+  border-radius: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  & > svg {
+    transform: scale(2);
+    margin-left: 3%;
+  }
+}

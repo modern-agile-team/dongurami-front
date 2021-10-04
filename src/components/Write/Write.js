@@ -1,36 +1,24 @@
-import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Container from "./Container";
 import WriteContent from './WriteContent';
 import Modal from 'components/Common/Modal';
 import WritePromotion from "./WritePromotion";
-import getToken from "utils/getToken";
 
-function Write({ category }) {
+function Write({ category, Api }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
-  const token = getToken();
+
+  const api = new Api(router);
 
   const onSubmit = () => {
     if (category === 'promotion') {
       setShowModal(true);
       return;
     }
-    axios.post(`http://3.36.72.145:8080/api/board/${category}`, {
-      id: 'test1',
-      clubNo: '1',
-      title,
-      description: body
-    }, {
-      headers: {
-        'x-auth-token': token
-      }
-    }).then(() => {
-      router.push(`/${category}`);
-    });
+    api.post(title, body);
   };
   const onClose = () => {
     setShowModal(!showModal);
@@ -38,12 +26,12 @@ function Write({ category }) {
 
   return (
     <>
-    <Container category={category} type="글 작성하기">
-      <WriteContent title={title} body={body} setTitle={setTitle} setBody={setBody} onSubmit={onSubmit} />
-    </Container>
-    <Modal show={showModal} onClose={onClose}>
-      <WritePromotion title={title} body={body} />
-    </Modal>
+      <Container category={category} type="글 작성하기">
+        <WriteContent title={title} body={body} setTitle={setTitle} setBody={setBody} onSubmit={onSubmit} />
+      </Container>
+      <Modal show={showModal} onClose={onClose}>
+        <WritePromotion title={title} body={body} api={api} />
+      </Modal>
     </>
   );
 }

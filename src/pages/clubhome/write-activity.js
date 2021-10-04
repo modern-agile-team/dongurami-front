@@ -1,7 +1,9 @@
 import axios from "axios";
+import Footer from "components/Common/Footer";
 import Header from "components/Common/Header/Header";
+import Write from "components/Write/Write";
+import router from "next/router";
 import getToken from "utils/getToken";
-import Write from "../../components/Write/Write";
 
 class Api {
   constructor(router) {
@@ -10,7 +12,7 @@ class Api {
   }
 
   async post(title, description) {
-    await axios.post(`http://3.36.72.145:8080/api/board/free`, {
+    await axios.post(`http://3.36.72.145:8080/api/club/board/clubActivity/1`, {
       id: 'test1',
       clubNo: '1',
       title, description
@@ -19,18 +21,19 @@ class Api {
         'x-auth-token': this.token
       }
     });
-    this.router.back();
+    router.push('/clubhome');
     return;
   }
 }
 
-function write() {
+function WriteActivity() {
   return (
     <>
       <Header />
-      <Write category="free" Api={Api} />
+      <Write category="" Api={Api} />
+      <Footer />
     </>
-  );
+  )
 }
 
-export default write;
+export default WriteActivity;
