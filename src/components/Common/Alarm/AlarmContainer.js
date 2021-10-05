@@ -34,7 +34,10 @@ const AlarmContainer = () => {
       },
     };
     await axios
-      .get("http://3.36.72.145:8080/api/notification/entire", options)
+      .get(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/notification/entire`,
+        options
+      )
       .then((res) => setAlarmList(res.data.notifications))
       .catch((err) => console.log(err.response.data));
   };
@@ -53,7 +56,10 @@ const AlarmContainer = () => {
     };
 
     confirm("전체 알람을 삭제하시겠습니까?") &&
-      (await axios("http://3.36.72.145:8080/api/notification/entire", options)
+      (await axios(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/notification/entire`,
+        options
+      )
         .then((res) => console.log(res.data))
         .catch((err) => console.log(err.response.data)));
     getAlarmData();
@@ -69,7 +75,10 @@ const AlarmContainer = () => {
         "x-auth-token": jwtToken,
       },
     };
-    await axios(`http://3.36.72.145:8080/api/notification/${notiNum}`, options)
+    await axios(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/notification/${notiNum}`,
+      options
+    )
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err.response.data));
     getAlarmData();

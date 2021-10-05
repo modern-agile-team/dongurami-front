@@ -34,7 +34,7 @@ const Review = () => {
         "x-auth-token": jwtTocken,
       },
     };
-    await axios("http://3.36.72.145:8080/api/club/review/1", options)
+    await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/club/review/1`, options)
       .then((res) => {
         setReviewList(res.data.reviewList);
       })
@@ -88,7 +88,7 @@ const Review = () => {
         score: reviewRate,
       },
     };
-    await axios("http://3.36.72.145:8080/api/club/review/1", options)
+    await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/club/review/1`, options)
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
 
@@ -105,7 +105,7 @@ const Review = () => {
       },
     };
     await axios(
-      `http://3.36.72.145:8080/api/club/review/1/${reviewMine[0].no}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/club/review/1/${reviewMine[0].no}`,
       options
     )
       .then((res) => alert(res.data.msg))
@@ -127,7 +127,7 @@ const Review = () => {
       },
     };
     await axios(
-      `http://3.36.72.145:8080/api/club/review/1/${myReviewNum}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/club/review/1/${myReviewNum}`,
       options
     )
       .then((res) => alert(res.data.msg))

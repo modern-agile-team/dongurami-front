@@ -42,7 +42,7 @@ const ClubIntro = () => {
         introduce: introDesc,
       },
     };
-    await axios("http://3.36.72.145:8080/api/club/home/1", options)
+    await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/club/home/1`, options)
       .then((res) =>
         res.data
           ? alert("글이 수정되었습니다.")
@@ -62,7 +62,7 @@ const ClubIntro = () => {
       },
     };
     await axios
-      .get("http://3.36.72.145:8080/api/club/home/1", options)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/club/home/1`, options)
       .then((res) => {
         setLeader(res.data.result[0].leader);
         setCategori(res.data.result[0].category);

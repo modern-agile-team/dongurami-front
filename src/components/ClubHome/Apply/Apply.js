@@ -46,7 +46,7 @@ const Apply = () => {
       },
     };
     await axios
-      .get("http://3.36.72.145:8080/api/club/application/1", options)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/club/application/1`, options)
       .then((res) => {
         const updateState = new Array(res.data.questions.length).fill(false);
         setUserInfo({
@@ -76,7 +76,10 @@ const Apply = () => {
         description: newQuestion,
       },
     };
-    await axios("http://3.36.72.145:8080/api/club/application/1", options)
+    await axios(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/club/application/1`,
+      options
+    )
       .then((res) => console.log(res.data))
       .catch((err) => alert(err.response.data.msg));
 
@@ -99,7 +102,10 @@ const Apply = () => {
         description: newQuestion,
       },
     };
-    await axios(`http://3.36.72.145:8080/api/club/application/1/${i}`, options)
+    await axios(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/club/application/1/${i}`,
+      options
+    )
       .then((res) => res.data)
       .catch((err) => alert(err.response.data));
     await getApplyQuestions();
@@ -124,7 +130,7 @@ const Apply = () => {
 
     if (isUpdate[i]) {
       await axios(
-        `http://3.36.72.145:8080/api/club/application/1/${no}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/club/application/1/${no}`,
         options
       )
         .then((res) => res.data)
@@ -158,7 +164,7 @@ const Apply = () => {
       data: result,
     };
     await axios(
-      `http://3.36.72.145:8080/api/club/application/1/answer`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/club/application/1/answer`,
       options
     )
       .then((res) => {

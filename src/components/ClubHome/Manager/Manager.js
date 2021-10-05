@@ -36,7 +36,10 @@ export const Manager = () => {
       },
     };
     await axios
-      .get("http://3.36.72.145:8080/api/club/admin-option/1", options)
+      .get(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/club/admin-option/1`,
+        options
+      )
       .then((res) => {
         setApplicantQNA(res.data.applicant.questionsAnswers);
         setApplicantInfo(res.data.applicant.applicantInfo);
@@ -64,7 +67,7 @@ export const Manager = () => {
       },
     };
     await axios(
-      "http://3.36.72.145:8080/api/club/admin-option/1/accept-applicant",
+      `${process.env.NEXT_PUBLIC_API_URL}/api/club/admin-option/1/accept-applicant`,
       options
     )
       .then((res) => alert(res.data.msg))
@@ -87,7 +90,7 @@ export const Manager = () => {
       },
     };
     await axios(
-      "http://3.36.72.145:8080/api/club/admin-option/1/reject-applicant",
+      `${process.env.NEXT_PUBLIC_API_URL}/api/club/admin-option/1/reject-applicant`,
       options
     )
       .then((res) => alert(res.data.msg))
@@ -112,7 +115,7 @@ export const Manager = () => {
     };
     confirm("회장을 양도하시겠습니까?") &&
       (await axios(
-        "http://3.36.72.145:8080/api/club/admin-option/1/leader",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/club/admin-option/1/leader`,
         options
       )
         .then((res) => alert(res.data.msg))
@@ -146,7 +149,7 @@ export const Manager = () => {
     };
 
     await axios(
-      "http://3.36.72.145:8080/api/club/admin-option/1/admin-functions",
+      `${process.env.NEXT_PUBLIC_API_URL}/api/club/admin-option/1/admin-functions`,
       options
     )
       .then((res) => alert(res.data.msg))
