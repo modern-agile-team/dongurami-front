@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Manager/ApproveList.module.scss";
 
-const ApproveList = ({ onApplyAccept, onApplyDelete, applicantInfo }) => {
+const ApproveList = ({ onApplyAccept, onApplyReject, applicantInfo }) => {
   return (
     <>
       {applicantInfo.map((info, index) => {
@@ -38,7 +38,7 @@ const ApproveList = ({ onApplyAccept, onApplyDelete, applicantInfo }) => {
               <button id={index} onClick={onApplyAccept}>
                 승인
               </button>
-              <button id={index} onClick={onApplyDelete}>
+              <button id={index} onClick={onApplyReject}>
                 거절
               </button>
               <hr />
