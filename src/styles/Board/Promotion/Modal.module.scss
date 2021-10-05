@@ -46,9 +46,11 @@
     margin: 0 auto;
     border: 2px solid #90e2d6;
     padding: 1rem 2rem;
+
     @media screen and (max-width: 768px) {
       width: 80%;
     }
+
     & > div:nth-child(1) {
       display: flex;
       flex-direction: column;
@@ -71,6 +73,7 @@
   }
 }
 
+/*
 @media (max-width: 770px) {
   .background {
     .image {
@@ -235,3 +238,4 @@
     }
   }
 }
+*/

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import styles from "../../../styles/Board/Promotion/Comment.module.scss";
-import AddComment from "components/Common/Comment/AddComment";
 import ReplyCommentContainer from "./ReplyCommentContainer";
 import ReplyAddComment from "./ReplyAddComment";
 
 const Comment = ({ comment, postId, getData }) => {
   const [replyComment, setReplyComment] = useState(false);
+  const [isContentEditable, setIsContentEditable] = useState(false);
   const onClick = () => {
     setReplyComment(!replyComment);
   };
@@ -19,6 +19,14 @@ const Comment = ({ comment, postId, getData }) => {
           <div>
             <p>{comment.studentName}</p>
             <p>작성자</p>
+            <div>
+              <button className={styles["action-button"]}>
+                {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
+              </button>
+              <button className={styles["action-button"]}>
+                <AiOutlineDelete />
+              </button>
+            </div>
           </div>
           <div>{comment.description}</div>
           <div>
