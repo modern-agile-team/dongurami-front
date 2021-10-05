@@ -2,8 +2,8 @@ import styles from "../../../styles/Club/Home/Intro/ClubIntro.module.scss";
 import ClubInfo from "./ClubInfo";
 import Desc from "./Desc";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
+import { getClubInfo, putClubIntroDesc } from "apis/clubhome";
 
 const ClubIntro = () => {
   const [info, setInfo] = useState([]);
@@ -13,12 +13,6 @@ const ClubIntro = () => {
   const [leader, setLeader] = useState("");
 
   const toLogin = useRouter();
-
-  let jwtTocken = "";
-
-  if (typeof window !== "undefined") {
-    jwtTocken = localStorage.getItem("jwt");
-  }
 
   const onDescUpdate = () => {
     setDescUpdate(!descUpdate);
@@ -30,19 +24,11 @@ const ClubIntro = () => {
 
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtTocken,
-      },
-      data: {
-        logoUrl: info[0].logoUrl,
-        fileId: info[0].fileId,
-        introduce: introDesc,
-      },
-    };
-    await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/club/home/1`, options)
+    putClubIntroDesc({
+      logoUrl: info[0].logoUrl,
+      fileId: info[0].fileId,
+      introduce: introDesc,
+    })
       .then((res) =>
         res.data
           ? alert("글이 수정되었습니다.")
@@ -54,15 +40,8 @@ const ClubIntro = () => {
   };
 
   // 동아리 정보 불러오기
-  const getClubData = async () => {
-    const options = {
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtTocken,
-      },
-    };
-    await axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/club/home/1`, options)
+  const getData = async () => {
+    getClubInfo()
       .then((res) => {
         setLeader(res.data.result[0].leader);
         setCategori(res.data.result[0].category);
@@ -76,7 +55,7 @@ const ClubIntro = () => {
   };
 
   useEffect(() => {
-    getClubData();
+    getData();
   }, []);
 
   return (
