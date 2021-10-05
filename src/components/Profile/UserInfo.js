@@ -12,15 +12,12 @@ const UserInfo = ({ logout, comp, setComp, baseImg, data }) => {
   if (comp === "프로필")
     return (
       <div>
-        <div className={styles.profileHeader}>
-          <button onClick={() => setComp("프로필")}>프로필</button>
-          <button onClick={() => setComp("스크랩")}>스크랩</button>
-        </div>
         <div className={styles.profileBody}>
           <img
             className={styles.profileImg}
             src={data.profile.profileImageUrl ?? baseImg}
           />
+          <hr />
           <div>
             <FaUserCircle />
             <span> {data.profile.name}</span>
@@ -31,10 +28,10 @@ const UserInfo = ({ logout, comp, setComp, baseImg, data }) => {
             <span>{data.profile.grade}학년</span>
           </div>
           <p>소속 동아리</p>
-          {data.profile.club.map((el, i) => {
+          {data.profile.club.map((club, index) => {
             return (
-              <span onClick={moveClub} key={i}>
-                {el}
+              <span onClick={moveClub} key={index}>
+                {club.title}
               </span>
             );
           })}

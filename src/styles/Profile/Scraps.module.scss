@@ -1,0 +1,13 @@
+.wrap {
+  border: 1px solid;
+  width: 90%;
+  height: 80vh;
+  // padding-bottom: 5vh;
+  .postItem {
+    display: flex;
+    .thumbnail {
+      width: 20vh;
+      height: 20vh;
+    }
+  }
+}
