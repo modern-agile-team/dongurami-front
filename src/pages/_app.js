@@ -1,7 +1,7 @@
-import '../styles/global.scss';
-import 'react-quill/dist/quill.snow.css';
 import { Provider } from 'react-redux';
 import store from 'redux/store';
+import '../styles/global.scss';
+import 'react-quill/dist/quill.snow.css';
 
 function MyApp({ Component, pageProps }) {
   return (
