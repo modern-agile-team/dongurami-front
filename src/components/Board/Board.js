@@ -3,27 +3,27 @@ import styles from "../../styles/Board/Board/Board.module.scss";
 import Table from "./Table";
 import Pagination from "./Pagination";
 import Search from "./Search";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import useBoardOrder from "hooks/useBoardOrder";
 import useBoardPage from "hooks/useBoardPage";
 import useBoardSearch from "hooks/useBoardSearch";
+import { useDispatch, useSelector } from 'react-redux';
+import { getBoardPosts } from 'redux/reducers/board';
 
-function Board({ category, getPosts }) {
+function Board({ category }) {
   const router = useRouter();
-  const [posts, setPosts] = useState([]);
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.board.posts);
 
   const page = useBoardPage(router);
   const order = useBoardOrder(router);
   const { search, searchBy } = useBoardSearch(router);
 
   useEffect(() => {
-    (async () => {
-      if (!order) return;
-      const response = await getPosts(order, { search, searchBy });
-      setPosts(response);
-    })();
-  }, [order, search, searchBy, getPosts]);
+    if (!order) return;
+    dispatch(getBoardPosts({ order, search, searchBy }));
+  }, [order, search, searchBy, dispatch]);
 
   const setPageToUrl = (nextPage) => {
     router.push({
