@@ -1,4 +1,4 @@
-const { combineReducers } = require("redux");
+import { combineReducers } from "@reduxjs/toolkit";
 
 const reducer = combineReducers({});
 
