@@ -1,9 +1,8 @@
-import React, { useCallback } from "react";
-import styles from "../../styles/Board/Promotion/Post.module.scss";
-import PromotionCommentContainer from "./Comment/PromotionCommentContainer";
-import { useRouter } from "next/router";
-import getToken from "utils/getToken";
-import axios from "axios";
+import React, { useCallback } from 'react';
+import styles from '../../styles/Board/Promotion/Post.module.scss';
+import PromotionCommentContainer from './Comment/PromotionCommentContainer';
+import { useRouter } from 'next/router';
+import getToken from 'utils/getToken';
 
 const Post = ({ postData, postId, getData, comments }) => {
   const { name, hit, title, inDate, description, studentId } = postData;
@@ -11,7 +10,7 @@ const Post = ({ postData, postId, getData, comments }) => {
   const router = useRouter();
 
   return (
-    <div className={styles.post}>
+    <div className={styles.post} onClick={(e) => e.stopPropagation()}>
       <div className={styles.container}>
         <div>
           <div>홍보게시판</div>

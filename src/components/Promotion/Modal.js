@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import styles from "../../styles/Board/Promotion/Modal.module.scss";
-import Post from "./Post";
-import { MdClose } from "react-icons/md";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import ZoomImg from "./ZoomImg";
-import { getdata } from "./getdata";
-import axios from "axios";
+import { useState, useEffect } from 'react';
+import styles from '../../styles/Board/Promotion/Modal.module.scss';
+import Post from './Post';
+import { MdClose } from 'react-icons/md';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import ZoomImg from './ZoomImg';
+import { getdata } from './getdata';
+import axios from 'axios';
 
 const Modal = ({ setOpenModal, postId }) => {
   const [index, setIndex] = useState(0);
@@ -58,11 +58,17 @@ const Modal = ({ setOpenModal, postId }) => {
   }, []);
 
   return (
-    <div className={styles.background}>
-      {zoom && <ZoomImg imgUrl={imgUrl} setZoom={setZoom} />}
+    <div className={styles.background} onClick={() => setOpenModal(false)}>
+      {zoom && (
+        <ZoomImg
+          imgUrl={imgUrl}
+          setZoom={setZoom}
+          onClick={(e) => e.stopPropagation()}
+        />
+      )}
       {!zoom && (
         <>
-          <div className={styles.image}>
+          <div className={styles.image} onClick={(e) => e.stopPropagation()}>
             <IoIosArrowBack size={95} onClick={prevSlide} />
             <img src={imgUrl} onClick={() => setZoom(true)} />
             <IoIosArrowForward size={95} onClick={nextSlide} />
@@ -73,6 +79,7 @@ const Modal = ({ setOpenModal, postId }) => {
             setPostData={setPostData}
             comments={comments}
             getData={getData}
+            onClick={(e) => e.stopPropagation()}
           />
         </>
       )}
