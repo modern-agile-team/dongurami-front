@@ -1,37 +1,35 @@
 import styles from "../../styles/Board/Board/Search.module.scss";
 import { BsSearch } from 'react-icons/bs';
 import { useRouter } from "next/router";
-import useBoardSearch from "hooks/useBoardSearch";
+import { useState } from 'react';
 
 function NoticeSearch() {
   const router = useRouter();
-  const { search, searchBy, setSearch, setSearchBy } = useBoardSearch(router);
+  const [type, setType] = useState('title');
+  const [keyword, setKeyword] = useState('');
 
-  const onSearchChange = (e) => {
-    setSearch(e.target.value);
+  const onTypeChange = (e) => {
+    setType(e.target.value);
   };
-  const onSearchByChange = (e) => {
-    setSearchBy(e.target.value);
+  const onKeywordChange = (e) => {
+    setKeyword(e.target.value);
   };
 
   const onClick = () => {
-    if (search === '') return;
+    if (keyword === '') return;
     router.push({
       pathname: router.pathname,
-      query: {
-        search,
-        searchBy
-      }
+      query: { type, keyword }
     });
   };
 
   return (
     <div className={styles.container}>
-      <select value={searchBy} onChange={onSearchByChange}>
+      <select value={type} onChange={onTypeChange}>
         <option value="title">제목</option>
         <option value="name">작성자</option>
       </select>
-      <input value={search} onChange={onSearchChange} />
+      <input value={keyword} onChange={onKeywordChange} />
       <button onClick={onClick}><BsSearch /></button>
     </div>
   );
