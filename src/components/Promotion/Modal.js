@@ -79,7 +79,6 @@ const Modal = ({ setOpenModal, postId }) => {
             setPostData={setPostData}
             comments={comments}
             getData={getData}
-            onClick={(e) => e.stopPropagation()}
           />
         </>
       )}
