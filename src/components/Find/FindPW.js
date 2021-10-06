@@ -1,17 +1,17 @@
-import styles from "../../styles/User/Find/FindPW.module.scss";
-import Link from "next/link";
-import { useState } from "react";
-import axios from "axios";
+import styles from '../../styles/User/Find/FindPW.module.scss';
+import Link from 'next/link';
+import { useState } from 'react';
+import { postFindPW } from 'apis/user';
 
 export const FindPW = () => {
-  const [id, setId] = useState("");
-  const [email, setEmail] = useState("");
-  const [findToken, setFindToken] = useState("");
+  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
+  const [findToken, setFindToken] = useState('');
   const [emailCheck, setEmailCheck] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    name === "id" ? setId(value) : setEmail(value);
+    name === 'id' ? setId(value) : setEmail(value);
   };
 
   const checkEmail = (e) => {
@@ -22,26 +22,21 @@ export const FindPW = () => {
   };
 
   const onSubmit = () => {
-    if (id === "") {
-      alert("학번을 입력해 주세요.");
+    if (id === '') {
+      alert('학번을 입력해 주세요.');
     } else if (id.length !== 9) {
-      alert("학번은 9자이어야 합니다.");
-    } else if (email === "") {
-      alert("이메일을 입력해 주세요.");
+      alert('학번은 9자이어야 합니다.');
+    } else if (email === '') {
+      alert('이메일을 입력해 주세요.');
     } else if (emailCheck === false) {
-      alert("이메일 형식을 맞춰 입력해 주세요.");
+      alert('이메일 형식을 맞춰 입력해 주세요.');
     } else {
-      axios("http://3.36.72.145:8080/api/forgot-password", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json; charset=utf-8",
-        },
-        data: {
-          id,
-          email,
-        },
+      postFindPW({
+        id,
+        email
       })
         .then((res) => {
+          console.log(res.data);
           alert(res.data.msg);
           setFindToken(res.data.token);
         })
@@ -49,10 +44,10 @@ export const FindPW = () => {
     }
   };
 
-  console.log("token:", findToken);
+  console.log('token:', findToken);
 
   const onKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       onSubmit();
     }
   };
