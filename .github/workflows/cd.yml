@@ -16,4 +16,4 @@ jobs:
           heroku_app_name: "dongurami-front"
           heroku_email: "junsang.yu3@gmail.com"
         env:
-          NEXT_PUBLIC_API_URL: ${{secrets.NEXT_PUBLIC_API_URL}}
+          HD_NEXT_PUBLIC_API_URL: ${{secrets.NEXT_PUBLIC_API_URL}}
