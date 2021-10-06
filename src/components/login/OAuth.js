@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
 
 export default function OAuth() {
+  const Login = () => {
+    if (typeof naver !== "undefined") {
+      Naver();
+    }
+  };
+  useEffect(Login, []);
+
   function Naver() {
-    console.log(new naver());
     const naverLogin = new naver.LoginWithNaverId({
       clientId: "x83IzQrhnNOf9S_P1RdE",
       callbackUrl: "http://localhost:3000/signup",
@@ -12,12 +18,6 @@ export default function OAuth() {
     });
     naverLogin.init();
   }
-  const Login = () => {
-    Naver();
-  };
 
-  if (typeof naver !== "undefined") {
-    useEffect(Login, []);
-  }
   return <div id="naverIdLogin" onClick={Login}></div>;
 }

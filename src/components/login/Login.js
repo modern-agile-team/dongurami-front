@@ -79,7 +79,6 @@ export const Login = () => {
           </button>
           <div className={styles.naverLogin}>
             <OAuth />
-            <button className={styles.signupBtn}>회원가입</button>
           </div>
         </div>
       </div>
