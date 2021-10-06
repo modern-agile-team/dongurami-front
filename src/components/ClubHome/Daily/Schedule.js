@@ -1,5 +1,5 @@
-import styles from "../../../styles/Club/Home/Schedule/Schedule.module.scss";
-import Link from "next/link";
+import styles from '../../../styles/Club/Home/Schedule/Schedule.module.scss';
+import Link from 'next/link';
 
 const Schedule = ({ schedule, nowDay }) => {
   return (

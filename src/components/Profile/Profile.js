@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Scraps from './Scraps';
 import styles from '../../styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo';
-import router, { Router } from 'next/router';
+import router from 'next/router';
 import axios from 'axios';
 import getToken from 'utils/getToken';
 
@@ -10,21 +10,21 @@ function Profile() {
   const [comp, setComp] = useState('프로필');
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
+  const [token, setToken] = useState(getToken());
   // const [scrapData, setScrapData] = useState();
   const moveWriteScraps = () => {
     router.push('/profile/writescraps');
   };
 
-  const getUserInfo = () => {
+  const getUserInfo = (token) => {
     axios
-      .get(`http://3.36.72.145:8080/api/profile/201816035`, {
+      .get(`http://3.36.72.145:8080/api/profile/${201816035}`, {
         headers: {
           'Content-type': 'application/json; charset=utf-8',
-          'x-auth-token': getToken()
+          'x-auth-token': token
         }
       })
       .then((res) => {
-        console.log(res);
         setUserInfo(res.data.userInfo);
         setProfile(res.data.profile);
       })
@@ -36,7 +36,7 @@ function Profile() {
     console.log(1);
   };
   useEffect(() => {
-    getUserInfo();
+    getUserInfo(token);
   }, []);
 
   const logout = () => {
@@ -60,14 +60,12 @@ function Profile() {
         userInfo={userInfo}
         profile={profile}
         comp={comp}
-        setComp={setComp}
       />
       <Scraps
         moveWriteScraps={moveWriteScraps}
         userInfo={userInfo}
         profile={profile}
         comp={comp}
-        setComp={setComp}
       />
     </div>
   );
