@@ -1,16 +1,16 @@
-import styles from "../../../styles/Club/Home/Intro/ClubIntro.module.scss";
-import ClubInfo from "./ClubInfo";
-import Desc from "./Desc";
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { getClubInfo, putClubIntroDesc } from "apis/clubhome";
+import styles from '../../../styles/Club/Home/Intro/ClubIntro.module.scss';
+import ClubInfo from './ClubInfo';
+import Desc from './Desc';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useRouter } from 'next/router';
+import { getClubInfo, putClubIntroDesc } from 'apis/clubhome';
 
 const ClubIntro = () => {
   const [info, setInfo] = useState([]);
   const [descUpdate, setDescUpdate] = useState(false);
-  const [introDesc, setIntroDesc] = useState("");
-  const [categori, setCategori] = useState("");
-  const [leader, setLeader] = useState("");
+  const [introDesc, setIntroDesc] = useState('');
+  const [categori, setCategori] = useState('');
+  const [leader, setLeader] = useState('');
 
   const toLogin = useRouter();
 
@@ -27,12 +27,12 @@ const ClubIntro = () => {
     putClubIntroDesc({
       logoUrl: info[0].logoUrl,
       fileId: info[0].fileId,
-      introduce: introDesc,
+      introduce: introDesc
     })
       .then((res) =>
         res.data
-          ? alert("글이 수정되었습니다.")
-          : alert("글 수정에 실패했습니다")
+          ? alert('글이 수정되었습니다.')
+          : alert('글 수정에 실패했습니다')
       )
       .catch((err) => alert(err.response.data.msg));
 
@@ -40,7 +40,7 @@ const ClubIntro = () => {
   };
 
   // 동아리 정보 불러오기
-  const getData = async () => {
+  const getData = useCallback(async () => {
     getClubInfo()
       .then((res) => {
         setLeader(res.data.result[0].leader);
@@ -50,13 +50,13 @@ const ClubIntro = () => {
       })
       .catch((err) => {
         alert(err.response.data.msg);
-        toLogin.push("/LoginPage");
+        toLogin.push('/LoginPage');
       });
-  };
+  }, [toLogin]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   return (
     <div className={styles.container}>

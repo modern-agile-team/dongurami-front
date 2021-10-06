@@ -61,7 +61,7 @@ const Modal = ({ setOpenModal, postId }) => {
     <div className={styles.background}>
       {zoom && <ZoomImg imgUrl={imgUrl} setZoom={setZoom} />}
       {!zoom && (
-        <div>
+        <>
           <div className={styles.image}>
             <IoIosArrowBack size={95} onClick={prevSlide} />
             <img src={imgUrl} onClick={() => setZoom(true)} />
@@ -74,7 +74,7 @@ const Modal = ({ setOpenModal, postId }) => {
             comments={comments}
             getData={getData}
           />
-        </div>
+        </>
       )}
     </div>
   );
