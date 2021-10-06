@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { getPosts, searchPosts } from 'apis/board';
 
 const getBoardPosts = createAsyncThunk(
   'board/getBoardPosts',
-  async ({ order, search, searchBy }) => {
+  async ({ category, sort, order, type, keyword }) => {
     let response;
-    if (search && searchBy) {
-      response = await axios.get(`http://3.36.72.145:8080/api/search/notice/${searchBy}/${search}/${order.replace(' ', '/')}`);
+    if (type && keyword) {
+      response = await searchPosts({ category, sort, order, type, keyword });
     } else {
-      response = await axios.get(`http://3.36.72.145:8080/api/board/notice/${order.replace(' ', '/')}`);
+      response = await getPosts({ category, sort, order });
     }
     return response.data.boards;
   }
