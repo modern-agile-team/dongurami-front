@@ -1,14 +1,57 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import styles from "../../../styles/Board/Promotion/Comment.module.scss";
-import AddComment from "components/Common/Comment/AddComment";
 import ReplyCommentContainer from "./ReplyCommentContainer";
 import ReplyAddComment from "./ReplyAddComment";
+import axios from "axios";
+import getToken from "utils/getToken";
 
 const Comment = ({ comment, postId, getData }) => {
   const [replyComment, setReplyComment] = useState(false);
+  const [isContentEditable, setIsContentEditable] = useState(false);
+  const descriptionDiv = useRef();
+  const token = getToken();
   const onClick = () => {
     setReplyComment(!replyComment);
+  };
+
+  const onEdit = async () => {
+    const body = {
+      description: descriptionDiv.current.textContent,
+    };
+
+    if (isContentEditable) {
+      await axios
+        .put(
+          `http://3.36.72.145:8080/api/board/promotion/${postId}/${comment.no}`,
+          body,
+          {
+            headers: {
+              "x-auth-token": token,
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data.success) getData();
+          else alert(response.data.msg);
+        });
+    }
+    setIsContentEditable(!isContentEditable);
+  };
+
+  const onDelete = async () => {
+    await axios
+      .delete(
+        `http://3.36.72.145:8080/api/board/promotion/${postId}/${comment.no}`,
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   return (
@@ -19,8 +62,18 @@ const Comment = ({ comment, postId, getData }) => {
           <div>
             <p>{comment.studentName}</p>
             <p>작성자</p>
+            <div>
+              <button onClick={onEdit} className={styles["action-button"]}>
+                {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
+              </button>
+              <button onClick={onDelete} className={styles["action-button"]}>
+                <AiOutlineDelete />
+              </button>
+            </div>
           </div>
-          <div>{comment.description}</div>
+          <div ref={descriptionDiv} contentEditable={isContentEditable}>
+            {comment.description}
+          </div>
           <div>
             <p>{comment.inDate}</p>
             {comment.no === comment.groupNo && (
