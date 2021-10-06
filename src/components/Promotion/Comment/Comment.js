@@ -39,6 +39,21 @@ const Comment = ({ comment, postId, getData }) => {
     setIsContentEditable(!isContentEditable);
   };
 
+  const onDelete = async () => {
+    await axios
+      .delete(
+        `http://3.36.72.145:8080/api/board/promotion/${postId}/${comment.no}`,
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
   return (
     <>
       <div className={styles.comment}>
@@ -51,7 +66,7 @@ const Comment = ({ comment, postId, getData }) => {
               <button onClick={onEdit} className={styles["action-button"]}>
                 {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
               </button>
-              <button className={styles["action-button"]}>
+              <button onClick={onDelete} className={styles["action-button"]}>
                 <AiOutlineDelete />
               </button>
             </div>
