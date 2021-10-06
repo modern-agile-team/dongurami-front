@@ -1,8 +1,9 @@
 .wrap {
   width: 100%;
   background-color: #fff;
-  margin-top: 2%;
+  margin-top: 5%;
   h1 {
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 3vw;
     font-weight: 200;
     padding: 2rem;
@@ -11,7 +12,7 @@
   }
   .imgs {
     width: 100%;
-    justify-content: center;
+    justify-content: space-evenly;
     display: flex;
     margin-top: 2%;
     margin-bottom: 15%;
@@ -20,29 +21,32 @@
       display: flex;
       flex-direction: column;
       img {
-        border: 0.35vw solid #F5EDB0;
+        border: 0.35vw solid #f5edb0;
+        width: 280px;
+        height: 280px;
         // box-shadow: 1px 1px 6px 4px #F5EDB0;
       }
       span {
+        font-family: "Noto Sans KR", sans-serif;
+        // font-weight: 200;
         margin-top: 8%;
-        width: 25vw;
         text-align: center;
       }
       &:hover {
-        margin-top: -2%
+        margin-top: -2%;
       }
     }
     .promotion {
       @extend .list;
       img {
-        border: 0.35vw solid #F0BF9A;
+        border: 0.35vw solid #f0bf9a;
         // box-shadow: 1px 1px 6px 4px #F0BF9A;
       }
     }
     .home {
       @extend .list;
       img {
-        border: 0.35vw solid #C2F2DC;
+        border: 0.35vw solid #c2f2dc;
         // box-shadow: 1px 1px 6px 4px #C2F2DC;
       }
     }
@@ -54,7 +58,6 @@
     overflow: hidden;
   }
 }
-
 
 @media screen and (max-width: 768px) {
   .wrap {

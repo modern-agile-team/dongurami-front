@@ -42,6 +42,7 @@ export const FindPW = () => {
         },
       })
         .then((res) => {
+          console.log(res);
           alert(res.data.msg);
           setFindToken(res.data.token);
         })
