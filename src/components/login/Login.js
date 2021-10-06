@@ -39,7 +39,7 @@ export const Login = () => {
         }
         router.push("/");
       })
-      .catch((err) => alert(err.response.data.msg));
+      .catch((err) => console.log(err.response));
   };
 
   return (
@@ -77,12 +77,11 @@ export const Login = () => {
           <button className={styles.loginBtn} onClick={onSubmit}>
             로그인
           </button>
-          <Link href="/signup" passHref>
-            <button className={styles.signupBtn}>회원가입</button>
-          </Link>
+          <div className={styles.naverLogin}>
+            <OAuth />
+          </div>
         </div>
       </div>
-      <OAuth />
     </div>
   );
 };

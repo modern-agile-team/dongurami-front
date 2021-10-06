@@ -39,7 +39,6 @@
     outline-style: none;
   }
   button {
-    font-family: "twayair";
     zoom: 1.4;
     width: 4.5rem;
     height: 2.3rem;
@@ -63,13 +62,21 @@
 }
 
 .buttons {
+  // display: flex;
   padding: 1rem;
-  margin-left: 21rem;
+  // margin-left: 21rem;
   .loginBtn {
+    margin-left: 21rem;
+
     margin-right: 1.5rem;
   }
   .loginBtn:hover {
     filter: brightness(96%);
+  }
+  .naverLogin {
+    // width: 100%;
+    text-align: start;
+    margin-left: 10%;
   }
   .signupBtn:hover {
     filter: brightness(96%);
@@ -98,6 +105,9 @@
         width: 85%;
         margin: 0;
         text-align: right;
+        .loginBtn {
+          margin-left: 75%;
+        }
       }
     }
   }

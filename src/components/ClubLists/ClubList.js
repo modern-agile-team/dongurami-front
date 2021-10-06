@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import styles from "../../styles/Club/Lists/ClubListContainer.module.scss";
-import { useRouter } from "next/router";
+import React, { useState } from 'react';
+import styles from '../../styles/Club/Lists/ClubListContainer.module.scss';
+import { useRouter } from 'next/router';
 
 const ClubList = ({ img, categories, title, onClick, clubNo }) => {
   const router = useRouter();
