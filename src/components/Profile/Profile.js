@@ -3,7 +3,7 @@ import Scraps from './Scraps';
 import styles from '../../styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo';
 import router from 'next/router';
-import axios from 'axios';
+import { getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';
 
 function Profile() {
@@ -16,27 +16,18 @@ function Profile() {
     router.push('/profile/writescraps');
   };
 
-  const getUserInfo = (token) => {
-    axios
-      .get(`http://3.36.72.145:8080/api/profile/${201816035}`, {
-        headers: {
-          'Content-type': 'application/json; charset=utf-8',
-          'x-auth-token': token
-        }
-      })
-      .then((res) => {
-        setUserInfo(res.data.userInfo);
-        setProfile(res.data.profile);
-      })
-      .catch((err) => console.log(err));
-  };
-
   const getScraps = () => {
     // axios.get()
     console.log(1);
   };
   useEffect(() => {
-    getUserInfo(token);
+    getUserInfo()
+      .then((res) => {
+        console.log(res);
+        setUserInfo(res.data.userInfo);
+        setProfile(res.data.profile);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const logout = () => {
