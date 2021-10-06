@@ -1,84 +1,49 @@
-import styles from "../../../styles/Common/Alarm/AlarmContainer.module.scss";
-import { FaTrashAlt } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
-import { TiDelete } from "react-icons/ti";
+import styles from '../../../styles/Common/Alarm/AlarmContainer.module.scss';
+import { FaTrashAlt } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { TiDelete } from 'react-icons/ti';
+import { getAlarm, putAlarm, patchAlarm } from 'apis/alarm';
 
 const alarmCategoriNum = {
-  0: "댓글이 달렸습니다.",
-  1: "답글이 달렸습니다.",
-  2: "동아리 가입이 승인되었습니다.",
-  3: "동아리 가입이 거절되었습니다.",
-  4: "새로운 일정이 생성되었습니다.",
-  5: "일정이 수정되었습니다.",
-  6: "오늘의 일정입니다.",
-  7: "동아리 공지가 생성되었습니다.",
+  0: '댓글이 달렸습니다.',
+  1: '답글이 달렸습니다.',
+  2: '동아리 가입이 승인되었습니다.',
+  3: '동아리 가입이 거절되었습니다.',
+  4: '새로운 일정이 생성되었습니다.',
+  5: '일정이 수정되었습니다.',
+  6: '오늘의 일정입니다.',
+  7: '동아리 공지가 생성되었습니다.'
 };
 
 const AlarmContainer = () => {
   const [alarmList, setAlarmList] = useState([]);
+
   const router = useRouter();
 
-  let jwtToken = "";
-  if (typeof window !== "undefined") {
-    jwtToken = localStorage.getItem("jwt");
-  }
-
-  // 알람 불러오기
-  const getAlarmData = async () => {
-    const options = {
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-    };
-    await axios
-      .get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/notification/entire`,
-        options
-      )
-      .then((res) => setAlarmList(res.data.notifications))
-      .catch((err) => console.log(err.response.data));
-  };
   const onAlarmClick = (url) => {
     router.push(url);
   };
 
+  // 알람 불러오기
+  const getAlarmData = () => {
+    getAlarm()
+      .then((res) => setAlarmList(res.data.notifications))
+      .catch((err) => alert(err.response.data.msg));
+  };
+
   // 알람 전체 삭제
   const onAlarmDeleteAll = async () => {
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-    };
-
-    confirm("전체 알람을 삭제하시겠습니까?") &&
-      (await axios(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/notification/entire`,
-        options
-      )
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err.response.data)));
+    confirm('전체 알람을 삭제하시겠습니까?') &&
+      (await putAlarm()
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err.response.data.msg)));
     getAlarmData();
   };
 
   // 알람 일부 삭제
   const onAlarmPatch = async (notiNum) => {
-    console.log(notiNum);
-    const options = {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-    };
-    await axios(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/notification/${notiNum}`,
-      options
-    )
+    await patchAlarm(notiNum)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err.response.data));
     getAlarmData();
