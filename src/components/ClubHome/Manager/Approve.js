@@ -7,7 +7,7 @@ const Approve = ({
   onApplyAccept,
   applicantInfo,
   mergedApplicantInfo,
-  onApplyDelete,
+  onApplyReject,
 }) => {
   const [listOpen, setListOpen] = useState(false);
 
@@ -24,7 +24,7 @@ const Approve = ({
       />
       {listOpen && (
         <ApproveList
-          onApplyDelete={onApplyDelete}
+          onApplyReject={onApplyReject}
           onApplyAccept={onApplyAccept}
           applicantInfo={mergedApplicantInfo}
         />

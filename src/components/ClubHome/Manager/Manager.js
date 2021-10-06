@@ -2,8 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "../../../styles/Club/Home/Manager/Manager.module.scss";
 import Approve from "./Approve";
 import Members from "./Members";
-import axios from "axios";
 import ManagerHeader from "./ManagerHeader";
+import {
+  getMember,
+  postApply,
+  putApply,
+  putAuth,
+  putLeader,
+} from "apis/manager";
 
 export const Manager = () => {
   const [members, setMembers] = useState([]);
@@ -21,22 +27,9 @@ export const Manager = () => {
 
   const refArr = [applyAuthRef, boardAuthRef, changeLeaderRef];
 
-  let jwtToken = "";
-
-  if (typeof window !== "undefined") {
-    jwtToken = localStorage.getItem("jwt");
-  }
-
   // 동아리원 정보 GET
   const getMembersData = async () => {
-    const options = {
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-    };
-    await axios
-      .get("http://3.36.72.145:8080/api/club/admin-option/1", options)
+    getMember()
       .then((res) => {
         setApplicantQNA(res.data.applicant.questionsAnswers);
         setApplicantInfo(res.data.applicant.applicantInfo);
@@ -51,74 +44,36 @@ export const Manager = () => {
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
-    const index = e.target.id;
-    const applicantID = mergedApplicantInfo[index].id;
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-      data: {
-        applicant: applicantID,
-      },
-    };
-    await axios(
-      "http://3.36.72.145:8080/api/club/admin-option/1/accept-applicant",
-      options
-    )
+    await postApply({
+      applicant: mergedApplicantInfo[e.target.id].id,
+    })
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
-    getMembersData();
+    await getMembersData();
   };
 
   // 가입 거절 PUT
-  const onApplyDelete = async (e) => {
-    const index = e.target.id;
-    const applicantID = mergedApplicantInfo[index].id;
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-      data: {
-        applicant: applicantID,
-      },
-    };
-    await axios(
-      "http://3.36.72.145:8080/api/club/admin-option/1/reject-applicant",
-      options
-    )
+  const onApplyReject = async (e) => {
+    await putApply({
+      applicant: mergedApplicantInfo[e.target.id].id,
+    })
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
-    getMembersData();
+    await getMembersData();
   };
 
   // 회장 양도 PUT
   const onLeaderChange = async (memberIndex) => {
     const newLeader = changeLeaderRef.current;
-    const newLeaderId = newLeader[memberIndex].id;
 
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-      data: {
-        newLeader: newLeaderId,
-      },
-    };
     confirm("회장을 양도하시겠습니까?") &&
-      (await axios(
-        "http://3.36.72.145:8080/api/club/admin-option/1/leader",
-        options
-      )
+      (await putLeader({
+        newLeader: newLeader[memberIndex].id,
+      })
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
 
-    getMembersData();
+    await getMembersData();
   };
 
   // 기능 권한 변경 PUT
@@ -134,24 +89,12 @@ export const Manager = () => {
       });
     });
 
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-      data: {
-        adminOptions: adminOptions,
-      },
-    };
-
-    await axios(
-      "http://3.36.72.145:8080/api/club/admin-option/1/admin-functions",
-      options
-    )
+    await putAuth({
+      adminOptions: adminOptions,
+    })
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
-    getMembersData();
+    await getMembersData();
   };
 
   //---------------------기능 권한 변경---------------------------//
@@ -183,7 +126,6 @@ export const Manager = () => {
     onApplyAuthClick();
     onBoardAuth();
   }, []);
-
   return (
     <div className={styles.container}>
       <ManagerHeader />
@@ -198,7 +140,7 @@ export const Manager = () => {
       />
       <Approve
         onApplyAccept={onApplyAccept}
-        onApplyDelete={onApplyDelete}
+        onApplyReject={onApplyReject}
         applicantInfo={applicantInfo}
         applicantQNA={applicantQNA}
         mergedApplicantInfo={mergedApplicantInfo}
@@ -211,7 +153,7 @@ export default Manager;
 
 // 가입 추가 질문 데이터 가공
 const mergeApplicantQNA = (needMergeData) => {
-  const merged = [];
+  const result = [];
   for (let dataIndex in needMergeData) {
     if (
       parseInt(dataIndex) === 0 ||
@@ -223,9 +165,9 @@ const mergeApplicantQNA = (needMergeData) => {
         questions: [needMergeData[dataIndex].question],
         answers: [needMergeData[dataIndex].answer],
       };
-      merged.push(obj);
+      result.push(obj);
     } else {
-      for (let j of merged) {
+      for (let j of result) {
         if (j.id === needMergeData[dataIndex].id) {
           j.questions.push(needMergeData[dataIndex].question);
           j.answers.push(needMergeData[dataIndex].answer);
@@ -233,16 +175,17 @@ const mergeApplicantQNA = (needMergeData) => {
       }
     }
   }
-  return merged;
+  return result;
 };
 
 // 가입 요청 데이터 가공
 const mergeApplicantInfo = (needMergeData, toMergeData) => {
-  for (let dataIndex in needMergeData) {
-    if (toMergeData[dataIndex].id === needMergeData[dataIndex].id) {
-      needMergeData[dataIndex].answers = toMergeData[dataIndex].answers;
-      needMergeData[dataIndex].questions = toMergeData[dataIndex].questions;
+  const result = needMergeData;
+  for (let dataIndex in result) {
+    if (toMergeData[dataIndex].id === result[dataIndex].id) {
+      result[dataIndex].answers = toMergeData[dataIndex].answers;
+      result[dataIndex].questions = toMergeData[dataIndex].questions;
     }
   }
-  return needMergeData;
+  return result;
 };
