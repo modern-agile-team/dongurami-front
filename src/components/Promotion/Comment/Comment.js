@@ -31,7 +31,10 @@ const Comment = ({ comment, postId, getData }) => {
             },
           }
         )
-        .then((response) => console.log(response));
+        .then((response) => {
+          if (response.data.success) getData();
+          else alert(response.data.msg);
+        });
     }
     setIsContentEditable(!isContentEditable);
   };
