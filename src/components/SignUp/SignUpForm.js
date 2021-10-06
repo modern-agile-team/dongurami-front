@@ -14,6 +14,28 @@ function SignUpForm() {
   const [checkSignUp, setCheckSignUp] = useState("");
   const [emailCheck, setEmailCheck] = useState(false);
   const [majorNum, setMajorNum] = useState("");
+  const [userData, setUserData] = useState();
+
+  const UserProfile = () => {
+    window.location.href.includes("access_token") && GetUser();
+    function GetUser() {
+      const location = window.location.href.split("=")[1];
+      const token = location.split("&")[0];
+      console.log("네이버 토큰: ", token);
+      axios("https://openapi.naver.com/v1/nid/me/", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => console.log(res))
+        .catch((err) => console.log("err : ", err));
+    }
+  };
+  useEffect(UserProfile, []);
+
+  console.log("네이버정보:", userData);
 
   const majorCategory = [
     { value: "00", label: "학과 선택" },
