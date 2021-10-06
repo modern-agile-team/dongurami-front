@@ -1,11 +1,7 @@
-import styles from "../../../styles/Club/Home/Schedule/Schedule.module.scss";
-import Router from "next/router";
+import styles from '../../../styles/Club/Home/Schedule/Schedule.module.scss';
+import Link from 'next/link';
 
 const Schedule = ({ schedule, nowDay }) => {
-  const goMypage = () => {
-    Router.push("/myPage");
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.schedule}>
@@ -38,7 +34,7 @@ const Schedule = ({ schedule, nowDay }) => {
             </div>
           ) : null;
         })}
-        <span onClick={goMypage}>박현우</span>
+        <Link href={`/profile/201816035`}>프로필</Link>
       </div>
     </div>
   );
