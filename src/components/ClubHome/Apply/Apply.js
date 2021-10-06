@@ -3,9 +3,15 @@ import ApplyHeader from "./ApplyHeader";
 import styles from "../../../styles/Club/Home/Apply/Apply.module.scss";
 import ApplyQuestions from "./ApplyQuestions";
 import Additional from "./Additional";
-import axios from "axios";
 import ApplySubmit from "./ApplySubmit";
 import { useRouter } from "next/router";
+import {
+  getApply,
+  postApply,
+  deleteApply,
+  putApply,
+  postSubmit,
+} from "apis/clubhome";
 
 const Apply = () => {
   const [userInfo, setUserInfo] = useState({
@@ -31,24 +37,10 @@ const Apply = () => {
 
   const iconSize = 40;
 
-  let jwtToken = "";
-
-  if (typeof window !== "undefined") {
-    jwtToken = localStorage.getItem("jwt");
-  }
-
   // 지원서 불러오기
-  const getApplyQuestions = async () => {
-    const options = {
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-    };
-    await axios
-      .get("http://3.36.72.145:8080/api/club/application/1", options)
+  const getApplyQuestions = () => {
+    getApply()
       .then((res) => {
-        const updateState = new Array(res.data.questions.length).fill(false);
         setUserInfo({
           name: res.data.clientInfo[0].name,
           id: res.data.clientInfo[0].id,
@@ -58,7 +50,7 @@ const Apply = () => {
           phoneNumber: "",
         });
         setLeader(res.data.leader);
-        setIsUpdate(updateState);
+        setIsUpdate(new Array(res.data.questions.length).fill(false));
         setQuestions(res.data.questions);
       })
       .catch((err) => alert(err.response.data.msg));
@@ -66,41 +58,20 @@ const Apply = () => {
 
   // 질문 추가
   const onQuestionAdd = async () => {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-      data: {
-        description: newQuestion,
-      },
-    };
-    await axios("http://3.36.72.145:8080/api/club/application/1", options)
-      .then((res) => console.log(res.data))
+    await postApply({
+      description: newQuestion,
+    })
+      .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
 
-    // GET
     await getApplyQuestions();
-
-    // input 비우기
     newQuestionInput.current.value = "";
   };
 
   // 질문 삭제
   const onRemove = async (i) => {
-    const options = {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-      data: {
-        description: newQuestion,
-      },
-    };
-    await axios(`http://3.36.72.145:8080/api/club/application/1/${i}`, options)
-      .then((res) => res.data)
+    await deleteApply({ description: newQuestion }, i)
+      .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data));
     await getApplyQuestions();
   };
@@ -111,23 +82,9 @@ const Apply = () => {
       return i === index ? !el : el;
     });
 
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-      data: {
-        description: updateQuestion,
-      },
-    };
-
     if (isUpdate[i]) {
-      await axios(
-        `http://3.36.72.145:8080/api/club/application/1/${no}`,
-        options
-      )
-        .then((res) => res.data)
+      await putApply({ description: updateQuestion }, no)
+        .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg));
       await getApplyQuestions();
     }
@@ -135,32 +92,19 @@ const Apply = () => {
   };
 
   // 지원서 제출
-  const onResumeSubmit = async () => {
-    // {no: no, description: description} 형태로 가공
+  const onResumeSubmit = () => {
     const obj = addQuestion.map((el, i) => {
       return { no: questions[i].no, description: el };
     });
 
-    const result = {
+    postSubmit({
       basic: {
         grade: parseInt(grade),
         gender: parseInt(sex),
         phoneNum: phoneNumber,
       },
       extra: obj,
-    };
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-        "x-auth-token": jwtToken,
-      },
-      data: result,
-    };
-    await axios(
-      `http://3.36.72.145:8080/api/club/application/1/answer`,
-      options
-    )
+    })
       .then((res) => {
         alert(res.data.msg);
         router.push("/clubhome"); // 가입신청 후 새로고침

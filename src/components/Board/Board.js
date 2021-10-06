@@ -1,66 +1,80 @@
-import Link from "next/link";
-import styles from "../../styles/Board/Board/Board.module.scss";
-import Table from "./Table";
-import Pagination from "./Pagination";
-import Search from "./Search";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import useBoardOrder from "hooks/useBoardOrder";
-import useBoardPage from "hooks/useBoardPage";
-import useBoardSearch from "hooks/useBoardSearch";
+import Link from 'next/link';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import Table from './Table';
+import Pagination from './Pagination';
+import Search from './Search';
+import styles from '../../styles/Board/Board/Board.module.scss';
 
-function Board({ category, getPosts }) {
+import { getBoardPosts } from 'redux/reducers/board';
+
+function getQuery(router) {
+  return {
+    page: Number(router.query.page) || 1,
+    sort: router.query.sort ?? 'inDate',
+    order: router.query.order ?? 'DESC',
+    type: router.query.type,
+    keyword: router.query.keyword
+  };
+}
+
+function Board({ category }) {
   const router = useRouter();
-  const [posts, setPosts] = useState([]);
+  const posts = useSelector((state) => state.board.posts);
+  const dispatch = useDispatch();
 
-  const page = useBoardPage(router);
-  const order = useBoardOrder(router);
-  const { search, searchBy } = useBoardSearch(router);
+  const { page, sort, order, type, keyword } = getQuery(router);
 
   useEffect(() => {
-    (async () => {
-      if (!order) return;
-      const response = await getPosts(order, { search, searchBy });
-      setPosts(response);
-    })();
-  }, [order, search, searchBy, getPosts]);
+    if (!sort || !order) return;
+    dispatch(getBoardPosts({ category, sort, order, type, keyword }));
+  }, [category, sort, order, type, keyword, dispatch]);
 
   const setPageToUrl = (nextPage) => {
     router.push({
       pathname: router.pathname,
       query: {
         ...router.query,
-        page: nextPage,
-      },
+        page: nextPage
+      }
     });
   };
   const onOrderChange = (e) => {
+    const value = e.target.value.split(' ');
     router.push({
       pathname: router.pathname,
       query: {
         ...router.query,
         page: 1,
-        order: e.target.value,
-      },
+        sort: value[0],
+        order: value[1]
+      }
     });
   };
 
-  const title = { notice: "공지 게시판", free: "자유 게시판", clubNotice: "공지 게시판" };
+  const title = {
+    notice: '공지 게시판',
+    free: '자유 게시판',
+    clubNotice: '공지 게시판'
+  };
 
   if (!posts) return null;
 
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <Link href={router.pathname} passHref><h1><a>{title[category]}</a></h1></Link>
+        <Link href={router.pathname} passHref>
+          <h1>
+            <a>{title[category]}</a>
+          </h1>
+        </Link>
         <hr />
         <div className={styles.orderBy}>
-          {(category === 'clubNotice') ? (
-            <Link href={`${router.pathname}/notice/write`} passHref><button>✏️ 글쓰기</button></Link>
-          ) : (
-            <Link href={`${router.pathname}/write`} passHref><button>✏️ 글쓰기</button></Link>
-          )}
-          <select value={order} onChange={onOrderChange}>
+          <Link href={`${router.pathname}/write`} passHref>
+            <button>✏️ 글쓰기</button>
+          </Link>
+          <select value={`${sort} ${order}`} onChange={onOrderChange}>
             <option value="inDate DESC">최근순</option>
             <option value="inDate ASC">오래된순</option>
             <option value="hit DESC">조회수순</option>

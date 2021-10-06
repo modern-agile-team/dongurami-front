@@ -49,7 +49,11 @@ const ClubListContainer = () => {
                 title={el.name}
                 categories={el.category}
                 key={el.no}
+<<<<<<< HEAD
                 clubNum={el.no}
+=======
+                clubNo={el.no}
+>>>>>>> 85a0b797b86a43cac5fd2d06f0560eadaf52794c
               />
             );
           })}

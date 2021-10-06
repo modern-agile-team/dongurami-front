@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 import Scraps from "./Scraps";
 import styles from "../../styles/Profile/Profile.module.scss";
 import UserInfo from "./UserInfo";
+import router, { Router } from "next/router";
 
 function Profile() {
   const [comp, setComp] = useState("프로필");
   const [token, setToken] = useState("");
+
+  const moveWriteScraps = () => {
+    router.push("/profile/writescraps");
+  };
 
   const data = {
     info: {
@@ -83,7 +88,13 @@ function Profile() {
         comp={comp}
         setComp={setComp}
       />
-      <Scraps data={data} scrapData={scrapData} comp={comp} setComp={setComp} />
+      <Scraps
+        moveWriteScraps={moveWriteScraps}
+        data={data}
+        scrapData={scrapData}
+        comp={comp}
+        setComp={setComp}
+      />
     </div>
   );
 }

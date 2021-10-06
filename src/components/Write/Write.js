@@ -30,7 +30,7 @@ function Write({ category, Api }) {
         <WriteContent title={title} body={body} setTitle={setTitle} setBody={setBody} onSubmit={onSubmit} />
       </Container>
       <Modal show={showModal} onClose={onClose}>
-        <WritePromotion title={title} body={body} />
+        <WritePromotion title={title} body={body} api={api} />
       </Modal>
     </>
   );

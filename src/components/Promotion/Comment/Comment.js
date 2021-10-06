@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import styles from "../../../styles/Board/Promotion/Comment.module.scss";
 import ReplyCommentContainer from "./ReplyCommentContainer";
@@ -70,7 +70,6 @@ const Comment = ({ comment, postId, getData }) => {
                 <AiOutlineDelete />
               </button>
             </div>
-            s
           </div>
           <div ref={descriptionDiv} contentEditable={isContentEditable}>
             {comment.description}
