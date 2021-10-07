@@ -1,18 +1,19 @@
-import styles from "../../../styles/Common/Header/Header.module.scss";
-import { useState, useEffect, useRef } from "react";
-import { FaUserCircle } from "react-icons/fa";
-import { BiBell } from "react-icons/bi";
-import Hamburger from "hamburger-react";
-import HeaderBoard from "./HeaderBoard";
-import HeaderUser from "./HeaderUser";
-import AlarmContainer from "../Alarm/AlarmContainer";
-import HeaderMobileBoard from "./HeaderMobileBoard";
-import Link from "next/link";
+import styles from '../../../styles/Common/Header/Header.module.scss';
+import { useState, useEffect, useRef } from 'react';
+import { FaUserCircle } from 'react-icons/fa';
+import { BiBell } from 'react-icons/bi';
+import Hamburger from 'hamburger-react';
+import HeaderBoard from './HeaderBoard';
+import HeaderUser from './HeaderUser';
+import AlarmContainer from '../Alarm/AlarmContainer';
+import HeaderMobileBoard from './HeaderMobileBoard';
+import Link from 'next/link';
+import getToken from 'utils/getToken';
 
 function Header() {
   const [open, setOpen] = useState(false);
   const [isAlarmOpen, setIsAlarmOpen] = useState(false);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
 
   const closeRef = useRef(null);
 
@@ -24,9 +25,9 @@ function Header() {
           setOpen(false);
         }
       }
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
       return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener('mousedown', handleClickOutside);
       };
     }, [ref]);
   };
@@ -34,17 +35,17 @@ function Header() {
 
   // localStorage의 JWT값 불러와 token state에 저장
   useEffect(() => {
-    setToken(window.localStorage.getItem("jwt"));
+    setToken(getToken());
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("jwt", token);
+    window.localStorage.setItem('jwt', token);
   }, [token]);
 
   // 로그아웃 이벤트
   const logout = () => {
     window.location.reload();
-    return setToken("");
+    return setToken('');
   };
 
   //알람 열람
