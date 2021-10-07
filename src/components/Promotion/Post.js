@@ -36,7 +36,7 @@ const Post = ({ postData, postId, getData, comments }) => {
           <div>
             <Link
               href={{
-                pathname: `${router.pathname}/edit`,
+                pathname: `${router.pathname}/${postId}/edit`,
                 query: router.query
               }}
               passHref

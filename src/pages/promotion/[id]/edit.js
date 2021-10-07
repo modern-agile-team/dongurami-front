@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Edit from 'components/Write/Edit';
+import Edit from 'components/Promotion/Edit/Edit';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import getToken from 'utils/getToken';
@@ -12,7 +12,7 @@ class Api {
 
   async getPost() {
     const response = await axios.get(
-      `http://3.36.72.145:8080/api/club/board/promotion/${this.postNo}`,
+      `http://3.36.72.145:8080/api/board/promotion/${this.postNo}`,
       {
         headers: {
           'x-auth-token': this.token
@@ -23,7 +23,7 @@ class Api {
   }
   async putPost(title, description) {
     await axios.put(
-      `http://3.36.72.145:8080/api/club/board/promotion/${this.postNo}`,
+      `http://3.36.72.145:8080/api/board/promotion/${this.postNo}`,
       {
         title,
         description
@@ -46,12 +46,12 @@ function Write() {
 
   useEffect(() => {
     if (!router.isReady) return;
-    setPid(router.query.pid);
+    setPid(router.query.id);
   }, [router]);
 
   if (!pid) return null;
 
-  return <div>안녕</div>;
+  return <Edit category="promotion" api={api} />;
 }
 
 export default Write;
