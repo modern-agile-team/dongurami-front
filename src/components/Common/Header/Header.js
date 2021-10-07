@@ -54,7 +54,7 @@ function Header() {
   };
 
   return (
-    <header>
+    <header className={styles.container}>
       <nav>
         <div className={styles.myHeader} ref={closeRef}>
           <Link href="/" passHref>

@@ -1,10 +1,10 @@
-import React from "react";
-import styles from "../../../styles/Common/Header/HeaderUser.module.scss";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import React from 'react';
+import styles from '../../../styles/Common/Header/HeaderUser.module.scss';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
 export const HeaderUser = () => {
-  const [nowPath, setNowPath] = useState("");
+  const [nowPath, setNowPath] = useState('');
 
   const router = useRouter();
 
@@ -14,7 +14,7 @@ export const HeaderUser = () => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("nowPath", nowPath);
+    window.localStorage.setItem('nowPath', nowPath);
   }, [nowPath]);
 
   return (
@@ -22,18 +22,18 @@ export const HeaderUser = () => {
       <ul className={styles.user}>
         <li
           className={styles.login}
-          id={nowPath === "/LoginPage" && styles.now}
+          id={nowPath === '/LoginPage' ? styles.now : undefined}
           onClick={() => {
-            router.push("/LoginPage");
+            router.push('/LoginPage');
           }}
         >
           로그인
         </li>
         <li
           className={styles.signUp}
-          id={nowPath === "/signup" && styles.nowSign}
+          id={nowPath === '/signup' ? styles.nowSign : undefined}
           onClick={() => {
-            router.push("/signup");
+            router.push('/signup');
           }}
         >
           회원가입
