@@ -8,6 +8,7 @@ import HeaderUser from './HeaderUser';
 import AlarmContainer from '../Alarm/AlarmContainer';
 import HeaderMobileBoard from './HeaderMobileBoard';
 import Link from 'next/link';
+import getToken from 'utils/getToken';
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -34,7 +35,7 @@ function Header() {
 
   // localStorage의 JWT값 불러와 token state에 저장
   useEffect(() => {
-    setToken(window.localStorage.getItem('jwt'));
+    setToken(getToken());
   }, []);
 
   useEffect(() => {
