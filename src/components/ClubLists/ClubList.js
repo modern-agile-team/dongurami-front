@@ -9,7 +9,7 @@ const ClubList = ({ img, categories, title, onClick, clubNo }) => {
       <img
         src={img}
         alt="동아리"
-        onClick={() => router.push(`/clubhome/${clubNo}`)}
+        onClick={() => router.push(`/clubhome/club?no=${clubNo}`)}
       />
       <div>
         <p id={styles.desc}>{title}</p>

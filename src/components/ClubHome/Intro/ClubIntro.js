@@ -3,7 +3,7 @@ import ClubInfo from './ClubInfo';
 import Desc from './Desc';
 import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import { getClubInfo, putClubIntroDesc } from 'apis/clubhome';
+import { getInfo, putIntroDesc } from 'apis/clubhome';
 
 const ClubIntro = () => {
   const [info, setInfo] = useState([]);
@@ -24,7 +24,7 @@ const ClubIntro = () => {
 
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
-    putClubIntroDesc({
+    putIntroDesc({
       logoUrl: info[0].logoUrl,
       fileId: info[0].fileId,
       introduce: introDesc
@@ -41,7 +41,7 @@ const ClubIntro = () => {
 
   // 동아리 정보 불러오기
   const getData = useCallback(async () => {
-    getClubInfo()
+    getInfo()
       .then((res) => {
         setLeader(res.data.result[0].leader);
         setCategori(res.data.result[0].category);

@@ -1,33 +1,33 @@
-import React, { useEffect, useState, useRef } from "react";
-import ApplyHeader from "./ApplyHeader";
-import styles from "../../../styles/Club/Home/Apply/Apply.module.scss";
-import ApplyQuestions from "./ApplyQuestions";
-import Additional from "./Additional";
-import ApplySubmit from "./ApplySubmit";
-import { useRouter } from "next/router";
+import React, { useEffect, useState, useRef } from 'react';
+import ApplyHeader from './ApplyHeader';
+import styles from '../../../styles/Club/Home/Apply/Apply.module.scss';
+import ApplyQuestions from './ApplyQuestions';
+import Additional from './Additional';
+import ApplySubmit from './ApplySubmit';
+import { useRouter } from 'next/router';
 import {
   getApply,
   postApply,
   deleteApply,
   putApply,
-  postSubmit,
-} from "apis/clubhome";
+  postSubmit
+} from 'apis/clubhome';
 
 const Apply = () => {
   const [userInfo, setUserInfo] = useState({
-    name: "",
-    id: "",
-    major: "",
-    grade: "",
-    sex: "",
-    phoneNumber: "",
+    name: '',
+    id: '',
+    major: '',
+    grade: '',
+    sex: '',
+    phoneNumber: ''
   });
-  const [newQuestion, setNewQuestion] = useState("");
+  const [newQuestion, setNewQuestion] = useState('');
   const [questions, setQuestions] = useState([]);
   const [isUpdate, setIsUpdate] = useState([]);
   const [addQuestion, setAddQuestion] = useState([]);
-  const [updateQuestion, setUpdateQuestion] = useState("");
-  const [leader, setLeader] = useState("");
+  const [updateQuestion, setUpdateQuestion] = useState('');
+  const [leader, setLeader] = useState('');
 
   const { grade, sex, phoneNumber } = userInfo;
 
@@ -45,9 +45,9 @@ const Apply = () => {
           name: res.data.clientInfo[0].name,
           id: res.data.clientInfo[0].id,
           major: res.data.clientInfo[0].major,
-          grade: "",
-          sex: "",
-          phoneNumber: "",
+          grade: '',
+          sex: '',
+          phoneNumber: ''
         });
         setLeader(res.data.leader);
         setIsUpdate(new Array(res.data.questions.length).fill(false));
@@ -59,13 +59,13 @@ const Apply = () => {
   // 질문 추가
   const onQuestionAdd = async () => {
     await postApply({
-      description: newQuestion,
+      description: newQuestion
     })
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
 
-    await getApplyQuestions();
-    newQuestionInput.current.value = "";
+    getApplyQuestions();
+    newQuestionInput.current.value = '';
   };
 
   // 질문 삭제
@@ -73,7 +73,7 @@ const Apply = () => {
     await deleteApply({ description: newQuestion }, i)
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data));
-    await getApplyQuestions();
+    getApplyQuestions();
   };
 
   // 질문 수정
@@ -86,14 +86,14 @@ const Apply = () => {
       await putApply({ description: updateQuestion }, no)
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg));
-      await getApplyQuestions();
+      getApplyQuestions();
     }
     setIsUpdate(update);
   };
 
   // 지원서 제출
   const onResumeSubmit = () => {
-    const obj = addQuestion.map((el, i) => {
+    const extra = addQuestion.map((el, i) => {
       return { no: questions[i].no, description: el };
     });
 
@@ -101,13 +101,13 @@ const Apply = () => {
       basic: {
         grade: parseInt(grade),
         gender: parseInt(sex),
-        phoneNum: phoneNumber,
+        phoneNum: phoneNumber
       },
-      extra: obj,
+      extra: extra
     })
       .then((res) => {
         alert(res.data.msg);
-        router.push("/clubhome"); // 가입신청 후 새로고침
+        router.push('/clubhome'); // 가입신청 후 새로고침
       })
       .catch((err) => alert(err.response.data.msg));
   };
@@ -130,10 +130,8 @@ const Apply = () => {
 
   // 추가 질문 답변 저장
   const onAnswerInputChange = (e) => {
-    const index = e.target.parentNode.id;
-    const input = e.target.value;
     const temp = [...addQuestion];
-    temp[index] = input;
+    temp[e.target.parentNode.id] = e.target.value;
     setAddQuestion(temp);
   };
 
