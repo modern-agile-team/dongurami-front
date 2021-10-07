@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Container from './Container';
 import WriteContent from './WriteContent';
 
-function Edit({ category, api }) {
+function Edit({ api }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const router = useRouter();
@@ -23,7 +23,7 @@ function Edit({ category, api }) {
   };
 
   return (
-    <Container category={category} type="글 수정하기">
+    <Container type="글 수정하기">
       <WriteContent
         title={title}
         body={body}

@@ -1,14 +1,7 @@
 import styles from '../../../styles/Board/Write/Container.module.scss';
 
 function Container({ children, category, type }) {
-  const title =
-    category === 'notice'
-      ? '공지 게시판'
-      : category === 'free'
-      ? '자유 게시판'
-      : category === 'promotion'
-      ? '홍보 게시판'
-      : undefined;
+  const title = '홍보게시판';
 
   return (
     <div className={styles.container}>

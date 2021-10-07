@@ -51,7 +51,7 @@ function Write() {
 
   if (!pid) return null;
 
-  return <Edit category="promotion" api={api} />;
+  return <Edit api={api} />;
 }
 
 export default Write;
