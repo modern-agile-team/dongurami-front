@@ -21,7 +21,7 @@ function Profile() {
     console.log(1);
   };
   useEffect(() => {
-    getUserInfo()
+    getUserInfo('201816035')
       .then((res) => {
         console.log(res);
         setUserInfo(res.data.userInfo);

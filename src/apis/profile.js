@@ -1,5 +1,5 @@
 import instance from 'apis';
 
-export const getUserInfo = () => {
-  return instance.get(`api/profile/${201816035}`);
+export const getUserInfo = (id) => {
+  return instance.get(`/api/profile/${id}`);
 };
