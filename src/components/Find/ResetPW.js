@@ -1,41 +1,47 @@
-import { useState } from "react";
-import styles from "../../styles/User/Find/ResetPW.module.scss";
+import { useState, useEffect } from 'react';
+import styles from '../../styles/User/Find/ResetPW.module.scss';
+import { patchResetPW } from 'apis/user';
 
 function ResetPW() {
-  const [id, setId] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [checkNewPassword, setCheckNewPassword] = useState("");
+  const [id, setId] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [checkNewPassword, setCheckNewPassword] = useState('');
+  const [userToken, setUserToken] = useState();
 
   const onChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "id") setId(value);
-    if (name === "newPassword") setNewPassword(value);
-    if (name === "checkNewPassword") setCheckNewPassword(value);
+    if (name === 'id') setId(value);
+    if (name === 'newPassword') setNewPassword(value);
+    if (name === 'checkNewPassword') setCheckNewPassword(value);
   };
 
-  console.log(id);
-  console.log(newPassword);
-  console.log(checkNewPassword);
+  useEffect(() => {
+    setUserToken(window.localStorage.getItem('user_token'));
+  }, []);
 
-  const onSubmit = () => {
-    axios(`${process.env.NEXT_PUBLIC_API_URL}/api/find-password/:token`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
+  const onSubmit = (e) => {
+    e.preventDefault();
+    patchResetPW(
+      {
+        id,
+        newPassword,
+        checkNewPassword
       },
-      data: {
-        id: id,
-        password: password,
-      },
-    })
+      userToken
+    )
       .then((res) => {
-        if (res.data.jwt) {
-          localStorage.setItem("jwt", res.data.jwt);
-        }
-        router.push("/");
+        alert(res.data.msg);
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        if (err.response.data.useable === false) {
+          alert(
+            '학번이 일치하지 않습니다.\n자신의 학번이 맞는지 확인해 주세요.'
+          );
+        } else {
+          alert(err.response.data.msg);
+        }
+      });
   };
 
   return (
@@ -63,7 +69,9 @@ function ResetPW() {
           value={checkNewPassword}
           onChange={onChange}
         />
-        <button type="submit">변경하기</button>
+        <button type="submit" onClick={onSubmit}>
+          변경하기
+        </button>
       </form>
     </div>
   );

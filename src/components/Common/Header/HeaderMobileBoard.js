@@ -1,10 +1,10 @@
-import React from "react";
-import styles from "../../../styles/Common/Header/HeaderMobileBoard.module.scss";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import React from 'react';
+import styles from '../../../styles/Common/Header/HeaderMobileBoard.module.scss';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
 export const HeaderMobileBoard = () => {
-  const [nowPath, setNowPath] = useState("");
+  const [nowPath, setNowPath] = useState('');
 
   const router = useRouter();
 
@@ -14,7 +14,7 @@ export const HeaderMobileBoard = () => {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("nowPath", nowPath);
+    window.localStorage.setItem('nowPath', nowPath);
   }, [nowPath]);
 
   return (
@@ -22,18 +22,18 @@ export const HeaderMobileBoard = () => {
       <ul className={styles.mobile}>
         <li
           className={styles.notice}
-          id={nowPath === "/notice" && styles.now}
+          id={nowPath === '/notice' ? styles.now : undefined}
           onClick={() => {
-            router.push("/notice");
+            router.push('/notice');
           }}
         >
           공지게시판
         </li>
         <li
           className={styles.free}
-          id={nowPath === "/free" && styles.now}
+          id={nowPath === '/free' ? styles.now : undefined}
           onClick={() => {
-            router.push("/free");
+            router.push('/free');
           }}
         >
           자유게시판
