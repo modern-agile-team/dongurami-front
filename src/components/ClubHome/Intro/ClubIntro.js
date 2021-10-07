@@ -57,7 +57,7 @@ const ClubIntro = () => {
         alert(err.response.data.msg);
         toLogin.push('/LoginPage');
       });
-  }, [toLogin]);
+  }, [toLogin, router.query.no]);
 
   useEffect(() => {
     getData();

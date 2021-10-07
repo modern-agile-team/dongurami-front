@@ -68,9 +68,9 @@ const SideBar = ({ setComp, comp }) => {
   const throttleScroll = throttle(handleScroll, 50);
 
   useEffect(() => {
-    documentRef.current.addEventListener('scroll', throttleScroll);
-    return () =>
-      documentRef.current.removeEventListener('scroll', throttleScroll);
+    const current = documentRef.current;
+    current.addEventListener('scroll', throttleScroll);
+    return () => current.removeEventListener('scroll', throttleScroll);
   }, [throttleScroll]);
 
   return (

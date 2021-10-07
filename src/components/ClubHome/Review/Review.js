@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from '../../../styles/Club/Home/Review/Review.module.scss';
 import ReviewFilter from './ReviewFilter';
 import ReviewHeader from './ReviewHeader';
@@ -32,13 +32,13 @@ const Review = () => {
   const myReviewNum = reviewMine.length ? reviewMine[0].no : null;
 
   // 후기 불러오기
-  const getReviewData = () => {
+  const getReviewData = useCallback(() => {
     getReview(router.query.no)
       .then((res) => {
         setReviewList(res.data.reviewList);
       })
       .catch((err) => console.log(err.response.data.msg));
-  };
+  }, [router.query.no]);
 
   // 후기 작성
   const onReviewSubmit = async () => {
@@ -52,7 +52,7 @@ const Review = () => {
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
 
-    await getReviewData();
+    getReviewData();
   };
 
   // 내 후기 삭제
@@ -60,7 +60,7 @@ const Review = () => {
     await deleteReview(reviewMine[0].no, router.query.no)
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
-    await getReviewData();
+    getReviewData();
   };
 
   // 내 후기 수정
@@ -75,7 +75,7 @@ const Review = () => {
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
-    await getReviewData();
+    getReviewData();
   };
 
   // 별점 비우기
@@ -118,7 +118,7 @@ const Review = () => {
 
   useEffect(() => {
     getReviewData();
-  }, []);
+  }, [getReviewData]);
 
   return (
     <div className={styles.container}>
