@@ -1,27 +1,21 @@
-import styles from "../../styles/User/Find/FindID.module.scss";
-import Link from "next/link";
-import { useState } from "react";
-import axios from "axios";
+import styles from '../../styles/User/Find/FindID.module.scss';
+import Link from 'next/link';
+import { useState } from 'react';
+import { postFindID } from 'apis/user';
 
 export const FindID = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    name === "name" ? setName(value) : setEmail(value);
+    name === 'name' ? setName(value) : setEmail(value);
   };
 
   const onSubmit = () => {
-    axios("http://3.36.72.145:8080/api/find-id", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-      },
-      data: {
-        name,
-        email,
-      },
+    postFindID({
+      name,
+      email
     })
       .then((res) => {
         alert(`${name}님의 아이디는 ${res.data.id}입니다.`);
@@ -30,7 +24,7 @@ export const FindID = () => {
   };
 
   const onKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       onSubmit();
     }
   };
