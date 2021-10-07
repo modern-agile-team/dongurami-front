@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from "react";
-import styles from "../../../styles/Club/Home/Review/Review.module.scss";
-import ReviewFilter from "./ReviewFilter";
-import ReviewHeader from "./ReviewHeader";
-import ReviewWrite from "./ReviewWrite";
-import ReviewMine from "./ReviewMine";
-import ReviewList from "./ReviewList";
-import { getReview, postReview, deleteReview, putReview } from "apis/clubhome";
+import React, { useEffect, useState } from 'react';
+import styles from '../../../styles/Club/Home/Review/Review.module.scss';
+import ReviewFilter from './ReviewFilter';
+import ReviewHeader from './ReviewHeader';
+import ReviewWrite from './ReviewWrite';
+import ReviewMine from './ReviewMine';
+import ReviewList from './ReviewList';
+import { getReview, postReview, deleteReview, putReview } from 'apis/clubhome';
+import { useRouter } from 'next/router';
 
 const Review = () => {
-  const [reviewInput, setReviewInput] = useState(""); // 후기 글
+  const [reviewInput, setReviewInput] = useState(''); // 후기 글
   const [reviewList, setReviewList] = useState([]); // 후기 리스트
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
+
+  const router = useRouter();
 
   // 별점 평균
   const reviewAvg =
@@ -22,7 +25,7 @@ const Review = () => {
       }, 0) / reviewList.length;
 
   // 내 후기와 내 후기가 아닌 것들
-  const reviewMine = reviewList.filter((el) => el.studentId === "201708051");
+  const reviewMine = reviewList.filter((el) => el.studentId === '201708051');
   const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
 
   // 내 리뷰 번호
@@ -30,7 +33,7 @@ const Review = () => {
 
   // 후기 불러오기
   const getReviewData = () => {
-    getReview()
+    getReview(router.query.no)
       .then((res) => {
         setReviewList(res.data.reviewList);
       })
@@ -39,10 +42,13 @@ const Review = () => {
 
   // 후기 작성
   const onReviewSubmit = async () => {
-    await postReview({
-      description: reviewInput,
-      score: reviewRate,
-    })
+    await postReview(
+      {
+        description: reviewInput,
+        score: reviewRate
+      },
+      router.query.no
+    )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
 
@@ -51,7 +57,7 @@ const Review = () => {
 
   // 내 후기 삭제
   const onReviewDelete = async () => {
-    await deleteReview(reviewMine[0].no)
+    await deleteReview(reviewMine[0].no, router.query.no)
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
     await getReviewData();
@@ -62,9 +68,10 @@ const Review = () => {
     await putReview(
       {
         description: reviewInput,
-        score: reviewRate,
+        score: reviewRate
       },
-      myReviewNum
+      myReviewNum,
+      router.query.no
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
@@ -106,7 +113,7 @@ const Review = () => {
       return b.score - a.score;
     });
 
-    filter === "1" ? setReviewList(dateFilter) : setReviewList(starFilter);
+    filter === '1' ? setReviewList(dateFilter) : setReviewList(starFilter);
   };
 
   useEffect(() => {
