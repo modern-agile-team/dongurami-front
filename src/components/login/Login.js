@@ -1,43 +1,37 @@
-import Link from "next/link";
-import styles from "../../styles/User/Login/Login.module.scss";
-import { useState } from "react";
-import axios from "axios";
-import { useRouter } from "next/router";
-import OAuth from "./OAuth";
+import Link from 'next/link';
+import styles from '../../styles/User/Login/Login.module.scss';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import OAuth from './OAuth';
+import { postLogin } from 'apis/user';
 
 export const Login = () => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    name === "id" ? setId(value) : setPassword(value);
+    name === 'id' ? setId(value) : setPassword(value);
   };
 
   const router = useRouter();
 
   const onKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       onSubmit();
     }
   };
 
   const onSubmit = () => {
-    axios("http://3.36.72.145:8080/api/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-      },
-      data: {
-        id: id,
-        password: password,
-      },
+    postLogin({
+      id,
+      password
     })
       .then((res) => {
         if (res.data.jwt) {
-          localStorage.setItem("jwt", res.data.jwt);
+          localStorage.setItem('jwt', res.data.jwt);
         }
-        router.push("/");
+        router.push('/');
       })
       .catch((err) => console.log(err.response));
   };
