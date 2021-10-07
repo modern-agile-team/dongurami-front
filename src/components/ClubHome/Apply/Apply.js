@@ -39,7 +39,7 @@ const Apply = () => {
 
   // 지원서 불러오기
   const getApplyQuestions = () => {
-    getApply()
+    getApply(router.query.no)
       .then((res) => {
         setUserInfo({
           name: res.data.clientInfo[0].name,
@@ -58,9 +58,12 @@ const Apply = () => {
 
   // 질문 추가
   const onQuestionAdd = async () => {
-    await postApply({
-      description: newQuestion
-    })
+    await postApply(
+      {
+        description: newQuestion
+      },
+      router.query.no
+    )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
 
@@ -70,7 +73,7 @@ const Apply = () => {
 
   // 질문 삭제
   const onRemove = async (i) => {
-    await deleteApply({ description: newQuestion }, i)
+    await deleteApply({ description: newQuestion }, i, router.query.no)
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data));
     getApplyQuestions();
@@ -83,7 +86,7 @@ const Apply = () => {
     });
 
     if (isUpdate[i]) {
-      await putApply({ description: updateQuestion }, no)
+      await putApply({ description: updateQuestion }, no, router.query.no)
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg));
       getApplyQuestions();
@@ -97,14 +100,17 @@ const Apply = () => {
       return { no: questions[i].no, description: el };
     });
 
-    postSubmit({
-      basic: {
-        grade: parseInt(grade),
-        gender: parseInt(sex),
-        phoneNum: phoneNumber
+    postSubmit(
+      {
+        basic: {
+          grade: parseInt(grade),
+          gender: parseInt(sex),
+          phoneNum: phoneNumber
+        },
+        extra: extra
       },
-      extra: extra
-    })
+      router.query.no
+    )
       .then((res) => {
         alert(res.data.msg);
         router.push('/clubhome'); // 가입신청 후 새로고침

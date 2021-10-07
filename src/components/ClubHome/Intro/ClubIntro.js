@@ -12,6 +12,8 @@ const ClubIntro = () => {
   const [categori, setCategori] = useState('');
   const [leader, setLeader] = useState('');
 
+  const router = useRouter();
+
   const toLogin = useRouter();
 
   const onDescUpdate = () => {
@@ -24,11 +26,14 @@ const ClubIntro = () => {
 
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
-    putIntroDesc({
-      logoUrl: info[0].logoUrl,
-      fileId: info[0].fileId,
-      introduce: introDesc
-    })
+    putIntroDesc(
+      {
+        logoUrl: info[0].logoUrl,
+        fileId: info[0].fileId,
+        introduce: introDesc
+      },
+      router.query.no
+    )
       .then((res) =>
         res.data
           ? alert('글이 수정되었습니다.')
@@ -41,7 +46,7 @@ const ClubIntro = () => {
 
   // 동아리 정보 불러오기
   const getData = useCallback(async () => {
-    getInfo()
+    getInfo(router.query.no)
       .then((res) => {
         setLeader(res.data.result[0].leader);
         setCategori(res.data.result[0].category);
