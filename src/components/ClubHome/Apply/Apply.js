@@ -94,12 +94,8 @@ const Apply = () => {
     setIsUpdate(update);
   };
 
-  // 지원서 제출
-  const onResumeSubmit = () => {
-    const extra = addQuestion.map((el, i) => {
-      return { no: questions[i].no, description: el };
-    });
-
+  // -------------------   지원서 제출   -------------------------
+  const post = (data) => {
     postSubmit(
       {
         basic: {
@@ -107,7 +103,7 @@ const Apply = () => {
           gender: parseInt(sex),
           phoneNum: phoneNumber
         },
-        extra: extra
+        extra: data
       },
       router.query.no
     )
@@ -116,10 +112,26 @@ const Apply = () => {
         router.push({
           pathname: '/clubhome/club',
           query: { no: router.query.no }
-        }); // 가입신청 후 새로고침
+        });
       })
       .catch((err) => alert(err.response.data.msg));
   };
+
+  const onResumeSubmit = () => {
+    if (
+      addQuestion.length === questions.length &&
+      userInfo.phoneNumber !== ''
+    ) {
+      post(
+        addQuestion.map((el, i) => {
+          return { no: questions[i].no, description: el };
+        })
+      );
+    } else {
+      alert('질문에 대한 답변을 모두 입력해주세요');
+    }
+  };
+  //---------------------------------------------------------------
 
   // 질문 수정할 입력창
   const onUpdateInputChange = (e) => {

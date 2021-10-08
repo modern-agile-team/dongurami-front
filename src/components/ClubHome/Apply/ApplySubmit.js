@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Apply/ApplySubmit.module.scss";
-import { IoIosAddCircleOutline, IoIosCheckmark } from "react-icons/io";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Apply/ApplySubmit.module.scss';
+import { IoIosAddCircleOutline, IoIosCheckmark } from 'react-icons/io';
 
 const ApplySubmit = ({
   newQuestionInput,
@@ -9,7 +9,7 @@ const ApplySubmit = ({
   iconSize,
   onResumeSubmit,
   leader,
-  userInfo,
+  userInfo
 }) => {
   return (
     <>

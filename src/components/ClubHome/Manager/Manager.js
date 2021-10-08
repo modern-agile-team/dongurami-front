@@ -55,7 +55,7 @@ export const Manager = () => {
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
-    await getMembersData();
+    router.reload();
   };
 
   // 가입 거절 PUT
