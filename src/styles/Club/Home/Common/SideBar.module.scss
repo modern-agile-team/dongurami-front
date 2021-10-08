@@ -9,28 +9,8 @@
   align-items: center;
 }
 
-#close {
-  background-color: white;
-}
-
-.menu,
-#show {
+.menu {
   display: flex;
-  div {
-    display: flex;
-    align-items: center;
-    height: 55px;
-    font-size: 90%;
-    padding: 0 1vw;
-    cursor: pointer;
-    &:hover {
-      background-color: rgba(228, 228, 228, 0.37);
-    }
-    svg {
-      padding: 1.5vh 0;
-      margin-right: 5px;
-    }
-  }
   #now {
     background-color: #d4eee498;
   }
@@ -40,11 +20,20 @@
   display: none;
 }
 
-#hide {
-  div {
-    span {
-      display: none;
-    }
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  font-size: 85%;
+  padding: 0 2em;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(228, 228, 228, 0.37);
+  }
+  svg {
+    padding: 1.5vh 0;
+    margin-right: 5px;
   }
 }
 

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "../../styles/Board/Promotion/Promotion.module.scss";
+import React, { useState } from 'react';
+import styles from '../../styles/Board/Promotion/Promotion.module.scss';
 
 function displayedAt(createdAt) {
   const time = new Date(createdAt);

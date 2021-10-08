@@ -6,7 +6,6 @@ import Table from './Table';
 import Pagination from './Pagination';
 import Search from './Search';
 import styles from '../../styles/Board/Board/Board.module.scss';
-
 import { getBoardPosts, searchBoardPosts } from 'redux/slices/board';
 
 function getQuery(router) {

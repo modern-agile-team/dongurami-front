@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Manager/MembersList.module.scss";
-import { RiVipCrownFill, RiVipCrownLine } from "react-icons/ri";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Manager/MembersList.module.scss';
+import { RiVipCrownFill, RiVipCrownLine } from 'react-icons/ri';
 
 const MembersList = ({
   leader,
@@ -10,7 +10,7 @@ const MembersList = ({
   changeLeader,
   onBoardAuth,
   onApplyAuthClick,
-  memberInfo,
+  memberInfo
 }) => {
   return (
     <div className={styles.member}>
@@ -22,7 +22,7 @@ const MembersList = ({
             <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
           )}
         </div>
-        <div>
+        <div id={styles.name}>
           <span>{memberInfo[0]}</span>
         </div>
       </div>
