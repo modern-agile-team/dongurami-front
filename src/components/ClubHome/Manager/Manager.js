@@ -67,7 +67,7 @@ export const Manager = () => {
       router.query.no
     )
       .then((res) => alert(res.data.msg))
-      .catch((err) => alert(err.response.data.msg));
+      .catch((err) => console.log(err.response.data.msg));
     await getMembersData();
   };
 
@@ -203,7 +203,7 @@ const processQuesData = (data) => {
 // 가입 요청 데이터 가공
 const processApplicantInfo = (data, QNAs) => {
   const result = data;
-  for (let index in result) {
+  for (let index in QNAs) {
     if (QNAs[index].id === result[index].id) {
       result[index].answers = QNAs[index].answers;
       result[index].questions = QNAs[index].questions;

@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  // margin-top: 10vh;
 }
 .wrap {
   display: flex;
@@ -8,4 +7,5 @@
   align-items: center;
   width: 100vw;
   margin-top: 5em;
+  min-height: 67vh;
 }

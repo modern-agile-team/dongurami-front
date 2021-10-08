@@ -14,8 +14,6 @@ const ClubIntro = () => {
 
   const router = useRouter();
 
-  const toLogin = useRouter();
-
   const onDescUpdate = () => {
     setDescUpdate(!descUpdate);
   };
@@ -55,9 +53,8 @@ const ClubIntro = () => {
       })
       .catch((err) => {
         alert(err.response.data.msg);
-        toLogin.push('/');
       });
-  }, [toLogin, router.query.no]);
+  }, [router, router.query.no]);
 
   useEffect(() => {
     if (!router.query.no) return;

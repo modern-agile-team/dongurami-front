@@ -13,7 +13,7 @@ export const postApply = (data, params) => {
   );
 };
 
-// 지원서 질문 수정
+// 가입 거절하기
 export const putApply = (data, params) => {
   return instance.put(`api/club/admin-option/${params}/reject-applicant`, data);
 };
