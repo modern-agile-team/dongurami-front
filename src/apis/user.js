@@ -24,3 +24,8 @@ export const postLogin = (data) => {
 export const postSignUp = (data) => {
   return instance.post(`api/sign-up`, data);
 };
+
+//oAuth
+export const getNaverOauth = (token) => {
+  return instance.get(`api/naver-login?token=${token}`);
+};
