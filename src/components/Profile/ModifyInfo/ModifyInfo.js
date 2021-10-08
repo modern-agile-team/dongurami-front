@@ -5,7 +5,7 @@ import ModifyHeader from './ModifyHeader';
 import ImmutableData from './ImmutableData';
 import MutableData from './MutableData';
 import { useRouter } from 'next/router';
-import { getUserInfo } from 'apis/profile';
+import { modifyInfo, getUserInfo } from 'apis/profile';
 
 const ModifyInfo = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -15,8 +15,7 @@ const ModifyInfo = () => {
   const [comp, setComp] = useState('수정');
   const router = useRouter();
 
-  useEffect(() => {
-    if (!router.isReady) return;
+  const getData = () => {
     getUserInfo(router.query.pid)
       .then((res) => {
         setUserInfo(res.data.profile);
@@ -25,6 +24,26 @@ const ModifyInfo = () => {
         setGrade(res.data.profile.grade);
       })
       .catch((err) => console.log(err));
+  };
+
+  const modifyBtn = () => {
+    modifyInfo(router.query.pid, {
+      email: email,
+      phoneNumber: phoneNumber,
+      grade: grade,
+      profileImageUrl: userInfo.profileImageUrl,
+      fileId: userInfo.fileId
+    })
+      .then((res) => {
+        console.log(res.data.msg);
+      })
+      .catch((err) => console.log(err.response.data));
+    getData();
+  };
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    getData();
   }, [router]);
 
   const baseImg =
@@ -39,6 +58,7 @@ const ModifyInfo = () => {
         setEmail={setEmail}
         setPhoneNumber={setPhoneNumber}
       />
+      <button onClick={() => modifyBtn()}>수정</button>
       <SetImg comp={comp} setComp={setComp} />
     </div>
   );
