@@ -1,12 +1,12 @@
-import styles from "../../../styles/Club/Home/Common/frame.module.scss";
-import SideBar from "./SideBar";
-import ClubIntro from "../Intro/ClubIntro";
-import Activities from "../Activities/Activities";
-import Review from "../Review/Review";
-import Calendar from "../Daily/Calendar";
-import ClubNotice from "../Notice/ClubNotice";
-import { useCallback, useState } from "react";
-import Apply from "../Apply/Apply";
+import styles from '../../../styles/Club/Home/Common/frame.module.scss';
+import SideBar from './SideBar';
+import ClubIntro from '../Intro/ClubIntro';
+import Activities from '../Activities/Activities';
+import Review from '../Review/Review';
+import Calendar from '../Daily/Calendar';
+import ClubNotice from '../Notice/ClubNotice';
+import { useCallback, useState } from 'react';
+import Apply from '../Apply/Apply';
 
 const Frame = () => {
   const [comp, setComp] = useState(1);

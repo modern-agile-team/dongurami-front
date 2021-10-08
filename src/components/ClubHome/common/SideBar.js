@@ -14,15 +14,17 @@ import { MdRateReview } from 'react-icons/md';
 
 const iconSize = 20;
 
-const board = [
-  '우아한 애자일',
-  '공지 사항',
-  '활동 내용',
-  '일정',
-  '동아리 후기',
-  '동아리 지원하기',
-  '관리자 페이지'
-];
+const board = (clubName) => {
+  return [
+    clubName,
+    '공지 사항',
+    '활동 내용',
+    '일정',
+    '동아리 후기',
+    '동아리 지원하기',
+    '관리자 페이지'
+  ];
+};
 
 const icons = [
   <AiOutlineHome size={iconSize} key="0" />,
@@ -54,7 +56,10 @@ const SideBar = ({ setComp, comp }) => {
   const router = useRouter();
 
   const movePage = () => {
-    Router.push({ pathname: '/manager', query: { no: router.query.no } });
+    Router.push({
+      pathname: '/manager',
+      query: { no: router.query.no, name: router.query.name }
+    });
   };
 
   const handleScroll = () => {
@@ -76,7 +81,7 @@ const SideBar = ({ setComp, comp }) => {
   return (
     <div className={hide ? styles.hide : styles.sideBar} id={styles.open}>
       <div className={styles.menu} id={styles.show}>
-        {board.map((el, i) => {
+        {board(router.query.name).map((el, i) => {
           return (
             <div
               className={styles.board}
