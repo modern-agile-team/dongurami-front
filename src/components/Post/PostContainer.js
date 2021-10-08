@@ -19,7 +19,7 @@ function PostContainer({ category }) {
     dispatch(getPost({ category, pid }));
   }, [category, pid, dispatch]);
 
-  if (!post) return null;
+  if (!post.description) return null;
 
   return (
     <Post category={category} post={post} />

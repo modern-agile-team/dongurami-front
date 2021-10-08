@@ -19,7 +19,7 @@ function NoticeSearch() {
     if (keyword === '') return;
     router.push({
       pathname: router.pathname,
-      query: { type, keyword }
+      query: { type, keyword, ...router.query }
     });
   };
 

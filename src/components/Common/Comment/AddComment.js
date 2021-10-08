@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { updatePost } from 'redux/slices/post';
 import api from 'apis/post';
 import styles from '../../../styles/Common/Comment/AddComment.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPost } from 'redux/slices/post';
 
-function AddComment() {
+function AddComment({ parentCommentID }) {
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
   const [description, setDescription] = useState('');
@@ -15,9 +14,9 @@ function AddComment() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    await api.postComment(post.category, post.no, 'test1', description);
-    dispatch(updatePost());
+    await api.postComment({ category: post.category, pid: post.no, id: 'test1', description, parentCommentID });
     setDescription('');
+    dispatch(getPost());
   }
 
   return (

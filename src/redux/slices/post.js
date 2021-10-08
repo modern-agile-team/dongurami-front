@@ -3,7 +3,12 @@ import api from 'apis/post';
 
 const getPost = createAsyncThunk(
   'post/getPost',
-  async ({ category, pid }) => {
+  async (arg, { getState }) => {
+    const state = getState().post;
+    let { category, no: pid } = state;
+    if (arg) {
+      ({ category, pid } = arg);
+    }
     const response = await api.getPost(category, pid);
     return response.data;
   }
@@ -11,23 +16,24 @@ const getPost = createAsyncThunk(
 
 const postSlice = createSlice({
   name: 'post',
-  initialState: null,
+  initialState: {},
   reducers: {
     setCategory(state, action) {
-      state.category = action;
+      state.category = action.payload;
     }
   },
   extraReducers: (builder) => {
     builder
       .addCase(getPost.fulfilled, (state, action) => {
-        console.log(action.payload);
         return {
           ...action.payload.board,
+          category: state.category,
           comments: action.payload.comments
         }
       });
   }
 });
 
+export const { setCategory } = postSlice.actions;
 export { getPost };
 export default postSlice.reducer;

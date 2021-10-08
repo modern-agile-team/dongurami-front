@@ -6,6 +6,7 @@ import styles from '../../styles/Board/Post/PostContent.module.scss';
 import api from 'apis/post';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { setCategory } from 'redux/slices/post';
 
 const ReactQuill = dynamic(import("react-quill"), {
   ssr: false,
@@ -16,8 +17,8 @@ function Post({ category, post }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch()
-  }, [dispatch])
+    dispatch(setCategory(category))
+  }, [category, dispatch])
 
   const title = (
     (category === 'notice') ? '공지 게시판' :

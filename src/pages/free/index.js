@@ -6,7 +6,7 @@ function free() {
   return (
     <>
       <Header />
-      <Board category="board/free" />
+      <Board category="free" />
       <Footer />
     </>
   );

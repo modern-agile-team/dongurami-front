@@ -58,9 +58,9 @@ function Board({ category }) {
   };
 
   const title = {
-    ['board/notice']: '공지 게시판',
-    ['board/free']: '자유 게시판',
-    ['club/board/clubActivity/1']: '동아리 공지 게시판'
+    notice: '공지 게시판',
+    free: '자유 게시판',
+    clubNotice: '동아리 공지 게시판'
   };
 
   if (!posts) return null;
@@ -75,7 +75,7 @@ function Board({ category }) {
         </Link>
         <hr />
         <div className={styles.orderBy}>
-          <Link href={`${router.pathname}/write`} passHref>
+          <Link href={{ pathname: `${router.pathname}/write`, query: router.query }} passHref>
             <button>✏️ 글쓰기</button>
           </Link>
           <select value={`${sort} ${order}`} onChange={onOrderChange}>

@@ -39,14 +39,14 @@ const ReactQuill = dynamic(import("react-quill"), {
   ssr: false,
 });
 
-function ReactQuillContainer({ body, setBody }) {
+function ReactQuillContainer({ description, setDescription }) {
   return (
     <ReactQuill
       placeholder="본문을 입력하세요..."
       modules={modules}
       formats={formats}
-      value={body}
-      onChange={setBody}
+      value={description}
+      onChange={setDescription}
     />
   );
 }

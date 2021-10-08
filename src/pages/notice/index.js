@@ -6,7 +6,7 @@ function Notice() {
   return (
     <>
       <Header />
-      <Board category="board/notice" />
+      <Board category="notice" />
       <Footer />
     </>
   );
