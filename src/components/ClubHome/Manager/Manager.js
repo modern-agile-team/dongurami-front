@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from '../../../styles/Club/Home/Manager/Manager.module.scss';
 import Approve from './Approve';
 import Members from './Members';
@@ -31,7 +31,7 @@ export const Manager = () => {
   const router = useRouter();
 
   // 동아리원 정보 GET
-  const getMembersData = async () => {
+  const getMembersData = useCallback(async () => {
     getMember(router.query.no)
       .then((res) => {
         setApplicantQNA(res.data.applicant.questionsAnswers);
@@ -42,8 +42,8 @@ export const Manager = () => {
           mergeApplicantQNA(res.data.applicant.questionsAnswers)
         );
       })
-      .catch((err) => console.log(err.response.data));
-  };
+      .catch((err) => alert(err.response.data.msg));
+  }, [router.query.no]);
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
@@ -137,10 +137,12 @@ export const Manager = () => {
   }, [applicantInfo, mergedApplicantQNA]);
 
   useEffect(() => {
+    if (!router.query.no) return;
     getMembersData();
     onApplyAuthClick();
     onBoardAuth();
-  }, []);
+  }, [getMembersData, router.query]);
+
   return (
     <div className={styles.container}>
       <ManagerHeader />

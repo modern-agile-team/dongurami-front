@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import ApplyHeader from './ApplyHeader';
 import styles from '../../../styles/Club/Home/Apply/Apply.module.scss';
 import ApplyQuestions from './ApplyQuestions';
@@ -38,7 +38,7 @@ const Apply = () => {
   const iconSize = 40;
 
   // 지원서 불러오기
-  const getApplyQuestions = () => {
+  const getApplyQuestions = useCallback(() => {
     getApply(router.query.no)
       .then((res) => {
         setUserInfo({
@@ -54,7 +54,7 @@ const Apply = () => {
         setQuestions(res.data.questions);
       })
       .catch((err) => alert(err.response.data.msg));
-  };
+  }, [router.query.no]);
 
   // 질문 추가
   const onQuestionAdd = async () => {
@@ -113,7 +113,10 @@ const Apply = () => {
     )
       .then((res) => {
         alert(res.data.msg);
-        router.push('/clubhome'); // 가입신청 후 새로고침
+        router.push({
+          pathname: '/clubhome/club',
+          query: { no: router.query.no }
+        }); // 가입신청 후 새로고침
       })
       .catch((err) => alert(err.response.data.msg));
   };
@@ -143,7 +146,7 @@ const Apply = () => {
 
   useEffect(() => {
     getApplyQuestions();
-  }, []);
+  }, [getApplyQuestions]);
 
   return (
     <div className={styles.container}>

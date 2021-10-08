@@ -10,7 +10,7 @@ const ClubIntro = () => {
   const [descUpdate, setDescUpdate] = useState(false);
   const [introDesc, setIntroDesc] = useState('');
   const [categori, setCategori] = useState('');
-  const [leader, setLeader] = useState('');
+  const [leader, setLeader] = useState(0);
 
   const router = useRouter();
 
@@ -48,20 +48,21 @@ const ClubIntro = () => {
   const getData = useCallback(async () => {
     getInfo(router.query.no)
       .then((res) => {
-        setLeader(res.data.result[0].leader);
+        setLeader(res.data.clientInfo.leader);
         setCategori(res.data.result[0].category);
         setInfo(res.data.result);
         setIntroDesc(res.data.result[0].introduce);
       })
       .catch((err) => {
         alert(err.response.data.msg);
-        toLogin.push('/LoginPage');
+        toLogin.push('/');
       });
-  }, [toLogin]);
+  }, [toLogin, router.query.no]);
 
   useEffect(() => {
+    if (!router.query.no) return;
     getData();
-  }, [getData]);
+  }, [getData, router.query]);
 
   return (
     <div className={styles.container}>
