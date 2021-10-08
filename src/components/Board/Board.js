@@ -7,7 +7,7 @@ import Pagination from './Pagination';
 import Search from './Search';
 import styles from '../../styles/Board/Board/Board.module.scss';
 
-import { getBoardPosts } from 'redux/reducers/board';
+import { getBoardPosts, searchBoardPosts } from 'redux/slices/board';
 
 function getQuery(router) {
   return {
@@ -28,7 +28,11 @@ function Board({ category }) {
 
   useEffect(() => {
     if (!sort || !order) return;
-    dispatch(getBoardPosts({ category, sort, order, type, keyword }));
+    if (type && keyword) {
+      dispatch(searchBoardPosts({ category, sort, order, type, keyword }));
+    } else {
+      dispatch(getBoardPosts({ category, sort, order }));
+    }
   }, [category, sort, order, type, keyword, dispatch]);
 
   const setPageToUrl = (nextPage) => {
@@ -54,9 +58,9 @@ function Board({ category }) {
   };
 
   const title = {
-    notice: '공지 게시판',
-    free: '자유 게시판',
-    clubNotice: '공지 게시판'
+    ['board/notice']: '공지 게시판',
+    ['board/free']: '자유 게시판',
+    ['club/board/clubActivity/1']: '동아리 공지 게시판'
   };
 
   if (!posts) return null;

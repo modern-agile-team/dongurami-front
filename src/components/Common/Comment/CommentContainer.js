@@ -37,7 +37,7 @@ function CommentContainer({ comments, api, updatePost }) {
             )}
           </React.Fragment>
         ))}
-        <AddComment api={api} updatePost={updatePost} />
+        <AddComment />
       </div>
     </>
   );

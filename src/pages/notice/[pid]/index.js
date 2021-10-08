@@ -89,22 +89,10 @@ class Api {
 }
 
 function NoticePost() {
-  const [pid, setPid] = useState();
-  const router = useRouter();
-
-  const api = new Api(pid);
-  
-  useEffect(() => {
-    if (!router.isReady) return;
-    setPid(router.query.pid);
-  }, [router]);
-
-  if (!pid) return null;
-
   return (
     <>
       <Header />
-      <PostContainer category="notice" api={api} />
+      <PostContainer category="notice" />
       <Footer />
     </>
   );
