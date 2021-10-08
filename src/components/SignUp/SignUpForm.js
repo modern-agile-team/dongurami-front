@@ -15,7 +15,6 @@ function SignUpForm() {
   const [checkSignUp, setCheckSignUp] = useState('');
   const [emailCheck, setEmailCheck] = useState(false);
   const [majorNum, setMajorNum] = useState('');
-  const [userData, setUserData] = useState();
 
   const UserProfile = () => {
     window.location.href.includes('access_token') && GetUser();
@@ -23,20 +22,17 @@ function SignUpForm() {
       const location = window.location.href.split('=')[1];
       const token = location.split('&')[0];
       console.log('네이버 토큰: ', token);
-      axios('https://openapi.naver.com/v1/nid/me/', {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
+      axios(`http://3.36.72.145:8080/api/naver-login?token=${token}`, {
+        method: 'GET'
       })
-        .then((res) => console.log(res))
-        .catch((err) => console.log('err : ', err));
+        .then((res) => {
+          setNames(res.data.name);
+          setEmail(res.data.email);
+        })
+        .catch((err) => console.log('에러:', err.response));
     }
   };
   useEffect(UserProfile, []);
-
-  console.log('네이버정보:', userData);
 
   const majorCategory = [
     { value: '00', label: '학과 선택' },
