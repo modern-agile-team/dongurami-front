@@ -1,6 +1,7 @@
 import styles from '../../styles/Profile/UserInfo.module.scss';
 import { FaGraduationCap, FaUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const UserInfo = ({ logout, comp, baseImg, userInfo, profile }) => {
   if (comp === '프로필')
@@ -34,7 +35,13 @@ const UserInfo = ({ logout, comp, baseImg, userInfo, profile }) => {
           )}
           {userInfo.id === profile.id ? (
             <div>
-              <Link href="/modifyinfo">개인정보 수정</Link>
+              <Link
+                href={{
+                  pathname: `/modifyinfo/${userInfo.id}`
+                }}
+              >
+                개인정보 수정
+              </Link>
               <span onClick={() => logout()}>로그아웃</span>
             </div>
           ) : null}

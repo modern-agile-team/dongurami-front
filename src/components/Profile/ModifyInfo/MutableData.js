@@ -1,14 +1,14 @@
-import { FaPhoneAlt } from "react-icons/fa";
-import { IoIosMail } from "react-icons/io";
-import styles from "../../../styles/Profile/ModifyInfo.module.scss";
+import { FaPhoneAlt } from 'react-icons/fa';
+import { IoIosMail } from 'react-icons/io';
+import styles from '../../../styles/Profile/ModifyInfo.module.scss';
 
-const MutableData = ({ data, setEmail, setPhoneNumber }) => {
+const MutableData = ({ userInfo, setEmail, setPhoneNumber }) => {
   return (
     <div className={styles.mutable}>
       <div className={styles.email}>
         <IoIosMail />
         <input
-          placeholder={data.profile.email}
+          placeholder={userInfo.email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -17,7 +17,7 @@ const MutableData = ({ data, setEmail, setPhoneNumber }) => {
       <div className={styles.phone}>
         <FaPhoneAlt />
         <input
-          placeholder={data.profile.phoneNumber}
+          placeholder={userInfo.phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
       </div>

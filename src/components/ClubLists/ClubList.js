@@ -4,12 +4,16 @@ import { useRouter } from 'next/router';
 
 const ClubList = ({ img, categories, title, onClick, clubNo }) => {
   const router = useRouter();
+  
   return (
     <div className={styles.container}>
       <img
         src={img}
         alt="동아리"
-        onClick={() => router.push(`/clubhome/${clubNo}`)}
+        onClick={() => router.push({
+    pathname: "/clubhome/club",
+    query: {no: clubNo}
+  })}
       />
       <div>
         <p id={styles.desc}>{title}</p>

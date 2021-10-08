@@ -3,14 +3,16 @@ import ClubInfo from './ClubInfo';
 import Desc from './Desc';
 import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import { getClubInfo, putClubIntroDesc } from 'apis/clubhome';
+import { getInfo, putIntroDesc } from 'apis/clubhome';
 
 const ClubIntro = () => {
   const [info, setInfo] = useState([]);
   const [descUpdate, setDescUpdate] = useState(false);
   const [introDesc, setIntroDesc] = useState('');
   const [categori, setCategori] = useState('');
-  const [leader, setLeader] = useState('');
+  const [leader, setLeader] = useState(0);
+
+  const router = useRouter();
 
   const toLogin = useRouter();
 
@@ -24,11 +26,14 @@ const ClubIntro = () => {
 
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
-    putClubIntroDesc({
-      logoUrl: info[0].logoUrl,
-      fileId: info[0].fileId,
-      introduce: introDesc
-    })
+    putIntroDesc(
+      {
+        logoUrl: info[0].logoUrl,
+        fileId: info[0].fileId,
+        introduce: introDesc
+      },
+      router.query.no
+    )
       .then((res) =>
         res.data
           ? alert('글이 수정되었습니다.')
@@ -41,22 +46,23 @@ const ClubIntro = () => {
 
   // 동아리 정보 불러오기
   const getData = useCallback(async () => {
-    getClubInfo()
+    getInfo(router.query.no)
       .then((res) => {
-        setLeader(res.data.result[0].leader);
+        setLeader(res.data.clientInfo.leader);
         setCategori(res.data.result[0].category);
         setInfo(res.data.result);
         setIntroDesc(res.data.result[0].introduce);
       })
       .catch((err) => {
         alert(err.response.data.msg);
-        toLogin.push('/LoginPage');
+        toLogin.push('/');
       });
-  }, [toLogin]);
+  }, [toLogin, router.query.no]);
 
   useEffect(() => {
+    if (!router.query.no) return;
     getData();
-  }, [getData]);
+  }, [getData, router.query]);
 
   return (
     <div className={styles.container}>

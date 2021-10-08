@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import styles from '../../styles/Board/Promotion/Post.module.scss';
 import PromotionCommentContainer from './Comment/PromotionCommentContainer';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import getToken from 'utils/getToken';
 import axios from 'axios';
 
@@ -33,7 +34,15 @@ const Post = ({ postData, postId, getData, comments }) => {
           <div>홍보게시판</div>
           <div>{title}</div>
           <div>
-            <button>수정하기</button>
+            <Link
+              href={{
+                pathname: `${router.pathname}/${postId}/edit`,
+                query: router.query
+              }}
+              passHref
+            >
+              <button>수정하기</button>
+            </Link>
             <button onClick={onDelete}>삭제하기</button>
           </div>
           <div>

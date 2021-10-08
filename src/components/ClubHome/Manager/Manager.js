@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
-import styles from "../../../styles/Club/Home/Manager/Manager.module.scss";
-import Approve from "./Approve";
-import Members from "./Members";
-import ManagerHeader from "./ManagerHeader";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import styles from '../../../styles/Club/Home/Manager/Manager.module.scss';
+import Approve from './Approve';
+import Members from './Members';
+import ManagerHeader from './ManagerHeader';
 import {
   getMember,
   postApply,
   putApply,
   putAuth,
-  putLeader,
-} from "apis/manager";
+  putLeader
+} from 'apis/manager';
+import { useRouter } from 'next/router';
 
 export const Manager = () => {
   const [members, setMembers] = useState([]);
-  const [leader, setLeader] = useState("");
+  const [leader, setLeader] = useState('');
   const [applicantInfo, setApplicantInfo] = useState([]);
   const [applicantQNA, setApplicantQNA] = useState([]);
   const [mergedApplicantQNA, setMergedApplicantQNA] = useState([]);
@@ -27,9 +28,11 @@ export const Manager = () => {
 
   const refArr = [applyAuthRef, boardAuthRef, changeLeaderRef];
 
+  const router = useRouter();
+
   // 동아리원 정보 GET
-  const getMembersData = async () => {
-    getMember()
+  const getMembersData = useCallback(async () => {
+    getMember(router.query.no)
       .then((res) => {
         setApplicantQNA(res.data.applicant.questionsAnswers);
         setApplicantInfo(res.data.applicant.applicantInfo);
@@ -39,14 +42,17 @@ export const Manager = () => {
           mergeApplicantQNA(res.data.applicant.questionsAnswers)
         );
       })
-      .catch((err) => console.log(err.response.data));
-  };
+      .catch((err) => alert(err.response.data.msg));
+  }, [router.query.no]);
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
-    await postApply({
-      applicant: mergedApplicantInfo[e.target.id].id,
-    })
+    await postApply(
+      {
+        applicant: mergedApplicantInfo[e.target.id].id
+      },
+      router.query.no
+    )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
     await getMembersData();
@@ -54,9 +60,12 @@ export const Manager = () => {
 
   // 가입 거절 PUT
   const onApplyReject = async (e) => {
-    await putApply({
-      applicant: mergedApplicantInfo[e.target.id].id,
-    })
+    await putApply(
+      {
+        applicant: mergedApplicantInfo[e.target.id].id
+      },
+      router.query.no
+    )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
     await getMembersData();
@@ -66,10 +75,13 @@ export const Manager = () => {
   const onLeaderChange = async (memberIndex) => {
     const newLeader = changeLeaderRef.current;
 
-    confirm("회장을 양도하시겠습니까?") &&
-      (await putLeader({
-        newLeader: newLeader[memberIndex].id,
-      })
+    confirm('회장을 양도하시겠습니까?') &&
+      (await putLeader(
+        {
+          newLeader: newLeader[memberIndex].id
+        },
+        router.query.no
+      )
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
 
@@ -85,13 +97,16 @@ export const Manager = () => {
       adminOptions.push({
         id: member.id,
         joinAdminFlag: applyAuth[index],
-        boardAdminFlag: boardAuth[index],
+        boardAdminFlag: boardAuth[index]
       });
     });
 
-    await putAuth({
-      adminOptions: adminOptions,
-    })
+    await putAuth(
+      {
+        adminOptions: adminOptions
+      },
+      router.query.no
+    )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
     await getMembersData();
@@ -122,10 +137,12 @@ export const Manager = () => {
   }, [applicantInfo, mergedApplicantQNA]);
 
   useEffect(() => {
+    if (!router.query.no) return;
     getMembersData();
     onApplyAuthClick();
     onBoardAuth();
-  }, []);
+  }, [getMembersData, router.query]);
+
   return (
     <div className={styles.container}>
       <ManagerHeader />
@@ -163,7 +180,7 @@ const mergeApplicantQNA = (needMergeData) => {
       const obj = {
         id: needMergeData[dataIndex].id,
         questions: [needMergeData[dataIndex].question],
-        answers: [needMergeData[dataIndex].answer],
+        answers: [needMergeData[dataIndex].answer]
       };
       result.push(obj);
     } else {
