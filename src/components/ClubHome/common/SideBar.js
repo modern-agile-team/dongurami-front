@@ -60,8 +60,8 @@ const SideBar = ({ setComp, comp }) => {
   const handleScroll = () => {
     const { pageYOffset } = window;
     const deltaY = pageYOffset - pageY;
-    const hide = pageYOffset !== 0 && deltaY >= 0;
-    setHide(hide);
+    const scrollIsDown = pageYOffset !== 0 && deltaY >= 0;
+    setHide(scrollIsDown);
     setPageY(pageYOffset);
   };
 
@@ -79,6 +79,7 @@ const SideBar = ({ setComp, comp }) => {
         {board.map((el, i) => {
           return (
             <div
+              className={styles.board}
               id={comp === i + 1 ? styles.now : 0}
               onClick={() => {
                 i === 6 ? movePage() : setComp(i + 1);
