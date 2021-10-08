@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 export default function OAuth() {
   const Login = () => {
-    if (typeof naver !== "undefined") {
+    if (typeof naver !== 'undefined') {
       Naver();
     }
   };
@@ -10,11 +10,11 @@ export default function OAuth() {
 
   function Naver() {
     const naverLogin = new naver.LoginWithNaverId({
-      clientId: "x83IzQrhnNOf9S_P1RdE",
-      callbackUrl: "http://localhost:3000/signup",
+      clientId: 'x83IzQrhnNOf9S_P1RdE',
+      callbackUrl: 'http://localhost:3000/signup',
       isPopup: false,
-      loginButton: { color: "white", type: 3, height: 40 },
-      callbackHandle: true,
+      loginButton: { color: 'white', type: 3, height: 40 },
+      callbackHandle: true
     });
     naverLogin.init();
   }
