@@ -42,7 +42,7 @@ export const Manager = () => {
           mergeApplicantQNA(res.data.applicant.questionsAnswers)
         );
       })
-      .catch((err) => console.log(err.response.data));
+      .catch((err) => alert(err.response.data.msg));
   }, [router.query.no]);
 
   // 가입 승인 POST
@@ -137,10 +137,12 @@ export const Manager = () => {
   }, [applicantInfo, mergedApplicantQNA]);
 
   useEffect(() => {
+    if (!router.query.no) return;
     getMembersData();
     onApplyAuthClick();
     onBoardAuth();
-  }, [getMembersData]);
+  }, [getMembersData, router.query]);
+
   return (
     <div className={styles.container}>
       <ManagerHeader />

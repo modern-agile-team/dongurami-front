@@ -113,7 +113,10 @@ const Apply = () => {
     )
       .then((res) => {
         alert(res.data.msg);
-        router.push('/clubhome'); // 가입신청 후 새로고침
+        router.push({
+          pathname: '/clubhome/club',
+          query: { no: router.query.no }
+        }); // 가입신청 후 새로고침
       })
       .catch((err) => alert(err.response.data.msg));
   };
