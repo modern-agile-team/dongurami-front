@@ -1,6 +1,6 @@
 .container {
-  font-size: 1.1vw;
-  margin-left: 4%;
+  font-size: 80%;
+  margin-left: 10%;
   .user {
     display: flex;
     padding-left: 0;
@@ -32,17 +32,31 @@
   color: #3fcdb8;
 }
 
+@media screen and (max-width: 1024px) {
+  .container {
+    ul {
+      font-size: 90%;
+      padding: 0%;
+    }
+    .user {
+      .signUp {
+        width: 8vw;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .container {
+    font-size: 95%;
     .user {
-      margin-top: 245%;
-      margin-left: -112%;
-      font-size: 2.2vw;
+      margin-top: 250%;
+      margin-left: -126%;
       .login {
-        margin-right: 2%;
+        margin-right: 3%;
       }
       .signUp {
-        width: 11vw;
+        width: 10vw;
       }
     }
   }
