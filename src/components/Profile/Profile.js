@@ -11,7 +11,9 @@ function Profile() {
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
   const [token, setToken] = useState(getToken());
-  // const [scrapData, setScrapData] = useState();
+  const [id, setId] = useState('201816035');
+  //get요청때 쓰는 아이디는 사용자 이름 눌렀을때 props로 받을예정
+
   const moveWriteScraps = () => {
     router.push('/profile/writescraps');
   };
@@ -21,7 +23,7 @@ function Profile() {
     console.log(1);
   };
   useEffect(() => {
-    getUserInfo()
+    getUserInfo(id)
       .then((res) => {
         console.log(res);
         setUserInfo(res.data.userInfo);
