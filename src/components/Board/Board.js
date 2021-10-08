@@ -7,7 +7,7 @@ import Pagination from './Pagination';
 import Search from './Search';
 import styles from '../../styles/Board/Board/Board.module.scss';
 
-import { getBoardPosts } from 'redux/reducers/board';
+import { getBoardPosts } from 'redux/slices/board';
 
 function getQuery(router) {
   return {
