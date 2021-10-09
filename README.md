@@ -32,6 +32,9 @@
   <img src= "https://img.shields.io/badge/React-blue?logo=react"/>
   <img src= "https://img.shields.io/badge/Next.js-black?logo=next-dot-js&logoColor=white"/>
   <img src= "https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript"/>
+  <img src="https://img.shields.io/badge/Redux-purple?style=for-the-badge&logo=Redux&logoColor=white">
+
+출처: https://byul91oh.tistory.com/214 [개발하는 감자 [: 개감]]
 </p>
 
 <h3 align="center">  
