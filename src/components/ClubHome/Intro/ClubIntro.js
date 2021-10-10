@@ -61,17 +61,8 @@ const ClubIntro = ({ visitTime }) => {
   useEffect(() => {
     if (!router.query.no) return;
     setIsLoading(true);
-    new Promise((res) => {
-      setTimeout(
-        () => {
-          res();
-        },
-        visitTime === 0 ? 500 : 50
-      );
-    }).then(() => {
-      getData();
-      setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
-    });
+    getData();
+    setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
   }, [getData, router.query]);
 
   return (
