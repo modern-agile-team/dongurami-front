@@ -4,13 +4,15 @@ import Desc from './Desc';
 import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { getInfo, putIntroDesc } from 'apis/clubhome';
+import Skeleton from './Skeleton';
 
-const ClubIntro = () => {
+const ClubIntro = ({ visitTime }) => {
   const [info, setInfo] = useState([]);
   const [descUpdate, setDescUpdate] = useState(false);
   const [introDesc, setIntroDesc] = useState('');
   const [categori, setCategori] = useState('');
   const [leader, setLeader] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
 
@@ -58,28 +60,45 @@ const ClubIntro = () => {
 
   useEffect(() => {
     if (!router.query.no) return;
-    getData();
+    setIsLoading(true);
+    new Promise((res) => {
+      setTimeout(
+        () => {
+          res();
+        },
+        visitTime === 0 ? 500 : 50
+      );
+    }).then(() => {
+      getData();
+      setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
+    });
   }, [getData, router.query]);
 
   return (
     <div className={styles.container}>
-      <ClubInfo
-        clubName={info[0] && info[0].name}
-        logoUrl={info[0] && info[0].logoUrl}
-        fileId={info[0] && info[0].fileId}
-        genderMan={info[0] && info[0].genderMan}
-        genderWomen={info[0] && info[0].genderWomen}
-        categori={categori}
-        leader={leader}
-      />
-      <Desc
-        onDescSubnmit={onDescSubnmit}
-        onDescChange={onDescChange}
-        introDesc={introDesc}
-        onDescUpdate={onDescUpdate}
-        descUpdate={descUpdate}
-        leader={leader}
-      />
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <>
+          <ClubInfo
+            clubName={info[0] && info[0].name}
+            logoUrl={info[0] && info[0].logoUrl}
+            fileId={info[0] && info[0].fileId}
+            genderMan={info[0] && info[0].genderMan}
+            genderWomen={info[0] && info[0].genderWomen}
+            categori={categori}
+            leader={leader}
+          />
+          <Desc
+            onDescSubnmit={onDescSubnmit}
+            onDescChange={onDescChange}
+            introDesc={introDesc}
+            onDescUpdate={onDescUpdate}
+            descUpdate={descUpdate}
+            leader={leader}
+          />
+        </>
+      )}
     </div>
   );
 };
