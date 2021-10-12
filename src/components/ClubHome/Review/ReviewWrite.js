@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Review/ReviewWrite.module.scss";
-import { AiFillStar, AiOutlineStar, AiFillEdit } from "react-icons/ai";
-import { BiRevision } from "react-icons/bi";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Review/ReviewWrite.module.scss';
+import { AiFillStar, AiOutlineStar, AiFillEdit } from 'react-icons/ai';
+import { BiRevision } from 'react-icons/bi';
 const ReviewWrite = ({
   onReviewInput,
   onReviewSubmit,
@@ -10,6 +10,7 @@ const ReviewWrite = ({
   starState,
   isReviewMine,
   onReviewUpdate,
+  inputRef
 }) => {
   return (
     <div className={styles.write}>
@@ -23,7 +24,7 @@ const ReviewWrite = ({
         })}
       </div>
       <div className={styles.comment}>
-        <input onChange={onReviewInput} />
+        <input ref={inputRef} onChange={onReviewInput} />
         {isReviewMine ? (
           <button onClick={onReviewUpdate}>
             <BiRevision size={20} />
