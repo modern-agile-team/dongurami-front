@@ -1,17 +1,16 @@
 .wrap {
   width: 100%;
   background-color: #fff;
-  margin-top: 5%;
   h1 {
-    font-family: "Noto Sans KR", sans-serif;
     font-size: 3vw;
-    font-weight: 200;
+    font-weight: 100;
     padding: 2rem;
     margin-left: 1.5%;
     margin-bottom: 0px;
   }
   .imgs {
-    width: 100%;
+    width: 93%;
+    margin: 0 auto;
     justify-content: space-evenly;
     display: flex;
     margin-top: 2%;
@@ -21,40 +20,34 @@
       display: flex;
       flex-direction: column;
       img {
-        border: 0.35vw solid #f5edb0;
-        width: 280px;
-        height: 280px;
-        // box-shadow: 1px 1px 6px 4px #F5EDB0;
+        border: 0.25vw solid #f5edb0;
       }
       span {
-        font-family: "Noto Sans KR", sans-serif;
-        // font-weight: 200;
+        font-family: 'Noto Sans KR', sans-serif;
         margin-top: 8%;
         text-align: center;
       }
       &:hover {
-        margin-top: -2%;
+        margin-top: -1%;
       }
     }
     .promotion {
       @extend .list;
       img {
-        border: 0.35vw solid #f0bf9a;
-        // box-shadow: 1px 1px 6px 4px #F0BF9A;
+        border: 0.25vw solid #f0bf9a;
       }
     }
     .home {
       @extend .list;
       img {
-        border: 0.35vw solid #c2f2dc;
-        // box-shadow: 1px 1px 6px 4px #C2F2DC;
+        border: 0.25vw solid #c2f2dc;
       }
     }
   }
   img {
-    width: 25vw;
-    height: 25vw;
-    border-radius: 70%;
+    width: 280px;
+    height: 280px;
+    border-radius: 150px;
     overflow: hidden;
   }
 }
@@ -62,21 +55,27 @@
 @media screen and (max-width: 768px) {
   .wrap {
     width: 100%;
-    margin-top: 5%;
+    margin-top: 15%;
     h1 {
       font-size: 3.5vw;
       width: 70%;
       margin: 0%;
     }
+    img {
+      width: 170px;
+      height: 170px;
+    }
     .imgs {
       width: 95%;
       margin-top: 0%;
       gap: 0%;
-      padding-left: 5%;
       .list {
         width: 100%;
+        img {
+          margin: 0 auto;
+        }
         span {
-          font-size: 80%;
+          font-size: 60%;
         }
       }
     }
@@ -93,8 +92,11 @@
       padding-left: 0;
       padding-right: 0;
     }
+    img {
+      width: 95px;
+      height: 95px;
+    }
     .imgs {
-      width: 100%;
       display: flex;
       flex-direction: column;
       padding: 0;
