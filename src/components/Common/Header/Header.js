@@ -48,6 +48,15 @@ function Header() {
     return setToken('');
   };
 
+  //24시간 경과시 기존에 있던 token remove
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      window.location.reload();
+      setToken('');
+    }, 1000 * 60 * 60 * 24);
+    return () => clearInterval(countdown);
+  }, []);
+
   //알람 열람
   const alarmOpen = () => {
     setIsAlarmOpen(!isAlarmOpen);
