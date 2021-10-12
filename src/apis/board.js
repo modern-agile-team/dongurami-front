@@ -5,6 +5,9 @@ export function getPosts({ category, ...params }) {
   if (category === 'clubNotice') {
     return axios.get(`/api/club/board/clubNotice/2?${queryString}`);
   }
+  if (category === 'clubActivity') {
+    return axios.get(`/api/club/board/clubActivity/2?${queryString}`);
+  }
   return axios.get(`/api/board/${category}?${queryString}`);
 }
 
@@ -20,6 +23,9 @@ export function searchPosts({ category, ...params }) {
 export function postPost(category, body) {
   if (category === 'clubNotice') {
     return axios.post(`/api/club/board/clubNotice/2`, { id: 'test1', clubno: 2, ...body });
+  }
+  if (category === 'clubActivity') {
+    return axios.post(`/api/club/board/clubActivity/2`, { id: 'test1', clubno: 2, ...body });
   }
   return axios.post(`/api/board/${category}`, { id: 'test1', clubno: 2, ...body });
 }

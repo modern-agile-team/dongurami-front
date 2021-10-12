@@ -1,63 +1,38 @@
-import axios from "axios";
 import Post from "components/Post/Post";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import styles from 'styles/Club/Home/Activities/ActivityPost.module.scss';
-import getToken from "utils/getToken";
+import { useSelector } from 'react-redux';
+import api from 'apis/post';
+import { useDispatch } from 'react-redux';
+import { getPost } from 'redux/slices/post';
+import { getBoardPosts } from 'redux/slices/board';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-class Api {
-  constructor(no, setPost, closeModal, updatePosts) {
-    this.no = no;
-    this.setPost = setPost;
-    this.token = getToken();
-    this.closeModal = closeModal
-    this.updatePosts = updatePosts
-  }
-
-  async updatePost() {
-    const post = await this.getPost();
-    this.setPost(post);
-  }
-
-  async getPost() {
-    const response = await axios.get(`http://3.36.72.145:8080/api/club/board/clubActivity/1/${this.no}`, {
-      headers: {
-        'x-auth-token': this.token
-      }
-    });
-    return response.data;
-  }
-  async deletePost() {
-    await axios.delete(`http://3.36.72.145:8080/api/club/board/clubActivity/1/${this.no}`, {
-      headers: {
-        'x-auth-token': this.token
-      }
-    });
-    this.closeModal();
-    this.updatePosts();
-  }
-}
-
-function ActivityPost({ no, closeModal, updatePosts }) {
-  const [post, setPost] = useState();
-  const api = useMemo(() => new Api(no, setPost, closeModal, updatePosts), [no, closeModal, updatePosts]);
+function ActivityPost({ pid, closeModal }) {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const post = useSelector((state) => state.post);
 
   useEffect(() => {
-    api.updatePost();
-  }, [api]);
+    dispatch(getPost({ category: 'clubActivity', pid }))
+  }, [pid, dispatch]);
 
-  if (!post) return null;
+  const onDelete = async () => {
+    await api.deletePost('clubActivity', post.no);
+    dispatch(getBoardPosts({ category: 'clubActivity', sort: 'inDate', order: 'DESC' }));
+    closeModal();
+  };
+
+  if (!post?.description) return null;
 
   return (
     <div className={styles.container}>
-      <Post post={post} api={api} buttons={(
-        <>
-          <Link href={`/clubhome/edit-activity?no=${no}`} passHref>
-            <button>수정하기</button>
-          </Link>
-          <button onClick={() => api.deletePost()}>삭제하기</button>
-        </>
-      )}></Post>
+      <Post
+        category="clubActivity"
+        post={post}
+        optionalEditHref={{ pathname: `${router.pathname}/edit-activity`, query: { pid, ...router.query } }}
+        optionalOnDelete={onDelete} />
     </div>
   );
 }

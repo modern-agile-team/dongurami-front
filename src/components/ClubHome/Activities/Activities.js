@@ -6,40 +6,30 @@ import Modal from "components/Common/Modal";
 import ActivityPost from "./ActivityPost";
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import axios from "axios";
-import getToken from "utils/getToken";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getBoardPosts } from 'redux/slices/board';
 
 const Activities = () => {
-  const [isModalOpened, setIsModalOpened] = useState(false);
-  const [selectedID, setSelectedID] = useState();
-  const [posts, setPosts] = useState([]);
   const router = useRouter();
-
-  const updatePosts = async () => {
-    const token = getToken();
-    const response = await axios.get(
-      "http://3.36.72.145:8080/api/club/board/clubActivity/1/inDate/desc",
-      {
-        headers: {
-          "x-auth-token": token
-        }
-      }
-    );
-    setPosts(response.data.boards);
-  };
+  const dispatch = useDispatch();
+  const [selectedID, setSelectedID] = useState();
+  const posts = useSelector((state) => state.board.posts);
 
   useEffect(() => {
-    updatePosts();
-  }, []);
+    dispatch(getBoardPosts({ category: 'clubActivity', sort: 'inDate', order: 'DESC' }));
+  }, [dispatch]);
 
   const onClick = (id) => {
     setSelectedID(id)
-    setIsModalOpened(true);
   };
   const closeModal = () => {
-    setIsModalOpened(false);
     setSelectedID();
   }
+
+  const isModalOpened = selectedID !== undefined;
+
+  if (!posts) return null;
 
   return (
     <div className={styles.container}>
@@ -47,7 +37,7 @@ const Activities = () => {
         <p>우아한 애자일의 활동</p>
       </div>
       <div id={styles.add}>
-        <Link href={`${router.pathname}/write-activity`} passHref><IoIosAddCircleOutline /></Link>
+        <Link href={{ pathname: `${router.pathname}/write-activity`, query: router.query }} passHref><IoIosAddCircleOutline /></Link>
       </div>
       <div className={styles.activities}>
         {posts.map((el, i) => {
@@ -64,7 +54,7 @@ const Activities = () => {
       </div>
       {(isModalOpened) && (
         <Modal show={isModalOpened} onClose={closeModal}>
-          <ActivityPost no={selectedID} closeModal={closeModal} updatePosts={updatePosts} />
+          <ActivityPost pid={selectedID} closeModal={closeModal} />
         </Modal>
       )}
     </div>
