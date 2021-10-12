@@ -7,6 +7,7 @@ import Modal from './Modal';
 import Promotion from './Promotion';
 import Link from 'next/link';
 import axios from 'axios';
+import { getData } from 'apis/promotion';
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -19,45 +20,34 @@ const PromotionContainer = () => {
   let preitem = 0;
   let item = 8;
 
-  const getData = async () => {
+  const getDatas = async () => {
     try {
-      await axios
-        .get(`http://3.36.72.145:8080/api/board/promotion/${searchItem}`)
-        .then((response) => {
-          const result = response.data.boards.slice(preitem, item);
+      await getData(searchItem).then((response) => {
+        const result = response.data.boards.slice(preitem, item);
 
-          if (result.length) {
-            const extraData = boarddata.concat(result);
-            setBoardData((prev) => prev.concat(extraData));
-          }
-        });
+        if (result.length) {
+          const extraData = boarddata.concat(result);
+          setBoardData((prev) => prev.concat(extraData));
+        }
+      });
     } catch (e) {
       console.log(e);
     }
   };
 
-  const firstGetData = async () => {
+  const firstGetDatas = async () => {
     try {
-      await axios
-        .get(`http://3.36.72.145:8080/api/board/promotion/${searchItem}`)
-        .then((response) => {
-          preitem = 0;
-          item = 8;
-          console.log(response.data);
-          const result = response.data.boards.slice(preitem, item);
-          setBoardData(result);
-        });
+      await getData(searchItem).then((response) => {
+        preitem = 0;
+        item = 8;
+        console.log(response);
+
+        const result = response.data.boards.slice(preitem, item);
+        setBoardData(result);
+      });
     } catch (e) {
       console.log(e);
     }
-  };
-
-  const api = () => {
-    axios
-      .get(
-        `http://3.36.72.145:8080/api/board/promotion/${searchItem}/inDate/DESC`
-      )
-      .then((res) => console.log(res));
   };
 
   const infiniteScroll = () => {
@@ -74,12 +64,12 @@ const PromotionContainer = () => {
     if (scrollTop + clientHeight >= scrollHeight) {
       preitem = item;
       item += 8;
-      getData();
+      getDatas();
     }
   };
 
   useEffect(() => {
-    firstGetData();
+    firstGetDatas();
     window.addEventListener('scroll', infiniteScroll);
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
