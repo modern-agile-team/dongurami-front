@@ -6,7 +6,7 @@ function write() {
   return (
     <>
       <Header />
-      <Write />
+      <Write category="clubNotice" />
       <Footer />
     </>
   );

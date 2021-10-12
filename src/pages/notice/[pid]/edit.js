@@ -27,19 +27,7 @@ class Api {
 }
 
 function Write() {
-  const router = useRouter();
-  const [pid, setPid] = useState();
-
-  const api = new Api(pid);
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    setPid(router.query.pid);
-  }, [router]);
-
-  if (!pid) return null;
-
-  return <Edit category="notice" api={api} />;
+  return <Edit category="notice" />;
 }
 
 export default Write;

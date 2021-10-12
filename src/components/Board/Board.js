@@ -6,7 +6,7 @@ import Table from './Table';
 import Pagination from './Pagination';
 import Search from './Search';
 import styles from '../../styles/Board/Board/Board.module.scss';
-import { getBoardPosts, searchBoardPosts } from 'redux/slices/board';
+import { getBoardPosts } from 'redux/slices/board';
 
 function getQuery(router) {
   return {
@@ -27,12 +27,9 @@ function Board({ category }) {
 
   useEffect(() => {
     if (!sort || !order) return;
-    if (type && keyword) {
-      dispatch(searchBoardPosts({ category, sort, order, type, keyword }));
-    } else {
-      dispatch(getBoardPosts({ category, sort, order }));
-    }
-  }, [category, sort, order, type, keyword, dispatch]);
+    if (!router.isReady) return;
+    dispatch(getBoardPosts({ category, sort, order, type, keyword }))
+  }, [router, category, sort, order, type, keyword, dispatch]);
 
   const setPageToUrl = (nextPage) => {
     router.push({
