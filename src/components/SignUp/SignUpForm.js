@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import styles from '../../styles/User/SignUp/SignUpForm.module.scss';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import { postSignUp } from 'apis/user';
+import { getNaverOauth } from 'apis/user';
 
 function SignUpForm() {
   const [id, setId] = useState('');
@@ -16,20 +16,17 @@ function SignUpForm() {
   const [emailCheck, setEmailCheck] = useState(false);
   const [majorNum, setMajorNum] = useState('');
 
+  //네이버 oAuth의 프로필 정보 가져오기
   const UserProfile = () => {
     window.location.href.includes('access_token') && GetUser();
     function GetUser() {
-      const location = window.location.href.split('=')[1];
-      const token = location.split('&')[0];
-      console.log('네이버 토큰: ', token);
-      axios(`http://3.36.72.145:8080/api/naver-login?token=${token}`, {
-        method: 'GET'
-      })
+      const token = window.location.href.split('=')[1].split('&')[0];
+      getNaverOauth(token)
         .then((res) => {
           setNames(res.data.name);
           setEmail(res.data.email);
         })
-        .catch((err) => console.log('에러:', err.response));
+        .catch((err) => alert(err.response.data.msg));
     }
   };
   useEffect(UserProfile, []);

@@ -10,7 +10,6 @@ function Profile() {
   const [comp, setComp] = useState('프로필');
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
-  const [token, setToken] = useState(getToken());
   const [id, setId] = useState('201816035');
   //get요청때 쓰는 아이디는 사용자 이름 눌렀을때 props로 받을예정
 

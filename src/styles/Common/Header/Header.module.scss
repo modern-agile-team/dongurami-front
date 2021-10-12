@@ -17,7 +17,7 @@
     width: 81px;
     height: 36px;
     object-fit: cover;
-    margin-right: 43%;
+    margin-right: 41vw;
     margin-left: 7%;
     cursor: pointer;
   }
@@ -26,7 +26,6 @@
   }
   .topMenu {
     width: 50%;
-    margin-left: 2.8%;
     display: flex;
   }
   .menus {
@@ -68,6 +67,19 @@
   align-items: center;
 }
 
+@media screen and (max-width: 1024px) {
+  .myHeader {
+    img {
+      margin-right: 35vw;
+    }
+  }
+  .topMenu {
+    .menus {
+      width: 20vw;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .myHeader {
     flex-direction: column;
@@ -83,7 +95,7 @@
     .topMenu {
       width: 60%;
       margin: 0%;
-      margin-left: 106%;
+      margin-left: 105%;
     }
     .menus {
       cursor: default;
@@ -92,7 +104,7 @@
       height: 100%;
       flex-direction: column;
       margin: 0%;
-      margin-top: 120%;
+      margin-top: 110%;
       margin-bottom: 60%;
       li {
         width: 70%;

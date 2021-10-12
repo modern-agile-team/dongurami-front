@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import api from 'apis/post';
 import styles from '../../../styles/Common/Comment/Comment.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPost } from 'redux/slices/post';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
 function setEndOfContenteditable(contentEditableElement) {
@@ -13,7 +16,9 @@ function setEndOfContenteditable(contentEditableElement) {
   selection.addRange(range); //make the range you have just created the visible selection
 }
 
-function Comment({ comment, setAddReplyID, api, updatePost }) {
+function Comment({ comment, parentCommentID, setParentCommentID }) {
+  const dispatch = useDispatch();
+  const post = useSelector((state) => state.post);
   const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
 
@@ -24,15 +29,15 @@ function Comment({ comment, setAddReplyID, api, updatePost }) {
 
   const onEdit = async () => {
     if (isContentEditable) {
-      await api.putComment(descriptionDiv.current.textContent, comment.no, comment.groupNo);
-      updatePost();
+      await api.putComment({ category: post.category, pid: post.no, commentID: comment.no, description: descriptionDiv.current.textContent, parentCommentID });
+      dispatch(getPost());
     }
     setIsContentEditable(!isContentEditable);
     setEndOfContenteditable(descriptionDiv.current);
   }
   const onDelete = async () => {
-    await api.deleteComment(comment.no, comment.groupNo);
-    updatePost();
+    await api.deleteComment({ category: post.category, pid: post.no, commentID: comment.no, parentCommentID });
+    dispatch(getPost());
   }
 
 
@@ -52,7 +57,7 @@ function Comment({ comment, setAddReplyID, api, updatePost }) {
         <div>
           <p>{comment.inDate}</p>
           {(comment.no === comment.groupNo) && (
-            <p onClick={() => { setAddReplyID(comment.no); }}>답글 쓰기</p>
+            <p onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
           )}
         </div>
       </div>

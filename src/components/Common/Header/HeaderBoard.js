@@ -2,7 +2,6 @@ import React from 'react';
 import styles from '../../../styles/Common/Header/HeaderBoard.module.scss';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { now } from 'moment';
 
 export const HeaderBoard = () => {
   const [nowPath, setNowPath] = useState('');

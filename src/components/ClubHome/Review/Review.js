@@ -13,6 +13,7 @@ const Review = () => {
   const [reviewList, setReviewList] = useState([]); // 후기 리스트
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
+  const [studentId, setStudentId] = useState('');
 
   const router = useRouter();
 
@@ -25,7 +26,7 @@ const Review = () => {
       }, 0) / reviewList.length;
 
   // 내 후기와 내 후기가 아닌 것들
-  const reviewMine = reviewList.filter((el) => el.studentId === '201708051');
+  const reviewMine = reviewList.filter((el) => el.studentId === studentId);
   const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
 
   // 내 리뷰 번호
@@ -35,6 +36,7 @@ const Review = () => {
   const getReviewData = useCallback(() => {
     getReview(router.query.no)
       .then((res) => {
+        setStudentId(res.data.studentId);
         setReviewList(res.data.reviewList);
       })
       .catch((err) => console.log(err.response.data.msg));
