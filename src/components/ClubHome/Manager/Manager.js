@@ -4,6 +4,7 @@ import Approve from './Approve';
 import Members from './Members';
 import ManagerHeader from './ManagerHeader';
 import {
+  deleteMember,
   getMember,
   postApply,
   putApply,
@@ -42,8 +43,22 @@ export const Manager = () => {
           processQuesData(res.data.applicant.questionsAnswers)
         );
       })
-      .catch((err) => alert(err.response.data.msg));
-  }, [router.query.no]);
+      .catch((err) => {
+        switch (err.response.status) {
+          case 401:
+            alert('로그인 후 이용해주세요');
+            router.push('/LoginPage');
+            break;
+          case 404:
+            alert('존재하지 않는 동아리입니다');
+            router.push('/');
+            break;
+          default:
+            alert('알 수 없는 오류입니다 개발자에게 문의해주세요');
+            router.push('/');
+        }
+      });
+  }, [router]);
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
@@ -69,6 +84,7 @@ export const Manager = () => {
       .then((res) => alert(res.data.msg))
       .catch((err) => console.log(err.response.data.msg));
     await getMembersData();
+    if (applicantInfo.length === 0) router.reload();
   };
 
   // 회장 양도 PUT
@@ -135,6 +151,18 @@ export const Manager = () => {
     });
   };
 
+  const exileMember = async (index) => {
+    const studentID = changeLeaderRef.current[index].id;
+    await deleteMember(
+      {
+        studentId: studentID
+      },
+      router.query.no
+    )
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err.response));
+  };
+
   useEffect(() => {
     if (applicantInfo.length > 0 && mergedApplicantQNA.length > 0) {
       setMergedApplicantInfo(
@@ -161,6 +189,7 @@ export const Manager = () => {
         onBoardAuth={onBoardAuth}
         changeMembersAuth={changeMembersAuth}
         refArr={refArr}
+        exileMember={exileMember}
       />
       <Approve
         onApplyAccept={onApplyAccept}

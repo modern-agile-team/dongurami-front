@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Manager/Manager.module.scss";
-import MembersList from "./MembersList";
-import MembersPreface from "./MembersPreface";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Manager/Manager.module.scss';
+import MembersList from './MembersList';
+import MembersPreface from './MembersPreface';
 export const Members = ({
   members,
   leader,
@@ -10,6 +10,7 @@ export const Members = ({
   onBoardAuth,
   refArr,
   changeMembersAuth,
+  exileMember
 }) => {
   return (
     <div>
@@ -24,7 +25,7 @@ export const Members = ({
               member.name,
               member.id,
               member.joinAdminFlag,
-              member.boardAdminFlag,
+              member.boardAdminFlag
             ]}
             leader={leader}
             onLeaderChange={() => onLeaderChange(index)}
@@ -33,6 +34,7 @@ export const Members = ({
             boardAuth={(element) => (refArr[1].current[index] = element)}
             applyAuth={(element) => (refArr[0].current[index] = element)}
             changeLeader={(element) => (refArr[2].current[index] = element)}
+            exileMember={() => exileMember(index)}
           />
         );
       })}
