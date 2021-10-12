@@ -139,7 +139,7 @@ const Review = () => {
 
   return (
     <div className={styles.container}>
-      <ReviewHeader reviewAvg={reviewAvg} />
+      <ReviewHeader reviewAvg={reviewAvg} clubName={router.query.name} />
       <ReviewWrite
         onReviewUpdate={onReviewUpdate}
         isReviewMine={reviewMine.length}
