@@ -9,7 +9,6 @@ const ClubInfo = ({
   genderWomen,
   leader
 }) => {
-  console.log(leader);
   return (
     <div className={styles.container}>
       <div className={styles.desc}>
