@@ -3,13 +3,15 @@ import { FaCamera } from 'react-icons/fa';
 
 const ModifyHeader = ({ userInfo, setComp, baseImg }) => {
   return (
-    <div className={styles.divImg}>
+    <div className={styles.header}>
       <img
         className={styles.profileImg}
         src={userInfo.profileImageUrl ?? baseImg}
       />
-      <FaCamera onClick={() => setComp('이미지수정')} />
-      <hr />
+      <FaCamera
+        className={styles.imgBtn}
+        onClick={() => setComp('이미지수정')}
+      />
     </div>
   );
 };

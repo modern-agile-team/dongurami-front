@@ -1,4 +1,31 @@
-.profileImg {
-  width: 5vh;
-  height: 5vh;
+.wrap {
+  margin: 10% auto;
+  // padding: 3% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  border: 1px solid;
+
+  .header {
+    width: 30%;
+    .profileImg {
+      border-radius: 50%;
+      z-index: 1;
+      width: 17vw;
+      height: 17vw;
+    }
+    .imgBtn {
+      // border: 1px solid;
+      // border-radius: 50%;
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      z-index: 2;
+      cursor: pointer;
+      &:hover {
+        color: #90e2d6;
+      }
+    }
+  }
 }
