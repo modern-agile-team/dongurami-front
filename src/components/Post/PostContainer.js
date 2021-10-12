@@ -1,19 +1,14 @@
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Post from 'components/Post/Post'
-import CommentContainer from "components/Common/Comment/CommentContainer";
-import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPost } from 'redux/slices/post';
 
-function PostContainer({ category, api }) {
+function PostContainer({ category }) {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const post = useSelector((state) => state.post)
   const [pid, setPid] = useState();
-  const [post, setPost] = useState();
-
-  const updatePost = useCallback(() => {
-    api.getPost().then((response) => {
-      setPost(response);
-    });
-  }, [api]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -21,30 +16,13 @@ function PostContainer({ category, api }) {
   }, [router]);
   useEffect(() => {
     if (!pid) return;
-    updatePost();
-  }, [pid, updatePost]);
+    dispatch(getPost({ category, pid }));
+  }, [category, pid, dispatch]);
 
-  const onDelete = () => {
-    (async () => {
-      await api.deletePost();
-      router.back();
-    })();
-  }
-
-  if (!post) return null;
-
+  if (!post?.description) return null;
 
   return (
-    <Post category={category} post={post} onDelete={onDelete} buttons={(
-      <>
-        <Link href={{ pathname: `${router.pathname}/edit`, query: router.query }} passHref>
-          <button>수정하기</button>
-        </Link>
-        <button onClick={onDelete}>삭제하기</button>
-      </>
-    )}>
-      <CommentContainer comments={post.comments} api={api} updatePost={updatePost} />
-    </Post>
+    <Post category={category} post={post} />
   );
 }
 

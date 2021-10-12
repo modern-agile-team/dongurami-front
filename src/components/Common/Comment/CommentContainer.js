@@ -1,11 +1,11 @@
-import style from "../../../styles/Common/Comment/CommentContainer.module.scss";
-import Comment from "./Comment";
-import AddComment from "./AddComment";
-import ReplyContainer from "./ReplyContainer";
-import React, { useState } from "react";
+import style from '../../../styles/Common/Comment/CommentContainer.module.scss';
+import Comment from './Comment';
+import AddComment from './AddComment';
+import ReplyContainer from './ReplyContainer';
+import React, { useState } from 'react';
 
-function CommentContainer({ comments, api, updatePost }) {
-  const [addReplyID, setAddReplyID] = useState();
+function CommentContainer({ comments }) {
+  const [parentCommentID, setParentCommentID] = useState();
 
   return (
     <>
@@ -16,28 +16,19 @@ function CommentContainer({ comments, api, updatePost }) {
           <React.Fragment key={comment.no}>
             {comment.depth ? (
               <ReplyContainer>
-                <Comment comment={comment} api={api} updatePost={updatePost} />
+                <Comment comment={comment} parentCommentID={comment.groupNo} />
               </ReplyContainer>
             ) : (
-              <Comment
-                comment={comment}
-                setAddReplyID={setAddReplyID}
-                api={api}
-                updatePost={updatePost}
-              />
+              <Comment comment={comment} setParentCommentID={setParentCommentID} />
             )}
-            {addReplyID === comment.no && (
+            {parentCommentID === comment.no && (
               <ReplyContainer>
-                <AddComment
-                  parentCommentID={comment.groupNo}
-                  api={api}
-                  updatePost={updatePost}
-                />
+                <AddComment parentCommentID={parentCommentID} />
               </ReplyContainer>
             )}
           </React.Fragment>
         ))}
-        <AddComment api={api} updatePost={updatePost} />
+        <AddComment />
       </div>
     </>
   );

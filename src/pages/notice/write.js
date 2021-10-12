@@ -28,7 +28,7 @@ function write() {
   return (
     <>
       <Header />
-      <Write category="notice" Api={Api} />
+      <Write category="notice" />
     </>
   );
 }
