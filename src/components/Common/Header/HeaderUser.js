@@ -31,9 +31,9 @@ export const HeaderUser = () => {
         </li>
         <li
           className={styles.signUp}
-          id={nowPath === '/signup' ? styles.nowSign : undefined}
+          id={nowPath === '/selectSignUp' ? styles.nowSign : undefined}
           onClick={() => {
-            router.push('/signup');
+            router.push('/selectSignUp');
           }}
         >
           회원가입

@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import styles from '../../styles/User/Login/Login.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import OAuth from './OAuth';
 import { postLogin } from 'apis/user';
 
 export const Login = () => {
@@ -35,6 +34,10 @@ export const Login = () => {
       })
       .catch((err) => alert(err.response.data.msg));
   };
+
+  useEffect(() => {
+    console.log(window.naver);
+  }, []);
 
   return (
     <div className={styles.wrap}>
@@ -71,9 +74,10 @@ export const Login = () => {
           <button className={styles.loginBtn} onClick={onSubmit}>
             로그인
           </button>
-          <div className={styles.naverLogin}>
-            <OAuth />
-          </div>
+          <br />
+          <Link href="/selectSignUp" passHref>
+            <button className={styles.signupBtn}>회원가입</button>
+          </Link>
         </div>
       </div>
     </div>
