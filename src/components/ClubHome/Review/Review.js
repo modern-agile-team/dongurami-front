@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from '../../../styles/Club/Home/Review/Review.module.scss';
 import ReviewFilter from './ReviewFilter';
 import ReviewHeader from './ReviewHeader';
@@ -16,6 +16,8 @@ const Review = () => {
   const [studentId, setStudentId] = useState('');
 
   const router = useRouter();
+
+  const inputRef = useRef();
 
   // 별점 평균
   const reviewAvg =
@@ -39,22 +41,27 @@ const Review = () => {
         setStudentId(res.data.studentId);
         setReviewList(res.data.reviewList);
       })
-      .catch((err) => console.log(err.response.data.msg));
+      .catch((err) => alert(err.response.data.msg));
   }, [router.query.no]);
 
   // 후기 작성
   const onReviewSubmit = async () => {
-    await postReview(
-      {
-        description: reviewInput,
-        score: reviewRate
-      },
-      router.query.no
-    )
-      .then((res) => alert(res.data.msg))
-      .catch((err) => alert(err.response.data.msg));
-
-    getReviewData();
+    if (reviewRate === 0) alert('별점을 입력해주세요');
+    else if (reviewInput === '') alert('후기를 입력해주세요');
+    else {
+      await postReview(
+        {
+          description: reviewInput,
+          score: reviewRate
+        },
+        router.query.no
+      )
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err.response.data.msg));
+      getReviewData();
+      onStarHandleFalse(-1);
+      inputRef.current.value = '';
+    }
   };
 
   // 내 후기 삭제
@@ -63,21 +70,29 @@ const Review = () => {
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
     getReviewData();
+    onStarHandleFalse(-1);
+    inputRef.current.value = '';
   };
 
   // 내 후기 수정
   const onReviewUpdate = async () => {
-    await putReview(
-      {
-        description: reviewInput,
-        score: reviewRate
-      },
-      myReviewNum,
-      router.query.no
-    )
-      .then((res) => alert(res.data.msg))
-      .catch((err) => alert(err.response.data.msg));
-    getReviewData();
+    if (reviewRate === 0) alert('별점을 입력해주세요');
+    else if (reviewInput === '') alert('후기를 입력해주세요');
+    else {
+      await putReview(
+        {
+          description: reviewInput,
+          score: reviewRate
+        },
+        myReviewNum,
+        router.query.no
+      )
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err.response.data.msg));
+      getReviewData();
+      onStarHandleFalse(-1);
+      inputRef.current.value = '';
+    }
   };
 
   // 별점 비우기
@@ -133,6 +148,7 @@ const Review = () => {
         onStarHandleTrue={onStarHandleTrue}
         onReviewInput={onReviewInput}
         onReviewSubmit={onReviewSubmit}
+        inputRef={inputRef}
       />
       <ReviewFilter onFilterChange={onFilterChange} />
       {reviewMine.length ? (
