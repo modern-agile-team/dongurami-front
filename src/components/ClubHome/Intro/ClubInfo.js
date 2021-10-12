@@ -1,20 +1,15 @@
+import { useRouter } from 'next/router';
 import styles from '../../../styles/Club/Home/Intro/ClubInfo.module.scss';
 import LogoUpdate from './LogoUpdate';
 
-const ClubInfo = ({
-  clubName,
-  categori,
-  fileId,
-  genderMan,
-  genderWomen,
-  leader
-}) => {
-  console.log(leader);
+const ClubInfo = ({ categori, fileId, genderMan, genderWomen, leader }) => {
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={styles.desc}>
         <div className={styles.thumbnail}>
-          <h1>{clubName}</h1>
+          <h1>{router.query.name}</h1>
         </div>
         <div className={styles.categori}>
           <p>{categori} 동아리</p>
@@ -34,6 +29,10 @@ const ClubInfo = ({
       </div>
     </div>
   );
+};
+
+export const getClubName = (data) => {
+  return data;
 };
 
 export default ClubInfo;

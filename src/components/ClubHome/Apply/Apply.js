@@ -162,7 +162,7 @@ const Apply = () => {
 
   return (
     <div className={styles.container}>
-      <ApplyHeader />
+      <ApplyHeader clubName={router.query.name} />
       <ApplyQuestions onUserInfoChange={onUserInfoChange} userInfo={userInfo} />
       <Additional
         onAnswerInputChange={onAnswerInputChange}

@@ -1,10 +1,10 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Apply/ApplyHeader.module.scss";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Apply/ApplyHeader.module.scss';
 
-const ApplyHeader = () => {
+const ApplyHeader = ({ clubName }) => {
   return (
     <div className={styles.header}>
-      <h2>우아한 애자일 지원</h2>
+      <h2>{clubName}</h2>
     </div>
   );
 };

@@ -50,6 +50,7 @@ const ClubListContainer = () => {
                 categories={el.category}
                 key={el.no}
                 clubNo={el.no}
+                clubName={el.name}
               />
             );
           })}

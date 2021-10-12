@@ -4,17 +4,17 @@ import Desc from './Desc';
 import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { getInfo, putIntroDesc } from 'apis/clubhome';
+import Skeleton from './Skeleton';
 
-const ClubIntro = () => {
+const ClubIntro = ({ visitTime }) => {
   const [info, setInfo] = useState([]);
   const [descUpdate, setDescUpdate] = useState(false);
   const [introDesc, setIntroDesc] = useState('');
   const [categori, setCategori] = useState('');
   const [leader, setLeader] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
-
-  const toLogin = useRouter();
 
   const onDescUpdate = () => {
     setDescUpdate(!descUpdate);
@@ -54,35 +54,54 @@ const ClubIntro = () => {
         setIntroDesc(res.data.result[0].introduce);
       })
       .catch((err) => {
-        alert(err.response.data.msg);
-        toLogin.push('/');
+        switch (err.response.status) {
+          case 401:
+            alert('로그인 후 이용해주세요');
+            router.push('/LoginPage');
+            break;
+          case 404:
+            alert('존재하지 않는 동아리입니다');
+            router.push('/');
+            break;
+          default:
+            alert('알 수 없는 오류입니다 개발자에게 문의해주세요');
+            router.push('/');
+        }
       });
-  }, [toLogin, router.query.no]);
+  }, [router]);
 
   useEffect(() => {
     if (!router.query.no) return;
+    setIsLoading(true);
     getData();
-  }, [getData, router.query]);
+    setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
+  }, [getData, router.query.no, visitTime]);
 
   return (
     <div className={styles.container}>
-      <ClubInfo
-        clubName={info[0] && info[0].name}
-        logoUrl={info[0] && info[0].logoUrl}
-        fileId={info[0] && info[0].fileId}
-        genderMan={info[0] && info[0].genderMan}
-        genderWomen={info[0] && info[0].genderWomen}
-        categori={categori}
-        leader={leader}
-      />
-      <Desc
-        onDescSubnmit={onDescSubnmit}
-        onDescChange={onDescChange}
-        introDesc={introDesc}
-        onDescUpdate={onDescUpdate}
-        descUpdate={descUpdate}
-        leader={leader}
-      />
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <>
+          <ClubInfo
+            clubName={info[0] && info[0].name}
+            logoUrl={info[0] && info[0].logoUrl}
+            fileId={info[0] && info[0].fileId}
+            genderMan={info[0] && info[0].genderMan}
+            genderWomen={info[0] && info[0].genderWomen}
+            categori={categori}
+            leader={leader}
+          />
+          <Desc
+            onDescSubnmit={onDescSubnmit}
+            onDescChange={onDescChange}
+            introDesc={introDesc}
+            onDescUpdate={onDescUpdate}
+            descUpdate={descUpdate}
+            leader={leader}
+          />
+        </>
+      )}
     </div>
   );
 };

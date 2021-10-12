@@ -1,6 +1,21 @@
 import styles from '../../../styles/Club/Home/Intro/Desc.module.scss';
 import { IoPencil } from 'react-icons/io5';
 
+const Button = ({ descUpdate, onDescSubnmit, onDescUpdate }) => {
+  return (
+    <>
+      {descUpdate ? (
+        <button onClick={onDescSubnmit}>Finish</button>
+      ) : (
+        <button onClick={onDescUpdate}>
+          <IoPencil />
+          Edit
+        </button>
+      )}
+    </>
+  );
+};
+
 const Desc = ({
   onDescChange,
   introDesc,
@@ -21,14 +36,11 @@ const Desc = ({
       </div>
       {leader === 1 ? (
         <div>
-          {descUpdate ? (
-            <button onClick={onDescSubnmit}>Finish</button>
-          ) : (
-            <button onClick={onDescUpdate}>
-              <IoPencil />
-              Edit
-            </button>
-          )}
+          <Button
+            descUpdate={descUpdate}
+            onDescSubnmit={onDescSubnmit}
+            onDescUpdate={onDescUpdate}
+          />
         </div>
       ) : (
         <></>

@@ -1,12 +1,12 @@
-import React from "react";
-import { AiFillStar } from "react-icons/ai";
-import styles from "../../../styles/Club/Home/Review/ReviewHeader.module.scss";
+import React from 'react';
+import { AiFillStar } from 'react-icons/ai';
+import styles from '../../../styles/Club/Home/Review/ReviewHeader.module.scss';
 
-const ReviewHeader = ({ reviewAvg }) => {
+const ReviewHeader = ({ reviewAvg, clubName }) => {
   return (
     <div className={styles.header}>
       <div>
-        <span>우아한 애자일 후기</span>
+        <span>{clubName}</span>
       </div>
       <div className={styles.star}>
         <AiFillStar />

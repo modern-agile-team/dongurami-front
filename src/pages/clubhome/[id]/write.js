@@ -1,15 +1,15 @@
 import Footer from "components/Common/Footer";
 import Header from "components/Common/Header/Header";
-import PostContainer from "components/Post/PostContainer";
+import Write from "components/Write/Write";
 
-function NoticePost() {
+function write() {
   return (
     <>
       <Header />
-      <PostContainer category="notice" />
+      <Write />
       <Footer />
     </>
   );
 }
 
-export default NoticePost;
+export default write;
