@@ -43,6 +43,7 @@ const Modal = ({ setOpenModal, postId }) => {
       await axios
         .get(`http://3.36.72.145:8080/api/board/promotion/${postId}`)
         .then((res) => {
+          console.log(res);
           if (res.data.success) {
             setPostData(res.data.board);
             setComments(res.data.comments);

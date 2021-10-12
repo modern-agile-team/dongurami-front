@@ -3,7 +3,7 @@ import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
 import styles from '../../styles/Club/Lists/ClubLists.module.scss';
 import ClubList from './ClubList';
-import axios from 'axios';
+import { getDatas } from 'apis/clublist';
 
 const ClubListContainer = () => {
   const [clubData, setClubData] = useState([]);
@@ -24,9 +24,7 @@ const ClubListContainer = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(
-          'http://3.36.72.145:8080/api/club/list'
-        );
+        const response = await getDatas();
         setClubData(response.data.result);
         setOriginData(response.data.result);
       } catch (e) {

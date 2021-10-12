@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import styles from "../../styles/Board/Promotion/PromotionContainer.module.scss";
-import Header from "../Common/Header/Header";
-import TypeSearch from "./TypeSearch";
-import { BsPencil } from "react-icons/bs";
-import Modal from "./Modal";
-import Promotion from "./Promotion";
-import Link from "next/link";
-import axios from "axios";
+import { useEffect, useState } from 'react';
+import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
+import Header from '../Common/Header/Header';
+import TypeSearch from './TypeSearch';
+import { BsPencil } from 'react-icons/bs';
+import Modal from './Modal';
+import Promotion from './Promotion';
+import Link from 'next/link';
+import axios from 'axios';
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [postId, setPostId] = useState("");
+  const [postId, setPostId] = useState('');
   const [boarddata, setBoardData] = useState([]);
-  const [searchItem, setSearchItem] = useState("whole");
+  const [searchItem, setSearchItem] = useState('whole');
   const img =
-    "https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg";
+    'https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg';
 
   let preitem = 0;
   let item = 8;
@@ -22,9 +22,7 @@ const PromotionContainer = () => {
   const getData = async () => {
     try {
       await axios
-        .get(
-          `http://3.36.72.145:8080/api/board/promotion/${searchItem}/inDate/DESC`
-        )
+        .get(`http://3.36.72.145:8080/api/board/promotion/${searchItem}`)
         .then((response) => {
           const result = response.data.boards.slice(preitem, item);
 
@@ -41,9 +39,7 @@ const PromotionContainer = () => {
   const firstGetData = async () => {
     try {
       await axios
-        .get(
-          `http://3.36.72.145:8080/api/board/promotion/${searchItem}/inDate/DESC`
-        )
+        .get(`http://3.36.72.145:8080/api/board/promotion/${searchItem}`)
         .then((response) => {
           preitem = 0;
           item = 8;
@@ -54,6 +50,14 @@ const PromotionContainer = () => {
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const api = () => {
+    axios
+      .get(
+        `http://3.36.72.145:8080/api/board/promotion/${searchItem}/inDate/DESC`
+      )
+      .then((res) => console.log(res));
   };
 
   const infiniteScroll = () => {
@@ -76,9 +80,9 @@ const PromotionContainer = () => {
 
   useEffect(() => {
     firstGetData();
-    window.addEventListener("scroll", infiniteScroll);
+    window.addEventListener('scroll', infiniteScroll);
     return () => {
-      window.removeEventListener("scroll", infiniteScroll);
+      window.removeEventListener('scroll', infiniteScroll);
     };
   }, [searchItem]);
 
