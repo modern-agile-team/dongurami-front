@@ -54,16 +54,28 @@ const ClubIntro = ({ visitTime }) => {
         setIntroDesc(res.data.result[0].introduce);
       })
       .catch((err) => {
-        alert(err.response.data.msg);
+        switch (err.response.status) {
+          case 401:
+            alert('로그인 후 이용해주세요');
+            router.push('/LoginPage');
+            break;
+          case 404:
+            alert('존재하지 않는 동아리입니다');
+            router.push('/');
+            break;
+          default:
+            alert('알 수 없는 오류입니다 개발자에게 문의해주세요');
+            router.push('/');
+        }
       });
-  }, [router, router.query.no]);
+  }, [router]);
 
   useEffect(() => {
     if (!router.query.no) return;
     setIsLoading(true);
     getData();
     setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
-  }, [getData, router.query]);
+  }, [getData, router.query.no, visitTime]);
 
   return (
     <div className={styles.container}>
