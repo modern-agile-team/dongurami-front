@@ -19,9 +19,11 @@ function NoticeSearch() {
     if (keyword === '') return;
     router.push({
       pathname: router.pathname,
-      query: { type, keyword, ...router.query }
+      query: { ...router.query, type, keyword }
     });
   };
+
+  console.log(type);
 
   return (
     <div className={styles.container}>
