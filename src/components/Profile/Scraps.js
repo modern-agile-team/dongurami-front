@@ -1,18 +1,12 @@
 import styles from '../../styles/Profile/Scraps.module.scss';
 import { BsFileText, BsPlusCircle } from 'react-icons/bs';
-import { useEffect } from 'react';
 
 function Scraps({
   moveWriteScraps,
   comp,
   profile,
-  scrapData,
-  boardData,
-  clubNo,
-  setClubNo,
   getScraps,
-  setBoardData,
-  setScrapData,
+  setDataArr,
   dataArr
 }) {
   if (comp === '스크랩') {
@@ -23,8 +17,11 @@ function Scraps({
           <select
             onChange={(e) => {
               getScraps(profile.id, e.target.value).then((res) => {
-                setScrapData(res.data.scraps);
-                setBoardData(res.data.board);
+                setDataArr(
+                  res.data.scraps
+                    .concat(res.data.board)
+                    .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
+                );
               });
             }}
           >

@@ -10,8 +10,6 @@ function Profile() {
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
   const [id, setId] = useState('201816035');
-  const [scrapData, setScrapData] = useState([]);
-  const [boardData, setBoardData] = useState([]);
   const [clubNo, setClubNo] = useState(0);
   const [dataArr, setDataArr] = useState([]);
 
@@ -48,12 +46,12 @@ function Profile() {
             if (profile.clubs.length > 0) {
               getScraps(profile.id, profile.clubs[0].no)
                 .then((res) => {
-                  setScrapData(res.data.scraps);
-                  setBoardData(res.data.board);
                   setDataArr(
-                    scrapData
-                      .concat(boardData)
-                      .sort((a, b) => b.inDate - a.inDate)
+                    res.data.scrpas
+                      .concat(res.data.board)
+                      .sort(
+                        (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
+                      )
                   );
                 })
                 .catch((err) => console.log(err.response.data.msg));
@@ -76,8 +74,6 @@ function Profile() {
         userInfo={userInfo}
         profile={profile}
         comp={comp}
-        scrapData={scrapData}
-        boardData={boardData}
         setClubNo={setClubNo}
         clubNo={clubNo}
         getScraps={getScraps}
