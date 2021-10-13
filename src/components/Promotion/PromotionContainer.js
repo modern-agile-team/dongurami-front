@@ -6,14 +6,13 @@ import { BsPencil } from 'react-icons/bs';
 import Modal from './Modal';
 import Promotion from './Promotion';
 import Link from 'next/link';
-import axios from 'axios';
-import { getData } from 'apis/promotion';
+import { getData, getBoardData } from 'apis/promotion';
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
   const [postId, setPostId] = useState('');
   const [boarddata, setBoardData] = useState([]);
-  const [searchItem, setSearchItem] = useState('whole');
+  const [searchItem, setSearchItem] = useState('');
   const img =
     'https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg';
 
@@ -22,14 +21,27 @@ const PromotionContainer = () => {
 
   const getDatas = async () => {
     try {
-      await getData(searchItem).then((response) => {
-        const result = response.data.boards.slice(preitem, item);
+      if (searchItem) {
+        await getData(searchItem).then((response) => {
+          console.log(response);
+          const result = response.data.boards.slice(preitem, item);
 
-        if (result.length) {
-          const extraData = boarddata.concat(result);
-          setBoardData((prev) => prev.concat(extraData));
-        }
-      });
+          if (result.length) {
+            const extraData = boarddata.concat(result);
+            setBoardData((prev) => prev.concat(extraData));
+          }
+        });
+      } else {
+        await getBoardData().then((response) => {
+          console.log(response);
+          const result = response.data.boards.slice(preitem, item);
+
+          if (result.length) {
+            const extraData = boarddata.concat(result);
+            setBoardData((prev) => prev.concat(extraData));
+          }
+        });
+      }
     } catch (e) {
       console.log(e);
     }
@@ -37,14 +49,23 @@ const PromotionContainer = () => {
 
   const firstGetDatas = async () => {
     try {
-      await getData(searchItem).then((response) => {
-        preitem = 0;
-        item = 8;
-        console.log(response);
-
-        const result = response.data.boards.slice(preitem, item);
-        setBoardData(result);
-      });
+      if (searchItem) {
+        await getData(searchItem).then((response) => {
+          console.log(response);
+          preitem = 0;
+          item = 8;
+          const result = response.data.boards.slice(preitem, item);
+          setBoardData(result);
+        });
+      } else {
+        await getBoardData(searchItem).then((response) => {
+          console.log(response);
+          preitem = 0;
+          item = 8;
+          const result = response.data.boards.slice(preitem, item);
+          setBoardData(result);
+        });
+      }
     } catch (e) {
       console.log(e);
     }
@@ -79,7 +100,7 @@ const PromotionContainer = () => {
   return (
     <>
       <Header />
-      <TypeSearch setSearchItem={setSearchItem} getData={getData} />
+      <TypeSearch setSearchItem={setSearchItem} />
       <Link href={`/promotion/write`} passHref>
         <button className={styles.writeBtn}>
           <BsPencil />
