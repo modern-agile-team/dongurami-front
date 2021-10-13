@@ -1,133 +1,124 @@
 .form {
-  font-family: "twayair";
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   margin-top: 3%;
   margin-bottom: 5%;
-  gap: 15px;
-  width: 35em;
-  height: 45em;
-  border: solid;
-  border-color: #c2f2dc;
-  border-radius: 40px;
-  h1 {
+  .container {
+    width: 40%;
+    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    padding: 1rem;
     margin: 0 auto;
-    margin-top: 5.5vh;
-    margin-bottom: 4vh;
+    text-align: center;
+  }
+  h1 {
+    font-weight: 100;
+    margin-bottom: 10%;
   }
   input {
-    font-family: "Noto Sans KR", sans-serif;
-    width: 20em;
-    height: 1vh;
-    margin: 0 auto;
-    padding: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 60%;
+    height: 50px;
     border: none;
-    border-bottom: 1.4px solid #dadada;
+    border-radius: 0px;
+    border-bottom: 1.3px inset #dadada;
     outline-style: none;
+    margin-bottom: 3%;
   }
   select {
-    font-family: "Noto Sans KR", sans-serif;
-    width: 23.5em;
-    height: 3.5em;
-    margin: 0 auto;
-    margin-top: 2vh;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 63%;
+    height: 50px;
+    margin-top: 2%;
     border: 1.5px solid #dadada;
-    border-radius: 0.5em;
+    border-radius: 5px;
+    option {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+  }
+  .feedback {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 65%;
+    width: 62.5%;
+    margin: 0 auto;
+    margin-bottom: 4%;
+    text-align: start;
+    color: rgb(51, 51, 160);
   }
   .notSame {
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: 1vw;
-    margin: 0 auto;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 75%;
+    display: flex;
+    justify-content: center;
     margin-top: 2%;
     color: red;
   }
-  .feedback {
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: 0.9vw;
-    margin: 0 auto;
-    color: blue;
-  }
-}
-
-.button {
-  font-family: "twayair";
-  zoom: 1.4;
-  width: 6em;
-  height: 3em;
-  margin: 0 auto;
-  margin-top: 2vh;
-  border-radius: 8px;
-  border: 1.5px solid #3fcdb8;
-  background-color: #fff;
-  color: #3fcdb8;
-  cursor: pointer;
-}
-.button:hover {
-  filter: brightness(96%);
-}
-
-.login {
-  width: 100%;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  text-align: center;
-  .loginRouting {
-    margin-left: 1rem;
+  .button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 100%;
+    font-weight: 400;
+    width: 63%;
+    height: 50px;
+    margin-top: 5%;
+    border-radius: 5px;
+    border: 1.5px solid #90cec7cb;
+    background-color: #fff;
+    color: #3fcdb8;
     cursor: pointer;
-    &:hover {
-      color: #3fcdb8;
-    }
   }
-}
-
-.input::-webkit-inner-spin-button,
-.input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-@media screen and (max-width: 1024px) {
-  .form {
-    width: 35rem;
-    height: 55rem;
-    margin-top: 8%;
+  .button:hover {
+    filter: brightness(98%);
+  }
+  .login {
+    span {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 80%;
+    }
+    margin-top: 10%;
+    margin-bottom: 5%;
+    .loginRouting {
+      cursor: pointer;
+      font-style: oblique;
+      color: rgb(99, 99, 99);
+      &:hover {
+        color: #90cec7;
+      }
+    }
   }
 }
 
 @media screen and (max-width: 768px) {
   .form {
-    width: 90%;
-    height: 50rem;
-    margin-top: 12%;
-    .input {
-      width: 52%;
-    }
-    .select {
-      width: 63%;
-    }
-    .button {
-      width: 22%;
-      height: 7%;
-      font-size: 70%;
-    }
-    .login {
-      font-size: 90%;
+    .container {
+      width: 70%;
     }
   }
 }
 
 @media screen and (max-width: 480px) {
   .form {
-    width: 90%;
-    height: 48rem;
-    margin-top: 19%;
-    input {
-      width: 50%;
-      font-size: 60%;
-    }
-    .button {
-      width: 5.5rem;
-      height: 2.5rem;
+    .container {
+      width: 85%;
+      input {
+        font-size: 75%;
+        width: 80%;
+      }
+      select {
+        font-size: 80%;
+        width: 82%;
+      }
+      .feedback {
+        width: 81%;
+      }
+      .button {
+        font-size: 90%;
+        width: 80%;
+        margin-top: 10%;
+      }
+      .login {
+        span {
+          font-size: 70%;
+        }
+      }
     }
   }
 }

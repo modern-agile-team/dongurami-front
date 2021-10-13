@@ -1,11 +1,13 @@
-import SignUp from "../components/SignUp/SignUp";
-import Header from "../components/Common/Header/Header";
+import Header from '../components/Common/Header/Header';
+import SignUpForm from 'components/SignUp/SignUpForm';
+import Footer from 'components/Common/Footer';
 
 function signup() {
   return (
     <>
       <Header />
-      <SignUp />
+      <SignUpForm />
+      <Footer />
     </>
   );
 }
