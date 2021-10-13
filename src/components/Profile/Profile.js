@@ -3,22 +3,20 @@ import Scraps from './Scraps';
 import styles from '../../styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo';
 import router from 'next/router';
-import { getUserInfo } from 'apis/profile';
+import { getScraps, getUserInfo } from 'apis/profile';
 
 function Profile() {
   const [comp, setComp] = useState('프로필');
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
   const [id, setId] = useState('201816035');
-  //get요청때 쓰는 아이디는 사용자 이름 눌렀을때 props로 받을예정
+  const [scrapData, setScrapData] = useState([]);
+  const [boardData, setBoardData] = useState([]);
+  const [clubNo, setClubNo] = useState(0);
+  const [dataArr, setDataArr] = useState([]);
 
   const moveWriteScraps = () => {
     router.push(`/profile/${id}/writescraps`);
-  };
-
-  const getScraps = () => {
-    // axios.get()
-    console.log(1);
   };
 
   const logout = () => {
@@ -36,6 +34,7 @@ function Profile() {
       .then((res) => {
         setUserInfo(res.data.userInfo);
         setProfile(res.data.profile);
+        setClubNo(res.datra.profile.clubs[0].no);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -44,7 +43,26 @@ function Profile() {
     <div className={styles.container}>
       <div className={styles.profileHeader}>
         <button onClick={() => setComp('프로필')}>프로필</button>
-        <button onClick={() => setComp('스크랩')}>스크랩</button>
+        <button
+          onClick={() => {
+            if (profile.clubs.length > 0) {
+              getScraps(profile.id, profile.clubs[0].no)
+                .then((res) => {
+                  setScrapData(res.data.scraps);
+                  setBoardData(res.data.board);
+                  setDataArr(
+                    scrapData
+                      .concat(boardData)
+                      .sort((a, b) => b.inDate - a.inDate)
+                  );
+                })
+                .catch((err) => console.log(err.response.data.msg));
+              setComp('스크랩');
+            } else alert('가입된 동아리가 없습니다.');
+          }}
+        >
+          스크랩
+        </button>
       </div>
       <UserInfo
         logout={logout}
@@ -58,6 +76,12 @@ function Profile() {
         userInfo={userInfo}
         profile={profile}
         comp={comp}
+        scrapData={scrapData}
+        boardData={boardData}
+        setClubNo={setClubNo}
+        clubNo={clubNo}
+        getScraps={getScraps}
+        dataArr={dataArr}
       />
     </div>
   );
