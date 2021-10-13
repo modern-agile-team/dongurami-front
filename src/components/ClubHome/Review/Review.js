@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from "react";
-import styles from "../../../styles/Club/Home/Review/Review.module.scss";
-import ReviewFilter from "./ReviewFilter";
-import ReviewHeader from "./ReviewHeader";
-import ReviewWrite from "./ReviewWrite";
-import ReviewMine from "./ReviewMine";
-import ReviewList from "./ReviewList";
-import { getReview, postReview, deleteReview, putReview } from "apis/clubhome";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import styles from '../../../styles/Club/Home/Review/Review.module.scss';
+import ReviewFilter from './ReviewFilter';
+import ReviewHeader from './ReviewHeader';
+import ReviewWrite from './ReviewWrite';
+import ReviewMine from './ReviewMine';
+import ReviewList from './ReviewList';
+import { getReview, postReview, deleteReview, putReview } from 'apis/clubhome';
+import { useRouter } from 'next/router';
 
 const Review = () => {
-  const [reviewInput, setReviewInput] = useState(""); // 후기 글
+  const [reviewInput, setReviewInput] = useState(''); // 후기 글
   const [reviewList, setReviewList] = useState([]); // 후기 리스트
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
+  const [studentId, setStudentId] = useState('');
+
+  const router = useRouter();
+
+  const inputRef = useRef();
 
   // 별점 평균
   const reviewAvg =
@@ -22,53 +28,71 @@ const Review = () => {
       }, 0) / reviewList.length;
 
   // 내 후기와 내 후기가 아닌 것들
-  const reviewMine = reviewList.filter((el) => el.studentId === "201708051");
+  const reviewMine = reviewList.filter((el) => el.studentId === studentId);
   const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
 
   // 내 리뷰 번호
   const myReviewNum = reviewMine.length ? reviewMine[0].no : null;
 
   // 후기 불러오기
-  const getReviewData = () => {
-    getReview()
+  const getReviewData = useCallback(() => {
+    getReview(router.query.no)
       .then((res) => {
+        setStudentId(res.data.studentId);
         setReviewList(res.data.reviewList);
       })
-      .catch((err) => console.log(err.response.data.msg));
-  };
+      .catch((err) => alert(err.response.data.msg));
+  }, [router.query.no]);
 
   // 후기 작성
   const onReviewSubmit = async () => {
-    await postReview({
-      description: reviewInput,
-      score: reviewRate,
-    })
-      .then((res) => alert(res.data.msg))
-      .catch((err) => alert(err.response.data.msg));
-
-    await getReviewData();
+    if (reviewRate === 0) alert('별점을 입력해주세요');
+    else if (reviewInput === '') alert('후기를 입력해주세요');
+    else {
+      await postReview(
+        {
+          description: reviewInput,
+          score: reviewRate
+        },
+        router.query.no
+      )
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err.response.data.msg));
+      getReviewData();
+      onStarHandleFalse(-1);
+      inputRef.current.value = '';
+    }
   };
 
   // 내 후기 삭제
   const onReviewDelete = async () => {
-    await deleteReview(reviewMine[0].no)
+    await deleteReview(reviewMine[0].no, router.query.no)
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
-    await getReviewData();
+    getReviewData();
+    onStarHandleFalse(-1);
+    inputRef.current.value = '';
   };
 
   // 내 후기 수정
   const onReviewUpdate = async () => {
-    await putReview(
-      {
-        description: reviewInput,
-        score: reviewRate,
-      },
-      myReviewNum
-    )
-      .then((res) => alert(res.data.msg))
-      .catch((err) => alert(err.response.data.msg));
-    await getReviewData();
+    if (reviewRate === 0) alert('별점을 입력해주세요');
+    else if (reviewInput === '') alert('후기를 입력해주세요');
+    else {
+      await putReview(
+        {
+          description: reviewInput,
+          score: reviewRate
+        },
+        myReviewNum,
+        router.query.no
+      )
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err.response.data.msg));
+      getReviewData();
+      onStarHandleFalse(-1);
+      inputRef.current.value = '';
+    }
   };
 
   // 별점 비우기
@@ -106,16 +130,16 @@ const Review = () => {
       return b.score - a.score;
     });
 
-    filter === "1" ? setReviewList(dateFilter) : setReviewList(starFilter);
+    filter === '1' ? setReviewList(dateFilter) : setReviewList(starFilter);
   };
 
   useEffect(() => {
     getReviewData();
-  }, []);
+  }, [getReviewData]);
 
   return (
     <div className={styles.container}>
-      <ReviewHeader reviewAvg={reviewAvg} />
+      <ReviewHeader reviewAvg={reviewAvg} clubName={router.query.name} />
       <ReviewWrite
         onReviewUpdate={onReviewUpdate}
         isReviewMine={reviewMine.length}
@@ -124,6 +148,7 @@ const Review = () => {
         onStarHandleTrue={onStarHandleTrue}
         onReviewInput={onReviewInput}
         onReviewSubmit={onReviewSubmit}
+        inputRef={inputRef}
       />
       <ReviewFilter onFilterChange={onFilterChange} />
       {reviewMine.length ? (

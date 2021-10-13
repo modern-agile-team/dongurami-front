@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import board from 'redux/reducers/board';
+import board from 'redux/slices/board';
 
 const reducer = combineReducers({ board });
 

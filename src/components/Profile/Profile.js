@@ -3,32 +3,18 @@ import Scraps from './Scraps';
 import styles from '../../styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo';
 import router from 'next/router';
-import axios from 'axios';
+import { getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';
 
 function Profile() {
   const [comp, setComp] = useState('프로필');
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
-  const [token, setToken] = useState(getToken());
-  // const [scrapData, setScrapData] = useState();
+  const [id, setId] = useState('201816035');
+  //get요청때 쓰는 아이디는 사용자 이름 눌렀을때 props로 받을예정
+
   const moveWriteScraps = () => {
     router.push('/profile/writescraps');
-  };
-
-  const getUserInfo = (token) => {
-    axios
-      .get(`http://3.36.72.145:8080/api/profile/${201816035}`, {
-        headers: {
-          'Content-type': 'application/json; charset=utf-8',
-          'x-auth-token': token
-        }
-      })
-      .then((res) => {
-        setUserInfo(res.data.userInfo);
-        setProfile(res.data.profile);
-      })
-      .catch((err) => console.log(err));
   };
 
   const getScraps = () => {
@@ -36,7 +22,13 @@ function Profile() {
     console.log(1);
   };
   useEffect(() => {
-    getUserInfo(token);
+    getUserInfo(id)
+      .then((res) => {
+        console.log(res);
+        setUserInfo(res.data.userInfo);
+        setProfile(res.data.profile);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const logout = () => {

@@ -1,26 +1,29 @@
-import instance from "apis";
+import instance from 'apis';
 
 // 동아리 정보 불러오기
-export const getMember = async () => {
-  return await instance.get(`api/club/admin-option/1`);
+export const getMember = (params) => {
+  return instance.get(`api/club/admin-option/${params}`);
 };
 
 // 가입 승인하기
-export const postApply = async (data) => {
-  return await instance.post(`api/club/admin-option/1/accept-applicant`, data);
+export const postApply = (data, params) => {
+  return instance.post(
+    `api/club/admin-option/${params}/accept-applicant`,
+    data
+  );
 };
 
-// 지원서 질문 수정
-export const putApply = async (data) => {
-  return await instance.put(`api/club/admin-option/1/reject-applicant`, data);
+// 가입 거절하기
+export const putApply = (data, params) => {
+  return instance.put(`api/club/admin-option/${params}/reject-applicant`, data);
 };
 
 // 회장 양도
-export const putLeader = async (data) => {
-  return await instance.put(`api/club/admin-option/1/leader`, data);
+export const putLeader = (data, params) => {
+  return instance.put(`api/club/admin-option/${params}/leader`, data);
 };
 
 // 권한 변경
-export const putAuth = async (data) => {
-  return await instance.put(`api/club/admin-option/1/admin-functions`, data);
+export const putAuth = (data, params) => {
+  return instance.put(`api/club/admin-option/${params}/admin-functions`, data);
 };

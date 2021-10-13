@@ -1,24 +1,16 @@
 import styles from '../../styles/User/Find/FindPW.module.scss';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { postFindPW } from 'apis/user';
 
 export const FindPW = () => {
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
   const [findToken, setFindToken] = useState('');
-  const [emailCheck, setEmailCheck] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
     name === 'id' ? setId(value) : setEmail(value);
-  };
-
-  const checkEmail = (e) => {
-    const regExp =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    let result = regExp.test(e.target.value);
-    setEmailCheck(result);
   };
 
   const onSubmit = () => {
@@ -28,22 +20,26 @@ export const FindPW = () => {
       alert('학번은 9자이어야 합니다.');
     } else if (email === '') {
       alert('이메일을 입력해 주세요.');
-    } else if (emailCheck === false) {
-      alert('이메일 형식을 맞춰 입력해 주세요.');
     } else {
       postFindPW({
         id,
         email
       })
         .then((res) => {
-          alert(res.data.msg);
-          setFindToken(res.data.token);
+          if (res.data.success === true) {
+            alert(
+              '가입하신 이메일로 메일이 발송되었습니다.\n본인의 메일을 확인해 주세요.'
+            );
+            setFindToken(res.data.token);
+          }
         })
         .catch((err) => alert(err.response.data.msg));
     }
   };
 
-  console.log('token:', findToken);
+  useEffect(() => {
+    window.localStorage.setItem('user_token', findToken);
+  }, [findToken]);
 
   const onKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -70,7 +66,6 @@ export const FindPW = () => {
             name="email"
             onChange={onChange}
             onKeyPress={onKeyPress}
-            onBlur={checkEmail}
           />
         </div>
         <div className={styles.findID}>

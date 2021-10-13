@@ -3,18 +3,14 @@ body {
   margin: 0;
 }
 
-body {
-  margin-top: 60px;
-}
-
 @font-face {
-  font-family: "twayair";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
-    format("woff");
+  font-family: 'twayair';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 * {
-  font-family: "twayair";
+  font-family: 'twayair';
 }
