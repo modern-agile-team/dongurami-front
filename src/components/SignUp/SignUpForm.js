@@ -95,10 +95,6 @@ function SignUpForm() {
     }
   };
 
-  useEffect(() => {
-    console.log(major);
-  }, [major]);
-
   const checkID = () => {
     let majorNum = id[4] + id[5];
     if (majorNum === 24) {
@@ -173,69 +169,72 @@ function SignUpForm() {
 
   return (
     <form className={styles.form}>
-      <h1>회원가입</h1>
-      <input
-        className={styles.inputNum}
-        type="number"
-        placeholder="학번&#32;&#40;아이디로 사용됩니다.&#41;"
-        onChange={onChange}
-        name="id"
-        value={id}
-        onBlur={checkID}
-      />
-      <input
-        type="text"
-        placeholder="이름"
-        onChange={onChange}
-        name="names"
-        value={names}
-      />
-      <select
-        className={styles.select}
-        onChange={onChange}
-        name="major"
-        value={majorNum}
-      >
-        {majorCategory.map((majorCategory, index) => (
-          <option id={index} key={index} value={majorCategory.value}>
-            {majorCategory.label}
-          </option>
-        ))}
-      </select>
-      {major === undefined || majorNum === '' ? '' : FeedbackMessage()}
-      <input
-        type="email"
-        placeholder="이메일"
-        onChange={onChange}
-        name="email"
-        value={email}
-        onBlur={checkEmail}
-      />
-      <input
-        className={styles.pwd}
-        type="password"
-        placeholder="비밀번호&#32;&#40;최소 8자리 이상&#41;"
-        onChange={onChange}
-        name="password"
-        value={password}
-      />
-      <input
-        className={styles.confirmPwd}
-        type="password"
-        placeholder="비밀번호 확인"
-        onChange={onChange}
-        name="repassword"
-        value={repassword}
-      />
-      <span className={styles.notSame}>{checkSignUp}</span>
-      <button className={styles.button} onClick={onSubmit}>
-        가입하기
-      </button>
-      <div className={styles.login}>
-        <span>계정이 있으신가요?</span>
-        <Link href="/LoginPage" passHref>
-          <span className={styles.loginRouting}>로그인하러가기~</span>
-        </Link>
+      <div className={styles.container}>
+        <h1>회원가입</h1>
+        <input
+          className={styles.inputNum}
+          type="number"
+          placeholder="학번&#32;&#40;아이디로 사용됩니다.&#41;"
+          onChange={onChange}
+          name="id"
+          value={id}
+          onBlur={checkID}
+        />
+        <input
+          type="text"
+          placeholder="이름"
+          onChange={onChange}
+          name="names"
+          value={names}
+        />
+        <select
+          className={styles.select}
+          onChange={onChange}
+          name="major"
+          value={majorNum}
+        >
+          {majorCategory.map((majorCategory, index) => (
+            <option id={index} key={index} value={majorCategory.value}>
+              {majorCategory.label}
+            </option>
+          ))}
+        </select>
+        {major === undefined || majorNum === '' ? '' : FeedbackMessage()}
+        <input
+          type="email"
+          placeholder="이메일"
+          onChange={onChange}
+          name="email"
+          value={email}
+          onBlur={checkEmail}
+        />
+        <input
+          className={styles.pwd}
+          type="password"
+          placeholder="비밀번호&#32;&#40;최소 8자리 이상&#41;"
+          onChange={onChange}
+          name="password"
+          value={password}
+        />
+        <input
+          className={styles.confirmPwd}
+          type="password"
+          placeholder="비밀번호 확인"
+          onChange={onChange}
+          name="repassword"
+          value={repassword}
+        />
+        <span className={styles.notSame}>{checkSignUp}</span>
+        <button className={styles.button} onClick={onSubmit}>
+          가입하기
+        </button>
+        <div className={styles.login}>
+          <span>계정이 있으신가요?</span>
+          <br />
+          <Link href="/LoginPage" passHref>
+            <span className={styles.loginRouting}>로그인 하기</span>
+          </Link>
+        </div>
       </div>
     </form>
   );
