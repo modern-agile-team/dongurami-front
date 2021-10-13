@@ -1,6 +1,6 @@
 import { putPost } from 'apis/board';
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
