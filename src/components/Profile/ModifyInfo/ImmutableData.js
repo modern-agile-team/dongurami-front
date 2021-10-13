@@ -7,7 +7,7 @@ const ImmutableData = ({ userInfo, setGrade, grade }) => {
     <div className={styles.immutable}>
       <div className={styles.name}>
         <FaUserCircle />
-        <span> {userInfo.name}</span>
+        <span>{userInfo.name}</span>
       </div>
       <div>
         <FaGraduationCap />
@@ -26,7 +26,6 @@ const ImmutableData = ({ userInfo, setGrade, grade }) => {
         </select>
         <span>학년</span>
       </div>
-      <hr />
     </div>
   );
 };
