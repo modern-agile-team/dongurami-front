@@ -1,17 +1,15 @@
-import axios from "axios";
-import { useRouter } from "next/router";
+import { postPost } from 'apis/board';
 import { useState } from "react";
 import styles from "../../styles/Board/Write/WritePromotionContent.module.scss";
 
-function WritePromition({ title, body, api }) {
-  const router = useRouter();
+function WritePromition({ title, description }) {
   const [image, setImage] = useState();
 
   const onChange = (e) => {
     setImage(e.target.files[0]);
   }
   const onSubmit = () => {
-    api.post(title, body);
+    postPost('promotion', { title, description })
   };
 
   return (
@@ -21,16 +19,18 @@ function WritePromition({ title, body, api }) {
         <p>사진 업로드</p>
       </label>
       <input id="imageInput" type="file" accept="image/*" onChange={onChange} />
-      <select>
-        <option>동아리 선택</option>
-        <option>우아한 애자일</option>
-        <option>그웨</option>
-      </select>
-      <select>
-        <option>태그 선택</option>
-        <option>개발</option>
-        <option>친목</option>
-      </select>
+      <div className={styles.selectContainer}>
+        <select>
+          <option>동아리 선택</option>
+          <option>우아한 애자일</option>
+          <option>그웨</option>
+        </select>
+        <select>
+          <option>태그 선택</option>
+          <option>개발</option>
+          <option>친목</option>
+        </select>
+      </div>
       <button onClick={onSubmit}>등록</button>
     </div>
   );
