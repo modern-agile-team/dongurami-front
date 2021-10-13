@@ -10,7 +10,8 @@ const MembersList = ({
   changeLeader,
   onBoardAuth,
   onApplyAuthClick,
-  memberInfo
+  memberInfo,
+  exileMember
 }) => {
   return (
     <div className={styles.member}>
@@ -23,7 +24,7 @@ const MembersList = ({
           )}
         </div>
         <div id={styles.name}>
-          <span>{memberInfo[0]}</span>
+          <span onClick={exileMember}>{memberInfo[0]}</span>
         </div>
       </div>
       <div>
