@@ -35,7 +35,7 @@ const PromotionContainer = () => {
         });
       } else if (search) {
         await getSearchData(type, searchKeyword).then((response) => {
-          const result = response.data.boards.slice(preitem, item);
+          const result = response.data.promotionSearch.slice(preitem, item);
 
           if (result.length) {
             const extraData = boarddata.concat(result);

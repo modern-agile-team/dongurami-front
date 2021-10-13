@@ -21,6 +21,7 @@ const TypeSearch = ({
   const onSubmit = (e) => {
     e.preventDefault();
     onSearch();
+    e.target.value = 0;
   };
 
   return (
