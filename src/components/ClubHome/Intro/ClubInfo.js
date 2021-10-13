@@ -4,12 +4,11 @@ import LogoUpdate from './LogoUpdate';
 
 const ClubInfo = ({ categori, fileId, genderMan, genderWomen, leader }) => {
   const router = useRouter();
-
   return (
     <div className={styles.container}>
       <div className={styles.desc}>
         <div className={styles.thumbnail}>
-          <h1>{router.query.name}</h1>
+          <h1>{unescape(router.query.club)}</h1>
         </div>
         <div className={styles.categori}>
           <p>{categori} 동아리</p>

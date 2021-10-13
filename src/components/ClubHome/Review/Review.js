@@ -36,13 +36,13 @@ const Review = () => {
 
   // 후기 불러오기
   const getReviewData = useCallback(() => {
-    getReview(router.query.no)
+    getReview(router.query.id)
       .then((res) => {
         setStudentId(res.data.studentId);
         setReviewList(res.data.reviewList);
       })
       .catch((err) => alert(err.response.data.msg));
-  }, [router.query.no]);
+  }, [router.query.id]);
 
   // 후기 작성
   const onReviewSubmit = async () => {
@@ -54,7 +54,7 @@ const Review = () => {
           description: reviewInput,
           score: reviewRate
         },
-        router.query.no
+        router.query.id
       )
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg));
@@ -66,7 +66,7 @@ const Review = () => {
 
   // 내 후기 삭제
   const onReviewDelete = async () => {
-    await deleteReview(reviewMine[0].no, router.query.no)
+    await deleteReview(reviewMine[0].no, router.query.id)
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
     getReviewData();
@@ -85,7 +85,7 @@ const Review = () => {
           score: reviewRate
         },
         myReviewNum,
-        router.query.no
+        router.query.id
       )
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg));
@@ -139,7 +139,7 @@ const Review = () => {
 
   return (
     <div className={styles.container}>
-      <ReviewHeader reviewAvg={reviewAvg} clubName={router.query.name} />
+      <ReviewHeader reviewAvg={reviewAvg} clubName={router.query.club} />
       <ReviewWrite
         onReviewUpdate={onReviewUpdate}
         isReviewMine={reviewMine.length}
@@ -168,6 +168,7 @@ const Review = () => {
             rate={review.score}
             desc={review.description}
             date={review.inDate.substring(0, 10)}
+            clubName={router.query.club}
           />
         );
       })}

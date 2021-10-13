@@ -10,22 +10,22 @@ import Apply from '../Apply/Apply';
 
 const Frame = () => {
   const [comp, setComp] = useState(1);
-  const [visitTime, setVisitTime] = useState(0);
+  const [isVisit, setIsVisit] = useState(false);
 
   const Comp = useCallback(() => {
-    if (comp === 1) return <ClubIntro visitTime={visitTime} />;
+    if (comp === 1) return <ClubIntro isVisit={isVisit} />;
     else if (comp === 2) return <ClubNotice />;
     else if (comp === 3) return <Activities />;
     else if (comp === 4) return <Calendar />;
     else if (comp === 5) return <Review />;
     else if (comp === 6) return <Apply />;
-  }, [comp]);
+  }, [comp, isVisit]);
 
   useEffect(() => {
-    if (comp !== 1) {
-      setVisitTime(visitTime + 1);
+    if (comp === false) {
+      setIsVisit(true);
     }
-  }, [comp]);
+  }, [comp, isVisit]);
   return (
     <>
       <div className={styles.container}>

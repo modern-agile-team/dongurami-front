@@ -33,7 +33,7 @@ export const Manager = () => {
 
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
-    getMember(router.query.no)
+    getMember(router.query.id)
       .then((res) => {
         setApplicantQNA(res.data.applicant.questionsAnswers);
         setApplicantInfo(res.data.applicant.applicantInfo);
@@ -66,7 +66,7 @@ export const Manager = () => {
       {
         applicant: mergedApplicantInfo[e.target.id].id
       },
-      router.query.no
+      router.query.id
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
@@ -79,7 +79,7 @@ export const Manager = () => {
       {
         applicant: mergedApplicantInfo[e.target.id].id
       },
-      router.query.no
+      router.query.id
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => console.log(err.response.data.msg));
@@ -96,7 +96,7 @@ export const Manager = () => {
         {
           newLeader: newLeader[memberIndex].id
         },
-        router.query.no
+        router.query.id
       )
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
@@ -121,7 +121,7 @@ export const Manager = () => {
       {
         adminOptions: adminOptions
       },
-      router.query.no
+      router.query.id
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
@@ -143,11 +143,11 @@ export const Manager = () => {
     setBoardAuth(boolOfBoardAuth);
   };
   //-------------------------------------------------------------//
-
+  console.log(unescape('1C1OKWM_koKR954KR954'));
   const toClubHome = () => {
     router.push({
-      pathname: '/clubhome/club',
-      query: { no: router.query.no }
+      pathname: `/clubhome/${router.query.id}`,
+      query: { club: router.query.club }
     });
   };
 
@@ -157,7 +157,7 @@ export const Manager = () => {
       {
         studentId: studentID
       },
-      router.query.no
+      router.query.id
     )
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err.response));
@@ -172,7 +172,7 @@ export const Manager = () => {
   }, [applicantInfo, mergedApplicantQNA]);
 
   useEffect(() => {
-    if (!router.query.no) return;
+    if (!router.query.id) return;
     getMembersData();
     onApplyAuthClick();
     onBoardAuth();
@@ -180,7 +180,7 @@ export const Manager = () => {
 
   return (
     <div className={styles.container}>
-      <ManagerHeader toClubHome={toClubHome} clubName={router.query.name} />
+      <ManagerHeader toClubHome={toClubHome} clubName={router.query.club} />
       <Members
         members={members}
         leader={leader}

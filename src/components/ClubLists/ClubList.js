@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../styles/Club/Lists/ClubListContainer.module.scss';
 import { useRouter } from 'next/router';
 
-const ClubList = ({ img, categories, title, onClick, clubNo, clubName }) => {
+const ClubList = ({ img, categories, title, clubNo, clubName }) => {
   const router = useRouter();
 
   return (
@@ -12,8 +12,8 @@ const ClubList = ({ img, categories, title, onClick, clubNo, clubName }) => {
         alt="동아리"
         onClick={() =>
           router.push({
-            pathname: '/clubhome/club',
-            query: { no: clubNo, name: clubName }
+            pathname: `/clubhome/${clubNo}`,
+            query: { club: escape(clubName) }
           })
         }
       />

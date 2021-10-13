@@ -32,7 +32,7 @@ const ClubIntro = ({ visitTime }) => {
         fileId: info[0].fileId,
         introduce: introDesc
       },
-      router.query.no
+      router.query.id
     )
       .then((res) =>
         res.data
@@ -46,7 +46,7 @@ const ClubIntro = ({ visitTime }) => {
 
   // 동아리 정보 불러오기
   const getData = useCallback(async () => {
-    getInfo(router.query.no)
+    getInfo(router.query.id)
       .then((res) => {
         setLeader(res.data.clientInfo.leader);
         setCategori(res.data.result[0].category);
@@ -71,11 +71,11 @@ const ClubIntro = ({ visitTime }) => {
   }, [router]);
 
   useEffect(() => {
-    if (!router.query.no) return;
+    if (!router.query.id) return;
     setIsLoading(true);
     getData();
     setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
-  }, [getData, router.query.no, visitTime]);
+  }, [getData, router.query.id, visitTime]);
 
   return (
     <div className={styles.container}>
