@@ -7,3 +7,7 @@ export const getUserInfo = (id) => {
 export const modifyInfo = (id, body) => {
   return instance.put(`/api/profile/${id}`, body);
 };
+
+export const getScraps = (id, clubNum) => {
+  return instance.get(`/api/my-page/${id}/personal/${clubNum}`);
+};
