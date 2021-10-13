@@ -2,20 +2,25 @@ import React, { useState } from 'react';
 import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
 import { FaSearch } from 'react-icons/fa';
 
-const TypeSearch = ({ setSearchItem, getData }) => {
-  const [value, setValue] = useState('');
-  const [type, setType] = useState('');
-
+const TypeSearch = ({
+  setSearchItem,
+  setSearchKeyword,
+  type,
+  searchKeyword,
+  setType,
+  onSearch
+}) => {
   const onChange = (e) => {
-    setValue(e.target.value);
+    setSearchKeyword(e.target.value);
   };
 
   const onTypeChange = (e) => {
     setType(e.target.value);
   };
 
-  const onSubmit = () => {
-    console.log(type, value);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onSearch();
   };
 
   return (
@@ -32,14 +37,14 @@ const TypeSearch = ({ setSearchItem, getData }) => {
       </ul>
       <select value={type} onChange={onTypeChange}>
         <option value="title">제목</option>
-        <option value="name">동아리명</option>
+        <option value="clubname">동아리명</option>
       </select>
       <div className={styles.searchContainer}>
         <form className={styles.searchElement} onSubmit={onSubmit}>
           <input
             type="text"
             placeholder="search"
-            value={value}
+            value={searchKeyword}
             onChange={onChange}
           />
           <FaSearch />
