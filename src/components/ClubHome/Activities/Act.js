@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "../../../styles/Club/Home/Activities/Act.module.scss";
 
-const Act = ({ img, title, onClick, no }) => {
+const Act = ({ post, onClick }) => {
   return (
     <div className={styles.container}>
-      <img src={img} onClick={() => onClick(no)} alt="test" />
+      <img src={`https://picsum.photos/500?random=${post.no}`} onClick={() => onClick(post.no)} alt="test" />
       <div>
-        <p id={styles.desc}>{title}</p>
+        <p className={styles.title}>{post.title}</p>
+        <p className={styles.name}>{post.studentName}</p>
       </div>
     </div>
   );

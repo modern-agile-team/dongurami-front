@@ -10,8 +10,15 @@
     width: 100%;
   }
   & > div {
-    & > p {
-      margin: 1rem;
+    padding: 1rem;
+    & > .title {
+      margin: 0;
+    }
+    & > .name {
+      margin: 0;
+      margin-top: .5rem;
+      color: gray;
+      font-size: .75rem;
     }
   }
 }
