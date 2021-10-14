@@ -4,6 +4,7 @@
   border: 2px solid #90e2d6;
   padding: 1rem 2rem;
   @media screen and (max-width: 768px) {
+    margin: 0 auto;
     width: 80%;
   }
   & h1 {
@@ -32,6 +33,7 @@
         border-radius: 1rem;
         margin: 0.25rem;
         cursor: pointer;
+        color: black;
       }
     }
   }
