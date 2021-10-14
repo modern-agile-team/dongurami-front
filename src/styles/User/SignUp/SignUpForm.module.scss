@@ -86,6 +86,12 @@
   }
 }
 
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @media screen and (max-width: 768px) {
   .form {
     .container {
@@ -98,6 +104,9 @@
   .form {
     .container {
       width: 85%;
+      h1 {
+        margin-bottom: 15%;
+      }
       input {
         font-size: 75%;
         width: 80%;

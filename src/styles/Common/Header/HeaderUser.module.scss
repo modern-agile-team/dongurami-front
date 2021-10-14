@@ -48,15 +48,27 @@
 
 @media screen and (max-width: 768px) {
   .container {
+    width: 100%;
+    margin: 0 auto;
     font-size: 95%;
+    padding: 3.5rem 1rem;
     .user {
-      margin-top: 250%;
-      margin-left: -126%;
+      justify-content: space-around;
+      li {
+        border-bottom: none;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0);
+        }
+      }
       .login {
-        margin-right: 3%;
+        padding-left: 0.7rem;
       }
       .signUp {
-        width: 10vw;
+        margin: 0;
+        width: 40%;
+        &:hover {
+          background-color: #90e2d6;
+        }
       }
     }
   }
@@ -64,15 +76,14 @@
 
 @media screen and (max-width: 480px) {
   .container {
+    font-size: 85%;
+    padding: 3.5rem 0.2rem;
     .user {
-      margin-top: 235%;
-      margin-left: -48%;
       .login {
-        width: 20%;
+        padding-left: 0.5rem;
       }
       .signUp {
-        width: 25%;
-        margin-left: 2.5%;
+        width: 45%;
       }
     }
   }

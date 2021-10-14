@@ -52,13 +52,17 @@
 
 @media screen and (max-width: 768px) {
   .container {
+    display: inline;
+    width: 79%;
     ul {
       flex-direction: column;
-      width: 30vw;
-      font-size: 120%;
-      padding: 0%;
+      align-items: center;
+      margin: 0;
+      font-size: 110%;
+      width: 100%;
     }
     li {
+      padding: 1.5rem;
       width: 100%;
       text-align: center;
     }
@@ -70,8 +74,9 @@
 
 @media screen and (max-width: 480px) {
   .container {
+    width: 70%;
     ul {
-      font-size: 115%;
+      font-size: 100%;
     }
   }
 }
