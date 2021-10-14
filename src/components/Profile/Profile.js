@@ -4,12 +4,13 @@ import styles from '../../styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo';
 import router from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
+import getToken from 'utils/getToken';
 
 function Profile() {
   const [comp, setComp] = useState('프로필');
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
-  const [id, setId] = useState('201816035');
+  const [id, setId] = useState('201908053');
   const [clubNo, setClubNo] = useState(0);
   const [dataArr, setDataArr] = useState([]);
 
@@ -20,17 +21,21 @@ function Profile() {
     // window.location.reload();
   };
 
+  const getDatas = async () => {
+    await getUserInfo(id)
+    .then((res) => {
+      setUserInfo(res.data.userInfo);
+      setProfile(res.data.profile);
+      setClubNo(res.data.profile.clubs[0].no);
+    })
+    .catch((err) => console.log(err));
+  }
+
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
   useEffect(() => {
-    getUserInfo(id)
-      .then((res) => {
-        setUserInfo(res.data.userInfo);
-        setProfile(res.data.profile);
-        setClubNo(res.data.profile.clubs[0].no);
-      })
-      .catch((err) => console.log(err));
+    getDatas();
   }, []);
 
   return (
