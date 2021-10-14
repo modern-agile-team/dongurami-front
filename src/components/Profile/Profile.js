@@ -13,10 +13,6 @@ function Profile() {
   const [clubNo, setClubNo] = useState(0);
   const [dataArr, setDataArr] = useState([]);
 
-  const moveWriteScraps = () => {
-    router.push(`/profile/${id}/writescraps`);
-  };
-
   const logout = () => {
     console.log(1);
     // setToken("");
@@ -32,7 +28,7 @@ function Profile() {
       .then((res) => {
         setUserInfo(res.data.userInfo);
         setProfile(res.data.profile);
-        setClubNo(res.datra.profile.clubs[0].no);
+        setClubNo(res.data.profile.clubs[0].no);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -47,14 +43,14 @@ function Profile() {
               getScraps(profile.id, profile.clubs[0].no)
                 .then((res) => {
                   setDataArr(
-                    res.data.scrpas
-                      .concat(res.data.board)
+                    res.data.scraps
+                      .concat(res.data.boards)
                       .sort(
                         (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
                       )
                   );
                 })
-                .catch((err) => console.log(err.response.data.msg));
+                .catch((err) => console.log(err.response));
               setComp('스크랩');
             } else alert('가입된 동아리가 없습니다.');
           }}
@@ -70,7 +66,6 @@ function Profile() {
         comp={comp}
       />
       <Scraps
-        moveWriteScraps={moveWriteScraps}
         userInfo={userInfo}
         profile={profile}
         comp={comp}
@@ -78,6 +73,7 @@ function Profile() {
         clubNo={clubNo}
         getScraps={getScraps}
         dataArr={dataArr}
+        id={id}
       />
     </div>
   );
