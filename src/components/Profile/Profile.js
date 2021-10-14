@@ -9,13 +9,9 @@ function Profile() {
   const [comp, setComp] = useState('프로필');
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
-  const [id, setId] = useState('201908053');
+  const [id, setId] = useState('201816035');
   const [clubNo, setClubNo] = useState(0);
   const [dataArr, setDataArr] = useState([]);
-
-  const moveWriteScraps = () => {
-    router.push(`/profile/${id}/writescraps`);
-  };
 
   const logout = () => {
     console.log(1);
@@ -70,7 +66,6 @@ function Profile() {
         comp={comp}
       />
       <Scraps
-        moveWriteScraps={moveWriteScraps}
         userInfo={userInfo}
         profile={profile}
         comp={comp}

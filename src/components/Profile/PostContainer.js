@@ -7,14 +7,18 @@ const PostContainer = () => {
   const [post, setPost] = useState({});
   const router = useRouter();
   const data = router.query;
+  console.log(data);
 
   useEffect(() => {
+    if (!router.isReady) return;
     getPost(data.pid, data.clubNum, data.boardNum)
       .then((res) => setPost(res.data.board))
       .catch((err) => {
         console.log(err.response);
       });
-  }, []);
+  }, [router]);
+
+  if (!post.description) return null;
 
   return <Post category="personal" post={post} />;
 };

@@ -3,9 +3,9 @@ import { BsFileText, BsPlusCircle } from 'react-icons/bs';
 import Link from 'next/dist/client/link';
 
 function Scraps({
-  moveWriteScraps,
   comp,
   profile,
+  userInfo,
   getScraps,
   setDataArr,
   dataArr,
@@ -17,9 +17,16 @@ function Scraps({
     return (
       <div className={styles.wrap}>
         <div>
-          <BsPlusCircle onClick={() => moveWriteScraps()} />
+          {profile.id === userInfo.id ? (
+            <Link
+              href={{
+                pathname: `/profile/${id}/${clubNo}/writescraps`
+              }}
+            >
+              <BsPlusCircle />
+            </Link>
+          ) : null}
           <select
-            value=""
             onChange={(e) => {
               setClubNo(e.target.value);
               getScraps(profile.id, e.target.value).then((res) => {

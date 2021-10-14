@@ -1,14 +1,16 @@
-import styles from "../../styles/Board/Write/Container.module.scss";
-import Header from "../Common/Header/Header";
+import styles from '../../styles/Board/Write/Container.module.scss';
+import Header from '../Common/Header/Header';
 
 function Container({ children, category, type }) {
   const title =
-    category === "notice"
-      ? "공지 게시판"
-      : category === "free"
-      ? "자유 게시판"
-      : category === "promotion"
-      ? "홍보 게시판"
+    category === 'notice'
+      ? '공지 게시판'
+      : category === 'free'
+      ? '자유 게시판'
+      : category === 'promotion'
+      ? '홍보 게시판'
+      : category === 'personal'
+      ? '활동내용'
       : undefined;
 
   return (

@@ -15,3 +15,7 @@ export const getScraps = (id, clubNum) => {
 export const getPost = (id, clubNum, boardNum) => {
   return instance.get(`api/my-page/${id}/personal/${clubNum}/${boardNum}`);
 };
+
+export const addPost = (id, clubNum, body) => {
+  return instance.post(`api/my-page/${id}/personal/${clubNum}`, body);
+};
