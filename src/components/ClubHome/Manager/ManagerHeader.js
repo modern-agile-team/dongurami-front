@@ -2,11 +2,10 @@ import React from 'react';
 import { AiOutlineHome } from 'react-icons/ai';
 import styles from '../../../styles/Club/Home/Manager/ManagerHeader.module.scss';
 
-const ManagerHeader = ({ toClubHome, clubName }) => {
+const ManagerHeader = ({ toClubHome }) => {
   return (
     <div className={styles.header}>
       <AiOutlineHome size={30} onClick={toClubHome} />
-      <h1 onClick={toClubHome}>{clubName}</h1>
     </div>
   );
 };

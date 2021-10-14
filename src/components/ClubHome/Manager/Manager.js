@@ -12,7 +12,6 @@ import {
   putLeader
 } from 'apis/manager';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
 
 export const Manager = () => {
   const [members, setMembers] = useState([]);
@@ -29,8 +28,6 @@ export const Manager = () => {
   const changeLeaderRef = useRef([]);
 
   const refArr = [applyAuthRef, boardAuthRef, changeLeaderRef];
-
-  const clubName = useSelector((state) => state.clubhome.info.result[0].name);
 
   const router = useRouter();
 
@@ -180,7 +177,7 @@ export const Manager = () => {
 
   return (
     <div className={styles.container}>
-      <ManagerHeader toClubHome={toClubHome} clubName={clubName} />
+      <ManagerHeader toClubHome={toClubHome} />
       <Members
         members={members}
         leader={leader}
