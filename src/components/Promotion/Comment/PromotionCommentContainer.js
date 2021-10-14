@@ -1,9 +1,9 @@
-import style from "../../../styles/Board/Promotion/PromotionCommentContainer.module.scss";
-import AddComment from "./AddComment";
-import React, { useState } from "react";
-import Comment from "./Comment";
-import ReplyComment from "./ReplyComment";
-import ReplyCommentContainer from "./ReplyCommentContainer";
+import style from '../../../styles/Board/Promotion/PromotionCommentContainer.module.scss';
+import AddComment from './AddComment';
+import React, { useState } from 'react';
+import Comment from './Comment';
+import ReplyComment from './ReplyComment';
+import ReplyCommentContainer from './ReplyCommentContainer';
 
 const PromotionCommentContainer = ({ comments, postId, getData }) => {
   const [replyComment, setReplyComment] = useState([]);

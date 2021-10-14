@@ -7,6 +7,7 @@ import Modal from './Modal';
 import Promotion from './Promotion';
 import Link from 'next/link';
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
+import test from 'pages/changepassword';
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -17,6 +18,7 @@ const PromotionContainer = () => {
   const [type, setType] = useState('title');
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
+  const [test, setTest] = useState(false);
   const img =
     'https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg';
 
@@ -28,9 +30,10 @@ const PromotionContainer = () => {
       if (searchItem) {
         await getData(searchItem).then((response) => {
           const result = response.data.boards.slice(preitem, item);
+
           if (result.length) {
-            const extraData = boarddata.concat(result);
-            setBoardData((prev) => prev.concat(extraData));
+            // const extraData = boarddata.concat(result);
+            setBoardData((prev) => prev.concat(result));
           }
         });
       } else if (search) {
@@ -61,11 +64,12 @@ const PromotionContainer = () => {
     try {
       if (searchItem) {
         await getData(searchItem).then((response) => {
-          console.log(response);
           preitem = 0;
           item = 8;
           const result = response.data.boards.slice(preitem, item);
+          console.log(boarddata, '처음데이터');
           setBoardData(result);
+          setTest(true);
         });
       } else if (search) {
         await getSearchData(type, searchKeyword).then((response) => {
@@ -77,7 +81,7 @@ const PromotionContainer = () => {
         });
       } else {
         await getBoardData(searchItem).then((response) => {
-          console.log(response);
+          console.log(response, '데이터 첫번째 조회');
           preitem = 0;
           item = 8;
           const result = response.data.boards.slice(preitem, item);
@@ -121,6 +125,10 @@ const PromotionContainer = () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
   }, [searchItem, isSearch]);
+
+  useEffect(() => {
+    console.log(boarddata, '테스트');
+  }, [test]);
 
   return (
     <>
