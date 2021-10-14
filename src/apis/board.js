@@ -1,6 +1,7 @@
 import axios from 'apis/index';
 
 export function getPosts({ category, ...params }) {
+  console.log(axios);
   const queryString = new URLSearchParams(params).toString();
   if (category === 'clubNotice') {
     return axios.get(`/api/club/board/clubNotice/2?${queryString}`);
