@@ -1,6 +1,6 @@
 import styles from '../../../styles/Board/Write/Container.module.scss';
 
-function Container({ children, category, type }) {
+function Container({ children, type }) {
   const title = '홍보게시판';
 
   return (

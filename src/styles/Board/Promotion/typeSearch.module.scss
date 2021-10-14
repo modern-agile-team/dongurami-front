@@ -3,7 +3,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
   // margin-top: 5em;
+  select {
+    border-radius: 1rem;
+    height: 2rem;
+    padding: 0 1rem;
+    border: 1px solid lightgray;
+    position: absolute;
+    right: 70%;
+    top: 58%;
+  }
 
   .searchContainer {
     margin-top: 8px;
