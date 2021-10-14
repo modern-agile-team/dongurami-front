@@ -7,7 +7,7 @@ export const getInfo = (params) => {
 
 // 동아리 소개글 수정
 export const putIntroDesc = (data, params) => {
-  return instance.put(`api/club/home/${params}`, data);
+  return instance.patch(`api/club/home/${params}`, data);
 };
 
 // 지원서 불러오기

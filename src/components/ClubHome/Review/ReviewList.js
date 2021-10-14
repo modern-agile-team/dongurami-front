@@ -13,7 +13,7 @@ const ReviewList = ({ rate, desc, date, clubName }) => {
             alt="우아한 애자일"
           />
           <div id={styles.date}>
-            <span>{unescape(clubName)}</span>
+            <span>{clubName}</span>
             <p>{date}</p>
           </div>
         </div>
