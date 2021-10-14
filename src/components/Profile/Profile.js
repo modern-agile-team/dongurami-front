@@ -4,6 +4,7 @@ import styles from '../../styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo';
 import router from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
+import getToken from 'utils/getToken';
 
 function Profile() {
   const [comp, setComp] = useState('프로필');
@@ -25,12 +26,12 @@ function Profile() {
 
   useEffect(() => {
     getUserInfo(id)
-      .then((res) => {
-        setUserInfo(res.data.userInfo);
-        setProfile(res.data.profile);
-        setClubNo(res.data.profile.clubs[0].no);
-      })
-      .catch((err) => console.log(err));
+    .then((res) => {
+      setUserInfo(res.data.userInfo);
+      setProfile(res.data.profile);
+      setClubNo(res.data.profile.clubs[0].no);
+    })
+    .catch((err) => console.log(err));
   }, []);
 
   return (

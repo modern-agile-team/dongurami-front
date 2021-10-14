@@ -1,26 +1,43 @@
 import Post from '../Post/Post';
 import { useRouter } from 'next/router';
-import { getPost } from 'apis/profile';
+import { getBPost, getSPost } from 'apis/profile';
 import { useEffect, useState } from 'react';
 
 const PostContainer = () => {
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState();
   const router = useRouter();
   const data = router.query;
-  console.log(data);
+
+  const getBoardPost = () => {
+    getBPost(data.pid, data.clubNum, data.boardNum)
+      .then((res) => setPost(res.data.board))
+      .catch((err) => console.log(err.response));
+  }
+
+  const getScrapPost = () => {
+    getSPost(data.pid, data.clubNum, data.boardNum)
+    .then(res => {
+      setPost(res.data.scrap)
+      console.log(post)
+    })
+    .catch(err => console.log(err));
+  }
+
+  const scrapData = () => {
+    return {
+      ...post,
+      description:  post.description + `<br />` + post.scrapDescription
+    };
+  }
 
   useEffect(() => {
     if (!router.isReady) return;
-    getPost(data.pid, data.clubNum, data.boardNum)
-      .then((res) => setPost(res.data.board))
-      .catch((err) => {
-        console.log(err.response);
-      });
+    data.no === 'board' ? getBoardPost() : getScrapPost()
   }, [router]);
 
-  if (!post.description) return null;
+  if(!post?.description) return null;
 
-  return <Post category="personal" post={post} />;
+  return <Post category="personal" post={post.scrapDescription === undefined ? post : scrapData()} />;
 };
 
 export default PostContainer;

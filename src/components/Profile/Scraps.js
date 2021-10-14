@@ -52,8 +52,13 @@ function Scraps({
             return (
               <Link
                 key={index}
-                href={{
-                  pathname: `/profile/${id}/${clubNo}/${post.no}`
+                href={
+                  post.scrapNo === undefined ? {
+                  pathname: `/profile/${id}/${clubNo}/${post.boardNo}`,
+                  query: {no: 'board'}
+                } : {
+                  pathname: `/profile/${id}/${clubNo}/${post.scrapNo}`,
+                  query: {no: 'scrap'}
                 }}
               >
                 <div>
