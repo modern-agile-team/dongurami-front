@@ -3,54 +3,63 @@ import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import ReplyCommentContainer from './ReplyCommentContainer';
 import ReplyAddComment from './ReplyAddComment';
-import axios from 'axios';
+import {
+  deleteComment,
+  editComment,
+  editReplyComment,
+  deleteReplyComment
+} from 'apis/promotion';
 import getToken from 'utils/getToken';
 
 const Comment = ({ comment, postId, getData }) => {
   const [replyComment, setReplyComment] = useState(false);
   const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
-  const token = getToken();
   const onClick = () => {
     setReplyComment(!replyComment);
   };
 
   const onEdit = async () => {
     if (isContentEditable) {
-      await axios
-        .put(
-          `http://3.36.72.145:8080/api/board/promotion/${postId}/${comment.no}`,
-          {
-            description: descriptionDiv.current.textContent
-          },
-          {
-            headers: {
-              'x-auth-token': token
-            }
-          }
-        )
-        .then((response) => {
+      if (comment.groupNo !== comment.no) {
+        await editReplyComment(
+          postId,
+          comment.groupNo,
+          comment.no,
+          descriptionDiv.current.textContent
+        ).then((response) => {
           if (response.data.success) getData();
           else alert(response.data.msg);
         });
+      } else {
+        await editComment(
+          postId,
+          comment.no,
+          descriptionDiv.current.textContent
+        ).then((response) => {
+          if (response.data.success) getData();
+          else alert(response.data.msg);
+        });
+      }
     }
     setIsContentEditable(!isContentEditable);
+    console.log(descriptionDiv.current.textContent);
   };
 
   const onDelete = async () => {
-    await axios
-      .delete(
-        `http://3.36.72.145:8080/api/board/promotion/${postId}/${comment.no}`,
-        {
-          headers: {
-            'x-auth-token': token
-          }
+    if (comment.groupNo !== comment.no) {
+      await deleteReplyComment(postId, comment.groupNo, comment.no).then(
+        (response) => {
+          if (response.data.success) getData();
+          else alert(response.data.msg);
         }
-      )
-      .then((response) => {
+      );
+    } else {
+      await deleteComment(postId, comment.no).then((response) => {
         if (response.data.success) getData();
         else alert(response.data.msg);
       });
+    }
   };
 
   return (

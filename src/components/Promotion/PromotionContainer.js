@@ -32,7 +32,6 @@ const PromotionContainer = () => {
           const result = response.data.boards.slice(preitem, item);
 
           if (result.length) {
-            // const extraData = boarddata.concat(result);
             setBoardData((prev) => prev.concat(result));
           }
         });
@@ -41,8 +40,7 @@ const PromotionContainer = () => {
           const result = response.data.promotionSearch.slice(preitem, item);
 
           if (result.length) {
-            const extraData = boarddata.concat(result);
-            setBoardData((prev) => prev.concat(extraData));
+            setBoardData((prev) => prev.concat(result));
           }
         });
       } else {
@@ -50,8 +48,7 @@ const PromotionContainer = () => {
           const result = response.data.boards.slice(preitem, item);
 
           if (result.length) {
-            const extraData = boarddata.concat(result);
-            setBoardData((prev) => prev.concat(extraData));
+            setBoardData((prev) => prev.concat(result));
           }
         });
       }
