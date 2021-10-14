@@ -14,7 +14,7 @@
       line-height: 32px;
     }
     .signUp {
-      width: 5.5vw;
+      width: 70px;
       height: 32px;
       border-radius: 8px;
       background-color: #90e2d6;
@@ -54,21 +54,12 @@
     padding: 3.5rem 1rem;
     .user {
       justify-content: space-around;
-      li {
-        border-bottom: none;
-        &:hover {
-          background-color: rgba(255, 255, 255, 0);
-        }
-      }
       .login {
         padding-left: 0.7rem;
       }
       .signUp {
         margin: 0;
-        width: 40%;
-        &:hover {
-          background-color: #90e2d6;
-        }
+        width: 45%;
       }
     }
   }
@@ -81,9 +72,6 @@
     .user {
       .login {
         padding-left: 0.5rem;
-      }
-      .signUp {
-        width: 45%;
       }
     }
   }

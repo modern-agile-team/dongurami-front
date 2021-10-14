@@ -18,6 +18,11 @@
     li {
       padding: 1.5rem;
       text-align: center;
+      border-bottom: 0.1px solid #dddbdb;
+      &:hover {
+        background-color: #bfe7e17e;
+        color: black;
+      }
     }
   }
 }

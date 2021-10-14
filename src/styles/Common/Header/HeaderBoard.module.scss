@@ -65,6 +65,11 @@
       padding: 1.5rem;
       width: 100%;
       text-align: center;
+      border-bottom: 0.1px solid #dddbdb;
+      &:hover {
+        background-color: #bfe7e17e;
+        color: black;
+      }
     }
     .dropdown {
       display: none;
