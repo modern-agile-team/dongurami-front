@@ -15,7 +15,8 @@ function NoticeSearch() {
     setKeyword(e.target.value);
   };
 
-  const onClick = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     if (keyword === '') return;
     router.push({
       pathname: router.pathname,
@@ -23,16 +24,16 @@ function NoticeSearch() {
     });
   };
 
-  console.log(type);
-
   return (
     <div className={styles.container}>
       <select value={type} onChange={onTypeChange}>
         <option value="title">제목</option>
         <option value="name">작성자</option>
       </select>
-      <input value={keyword} onChange={onKeywordChange} />
-      <button onClick={onClick}><BsSearch /></button>
+      <form onSubmit={onSubmit}>
+        <input value={keyword} onChange={onKeywordChange} />
+        <button type="submit"><BsSearch /></button>
+      </form>
     </div>
   );
 }

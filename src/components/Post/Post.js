@@ -51,6 +51,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
         <div>
           <div>{post.name}</div>
           <div>
+            {(category === 'clubActivity') && <button>스크랩하기</button>}
             <Link href={editHref} passHref>
               <button>수정하기</button>
             </Link>

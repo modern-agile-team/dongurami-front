@@ -30,8 +30,8 @@ $color-light-mint: #c2f2dc;
 }
 
 .activities {
-  display: flex;
-  padding-left: 7vw;
-  margin-top: 2vh;
-  flex-wrap: wrap;
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, auto));
+  gap: 1rem;
 }

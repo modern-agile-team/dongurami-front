@@ -40,13 +40,11 @@ const Activities = () => {
         <Link href={{ pathname: `${router.pathname}/write-activity`, query: router.query }} passHref><IoIosAddCircleOutline /></Link>
       </div>
       <div className={styles.activities}>
-        {posts.map((el, i) => {
+        {posts.map((post) => {
           return (
             <Act
-              key={el.no}
-              no={el.no}
-              img={`https://picsum.photos/500?random=${i}`}
-              title={el.title}
+              key={post.no}
+              post={post}
               onClick={onClick}
             />
           );
