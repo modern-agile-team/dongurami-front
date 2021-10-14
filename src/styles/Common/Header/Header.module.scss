@@ -81,34 +81,34 @@
 }
 
 @media screen and (max-width: 768px) {
-  .myHeader {
-    flex-direction: column;
-    img {
-      position: absolute;
-      left: -5px;
-    }
-    & > div:nth-of-type(1) {
-      display: inline;
-      position: absolute !important;
-      right: 35px;
-    }
-    .topMenu {
-      width: 60%;
-      margin: 0%;
-      margin-left: 105%;
-    }
-    .menus {
-      cursor: default;
-      font-size: 90%;
-      width: 100%;
-      height: 100%;
-      flex-direction: column;
-      margin: 0%;
-      margin-top: 110%;
-      margin-bottom: 60%;
+  .container {
+    .myHeader {
+      img {
+        position: absolute;
+        left: -5px;
+      }
+      & > div:nth-of-type(1) {
+        display: inline;
+        position: absolute !important;
+        right: 35px;
+      }
+      .topMenu {
+        flex-direction: column-reverse;
+        position: fixed;
+        top: 60px;
+        right: 0;
+        width: 30%;
+      }
+      .menus {
+        flex-direction: column;
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+      }
+      .users {
+        margin: 0;
+      }
       li {
-        width: 70%;
-        padding: 1.5rem;
         cursor: pointer;
         border-bottom: 0.1px solid #dddbdb;
         &:hover {
@@ -116,70 +116,48 @@
           color: black;
         }
       }
-    }
-    .users {
-      width: 100%;
-      height: 100%;
-      margin-top: 90%;
-    }
-    .tokenIcons {
-      width: 100%;
-      margin-top: 150%;
-      .alam {
+      .tokenIcons {
         width: 100%;
+        margin: 0;
+        padding: 4.2rem 0rem;
+        justify-content: space-evenly;
+        .bell {
+          margin: 0%;
+          width: 33px;
+          height: 33px;
+        }
+        .Profile {
+          margin: 0%;
+          width: 33px;
+          height: 33px;
+        }
       }
-      .bell {
-        width: 20%;
-        height: 20%;
-        margin-top: 130%;
-        margin-left: -180%;
+      #show {
+        display: flex;
+        box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.215);
+        background-color: rgb(252, 252, 252);
       }
-      .Profile {
-        width: 20%;
-        height: 20%;
-        margin-top: 130%;
-        margin-left: -182%;
+      #hide {
+        display: none;
       }
-    }
-    #show {
-      background-color: #fafafaf5;
-    }
-    #hide {
-      display: none;
     }
   }
 }
 
 @media screen and (max-width: 480px) {
-  .myHeader {
-    width: 100%;
-    img {
-      padding-left: 2%;
-    }
-    .topMenu {
-      width: 90vw;
-      .menus {
-        margin-top: 150%;
-      }
-      li {
-        font-size: 80%;
-        width: 100%;
-        margin-left: -27%;
-      }
-      .users {
-        margin-left: -5%;
+  .container {
+    .myHeader {
+      .topMenu {
+        width: 45%;
       }
       .tokenIcons {
-        margin-top: 145%;
-        margin-left: 0%;
         .bell {
-          height: 12%;
-          margin-left: -100%;
+          width: 27px;
+          height: 27px;
         }
         .Profile {
-          width: 18%;
-          height: 15%;
-          margin-left: -145%;
+          width: 27px;
+          height: 27px;
         }
       }
     }
