@@ -10,12 +10,7 @@ const ClubList = ({ img, categories, title, clubNo, clubName }) => {
       <img
         src={img}
         alt="동아리"
-        onClick={() =>
-          router.push({
-            pathname: `/clubhome/${clubNo}`,
-            query: { club: escape(clubName) }
-          })
-        }
+        onClick={() => router.push(`/clubhome/${clubNo}`)}
       />
       <div>
         <p id={styles.desc}>{title}</p>

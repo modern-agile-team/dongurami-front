@@ -143,12 +143,9 @@ export const Manager = () => {
     setBoardAuth(boolOfBoardAuth);
   };
   //-------------------------------------------------------------//
-  console.log(unescape('1C1OKWM_koKR954KR954'));
+
   const toClubHome = () => {
-    router.push({
-      pathname: `/clubhome/${router.query.id}`,
-      query: { club: router.query.club }
-    });
+    router.push(`/clubhome/${router.query.id}`);
   };
 
   const exileMember = async (index) => {
@@ -180,7 +177,7 @@ export const Manager = () => {
 
   return (
     <div className={styles.container}>
-      <ManagerHeader toClubHome={toClubHome} clubName={router.query.club} />
+      <ManagerHeader toClubHome={toClubHome} />
       <Members
         members={members}
         leader={leader}

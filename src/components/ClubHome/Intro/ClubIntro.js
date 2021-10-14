@@ -1,20 +1,24 @@
 import styles from '../../../styles/Club/Home/Intro/ClubIntro.module.scss';
 import ClubInfo from './ClubInfo';
 import Desc from './Desc';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getInfo, putIntroDesc } from 'apis/clubhome';
 import Skeleton from './Skeleton';
+import { useDispatch, useSelector } from 'react-redux';
+import { getClubInfo, putDesc } from 'redux/slices/clubhome';
+import { putIntroDesc } from 'apis/clubhome';
 
 const ClubIntro = ({ visitTime }) => {
-  const [info, setInfo] = useState([]);
   const [descUpdate, setDescUpdate] = useState(false);
-  const [introDesc, setIntroDesc] = useState('');
-  const [categori, setCategori] = useState('');
-  const [leader, setLeader] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [introDesc, setIntroDesc] = useState('');
 
   const router = useRouter();
+  const clubId = router.query.id;
+
+  const dispatch = useDispatch();
+
+  const infos = useSelector((state) => state.clubhome.info);
 
   const onDescUpdate = () => {
     setDescUpdate(!descUpdate);
@@ -26,56 +30,20 @@ const ClubIntro = ({ visitTime }) => {
 
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
-    putIntroDesc(
-      {
-        logoUrl: info[0].logoUrl,
-        fileId: info[0].fileId,
-        introduce: introDesc
-      },
-      router.query.id
-    )
-      .then((res) =>
-        res.data
-          ? alert('글이 수정되었습니다.')
-          : alert('글 수정에 실패했습니다')
-      )
-      .catch((err) => alert(err.response.data.msg));
-
+    putIntroDesc({ introduce: introDesc }, clubId)
+      .then(dispatch(putDesc({ introduce: introDesc }, clubId)))
+      .then(dispatch(getClubInfo(clubId)));
     setDescUpdate(!descUpdate);
   };
 
-  // 동아리 정보 불러오기
-  const getData = useCallback(async () => {
-    getInfo(router.query.id)
-      .then((res) => {
-        setLeader(res.data.clientInfo.leader);
-        setCategori(res.data.result[0].category);
-        setInfo(res.data.result);
-        setIntroDesc(res.data.result[0].introduce);
-      })
-      .catch((err) => {
-        switch (err.response.status) {
-          case 401:
-            alert('로그인 후 이용해주세요');
-            router.push('/LoginPage');
-            break;
-          case 404:
-            alert('존재하지 않는 동아리입니다');
-            router.push('/');
-            break;
-          default:
-            alert('알 수 없는 오류입니다 개발자에게 문의해주세요');
-            router.push('/');
-        }
-      });
-  }, [router]);
-
   useEffect(() => {
-    if (!router.query.id) return;
+    if (!clubId) return;
     setIsLoading(true);
-    getData();
+    dispatch(getClubInfo(clubId));
     setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
-  }, [getData, router.query.id, visitTime]);
+  }, [dispatch, clubId, visitTime]);
+
+  if (!infos) return null;
 
   return (
     <div className={styles.container}>
@@ -83,22 +51,13 @@ const ClubIntro = ({ visitTime }) => {
         <Skeleton />
       ) : (
         <>
-          <ClubInfo
-            clubName={info[0] && info[0].name}
-            logoUrl={info[0] && info[0].logoUrl}
-            fileId={info[0] && info[0].fileId}
-            genderMan={info[0] && info[0].genderMan}
-            genderWomen={info[0] && info[0].genderWomen}
-            categori={categori}
-            leader={leader}
-          />
+          <ClubInfo infos={infos} />
           <Desc
+            infos={infos}
             onDescSubnmit={onDescSubnmit}
             onDescChange={onDescChange}
-            introDesc={introDesc}
             onDescUpdate={onDescUpdate}
             descUpdate={descUpdate}
-            leader={leader}
           />
         </>
       )}

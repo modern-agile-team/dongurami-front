@@ -18,23 +18,24 @@ const Button = ({ descUpdate, onDescSubnmit, onDescUpdate }) => {
 
 const Desc = ({
   onDescChange,
-  introDesc,
   onDescUpdate,
   descUpdate,
   onDescSubnmit,
-  leader
+  infos
 }) => {
+  const result = infos.result[0];
+  const client = infos.clientInfo;
   return (
     <div className={styles.intro}>
       <span>동아리 소개</span>
       <div id={styles.desc}>
         {descUpdate ? (
-          <textarea onChange={onDescChange} defaultValue={introDesc} />
+          <textarea onChange={onDescChange} defaultValue={result.introduce} />
         ) : (
-          <p>{introDesc}</p>
+          <p>{result.introduce}</p>
         )}
       </div>
-      {leader === 1 ? (
+      {client.leader === 1 ? (
         <div>
           <Button
             descUpdate={descUpdate}
