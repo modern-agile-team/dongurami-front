@@ -7,7 +7,6 @@ import Modal from './Modal';
 import Promotion from './Promotion';
 import Link from 'next/link';
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
-import test from 'pages/changepassword';
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -18,7 +17,6 @@ const PromotionContainer = () => {
   const [type, setType] = useState('title');
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
-  const [test, setTest] = useState(false);
   const img =
     'https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg';
 
@@ -123,10 +121,6 @@ const PromotionContainer = () => {
     };
   }, [searchItem, isSearch]);
 
-  useEffect(() => {
-    console.log(boarddata, '테스트');
-  }, [test]);
-
   return (
     <>
       <Header />
@@ -151,7 +145,9 @@ const PromotionContainer = () => {
             pId={el.no}
             date={el.inDate}
             clubName={el.clubName}
+            name={el.studentName}
             img={img}
+            category={el.category}
             setOpenModal={setOpenModal}
             setPostId={setPostId}
           />
