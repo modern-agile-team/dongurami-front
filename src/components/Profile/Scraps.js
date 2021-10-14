@@ -1,29 +1,50 @@
 import styles from '../../styles/Profile/Scraps.module.scss';
 import { BsFileText, BsPlusCircle } from 'react-icons/bs';
 
-function Scraps({ moveWriteScraps, getScraps, comp, userInfo, profile }) {
+function Scraps({
+  moveWriteScraps,
+  comp,
+  profile,
+  getScraps,
+  setDataArr,
+  dataArr
+}) {
   if (comp === '스크랩') {
     return (
       <div className={styles.wrap}>
         <div>
           <BsPlusCircle onClick={() => moveWriteScraps()} />
-          <select>
+          <select
+            onChange={(e) => {
+              getScraps(profile.id, e.target.value).then((res) => {
+                setDataArr(
+                  res.data.scraps
+                    .concat(res.data.board)
+                    .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
+                );
+              });
+            }}
+          >
             {profile.clubs.map((club, index) => {
-              return <option key={index}>{club.title}</option>;
+              return (
+                <option value={club.no} key={index}>
+                  {club.name}
+                </option>
+              );
             })}
           </select>
         </div>
         <div className={styles.postItem}>
-          {scrapData.map((data, index) => {
+          {dataArr.map((post, index) => {
             return (
               <div key={index}>
-                {data.fileUrl === null ? (
+                {post.imgPath === null ? (
                   <BsFileText className={styles.thumbnail} />
                 ) : (
-                  <img className={styles.thumbnail} src={data.fileUrl} />
+                  <img className={styles.thumbnail} src={post.imgPath} />
                 )}
                 <br />
-                <span>{data.title}</span>
+                <span>{post.title}</span>
               </div>
             );
           })}

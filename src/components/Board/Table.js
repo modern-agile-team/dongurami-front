@@ -24,7 +24,7 @@ function NoticeTable({ posts, page, category }) {
             <td>{post.no}</td>
             <td>
               {(category === 'clubNotice') ? (
-                <Link href={{ pathname: `${router.pathname}/notice/${post.no}` }} passHref>
+                <Link href={{ pathname: `${router.pathname}/notice/${post.no}`, query: router.query }} passHref>
                   <a>{post.title}</a>
                 </Link>
               ) : (

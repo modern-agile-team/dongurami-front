@@ -39,7 +39,7 @@ const Apply = () => {
 
   // 지원서 불러오기
   const getApplyQuestions = useCallback(() => {
-    getApply(router.query.no)
+    getApply(router.query.id)
       .then((res) => {
         setUserInfo({
           name: res.data.clientInfo[0].name,
@@ -54,7 +54,7 @@ const Apply = () => {
         setQuestions(res.data.questions);
       })
       .catch((err) => alert(err.response.data.msg));
-  }, [router.query.no]);
+  }, [router.query.id]);
 
   // 질문 추가
   const onQuestionAdd = async () => {
@@ -62,7 +62,7 @@ const Apply = () => {
       {
         description: newQuestion
       },
-      router.query.no
+      router.query.id
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
@@ -73,7 +73,7 @@ const Apply = () => {
 
   // 질문 삭제
   const onRemove = async (i) => {
-    await deleteApply({ description: newQuestion }, i, router.query.no)
+    await deleteApply({ description: newQuestion }, i, router.query.id)
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data));
     getApplyQuestions();
@@ -86,7 +86,7 @@ const Apply = () => {
     });
 
     if (isUpdate[i]) {
-      await putApply({ description: updateQuestion }, no, router.query.no)
+      await putApply({ description: updateQuestion }, no, router.query.id)
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg));
       getApplyQuestions();
@@ -105,13 +105,13 @@ const Apply = () => {
         },
         extra: data
       },
-      router.query.no
+      router.query.id
     )
       .then((res) => {
         alert(res.data.msg);
         router.push({
           pathname: '/clubhome/club',
-          query: { no: router.query.no }
+          query: { no: router.query.id }
         });
       })
       .catch((err) => alert(err.response.data.msg));
@@ -162,7 +162,7 @@ const Apply = () => {
 
   return (
     <div className={styles.container}>
-      <ApplyHeader clubName={router.query.name} />
+      <ApplyHeader clubName={router.query.club} />
       <ApplyQuestions onUserInfoChange={onUserInfoChange} userInfo={userInfo} />
       <Additional
         onAnswerInputChange={onAnswerInputChange}

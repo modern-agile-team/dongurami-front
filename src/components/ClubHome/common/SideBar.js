@@ -15,7 +15,7 @@ import { MdRateReview } from 'react-icons/md';
 
 const board = (clubName) => {
   return [
-    clubName,
+    unescape(clubName),
     '공지 사항',
     '활동 내용',
     '일정',
@@ -58,11 +58,11 @@ const SideBar = ({ setComp, comp }) => {
   const router = useRouter();
 
   const checkManageAuth = async () => {
-    getMember(router.query.no)
+    getMember(router.query.id)
       .then(() => {
         Router.push({
-          pathname: '/manager',
-          query: { no: router.query.no, name: router.query.name }
+          pathname: `/manager/${router.query.id}`,
+          query: { club: router.query.club }
         });
       })
       .catch((err) => {
@@ -89,7 +89,7 @@ const SideBar = ({ setComp, comp }) => {
   return (
     <div className={hide ? styles.hide : styles.sideBar} id={styles.open}>
       <div className={styles.menu} id={styles.show}>
-        {board(router.query.name).map((el, i) => {
+        {board(router.query.club).map((el, i) => {
           return (
             <div
               className={styles.board}

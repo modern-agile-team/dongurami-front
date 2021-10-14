@@ -27,7 +27,7 @@ const UserInfo = ({ logout, comp, baseImg, userInfo, profile }) => {
           ) : (
             profile.clubs.map((club, index) => {
               return (
-                <Link href={`/${club.no}/clubhome`} key={index}>
+                <Link href={`/clubhome/${club.no}`} key={index}>
                   {club.name}
                 </Link>
               );

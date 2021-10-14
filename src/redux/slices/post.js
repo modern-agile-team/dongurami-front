@@ -4,8 +4,8 @@ import api from 'apis/post';
 const getPost = createAsyncThunk(
   'post/getPost',
   async (arg, { getState }) => {
-    const state = getState().post;
-    let { category, no: pid } = state;
+    const state = getState();
+    let { category, no: pid } = state.post;
     if (arg) {
       ({ category, pid } = arg);
     }

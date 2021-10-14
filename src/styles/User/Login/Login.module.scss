@@ -1,11 +1,8 @@
 .login {
-  font-family: "twayair";
-  width: 42em;
+  width: 50%;
   height: 28rem;
-
-  margin: 8vh auto;
-  border-style: solid;
-  border-color: #c2f2dc;
+  margin: 5% auto;
+  border: 2px solid #c2f2dc;
   border-radius: 70px;
   .body {
     display: flex;
@@ -13,14 +10,15 @@
   }
   h1 {
     margin: 0 auto;
-    font-size: 2.5em;
+    font-size: 240%;
+    font-weight: 100;
     margin-top: 45px;
     margin-bottom: 35px;
   }
   .idInput {
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: 1rem;
-    width: 30rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 90%;
+    width: 70%;
     height: 3.3rem;
     margin: 0 auto;
     margin-bottom: 20px;
@@ -29,20 +27,13 @@
     outline-style: none;
   }
   .pwInput {
-    font-family: "Noto Sans KR", sans-serif;
-    font-size: 1rem;
-    width: 30rem;
-    height: 3.3rem;
-    margin: 0 auto;
-    border: none;
-    border-bottom: 1.4px solid #dadada;
-    outline-style: none;
+    @extend .idInput;
+    margin-bottom: 0%;
   }
   button {
-    zoom: 1.4;
-    width: 4.5rem;
-    height: 2.3rem;
-    margin: 0 auto;
+    width: 20%;
+    height: 50px;
+    font-size: 100%;
     border-radius: 8px;
     border-style: solid;
     border-color: #3fcdb8;
@@ -53,30 +44,30 @@
 }
 
 .find {
-  padding: 1rem;
-  margin-left: 23rem;
-  cursor: pointer;
+  width: 70%;
+  padding-top: 1rem;
+  font-size: 85%;
+  margin: 0 auto;
+  text-align: right;
+  span {
+    cursor: pointer;
+  }
   .findID {
     margin-right: 1.5rem;
   }
 }
 
 .buttons {
-  // display: flex;
-  padding: 1rem;
-  // margin-left: 21rem;
+  display: flex;
+  justify-content: flex-end;
+  width: 72%;
+  margin: 0 auto;
+  margin-top: 5%;
   .loginBtn {
-    margin-left: 21rem;
-
-    margin-right: 1.5rem;
+    margin-right: 15px;
   }
   .loginBtn:hover {
     filter: brightness(96%);
-  }
-  .naverLogin {
-    // width: 100%;
-    text-align: start;
-    margin-left: 10%;
   }
   .signupBtn:hover {
     filter: brightness(96%);
@@ -85,29 +76,10 @@
 
 @media screen and (max-width: 768px) {
   .wrap {
-    width: 100%;
     .login {
       width: 80%;
-      font-size: 90%;
-      .idInput {
-        width: 65%;
-      }
-      .pwInput {
-        width: 65%;
-      }
       .find {
-        font-size: 90%;
-        width: 80%;
-        margin: 0;
-        text-align: right;
-      }
-      .buttons {
-        width: 85%;
-        margin: 0;
-        text-align: right;
-        .loginBtn {
-          margin-left: 75%;
-        }
+        font-size: 80%;
       }
     }
   }
@@ -119,15 +91,8 @@
     .login {
       width: 90%;
       font-size: 80%;
-      .idInput {
-        font-size: 100%;
-      }
-      .pwInput {
-        font-size: 100%;
-      }
       button {
-        zoom: 1.2;
-        margin-top: 8%;
+        width: 30%;
       }
     }
   }

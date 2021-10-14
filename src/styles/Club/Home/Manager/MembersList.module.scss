@@ -26,23 +26,36 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   }
 }
 
+.name {
+  height: 100%;
+}
+.name div {
+  border: none;
+  height: 100%;
+  width: 15%;
+}
+
+#crown {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#name {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#name span {
+  cursor: pointer;
+  &:hover {
+    color: rgb(238, 55, 55);
+  }
+}
+
 #changeLeader {
   color: rgba(194, 194, 194, 0.281);
   cursor: pointer;
   &:hover {
     color: #f7e600;
-  }
-}
-
-.name {
-  svg {
-    margin: 0;
-  }
-  div {
-    width: 25%;
-    border: none;
-  }
-  #crown {
-    width: 5%;
   }
 }

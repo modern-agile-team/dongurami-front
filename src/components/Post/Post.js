@@ -12,7 +12,7 @@ const ReactQuill = dynamic(import("react-quill"), {
   ssr: false,
 });
 
-function Post({ category, post }) {
+function Post({ category, post, optionalOnDelete, optionalEditHref }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -26,10 +26,12 @@ function Post({ category, post }) {
     undefined
   );
 
-  const onDelete = async () => {
+  const onDelete = optionalOnDelete || (async () => {
     await api.deletePost(category, post.no);
     router.back();
-  };
+  });
+
+  const editHref = optionalEditHref || { pathname: `${router.pathname}/edit`, query: router.query }
 
   return (
     <div className={styles.container}>
@@ -41,7 +43,7 @@ function Post({ category, post }) {
         <div>
           <div>{post.name}</div>
           <div>
-            <Link href={{ pathname: `${router.pathname}/edit`, query: router.query }} passHref>
+            <Link href={editHref} passHref>
               <button>수정하기</button>
             </Link>
             <button onClick={onDelete}>삭제하기</button>
@@ -52,7 +54,7 @@ function Post({ category, post }) {
       </div>
       <hr />
       <ReactQuill value={post.description} theme="bubble" readOnly />
-      <CommentContainer comments={post.comments} />
+      {(post.comments) && <CommentContainer comments={post.comments} />}
     </div>
   );
 }

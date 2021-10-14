@@ -4,6 +4,7 @@ import Approve from './Approve';
 import Members from './Members';
 import ManagerHeader from './ManagerHeader';
 import {
+  deleteMember,
   getMember,
   postApply,
   putApply,
@@ -32,7 +33,7 @@ export const Manager = () => {
 
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
-    getMember(router.query.no)
+    getMember(router.query.id)
       .then((res) => {
         setApplicantQNA(res.data.applicant.questionsAnswers);
         setApplicantInfo(res.data.applicant.applicantInfo);
@@ -42,8 +43,22 @@ export const Manager = () => {
           processQuesData(res.data.applicant.questionsAnswers)
         );
       })
-      .catch((err) => alert(err.response.data.msg));
-  }, [router.query.no]);
+      .catch((err) => {
+        switch (err.response.status) {
+          case 401:
+            alert('로그인 후 이용해주세요');
+            router.push('/LoginPage');
+            break;
+          case 404:
+            alert('존재하지 않는 동아리입니다');
+            router.push('/');
+            break;
+          default:
+            alert('알 수 없는 오류입니다 개발자에게 문의해주세요');
+            router.push('/');
+        }
+      });
+  }, [router]);
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
@@ -51,7 +66,7 @@ export const Manager = () => {
       {
         applicant: mergedApplicantInfo[e.target.id].id
       },
-      router.query.no
+      router.query.id
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
@@ -64,11 +79,12 @@ export const Manager = () => {
       {
         applicant: mergedApplicantInfo[e.target.id].id
       },
-      router.query.no
+      router.query.id
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => console.log(err.response.data.msg));
     await getMembersData();
+    if (applicantInfo.length === 0) router.reload();
   };
 
   // 회장 양도 PUT
@@ -80,7 +96,7 @@ export const Manager = () => {
         {
           newLeader: newLeader[memberIndex].id
         },
-        router.query.no
+        router.query.id
       )
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
@@ -105,7 +121,7 @@ export const Manager = () => {
       {
         adminOptions: adminOptions
       },
-      router.query.no
+      router.query.id
     )
       .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
@@ -127,12 +143,24 @@ export const Manager = () => {
     setBoardAuth(boolOfBoardAuth);
   };
   //-------------------------------------------------------------//
-
+  console.log(unescape('1C1OKWM_koKR954KR954'));
   const toClubHome = () => {
     router.push({
-      pathname: '/clubhome/club',
-      query: { no: router.query.no }
+      pathname: `/clubhome/${router.query.id}`,
+      query: { club: router.query.club }
     });
+  };
+
+  const exileMember = async (index) => {
+    const studentID = changeLeaderRef.current[index].id;
+    await deleteMember(
+      {
+        studentId: studentID
+      },
+      router.query.id
+    )
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err.response));
   };
 
   useEffect(() => {
@@ -144,7 +172,7 @@ export const Manager = () => {
   }, [applicantInfo, mergedApplicantQNA]);
 
   useEffect(() => {
-    if (!router.query.no) return;
+    if (!router.query.id) return;
     getMembersData();
     onApplyAuthClick();
     onBoardAuth();
@@ -152,7 +180,7 @@ export const Manager = () => {
 
   return (
     <div className={styles.container}>
-      <ManagerHeader toClubHome={toClubHome} clubName={router.query.name} />
+      <ManagerHeader toClubHome={toClubHome} clubName={router.query.club} />
       <Members
         members={members}
         leader={leader}
@@ -161,6 +189,7 @@ export const Manager = () => {
         onBoardAuth={onBoardAuth}
         changeMembersAuth={changeMembersAuth}
         refArr={refArr}
+        exileMember={exileMember}
       />
       <Approve
         onApplyAccept={onApplyAccept}

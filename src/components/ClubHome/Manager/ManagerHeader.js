@@ -6,7 +6,7 @@ const ManagerHeader = ({ toClubHome, clubName }) => {
   return (
     <div className={styles.header}>
       <AiOutlineHome size={30} onClick={toClubHome} />
-      <h1 onClick={toClubHome}>{clubName}</h1>
+      <h1 onClick={toClubHome}>{unescape(clubName)}</h1>
     </div>
   );
 };
