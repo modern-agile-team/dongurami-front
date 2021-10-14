@@ -8,8 +8,8 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { setCategory } from 'redux/slices/post';
 
-const ReactQuill = dynamic(import("react-quill"), {
-  ssr: false,
+const ReactQuill = dynamic(import('react-quill'), {
+  ssr: false
 });
 
 function Post({ category, post, optionalOnDelete, optionalEditHref }) {
@@ -17,21 +17,29 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setCategory(category))
-  }, [category, dispatch])
+    dispatch(setCategory(category));
+  }, [category, dispatch]);
 
-  const title = (
-    (category === 'notice') ? '공지 게시판' :
-    (category === 'free') ? '자유 게시판' :
-    undefined
-  );
+  const title =
+    category === 'notice'
+      ? '공지 게시판'
+      : category === 'free'
+      ? '자유 게시판'
+      : category === 'personal'
+      ? '활동내용'
+      : undefined;
 
-  const onDelete = optionalOnDelete || (async () => {
-    await api.deletePost(category, post.no);
-    router.back();
-  });
+  const onDelete =
+    optionalOnDelete ||
+    (async () => {
+      await api.deletePost(category, post.no);
+      router.back();
+    });
 
-  const editHref = optionalEditHref || { pathname: `${router.pathname}/edit`, query: router.query }
+  const editHref = optionalEditHref || {
+    pathname: `${router.pathname}/edit`,
+    query: router.query
+  };
 
   return (
     <div className={styles.container}>
@@ -54,7 +62,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
       </div>
       <hr />
       <ReactQuill value={post.description} theme="bubble" readOnly />
-      {(post.comments) && <CommentContainer comments={post.comments} />}
+      {post.comments && <CommentContainer comments={post.comments} />}
     </div>
   );
 }

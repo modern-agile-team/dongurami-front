@@ -1,5 +1,6 @@
 import styles from '../../styles/Profile/Scraps.module.scss';
 import { BsFileText, BsPlusCircle } from 'react-icons/bs';
+import Link from 'next/dist/client/link';
 
 function Scraps({
   moveWriteScraps,
@@ -7,7 +8,10 @@ function Scraps({
   profile,
   getScraps,
   setDataArr,
-  dataArr
+  dataArr,
+  id,
+  clubNo,
+  setClubNo
 }) {
   if (comp === '스크랩') {
     return (
@@ -15,11 +19,13 @@ function Scraps({
         <div>
           <BsPlusCircle onClick={() => moveWriteScraps()} />
           <select
+            value=""
             onChange={(e) => {
+              setClubNo(e.target.value);
               getScraps(profile.id, e.target.value).then((res) => {
                 setDataArr(
                   res.data.scraps
-                    .concat(res.data.board)
+                    .concat(res.data.boards)
                     .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
                 );
               });
@@ -37,15 +43,22 @@ function Scraps({
         <div className={styles.postItem}>
           {dataArr.map((post, index) => {
             return (
-              <div key={index}>
-                {post.imgPath === null ? (
-                  <BsFileText className={styles.thumbnail} />
-                ) : (
-                  <img className={styles.thumbnail} src={post.imgPath} />
-                )}
-                <br />
-                <span>{post.title}</span>
-              </div>
+              <Link
+                key={index}
+                href={{
+                  pathname: `/profile/${id}/${clubNo}/${post.no}`
+                }}
+              >
+                <div>
+                  {post.imgPath === null ? (
+                    <BsFileText className={styles.thumbnail} />
+                  ) : (
+                    <img className={styles.thumbnail} src={post.imgPath} />
+                  )}
+                  <br />
+                  <span>{post.title}</span>
+                </div>
+              </Link>
             );
           })}
         </div>
