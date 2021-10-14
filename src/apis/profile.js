@@ -23,3 +23,11 @@ export const getSPost = (id, clubNum, scrapNum ) => {
 export const addPost = (id, clubNum, body) => {
   return instance.post(`/api/my-page/${id}/personal/${clubNum}`, body);
 };
+
+export const modifyBPost = (id, clubNum, boardNum, body) => {
+  return instance.put(`/api/my-page/${id}/personal/${clubNum}/${boardNum}`, body)
+}
+
+export const modifySPost = (id, clubNum, scrapNum, body) => {
+  return instance.put(`/api/my-page/${id}/personal/scrap/${clubNum}/${scrapNum}`, body)
+}
