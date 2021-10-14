@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import styles from '../../styles/User/Login/Login.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { postLogin } from 'apis/user';
 
@@ -34,10 +34,6 @@ export const Login = () => {
       })
       .catch((err) => alert(err.response.data.msg));
   };
-
-  useEffect(() => {
-    console.log(window.naver);
-  }, []);
 
   return (
     <div className={styles.wrap}>
@@ -75,9 +71,13 @@ export const Login = () => {
             로그인
           </button>
           <br />
-          <Link href="/selectSignUp" passHref>
-            <button className={styles.signupBtn}>회원가입</button>
-          </Link>
+          <div className={styles.signup}>
+            <span>아직 계정이 없으신가요?</span>
+            <br />
+            <Link href="/selectSignUp" passHref>
+              <span className={styles.signupBtn}>회원가입</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
