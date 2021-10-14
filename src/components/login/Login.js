@@ -32,7 +32,7 @@ export const Login = () => {
         }
         router.push('/');
       })
-      .catch((err) => alert(err.response.data.msg));
+      .catch((err) => console.log(err.response));
   };
 
   return (

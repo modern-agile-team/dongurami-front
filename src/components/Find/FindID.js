@@ -55,7 +55,7 @@ export const FindID = () => {
             <span>비밀번호 찾기</span>
           </Link>
         </div>
-        <div>
+        <div className={styles.btnWrap}>
           <button onClick={onSubmit}>아이디 찾기</button>
         </div>
       </div>

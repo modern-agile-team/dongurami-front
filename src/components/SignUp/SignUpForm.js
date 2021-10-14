@@ -13,7 +13,7 @@ function SignUpForm() {
   const [email, setEmail] = useState('');
   const [major, setMajor] = useState('');
   const [checkSignUp, setCheckSignUp] = useState('');
-  const [emailCheck, setEmailCheck] = useState(false);
+  const [emailCheck, setEmailCheck] = useState();
   const [majorNum, setMajorNum] = useState('');
 
   //네이버 oAuth의 프로필 정보 가져오기
@@ -26,7 +26,7 @@ function SignUpForm() {
           setNames(res.data.name);
           setEmail(res.data.email);
         })
-        .catch((err) => alert(err.response.data.msg));
+        .catch((err) => alert(err.response));
     }
   };
   useEffect(UserProfile, []);
@@ -116,10 +116,10 @@ function SignUpForm() {
     );
   };
 
-  const checkEmail = (e) => {
+  const checkEmail = () => {
     const regExp =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    let result = regExp.test(e.target.value);
+    let result = regExp.test(email);
     setEmailCheck(result);
   };
 
@@ -127,6 +127,7 @@ function SignUpForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    checkEmail();
     if (id === '') {
       setCheckSignUp('학번을 입력해 주세요.');
     } else if (id.length !== 9) {
@@ -172,6 +173,20 @@ function SignUpForm() {
       <div className={styles.container}>
         <h1>회원가입</h1>
         <input
+          type="text"
+          placeholder="이름"
+          onChange={onChange}
+          name="names"
+          value={names}
+        />
+        <input
+          type="email"
+          placeholder="이메일"
+          onChange={onChange}
+          name="email"
+          value={email}
+        />
+        <input
           className={styles.inputNum}
           type="number"
           placeholder="학번&#32;&#40;아이디로 사용됩니다.&#41;"
@@ -179,34 +194,6 @@ function SignUpForm() {
           name="id"
           value={id}
           onBlur={checkID}
-        />
-        <input
-          type="text"
-          placeholder="이름"
-          onChange={onChange}
-          name="names"
-          value={names}
-        />
-        <select
-          className={styles.select}
-          onChange={onChange}
-          name="major"
-          value={majorNum}
-        >
-          {majorCategory.map((majorCategory, index) => (
-            <option id={index} key={index} value={majorCategory.value}>
-              {majorCategory.label}
-            </option>
-          ))}
-        </select>
-        {major === undefined || majorNum === '' ? '' : FeedbackMessage()}
-        <input
-          type="email"
-          placeholder="이메일"
-          onChange={onChange}
-          name="email"
-          value={email}
-          onBlur={checkEmail}
         />
         <input
           className={styles.pwd}
@@ -224,6 +211,19 @@ function SignUpForm() {
           name="repassword"
           value={repassword}
         />
+        <select
+          className={styles.select}
+          onChange={onChange}
+          name="major"
+          value={majorNum}
+        >
+          {majorCategory.map((majorCategory, index) => (
+            <option id={index} key={index} value={majorCategory.value}>
+              {majorCategory.label}
+            </option>
+          ))}
+        </select>
+        {major === undefined || majorNum === '' ? '' : FeedbackMessage()}
         <span className={styles.notSame}>{checkSignUp}</span>
         <button className={styles.button} onClick={onSubmit}>
           가입하기

@@ -20,7 +20,7 @@
     height: 50px;
     border: none;
     border-radius: 0px;
-    border-bottom: 1.3px inset #dadada;
+    border-bottom: 1.4px solid #dadada;
     outline-style: none;
     margin-bottom: 3%;
   }
@@ -104,6 +104,7 @@
   .form {
     .container {
       width: 85%;
+      box-shadow: 0px 0px 0px 0px;
       h1 {
         margin-bottom: 15%;
       }
