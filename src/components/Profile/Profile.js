@@ -13,6 +13,7 @@ function Profile() {
   const [id, setId] = useState('201816035');
   const [clubNo, setClubNo] = useState(0);
   const [dataArr, setDataArr] = useState([]);
+  const [token, setToken] = useState(getToken());
 
   const logout = () => {
     console.log(1);
@@ -24,15 +25,16 @@ function Profile() {
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
-  useEffect(() => {
-    getUserInfo(id)
+  useEffect(() => { 
+    setToken(getToken())
+    getUserInfo(id, token)
     .then((res) => {
       setUserInfo(res.data.userInfo);
       setProfile(res.data.profile);
       setClubNo(res.data.profile.clubs[0].no);
     })
     .catch((err) => console.log(err));
-  }, []);
+  }, [token]);
 
   return (
     <div className={styles.container}>
