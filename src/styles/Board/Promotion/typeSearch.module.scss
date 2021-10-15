@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  // margin-top: 5em;
+
   select {
     border-radius: 1rem;
     height: 2rem;
@@ -12,7 +12,7 @@
     border: 1px solid lightgray;
     position: absolute;
     right: 70%;
-    top: 58%;
+    top: 68%;
   }
 
   .searchContainer {
@@ -49,6 +49,7 @@
   ul {
     display: flex;
     list-style: none;
+    margin-right: 3vw;
 
     li {
       cursor: pointer;
