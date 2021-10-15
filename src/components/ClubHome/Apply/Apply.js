@@ -12,6 +12,7 @@ import {
   putApply,
   postSubmit
 } from 'apis/clubhome';
+import { useSelector } from 'react-redux';
 
 const Apply = () => {
   const [userInfo, setUserInfo] = useState({
@@ -33,6 +34,8 @@ const Apply = () => {
 
   const router = useRouter();
 
+  const clubName = useSelector((state) => state.clubhome.info.result[0].name);
+
   const newQuestionInput = useRef();
 
   const iconSize = 40;
@@ -45,9 +48,9 @@ const Apply = () => {
           name: res.data.clientInfo[0].name,
           id: res.data.clientInfo[0].id,
           major: res.data.clientInfo[0].major,
-          grade: '',
-          sex: '',
-          phoneNumber: ''
+          grade: res.data.clientInfo[0].grade,
+          sex: res.data.clientInfo[0].gender,
+          phoneNumber: res.data.clientInfo[0].phoneNumber
         });
         setLeader(res.data.leader);
         setIsUpdate(new Array(res.data.questions.length).fill(false));
@@ -162,7 +165,7 @@ const Apply = () => {
 
   return (
     <div className={styles.container}>
-      <ApplyHeader clubName={router.query.club} />
+      <ApplyHeader clubName={clubName} />
       <ApplyQuestions onUserInfoChange={onUserInfoChange} userInfo={userInfo} />
       <Additional
         onAnswerInputChange={onAnswerInputChange}

@@ -32,7 +32,7 @@ function NoticeSearch() {
       </select>
       <form onSubmit={onSubmit}>
         <input value={keyword} onChange={onKeywordChange} />
-        <button type="submit"><BsSearch /></button>
+        <button type="submit"><BsSearch color="black" /></button>
       </form>
     </div>
   );

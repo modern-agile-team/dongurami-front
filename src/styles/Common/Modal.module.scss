@@ -14,11 +14,15 @@
     padding: 2rem;
     max-height: 80%;
     overflow: auto;
+    @media screen and (max-width: 576px) {
+      padding: 0;
+      width: 80%;
+    }
   }
   & > button {
     position: fixed;
-    top: 3rem;
-    right: 3rem;
+    top: 5vh;
+    right: 5vh;
     background: none;
     border: none;
     transform: scale(2);

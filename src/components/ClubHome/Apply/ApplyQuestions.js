@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Apply/ApplyQuestions.module.scss";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Apply/ApplyQuestions.module.scss';
 
 const ApplyQuestions = ({ onUserInfoChange, userInfo }) => {
   const [male, female] = [1, 2];
@@ -21,8 +21,13 @@ const ApplyQuestions = ({ onUserInfoChange, userInfo }) => {
         <li>
           <span>학년</span>
           <br />
-          <select name="grade" id="grade" onChange={onUserInfoChange}>
-            <option value="선택 안함">선택</option>
+          <select
+            name="grade"
+            id="grade"
+            onChange={onUserInfoChange}
+            value={userInfo.grade || 0}
+          >
+            <option value={0}>선택</option>
             <option value={1}>1학년</option>
             <option value={2}>2학년</option>
             <option value={3}>3학년</option>
@@ -31,8 +36,13 @@ const ApplyQuestions = ({ onUserInfoChange, userInfo }) => {
         <li>
           <span>성별</span>
           <br />
-          <select name="sex" id="sex" onChange={onUserInfoChange}>
-            <option value="선택 안함">선택</option>
+          <select
+            value={userInfo.sex || 0}
+            name="sex"
+            id="sex"
+            onChange={onUserInfoChange}
+          >
+            <option value={0}>선택</option>
             <option value={male}>남자</option>
             <option value={female}>여자</option>
           </select>
@@ -45,6 +55,7 @@ const ApplyQuestions = ({ onUserInfoChange, userInfo }) => {
             type="text"
             placeholder="전화번호 ( - 제외 )"
             id="phone"
+            defaultValue={userInfo.phoneNumber}
             onChange={onUserInfoChange}
           />
         </li>
