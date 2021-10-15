@@ -2,60 +2,43 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 .member {
-  margin: 1em 0;
   display: flex;
-  justify-content: space-between;
-  span {
-    font-family: $sans-font;
-  }
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 25%;
-    border-bottom: 1px solid rgba(207, 207, 207, 0.548);
-    padding-bottom: 0.7em;
-  }
-  svg {
-    color: #f7e600;
-    margin-right: 10px;
-  }
-  input[type='checkbox'] {
-    cursor: pointer;
-  }
+  justify-content: space-around;
 }
 
-.name {
-  height: 100%;
-}
-.name div {
-  border: none;
-  height: 100%;
-  width: 15%;
+.member div {
+  text-align: left;
+  width: 80%;
+  padding: 10px 0;
 }
 
-#crown {
-  display: flex;
-  justify-content: flex-end;
-}
-
-#name {
-  display: flex;
-  justify-content: flex-start;
-}
-
-#name span {
-  cursor: pointer;
-  &:hover {
-    color: rgb(238, 55, 55);
-  }
+.member svg {
+  border: 1px solid;
+  border-radius: 50%;
+  color: #fae100;
+  padding: 5px;
 }
 
 #changeLeader {
-  color: rgba(194, 194, 194, 0.281);
+  color: rgba(244, 244, 244, 0.7);
+  &:hover {
+    color: #fae100;
+  }
+}
+
+.name span {
   cursor: pointer;
   &:hover {
-    color: #f7e600;
+    text-decoration: line-through;
+    color: rgb(201, 0, 40);
   }
+}
+
+#crown {
+  text-align: center;
+  width: 30% !important;
+}
+.input {
+  display: flex;
+  justify-content: center;
 }

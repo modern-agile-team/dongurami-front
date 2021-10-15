@@ -7,9 +7,9 @@ const ApproveList = ({ onApplyAccept, onApplyReject, applicantInfo }) => {
       {applicantInfo.map((info, index) => {
         return (
           <ApproveInfo
-            key={info.id}
-            info={info}
+            key={index}
             index={index}
+            info={info}
             onApplyAccept={onApplyAccept}
             onApplyReject={onApplyReject}
           />

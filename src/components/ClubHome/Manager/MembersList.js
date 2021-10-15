@@ -15,24 +15,22 @@ const MembersList = ({
 }) => {
   return (
     <div className={styles.member}>
+      <div id={styles.crown}>
+        {memberInfo[0] === leader ? (
+          <RiVipCrownFill />
+        ) : (
+          <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
+        )}
+      </div>
       <div className={styles.name}>
-        <div id={styles.crown}>
-          {memberInfo[0] === leader ? (
-            <RiVipCrownFill />
-          ) : (
-            <RiVipCrownLine onClick={onLeaderChange} id={styles.changeLeader} />
-          )}
-        </div>
-        <div id={styles.name}>
-          <span onClick={exileMember}>{memberInfo[0]}</span>
-        </div>
+        <span onClick={exileMember}>{memberInfo[0]}</span>
       </div>
       <div>
         <span ref={changeLeader} id={memberInfo[1]}>
           {memberInfo[1]}
         </span>
       </div>
-      <div>
+      <div className={styles.input}>
         <input
           type="checkBox"
           defaultChecked={memberInfo[2] ? true : false}
@@ -41,7 +39,7 @@ const MembersList = ({
           onClick={onApplyAuthClick}
         />
       </div>
-      <div>
+      <div className={styles.input}>
         <input
           type="checkBox"
           defaultChecked={memberInfo[3] ? true : false}
