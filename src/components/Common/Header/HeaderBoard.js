@@ -40,6 +40,15 @@ export const HeaderBoard = () => {
             >
               자유게시판
             </li>
+            <li
+              className={styles.QnA}
+              id={nowPath === '/free' ? styles.now : undefined}
+              onClick={() => {
+                router.push('/free');
+              }}
+            >
+              Q&#38;A
+            </li>
           </ul>
         </li>
         <li
