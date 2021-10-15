@@ -9,3 +9,11 @@
     justify-content: space-between;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    div {
+      border-radius: 0px;
+    }
+  }
+}

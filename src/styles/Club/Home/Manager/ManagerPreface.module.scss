@@ -30,6 +30,7 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 @media (max-width: 768px) {
   .preface {
     justify-content: space-between;
+    border-radius: 0px;
     div {
       width: 100%;
     }
