@@ -34,6 +34,10 @@
       margin-top: 1vh;
       margin-bottom: 3vh;
     }
+    .free {
+      margin-top: 1vh;
+      margin-bottom: 3vh;
+    }
   }
 }
 
@@ -53,7 +57,7 @@
 @media screen and (max-width: 768px) {
   .container {
     display: inline;
-    width: 79%;
+    width: 76%;
     ul {
       flex-direction: column;
       align-items: center;
