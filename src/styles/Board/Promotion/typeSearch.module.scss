@@ -49,11 +49,18 @@
   ul {
     display: flex;
     list-style: none;
-    font-size: 20px;
 
     li {
-      margin-right: 3em;
       cursor: pointer;
+      background-color: #f1f3f5;
+      border-radius: 15px;
+      padding: 13px;
+      font-size: 16px;
+      margin-right: 30px;
+
+      &:hover {
+        background-color: #ced4da;
+      }
     }
   }
 }

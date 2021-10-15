@@ -5,7 +5,6 @@ import { MdClose } from 'react-icons/md';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import ZoomImg from './ZoomImg';
 import { getdata } from './getdata';
-import axios from 'axios';
 import { getPost } from 'apis/promotion';
 
 const Modal = ({ setOpenModal, postId }) => {
