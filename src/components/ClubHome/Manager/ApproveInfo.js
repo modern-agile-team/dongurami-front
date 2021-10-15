@@ -1,25 +1,26 @@
 import React from 'react';
 import styles from '../../../styles/Club/Home/Manager/ApproveList.module.scss';
+import { AiOutlineUserAdd, AiOutlineUserDelete } from 'react-icons/ai';
 
 const ApproveInfo = ({ info, index, onApplyAccept, onApplyReject }) => {
   return (
     <>
       <div className={styles.applierInfo}>
         <div>
-          <span>이름: </span>
-          <span>{info.name}</span>
+          <span>이름</span>
+          <p>{info.name}</p>
         </div>
         <div>
-          <span>학과: </span>
-          <span>{info.major}</span>
+          <span>학과</span>
+          <p>{info.major}</p>
         </div>
         <div>
-          <span>학번: </span>
-          <span>{info.id}</span>
+          <span>학번</span>
+          <p>{info.id}</p>
         </div>
         <div>
-          <span>전화번호: </span>
-          <span>{info.phoneNum}</span>
+          <span>전화번호</span>
+          <p>{info.phoneNum}</p>
         </div>
         {info.questions &&
           info.questions.map((question, i) => {
@@ -30,15 +31,10 @@ const ApproveInfo = ({ info, index, onApplyAccept, onApplyReject }) => {
               </div>
             );
           })}
-      </div>
-      <div className={styles.button}>
-        <button id={index} onClick={onApplyAccept}>
-          승인
-        </button>
-        <button id={index} onClick={onApplyReject}>
-          거절
-        </button>
-        <hr />
+        <div className={styles.acceptOrDel}>
+          <AiOutlineUserAdd id={index} onClick={onApplyAccept} />
+          <AiOutlineUserDelete id={index} onClick={onApplyReject} />
+        </div>
       </div>
     </>
   );
