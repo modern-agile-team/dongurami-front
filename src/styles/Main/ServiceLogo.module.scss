@@ -3,11 +3,20 @@
 .container {
   width: 100%;
   background-color: #fff;
+  .wrap {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    padding: 2rem 5vw;
+    .des {
+      margin: 0%;
+      padding-left: 2rem;
+    }
+  }
   h1 {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 440%;
-    padding: 2rem;
-    margin: 0% 10% -1.5% 12%;
+    margin: 0;
     .title {
       font-family: 'Noto Sans KR', sans-serif;
       display: flex;
@@ -20,67 +29,77 @@
   }
   span {
     font-family: 'Noto Sans KR', sans-serif;
-    padding: 2rem;
-    margin-left: 12.2%;
-    margin-bottom: 30%;
   }
+
   img {
-    width: 550px;
-    margin-top: -50%;
-    margin-left: 48%;
+    width: 510px;
+    margin-top: 16em;
   }
 }
 
 @media screen and (max-width: 1024px) {
   .container {
-    width: 80%;
-    margin: 0%;
+    .wrap {
+      padding: 5vw;
+    }
     h1 {
-      margin-left: 11%;
+      font-size: 400%;
     }
     span {
-      margin-left: 11%;
+      font-size: 90%;
+    }
+    .image {
+      width: 50%;
     }
     img {
-      width: 55%;
-      margin-left: 62%;
+      width: 105%;
     }
   }
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    width: 100%;
     margin-top: 5%;
+    .wrap {
+      flex-direction: column;
+      align-items: center;
+      .des {
+        padding: 0;
+      }
+    }
     h1 {
-      font-size: 430%;
-      padding: 1rem;
+      font-size: 10vw;
+      padding: 0 3rem;
     }
     span {
-      margin-left: 9.5%;
+      font-size: 2.5vw;
+      padding: 1rem 3rem;
     }
     img {
-      width: 80%;
-      margin-top: 13%;
-      margin-left: 10%;
+      width: 180%;
+      margin-top: 8em;
+      margin-left: -17vw;
     }
   }
 }
 
 @media screen and (max-width: 480px) {
   .container {
-    width: 100%;
+    .wrap {
+      .des {
+        width: 100%;
+        margin-left: 0px;
+      }
+    }
     h1 {
-      width: 80%;
-      font-size: 270%;
-      margin-left: 9%;
+      font-size: 11vw;
     }
     span {
-      font-size: 2vw;
-      margin-left: 5%;
+      font-size: 1vw;
     }
     img {
-      margin-left: 9%;
+      margin-top: 5rem;
+      margin-left: -4rem;
     }
   }
 }
