@@ -19,15 +19,14 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
   useEffect(() => {
     dispatch(setCategory(category));
   }, [category, dispatch]);
-
-  const title =
-    category === 'notice'
-      ? '공지 게시판'
-      : category === 'free'
-      ? '자유 게시판'
-      : category === 'personal'
-      ? '활동내용'
-      : undefined;
+  
+  const title = {
+    notice: '공지 게시판',
+    free: '자유 게시판',
+    clubNotice: '동아리 공지 게시판',
+    questionAndAnswer: 'Q&A 게시판',
+    personal: '활동내용'
+  };
 
   const onDelete =
     optionalOnDelete ||
@@ -45,7 +44,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     <div className={styles.container}>
       <div>
         <Link href={`/${category}`} passHref>
-          <a>{title}</a>
+          <a>{title[category]}</a>
         </Link>
         <h1>{post.title}</h1>
         <div>
