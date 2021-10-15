@@ -56,7 +56,8 @@ function Board({ category }) {
   const title = {
     notice: '공지 게시판',
     free: '자유 게시판',
-    clubNotice: '동아리 공지 게시판'
+    clubNotice: '동아리 공지 게시판',
+    questionAndAnswer: 'Q&A 게시판'
   };
 
   if (!posts) return null;
