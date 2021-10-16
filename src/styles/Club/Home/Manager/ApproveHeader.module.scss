@@ -1,4 +1,5 @@
 .container {
+  background-color: white;
   div {
     display: flex;
     background-color: rgba(0, 209, 136, 0.197);
@@ -12,6 +13,9 @@
 
 @media (max-width: 768px) {
   .container {
+    h1 {
+      padding: 0 10px;
+    }
     div {
       border-radius: 0px;
     }
