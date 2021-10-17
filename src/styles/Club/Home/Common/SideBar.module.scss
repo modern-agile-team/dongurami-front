@@ -39,16 +39,20 @@
 
 @media (max-width: 1024px) {
   #show {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 3em;
     div {
+      width: 100%;
+      height: 100%;
       padding: 0 1px;
-      height: 50px;
     }
     svg {
-      width: 25px;
-      height: 25px;
+      width: 50%;
+      height: 50%;
       padding-top: 0.3em;
       padding-bottom: 0.3em;
-      margin: 0 20px;
     }
     span {
       display: none;
@@ -61,14 +65,9 @@
 
 @media (max-width: 767px) {
   #show {
+    height: 2.5em;
     div {
-      padding: 0 1px;
-      height: 40px;
-    }
-    svg {
-      width: 15px;
-      height: 15px;
-      margin: 0 10px;
+      height: 100%;
     }
   }
 }
