@@ -45,18 +45,12 @@ const ClubIntro = ({ visitTime }) => {
 
   const onChangeLogo = async (e) => {
     const file = e.target.files[0];
-    let presignedURL = '';
-    let imgURL = '';
-    await getS3PresignedURL({ img: e.target.files[0].name })
-      .then((res) => {
-        imgURL = res.data.readObjectUrl;
-        presignedURL = res.data.preSignedPutUrl;
-      })
-      .catch((err) => console.log('c', err.response.data.msg));
+    const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (
+      await getS3PresignedURL({ img: e.target.files[0].name })
+    ).data;
     await uploadImage(presignedURL, file);
-    await putClubLogo({ logoUrl: imgURL, fileId: '동아리 로고' }).then(
-      dispatch(getClubInfo(clubId))
-    );
+    await putClubLogo({ logoUrl: imageURL, fileId: '동아리 로고' });
+    dispatch(getClubInfo(clubId));
   };
 
   useEffect(() => {
