@@ -32,7 +32,7 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 @media (max-width: 768px) {
   .container {
     width: 100%;
-    padding: 1em 0;
+    padding-bottom: 0;
     svg {
       height: 20px;
       width: 20px;
@@ -41,10 +41,10 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       font-size: 100%;
     }
     h3 {
-      font-size: 80%;
+      font-size: 100%;
     }
     span {
-      font-size: 50%;
+      font-size: 90%;
     }
   }
   .container input[type='checkbox']:checked {
