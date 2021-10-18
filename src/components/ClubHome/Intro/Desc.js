@@ -50,7 +50,7 @@ const Desc = ({
         )}
       </div>
       {client.leader === 1 ? (
-        <div>
+        <div className={styles.button}>
           <Button
             descUpdate={descUpdate}
             onDescSubnmit={onDescSubnmit}
