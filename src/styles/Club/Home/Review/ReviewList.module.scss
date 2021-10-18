@@ -39,8 +39,8 @@
   margin-left: 1em;
   p {
     margin-left: 3px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 80%;
   }
 }
@@ -49,19 +49,19 @@
   margin-top: 1.5em;
   p {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 85%;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .list {
     width: 90%;
     padding: 10px;
     p,
     #date {
-      font-size: 60%;
+      font-size: 90%;
     }
   }
   .star {
@@ -73,10 +73,11 @@
   .club {
     align-items: center;
     img {
-      width: 10%;
+      width: 20%;
     }
   }
   .review {
     margin-top: 0.5em;
+    padding: 10px 0;
   }
 }
