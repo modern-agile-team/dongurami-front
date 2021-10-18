@@ -29,6 +29,7 @@ function Profile() {
 
   useEffect(() => { 
     if (!uRouter.isReady) return;
+    console.log(uRouter.query)
     setToken(getToken())
     getUserInfo(uRouter.query.pid, token)
     .then((res) => {
