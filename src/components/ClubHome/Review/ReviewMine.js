@@ -1,11 +1,11 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Review/ReviewMine.module.scss";
-import { AiFillStar } from "react-icons/ai";
-import { FaTrashAlt } from "react-icons/fa";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Review/ReviewMine.module.scss';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const ReviewMine = ({ description, score, inDate, onReviewDelete }) => {
   const stars = new Array(score).fill(score);
-
+  const notStars = new Array(5 - score).fill(score);
   return (
     <div className={styles.mine}>
       <div className={styles.header}>
@@ -20,6 +20,9 @@ const ReviewMine = ({ description, score, inDate, onReviewDelete }) => {
           </div>
         </div>
         <div className={styles.star}>
+          {notStars.map((el, i) => {
+            return <AiOutlineStar key={5 - i} />;
+          })}
           {stars.map((el, i) => {
             return <AiFillStar key={i} />;
           })}

@@ -3,7 +3,6 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 @import '../Manager/Members.module.scss';
 
 .intro {
-  border-top: 1px solid rgb(209, 209, 209);
   padding-top: 2em;
   display: flex;
   flex-direction: column;
@@ -97,12 +96,10 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .intro {
-    padding: 2em 0 0 0;
     span {
-      font-size: 120%;
-      margin-bottom: 2vh;
+      font-size: 150%;
     }
     p {
       font-size: 90%;
