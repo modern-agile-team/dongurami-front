@@ -6,7 +6,8 @@ import { useRouter } from 'next/router';
 import Skeleton from './Skeleton';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClubInfo, putDesc } from 'redux/slices/clubhome';
-import { putIntroDesc } from 'apis/clubhome';
+import { patchIntroDesc, putLogo } from 'apis/clubhome';
+import { getS3PresignedURL, uploadImage } from 'apis/image';
 
 const ClubIntro = ({ visitTime }) => {
   const [descUpdate, setDescUpdate] = useState(false);
@@ -25,19 +26,31 @@ const ClubIntro = ({ visitTime }) => {
     setDescUpdate(!descUpdate);
   };
 
-  const onDescChange = (e) => {
-    setIntroDesc(e.target.value);
+  const patchClubIntro = (data) => {
+    return patchIntroDesc(data, clubId).then(dispatch(putDesc(data, clubId)));
+  };
+
+  const putClubLogo = (data) => {
+    return putLogo(data, clubId).then(dispatch(putDesc(data, clubId)));
   };
 
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
-    putIntroDesc({ introduce: introDesc }, clubId)
-      .then(dispatch(putDesc({ introduce: introDesc }, clubId)))
-      .then(() => {
-        alert('동아리 소개글이 수정되었습니다.');
-        dispatch(getClubInfo(clubId));
-      });
+    patchClubIntro({ introduce: introDesc }).then(() => {
+      alert('동아리 소개글이 수정되었습니다.');
+      dispatch(getClubInfo(clubId));
+    });
     setDescUpdate(!descUpdate);
+  };
+
+  const onChangeLogo = async (e) => {
+    const file = e.target.files[0];
+    const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (
+      await getS3PresignedURL({ img: e.target.files[0].name })
+    ).data;
+    await uploadImage(presignedURL, file);
+    await putClubLogo({ logoUrl: imageURL, fileId: '동아리 로고' });
+    dispatch(getClubInfo(clubId));
   };
 
   useEffect(() => {
@@ -69,13 +82,14 @@ const ClubIntro = ({ visitTime }) => {
         <Skeleton />
       ) : (
         <>
-          <ClubInfo infos={infos} />
+          <ClubInfo infos={infos} onChangeLogo={onChangeLogo} />
           <Desc
             infos={infos}
             onDescSubnmit={onDescSubnmit}
-            onDescChange={onDescChange}
             onDescUpdate={onDescUpdate}
             descUpdate={descUpdate}
+            introDesc={introDesc}
+            setIntroDesc={setIntroDesc}
           />
         </>
       )}

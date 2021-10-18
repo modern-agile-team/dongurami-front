@@ -42,9 +42,9 @@ export const HeaderBoard = () => {
             </li>
             <li
               className={styles.QnA}
-              id={nowPath === '/q&a' ? styles.now : undefined}
+              id={nowPath === '/questionAndAnswer' ? styles.now : undefined}
               onClick={() => {
-                router.push('/q&a');
+                router.push('/questionAndAnswer');
               }}
             >
               Q&#38;A

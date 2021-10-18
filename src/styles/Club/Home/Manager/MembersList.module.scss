@@ -42,3 +42,19 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   display: flex;
   justify-content: center;
 }
+@media (max-width: 768px) {
+  .member {
+    div {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  #crown {
+    width: 40% !important;
+    text-align: left;
+    svg {
+      width: 40%;
+      height: 40%;
+    }
+  }
+}

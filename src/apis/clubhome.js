@@ -6,8 +6,13 @@ export const getInfo = (params) => {
 };
 
 // 동아리 소개글 수정
-export const putIntroDesc = (data, params) => {
+export const patchIntroDesc = (data, params) => {
   return instance.patch(`api/club/home/${params}`, data);
+};
+
+// 동아리 로고 수정
+export const putLogo = (data, params) => {
+  return instance.put(`api/club/home/${params}`, data);
 };
 
 // 지원서 불러오기

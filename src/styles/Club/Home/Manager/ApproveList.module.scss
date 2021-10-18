@@ -5,12 +5,12 @@ $color1: #9fa4a240;
 .applierInfo {
   display: flex;
   flex-direction: column;
-  margin: 1em 0;
+  margin: 5px 0;
   border-radius: 20px;
   border: 1px solid $color1;
   box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.1);
-
   padding: 2.5em;
+  background-color: white;
   div {
     margin: 10px 0;
   }
@@ -31,12 +31,34 @@ $color1: #9fa4a240;
 
 .acceptOrDel {
   display: flex;
+  justify-content: flex-end;
   svg {
+    margin-top: 10px;
     margin-right: 20px;
     height: 100%;
     width: 30px;
     &:hover {
       color: #8af3cd;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .applierInfo {
+    padding: 1em;
+    // margin-bottom: 2em;
+    border-radius: 0px;
+    div {
+      margin: 0;
+    }
+    p {
+      font-size: 90%;
+      padding: 3px;
+    }
+  }
+  .acceptOrDel {
+    svg {
+      width: 25px;
     }
   }
 }

@@ -15,10 +15,10 @@ const MembersPreface = ({ members }) => {
           <span>학번</span>
         </div>
         <div className={styles.input}>
-          <span>가입 신청 관리</span>
+          <span>가입 관리</span>
         </div>
         <div className={styles.input}>
-          <span>게시글 편집</span>
+          <span>게시글 관리</span>
         </div>
       </div>
     </>

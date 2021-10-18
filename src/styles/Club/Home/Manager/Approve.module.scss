@@ -1,20 +1,15 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-top: 10vh;
+  margin-top: 5vh;
 }
 .questions {
   display: flex;
   flex-direction: column;
 }
-.kkk {
-  display: flex;
-}
 
-#q,
-#a {
-  margin: 6vh 2vw;
-  div {
-    margin: 4vh 0;
+@media (max-width: 768px) {
+  .container {
+    background-color: rgba(238, 238, 238, 0.673);
   }
 }
