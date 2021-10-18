@@ -1,7 +1,15 @@
 import instance from 'apis/index';
+import axios from 'axios';
+import setInterceptors from './common/interceptors';
 
-export const getUserInfo = (id) => {
-  return instance.get(`/api/profile/${id}`);
+export const getUserInfo = (id, token) => {
+  const inst = axios.create({
+    baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+    headers: {
+      'x-auth-token': token
+    }
+  })
+  return setInterceptors(inst).get(`/api/profile/${id}`);
 };
 
 export const modifyInfo = (id, body) => {

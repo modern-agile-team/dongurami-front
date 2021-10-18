@@ -46,10 +46,10 @@ const Edit = () => {
   }
 
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!uRouter.isReady) return;
     data.no === 'board' ? getBoardPost() : getScrapPost()
-  }, [router])
-
+  }, [uRouter])
+  
   return (
     <Container category='personal' type="글 수정하기">
       <WriteContent title={title} description={description} setTitle={setTitle} setDescription={setDescription} onSubmit={onSubmit} />
