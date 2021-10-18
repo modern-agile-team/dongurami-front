@@ -3,7 +3,6 @@ import AddComment from './AddComment';
 import React, { useState } from 'react';
 import Comment from './Comment';
 import ReplyComment from './ReplyComment';
-import ReplyCommentContainer from './ReplyCommentContainer';
 
 const PromotionCommentContainer = ({
   comments,
@@ -11,8 +10,6 @@ const PromotionCommentContainer = ({
   getData,
   studentId
 }) => {
-  const [replyComment, setReplyComment] = useState([]);
-
   return (
     <>
       <p>댓글 {comments.length}</p>
