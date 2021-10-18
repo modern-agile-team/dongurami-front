@@ -13,7 +13,9 @@ const ClubListContainer = () => {
 
   const onCategorySearch = (element) => {
     const searchData = originData.filter((el) => el.category === element);
-    setClubData(searchData);
+
+    if (element === '') setClubData(originData);
+    else setClubData(searchData);
   };
 
   const onSearch = (data) => {

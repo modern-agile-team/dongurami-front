@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  // margin-top: 5em;
+
   select {
     border-radius: 1rem;
     height: 2rem;
@@ -12,7 +12,7 @@
     border: 1px solid lightgray;
     position: absolute;
     right: 70%;
-    top: 58%;
+    top: 68%;
   }
 
   .searchContainer {
@@ -49,18 +49,26 @@
   ul {
     display: flex;
     list-style: none;
-    font-size: 20px;
+    margin-right: 3vw;
 
     li {
-      margin-right: 3em;
       cursor: pointer;
+      background-color: #f1f3f5;
+      border-radius: 15px;
+      padding: 13px;
+      font-size: 16px;
+      margin-right: 30px;
+
+      &:hover {
+        background-color: #ced4da;
+      }
     }
   }
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    margin-top: 10vh;
+    margin-top: 5vh;
     .searchContainer {
       .searchElement {
         svg {

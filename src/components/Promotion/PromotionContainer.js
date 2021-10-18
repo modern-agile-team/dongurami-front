@@ -28,9 +28,9 @@ const PromotionContainer = () => {
       if (searchItem) {
         await getData(searchItem).then((response) => {
           const result = response.data.boards.slice(preitem, item);
+
           if (result.length) {
-            const extraData = boarddata.concat(result);
-            setBoardData((prev) => prev.concat(extraData));
+            setBoardData((prev) => prev.concat(result));
           }
         });
       } else if (search) {
@@ -38,8 +38,7 @@ const PromotionContainer = () => {
           const result = response.data.promotionSearch.slice(preitem, item);
 
           if (result.length) {
-            const extraData = boarddata.concat(result);
-            setBoardData((prev) => prev.concat(extraData));
+            setBoardData((prev) => prev.concat(result));
           }
         });
       } else {
@@ -47,8 +46,7 @@ const PromotionContainer = () => {
           const result = response.data.boards.slice(preitem, item);
 
           if (result.length) {
-            const extraData = boarddata.concat(result);
-            setBoardData((prev) => prev.concat(extraData));
+            setBoardData((prev) => prev.concat(result));
           }
         });
       }
@@ -61,11 +59,12 @@ const PromotionContainer = () => {
     try {
       if (searchItem) {
         await getData(searchItem).then((response) => {
-          console.log(response);
           preitem = 0;
           item = 8;
           const result = response.data.boards.slice(preitem, item);
+          console.log(boarddata, '처음데이터');
           setBoardData(result);
+          setTest(true);
         });
       } else if (search) {
         await getSearchData(type, searchKeyword).then((response) => {
@@ -77,7 +76,7 @@ const PromotionContainer = () => {
         });
       } else {
         await getBoardData(searchItem).then((response) => {
-          console.log(response);
+          console.log(response, '데이터 첫번째 조회');
           preitem = 0;
           item = 8;
           const result = response.data.boards.slice(preitem, item);
@@ -146,7 +145,9 @@ const PromotionContainer = () => {
             pId={el.no}
             date={el.inDate}
             clubName={el.clubName}
+            name={el.studentName}
             img={img}
+            category={el.category}
             setOpenModal={setOpenModal}
             setPostId={setPostId}
           />
