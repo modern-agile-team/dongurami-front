@@ -21,7 +21,16 @@ function displayedAt(createdAt) {
   return `${Math.floor(years)}년 전`;
 }
 
-const Promotion = ({ img, clubName, setOpenModal, date, pId, setPostId }) => {
+const Promotion = ({
+  img,
+  name,
+  clubName,
+  setOpenModal,
+  date,
+  pId,
+  setPostId,
+  category
+}) => {
   return (
     <div className={styles.promotion}>
       <div className={styles.img}>
@@ -39,8 +48,8 @@ const Promotion = ({ img, clubName, setOpenModal, date, pId, setPostId }) => {
               e.stopPropagation();
             }}
           >
-            <div className={styles.writer}>최두리</div>
-            <div className={styles.writer}>우아한애자일</div>
+            <div className={styles.writer}>{name}</div>
+            <div className={styles.writer}>{clubName}</div>
           </div>
           <div
             className={styles.date}
@@ -59,7 +68,7 @@ const Promotion = ({ img, clubName, setOpenModal, date, pId, setPostId }) => {
         }}
       >
         <p className={styles.description}>{clubName}</p>
-        <p className={styles.hashtag}>#IT</p>
+        <p className={styles.hashtag}>#{category}</p>
         <p className={styles.time}>{displayedAt(date)}</p>
       </div>
     </div>

@@ -5,7 +5,6 @@ import { MdClose } from 'react-icons/md';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import ZoomImg from './ZoomImg';
 import { getdata } from './getdata';
-import axios from 'axios';
 import { getPost } from 'apis/promotion';
 
 const Modal = ({ setOpenModal, postId }) => {
@@ -68,9 +67,9 @@ const Modal = ({ setOpenModal, postId }) => {
       {!zoom && (
         <>
           <div className={styles.image} onClick={(e) => e.stopPropagation()}>
-            <IoIosArrowBack size={95} onClick={prevSlide} />
+            <IoIosArrowBack size={70} onClick={prevSlide} />
             <img src={imgUrl} onClick={() => setZoom(true)} />
-            <IoIosArrowForward size={95} onClick={nextSlide} />
+            <IoIosArrowForward size={70} onClick={nextSlide} />
           </div>
           <Post
             postData={postData}

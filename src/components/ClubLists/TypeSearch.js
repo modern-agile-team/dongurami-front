@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import styles from "../../styles/Board/Promotion/typeSearch.module.scss";
-import { FaSearch } from "react-icons/fa";
+import React, { useState } from 'react';
+import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
+import { FaSearch } from 'react-icons/fa';
 
 const TypeSearch = ({ onCategorySearch, onSearch }) => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const onChange = (e) => {
     setSearch(e.target.value);
   };
   const onSubmit = (e) => {
     e.preventDefault();
     onSearch(search);
-    setSearch("");
+    setSearch('');
     console.log(e);
   };
 
@@ -18,8 +18,9 @@ const TypeSearch = ({ onCategorySearch, onSearch }) => {
     <div className={styles.container}>
       <ul
         className={styles.tagList}
-        onClick={(event) => onCategorySearch(event.target.getAttribute("name"))}
+        onClick={(event) => onCategorySearch(event.target.getAttribute('name'))}
       >
+        <li name="">#전체</li>
         <li name="IT">#IT</li>
         <li name="음악">#음악</li>
         <li name="친목">#친목</li>
