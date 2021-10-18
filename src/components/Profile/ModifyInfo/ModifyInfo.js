@@ -4,8 +4,9 @@ import SetImg from './SetImg';
 import ModifyHeader from './ModifyHeader';
 import ImmutableData from './ImmutableData';
 import MutableData from './MutableData';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import { modifyInfo, getUserInfo } from 'apis/profile';
+import { getS3PresignedURL, uploadImage } from 'apis/image';
 
 const ModifyInfo = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -13,10 +14,23 @@ const ModifyInfo = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [grade, setGrade] = useState(0);
   const [comp, setComp] = useState('수정');
-  const router = useRouter();
+  // const [pUrl, setPUrl] = useState();
+  const [imgUrl, setImgUrl] = useState(userInfo.profileImageUrl);
+  const [fileId, setFileId] = useState();
+  const uRouter = useRouter();
+
+  const onChangeImg = async (e) => {
+    const file = e.target.files[0];
+    setFileId(file.name)
+    const {preSignedPutUrl: presignedURL, readObjectUrl: imgURL} = (
+      await getS3PresignedURL(file.name)
+    ).data
+    await uploadImage(presignedURL, file);
+    setImgUrl(imgURL)
+    }
 
   const getData = () => {
-    getUserInfo(router.query.pid)
+    getUserInfo(uRouter.query.pid)
       .then((res) => {
         setUserInfo(res.data.profile);
         setEmail(res.data.profile.email);
@@ -27,31 +41,31 @@ const ModifyInfo = () => {
   };
 
   const modifyBtn = () => {
-    modifyInfo(router.query.pid, {
-      email: email,
-      phoneNumber: phoneNumber,
-      grade: grade,
-      profileImageUrl: userInfo.profileImageUrl,
-      fileId: userInfo.fileId
+    modifyInfo(uRouter.query.pid, {
+      email,
+      phoneNumber,
+      grade,
+      profileImageUrl: imgUrl,
+      fileId
     })
       .then((res) => {
         console.log(res.data.msg);
       })
       .catch((err) => console.log(err.response.data));
-    getData();
+    router.push(`/profile/${userInfo.id}`)
   };
 
   useEffect(() => {
-    if (!router.isReady) return;
+    if (!uRouter.isReady) return;
     getData();
-  }, [router]);
+  }, [uRouter]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
   return (
     <div className={styles.wrap}>
-      <ModifyHeader userInfo={userInfo} setComp={setComp} baseImg={baseImg} />
+      <ModifyHeader imgUrl={imgUrl} onChangeImg={onChangeImg} userInfo={userInfo} setComp={setComp} baseImg={baseImg} />
       <ImmutableData userInfo={userInfo} grade={grade} setGrade={setGrade} />
       <MutableData
         userInfo={userInfo}

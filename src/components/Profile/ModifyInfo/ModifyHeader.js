@@ -1,17 +1,29 @@
 import styles from '../../../styles/Profile/ModifyInfo.module.scss';
 import { FaCamera } from 'react-icons/fa';
 
-const ModifyHeader = ({ userInfo, setComp, baseImg }) => {
+const ModifyHeader = ({ userInfo, onChangeImg, baseImg, imgUrl }) => {
   return (
     <div className={styles.header}>
       <img
         className={styles.profileImg}
-        src={userInfo.profileImageUrl ?? baseImg}
+        src={imgUrl ?? baseImg}
+        // src='https://d19lmxaqvbojzg.cloudfront.net/5591779b23_Wlogo.jpg'
       />
-      <FaCamera
-        className={styles.imgBtn}
-        onClick={() => setComp('이미지수정')}
-      />
+
+      <div>
+        <label htmlFor='inputFile' className={styles.imgBtn}>
+          <FaCamera />
+        </label>
+        <input 
+          onChange={onChangeImg}
+          type="file" 
+          id='inputFile' 
+          style={{display:"none"}} 
+          name="profileImg"
+          accept="image/jpg, image/png, image/jpeg"
+          />
+      </div>
+
     </div>
   );
 };
