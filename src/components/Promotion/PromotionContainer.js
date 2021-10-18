@@ -62,13 +62,11 @@ const PromotionContainer = () => {
           preitem = 0;
           item = 8;
           const result = response.data.boards.slice(preitem, item);
-          console.log(boarddata, '처음데이터');
           setBoardData(result);
           setTest(true);
         });
       } else if (search) {
         await getSearchData(type, searchKeyword).then((response) => {
-          console.log(response);
           preitem = 0;
           item = 8;
           const result = response.data.promotionSearch.slice(preitem, item);
@@ -76,7 +74,6 @@ const PromotionContainer = () => {
         });
       } else {
         await getBoardData(searchItem).then((response) => {
-          console.log(response, '데이터 첫번째 조회');
           preitem = 0;
           item = 8;
           const result = response.data.boards.slice(preitem, item);

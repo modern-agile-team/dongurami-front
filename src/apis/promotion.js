@@ -32,7 +32,6 @@ export function editReplyComment(
   replyCommentNo,
   description
 ) {
-  console.log('안녕');
   return axios.put(
     `api/board/promotion/${postId}/${commentNo}/${replyCommentNo}`,
     {

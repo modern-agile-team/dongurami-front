@@ -40,7 +40,9 @@ const Post = ({ postData, postId, getData, comments }) => {
             <button onClick={onDelete}>삭제하기</button>
           </div>
           <div>
-            <div>{name}</div>
+            <Link href={{ pathname: `profile/${studentId}` }} passHref>
+              <div>{name}</div>
+            </Link>
             <div>
               <div>{inDate}</div>
               <div>조회 {hit}</div>
