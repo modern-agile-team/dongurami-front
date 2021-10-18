@@ -9,15 +9,13 @@ const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
       ref={nowDate}
       id={days.format("YYYY-MM-DD")}
     >
-      <div className={styles.tdBlock}>
-        <div className={styles.date}>
-          <span
-            onClick={() => {
+      <div className={styles.tdBlock} 
+              onClick={() => {
               setPop("DailyControl");
               setDate(days.format("YYYY-MM-DD"));
-            }}
-            className={styles.today}
-          >
+            }}>
+        <div className={styles.date} >
+          <span className={styles.today}>
             {days.format("D")}
           </span>
         </div>
@@ -27,17 +25,15 @@ const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
               Date.parse(days.format("YYYY-MM-DD")) &&
               Date.parse(days.format("YYYY-MM-DD")) <=
                 Date.parse(el.endDate) ? (
-              <div>
                 <span
                   className={styles.scheduleSpan}
-                  style={{ color: `${el.colorCode}` }}
+                  style={{ background: `${el.colorCode}` }}
                   key={days.format("YYYY-MM-DD")}
                 >
                   {el.title.split(" ").join("").length < 9
                     ? el.title
                     : el.title.slice(0, 8) + ".."}
                 </span>
-              </div>
             ) : null;
           })}
         </div>

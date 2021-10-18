@@ -5,7 +5,7 @@ import axios from 'axios';
 import Router from 'next/router';
 import { getInfo, addSchedule } from 'apis/calendar';
 
-const DailyModal = ({ setPop, pop, today, setSchedule }) => {
+const DailyModal = ({ colors, setPop, pop, today, setSchedule }) => {
   const [startDate, setStartDate] = useState(today.format('YYYY-MM-DD'));
   const [endDate, setEndDate] = useState(today.format('YYYY-MM-DD'));
   const [color, setColor] = useState('#000000');
@@ -95,12 +95,9 @@ const DailyModal = ({ setPop, pop, today, setSchedule }) => {
             />
             <br />
             <p>일정 색상</p>
-            <input
-              type="color"
-              ref={colorCode}
-              className={styles.choiceColor}
-              onChange={() => setColor(`${colorCode.current.value}`)}
-            />
+            {colors.map((color, index) => {
+              return <button className={styles.colorBtn} key={index} style={{ background : color }} onClick={() => setColor(`${color}`)}></button>
+            })}
           </div>
         </div>
         <button className={styles.addBtn} onClick={(e) => onAddBtn(e)}>
