@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nivo/bar": "^0.74.0",
+    "@nivo/core": "^0.74.0",
     "@reduxjs/toolkit": "^1.6.1",
     "animate.css": "^4.1.1",
     "axios": "^0.21.4",
