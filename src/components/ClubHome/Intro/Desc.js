@@ -42,7 +42,11 @@ const Desc = ({
             description={introDesc}
           />
         ) : (
-          <ReactQuill theme="bubble" value={result.introduce} readOnly />
+          <ReactQuill
+            className={styles.bubble}
+            value={result.introduce}
+            readOnly
+          />
         )}
       </div>
       {client.leader === 1 ? (

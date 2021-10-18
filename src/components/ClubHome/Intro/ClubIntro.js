@@ -72,7 +72,13 @@ const ClubIntro = ({ visitTime }) => {
       alert('알 수 없는 오류입니다. 개발자에게 문의해주세요');
       router.back();
     }
-  }, [error]);
+  }, [router, error]);
+
+  useEffect(() => {
+    if (infos) {
+      setIntroDesc(infos.result[0].introduce);
+    }
+  }, [infos]);
 
   if (!infos) return null;
 
