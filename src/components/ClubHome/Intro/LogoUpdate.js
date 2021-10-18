@@ -1,11 +1,7 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Intro/LogoUpdate.module.scss";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Intro/LogoUpdate.module.scss';
 
-const LogoUpdate = () => {
-  const onChangeLogo = (e) => {
-    console.log(e.target.files);
-  };
-
+const LogoUpdate = ({ onChangeLogo }) => {
   return (
     <div className={styles.container}>
       <label htmlFor="clubLogo">로고 변경</label>
