@@ -19,7 +19,7 @@ const WriteScrpas = () => {
       images: []
     })
       .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .catch((err) => alert(res.response.data.msg));
     router.push(`/profile/${data.pid}`);
   };
 

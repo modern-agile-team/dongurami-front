@@ -1,7 +1,7 @@
 import styles from '../../../styles/Profile/ModifyInfo.module.scss';
 import { FaCamera } from 'react-icons/fa';
 
-const ModifyHeader = ({ userInfo, onChangeImg, baseImg, imgUrl }) => {
+const ModifyHeader = ({ onChangeImg, baseImg, imgUrl }) => {
   return (
     <div className={styles.header}>
       <img

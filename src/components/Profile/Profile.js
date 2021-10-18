@@ -18,10 +18,8 @@ function Profile() {
   const uRouter = useRouter();
 
   const logout = () => {
-    console.log(1);
-    // setToken("");
-    // window.localStorage.setItem("jwt", token);
-    // window.location.reload();
+    window.localStorage.setItem("jwt", "");
+    window.location.reload();
   };
 
   const baseImg =
@@ -29,7 +27,7 @@ function Profile() {
 
   useEffect(() => { 
     if (!uRouter.isReady) return;
-    console.log(uRouter.query)
+    setId(uRouter.query.pid)
     setToken(getToken())
     getUserInfo(uRouter.query.pid, token)
 
@@ -61,7 +59,10 @@ function Profile() {
                       )
                   );
                 })
-                .catch((err) => console.log(err.response));
+                .catch((err) => {
+                  alert('로그인 한 사용자만 열람할 수 있습니다.')
+                  setComp('프로필')
+                });
               setComp('스크랩');
             } else alert('가입된 동아리가 없습니다.');
           }}
