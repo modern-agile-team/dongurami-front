@@ -1,7 +1,7 @@
 @font-face {
-  font-family: "twayair";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
-    format("woff");
+  font-family: 'twayair';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -9,8 +9,8 @@
 .writeBtn {
   position: absolute;
   right: 20%;
-  top: 22%;
-  font-family: "twayair";
+  top: 20%;
+  font-family: 'twayair';
   padding: 8px;
   width: 7%;
   font-size: 16px;
@@ -48,8 +48,7 @@
 @media (max-width: 770px) {
   .writeBtn {
     width: 18%;
-    right: 10%;
-    top: 100%;
+    right: 100%;
   }
 }
 

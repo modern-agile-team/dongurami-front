@@ -6,9 +6,50 @@
   margin: 0 auto;
   border: 2px solid #90e2d6;
   padding: 1rem 2rem;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   @media screen and (max-width: 768px) {
-    width: 80%;
+    width: 94vw;
+
+    position: absolute;
+    top: 30%;
+    left: 0;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    & > div:nth-child(1) {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      & > div:nth-of-type(2) {
+        font-size: 1.3rem;
+      }
+      & > div:nth-child(3) {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-left: 75%;
+        button {
+          display: none;
+        }
+      }
+      & > div:nth-child(4) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    & > hr {
+      border: 0.5px solid #90e2d6;
+    }
+    & > div:nth-of-type(2) {
+      margin: 2rem;
+    }
   }
   & > div:nth-child(1) {
     display: flex;

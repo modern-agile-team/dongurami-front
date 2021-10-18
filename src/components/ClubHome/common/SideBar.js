@@ -7,9 +7,9 @@ import { getMember } from 'apis/manager';
 import {
   AiOutlineHome,
   AiOutlineNotification,
-  AiOutlinePicLeft,
   AiOutlineSchedule,
-  AiOutlineSetting
+  AiOutlineSetting,
+  AiOutlinePicture
 } from 'react-icons/ai';
 import { MdRateReview } from 'react-icons/md';
 import { useSelector } from 'react-redux';
@@ -31,7 +31,7 @@ const icons = () => {
   return [
     <AiOutlineHome size={iconSize} key="0" />,
     <AiOutlineNotification size={iconSize} key="1" />,
-    <AiOutlinePicLeft size={iconSize} key="2" />,
+    <AiOutlinePicture size={iconSize} key="2" />,
     <AiOutlineSchedule size={iconSize} key="3" />,
     <MdRateReview size={iconSize} key="4" />,
     <HiPencil size={iconSize} key="5" />,

@@ -13,9 +13,54 @@ export function getSearchData(type, keyword) {
 }
 
 export function getPost(postId) {
-  return axios.get(`http://3.36.72.145:8080/api/board/promotion/${postId}`);
+  return axios.get(`api/board/promotion/${postId}`);
 }
 
 export function deletePost(postId) {
-  return axios.delete(`http://3.36.72.145:8080/api/board/promotion/${postId}`);
+  return axios.delete(`api/board/promotion/${postId}`);
+}
+
+export function editComment(postId, commentNo, description) {
+  return axios.put(`api/board/promotion/${postId}/${commentNo}`, {
+    description
+  });
+}
+
+export function editReplyComment(
+  postId,
+  commentNo,
+  replyCommentNo,
+  description
+) {
+  console.log('안녕');
+  return axios.put(
+    `api/board/promotion/${postId}/${commentNo}/${replyCommentNo}`,
+    {
+      description
+    }
+  );
+}
+
+export function deleteComment(postId, commentNo) {
+  return axios.delete(`api/board/promotion/${postId}/${commentNo}`);
+}
+
+export function deleteReplyComment(postId, commentNo, replyCommentNo) {
+  return axios.delete(
+    `api/board/promotion/${postId}/${commentNo}/${replyCommentNo}`
+  );
+}
+
+export function addComment(postId, description) {
+  return axios.post(`api/board/promotion/${postId}`, {
+    id: 'test1',
+    description
+  });
+}
+
+export function replyAddComment(postId, parentCommentId, description) {
+  return axios.post(`api/board/promotion/${postId}/${parentCommentId}`, {
+    id: 'test1',
+    description
+  });
 }

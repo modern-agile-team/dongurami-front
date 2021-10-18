@@ -1,3 +1,5 @@
+@import '../Manager/Members.module.scss';
+
 .write {
   display: flex;
   flex-direction: column;
@@ -46,11 +48,11 @@
     width: 4em;
     margin-left: 1em;
     height: 3em;
-    border-radius: 3px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: lighter;
-    background-color: #64beb18c;
-    border: none;
+    background-color: rgba(236, 236, 236, 0.34);
+    border: 1px solid #c9eee8;
     &:hover {
       background-color: #3fcdb8;
     }

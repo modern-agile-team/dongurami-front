@@ -32,6 +32,7 @@ function Profile() {
     console.log(uRouter.query)
     setToken(getToken())
     getUserInfo(uRouter.query.pid, token)
+
     .then((res) => {
       setUserInfo(res.data.userInfo);
       setProfile(res.data.profile);
