@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-evenly;
     margin: 0 auto;
-    padding: 2rem 5vw;
+    padding: 3.5% 5vw;
     .des {
       margin: 0%;
       padding-left: 2rem;
@@ -24,6 +24,7 @@
       .logo {
         font-family: 'Noto Sans KR', sans-serif;
         color: #3fcdb8;
+        margin: 0;
       }
     }
   }
@@ -93,9 +94,10 @@
     }
     h1 {
       font-size: 11vw;
+      padding: 0 2rem;
     }
     span {
-      font-size: 1vw;
+      padding: 0 2rem;
     }
     img {
       margin-top: 5rem;

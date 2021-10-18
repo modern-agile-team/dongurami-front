@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+
 .container {
   width: 100%;
   background-color: #fff;
-  margin-top: 11%;
+  margin-top: 17%;
   h1 {
     font-size: 350%;
     font-weight: 100;
@@ -33,7 +35,7 @@
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 50%;
     font-weight: 800;
-    width: 5.5vw;
+    width: 10em;
     margin-left: 75%;
     margin-bottom: 8%;
     zoom: 2.5;
@@ -115,33 +117,38 @@
   .container {
     width: 80%;
     h1 {
-      font-size: 149%;
+      font-size: 180%;
+      padding: 0 5vw;
     }
     .list {
       .br {
-        margin-left: -208px;
+        margin-top: 18%;
+        margin-left: -250px;
       }
     }
     .promotion {
-      margin-left: 3%;
+      margin-top: 25%;
       .recruit {
         margin-left: 10px;
       }
       .br {
-        margin-left: -225px;
+        margin-top: 16%;
+        margin-left: -268px;
       }
     }
     .listBtn {
-      width: 20%;
-      font-weight: 200;
-      zoom: 0;
-      margin-left: 90%;
+      width: 9em;
+      height: 1.3rem;
+      font-weight: 600;
+      zoom: 1.3;
+      margin-left: 85%;
     }
     .promotionBtn {
-      width: 20%;
-      font-weight: 200;
-      zoom: 0;
-      margin-left: 90%;
+      width: 9em;
+      height: 1.3rem;
+      font-weight: 600;
+      zoom: 1.3;
+      margin-left: 85%;
       margin-top: 5%;
     }
   }
