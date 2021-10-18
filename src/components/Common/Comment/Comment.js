@@ -40,14 +40,13 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
     dispatch(getPost());
   }
 
-
   return (
     <div className={styles.comment}>
       <img src={`https://picsum.photos/500?random=${Math.floor(Math.random() * 9) + 1}`} alt="profile" />
       <div>
         <div>
           <p>{comment.studentName}</p>
-          <p>작성자</p>
+          {(post.studentId === comment.studentId) && <p>작성자</p>}
           <div>
             <button onClick={onEdit} className={styles['action-button']}>{(isContentEditable) ? <AiOutlineCheck /> : <AiOutlineEdit />}</button>
             <button onClick={onDelete} className={styles['action-button']}><AiOutlineDelete /></button>
