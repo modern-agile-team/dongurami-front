@@ -4,6 +4,7 @@
   justify-content: center;
   font-size: 140%;
   z-index: 9;
+  margin-top: 1.5em;
   .lastmonth {
     cursor: pointer;
     margin-right: 2%;
@@ -14,6 +15,7 @@
   }
   .thisMonth {
     align-items: stretch;
+    font-size: 120%;
   }
   .nextmonth {
     cursor: pointer;
@@ -28,12 +30,15 @@
 .add {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 1%;
+  margin: -2.5% 2% 4% 0%;
   span {
+    padding: 0.8rem;
     color: black;
     cursor: pointer;
+    background-color: #fcf5c4;
+    border-radius: 6px;
     &:hover {
-      color: #3fcdb8;
+      filter: brightness(97%);
     }
   }
 }

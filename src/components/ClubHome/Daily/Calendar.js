@@ -22,6 +22,7 @@ const Calendar = () => {
   const [color, setColor] = useState('');
   const [nowDay, setNowDay] = useState('');
   const nowDate = useRef();
+  const colors = ['#f7b5b5', '#ffee8f', '#aefff8', '#ffc2fc', '#e2e2e2']
 
   const moveLogin = () => {
     Router.push('/LoginPage');
@@ -99,6 +100,7 @@ const Calendar = () => {
         />
       </div>
       <DailyModal
+        colors={colors}
         setSchedule={setSchedule}
         setPop={setPop}
         today={today}
