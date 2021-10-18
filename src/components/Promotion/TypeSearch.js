@@ -29,6 +29,7 @@ const TypeSearch = ({
         className={styles.tagList}
         onClick={(event) => setSearchItem(event.target.getAttribute('name'))}
       >
+        <li name="">#전체</li>
         <li name="IT">#IT</li>
         <li name="음악">#음악</li>
         <li name="친목">#친목</li>
