@@ -4,6 +4,7 @@ import styles from '../../styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo';
 import router from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
+import getToken from 'utils/getToken';
 
 function Profile() {
   const [comp, setComp] = useState('프로필');
@@ -12,10 +13,7 @@ function Profile() {
   const [id, setId] = useState('201816035');
   const [clubNo, setClubNo] = useState(0);
   const [dataArr, setDataArr] = useState([]);
-
-  const moveWriteScraps = () => {
-    router.push(`/profile/${id}/writescraps`);
-  };
+  const [token, setToken] = useState(getToken());
 
   const logout = () => {
     console.log(1);
@@ -27,15 +25,16 @@ function Profile() {
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
-  useEffect(() => {
-    getUserInfo(id)
-      .then((res) => {
-        setUserInfo(res.data.userInfo);
-        setProfile(res.data.profile);
-        setClubNo(res.datra.profile.clubs[0].no);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  useEffect(() => { 
+    setToken(getToken())
+    getUserInfo(id, token)
+    .then((res) => {
+      setUserInfo(res.data.userInfo);
+      setProfile(res.data.profile);
+      setClubNo(res.data.profile.clubs[0].no);
+    })
+    .catch((err) => console.log(err));
+  }, [token]);
 
   return (
     <div className={styles.container}>
@@ -47,14 +46,14 @@ function Profile() {
               getScraps(profile.id, profile.clubs[0].no)
                 .then((res) => {
                   setDataArr(
-                    res.data.scrpas
-                      .concat(res.data.board)
+                    res.data.scraps
+                      .concat(res.data.boards)
                       .sort(
                         (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
                       )
                   );
                 })
-                .catch((err) => console.log(err.response.data.msg));
+                .catch((err) => console.log(err.response));
               setComp('스크랩');
             } else alert('가입된 동아리가 없습니다.');
           }}
@@ -70,7 +69,6 @@ function Profile() {
         comp={comp}
       />
       <Scraps
-        moveWriteScraps={moveWriteScraps}
         userInfo={userInfo}
         profile={profile}
         comp={comp}
@@ -78,6 +76,7 @@ function Profile() {
         clubNo={clubNo}
         getScraps={getScraps}
         dataArr={dataArr}
+        id={id}
       />
     </div>
   );

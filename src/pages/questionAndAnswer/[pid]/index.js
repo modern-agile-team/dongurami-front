@@ -1,15 +1,15 @@
-import WriteScraps from "components/Profile/WriteScraps";
 import Footer from "components/Common/Footer";
 import Header from "components/Common/Header/Header";
+import PostContainer from "components/Post/PostContainer";
 
-const writescraps = () => {
+function NoticePost() {
   return (
     <>
       <Header />
-      <WriteScraps />
+      <PostContainer category="questionAndAnswer" />
       <Footer />
     </>
   );
-};
+}
 
-export default writescraps;
+export default NoticePost;

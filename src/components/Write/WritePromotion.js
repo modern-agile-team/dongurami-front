@@ -1,15 +1,18 @@
 import { postPost } from 'apis/board';
+import { useRouter } from 'next/router';
 import { useState } from "react";
 import styles from "../../styles/Board/Write/WritePromotionContent.module.scss";
 
 function WritePromition({ title, description }) {
+  const router = useRouter();
   const [image, setImage] = useState();
 
   const onChange = (e) => {
     setImage(e.target.files[0]);
   }
   const onSubmit = () => {
-    postPost('promotion', { title, description })
+    postPost('promotion', { title, description });
+    router.push('/promotion');
   };
 
   return (

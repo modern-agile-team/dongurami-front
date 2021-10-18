@@ -46,33 +46,37 @@ function ResetPW() {
 
   return (
     <div className={styles.container}>
-      <h1>새 비밀번호 설정</h1>
-      <form>
-        <input
-          type="number"
-          placeholder="학번"
-          name="id"
-          value={id}
-          onChange={onChange}
-        />
-        <input
-          type="password"
-          placeholder="새로운 비밀번호"
-          name="newPassword"
-          value={newPassword}
-          onChange={onChange}
-        />
-        <input
-          type="password"
-          placeholder="새로운 비밀번호 확인"
-          name="checkNewPassword"
-          value={checkNewPassword}
-          onChange={onChange}
-        />
-        <button type="submit" onClick={onSubmit}>
-          변경하기
-        </button>
-      </form>
+      <div className={styles.resetPW}>
+        <div className={styles.body}>
+          <h1>새 비밀번호 설정</h1>
+          <input
+            type="number"
+            placeholder="학번"
+            name="id"
+            value={id}
+            onChange={onChange}
+          />
+          <input
+            type="password"
+            placeholder="새로운 비밀번호"
+            name="newPassword"
+            value={newPassword}
+            onChange={onChange}
+          />
+          <input
+            type="password"
+            placeholder="새로운 비밀번호 확인"
+            name="checkNewPassword"
+            value={checkNewPassword}
+            onChange={onChange}
+          />
+        </div>
+        <div className={styles.btnWrap}>
+          <button type="submit" onClick={onSubmit}>
+            변경하기
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

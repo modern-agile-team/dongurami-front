@@ -1,5 +1,11 @@
 import styles from '../../../styles/Club/Home/Intro/Desc.module.scss';
 import { IoPencil } from 'react-icons/io5';
+import ReactQuillContainer from 'components/Write/ReactQuillContainer';
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(import('react-quill'), {
+  ssr: false
+});
 
 const Button = ({ descUpdate, onDescSubnmit, onDescUpdate }) => {
   return (
@@ -17,24 +23,29 @@ const Button = ({ descUpdate, onDescSubnmit, onDescUpdate }) => {
 };
 
 const Desc = ({
-  onDescChange,
-  introDesc,
   onDescUpdate,
   descUpdate,
   onDescSubnmit,
-  leader
+  setIntroDesc,
+  infos,
+  introDesc
 }) => {
+  const result = infos.result[0];
+  const client = infos.clientInfo;
   return (
     <div className={styles.intro}>
       <span>동아리 소개</span>
-      <div id={styles.desc}>
+      <div className={styles.desc}>
         {descUpdate ? (
-          <textarea onChange={onDescChange} defaultValue={introDesc} />
+          <ReactQuillContainer
+            setDescription={setIntroDesc}
+            description={introDesc}
+          />
         ) : (
-          <p>{introDesc}</p>
+          <ReactQuill theme="bubble" value={result.introduce} readOnly />
         )}
       </div>
-      {leader === 1 ? (
+      {client.leader === 1 ? (
         <div>
           <Button
             descUpdate={descUpdate}

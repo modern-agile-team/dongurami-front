@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from '../../../styles/Club/Home/Manager/Manager.module.scss';
 import Approve from './Approve';
 import Members from './Members';
-import ManagerHeader from './ManagerHeader';
 import {
   deleteMember,
   getMember,
@@ -12,6 +11,7 @@ import {
   putLeader
 } from 'apis/manager';
 import { useRouter } from 'next/router';
+import { AiFillCaretUp } from 'react-icons/ai';
 
 export const Manager = () => {
   const [members, setMembers] = useState([]);
@@ -49,6 +49,9 @@ export const Manager = () => {
             alert('로그인 후 이용해주세요');
             router.push('/LoginPage');
             break;
+          case 403:
+            alert('관리자 권한이 없습니다. 동아리 회장에게 문의해주세요');
+            break;
           case 404:
             alert('존재하지 않는 동아리입니다');
             router.push('/');
@@ -62,28 +65,32 @@ export const Manager = () => {
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
-    await postApply(
-      {
-        applicant: mergedApplicantInfo[e.target.id].id
-      },
-      router.query.id
-    )
-      .then((res) => alert(res.data.msg))
-      .catch((err) => alert(err.response.data.msg));
+    confirm('가입을 승인합니까?') &&
+      (await postApply(
+        {
+          applicant: mergedApplicantInfo[e.target.id].id
+        },
+        router.query.id
+      )
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err.response.data.msg)));
     router.reload();
   };
 
   // 가입 거절 PUT
   const onApplyReject = async (e) => {
-    await putApply(
-      {
-        applicant: mergedApplicantInfo[e.target.id].id
-      },
-      router.query.id
-    )
-      .then((res) => alert(res.data.msg))
-      .catch((err) => console.log(err.response.data.msg));
-    await getMembersData();
+    confirm('가입을 거절합니까?') &&
+      (await putApply(
+        {
+          applicant: mergedApplicantInfo[e.target.id].id
+        },
+        router.query.id
+      )
+        .then((res) => {
+          alert(res.data.msg);
+          getMembersData();
+        })
+        .catch((err) => alert(err.response.data.msg)));
     if (applicantInfo.length === 0) router.reload();
   };
 
@@ -123,8 +130,20 @@ export const Manager = () => {
       },
       router.query.id
     )
-      .then((res) => alert(res.data.msg))
+      .then((res) => {
+        alert(res.data.msg);
+      })
       .catch((err) => alert(err.response.data.msg));
+    await getMembersData();
+  };
+
+  // 동아리원 추방 DELETE
+  const exileMember = async (index) => {
+    const studentID = changeLeaderRef.current[index].id;
+    confirm(`${studentID}님을 동아리에서 추방시키겠습니까?`) &&
+      (await deleteMember(studentID, router.query.id)
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err.response.data.msg)));
     await getMembersData();
   };
 
@@ -143,24 +162,9 @@ export const Manager = () => {
     setBoardAuth(boolOfBoardAuth);
   };
   //-------------------------------------------------------------//
-  console.log(unescape('1C1OKWM_koKR954KR954'));
-  const toClubHome = () => {
-    router.push({
-      pathname: `/clubhome/${router.query.id}`,
-      query: { club: router.query.club }
-    });
-  };
 
-  const exileMember = async (index) => {
-    const studentID = changeLeaderRef.current[index].id;
-    await deleteMember(
-      {
-        studentId: studentID
-      },
-      router.query.id
-    )
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err.response));
+  const toClubHome = () => {
+    router.push(`/clubhome/${router.query.id}`);
   };
 
   useEffect(() => {
@@ -180,7 +184,6 @@ export const Manager = () => {
 
   return (
     <div className={styles.container}>
-      <ManagerHeader toClubHome={toClubHome} clubName={router.query.club} />
       <Members
         members={members}
         leader={leader}
@@ -190,6 +193,7 @@ export const Manager = () => {
         changeMembersAuth={changeMembersAuth}
         refArr={refArr}
         exileMember={exileMember}
+        toClubHome={toClubHome}
       />
       <Approve
         onApplyAccept={onApplyAccept}

@@ -7,15 +7,16 @@ import { getMember } from 'apis/manager';
 import {
   AiOutlineHome,
   AiOutlineNotification,
-  AiOutlinePicLeft,
   AiOutlineSchedule,
-  AiOutlineSetting
+  AiOutlineSetting,
+  AiOutlinePicture
 } from 'react-icons/ai';
 import { MdRateReview } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 
 const board = (clubName) => {
   return [
-    unescape(clubName),
+    clubName,
     '공지 사항',
     '활동 내용',
     '일정',
@@ -30,7 +31,7 @@ const icons = () => {
   return [
     <AiOutlineHome size={iconSize} key="0" />,
     <AiOutlineNotification size={iconSize} key="1" />,
-    <AiOutlinePicLeft size={iconSize} key="2" />,
+    <AiOutlinePicture size={iconSize} key="2" />,
     <AiOutlineSchedule size={iconSize} key="3" />,
     <MdRateReview size={iconSize} key="4" />,
     <HiPencil size={iconSize} key="5" />,
@@ -53,6 +54,8 @@ const SideBar = ({ setComp, comp }) => {
   const [pageY, setPageY] = useState(0);
   const [hide, setHide] = useState(false);
 
+  const clubName = useSelector((state) => state.clubhome.info);
+
   const documentRef = useRef(typeof window === 'object' && document);
 
   const router = useRouter();
@@ -60,10 +63,7 @@ const SideBar = ({ setComp, comp }) => {
   const checkManageAuth = async () => {
     getMember(router.query.id)
       .then(() => {
-        Router.push({
-          pathname: `/manager/${router.query.id}`,
-          query: { club: router.query.club }
-        });
+        Router.push(`/manager/${router.query.id}`);
       })
       .catch((err) => {
         alert(err.response.data.msg);
@@ -86,10 +86,12 @@ const SideBar = ({ setComp, comp }) => {
     return () => current.removeEventListener('scroll', throttleScroll);
   }, [throttleScroll]);
 
+  if (!clubName) return null;
+
   return (
     <div className={hide ? styles.hide : styles.sideBar} id={styles.open}>
       <div className={styles.menu} id={styles.show}>
-        {board(router.query.club).map((el, i) => {
+        {board(clubName.result[0].name).map((el, i) => {
           return (
             <div
               className={styles.board}

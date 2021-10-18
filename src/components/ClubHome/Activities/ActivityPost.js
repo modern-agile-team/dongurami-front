@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { getBoardPosts } from 'redux/slices/board';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 function ActivityPost({ pid, closeModal }) {
   const router = useRouter();

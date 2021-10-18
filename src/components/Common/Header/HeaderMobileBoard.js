@@ -27,7 +27,7 @@ export const HeaderMobileBoard = () => {
             router.push('/notice');
           }}
         >
-          공지게시판
+          공지 게시판
         </li>
         <li
           className={styles.free}
@@ -36,7 +36,7 @@ export const HeaderMobileBoard = () => {
             router.push('/free');
           }}
         >
-          자유게시판
+          자유 게시판
         </li>
       </ul>
     </div>

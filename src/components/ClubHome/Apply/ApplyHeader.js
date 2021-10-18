@@ -4,7 +4,7 @@ import styles from '../../../styles/Club/Home/Apply/ApplyHeader.module.scss';
 const ApplyHeader = ({ clubName }) => {
   return (
     <div className={styles.header}>
-      <h2>{unescape(clubName)}</h2>
+      <h2>{clubName}</h2>
     </div>
   );
 };

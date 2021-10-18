@@ -6,7 +6,7 @@ const ReviewHeader = ({ reviewAvg, clubName }) => {
   return (
     <div className={styles.header}>
       <div>
-        <span>{unescape(clubName)}</span>
+        <span>{clubName}</span>
       </div>
       <div className={styles.star}>
         <AiFillStar />

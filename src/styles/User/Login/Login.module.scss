@@ -1,9 +1,9 @@
 .login {
   width: 50%;
   height: 28rem;
-  margin: 5% auto;
-  border: 2px solid #c2f2dc;
-  border-radius: 70px;
+  margin: 3% auto;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.342);
+  border-radius: 50px;
   .body {
     display: flex;
     flex-direction: column;
@@ -12,65 +12,73 @@
     margin: 0 auto;
     font-size: 240%;
     font-weight: 100;
-    margin-top: 45px;
+    margin-top: 35px;
     margin-bottom: 35px;
   }
   .idInput {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 90%;
-    width: 70%;
+    width: 60%;
     height: 3.3rem;
     margin: 0 auto;
     margin-bottom: 20px;
     border: none;
     border-bottom: 1.4px solid #dadada;
+    border-radius: 0px;
     outline-style: none;
   }
   .pwInput {
     @extend .idInput;
     margin-bottom: 0%;
   }
+  .find {
+    width: 60%;
+    padding-top: 1rem;
+    font-size: 85%;
+    margin: 0 auto;
+    text-align: left;
+    color: #777777;
+    span {
+      cursor: pointer;
+    }
+    .findID {
+      margin-right: 1.5rem;
+    }
+  }
+  .buttons {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 6%;
+    text-align: center;
+    .loginBtn:hover {
+      filter: brightness(96%);
+    }
+  }
   button {
-    width: 20%;
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 100%;
     height: 50px;
     font-size: 100%;
-    border-radius: 8px;
-    border-style: solid;
-    border-color: #3fcdb8;
+    border-radius: 5px;
+    border: 1.5px solid #90cec7cb;
     background-color: #fff;
     color: #3fcdb8;
     cursor: pointer;
   }
-}
-
-.find {
-  width: 70%;
-  padding-top: 1rem;
-  font-size: 85%;
-  margin: 0 auto;
-  text-align: right;
-  span {
-    cursor: pointer;
-  }
-  .findID {
-    margin-right: 1.5rem;
-  }
-}
-
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-  width: 72%;
-  margin: 0 auto;
-  margin-top: 5%;
-  .loginBtn {
-    margin-right: 15px;
-  }
-  .loginBtn:hover {
-    filter: brightness(96%);
-  }
-  .signupBtn:hover {
-    filter: brightness(96%);
+  .signup {
+    span {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 80%;
+    }
+    margin-top: 7%;
+    .signupBtn {
+      cursor: pointer;
+      font-style: oblique;
+      color: rgb(99, 99, 99);
+      &:hover {
+        color: #90cec7;
+      }
+    }
   }
 }
 
@@ -91,8 +99,13 @@
     .login {
       width: 90%;
       font-size: 80%;
+      box-shadow: 0px 0px 0px 0px;
+      .buttons {
+        margin-top: 15%;
+      }
       button {
-        width: 30%;
+        height: 40px;
+        margin-bottom: 5%;
       }
     }
   }

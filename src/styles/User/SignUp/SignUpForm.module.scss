@@ -4,8 +4,8 @@
   margin-bottom: 5%;
   .container {
     width: 40%;
-    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.08);
-    border-radius: 30px;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.342);
+    border-radius: 50px;
     padding: 1rem;
     margin: 0 auto;
     text-align: center;
@@ -20,7 +20,7 @@
     height: 50px;
     border: none;
     border-radius: 0px;
-    border-bottom: 1.3px inset #dadada;
+    border-bottom: 1.4px solid #dadada;
     outline-style: none;
     margin-bottom: 3%;
   }
@@ -86,6 +86,12 @@
   }
 }
 
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @media screen and (max-width: 768px) {
   .form {
     .container {
@@ -98,6 +104,10 @@
   .form {
     .container {
       width: 85%;
+      box-shadow: 0px 0px 0px 0px;
+      h1 {
+        margin-bottom: 15%;
+      }
       input {
         font-size: 75%;
         width: 80%;

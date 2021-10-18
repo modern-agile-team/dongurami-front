@@ -1,6 +1,5 @@
 .container {
   font-size: 80%;
-  margin-left: 10%;
   .user {
     display: flex;
     padding-left: 0;
@@ -14,7 +13,7 @@
       line-height: 32px;
     }
     .signUp {
-      width: 5.5vw;
+      width: 70px;
       height: 32px;
       border-radius: 8px;
       background-color: #90e2d6;
@@ -48,15 +47,18 @@
 
 @media screen and (max-width: 768px) {
   .container {
+    width: 100%;
+    margin: 0 auto;
     font-size: 95%;
+    padding: 3.5rem 1rem;
     .user {
-      margin-top: 250%;
-      margin-left: -126%;
+      justify-content: space-around;
       .login {
-        margin-right: 3%;
+        padding-left: 0.7rem;
       }
       .signUp {
-        width: 10vw;
+        margin: 0;
+        width: 45%;
       }
     }
   }
@@ -64,15 +66,11 @@
 
 @media screen and (max-width: 480px) {
   .container {
+    font-size: 85%;
+    padding: 3.5rem 0.2rem;
     .user {
-      margin-top: 235%;
-      margin-left: -48%;
       .login {
-        width: 20%;
-      }
-      .signUp {
-        width: 25%;
-        margin-left: 2.5%;
+        padding-left: 0.5rem;
       }
     }
   }

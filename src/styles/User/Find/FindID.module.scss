@@ -1,90 +1,75 @@
 .find {
-  width: 42em;
+  width: 50%;
   height: 28rem;
-
-  margin: 4vh auto;
-  border-style: solid;
-  border-color: #c2f2dc;
-  border-radius: 70px;
+  margin: 3% auto;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.342);
+  border-radius: 50px;
   .body {
     display: flex;
     flex-direction: column;
   }
   h1 {
     margin: 0 auto;
-    font-size: 2.5em;
-    margin-top: 45px;
+    font-size: 240%;
+    font-weight: 100;
+    margin-top: 35px;
     margin-bottom: 35px;
   }
   .name {
-    font-size: 1rem;
-    width: 30rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 90%;
+    width: 60%;
     height: 3.3rem;
     margin: 0 auto;
     margin-bottom: 20px;
     border: none;
     border-bottom: 1.4px solid #dadada;
+    border-radius: 0px;
     outline-style: none;
   }
   .email {
-    font-size: 1rem;
-    width: 30rem;
-    height: 3.3rem;
-    margin: 0 auto;
-    border: none;
-    border-bottom: 1.4px solid #dadada;
-    outline-style: none;
+    @extend .name;
+    margin-bottom: 0%;
   }
   .findPW {
-    width: 5.8rem;
-    padding: 1rem;
-    margin-left: 4.5rem;
-    cursor: pointer;
-  }
-  button {
-    zoom: 1.4;
-    width: 6rem;
-    height: 2.3rem;
+    width: 60%;
+    padding-top: 1rem;
+    font-size: 85%;
     margin: 0 auto;
-    margin-top: 2vh;
-    border-radius: 8px;
-    border-style: solid;
-    border-color: #3fcdb8;
-    background-color: #fff;
-    color: #3fcdb8;
-    cursor: pointer;
-    margin-left: 21rem;
-    &:hover {
-      filter: brightness(96%);
+    text-align: left;
+    color: #777777;
+    span {
+      cursor: pointer;
+    }
+  }
+  .btnWrap {
+    width: 60%;
+    margin: 0 auto;
+    padding: 3rem;
+    button {
+      font-family: 'Noto Sans KR', sans-serif;
+      width: 100%;
+      height: 50px;
+      justify-content: center;
+      font-size: 100%;
+      border-radius: 5px;
+      border: 1.5px solid #90cec7cb;
+      background-color: #fff;
+      color: #3fcdb8;
+      cursor: pointer;
+      &:hover {
+        filter: brightness(96%);
+      }
     }
   }
 }
 
 @media screen and (max-width: 768px) {
   .wrap {
-    width: 100%;
-    margin-top: 10%;
     .find {
       width: 80%;
-      font-size: 85%;
-      .name {
-        width: 65%;
-        margin-top: 2%;
-      }
-      .email {
-        width: 65%;
-      }
       .findPW {
-        width: 50%;
-        font-size: 110%;
-        margin: 0;
-        margin-left: 14%;
-      }
-      button {
-        width: 30%;
-        margin: 0;
-        margin-top: 2rem;
-        margin-left: 60%;
+        font-size: 80%;
       }
     }
   }
@@ -96,12 +81,13 @@
     .find {
       width: 90%;
       font-size: 75%;
-      margin-top: 30%;
-      margin-bottom: 35%;
+      box-shadow: 0px 0px 0px 0px;
+      h1 {
+        margin-top: 3rem;
+      }
       button {
-        zoom: 1.1;
-        margin-top: 8%;
-        font-size: 60%;
+        height: 40px;
+        margin-bottom: 5%;
       }
     }
   }

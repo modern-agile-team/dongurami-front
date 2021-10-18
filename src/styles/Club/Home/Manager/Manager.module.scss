@@ -1,37 +1,55 @@
-$sans-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-$color1: #d4eee498;
+$sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+  Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 .container {
+  width: 45%;
   padding: 3em;
   margin: 0 auto;
   svg {
     cursor: pointer;
   }
   h1,
-  h2 {
+  h3,
+  span {
     margin: 0;
     font-family: $sans-font;
   }
-  h2 {
-    margin: 1em 0;
+}
+
+.container input[type='checkbox']:checked {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 80%;
+    padding: 1em 0;
   }
-  button {
-    margin-top: 1em;
-    width: 6vw;
-    height: 5vh;
-    border-radius: 6px;
-    border: none;
-    background-color: $color1;
-    font-family: $sans-font;
-    cursor: pointer;
-    &:hover {
-      background-color: #e6f2ff;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding-bottom: 0;
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+    h1 {
+      font-size: 100%;
+    }
+    h3 {
+      font-size: 100%;
+    }
+    span {
+      font-size: 90%;
     }
   }
-  input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+  .container input[type='checkbox']:checked {
+    width: 13px;
+    height: 13px;
+    margin-right: 3px;
   }
 }

@@ -34,6 +34,10 @@
       margin-top: 1vh;
       margin-bottom: 3vh;
     }
+    .free {
+      margin-top: 1vh;
+      margin-bottom: 3vh;
+    }
   }
 }
 
@@ -52,15 +56,24 @@
 
 @media screen and (max-width: 768px) {
   .container {
+    display: inline;
+    width: 76%;
     ul {
       flex-direction: column;
-      width: 30vw;
-      font-size: 120%;
-      padding: 0%;
+      align-items: center;
+      margin: 0;
+      font-size: 110%;
+      width: 100%;
     }
     li {
+      padding: 1.5rem;
       width: 100%;
       text-align: center;
+      border-bottom: 0.1px solid #dddbdb;
+      &:hover {
+        background-color: #bfe7e17e;
+        color: black;
+      }
     }
     .dropdown {
       display: none;
@@ -70,8 +83,9 @@
 
 @media screen and (max-width: 480px) {
   .container {
+    width: 70%;
     ul {
-      font-size: 115%;
+      font-size: 100%;
     }
   }
 }
