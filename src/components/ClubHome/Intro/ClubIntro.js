@@ -43,13 +43,14 @@ const ClubIntro = ({ visitTime }) => {
     setDescUpdate(!descUpdate);
   };
 
+  // 로고 수정
   const onChangeLogo = async (e) => {
     const file = e.target.files[0];
     const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (
       await getS3PresignedURL({ img: e.target.files[0].name })
     ).data;
     await uploadImage(presignedURL, file);
-    await putClubLogo({ logoUrl: imageURL, fileId: '동아리 로고' });
+    await putClubLogo({ logoUrl: imageURL });
     dispatch(getClubInfo(clubId));
   };
 

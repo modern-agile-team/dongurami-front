@@ -41,6 +41,7 @@ const Review = () => {
   const getReviewData = useCallback(() => {
     getReview(router.query.id)
       .then((res) => {
+        console.log(res.data);
         setStudentId(res.data.studentId);
         setReviewList(res.data.reviewList);
       })

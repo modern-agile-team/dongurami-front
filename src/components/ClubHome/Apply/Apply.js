@@ -164,29 +164,34 @@ const Apply = () => {
   }, [getApplyQuestions]);
 
   return (
-    <div className={styles.container}>
+    <>
       <ApplyHeader clubName={clubName} />
-      <ApplyQuestions onUserInfoChange={onUserInfoChange} userInfo={userInfo} />
-      <Additional
-        onAnswerInputChange={onAnswerInputChange}
-        isUpdate={isUpdate}
-        onUpdate={onUpdateQuestionClick}
-        onRemove={onRemove}
-        questions={questions}
-        onUpdateInputChange={onUpdateInputChange}
-        leader={leader}
-        userInfo={userInfo}
-      />
-      <ApplySubmit
-        newQuestionInput={newQuestionInput}
-        handleChange={handleChange}
-        onQuestionAdd={onQuestionAdd}
-        iconSize={iconSize}
-        onResumeSubmit={onResumeSubmit}
-        leader={leader}
-        userInfo={userInfo}
-      />
-    </div>
+      <div className={styles.container}>
+        <ApplyQuestions
+          onUserInfoChange={onUserInfoChange}
+          userInfo={userInfo}
+        />
+        <Additional
+          onAnswerInputChange={onAnswerInputChange}
+          isUpdate={isUpdate}
+          onUpdate={onUpdateQuestionClick}
+          onRemove={onRemove}
+          questions={questions}
+          onUpdateInputChange={onUpdateInputChange}
+          leader={leader}
+          userInfo={userInfo}
+        />
+        <ApplySubmit
+          newQuestionInput={newQuestionInput}
+          handleChange={handleChange}
+          onQuestionAdd={onQuestionAdd}
+          iconSize={iconSize}
+          onResumeSubmit={onResumeSubmit}
+          leader={leader}
+          userInfo={userInfo}
+        />
+      </div>
+    </>
   );
 };
 

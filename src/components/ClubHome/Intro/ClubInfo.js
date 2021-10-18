@@ -3,14 +3,6 @@ import LogoUpdate from './LogoUpdate';
 import { ResponsiveBar } from '@nivo/bar';
 import { BsImage } from 'react-icons/bs';
 
-const colors = ['#03BDA6', '#03B0C0', '#FEB942', '#F39019', '#FF7E79'];
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
 const ClubInfo = ({ infos, onChangeLogo }) => {
   const result = infos.result[0];
   const client = infos.clientInfo;
@@ -18,8 +10,6 @@ const ClubInfo = ({ infos, onChangeLogo }) => {
     { gender: '남자', '인원(명)': result.genderMan },
     { gender: '여자', '인원(명)': result.genderWomen }
   ];
-  const ramdomColor = colors[getRandomInt(0, colors.length)];
-  console.log(infos.result[0]);
   return (
     <div className={styles.container}>
       <div className={styles.desc}>
@@ -34,12 +24,12 @@ const ClubInfo = ({ infos, onChangeLogo }) => {
             data={data}
             keys={['인원(명)']}
             indexBy="gender"
-            colors={ramdomColor}
-            padding={0.4}
+            colors="#03B0C0"
+            padding={0.5}
             layout="horizontal"
             enableGridY={false}
             margin={{ top: -20, right: 0, bottom: 0, left: 40 }}
-            borderRadius={16}
+            borderRadius={6}
             labelTextColor={'white'}
           />
         </div>
@@ -48,7 +38,9 @@ const ClubInfo = ({ infos, onChangeLogo }) => {
         {infos.result[0].logoUrl === null ? (
           <BsImage />
         ) : (
-          <img src={infos.result[0].logoUrl} alt={result.fileId} />
+          <div className={styles.img}>
+            <img src={infos.result[0].logoUrl} alt={result.fileId} />
+          </div>
         )}
         {client.leader === 1 && <LogoUpdate onChangeLogo={onChangeLogo} />}
       </div>

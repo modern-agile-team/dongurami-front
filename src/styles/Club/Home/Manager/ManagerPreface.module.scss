@@ -6,7 +6,7 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   justify-content: space-around;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  background-color: rgba(0, 209, 136, 0.197);
+  background-color: #c5e2f0;
   padding: 10px 0;
   span {
     font-family: $sans-font;
@@ -14,7 +14,8 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   }
 }
 .preface div {
-  text-align: left;
+  width: 100%;
+  text-align: center;
 }
 
 .members {
