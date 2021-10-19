@@ -39,8 +39,8 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   cursor: pointer;
   border: 1px solid $color1;
   background-color: white;
-  border-radius: 6px;
-  height: 3em;
+  border-radius: 3px;
+  padding: 5px;
   &:hover {
     background-color: $color1;
   }
