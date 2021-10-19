@@ -30,7 +30,7 @@ export const Login = () => {
         if (res.data.jwt) {
           localStorage.setItem('jwt', res.data.jwt);
         }
-        router.push('/');
+        router.back();
       })
       .catch((err) => console.log(err.response));
   };
