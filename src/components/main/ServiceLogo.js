@@ -22,7 +22,7 @@ function ServiceLogo() {
         <div className={styles.des}>
           <h1>
             <div className={styles.title}>
-              <div className={styles.logo}>동그라미</div>에서 <br />
+              <p className={styles.logo}>동그라미</p>에서 <br />
             </div>
             원하는 <br />
             동아리를 <br />

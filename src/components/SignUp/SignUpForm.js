@@ -17,19 +17,22 @@ function SignUpForm() {
   const [majorNum, setMajorNum] = useState('');
 
   //네이버 oAuth의 프로필 정보 가져오기
-  const UserProfile = () => {
-    window.location.href.includes('access_token') && GetUser();
-    function GetUser() {
-      const token = window.location.href.split('=')[1].split('&')[0];
-      getNaverOauth(token)
-        .then((res) => {
-          setNames(res.data.name);
-          setEmail(res.data.email);
-        })
-        .catch((err) => alert(err.response));
-    }
-  };
-  useEffect(UserProfile, []);
+  function GetUser() {
+    const token = window.location.href.split('=')[1].split('&')[0];
+    getNaverOauth(token)
+      .then((res) => {
+        setNames(res.data.name);
+        setEmail(res.data.email);
+      })
+      .catch((err) => {
+        alert('오류가 발생했습니다.\n개발자에게 문의해 주세요.');
+        console.log(err.response);
+      });
+  }
+
+  useEffect(() => {
+    GetUser();
+  }, []);
 
   const majorCategory = [
     { value: '00', label: '학과 선택' },
