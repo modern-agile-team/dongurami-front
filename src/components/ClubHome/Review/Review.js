@@ -23,13 +23,15 @@ const Review = () => {
   const clubInfo = useSelector((state) => state.clubhome.info.result[0]);
 
   // 별점 평균
-  const reviewAvg =
-    reviewList
-      .map((el) => el.score)
-      .reduce((sum, cur) => {
-        return sum + cur;
-      }, 0) / reviewList.length;
-
+  const reviewAvg = (reviews) => {
+    return (
+      reviews
+        .map((el) => el.score)
+        .reduce((sum, cur) => {
+          return sum + cur;
+        }, 0) / reviews.length
+    );
+  };
   // 내 후기와 내 후기가 아닌 것들
   const reviewMine = reviewList.filter((el) => el.studentId === studentId);
   const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
@@ -142,7 +144,7 @@ const Review = () => {
 
   return (
     <div className={styles.container}>
-      <ReviewHeader reviewAvg={reviewAvg} clubInfo={clubInfo} />
+      <ReviewHeader reviewAvg={reviewAvg(reviewList)} clubInfo={clubInfo} />
       <ReviewWrite
         onReviewUpdate={onReviewUpdate}
         isReviewMine={reviewMine.length}
