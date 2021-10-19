@@ -84,7 +84,9 @@ function Header() {
                   <BiBell onClick={alarmOpen} className={styles.bell} />
                   {isAlarmOpen && <AlarmContainer />}
                 </div>
-                <FaUserCircle className={styles.Profile} onClick={logout} />
+                <Link href="/profile/201908033" passHref>
+                  <FaUserCircle className={styles.Profile} />
+                </Link>
               </div>
             ) : (
               <div
