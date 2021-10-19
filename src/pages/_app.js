@@ -1,14 +1,57 @@
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import store from 'redux/store';
 import '../styles/global.scss';
 import 'react-quill/dist/quill.snow.css';
+import { useEffect, useState } from 'react';
+import { getUser } from 'redux/slices/user';
+import { AiFillCaretUp } from 'react-icons/ai';
 
-function MyApp({ Component, pageProps }) {
+function ReduxWrapper({ children }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
+
+  return children;
+}
+
+function App({ Component, pageProps }) {
+  const [scrollY, setScrollY] = useState(0);
+
+  const scrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      const scroll = window.setInterval(() => {
+        const pos = window.pageYOffset;
+        const step = 50;
+        if (pos > 0) window.scrollTo(0, pos - step);
+        else window.clearInterval(scroll);
+      }, 1);
+    }
+  };
+
+  const scrollPosition = () => {
+    addEventListener('scroll', () => {
+      if (typeof window !== 'undefined') setScrollY(window.scrollY);
+    });
+  };
+  useEffect(() => {
+    scrollPosition();
+  }, [scrollY]);
+
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+      <ReduxWrapper>
+        <Component {...pageProps} />
+        {scrollY > 550 && (
+          <div className="toTheTop" onClick={scrollToTop}>
+            <AiFillCaretUp />
+            <p>TOP</p>
+          </div>
+        )}
+      </ReduxWrapper>
     </Provider>
   );
 }
 
-export default MyApp;
+export default App;

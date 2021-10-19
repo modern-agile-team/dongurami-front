@@ -2,18 +2,27 @@ import React from 'react';
 import styles from '../../../styles/Club/Home/Review/ReviewMine.module.scss';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { FaTrashAlt } from 'react-icons/fa';
+import { BsImage } from 'react-icons/bs';
 
-const ReviewMine = ({ description, score, inDate, onReviewDelete }) => {
+const ReviewMine = ({
+  description,
+  score,
+  inDate,
+  onReviewDelete,
+  clubInfo
+}) => {
   const stars = new Array(score).fill(score);
   const notStars = new Array(5 - score).fill(score);
+
   return (
     <div className={styles.mine}>
       <div className={styles.header}>
         <div className={styles.club}>
-          <img
-            src="https://lovelyoch.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F65bcaa80-1b5b-4662-82c2-41d689605df2%2F%EC%9A%B0%EC%95%84%ED%95%9C_%EC%95%A0%EC%9E%90%EC%9D%BC_%EB%A1%9C%EA%B3%A0.png?table=block&id=c6f4102e-005c-45a7-bc48-27ecaacc7a0d&spaceId=69eb8ea8-3d04-47ec-8bb7-004e8aa31f9e&width=250&userId=&cache=v2"
-            alt="우아한 애자일"
-          />
+          {clubInfo.logoUrl === null ? (
+            <BsImage />
+          ) : (
+            <img src={clubInfo.logoUrl} alt="동아리 로고" />
+          )}
           <div id={styles.date}>
             <span>내가 작성한 후기</span>
             <p>{inDate}</p>

@@ -11,6 +11,19 @@ body {
   font-style: normal;
 }
 
+.toTheTop {
+  text-align: center;
+  position: fixed;
+  right: 10%;
+  bottom: 20%;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  p {
+    margin: 0;
+  }
+}
+
 * {
   font-family: 'twayair';
 }

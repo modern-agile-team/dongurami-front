@@ -20,16 +20,18 @@ const Review = () => {
 
   const inputRef = useRef();
 
-  const clubName = useSelector((state) => state.clubhome.info.result[0].name);
+  const clubInfo = useSelector((state) => state.clubhome.info.result[0]);
 
   // 별점 평균
-  const reviewAvg =
-    reviewList
-      .map((el) => el.score)
-      .reduce((sum, cur) => {
-        return sum + cur;
-      }, 0) / reviewList.length;
-
+  const reviewAvg = (reviews) => {
+    return (
+      reviews
+        .map((review) => review.score)
+        .reduce((sum, cur) => {
+          return sum + cur;
+        }, 0) / reviews.length
+    );
+  };
   // 내 후기와 내 후기가 아닌 것들
   const reviewMine = reviewList.filter((el) => el.studentId === studentId);
   const reviewNotMine = reviewList.filter((el) => el !== reviewMine[0]);
@@ -41,7 +43,6 @@ const Review = () => {
   const getReviewData = useCallback(() => {
     getReview(router.query.id)
       .then((res) => {
-        console.log(res.data);
         setStudentId(res.data.studentId);
         setReviewList(res.data.reviewList);
       })
@@ -143,7 +144,7 @@ const Review = () => {
 
   return (
     <div className={styles.container}>
-      <ReviewHeader reviewAvg={reviewAvg} clubName={clubName} />
+      <ReviewHeader reviewAvg={reviewAvg(reviewList)} clubInfo={clubInfo} />
       <ReviewWrite
         onReviewUpdate={onReviewUpdate}
         isReviewMine={reviewMine.length}
@@ -161,6 +162,7 @@ const Review = () => {
           score={reviewMine[0].score}
           description={reviewMine[0].description}
           inDate={reviewMine[0].inDate.substring(0, 10)}
+          clubInfo={clubInfo}
         />
       ) : (
         <></>
@@ -172,7 +174,7 @@ const Review = () => {
             rate={review.score}
             desc={review.description}
             date={review.inDate.substring(0, 10)}
-            clubName={clubName}
+            clubInfo={clubInfo}
           />
         );
       })}

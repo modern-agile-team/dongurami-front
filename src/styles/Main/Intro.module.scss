@@ -1,8 +1,9 @@
 .wrap {
   width: 100%;
   background-color: #fff;
+  margin-top: 15%;
   h1 {
-    font-size: 3vw;
+    font-size: 230%;
     font-weight: 100;
     padding: 2rem;
     margin-left: 1.5%;
@@ -20,7 +21,7 @@
       display: flex;
       flex-direction: column;
       img {
-        border: 0.25vw solid #f5edb0;
+        box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.199);
       }
       span {
         font-family: 'Noto Sans KR', sans-serif;
@@ -33,15 +34,9 @@
     }
     .promotion {
       @extend .list;
-      img {
-        border: 0.25vw solid #f0bf9a;
-      }
     }
     .home {
       @extend .list;
-      img {
-        border: 0.25vw solid #c2f2dc;
-      }
     }
   }
   img {
@@ -73,6 +68,7 @@
         width: 100%;
         img {
           margin: 0 auto;
+          box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.164);
         }
         span {
           font-size: 60%;
@@ -105,9 +101,13 @@
         align-items: center;
         pointer-events: none;
         margin-top: 5%;
+        img {
+          box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.137);
+        }
         span {
           width: 100%;
           margin-top: 25px;
+          font-size: 3.2vw;
         }
       }
       .promotion {

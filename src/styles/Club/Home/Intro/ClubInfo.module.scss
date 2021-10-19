@@ -2,7 +2,7 @@
   display: flex;
   width: 80%;
   justify-content: space-between;
-  height: 50vh;
+  height: 30vh;
   border-bottom: 1px solid rgb(230, 230, 230);
   padding-bottom: 1em;
 }
@@ -10,9 +10,9 @@
 .desc {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  justify-content: center;
   align-items: center;
-  padding-top: 10%;
+  width: 50%;
   h1 {
     font-weight: lighter;
     margin-bottom: 0;
@@ -20,6 +20,7 @@
   }
   p {
     font-size: 150%;
+    margin-bottom: 0;
   }
 }
 
@@ -28,15 +29,19 @@
   max-height: 40%;
   width: 100%;
   height: 100%;
-  margin-bottom: 40px;
   text {
     font-size: 80% !important;
   }
   svg {
     & > g:nth-of-type(1) {
-      & > g:nth-of-type(4) {
+      & > g:nth-of-type(3) {
         rect {
           fill: #ff7e79;
+        }
+      }
+      & > g:nth-of-type(4) {
+        rect {
+          fill: #03b0c0;
         }
       }
     }
@@ -45,11 +50,9 @@
 
 .imgContainer {
   display: flex;
-  width: 50%;
   flex-direction: column;
   justify-content: center;
-  padding: 10px;
-  padding-left: 3em;
+  width: 50%;
   svg {
     width: 100%;
     height: 70%;
@@ -59,49 +62,49 @@
 .img {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
   img {
-    width: 100%;
+    max-width: 100%;
+    height: 100%;
   }
 }
 
 @media (max-width: 1024px) {
   .desc {
-    padding-top: 7%;
     h1 {
-      font-size: 300%;
+      font-size: 250%;
     }
     p {
       font-size: 150%;
+    }
+  }
+  .imgContainer {
+    height: 100%;
+    img {
+      height: 80%;
+    }
+    svg {
+      height: 50%;
     }
   }
 }
 
-@media (max-width: 767px) {
-  .container {
-    width: 90%;
-    height: 45vh;
-  }
+@media (max-width: 768px) {
   .desc {
-    padding-top: 33%;
+    margin-top: 7%;
     h1 {
-      font-size: 150%;
+      font-size: 130%;
     }
     p {
-      font-size: 100%;
+      font-size: 90%;
     }
   }
   .imgContainer {
-    padding: 0;
-    padding-top: 1em;
-    svg {
-      margin-left: 1em;
-      width: 80%;
+    img {
+      height: 50%;
     }
-  }
-  .img {
-    width: 100%;
   }
 }

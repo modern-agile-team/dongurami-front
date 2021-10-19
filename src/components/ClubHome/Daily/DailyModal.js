@@ -8,7 +8,7 @@ import { getInfo, addSchedule } from 'apis/calendar';
 const DailyModal = ({ colors, setPop, pop, today, setSchedule }) => {
   const [startDate, setStartDate] = useState(today.format('YYYY-MM-DD'));
   const [endDate, setEndDate] = useState(today.format('YYYY-MM-DD'));
-  const [color, setColor] = useState('#000000');
+  const [color, setColor] = useState('#FFFFFF');
   const startInput = useRef();
   const endInput = useRef();
   const colorCode = useRef();
@@ -17,7 +17,7 @@ const DailyModal = ({ colors, setPop, pop, today, setSchedule }) => {
   useEffect(() => {
     setStartDate(today.format('YYYY-MM-DD'));
     setEndDate(today.format('YYYY-MM-DD'));
-    setColor('#000000');
+    setColor('#FFFFFF');
   }, [pop]);
 
   const moveCal = () => {
@@ -94,15 +94,17 @@ const DailyModal = ({ colors, setPop, pop, today, setSchedule }) => {
               ref={title}
             />
             <br />
+            <div>
             <p>일정 색상</p>
-            {colors.map((color, index) => {
-              return <button className={styles.colorBtn} key={index} style={{ background : color }} onClick={() => setColor(`${color}`)}></button>
-            })}
+              {colors.map((color, index) => {
+                return <button className={styles.colorBtn} key={index} style={{ background : color }} onClick={() => setColor(`${color}`)}></button>
+              })}
+              <span className={styles.addBtn} onClick={(e) => onAddBtn(e)}>추가</span>
+            </div>
+            <br />
+            <span className={styles.sample} style={{ background: color }}>미리보기</span>
           </div>
         </div>
-        <button className={styles.addBtn} onClick={(e) => onAddBtn(e)}>
-          추가하기
-        </button>
       </div>
     );
   } else return null;
