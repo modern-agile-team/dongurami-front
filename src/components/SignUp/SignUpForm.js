@@ -32,7 +32,6 @@ function SignUpForm() {
         });
     }
   };
-
   useEffect(UserProfile, []);
 
   const majorCategory = [
