@@ -1,6 +1,4 @@
 import instance from 'apis';
-import getAsyncToken from 'utils/getAsyncToken';
-import getToken from 'utils/getToken';
 
 //비밀번호 찾기 - 이메일 전송
 export const postFindPW = (data) => {
