@@ -40,7 +40,6 @@ const Modal = ({ setOpenModal, postId }) => {
     try {
       await getPost(postId).then((res) => {
         if (res.data.success) {
-          console.log(res.data.images[0].imgPath);
           setImages(res.data.images);
           setImgUrl(res.data.images[index].imgPath);
           setPostData(res.data.board);
@@ -69,7 +68,11 @@ const Modal = ({ setOpenModal, postId }) => {
         <>
           <div className={styles.image} onClick={(e) => e.stopPropagation()}>
             <IoIosArrowBack onClick={() => prevSlide()} size={70} />
-            <img src={imgUrl} onClick={() => setZoom(true)} />
+            {images.length ? (
+              <img src={imgUrl} onClick={() => setZoom(true)} />
+            ) : (
+              <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
+            )}
             <IoIosArrowForward onClick={() => nextSlide()} size={70} />
           </div>
           <Post
