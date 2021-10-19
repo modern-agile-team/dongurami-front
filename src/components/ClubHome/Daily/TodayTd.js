@@ -20,7 +20,7 @@ const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
           </span>
         </div>
         <div className={styles.scheduleTitle}>
-          {schedule.map((el) => {
+          {schedule.map((el, index) => {
             return Date.parse(el.startDate) <=
               Date.parse(days.format("YYYY-MM-DD")) &&
               Date.parse(days.format("YYYY-MM-DD")) <=
@@ -28,7 +28,7 @@ const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
                 <span
                   className={styles.scheduleSpan}
                   style={{ background: `${el.colorCode}` }}
-                  key={days.format("YYYY-MM-DD")}
+                  key={index}
                 >
                   {el.title.split(" ").join("").length < 9
                     ? el.title
