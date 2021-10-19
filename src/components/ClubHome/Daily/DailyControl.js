@@ -58,23 +58,7 @@ const DailyControl = ({
               {schedule.map((el, index) => {
                 return Date.parse(el.startDate) <= Date.parse(date) &&
                   Date.parse(date) <= Date.parse(el.endDate) ? (
-                  <div key={index}>
-                    <br />
-                    <span style={{ color: `${el.colorCode}` }} key={el.no}>
-                      {el.title}
-                    </span>
-                    <HiPencil
-                      onClick={() => onClickModify(el)}
-                      className={styles.pencil}
-                    />
-                    <FaTrashAlt
-                      onClick={() => {
-                        if (el.important === 0) {
-                          onDeleteSchedule(el);
-                        } else alert('주요 일정은 삭제 할 수 없습니다.');
-                      }}
-                      className={styles.delete}
-                    />
+                  <div key={index} className={styles.des}>
                     {el.important ? (
                       <AiFillStar
                         className={styles.fillStar}
@@ -90,6 +74,23 @@ const DailyControl = ({
                         }}
                       />
                     )}
+                    <span style={{ color: 'black' }} key={el.no}>
+                      {el.title}
+                    </span>
+                    <div className={styles.edit}>
+                      <HiPencil
+                        onClick={() => onClickModify(el)}
+                        className={styles.pencil}
+                      />
+                      <FaTrashAlt
+                        onClick={() => {
+                          if (el.important === 0) {
+                            onDeleteSchedule(el);
+                          } else alert('주요 일정은 삭제 할 수 없습니다.');
+                        }}
+                        className={styles.delete}
+                      />
+                    </div>
                   </div>
                 ) : null;
               })}

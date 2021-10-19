@@ -11,9 +11,11 @@
   z-index: 999;
 
   .modal {
-    border-radius: 3%;
+    border-radius: 12px;
     background-color: white;
-    width: 30vw;
+    width: 25vw;
+    padding: 2rem;
+    padding-bottom: 10rem;
     display: flex;
     flex-direction: column;
     z-index: 9999;
@@ -24,7 +26,7 @@
     justify-content: center;
 
     h3 {
-      margin-bottom: 0;
+      margin-top: 0;
     }
   }
 
@@ -42,34 +44,54 @@
   }
   .body {
     display: flex;
-    // flex-direction: column;
-    justify-content: center;
+    flex-direction: column;
     margin-bottom: 2%;
+    .des {
+      padding: 1.5rem 0rem;
+      border-bottom: 1px solid #c2c2c269;
+    }
+    .edit {
+      float: right;
+      margin-top: 6px;
+    }
   }
 
   .delete {
+    color: rgb(179, 179, 179);
     cursor: pointer;
+    zoom: 1.15;
+    margin-right: 8px;
     &:hover {
-      color: #90e2d6;
+      color: red;
     }
   }
 
   .pencil {
+    color: rgb(179, 179, 179);
     cursor: pointer;
+    zoom: 1.15;
+    margin-right: 8px;
     &:hover {
-      color: #90e2d6;
+      color: black;
     }
   }
 
   .outLineStar {
+    color: gray;
     cursor: pointer;
+    zoom: 2;
+    margin-bottom: -5px;
+    margin-right: 5px;
     &:hover {
-      color: yellow;
+      color: rgb(255, 217, 0);
     }
   }
 
   .fillStar {
-    color: yellow;
+    color: rgb(255, 217, 0);
+    zoom: 2;
+    margin-bottom: -5px;
+    margin-right: 5px;
     cursor: pointer;
   }
 }

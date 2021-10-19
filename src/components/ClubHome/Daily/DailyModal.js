@@ -95,14 +95,25 @@ const DailyModal = ({ colors, setPop, pop, today, setSchedule }) => {
             />
             <br />
             <div>
-            <p>일정 색상</p>
+              <p>일정 색상</p>
               {colors.map((color, index) => {
-                return <button className={styles.colorBtn} key={index} style={{ background : color }} onClick={() => setColor(`${color}`)}></button>
+                return (
+                  <button
+                    className={styles.colorBtn}
+                    key={index}
+                    style={{ background: color }}
+                    onClick={() => setColor(`${color}`)}
+                  ></button>
+                );
               })}
-              <span className={styles.addBtn} onClick={(e) => onAddBtn(e)}>추가</span>
+              <span className={styles.addBtn} onClick={(e) => onAddBtn(e)}>
+                추가
+              </span>
             </div>
             <br />
-            <span className={styles.sample} style={{ background: color }}>미리보기</span>
+            <span className={styles.sample} style={{ background: color }}>
+              색상 미리보기
+            </span>
           </div>
         </div>
       </div>
