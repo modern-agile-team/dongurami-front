@@ -18,14 +18,14 @@ const PromotionContainer = () => {
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
 
-  let preitem = 0;
-  let item = 8;
+  let itemNo = 0;
 
   const getDatas = async () => {
     try {
       if (searchItem) {
-        await getData(searchItem).then((response) => {
-          const result = response.data.boards.slice(preitem, item);
+        await getData(searchItem, itemNo).then((response) => {
+          const result = response.data.boards;
+          itemNo = result[result.length - 1].no;
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
@@ -40,8 +40,9 @@ const PromotionContainer = () => {
           }
         });
       } else {
-        await getBoardData().then((response) => {
-          const result = response.data.boards.slice(preitem, item);
+        await getBoardData(itemNo).then((response) => {
+          const result = response.data.boards;
+          itemNo = result[result.length - 1].no;
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
@@ -54,26 +55,24 @@ const PromotionContainer = () => {
   };
 
   const firstGetDatas = async () => {
+    itemNo = 0;
     try {
       if (searchItem) {
-        await getData(searchItem).then((response) => {
-          preitem = 0;
-          item = 8;
-          const result = response.data.boards.slice(preitem, item);
+        await getData(searchItem, itemNo).then((response) => {
+          const result = response.data.boards;
+          itemNo = result[result.length - 1].no;
           setBoardData(result);
         });
       } else if (search) {
         await getSearchData(type, searchKeyword).then((response) => {
-          preitem = 0;
-          item = 8;
           const result = response.data.promotionSearch.slice(preitem, item);
           setBoardData(result);
         });
       } else {
-        await getBoardData(searchItem).then((response) => {
-          preitem = 0;
-          item = 8;
-          const result = response.data.boards.slice(preitem, item);
+        await getBoardData(itemNo).then((response) => {
+          console.log(response);
+          const result = response.data.boards;
+          itemNo = result[result.length - 1].no;
           setBoardData(result);
         });
       }
@@ -100,9 +99,6 @@ const PromotionContainer = () => {
     let clientHeight = document.documentElement.clientHeight;
 
     if (scrollTop + clientHeight >= scrollHeight) {
-      preitem = item;
-      item += 8;
-
       getDatas();
     }
   };
