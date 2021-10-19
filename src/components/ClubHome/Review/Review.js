@@ -26,7 +26,7 @@ const Review = () => {
   const reviewAvg = (reviews) => {
     return (
       reviews
-        .map((el) => el.score)
+        .map((review) => review.score)
         .reduce((sum, cur) => {
           return sum + cur;
         }, 0) / reviews.length
