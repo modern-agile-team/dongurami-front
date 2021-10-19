@@ -25,7 +25,6 @@ const Modal = ({ setOpenModal, postId }) => {
 
     setIndex(idx);
     setImgUrl(getdata[index].img);
-    console.log(postData);
   };
 
   const prevSlide = () => {
@@ -42,6 +41,7 @@ const Modal = ({ setOpenModal, postId }) => {
     try {
       await getPost(postId).then((res) => {
         if (res.data.success) {
+          console.log(res);
           setPostData(res.data.board);
           setComments(res.data.comments);
         } else alert(res.data.msg);

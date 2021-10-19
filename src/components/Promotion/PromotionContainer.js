@@ -17,8 +17,6 @@ const PromotionContainer = () => {
   const [type, setType] = useState('title');
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
-  const img =
-    'https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg';
 
   let preitem = 0;
   let item = 8;
@@ -63,7 +61,6 @@ const PromotionContainer = () => {
           item = 8;
           const result = response.data.boards.slice(preitem, item);
           setBoardData(result);
-          setTest(true);
         });
       } else if (search) {
         await getSearchData(type, searchKeyword).then((response) => {
@@ -89,7 +86,6 @@ const PromotionContainer = () => {
     setIssearch(!isSearch);
     setSearch(true);
     setSearchItem('');
-    console.log('안녕');
   };
 
   const infiniteScroll = () => {
@@ -106,6 +102,7 @@ const PromotionContainer = () => {
     if (scrollTop + clientHeight >= scrollHeight) {
       preitem = item;
       item += 8;
+
       getDatas();
     }
   };
@@ -117,6 +114,8 @@ const PromotionContainer = () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
   }, [searchItem, isSearch]);
+
+  console.log(boarddata);
 
   return (
     <>
@@ -143,7 +142,7 @@ const PromotionContainer = () => {
             date={el.inDate}
             clubName={el.clubName}
             name={el.studentName}
-            img={img}
+            img={el.url}
             category={el.category}
             setOpenModal={setOpenModal}
             setPostId={setPostId}
