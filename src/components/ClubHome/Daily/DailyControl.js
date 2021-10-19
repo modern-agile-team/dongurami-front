@@ -55,10 +55,10 @@ const DailyControl = ({
           />
           <div className={styles.body}>
             <div className={styles.schedule}>
-              {schedule.map((el) => {
+              {schedule.map((el, index) => {
                 return Date.parse(el.startDate) <= Date.parse(date) &&
                   Date.parse(date) <= Date.parse(el.endDate) ? (
-                  <>
+                  <div key={index}>
                     <br />
                     <span style={{ color: `${el.colorCode}` }} key={el.no}>
                       {el.title}
@@ -90,7 +90,7 @@ const DailyControl = ({
                         }}
                       />
                     )}
-                  </>
+                  </div>
                 ) : null;
               })}
             </div>
