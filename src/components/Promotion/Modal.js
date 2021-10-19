@@ -30,7 +30,7 @@ const Modal = ({ setOpenModal, postId }) => {
   const prevSlide = () => {
     let idx = index;
 
-    if (idx === 0) idx = getdata.length - 1;
+    if (idx === 0) idx = images.length - 1;
     else idx -= 1;
     setIndex(idx);
     setImgUrl(images[index].imgPath);
@@ -40,6 +40,7 @@ const Modal = ({ setOpenModal, postId }) => {
     try {
       await getPost(postId).then((res) => {
         if (res.data.success) {
+          console.log(res);
           setImages(res.data.images);
           setImgUrl(res.data.images[index].imgPath);
           setPostData(res.data.board);
@@ -66,14 +67,24 @@ const Modal = ({ setOpenModal, postId }) => {
       )}
       {!zoom && (
         <>
-          <div className={styles.image} onClick={(e) => e.stopPropagation()}>
-            <IoIosArrowBack onClick={() => prevSlide()} size={70} />
+          <div className={styles.image}>
+            <div onClick={(e) => e.stopPropagation()}>
+              <IoIosArrowBack onClick={() => prevSlide()} size={70} />
+            </div>
+
             {images.length ? (
-              <img src={imgUrl} onClick={() => setZoom(true)} />
+              <div
+                className={styles.imgContainer}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img src={imgUrl} onClick={() => setZoom(true)} />
+              </div>
             ) : (
               <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
             )}
-            <IoIosArrowForward onClick={() => nextSlide()} size={70} />
+            <div onClick={(e) => e.stopPropagation()}>
+              <IoIosArrowForward onClick={() => prevSlide()} size={70} />
+            </div>
           </div>
           <Post
             postData={postData}
