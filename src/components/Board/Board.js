@@ -21,6 +21,7 @@ function getQuery(router) {
 function Board({ category }) {
   const router = useRouter();
   const posts = useSelector((state) => state.board.posts);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const { page, sort, order, type, keyword } = getQuery(router);
@@ -72,9 +73,11 @@ function Board({ category }) {
         </Link>
         <hr />
         <div className={styles.orderBy}>
-          <Link href={{ pathname: `${router.pathname}/write`, query: router.query }} passHref>
-            <button>✏️ 글쓰기</button>
-          </Link>
+          {(user) && (
+            <Link href={{ pathname: `${router.pathname}/write`, query: router.query }} passHref>
+              <button>✏️ 글쓰기</button>
+            </Link>
+          )}
           <select value={`${sort} ${order}`} onChange={onOrderChange}>
             <option value="inDate DESC">최근순</option>
             <option value="inDate ASC">오래된순</option>

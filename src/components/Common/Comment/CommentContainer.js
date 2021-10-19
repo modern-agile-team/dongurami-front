@@ -3,8 +3,10 @@ import Comment from './Comment';
 import AddComment from './AddComment';
 import ReplyContainer from './ReplyContainer';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function CommentContainer({ comments }) {
+  const user = useSelector((state) => state.user);
   const [parentCommentID, setParentCommentID] = useState();
 
   return (
@@ -28,7 +30,7 @@ function CommentContainer({ comments }) {
             )}
           </React.Fragment>
         ))}
-        <AddComment />
+        {(user) && <AddComment />}
       </div>
     </>
   );
