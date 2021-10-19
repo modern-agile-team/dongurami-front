@@ -32,10 +32,16 @@ const ModifyInfo = () => {
   const getData = () => {
     getUserInfo(uRouter.query.pid)
       .then((res) => {
-        setUserInfo(res.data.profile);
-        setEmail(res.data.profile.email);
-        setPhoneNumber(res.data.profile.phoneNumber);
-        setGrade(res.data.profile.grade);
+        if (res.data.profile.id !== res.data.userInfo.id) {
+          alert("본인의 정보가 아닙니다.")
+          router.back()
+        }
+        else {
+          setUserInfo(res.data.profile);
+          setEmail(res.data.profile.email);
+          setPhoneNumber(res.data.profile.phoneNumber);
+          setGrade(res.data.profile.grade);
+        } 
       })
       .catch((err) => console.log(err));
   };

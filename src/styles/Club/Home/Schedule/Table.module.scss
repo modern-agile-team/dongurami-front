@@ -1,10 +1,10 @@
 .calendar {
   width: 70vw;
   height: 50vh;
-  border: solid 3px #3fcdb8;
-  border-radius: 15px;
+  // border: solid 3px #3fcdb8;
+  // border-radius: 15px;
   padding: 10px;
-  background-color: #e9fffc;
+  // background-color: #e9fffc;
 }
 .today {
   color: red;
@@ -17,7 +17,8 @@
 .yoil {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 1%;
+  margin-bottom: 0.5%;
+  // padding-bottom: 1rem;
 }
 // .monthdays {
 // }
@@ -36,12 +37,10 @@
     .tdBlock {
       width: 100%;
       height: 100%;
+      cursor: pointer;
       .date {
         margin: 2% 0 2% 1%;
         height: 20%;
-        span {
-          cursor: pointer;
-        }
       }
       .scheduleTitle {
         display: flex;

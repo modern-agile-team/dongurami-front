@@ -43,13 +43,14 @@ const ClubIntro = ({ visitTime }) => {
     setDescUpdate(!descUpdate);
   };
 
+  // 로고 수정
   const onChangeLogo = async (e) => {
     const file = e.target.files[0];
     const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (
       await getS3PresignedURL({ img: e.target.files[0].name })
     ).data;
     await uploadImage(presignedURL, file);
-    await putClubLogo({ logoUrl: imageURL, fileId: '동아리 로고' });
+    await putClubLogo({ logoUrl: imageURL });
     dispatch(getClubInfo(clubId));
   };
 
@@ -72,7 +73,13 @@ const ClubIntro = ({ visitTime }) => {
       alert('알 수 없는 오류입니다. 개발자에게 문의해주세요');
       router.back();
     }
-  }, [error]);
+  }, [router, error]);
+
+  useEffect(() => {
+    if (infos) {
+      setIntroDesc(infos.result[0].introduce);
+    }
+  }, [infos]);
 
   if (!infos) return null;
 

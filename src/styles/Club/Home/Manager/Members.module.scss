@@ -39,7 +39,10 @@ $color1: #9fa4a240;
 }
 
 .body {
-  background-color: rgba(245, 245, 245, 0.2);
+  background-color: rgba(235, 235, 235, 0.3);
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 @media (max-width: 768px) {

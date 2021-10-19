@@ -4,13 +4,13 @@ import styles from "../../../styles/Club/Home/Schedule/Table.module.scss";
 const OtherDays = ({ setPop, setDate, index, days, schedule }) => {
   return (
     <td key={index} className={styles.dayblock} id={days.format("YYYY-MM-DD")}>
-      <div className={styles.tdBlock}>
-        <div className={styles.date}>
-          <span
-            onClick={() => {
+      <div className={styles.tdBlock} 
+              onClick={() => {
               setPop("DailyControl");
               setDate(days.format("YYYY-MM-DD"));
-            }}
+            }}>
+        <div className={styles.date}>
+          <span            
             className={styles.otherday}
           >
             {days.format("D")}

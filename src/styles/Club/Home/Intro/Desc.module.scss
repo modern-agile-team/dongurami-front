@@ -3,11 +3,10 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 @import '../Manager/Members.module.scss';
 
 .intro {
-  border-top: 1px solid rgb(209, 209, 209);
+  border-width: 90%;
   padding-top: 2em;
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 80%;
   span {
     margin-bottom: 3vh;
@@ -26,6 +25,11 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     width: 100%;
     height: 80vh;
   }
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .intro button {
@@ -55,9 +59,12 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 }
 
 .desc {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   & > div:nth-of-type(1) {
     & > div:nth-of-type(1) {
       display: flex;
+      border: 1px solid;
       justify-content: space-between;
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
@@ -81,12 +88,23 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   }
 }
 
-@media (max-width: 767px) {
+.bubble {
+  border: none !important;
+  & > div:nth-of-type(1) {
+    display: none !important;
+  }
+  & > div:nth-of-type(2) {
+    border: none !important;
+    & > div:nth-of-type(1) {
+      padding: 0 !important;
+    }
+  }
+}
+
+@media (max-width: 768px) {
   .intro {
-    padding: 2em 0 0 0;
     span {
-      font-size: 120%;
-      margin-bottom: 2vh;
+      font-size: 150%;
     }
     p {
       font-size: 90%;

@@ -1,6 +1,12 @@
 .wrap {
   display: flex;
-  justify-content: center;
+  // justify-content: space-between;
+  // justify-content: center;
   align-items: center;
   width: 100%;
+  margin-top: -1.6%;
+  .right {
+    background-color: rgba(249, 249, 249, 0.658);
+    height: 100%;
+  }
 }

@@ -1,10 +1,15 @@
 import styles from '../../../styles/Club/Home/Intro/ClubInfo.module.scss';
 import LogoUpdate from './LogoUpdate';
+import { ResponsiveBar } from '@nivo/bar';
+import { BsImage } from 'react-icons/bs';
 
 const ClubInfo = ({ infos, onChangeLogo }) => {
   const result = infos.result[0];
   const client = infos.clientInfo;
-
+  const data = [
+    { gender: '남자', '인원(명)': result.genderMan },
+    { gender: '여자', '인원(명)': result.genderWomen }
+  ];
   return (
     <div className={styles.container}>
       <div className={styles.desc}>
@@ -15,13 +20,28 @@ const ClubInfo = ({ infos, onChangeLogo }) => {
           <p>{result.category} 동아리</p>
         </div>
         <div className={styles.population}>
-          <span>동아리원: {result.genderWomen + result.genderMan} 명 </span>
-          <span> 남: {result.genderMan} 명</span>
-          <span> 여: {result.genderWomen} 명</span>
+          <ResponsiveBar
+            data={data}
+            keys={['인원(명)']}
+            indexBy="gender"
+            colors="#03B0C0"
+            padding={0.5}
+            layout="horizontal"
+            enableGridY={false}
+            margin={{ top: -20, right: 0, bottom: 0, left: 40 }}
+            borderRadius={6}
+            labelTextColor={'white'}
+          />
         </div>
       </div>
       <div className={styles.imgContainer}>
-        <img src={infos.result[0].logoUrl} alt={result.fileId} />
+        {infos.result[0].logoUrl === null ? (
+          <BsImage />
+        ) : (
+          <div className={styles.img}>
+            <img src={infos.result[0].logoUrl} alt={result.fileId} />
+          </div>
+        )}
         {client.leader === 1 && <LogoUpdate onChangeLogo={onChangeLogo} />}
       </div>
     </div>
