@@ -60,12 +60,13 @@ const PromotionContainer = () => {
       if (searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
-          itemNo = result[result.length - 1].no;
+          if (result.length) itemNo = result[result.length - 1].no;
+
           setBoardData(result);
         });
       } else if (search) {
         await getSearchData(type, searchKeyword).then((response) => {
-          const result = response.data.promotionSearch.slice(preitem, item);
+          const result = response.data.promotionSearch.slice(0, 8);
           setBoardData(result);
         });
       } else {
