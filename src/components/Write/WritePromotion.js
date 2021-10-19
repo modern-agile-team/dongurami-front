@@ -7,6 +7,7 @@ import styles from "../../styles/Board/Write/WritePromotionContent.module.scss";
 function WritePromition({ title, description }) {
   const router = useRouter();
   const [images, setImage] = useState([]);
+  const [clubNo, setClubNo] = useState("0");
 
   const onChange = async (e) => {
     const imagesURL = await Promise.all([...e.target.files].map(async (file) => {
@@ -17,8 +18,11 @@ function WritePromition({ title, description }) {
     setImage(imagesURL);
   }
   const onSubmit = () => {
-    postPost('promotion', { title, description, images });
+    postPost('promotion', { title, description, images, clubNo: Number(clubNo) });
     router.push('/promotion');
+  };
+  const onClubNoChange = (e) => {
+    setClubNo(e.target.value);
   };
 
   return (
@@ -34,15 +38,10 @@ function WritePromition({ title, description }) {
       </label>
       <input id="imageInput" type="file" accept="image/*" onChange={onChange} multiple />
       <div className={styles.selectContainer}>
-        <select>
-          <option>동아리 선택</option>
-          <option>우아한 애자일</option>
-          <option>그웨</option>
-        </select>
-        <select>
-          <option>태그 선택</option>
-          <option>개발</option>
-          <option>친목</option>
+        <select value={clubNo} onChange={onClubNoChange}>
+          <option value="0">동아리 선택</option>
+          <option value="1">우아한 애자일</option>
+          <option value="2">프리버드</option>
         </select>
       </div>
       <button onClick={onSubmit}>등록</button>

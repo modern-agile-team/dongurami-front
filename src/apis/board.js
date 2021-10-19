@@ -22,12 +22,12 @@ export function searchPosts({ category, ...params }) {
 
 export function postPost(category, body) {
   if (category === 'clubNotice') {
-    return axios.post(`/api/club/board/clubNotice/2`, { id: 'test1', clubNo: 2, ...body });
+    return axios.post(`/api/club/board/clubNotice/2`, { id: 'test1', ...body });
   }
   if (category === 'clubActivity') {
-    return axios.post(`/api/club/board/clubActivity/2`, { id: 'test1', clubNo: 2, ...body });
+    return axios.post(`/api/club/board/clubActivity/2`, { id: 'test1', ...body });
   }
-  return axios.post(`/api/board/${category}`, { id: 'test1', clubNo: 2, ...body });
+  return axios.post(`/api/board/${category}`, { id: 'test1', ...body });
 }
 
 export function putPost(category, pid, body) {
