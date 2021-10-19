@@ -23,6 +23,7 @@ function Header() {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           setOpen(false);
+          setIsAlarmOpen(false);
         }
       }
       document.addEventListener('mousedown', handleClickOutside);
