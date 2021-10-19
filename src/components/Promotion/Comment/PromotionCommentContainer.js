@@ -3,11 +3,13 @@ import AddComment from './AddComment';
 import React, { useState } from 'react';
 import Comment from './Comment';
 import ReplyComment from './ReplyComment';
-import ReplyCommentContainer from './ReplyCommentContainer';
 
-const PromotionCommentContainer = ({ comments, postId, getData }) => {
-  const [replyComment, setReplyComment] = useState([]);
-
+const PromotionCommentContainer = ({
+  comments,
+  postId,
+  getData,
+  studentId
+}) => {
   return (
     <>
       <p>댓글 {comments.length}</p>
@@ -23,6 +25,7 @@ const PromotionCommentContainer = ({ comments, postId, getData }) => {
                     comment={comment}
                     postId={postId}
                     getData={getData}
+                    studentId={studentId}
                   />
                 </>
               )}
@@ -33,6 +36,7 @@ const PromotionCommentContainer = ({ comments, postId, getData }) => {
                   postId={postId}
                   getData={getData}
                   parentCommentId={comment.groupNo}
+                  studentId={studentId}
                 />
               )}
             </>

@@ -1,11 +1,15 @@
 import axios from 'apis/index';
 
-export function getData(searchItem) {
-  return axios.get(`api/board/promotion/club?category=${searchItem}`);
+export function getData(searchItem, no) {
+  return axios.get(
+    `api/board/promotion/club?category=${searchItem}&lastNum=${no}`
+  );
 }
 
-export function getBoardData() {
-  return axios.get(`api/board/promotion/club`);
+export function getBoardData(no) {
+  return axios.get(
+    `/api/board/promotion/club?sort=inDate&order=desc&lastNum=${no}`
+  );
 }
 
 export function getSearchData(type, keyword) {
@@ -32,7 +36,6 @@ export function editReplyComment(
   replyCommentNo,
   description
 ) {
-  console.log('안녕');
   return axios.put(
     `api/board/promotion/${postId}/${commentNo}/${replyCommentNo}`,
     {

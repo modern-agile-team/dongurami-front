@@ -16,6 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   .image {
     position: relative;
     left: 0;
@@ -23,14 +24,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80%;
+    height: 100%;
     svg {
       position: relative;
+      cursor: pointer;
     }
-    img {
-      margin-right: 50px;
-      height: 100%;
-      margin-left: 50px;
+    .imgContainer {
+      height: 80%;
+      img {
+        margin-right: 50px;
+        height: 100%;
+        max-width: 30vw;
+        margin-left: 50px;
+      }
     }
   }
 }
