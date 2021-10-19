@@ -6,8 +6,8 @@ const Table = ({ calendarArr }) => {
   return (
     <div>
       <div className={styles.yoil}>
-        {yoil.map((el) => {
-          return <span key={el.no}>{el}</span>;
+        {yoil.map((el, index) => {
+          return <span key={index}>{el}</span>;
         })}
       </div>
       <table className={styles.calendar}>
