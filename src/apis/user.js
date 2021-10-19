@@ -1,4 +1,6 @@
 import instance from 'apis';
+import getAsyncToken from 'utils/getAsyncToken';
+import getToken from 'utils/getToken';
 
 //비밀번호 찾기 - 이메일 전송
 export const postFindPW = (data) => {
@@ -29,3 +31,8 @@ export const postSignUp = (data) => {
 export const getNaverOauth = (token) => {
   return instance.get(`api/naver-login?token=${token}`);
 };
+
+// user 정보 가져오기
+export const getUserData = () => {
+  return Promise.resolve({ data: { test: 1 } });
+}
