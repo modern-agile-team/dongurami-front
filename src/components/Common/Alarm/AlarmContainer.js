@@ -2,7 +2,7 @@ import styles from '../../../styles/Common/Alarm/AlarmContainer.module.scss';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { TiDelete } from 'react-icons/ti';
+import { FiDelete } from 'react-icons/fi';
 import { getAlarm, putAlarm, patchAlarm } from 'apis/alarm';
 
 const alarmCategoriNum = {
@@ -18,10 +18,17 @@ const alarmCategoriNum = {
 
 const AlarmContainer = () => {
   const [alarmList, setAlarmList] = useState([]);
+  const [alarmShow, setAlarmShow] = useState(3);
 
   const router = useRouter();
 
-  const onAlarmClick = (url) => {
+  const showMoreAlarm = () => {
+    const temp = alarmShow;
+    setAlarmShow(temp + 3);
+  };
+
+  const onAlarmClick = (event) => (url) => {
+    event.stopPropagation();
     router.push(url);
   };
 
@@ -45,9 +52,7 @@ const AlarmContainer = () => {
 
   // 알람 일부 삭제
   const onAlarmPatch = async (notiNum) => {
-    await patchAlarm(notiNum)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err.response.data));
+    await patchAlarm(notiNum).catch((err) => console.log(err.response.data));
     getAlarmData();
   };
 
@@ -59,37 +64,40 @@ const AlarmContainer = () => {
     <>
       <div className={styles.rect} />
       <div className={styles.container}>
-        <div className={styles.icons}>
+        <div className={styles.delete}>
           <FaTrashAlt size={13} onClick={onAlarmDeleteAll} />
         </div>
         <div className={styles.alarms}>
-          {alarmList.slice(0, 3).map((alarm) => {
+          {alarmList.slice(0, alarmShow).map((alarm, index) => {
             return (
-              <div className={styles.alarm} key={alarm.notificationNum}>
-                <div className={styles.delAlarm}>
-                  <TiDelete
+              <div
+                key={index}
+                className={styles.description}
+                onClick={() => onAlarmClick(alarm.url)}
+              >
+                <div className={styles.top}>
+                  <p id={styles.big}>
+                    {alarmCategoriNum[alarm.notificationCategoryNum]}
+                  </p>
+                  <FiDelete
                     size={15}
                     onClick={() => onAlarmPatch(alarm.notificationNum)}
                   />
                 </div>
-                <div
-                  className={styles.description}
-                  onClick={() => onAlarmClick(alarm.url)}
-                >
-                  <p id={styles.big}>
-                    {alarmCategoriNum[alarm.notificationCategoryNum]}
-                  </p>
-                  <div className={styles.bottom}>
-                    <p>{alarm.senderId}</p>
-                    <p>{alarm.inDate.substr(0, 10)}</p>
-                  </div>
+                <div className={styles.bottom}>
+                  <p>{alarm.senderId}</p>
+                  <p>{alarm.inDate.substr(0, 10)}</p>
                 </div>
               </div>
             );
           })}
-          <div className={styles.leftAlarms}>
-            <span>{alarmList.slice(3).length}개의 알람이 더 있습니다</span>
-          </div>
+          {alarmList.length > alarmShow && (
+            <div className={styles.leftAlarms}>
+              <span onClick={showMoreAlarm}>
+                {alarmList.slice(alarmShow).length}개의 알람이 더 있습니다
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </>
