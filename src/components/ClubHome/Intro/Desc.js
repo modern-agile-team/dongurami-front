@@ -1,5 +1,4 @@
 import styles from '../../../styles/Club/Home/Intro/Desc.module.scss';
-import { IoPencil } from 'react-icons/io5';
 import ReactQuillContainer from 'components/Write/ReactQuillContainer';
 import dynamic from 'next/dynamic';
 
@@ -13,10 +12,7 @@ const Button = ({ descUpdate, onDescSubnmit, onDescUpdate }) => {
       {descUpdate ? (
         <button onClick={onDescSubnmit}>Finish</button>
       ) : (
-        <button onClick={onDescUpdate}>
-          <IoPencil />
-          Edit
-        </button>
+        <button onClick={onDescUpdate}>✏️ Edit</button>
       )}
     </>
   );
