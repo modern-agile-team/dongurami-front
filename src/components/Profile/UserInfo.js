@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 const UserInfo = ({ logout, comp, baseImg, userInfo, profile }) => {
   if (comp === '프로필')
     return (
-      <div>
+      <div className={styles.wrap}>
         <div className={styles.profileBody}>
           <img
             className={styles.profileImg}

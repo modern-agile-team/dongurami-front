@@ -29,12 +29,10 @@
   <img src="https://img.shields.io/badge/HTML-white?logo=html5"/>
   <img src= "https://img.shields.io/badge/CSS-blue?logo=css3"/>
   <img src= "https://img.shields.io/badge/Scss-pink?logo=sass"/>
-  <img src= "https://img.shields.io/badge/React-blue?logo=react"/>
+  <img src= "https://img.shields.io/badge/Next-blue?logo=react"/>
   <img src= "https://img.shields.io/badge/Next.js-black?logo=next-dot-js&logoColor=white"/>
   <img src= "https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript"/>
-  <img src="https://img.shields.io/badge/Redux-purple?style=for-the-badge&logo=Redux&logoColor=white">
-
-출처: https://byul91oh.tistory.com/214 [개발하는 감자 [: 개감]]
+  <img src="https://img.shields.io/badge/Redux-purple?logo=Redux&logoColor=white">
 </p>
 
 <h3 align="center">  

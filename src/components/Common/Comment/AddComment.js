@@ -7,6 +7,7 @@ import { getPost } from 'redux/slices/post';
 function AddComment({ parentCommentID }) {
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
+  const user = useSelector((state) => state.user);
   const [description, setDescription] = useState('');
 
   const onChange = (e) => {
@@ -21,7 +22,7 @@ function AddComment({ parentCommentID }) {
 
   return (
     <div className={styles.container}>
-      <div>닉네임</div>
+      <div>{user.name}</div>
       <form onSubmit={onSubmit}>
         <input type="text" placeholder="댓글을 남겨보세요" value={description} onChange={onChange} />
         <button type="submit">등록</button>

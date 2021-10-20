@@ -4,15 +4,14 @@
   position: fixed;
   width: 100%;
   z-index: 99;
-  border-bottom: 1px solid #e6e6e6;
-  background-color: #c5e2f0;
+  background-color: #dce4ed;
   align-items: center;
 }
 
 .menu {
   display: flex;
   #now {
-    background-color: #6ecfff;
+    background-color: #86b1e5;
   }
 }
 
@@ -29,7 +28,7 @@
   padding: 0 2em;
   cursor: pointer;
   &:hover {
-    background-color: rgba(228, 228, 228, 0.37);
+    background-color: #cad2db;
   }
   svg {
     padding: 1.5vh 0;

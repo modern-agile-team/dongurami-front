@@ -19,6 +19,7 @@ function setEndOfContenteditable(contentEditableElement) {
 function Comment({ comment, parentCommentID, setParentCommentID }) {
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
+  const user = useSelector((state) => state.user);
   const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
 
@@ -47,15 +48,17 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
         <div>
           <p>{comment.studentName}</p>
           {(post.studentId === comment.studentId) && <p>작성자</p>}
-          <div>
-            <button onClick={onEdit} className={styles['action-button']}>{(isContentEditable) ? <AiOutlineCheck /> : <AiOutlineEdit />}</button>
-            <button onClick={onDelete} className={styles['action-button']}><AiOutlineDelete /></button>
-          </div>
+          {(user?.id === comment.studentId) && (
+            <div>
+              <button onClick={onEdit} className={styles['action-button']}>{(isContentEditable) ? <AiOutlineCheck /> : <AiOutlineEdit />}</button>
+              <button onClick={onDelete} className={styles['action-button']}><AiOutlineDelete /></button>
+            </div>
+          )}
         </div>
         <div ref={descriptionDiv} contentEditable={isContentEditable} suppressContentEditableWarning={true}>{comment.description}</div>
         <div>
           <p>{comment.inDate}</p>
-          {(comment.no === comment.groupNo) && (
+          {(user && comment.no === comment.groupNo) && (
             <p onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
           )}
         </div>

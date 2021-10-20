@@ -17,17 +17,15 @@ const PromotionContainer = () => {
   const [type, setType] = useState('title');
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
-  const img =
-    'https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg';
 
-  let preitem = 0;
-  let item = 8;
+  let itemNo = 0;
 
   const getDatas = async () => {
     try {
       if (searchItem) {
-        await getData(searchItem).then((response) => {
-          const result = response.data.boards.slice(preitem, item);
+        await getData(searchItem, itemNo).then((response) => {
+          const result = response.data.boards;
+          itemNo = result[result.length - 1].no;
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
@@ -42,8 +40,9 @@ const PromotionContainer = () => {
           }
         });
       } else {
-        await getBoardData().then((response) => {
-          const result = response.data.boards.slice(preitem, item);
+        await getBoardData(itemNo).then((response) => {
+          const result = response.data.boards;
+          itemNo = result[result.length - 1].no;
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
@@ -56,30 +55,24 @@ const PromotionContainer = () => {
   };
 
   const firstGetDatas = async () => {
+    itemNo = 0;
     try {
       if (searchItem) {
-        await getData(searchItem).then((response) => {
-          preitem = 0;
-          item = 8;
-          const result = response.data.boards.slice(preitem, item);
-          console.log(boarddata, '처음데이터');
+        await getData(searchItem, itemNo).then((response) => {
+          const result = response.data.boards;
+          itemNo = result[result.length - 1].no;
           setBoardData(result);
-          setTest(true);
         });
       } else if (search) {
         await getSearchData(type, searchKeyword).then((response) => {
-          console.log(response);
-          preitem = 0;
-          item = 8;
           const result = response.data.promotionSearch.slice(preitem, item);
           setBoardData(result);
         });
       } else {
-        await getBoardData(searchItem).then((response) => {
-          console.log(response, '데이터 첫번째 조회');
-          preitem = 0;
-          item = 8;
-          const result = response.data.boards.slice(preitem, item);
+        await getBoardData(itemNo).then((response) => {
+          console.log(response);
+          const result = response.data.boards;
+          itemNo = result[result.length - 1].no;
           setBoardData(result);
         });
       }
@@ -92,7 +85,6 @@ const PromotionContainer = () => {
     setIssearch(!isSearch);
     setSearch(true);
     setSearchItem('');
-    console.log('안녕');
   };
 
   const infiniteScroll = () => {
@@ -107,8 +99,6 @@ const PromotionContainer = () => {
     let clientHeight = document.documentElement.clientHeight;
 
     if (scrollTop + clientHeight >= scrollHeight) {
-      preitem = item;
-      item += 8;
       getDatas();
     }
   };
@@ -120,6 +110,8 @@ const PromotionContainer = () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
   }, [searchItem, isSearch]);
+
+  console.log(boarddata);
 
   return (
     <>
@@ -146,7 +138,7 @@ const PromotionContainer = () => {
             date={el.inDate}
             clubName={el.clubName}
             name={el.studentName}
-            img={img}
+            img={el.url}
             category={el.category}
             setOpenModal={setOpenModal}
             setPostId={setPostId}

@@ -3,15 +3,15 @@ import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import ReplyCommentContainer from './ReplyCommentContainer';
 import ReplyAddComment from './ReplyAddComment';
+import Link from 'next/link';
 import {
   deleteComment,
   editComment,
   editReplyComment,
   deleteReplyComment
 } from 'apis/promotion';
-import getToken from 'utils/getToken';
 
-const Comment = ({ comment, postId, getData }) => {
+const Comment = ({ comment, postId, getData, studentId }) => {
   const [replyComment, setReplyComment] = useState(false);
   const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
@@ -65,10 +65,14 @@ const Comment = ({ comment, postId, getData }) => {
   return (
     <>
       <div className={styles.comment}>
-        <img src="https://picsum.photos/500" alt="profile" />
+        <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
+          <img src="https://picsum.photos/500" alt="profile" />
+        </Link>
         <div>
           <div>
-            <p>{comment.studentName}</p>
+            <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
+              <p>{comment.studentName}</p>
+            </Link>
             <p>작성자</p>
             <div>
               <button onClick={onEdit} className={styles['action-button']}>
@@ -97,6 +101,7 @@ const Comment = ({ comment, postId, getData }) => {
             postId={postId}
             getData={getData}
             setReplyComment={setReplyComment}
+            studentId={studentId}
           />
         </ReplyCommentContainer>
       )}

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
 import api from 'apis/post';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setCategory } from 'redux/slices/post';
 
@@ -15,11 +15,12 @@ const ReactQuill = dynamic(import('react-quill'), {
 function Post({ category, post, optionalOnDelete, optionalEditHref }) {
   const router = useRouter();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(setCategory(category));
   }, [category, dispatch]);
-  
+
   const title = {
     notice: '공지 게시판',
     free: '자유 게시판',
@@ -40,10 +41,13 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     query: router.query
   };
 
+  const boardURL = (category === 'clubNotice') ?
+    `/clubhome/${router.query.id}` : `/${category}`
+
   return (
     <div className={styles.container}>
       <div>
-        <Link href={`/${category}`} passHref>
+        <Link href={boardURL} passHref>
           <a>{title[category]}</a>
         </Link>
         <h1>{post.title}</h1>
@@ -51,10 +55,14 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
           <div>{post.name}</div>
           <div>
             {(category === 'clubActivity') && <button>스크랩하기</button>}
-            <Link href={editHref} passHref>
-              <button>수정하기</button>
-            </Link>
-            <button onClick={onDelete}>삭제하기</button>
+            {(user?.id === post.studentId) && (
+              <>
+                <Link href={editHref} passHref>
+                  <button>수정하기</button>
+                </Link>
+                <button onClick={onDelete}>삭제하기</button>
+              </>
+            )}
             <div>{post.inDate}</div>
             <div>조회 {post.hit}</div>
           </div>

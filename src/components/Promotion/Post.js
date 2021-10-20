@@ -15,9 +15,7 @@ const Post = ({ postData, postId, getData, comments }) => {
     await deletePost(postId).then((res) => {
       if (res.data.success) {
         alert('글 삭제가 완료되었습니다');
-        setTimeout(function () {
-          router.reload();
-        }, 2000);
+        router.reload();
       }
     });
   };
@@ -40,7 +38,9 @@ const Post = ({ postData, postId, getData, comments }) => {
             <button onClick={onDelete}>삭제하기</button>
           </div>
           <div>
-            <div>{name}</div>
+            <Link href={{ pathname: `profile/${studentId}` }} passHref>
+              <div>{name}</div>
+            </Link>
             <div>
               <div>{inDate}</div>
               <div>조회 {hit}</div>

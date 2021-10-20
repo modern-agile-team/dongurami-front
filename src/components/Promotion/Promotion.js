@@ -34,7 +34,11 @@ const Promotion = ({
   return (
     <div className={styles.promotion}>
       <div className={styles.img}>
-        <img src={img} alt="poster" />
+        {!img ? (
+          <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
+        ) : (
+          <img src={img} alt="poster" />
+        )}
         <div
           className={styles.creationInfo}
           onClick={(e) => {
