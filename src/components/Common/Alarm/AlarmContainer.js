@@ -64,7 +64,7 @@ const AlarmContainer = () => {
     <>
       <div className={styles.rect} />
       <div className={styles.container}>
-        <div className={styles.icons}>
+        <div className={styles.delete}>
           <FaTrashAlt size={13} onClick={onAlarmDeleteAll} />
         </div>
         <div className={styles.alarms}>
