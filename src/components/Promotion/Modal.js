@@ -37,19 +37,14 @@ const Modal = ({ setOpenModal, postId }) => {
   };
 
   const getData = async () => {
-    try {
-      await getPost(postId).then((res) => {
-        if (res.data.success) {
-          console.log(res);
-          setImages(res.data.images);
-          setImgUrl(res.data.images[index].imgPath);
-          setPostData(res.data.board);
-          setComments(res.data.comments);
-        } else alert(res.data.msg);
-      });
-    } catch (err) {
-      console.log(err.response.data.msg);
-    }
+    await getPost(postId).then((res) => {
+      if (res.data.success) {
+        setImages(res.data.images);
+        setImgUrl(res.data.images[index].imgPath);
+        setPostData(res.data.board);
+        setComments(res.data.comments);
+      } else alert(res.data.msg);
+    });
   };
 
   useEffect(() => {

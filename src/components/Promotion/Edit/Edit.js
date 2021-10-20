@@ -5,19 +5,19 @@ import WriteContent from './WriteContent';
 
 function Edit({ api }) {
   const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [description, setDescription] = useState('');
   const router = useRouter();
 
   useEffect(() => {
     (async () => {
       const post = await api.getPost();
       setTitle(post.title);
-      setBody(post.description);
+      setDescription(post.description);
     })();
-  }, [api]);
+  }, []);
 
   const onSubmit = () => {
-    api.putPost(title, body).then(() => {
+    api.putPost(title, description).then(() => {
       router.back();
     });
   };
@@ -26,9 +26,9 @@ function Edit({ api }) {
     <Container type="글 수정하기">
       <WriteContent
         title={title}
-        body={body}
+        description={description}
         setTitle={setTitle}
-        setBody={setBody}
+        setDescription={setDescription}
         onSubmit={onSubmit}
       />
     </Container>

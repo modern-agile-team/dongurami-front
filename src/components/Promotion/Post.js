@@ -5,6 +5,11 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import getToken from 'utils/getToken';
 import { deletePost } from 'apis/promotion';
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(import('react-quill'), {
+  ssr: false
+});
 
 const Post = ({ postData, postId, getData, comments }) => {
   const { name, hit, title, inDate, description, studentId } = postData;
@@ -48,7 +53,7 @@ const Post = ({ postData, postId, getData, comments }) => {
           </div>
         </div>
         <hr />
-        <div dangerouslySetInnerHTML={{ __html: description }}></div>
+        <ReactQuill value={description || ''} theme="bubble" readOnly />
         <PromotionCommentContainer
           comments={comments}
           postId={postId}

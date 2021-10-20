@@ -25,6 +25,7 @@ const PromotionContainer = () => {
       if (searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
+
           itemNo = result[result.length - 1].no;
 
           if (result.length) {
@@ -106,6 +107,7 @@ const PromotionContainer = () => {
 
   useEffect(() => {
     firstGetDatas();
+
     window.addEventListener('scroll', infiniteScroll);
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
