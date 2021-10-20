@@ -68,9 +68,10 @@ const AlarmContainer = () => {
           <FaTrashAlt size={13} onClick={onAlarmDeleteAll} />
         </div>
         <div className={styles.alarms}>
-          {alarmList.slice(0, alarmShow).map((alarm) => {
+          {alarmList.slice(0, alarmShow).map((alarm, index) => {
             return (
               <div
+                key={index}
                 className={styles.description}
                 onClick={() => onAlarmClick(alarm.url)}
               >
