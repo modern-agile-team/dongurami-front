@@ -33,4 +33,4 @@ export const getNaverOauth = (token) => {
 // user 정보 가져오기
 export const getUserData = () => {
   return Promise.resolve({ data: { test: 1 } });
-}
+};
