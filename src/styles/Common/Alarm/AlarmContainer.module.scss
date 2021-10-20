@@ -12,10 +12,21 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   background-color: white;
   top: 60px;
   margin-left: -50px;
+  max-height: 90vh;
+  overflow-y: auto;
   hr {
     width: 90%;
     border-top: 0.1px dashed #f2f2f2;
   }
+}
+
+.container::-webkit-scrollbar {
+  background-color: rgb(235, 235, 235);
+  width: 8px;
+}
+.container::-webkit-scrollbar-thumb {
+  background-color: #64beb18c;
+  border-radius: 16px;
 }
 
 .rect {
@@ -40,25 +51,25 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   }
 }
 
-.delAlarm {
-  text-align: left;
-  padding-left: 5px;
-  svg {
-    margin: 0;
-    margin-top: 5px;
-    cursor: pointer;
-    &:hover {
-      color: rgb(233, 49, 3);
-    }
-  }
-}
-
 .description {
   border-bottom: 1px solid #cacacabd;
   cursor: pointer;
   padding: 10px;
   &:hover {
     background-color: #eeeeee94;
+  }
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  svg {
+    &:hover {
+      color: rgb(212, 67, 67);
+    }
+  }
+  p {
+    font-weight: bold;
   }
 }
 
@@ -84,12 +95,6 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       border-bottom: 1px solid;
     }
   }
-}
-
-#big {
-  font-size: 100%;
-  font-weight: bold;
-  text-align: left;
 }
 
 .bottom {
