@@ -14,6 +14,7 @@ function Profile() {
   const [clubNo, setClubNo] = useState(0);
   const [dataArr, setDataArr] = useState([]);
   const [token, setToken] = useState(getToken());
+  const [isOpen, setIsOpen] = useState(false)
 
   const uRouter = useRouter();
 
@@ -78,6 +79,8 @@ function Profile() {
         userInfo={userInfo}
         profile={profile}
         comp={comp}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
       />
       <Scraps
         userInfo={userInfo}
