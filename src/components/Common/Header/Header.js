@@ -9,6 +9,8 @@ import AlarmContainer from '../Alarm/AlarmContainer';
 import HeaderMobileBoard from './HeaderMobileBoard';
 import Link from 'next/link';
 import getToken from 'utils/getToken';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -16,6 +18,7 @@ function Header() {
   const [token, setToken] = useState('');
 
   const closeRef = useRef(null);
+  const router = useRouter();
 
   //영역밖 클릭 시 사이드바 제거
   const CloseSidebar = (ref) => {
@@ -39,21 +42,17 @@ function Header() {
     setToken(getToken());
   }, []);
 
-  useEffect(() => {
-    window.localStorage.setItem('jwt', token);
-  }, [token]);
-
-  // 로그아웃 이벤트
-  const logout = () => {
-    window.location.reload();
-    return setToken('');
+  //user 정보 가져오기
+  const user = useSelector((state) => state.user);
+  const showProfile = () => {
+    router.push(`/profile/${user.id}`);
   };
 
   //24시간 경과시 기존에 있던 token remove
   useEffect(() => {
     const countdown = setInterval(() => {
+      window.localStorage.setItem('jwt', '');
       window.location.reload();
-      setToken('');
     }, 1000 * 60 * 60 * 24);
     return () => clearInterval(countdown);
   }, []);
@@ -85,9 +84,10 @@ function Header() {
                   <BiBell onClick={alarmOpen} className={styles.bell} />
                   {isAlarmOpen && <AlarmContainer />}
                 </div>
-                <Link href="/profile/201908033" passHref>
-                  <FaUserCircle className={styles.Profile} />
-                </Link>
+                <FaUserCircle
+                  className={styles.Profile}
+                  onClick={showProfile}
+                />
               </div>
             ) : (
               <div
