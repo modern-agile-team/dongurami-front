@@ -38,6 +38,15 @@ export const HeaderMobileBoard = () => {
         >
           자유 게시판
         </li>
+        <li
+          className={styles.QnA}
+          id={nowPath === '/questionAndAnswer' ? styles.now : undefined}
+          onClick={() => {
+            router.push('/questionAndAnswer');
+          }}
+        >
+          Q&#38;A 게시판
+        </li>
       </ul>
     </div>
   );
