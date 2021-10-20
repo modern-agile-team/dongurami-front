@@ -11,7 +11,6 @@ import {
   putLeader
 } from 'apis/manager';
 import { useRouter } from 'next/router';
-import { AiFillCaretUp } from 'react-icons/ai';
 
 export const Manager = () => {
   const [members, setMembers] = useState([]);
@@ -65,6 +64,7 @@ export const Manager = () => {
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
+    if (!e.target.id) return;
     confirm('가입을 승인합니까?') &&
       (await postApply(
         {
@@ -74,11 +74,11 @@ export const Manager = () => {
       )
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
-    router.reload();
   };
 
   // 가입 거절 PUT
   const onApplyReject = async (e) => {
+    if (!e.target.id) return;
     confirm('가입을 거절합니까?') &&
       (await putApply(
         {
@@ -88,10 +88,8 @@ export const Manager = () => {
       )
         .then((res) => {
           alert(res.data.msg);
-          getMembersData();
         })
         .catch((err) => alert(err.response.data.msg)));
-    if (applicantInfo.length === 0) router.reload();
   };
 
   // 회장 양도 PUT
