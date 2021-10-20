@@ -98,24 +98,33 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   }
 }
 
+@media (max-width: 1024px) {
+  .container {
+    width: 30%;
+    margin-left: -20%;
+    max-height: 50vh;
+  }
+}
+
 @media (max-width: 768px) {
+  .container {
+    width: 150%;
+    top: 110px;
+    right: 0;
+    max-height: 50vh;
+  }
   .rect {
     top: 105px;
   }
-  .container {
-    width: 100%;
-    top: 110px;
-    right: 0;
-  }
   .leftAlarms {
-    font-size: 70%;
+    font-size: 80%;
   }
   .alarms {
     p {
-      font-size: 70%;
+      font-size: 80%;
     }
   }
-  #big {
+  .top p {
     font-size: 80%;
   }
 }
