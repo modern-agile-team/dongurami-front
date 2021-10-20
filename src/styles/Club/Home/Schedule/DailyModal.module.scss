@@ -11,15 +11,20 @@
   z-index: 9999;
 
   .modal {
-    border-radius: 3%;
+    border-radius: 12px;
     background-color: white;
-    width: 30vw;
+    width: 25vw;
     display: flex;
     flex-direction: column;
+    padding: 2rem;
 
     .header {
       display: flex;
       justify-content: center;
+      h3 {
+        font-size: 150%;
+        margin-top: 0%;
+      }
     }
 
     .closeBtn {
@@ -37,13 +42,14 @@
 
     .body {
       margin-left: 2%;
+
       .titleInput {
         width: 20vw;
+        height: 2.5em;
       }
       .choiceColor {
         margin-bottom: 2%;
       }
-      margin-bottom: 10px;
     }
   }
 
@@ -53,13 +59,13 @@
   }
 
   .addBtn {
-    border: 1px solid;
-    padding: 0.5rem;
-    margin: 1rem;
+    border: 2px solid #f2f2f2;
+    padding: 0.5rem 1em;
+    margin-top: 4em;
     float: right;
     cursor: pointer;
     background-color: #fcf5c4;
-    border-radius: 6px;
+    border-radius: 8px;
     &:hover {
       filter: brightness(97%);
     }

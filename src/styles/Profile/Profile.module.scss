@@ -1,4 +1,23 @@
 .container {
-  // border: 1px solid;
+  width: 50%;
+  padding: 5em;
   margin: 0 auto;
+  display: flex;
+  .profileHeader {
+    z-index: 2;
+    margin-top: 2%;
+    width: 4.35rem;
+    margin-right: -1.1rem;
+    button {
+      margin-top: 2px;
+      height: 40px;
+      background-color: white;
+      border: 1px solid rgb(228, 228, 228);
+      border-top-left-radius: 7px;
+      border-bottom-left-radius: 7px;
+      &:hover {
+        filter: brightness(97%);
+      }
+    }
+  }
 }

@@ -28,7 +28,9 @@ const AlarmContainer = () => {
   // 알람 불러오기
   const getAlarmData = () => {
     getAlarm()
-      .then((res) => setAlarmList(res.data.notifications))
+      .then((res) => {
+        setAlarmList(res.data.notifications);
+      })
       .catch((err) => alert(err.response.data.msg));
   };
 
@@ -54,40 +56,43 @@ const AlarmContainer = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.icons}>
-        <FaTrashAlt size={13} onClick={onAlarmDeleteAll} />
-      </div>
-      <div className={styles.alarms}>
-        {alarmList.slice(0, 3).map((alarm) => {
-          return (
-            <div className={styles.alarm} key={alarm.notificationNum}>
-              <div className={styles.delAlarm}>
-                <TiDelete
-                  size={15}
-                  onClick={() => onAlarmPatch(alarm.notificationNum)}
-                />
-              </div>
-              <div
-                className={styles.description}
-                onClick={() => onAlarmClick(alarm.url)}
-              >
-                <p id={styles.big}>
-                  {alarmCategoriNum[alarm.notificationCategoryNum]}
-                </p>
-                <div className={styles.bottom}>
-                  <p>{alarm.senderId}</p>
-                  <p>{alarm.inDate.substr(0, 10)}</p>
+    <>
+      <div className={styles.rect} />
+      <div className={styles.container}>
+        <div className={styles.icons}>
+          <FaTrashAlt size={13} onClick={onAlarmDeleteAll} />
+        </div>
+        <div className={styles.alarms}>
+          {alarmList.slice(0, 3).map((alarm) => {
+            return (
+              <div className={styles.alarm} key={alarm.notificationNum}>
+                <div className={styles.delAlarm}>
+                  <TiDelete
+                    size={15}
+                    onClick={() => onAlarmPatch(alarm.notificationNum)}
+                  />
+                </div>
+                <div
+                  className={styles.description}
+                  onClick={() => onAlarmClick(alarm.url)}
+                >
+                  <p id={styles.big}>
+                    {alarmCategoriNum[alarm.notificationCategoryNum]}
+                  </p>
+                  <div className={styles.bottom}>
+                    <p>{alarm.senderId}</p>
+                    <p>{alarm.inDate.substr(0, 10)}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-        <div className={styles.leftAlarms}>
-          <span>{alarmList.slice(3).length}개의 알람이 더 있습니다</span>
+            );
+          })}
+          <div className={styles.leftAlarms}>
+            <span>{alarmList.slice(3).length}개의 알람이 더 있습니다</span>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

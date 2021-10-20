@@ -4,7 +4,7 @@ import { getUserData } from 'apis/user';
 const getUser = createAsyncThunk(
   'user/getUser',
   async () => {
-    const userData = (await getUserData()).data;
+    const userData = (await getUserData()).data.user;
     return userData;
   }
 );

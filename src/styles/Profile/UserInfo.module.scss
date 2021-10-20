@@ -1,8 +1,17 @@
-.profileBody {
-  display: flex;
-  flex-direction: column;
-  .profileImg {
-    width: 5vh;
-    height: 5vh;
+.wrap {
+  width: 100%;
+  .profileBody {
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0px 8px 8px 3px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    .profileImg {
+      width: 12em;
+      height: 12em;
+      border-radius: 50%;
+    }
   }
 }

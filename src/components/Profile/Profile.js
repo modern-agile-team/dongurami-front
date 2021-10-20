@@ -45,8 +45,10 @@ function Profile() {
   return (
     <div className={styles.container}>
       <div className={styles.profileHeader}>
-        <button onClick={() => setComp('프로필')}>프로필</button>
+        <button style={comp === '프로필' ? { borderRight: 0 } : null} className={styles.profileBtn} onClick={() => setComp('프로필')}>프로필</button>
         <button
+          style={comp === '스크랩' ? { borderRight: 0 } : null}
+          className={styles.scrapBtn}
           onClick={() => {
             if (profile.clubs.length > 0) {
               getScraps(profile.id, profile.clubs[0].no)
@@ -85,6 +87,7 @@ function Profile() {
         clubNo={clubNo}
         getScraps={getScraps}
         dataArr={dataArr}
+        setDataArr={setDataArr}
         id={id}
       />
     </div>
