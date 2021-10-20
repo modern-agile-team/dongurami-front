@@ -52,7 +52,9 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
         </Link>
         <h1>{post.title}</h1>
         <div>
-          <div>{post.name}</div>
+          <Link href={`/profile/${post.studentId}`} passHref>
+            <div>{post.name}</div>
+          </Link>
           <div>
             {(category === 'clubActivity') && <button>스크랩하기</button>}
             {(user?.id === post.studentId) && (
