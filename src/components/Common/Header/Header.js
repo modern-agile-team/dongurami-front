@@ -15,7 +15,6 @@ import { useSelector } from 'react-redux';
 function Header() {
   const [open, setOpen] = useState(false);
   const [isAlarmOpen, setIsAlarmOpen] = useState(false);
-  const [token, setToken] = useState('');
 
   const closeRef = useRef(null);
   const router = useRouter();
@@ -37,11 +36,6 @@ function Header() {
   };
   CloseSidebar(closeRef);
 
-  // localStorage의 JWT값 불러와 token state에 저장
-  useEffect(() => {
-    setToken(getToken());
-  }, []);
-
   //user 정보 가져오기
   const user = useSelector((state) => state.user);
   const showProfile = () => {
@@ -51,9 +45,9 @@ function Header() {
   //24시간 경과시 기존에 있던 token remove
   useEffect(() => {
     const countdown = setInterval(() => {
-      window.localStorage.setItem('jwt', '');
+      window.localStorage.removeItem('jwt');
       window.location.reload();
-    }, 1000 * 60 * 60 * 24);
+    }, 1000 * 60 * 60);
     return () => clearInterval(countdown);
   }, []);
 
@@ -75,7 +69,7 @@ function Header() {
               <HeaderMobileBoard />
               <HeaderBoard />
             </ul>
-            {token ? (
+            {getToken() ? (
               <div
                 className={styles.tokenIcons}
                 id={open ? styles.show : styles.hide}
