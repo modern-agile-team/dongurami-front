@@ -19,7 +19,7 @@ class Api {
         }
       }
     );
-    return response.data.board;
+    return response.data;
   }
   async putPost(title, description) {
     await axios.put(
