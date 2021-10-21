@@ -2,7 +2,7 @@ import styles from 'styles/Profile/WriteScraps.module.scss';
 import Container from 'components/Write/Container';
 import WriteContent from 'components/Write/WriteContent';
 import { useEffect, useState } from 'react';
-import { addPost } from 'apis/profile';
+import { addPost, addScrapPost } from 'apis/profile';
 import { useRouter } from 'next/router';
 import router from 'next/router';
 
@@ -13,14 +13,25 @@ const WriteScrpas = () => {
   const data = uRouter.query;
 
   const onSubmit = async () => {
-    await addPost(data.pid, data.clubNum, {
-      title,
-      description,
-      images: []
-    })
-      .then((res) => console.log(res))
-      .catch((err) => alert(res.response.data.msg));
-    router.push(`/profile/${data.pid}`);
+    if (data.scrapNum !== undefined) {
+      addScrapPost(data.clubNum, data.scrapNum, {
+        title,
+        description,
+      })
+      .then(res => alert(res.data.msg))
+      .catch(err => alert(err))
+      router.push(`/profile/${data.pid}`);
+    }
+    else {
+      await addPost(data.pid, data.clubNum, {
+        title,
+        description,
+        images: []
+      })
+        .then((res) => console.log(res))
+        .catch((err) => alert(err.response.data.msg));
+      router.push(`/profile/${data.pid}`);
+    }
   };
 
   return (
