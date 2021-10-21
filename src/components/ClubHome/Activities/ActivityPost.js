@@ -13,13 +13,15 @@ function ActivityPost({ pid, closeModal }) {
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
 
+  const clubNum = Number(router.query.id);
+
   useEffect(() => {
     dispatch(getPost({ category: 'clubActivity', pid }))
   }, [pid, dispatch]);
 
   const onDelete = async () => {
     await api.deletePost('clubActivity', post.no);
-    dispatch(getBoardPosts({ category: 'clubActivity', sort: 'inDate', order: 'DESC' }));
+    dispatch(getBoardPosts({ category: 'clubActivity', sort: 'inDate', order: 'DESC', clubNum }));
     closeModal();
   };
 

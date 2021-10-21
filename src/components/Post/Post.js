@@ -29,9 +29,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     personal: '활동내용'
   };
 
-  const onDelete =
-    optionalOnDelete ||
-    (async () => {
+  const onDelete = optionalOnDelete || (async () => {
       await api.deletePost(category, post.no);
       router.back();
     });
@@ -43,6 +41,8 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
 
   const boardURL = (category === 'clubNotice') ?
     `/clubhome/${router.query.id}` : `/${category}`
+
+  const clubNum = Number(router.query.id);
 
   return (
     <div className={styles.container}>
@@ -56,7 +56,11 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
             <div>{post.name}</div>
           </Link>
           <div>
-            {(category === 'clubActivity') && <button>스크랩하기</button>}
+            {(category === 'clubActivity' && user && user.clubNum.includes(clubNum)) && (
+              <Link href={{ pathname: `/profile/${user.id}/${clubNum}/writescraps`, query: { scrapNum: post.no } }} passHref>
+                <button>스크랩하기</button>
+              </Link>
+            )}
             {(user?.id === post.studentId) && (
               <>
                 <Link href={editHref} passHref>
