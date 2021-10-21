@@ -111,9 +111,9 @@ export const Manager = () => {
 
   // 기능 권한 변경 PUT
   const changeMembersAuth = async () => {
+    if (applyAuth.length === 0) return;
     const adminOptions = [];
     const tempArr = members.slice(0);
-
     tempArr.map((member, index) => {
       adminOptions.push({
         id: member.id,
@@ -121,7 +121,6 @@ export const Manager = () => {
         boardAdminFlag: boardAuth[index]
       });
     });
-
     await putAuth(
       {
         adminOptions: adminOptions
@@ -131,7 +130,7 @@ export const Manager = () => {
       .then((res) => {
         alert(res.data.msg);
       })
-      .catch((err) => alert(err.response.data.msg));
+      .catch((err) => console.log(err.response));
     await getMembersData();
   };
 
