@@ -12,12 +12,14 @@ function Write({ category }) {
   const [description, setDescription] = useState('');
   const [showModal, setShowModal] = useState(false);
 
+  const clubNum = Number(router.query.id);
+
   const onSubmit = async () => {
     if (category === 'promotion') {
       setShowModal(true);
       return;
     }
-    await postPost(category, { title, description });
+    await postPost(category, clubNum, { title, description });
     router.back();
   };
   const onClose = () => {
