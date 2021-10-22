@@ -19,7 +19,7 @@ function Profile() {
   const uRouter = useRouter();
 
   const logout = () => {
-    window.localStorage.setItem("jwt", "");
+    window.localStorage.removeItem("jwt");
     router.push('/')
   };
 
