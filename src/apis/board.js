@@ -27,7 +27,7 @@ export function postPost(category, clubNum, body) {
   if (category === 'clubActivity') {
     return axios.post(`/api/club/board/clubActivity/${clubNum + 1}`, { id: 'test1', ...body });
   }
-  return axios.post(`/api/board/${category}`, { id: 'test1', ...body });
+  return axios.post(`/api/board/${category}`, { ...body });
 }
 
 export function putPost(category, pid, body) {
