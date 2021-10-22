@@ -13,12 +13,12 @@ function WritePromition({ title, description }) {
     const imagesURL = await Promise.all([...e.target.files].map(async (file) => {
       const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (await getS3PresignedURL(file.name)).data;
       await uploadImage(presignedURL, file);
-      return { path: imageURL, name: file.name };
+      return { imgPath: imageURL };
     }));
     setImage(imagesURL);
   }
   const onSubmit = () => {
-    postPost('promotion', { title, description, images, clubNo: Number(clubNo) });
+    postPost('promotion', 1, { title, description, images, clubNo: Number(clubNo) });
     router.push('/promotion');
   };
   const onClubNoChange = (e) => {
