@@ -12,18 +12,18 @@ class Api {
 
   async getPost() {
     const response = await axios.get(
-      `http://3.36.72.145:8080/api/board/promotion/${this.postNo}`,
+      `http://3.37.220.237:8080/api/board/promotion/${this.postNo}`,
       {
         headers: {
           'x-auth-token': this.token
         }
       }
     );
-    return response.data.board;
+    return response.data;
   }
   async putPost(title, description) {
     await axios.put(
-      `http://3.36.72.145:8080/api/board/promotion/${this.postNo}`,
+      `http://3.37.220.237:8080/api/board/promotion/${this.postNo}`,
       {
         title,
         description
@@ -51,7 +51,7 @@ function Write() {
 
   if (!pid) return null;
 
-  return <Edit api={api} />;
+  return <Edit pid={pid} />;
 }
 
 export default Write;

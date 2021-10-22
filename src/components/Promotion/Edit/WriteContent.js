@@ -1,7 +1,14 @@
-import styles from '../../../styles/Board/Write/WriteContent.module.scss';
+import styles from '../../../styles/Board/Promotion/EditPage.module.scss';
 import ReactQuillContainer from './ReactQuilContainer';
 
-function Write({ title, body, setTitle, setBody, onSubmit }) {
+function Write({
+  title,
+  description,
+  setTitle,
+  setDescription,
+  onSubmit,
+  onOpen
+}) {
   return (
     <div className={styles.container}>
       <input
@@ -12,9 +19,13 @@ function Write({ title, body, setTitle, setBody, onSubmit }) {
       />
       <hr />
       <div></div>
-      <ReactQuillContainer body={body} setBody={setBody} />
+      <ReactQuillContainer
+        description={description}
+        setDescription={setDescription}
+      />
       <div>
-        <button onClick={onSubmit}>등록</button>
+        <button onClick={onOpen}>포스터 수정</button>
+        <button onClick={onSubmit}>수정 완료</button>
       </div>
     </div>
   );

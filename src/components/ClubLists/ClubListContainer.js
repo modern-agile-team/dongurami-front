@@ -8,8 +8,6 @@ import { getDatas } from 'apis/clublist';
 const ClubListContainer = () => {
   const [clubData, setClubData] = useState([]);
   const [originData, setOriginData] = useState([]);
-  const img =
-    'https://i.pinimg.com/236x/5b/4f/3f/5b4f3f801c99430ef0189e0fd8bc5855.jpg';
 
   const onCategorySearch = (element) => {
     const searchData = originData.filter((el) => el.category === element);
@@ -45,7 +43,7 @@ const ClubListContainer = () => {
           {clubData.map((el) => {
             return (
               <ClubList
-                img={img}
+                img={el.logoUrl}
                 title={el.name}
                 categories={el.category}
                 key={el.no}

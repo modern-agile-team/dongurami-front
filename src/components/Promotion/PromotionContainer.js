@@ -22,9 +22,10 @@ const PromotionContainer = () => {
 
   const getDatas = async () => {
     try {
-      if (searchItem) {
+      if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
+
           itemNo = result[result.length - 1].no;
 
           if (result.length) {
@@ -32,14 +33,20 @@ const PromotionContainer = () => {
           }
         });
       } else if (search) {
-        await getSearchData(type, searchKeyword).then((response) => {
-          const result = response.data.promotionSearch.slice(preitem, item);
+        await getSearchData(type, searchKeyword, itemNo).then((response) => {
+          const result = response.data.boards;
+          console.log(result);
+
+          itemNo = result[result.length - 1].no;
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
           }
         });
-      } else {
+      } else if (
+        searchItem === 'whole' ||
+        (search === false && searchItem === '')
+      ) {
         await getBoardData(itemNo).then((response) => {
           const result = response.data.boards;
           itemNo = result[result.length - 1].no;
@@ -57,18 +64,24 @@ const PromotionContainer = () => {
   const firstGetDatas = async () => {
     itemNo = 0;
     try {
-      if (searchItem) {
+      if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
-          itemNo = result[result.length - 1].no;
+          if (result.length) itemNo = result[result.length - 1].no;
+
           setBoardData(result);
         });
       } else if (search) {
-        await getSearchData(type, searchKeyword).then((response) => {
-          const result = response.data.promotionSearch.slice(preitem, item);
+        await getSearchData(type, searchKeyword, itemNo).then((response) => {
+          const result = response.data.boards;
+          console.log(result);
+          if (result.length) itemNo = result[result.length - 1].no;
           setBoardData(result);
         });
-      } else {
+      } else if (
+        searchItem === 'whole' ||
+        (search === false && searchItem === '')
+      ) {
         await getBoardData(itemNo).then((response) => {
           console.log(response);
           const result = response.data.boards;
@@ -85,6 +98,12 @@ const PromotionContainer = () => {
     setIssearch(!isSearch);
     setSearch(true);
     setSearchItem('');
+  };
+
+  const categorySearch = (event) => {
+    setSearch(false);
+    setSearchKeyword('');
+    setSearchItem(event.target.getAttribute('name'));
   };
 
   const infiniteScroll = () => {
@@ -105,13 +124,12 @@ const PromotionContainer = () => {
 
   useEffect(() => {
     firstGetDatas();
+
     window.addEventListener('scroll', infiniteScroll);
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
   }, [searchItem, isSearch]);
-
-  console.log(boarddata);
 
   return (
     <>
@@ -123,6 +141,7 @@ const PromotionContainer = () => {
         type={type}
         searchKeyword={searchKeyword}
         onSearch={onSearch}
+        categorySearch={categorySearch}
       />
       <Link href={`/promotion/write`} passHref>
         <button className={styles.writeBtn}>
