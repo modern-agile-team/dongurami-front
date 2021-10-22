@@ -1,6 +1,13 @@
+.wrap {
+  width: 100%;
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+}
+
 .login {
   width: 50%;
-  height: 28rem;
+  height: 29rem;
   margin: 3% auto;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.342);
   border-radius: 50px;
