@@ -36,10 +36,15 @@ const ClubIntro = ({ visitTime }) => {
 
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
-    patchClubIntro({ introduce: introDesc }).then(() => {
-      alert('동아리 소개글이 수정되었습니다.');
-      dispatch(getClubInfo(clubId));
-    });
+    patchClubIntro({ leader: infos.clientInfo.leader, introduce: introDesc })
+      .then(() => {
+        alert('동아리 소개글이 수정되었습니다.');
+        dispatch(getClubInfo(clubId));
+      })
+      .catch((err) => {
+        alert(err.response.data.msg);
+        router.reload();
+      });
     setDescUpdate(!descUpdate);
   };
 
@@ -50,7 +55,13 @@ const ClubIntro = ({ visitTime }) => {
       await getS3PresignedURL({ img: e.target.files[0].name })
     ).data;
     await uploadImage(presignedURL, file);
-    await putClubLogo({ logoUrl: imageURL });
+    await putClubLogo({
+      leader: infos.clientInfo.leader,
+      logoUrl: imageURL
+    }).catch((err) => {
+      alert(err.response.data.msg);
+      router.reload();
+    });
     dispatch(getClubInfo(clubId));
   };
 

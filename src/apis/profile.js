@@ -9,7 +9,7 @@ export const getUserInfo = (id, token) => {
       'x-auth-token': token
     }
   })
-  return setInterceptors(inst).get(`/api/profile/${id}`);
+  return setInterceptors(inst).get(`api/profile/${id}`);
 };
 
 export const modifyInfo = (id, body) => {
@@ -38,4 +38,8 @@ export const modifyBPost = (id, clubNum, boardNum, body) => {
 
 export const modifySPost = (id, clubNum, scrapNum, body) => {
   return instance.put(`/api/my-page/${id}/personal/scrap/${clubNum}/${scrapNum}`, body)
+}
+
+export const addScrapPost = (clubNum, boardNum, body) => {
+  return instance.post(`/api/club/board/clubActivity/personal/scrap/${clubNum}/${boardNum}`, body)
 }

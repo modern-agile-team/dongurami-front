@@ -26,9 +26,9 @@ const ReviewWrite = ({
       <div className={styles.comment}>
         <input ref={inputRef} onChange={onReviewInput} />
         {isReviewMine ? (
-          <button onClick={onReviewUpdate}>수정</button>
+          <button onClick={onReviewUpdate}>✏️ 수정</button>
         ) : (
-          <button onClick={onReviewSubmit}>등록</button>
+          <button onClick={onReviewSubmit}>✏️ 등록</button>
         )}
       </div>
     </div>

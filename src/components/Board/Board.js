@@ -14,7 +14,8 @@ function getQuery(router) {
     sort: router.query.sort ?? 'inDate',
     order: router.query.order ?? 'DESC',
     type: router.query.type,
-    keyword: router.query.keyword
+    keyword: router.query.keyword,
+    clubNum: Number(router.query.id)
   };
 }
 
@@ -24,13 +25,13 @@ function Board({ category }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const { page, sort, order, type, keyword } = getQuery(router);
+  const { page, sort, order, type, keyword, clubNum } = getQuery(router);
 
   useEffect(() => {
     if (!sort || !order) return;
     if (!router.isReady) return;
-    dispatch(getBoardPosts({ category, sort, order, type, keyword }))
-  }, [router, category, sort, order, type, keyword, dispatch]);
+    dispatch(getBoardPosts({ category, sort, order, type, keyword, clubNum }))
+  }, [router, category, sort, order, type, keyword, clubNum, dispatch]);
 
   const setPageToUrl = (nextPage) => {
     router.push({

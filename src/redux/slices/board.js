@@ -3,12 +3,12 @@ import { getPosts, searchPosts } from 'apis/board';
 
 const getBoardPosts = createAsyncThunk(
   'board/getBoardPosts',
-  async ({ category, sort, order, type, keyword }) => {
+  async ({ category, sort, order, type, keyword, clubNum }) => {
     let response;
     if (type && keyword) {
-      response = await searchPosts({ category, sort, order, type, keyword });
+      response = await searchPosts({ category, sort, order, type, keyword, clubNum });
     } else {
-      response = await getPosts({ category, sort, order });
+      response = await getPosts({ category, sort, order, clubNum });
     }
     return response.data.boards;
   }

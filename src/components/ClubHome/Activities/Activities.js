@@ -16,9 +16,11 @@ const Activities = () => {
   const [selectedID, setSelectedID] = useState();
   const posts = useSelector((state) => state.board.posts);
 
+  const clubNum = Number(router.query.id);
+
   useEffect(() => {
-    dispatch(getBoardPosts({ category: 'clubActivity', sort: 'inDate', order: 'DESC' }));
-  }, [dispatch]);
+    dispatch(getBoardPosts({ category: 'clubActivity', sort: 'inDate', order: 'DESC', clubNum }));
+  }, [clubNum, dispatch]);
 
   const onClick = (id) => {
     setSelectedID(id)
@@ -37,7 +39,9 @@ const Activities = () => {
         <p>우아한 애자일의 활동</p>
       </div>
       <div id={styles.add}>
-        <Link href={{ pathname: `${router.pathname}/write-activity`, query: router.query }} passHref><IoIosAddCircleOutline /></Link>
+        <Link href={{ pathname: `${router.pathname}/write-activity`, query: router.query }} passHref>
+          <a><IoIosAddCircleOutline /></a>
+        </Link>
       </div>
       <div className={styles.activities}>
         {posts.map((post) => {

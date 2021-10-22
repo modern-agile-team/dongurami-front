@@ -3,7 +3,7 @@ import styles from '../../../styles/Club/Home/Manager/Members.module.scss';
 import MembersList from './MembersList';
 import MembersPreface from './MembersPreface';
 import { AiOutlineHome } from 'react-icons/ai';
-import { HiOutlinePencil } from 'react-icons/hi';
+
 export const Members = ({
   members,
   leader,
@@ -46,10 +46,7 @@ export const Members = ({
         })}
       </div>
       <div className={styles.addBtn}>
-        <button onClick={changeMembersAuth}>
-          <HiOutlinePencil />
-          권한 수정
-        </button>
+        <button onClick={changeMembersAuth}>✏️ 권한 수정</button>
       </div>
     </div>
   );
