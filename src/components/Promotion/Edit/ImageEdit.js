@@ -31,11 +31,12 @@ function ImageEdit({ title, description, images }) {
   const onClubNoChange = (e) => {
     setClubNo(e.target.value);
   };
-  console.log(images);
 
   return (
     <div className={styles.container}>
-      <div className={styles.imageContainer}>안녕</div>
+      <div className={styles.imageContainer}>
+        <img src={images[0].imgPath} alt="poster" />
+      </div>
       <div className={styles.updateBtn}>
         <label htmlFor="imageInput">수정</label>
         <input

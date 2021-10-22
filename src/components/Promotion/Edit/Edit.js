@@ -4,8 +4,9 @@ import Container from './Container';
 import WriteContent from './WriteContent';
 import Modal from 'components/Common/Modal';
 import ImageEdit from './ImageEdit';
+import { getPost } from 'apis/promotion';
 
-function Edit({ api }) {
+function Edit({ pid }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -13,11 +14,19 @@ function Edit({ api }) {
   const router = useRouter();
 
   useEffect(() => {
-    (async () => {
-      const post = await api.getPost();
+    const getData = (async () => {
+      await getPost(pid).then((response) => {
+        if (response.data.success) {
+          setImages(response.data.images);
+          setTitle(response.data.board.title);
+          setDescription(response.data.board.description);
+        }
+      });
+      /*
       setTitle(post.board.title);
       setDescription(post.board.description);
       setImages(post.images);
+      */
     })();
   }, []);
 
@@ -47,9 +56,11 @@ function Edit({ api }) {
           onOpen={onOpen}
         />
       </Container>
-      <Modal show={showModal} onClose={onClose}>
-        <ImageEdit images={images} title={title} />
-      </Modal>
+      {images.length > 0 && (
+        <Modal show={showModal} onClose={onClose}>
+          <ImageEdit images={images} title={title} />
+        </Modal>
+      )}
     </>
   );
 }

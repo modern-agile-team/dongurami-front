@@ -51,7 +51,7 @@ function Write() {
 
   if (!pid) return null;
 
-  return <Edit api={api} />;
+  return <Edit pid={pid} />;
 }
 
 export default Write;
