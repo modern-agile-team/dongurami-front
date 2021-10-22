@@ -1,12 +1,13 @@
 import { postPost } from 'apis/board';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../../../styles/Board/Promotion/ImageEdit.module.scss';
 
 function ImageEdit({ title, description, images }) {
   const router = useRouter();
   const [clubNo, setClubNo] = useState('0');
+  const [posterImages, setPoster] = useState([]);
 
   const onChange = async (e) => {
     const imagesURL = await Promise.all(
@@ -20,6 +21,7 @@ function ImageEdit({ title, description, images }) {
     );
     setImage(imagesURL);
   };
+
   /*
   const onSubmit = () => {
     postPost('promotion', { title, description, images, clubNo: Number(clubNo) });
@@ -29,12 +31,11 @@ function ImageEdit({ title, description, images }) {
   const onClubNoChange = (e) => {
     setClubNo(e.target.value);
   };
-  console.log(images[0].imgPath);
+  console.log(images);
+
   return (
     <div className={styles.container}>
-      <div className={styles.imageContainer}>
-        <img src={images[0].imgPath} alt="preview" />
-      </div>
+      <div className={styles.imageContainer}>안녕</div>
       <div className={styles.updateBtn}>
         <label htmlFor="imageInput">수정</label>
         <input

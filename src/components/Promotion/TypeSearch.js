@@ -8,7 +8,8 @@ const TypeSearch = ({
   type,
   searchKeyword,
   setType,
-  onSearch
+  onSearch,
+  categorySearch
 }) => {
   const onChange = (e) => {
     setSearchKeyword(e.target.value);
@@ -25,11 +26,8 @@ const TypeSearch = ({
 
   return (
     <div className={styles.container}>
-      <ul
-        className={styles.tagList}
-        onClick={(event) => setSearchItem(event.target.getAttribute('name'))}
-      >
-        <li name="">#전체</li>
+      <ul className={styles.tagList} onClick={(event) => categorySearch(event)}>
+        <li name="whole">#전체</li>
         <li name="IT">#IT</li>
         <li name="음악">#음악</li>
         <li name="친목">#친목</li>
@@ -38,7 +36,7 @@ const TypeSearch = ({
       </ul>
       <select value={type} onChange={onTypeChange}>
         <option value="title">제목</option>
-        <option value="clubname">동아리명</option>
+        <option value="clubName">동아리명</option>
       </select>
       <div className={styles.searchContainer}>
         <form className={styles.searchElement} onSubmit={onSubmit}>

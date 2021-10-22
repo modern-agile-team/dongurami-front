@@ -15,7 +15,6 @@ function Edit({ api }) {
   useEffect(() => {
     (async () => {
       const post = await api.getPost();
-
       setTitle(post.board.title);
       setDescription(post.board.description);
       setImages(post.images);
@@ -49,7 +48,7 @@ function Edit({ api }) {
         />
       </Container>
       <Modal show={showModal} onClose={onClose}>
-        <ImageEdit images={images} />
+        <ImageEdit images={images} title={title} />
       </Modal>
     </>
   );

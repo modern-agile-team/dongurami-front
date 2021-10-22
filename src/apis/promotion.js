@@ -12,8 +12,10 @@ export function getBoardData(no) {
   );
 }
 
-export function getSearchData(type, keyword) {
-  return axios.get(`api/search/promotion?type=${type}&keyword=${keyword}`);
+export function getSearchData(type, keyword, no) {
+  return axios.get(
+    `api/search/promotion/category?type=${type}&keyword=${keyword}&sort=inDate&order=desc&lastNum=${no}`
+  );
 }
 
 export function getPost(postId) {
