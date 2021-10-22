@@ -10,11 +10,13 @@ import HeaderMobileBoard from './HeaderMobileBoard';
 import Link from 'next/link';
 import getToken from 'utils/getToken';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { getUserData } from 'apis/user';
 
 function Header() {
   const [open, setOpen] = useState(false);
   const [isAlarmOpen, setIsAlarmOpen] = useState(false);
+  const [token, setToken] = useState('');
+  const [user, setUser] = useState();
 
   const closeRef = useRef(null);
   const router = useRouter();
@@ -36,20 +38,34 @@ function Header() {
   };
   CloseSidebar(closeRef);
 
-  //user 정보 가져오기
-  const user = useSelector((state) => state.user);
+  // localStorage의 JWT값 불러와 token state에 저장
+  useEffect(() => {
+    setToken(getToken());
+  }, []);
+
+  //마이페이지 routing
   const showProfile = () => {
-    router.push(`/profile/${user.id}`);
+    router.push(`/profile/${user}`);
   };
 
-  //24시간 경과시 기존에 있던 token remove
+  //토큰 유효성 검사
   useEffect(() => {
-    const countdown = setInterval(() => {
-      window.localStorage.removeItem('jwt');
-      window.location.reload();
-    }, 1000 * 60 * 60);
-    return () => clearInterval(countdown);
-  }, []);
+    if (token) {
+      getUserData({
+        headers: {
+          'Content-type': 'application/json; charset=utf-8',
+          'x-auth-token': token
+        }
+      })
+        .then((res) => {
+          setUser(res.data.user.id);
+        })
+        .catch((err) => {
+          window.localStorage.removeItem('jwt');
+          window.location.reload();
+        });
+    }
+  });
 
   //알람 열람
   const alarmOpen = () => {
@@ -69,7 +85,7 @@ function Header() {
               <HeaderMobileBoard />
               <HeaderBoard />
             </ul>
-            {getToken() ? (
+            {token ? (
               <div
                 className={styles.tokenIcons}
                 id={open ? styles.show : styles.hide}
