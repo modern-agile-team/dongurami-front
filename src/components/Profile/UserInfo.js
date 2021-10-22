@@ -1,10 +1,18 @@
 import styles from '../../styles/Profile/UserInfo.module.scss';
 import { FaGraduationCap, FaUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
-import ClubModal from './ClubModal'
+import ClubModal from './ClubModal';
 import { useRouter } from 'next/router';
 
-const UserInfo = ({ isOpen, setIsOpen, logout, comp, baseImg, userInfo, profile }) => {
+const UserInfo = ({
+  isOpen,
+  setIsOpen,
+  logout,
+  comp,
+  baseImg,
+  userInfo,
+  profile
+}) => {
   if (comp === '프로필')
     return (
       <div className={styles.wrap}>
@@ -12,21 +20,25 @@ const UserInfo = ({ isOpen, setIsOpen, logout, comp, baseImg, userInfo, profile 
           <img
             className={styles.profileImg}
             src={profile.profileImageUrl ?? baseImg}
+            alt="profileImg"
           />
           <hr />
           <div className={styles.bottom}>
             <div className={styles.name}>
-              <FaUserCircle className={styles.icon}/>
+              <FaUserCircle className={styles.icon} />
               <span> {profile.name}</span>
             </div>
             <div className={styles.major}>
-              <FaGraduationCap className={styles.icon}/>
+              <FaGraduationCap className={styles.icon} />
               <span> {profile.major}</span>
             </div>
-            <button className={styles.clubBtn} onClick={() => setIsOpen(!isOpen)} >
+            <button
+              className={styles.clubBtn}
+              onClick={() => setIsOpen(!isOpen)}
+            >
               소속 동아리
             </button>
-            <ClubModal isOpen={isOpen} profile={profile}/>
+            <ClubModal isOpen={isOpen} profile={profile} />
 
             {userInfo.id === profile.id ? (
               <div className={styles.onlyMe}>

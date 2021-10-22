@@ -1,6 +1,5 @@
 import styles from '../../../styles/Profile/ModifyInfo.module.scss';
 import { useEffect, useState } from 'react';
-import SetImg from './SetImg';
 import ModifyHeader from './ModifyHeader';
 import ImmutableData from './ImmutableData';
 import MutableData from './MutableData';
@@ -15,33 +14,33 @@ const ModifyInfo = () => {
   const [grade, setGrade] = useState(0);
   const [comp, setComp] = useState('수정');
   // const [pUrl, setPUrl] = useState();
-  const [imgUrl, setImgUrl] = useState(userInfo.profileImageUrl);
+  const [imgUrl, setImgUrl] = useState();
   const [fileId, setFileId] = useState();
   const uRouter = useRouter();
 
   const onChangeImg = async (e) => {
     const file = e.target.files[0];
-    setFileId(file.name)
-    const {preSignedPutUrl: presignedURL, readObjectUrl: imgURL} = (
+    setFileId(file.name);
+    const { preSignedPutUrl: presignedURL, readObjectUrl: imgURL } = (
       await getS3PresignedURL(file.name)
-    ).data
+    ).data;
     await uploadImage(presignedURL, file);
-    setImgUrl(imgURL)
-    }
+    setImgUrl(imgURL);
+  };
 
   const getData = () => {
     getUserInfo(uRouter.query.pid)
       .then((res) => {
         if (res.data.profile.id !== res.data.userInfo.id) {
-          alert("본인의 정보가 아닙니다.")
-          router.back()
-        }
-        else {
+          alert('본인의 정보가 아닙니다.');
+          router.back();
+        } else {
           setUserInfo(res.data.profile);
           setEmail(res.data.profile.email);
           setPhoneNumber(res.data.profile.phoneNumber);
           setGrade(res.data.profile.grade);
-        } 
+          setImgUrl(res.data.profile.profileImageUrl);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -58,7 +57,7 @@ const ModifyInfo = () => {
         console.log(res.data.msg);
       })
       .catch((err) => console.log(err.response.data));
-    router.push(`/profile/${userInfo.id}`)
+    router.push(`/profile/${userInfo.id}`);
   };
 
   useEffect(() => {
@@ -71,15 +70,30 @@ const ModifyInfo = () => {
 
   return (
     <div className={styles.wrap}>
-      <ModifyHeader imgUrl={imgUrl} onChangeImg={onChangeImg} userInfo={userInfo} setComp={setComp} baseImg={baseImg} />
-      <ImmutableData userInfo={userInfo} grade={grade} setGrade={setGrade} />
-      <MutableData
-        userInfo={userInfo}
-        setEmail={setEmail}
-        setPhoneNumber={setPhoneNumber}
-      />
-      <button onClick={() => modifyBtn()}>수정</button>
-      <SetImg comp={comp} setComp={setComp} />
+      <div className={styles.profileBody}>
+        <ModifyHeader
+          imgUrl={imgUrl}
+          onChangeImg={onChangeImg}
+          userInfo={userInfo}
+          setComp={setComp}
+          baseImg={baseImg}
+        />
+        <div className={styles.data}>
+          <ImmutableData
+            userInfo={userInfo}
+            grade={grade}
+            setGrade={setGrade}
+          />
+          <MutableData
+            userInfo={userInfo}
+            setEmail={setEmail}
+            setPhoneNumber={setPhoneNumber}
+          />
+        </div>
+        <button className={styles.modifyBtn} onClick={() => modifyBtn()}>
+          <span>✏️ 수정</span>
+        </button>
+      </div>
     </div>
   );
 };
