@@ -70,7 +70,7 @@ function SignUpForm() {
     { value: '33', label: '사회복지과(사회복지전공)' },
     { value: '34', label: '사회복지과(아동보육전공)' },
     { value: '35', label: '융합기계공학과' },
-    { value: '36', label: '게임&amp;VR디자인학과' },
+    { value: '36', label: `게임&VR디자인학과` },
     { value: '37', label: '방송뷰티메이크업과' },
     { value: '38', label: '방송연예과(뮤지컬전공)' },
     { value: '39', label: '방송연예과(K-POP전공)' },
