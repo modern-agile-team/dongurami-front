@@ -4,7 +4,7 @@ import styles from '../../../styles/Profile/ModifyInfo.module.scss';
 
 const MutableData = ({ userInfo, setEmail, setPhoneNumber }) => {
   return (
-    <div className={styles.mutable}>
+    <>
       <div className={styles.email}>
         <IoIosMail />
         <input
@@ -21,7 +21,7 @@ const MutableData = ({ userInfo, setEmail, setPhoneNumber }) => {
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
       </div>
-    </div>
+    </>
   );
 };
 

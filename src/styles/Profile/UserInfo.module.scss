@@ -1,67 +1,85 @@
 .wrap {
   width: 100%;
-  .profileBody {
-    border-radius: 15px;
+}
+
+.profileBody {
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0px 8px 8px 3px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.profileImg {
+  margin: 5px;
+  width: 12em;
+  height: 12em;
+  border-radius: 50%;
+}
+
+.clubBtn {
+  background-color: white;
+  margin: 5px;
+  padding: 5px 12px;
+  border-radius: 0.5rem;
+  border: lightgray 1px solid;
+  &:hover {
+    filter: brightness(95%);
+  }
+}
+
+.clubList {
+  display: flex;
+  // border: 1px solid;
+  flex-direction: column;
+  align-items: center;
+  * {
+    margin: 2px;
+  }
+  a:link {
+    color: black;
+    text-decoration: none;
+  }
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #90e2d6;
+  }
+}
+
+.onlyMe {
+  * {
+    &:hover {
+      cursor: pointer;
+    }
+    color: rgb(177, 177, 177);
+    font-size: small;
+    margin: 3px;
+  }
+  a:link {
+    text-decoration: none;
+  }
+  a:visited {
+    text-decoration: none;
+  }
+}
+
+.bottom {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  div {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 100%;
-    box-shadow: 0px 8px 8px 3px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    .profileImg {
-      width: 12em;
-      height: 12em;
-      border-radius: 50%;
+    margin: 5px;
+
+    svg {
+      margin-right: 6px;
     }
-    
-    .bottom {
-      border: 1px solid;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .clubBtn {
-        background-color: white;
-        margin: 5px;
-        padding: 5px 12px;
-        &:hover {
-          filter: brightness(97%)
-        }
-      }
-
-      .clubList {
-        display: flex;
-        border: 1px solid;
-        flex-direction: column;
-        align-items: center;
-        * {
-          margin: 2px;
-        }
-        a:link {
-          color: black;
-          text-decoration: none;
-        }
-        a:visited {
-          color: black;
-          text-decoration: none;
-        }
-        a:hover {
-          color: #90e2d6;
-        }
-      }
-
-      .onlyMe {
-        * {
-          color: rgb(177, 177, 177);
-        }
-        a:link {
-          text-decoration: none;
-        }
-        a:visited {
-          text-decoration: none;
-        }
-      }
-    }
-  }       
+  }
 }
