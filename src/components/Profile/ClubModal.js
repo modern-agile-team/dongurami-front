@@ -5,7 +5,7 @@ const ClubModal = ({ isOpen, profile }) => {
   if (isOpen) {
     return (
       <div className={styles.clubList}>
-        {profile.clubs === undefined ? (
+        {profile.clubs.length === 0 ? (
             <span>소속된 동아리가 없습니다.</span>
           ) : (
             profile.clubs.map((club, index) => {

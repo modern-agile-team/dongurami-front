@@ -20,7 +20,7 @@ function Profile() {
 
   const logout = () => {
     window.localStorage.setItem("jwt", "");
-    window.location.reload();
+    router.push('/')
   };
 
   const baseImg =
@@ -34,10 +34,10 @@ function Profile() {
     .then((res) => {
       setUserInfo(res.data.userInfo);
       setProfile(res.data.profile);
-      setClubNo(res.data.profile.clubs[0].no);
+      setClubNo(res.data.profile.clubs.length === 0 ? 0 : res.data.profile.clubs[0].no);
     })
     .catch((err) => {
-      alert(err.response.data.msg)
+      alert(err)
       router.back()
     });
   }, [token, uRouter]);
