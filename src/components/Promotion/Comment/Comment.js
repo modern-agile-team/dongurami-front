@@ -4,6 +4,7 @@ import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import ReplyCommentContainer from './ReplyCommentContainer';
 import ReplyAddComment from './ReplyAddComment';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import {
   deleteComment,
   editComment,
@@ -14,6 +15,7 @@ import {
 const Comment = ({ comment, postId, getData, studentId }) => {
   const [replyComment, setReplyComment] = useState(false);
   const [isContentEditable, setIsContentEditable] = useState(false);
+  const user = useSelector((state) => state.user);
   const descriptionDiv = useRef();
   const onClick = () => {
     setReplyComment(!replyComment);
@@ -74,21 +76,23 @@ const Comment = ({ comment, postId, getData, studentId }) => {
               <p>{comment.studentName}</p>
             </Link>
             <p>작성자</p>
-            <div>
-              <button onClick={onEdit} className={styles['action-button']}>
-                {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
-              </button>
-              <button onClick={onDelete} className={styles['action-button']}>
-                <AiOutlineDelete />
-              </button>
-            </div>
+            {user.id === comment.studentId && (
+              <div>
+                <button onClick={onEdit} className={styles['action-button']}>
+                  {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
+                </button>
+                <button onClick={onDelete} className={styles['action-button']}>
+                  <AiOutlineDelete />
+                </button>
+              </div>
+            )}
           </div>
           <div ref={descriptionDiv} contentEditable={isContentEditable}>
             {comment.description}
           </div>
           <div>
             <p>{comment.inDate}</p>
-            {comment.no === comment.groupNo && (
+            {user && comment.no === comment.groupNo && (
               <p onClick={onClick}>답글 쓰기</p>
             )}
           </div>

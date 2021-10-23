@@ -28,6 +28,7 @@ function ImageEdit({ title, description, images }) {
     router.push('/promotion');
   };
   */
+
   const onClubNoChange = (e) => {
     setClubNo(e.target.value);
   };
