@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Post.module.scss';
 import PromotionCommentContainer from './Comment/PromotionCommentContainer';
 import { useRouter } from 'next/router';
@@ -12,8 +12,8 @@ const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
-const Post = ({ postData, postId, getData, comments }) => {
-  const { name, hit, title, inDate, description, studentId } = postData;
+const Post = ({ postData, postId, getData, post, comments }) => {
+  const { name, hit, title, inDate, description, studentId } = post;
   const user = useSelector((state) => state.user);
   const router = useRouter();
 
@@ -25,6 +25,7 @@ const Post = ({ postData, postId, getData, comments }) => {
       }
     });
   };
+
   return (
     <div className={styles.post} onClick={(e) => e.stopPropagation()}>
       <div className={styles.container}>
@@ -57,12 +58,14 @@ const Post = ({ postData, postId, getData, comments }) => {
         </div>
         <hr />
         <ReactQuill value={description || ''} theme="bubble" readOnly />
-        <PromotionCommentContainer
-          comments={comments}
-          postId={postId}
-          studentId={studentId}
-          getData={getData}
-        />
+        {post.comments && (
+          <PromotionCommentContainer
+            comments={post.comments}
+            postId={postId}
+            studentId={studentId}
+            getData={getData}
+          />
+        )}
       </div>
     </div>
   );

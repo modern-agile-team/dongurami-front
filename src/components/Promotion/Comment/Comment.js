@@ -4,19 +4,23 @@ import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import ReplyCommentContainer from './ReplyCommentContainer';
 import ReplyAddComment from './ReplyAddComment';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   deleteComment,
   editComment,
   editReplyComment,
   deleteReplyComment
 } from 'apis/promotion';
+import { getPost } from 'redux/slices/post';
 
-const Comment = ({ comment, postId, getData, studentId }) => {
+const Comment = ({ comment, postId, studentId }) => {
   const [replyComment, setReplyComment] = useState(false);
   const [isContentEditable, setIsContentEditable] = useState(false);
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const descriptionDiv = useRef();
+  const category = 'promotion';
+  const pid = postId;
   const onClick = () => {
     setReplyComment(!replyComment);
   };
@@ -30,7 +34,7 @@ const Comment = ({ comment, postId, getData, studentId }) => {
           comment.no,
           descriptionDiv.current.textContent
         ).then((response) => {
-          if (response.data.success) getData();
+          if (response.data.success) dispatch(getPost({ category, pid }));
           else alert(response.data.msg);
         });
       } else {
@@ -39,26 +43,25 @@ const Comment = ({ comment, postId, getData, studentId }) => {
           comment.no,
           descriptionDiv.current.textContent
         ).then((response) => {
-          if (response.data.success) getData();
+          if (response.data.success) dispatch(getPost({ category, pid }));
           else alert(response.data.msg);
         });
       }
     }
     setIsContentEditable(!isContentEditable);
-    console.log(descriptionDiv.current.textContent);
   };
 
   const onDelete = async () => {
     if (comment.groupNo !== comment.no) {
       await deleteReplyComment(postId, comment.groupNo, comment.no).then(
         (response) => {
-          if (response.data.success) getData();
+          if (response.data.success) dispatch(getPost({ category, pid }));
           else alert(response.data.msg);
         }
       );
     } else {
       await deleteComment(postId, comment.no).then((response) => {
-        if (response.data.success) getData();
+        if (response.data.success) dispatch(getPost({ category, pid }));
         else alert(response.data.msg);
       });
     }
