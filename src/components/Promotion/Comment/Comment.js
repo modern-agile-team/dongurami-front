@@ -87,7 +87,11 @@ const Comment = ({ comment, postId, getData, studentId }) => {
               </div>
             )}
           </div>
-          <div ref={descriptionDiv} contentEditable={isContentEditable}>
+          <div
+            ref={descriptionDiv}
+            contentEditable={isContentEditable}
+            suppressContentEditableWarning={true}
+          >
             {comment.description}
           </div>
           <div>

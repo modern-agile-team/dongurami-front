@@ -6,6 +6,7 @@ import Link from 'next/link';
 import getToken from 'utils/getToken';
 import { deletePost } from 'apis/promotion';
 import dynamic from 'next/dynamic';
+import { useSelector } from 'react-redux';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -13,7 +14,7 @@ const ReactQuill = dynamic(import('react-quill'), {
 
 const Post = ({ postData, postId, getData, comments }) => {
   const { name, hit, title, inDate, description, studentId } = postData;
-  const token = getToken();
+  const user = useSelector((state) => state.user);
   const router = useRouter();
 
   const onDelete = async () => {
@@ -30,18 +31,20 @@ const Post = ({ postData, postId, getData, comments }) => {
         <div>
           <div>홍보게시판</div>
           <div>{title}</div>
-          <div>
-            <Link
-              href={{
-                pathname: `${router.pathname}/${postId}/edit`,
-                query: router.query
-              }}
-              passHref
-            >
-              <button>수정하기</button>
-            </Link>
-            <button onClick={onDelete}>삭제하기</button>
-          </div>
+          {user.id === studentId && (
+            <div>
+              <Link
+                href={{
+                  pathname: `${router.pathname}/${postId}/edit`,
+                  query: router.query
+                }}
+                passHref
+              >
+                <button>수정하기</button>
+              </Link>
+              <button onClick={onDelete}>삭제하기</button>
+            </div>
+          )}
           <div>
             <Link href={{ pathname: `profile/${studentId}` }} passHref>
               <div>{name}</div>
