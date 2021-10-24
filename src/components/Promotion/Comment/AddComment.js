@@ -24,10 +24,6 @@ function AddComment({ postId, parentCommentId }) {
     setDescription('');
   };
 
-  useEffect(() => {
-    console.log(parentCommentId);
-  }, []);
-
   return (
     <div className={styles.container}>
       <div>{user.name}</div>
