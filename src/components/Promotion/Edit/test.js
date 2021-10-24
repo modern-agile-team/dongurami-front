@@ -1,3 +1,4 @@
+/*
 import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
 import Header from '../Common/Header/Header';
@@ -22,7 +23,7 @@ const PromotionContainer = () => {
 
   const getDatas = async () => {
     try {
-      if (searchItem !== 'whole' && searchItem) {
+      if (searchItem !== 'whole' && searchItem && itemNo !== 0) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
 
@@ -30,9 +31,11 @@ const PromotionContainer = () => {
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
+          } else {
+            itemNo = 0;
           }
         });
-      } else if (search) {
+      } else if (search && itemNp !== 0) {
         await getSearchData(type, searchKeyword, itemNo).then((response) => {
           const result = response.data.boards;
           console.log(result);
@@ -41,20 +44,22 @@ const PromotionContainer = () => {
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
+          } else {
+            itemNo = 0;
           }
         });
       } else if (
         searchItem === 'whole' ||
-        (search === false && searchItem === '')
+        (search === false && searchItem === '' && itemNo !== 0)
       ) {
-        console.log(itemNo, '값');
         await getBoardData(itemNo).then((response) => {
           const result = response.data.boards;
           itemNo = result[result.length - 1].no;
-          console.log(result);
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
+          } else {
+            itemNo = 0;
           }
         });
       }
@@ -109,18 +114,20 @@ const PromotionContainer = () => {
   };
 
   const infiniteScroll = () => {
-    const scrollHeight = Math.max(
+    let scrollHeight = Math.max(
       document.documentElement.scrollHeight,
       document.body.scrollHeight
     );
-    const scrollTop = Math.max(
+    let scrollTop = Math.max(
       document.documentElement.scrollTop,
       document.body.scrollTop
     );
-
+    let clientHeight = document.documentElement.clientHeight;
     const WINDOW_HEIGHT = window.innerHeight;
 
-    if (scrollTop + WINDOW_HEIGHT >= scrollHeight) {
+    console.log(WINDOW_HEIGHT, clientHeight);
+
+    if (scrollTop + clientHeight >= scrollHeight) {
       getDatas();
     }
   };
@@ -173,3 +180,4 @@ const PromotionContainer = () => {
 };
 
 export default PromotionContainer;
+*/

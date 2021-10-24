@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from '../../styles/Board/Promotion/Post.module.scss';
 import PromotionCommentContainer from './Comment/PromotionCommentContainer';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import getToken from 'utils/getToken';
 import { deletePost } from 'apis/promotion';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
@@ -12,7 +11,7 @@ const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
-const Post = ({ postData, postId, getData, post, comments }) => {
+const Post = ({ postId, getData, post }) => {
   const { name, hit, title, inDate, description, studentId } = post;
   const user = useSelector((state) => state.user);
   const router = useRouter();
@@ -32,7 +31,7 @@ const Post = ({ postData, postId, getData, post, comments }) => {
         <div>
           <div>홍보게시판</div>
           <div>{title}</div>
-          {user.id === studentId && (
+          {user.id === studentId ? (
             <div>
               <Link
                 href={{
@@ -45,6 +44,8 @@ const Post = ({ postData, postId, getData, post, comments }) => {
               </Link>
               <button onClick={onDelete}>삭제하기</button>
             </div>
+          ) : (
+            <div />
           )}
           <div>
             <Link href={{ pathname: `profile/${studentId}` }} passHref>

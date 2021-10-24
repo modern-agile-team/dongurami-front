@@ -18,6 +18,7 @@ const Comment = ({ comment, postId, studentId }) => {
   const [isContentEditable, setIsContentEditable] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const post = useSelector((state) => state.post);
   const descriptionDiv = useRef();
   const category = 'promotion';
   const pid = postId;
@@ -78,7 +79,7 @@ const Comment = ({ comment, postId, studentId }) => {
             <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
               <p>{comment.studentName}</p>
             </Link>
-            <p>작성자</p>
+            {post.studentId === comment.studentId && <p>작성자</p>}
             {user.id === comment.studentId && (
               <div>
                 <button onClick={onEdit} className={styles['action-button']}>
