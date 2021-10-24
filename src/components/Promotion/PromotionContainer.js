@@ -107,16 +107,15 @@ const PromotionContainer = () => {
   };
 
   const infiniteScroll = () => {
-    let scrollHeight = Math.max(
+    const scrollHeight = Math.max(
       document.documentElement.scrollHeight,
       document.body.scrollHeight
     );
-    let scrollTop = Math.max(
+    const scrollTop = Math.max(
       document.documentElement.scrollTop,
       document.body.scrollTop
     );
-    let clientHeight = document.documentElement.clientHeight;
-
+    const clientHeight = window.innerHeight;
     if (scrollTop + clientHeight >= scrollHeight) {
       getDatas();
     }

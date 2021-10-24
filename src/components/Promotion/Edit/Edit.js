@@ -22,11 +22,6 @@ function Edit({ pid }) {
           setDescription(response.data.board.description);
         }
       });
-      /*
-      setTitle(post.board.title);
-      setDescription(post.board.description);
-      setImages(post.images);
-      */
     })();
   }, []);
 
