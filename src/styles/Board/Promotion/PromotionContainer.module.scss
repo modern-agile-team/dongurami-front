@@ -80,10 +80,13 @@
 @media screen and (max-width: 480px) {
   .writeBtn {
     width: 25%;
-    top: 33%;
+    top: 39%;
+    right: -5%;
+    font-size: 15px;
   }
   .section {
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
   }
 }

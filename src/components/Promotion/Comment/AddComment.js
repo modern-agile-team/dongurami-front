@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import styles from '../../../styles/Board/Promotion/AddComment.module.scss';
 import { addComment } from 'apis/promotion';
 import getToken from 'utils/getToken';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 
 function AddComment({ postId, parentCommentId }) {
   const [description, setDescription] = useState('');
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const category = 'promotion';
   const pid = postId;
@@ -29,7 +30,7 @@ function AddComment({ postId, parentCommentId }) {
 
   return (
     <div className={styles.container}>
-      <div>닉네임</div>
+      <div>{user.name}</div>
       <form onSubmit={onSubmit}>
         <input
           type="text"
