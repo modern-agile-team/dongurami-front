@@ -134,7 +134,9 @@ const Review = () => {
     const rateHigh = reviewList.slice(0).sort((a, b) => {
       return b.score - a.score;
     });
-    const rateLow = reviewList.slice(0).reverse();
+    const rateLow = reviewList.slice(0).sort((a, b) => {
+      return a.score - b.score;
+    });
     switch (filter) {
       case '0':
         setReviewList(latestOrder);
