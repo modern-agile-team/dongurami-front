@@ -108,21 +108,22 @@ const PromotionContainer = () => {
   };
 
   const infiniteScroll = () => {
-    const scrollHeight = Math.max(
-      document.documentElement.scrollHeight,
-      document.body.scrollHeight
-    );
+    const scrollHeight = document.body.scrollHeight;
+
     const scrollTop = Math.max(
       document.documentElement.scrollTop,
       document.body.scrollTop
     );
-
     const WINDOW_HEIGHT = window.innerHeight;
-    let clientHeight = document.documentElement.clientHeight;
-    console.log(scrollTop, clientHeight, scrollHeight);
 
-    if (scrollTop + WINDOW_HEIGHT >= scrollHeight) {
-      getDatas();
+    if (WINDOW_HEIGHT === 640) {
+      if (scrollTop + (WINDOW_HEIGHT + 1) === scrollHeight) {
+        getDatas();
+      }
+    } else {
+      if (scrollTop + WINDOW_HEIGHT >= scrollHeight) {
+        getDatas();
+      }
     }
   };
 
@@ -149,20 +150,24 @@ const PromotionContainer = () => {
       />
       <div className={styles.sectionWrap}>
         <div className={styles.section}>
-          {boarddata.map((el) => (
-            <div className={styles.poster} key={el.no}>
-              <Promotion
-                pId={el.no}
-                date={el.inDate}
-                clubName={el.clubName}
-                name={el.studentName}
-                img={el.url}
-                category={el.category}
-                setOpenModal={setOpenModal}
-                setPostId={setPostId}
-              />
-            </div>
-          ))}
+          {boarddata.map((el) => {
+            console.log(el);
+            return (
+              <div className={styles.poster} key={el.no}>
+                <Promotion
+                  pId={el.no}
+                  date={el.inDate}
+                  clubName={el.clubName}
+                  name={el.studentName}
+                  img={el.url}
+                  clubNo={el.clubNo}
+                  category={el.category}
+                  setOpenModal={setOpenModal}
+                  setPostId={setPostId}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
       {openModal && <Modal setOpenModal={setOpenModal} postId={postId} />}

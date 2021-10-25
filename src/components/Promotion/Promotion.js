@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Board/Promotion/Promotion.module.scss';
+import Link from 'next/link';
 
 function displayedAt(createdAt) {
   const time = new Date(createdAt);
@@ -29,8 +30,10 @@ const Promotion = ({
   date,
   pId,
   setPostId,
-  category
+  category,
+  clubNo
 }) => {
+  console.log(clubNo);
   return (
     <div className={styles.promotion}>
       <div className={styles.img}>
@@ -53,7 +56,9 @@ const Promotion = ({
             }}
           >
             <div className={styles.writer}>{name}</div>
-            <div className={styles.writer}>{clubName}</div>
+            <Link href={{ pathname: `/clubhome/${clubNo}` }} passHref>
+              <div className={styles.writer}>{clubName}</div>
+            </Link>
           </div>
           <div
             className={styles.date}

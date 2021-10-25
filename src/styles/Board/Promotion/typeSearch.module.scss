@@ -5,8 +5,6 @@
   ul {
     display: flex;
     list-style: none;
-    justify-content: space-around;
-    width: 40%;
 
     li {
       cursor: pointer;
@@ -14,6 +12,7 @@
       border-radius: 15px;
       padding: 0.8rem 1.5rem;
       font-size: 16px;
+      margin-right: 6px;
 
       &:hover {
         filter: brightness(96%);

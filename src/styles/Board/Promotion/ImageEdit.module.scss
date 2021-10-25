@@ -5,6 +5,10 @@
   height: 100%;
   .imageContainer {
     text-align: center;
+    svg {
+      margin-bottom: 8em;
+      cursor: pointer;
+    }
     & > img {
       max-width: 50%;
       @media screen and (max-width: 768px) {

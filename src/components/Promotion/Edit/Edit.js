@@ -5,6 +5,7 @@ import WriteContent from './WriteContent';
 import Modal from 'components/Common/Modal';
 import ImageEdit from './ImageEdit';
 import { getBoardPost, putPost } from 'apis/promotion';
+import Router from 'next/dist/next-server/server/router';
 
 function Edit({ pid }) {
   const [title, setTitle] = useState('');
@@ -26,8 +27,8 @@ function Edit({ pid }) {
   }, []);
 
   const onSubmit = async (images) => {
-    await putPost(title, description, images).then(() => {
-      router.back();
+    await putPost(pid, title, description, images).then((response) => {
+      if (response.data.success) console.log(response);
     });
   };
 
