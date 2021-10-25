@@ -43,7 +43,7 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
 
   return (
     <div className={styles.comment}>
-      <img src={`https://picsum.photos/500?random=${Math.floor(Math.random() * 9) + 1}`} alt="profile" />
+      <img src={comment.profileImageUrl ?? 'https://via.placeholder.com/100'} alt="profile" />
       <div>
         <div>
           <p>{comment.studentName}</p>
