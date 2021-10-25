@@ -33,7 +33,6 @@ const Promotion = ({
   category,
   clubNo
 }) => {
-  console.log(clubNo);
   return (
     <div className={styles.promotion}>
       <div className={styles.img}>

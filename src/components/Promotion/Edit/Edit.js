@@ -5,13 +5,13 @@ import WriteContent from './WriteContent';
 import Modal from 'components/Common/Modal';
 import ImageEdit from './ImageEdit';
 import { getBoardPost, putPost } from 'apis/promotion';
-import Router from 'next/dist/next-server/server/router';
 
 function Edit({ pid }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [posterImages, setPosterImages] = useState([]);
+  const [images, setImages] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -26,9 +26,9 @@ function Edit({ pid }) {
     })();
   }, []);
 
-  const onSubmit = async (images) => {
+  const onSubmit = async () => {
     await putPost(pid, title, description, images).then((response) => {
-      if (response.data.success) console.log(response);
+      if (response.data.success) router.back();
     });
   };
 
@@ -38,6 +38,11 @@ function Edit({ pid }) {
 
   const onOpen = () => {
     setShowModal(true);
+  };
+
+  const onEditImages = (editImages) => {
+    setImages(editImages);
+    setShowModal(false);
   };
 
   return (
@@ -58,6 +63,7 @@ function Edit({ pid }) {
             posterImages={posterImages}
             title={title}
             onSubmit={onSubmit}
+            onEditImages={onEditImages}
           />
         </Modal>
       )}

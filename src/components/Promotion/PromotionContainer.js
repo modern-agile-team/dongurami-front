@@ -114,16 +114,9 @@ const PromotionContainer = () => {
       document.documentElement.scrollTop,
       document.body.scrollTop
     );
-    const WINDOW_HEIGHT = window.innerHeight;
-
-    if (WINDOW_HEIGHT === 640) {
-      if (scrollTop + (WINDOW_HEIGHT + 1) === scrollHeight) {
-        getDatas();
-      }
-    } else {
-      if (scrollTop + WINDOW_HEIGHT >= scrollHeight) {
-        getDatas();
-      }
+    const clientHeight = document.documentElement.clientHeight;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      getDatas();
     }
   };
 
@@ -151,7 +144,6 @@ const PromotionContainer = () => {
       <div className={styles.sectionWrap}>
         <div className={styles.section}>
           {boarddata.map((el) => {
-            console.log(el);
             return (
               <div className={styles.poster} key={el.no}>
                 <Promotion

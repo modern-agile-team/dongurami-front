@@ -6,8 +6,11 @@
   .imageContainer {
     text-align: center;
     svg {
-      margin-bottom: 8em;
+      margin-bottom: 30%;
       cursor: pointer;
+      &:hover {
+        color: red;
+      }
     }
     & > img {
       max-width: 50%;

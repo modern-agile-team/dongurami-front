@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
+import styles from '../../styles/Club/Lists/TypeSearch.module.scss';
 import { FaSearch } from 'react-icons/fa';
 
 const TypeSearch = ({ onCategorySearch, onSearch }) => {
@@ -18,12 +18,7 @@ const TypeSearch = ({ onCategorySearch, onSearch }) => {
     <div className={styles.container}>
       <ul
         className={styles.tagList}
-        onClick={
-          (event) =>
-            console.log(
-              event.target.value
-            ) /*onCategorySearch(event.target.getAttribute('name'))</div>*/
-        }
+        onClick={(event) => onCategorySearch(event.target.getAttribute('name'))}
       >
         <li name="">#전체</li>
         <li name="IT">#IT</li>

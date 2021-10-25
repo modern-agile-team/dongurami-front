@@ -12,7 +12,7 @@ const ReactQuill = dynamic(import('react-quill'), {
 });
 
 const Post = ({ postId, getData, post }) => {
-  const { name, hit, title, inDate, description, studentId } = post;
+  const { clubName, hit, title, inDate, description, studentId, clubNo } = post;
   const user = useSelector((state) => state.user);
   const router = useRouter();
 
@@ -48,8 +48,8 @@ const Post = ({ postId, getData, post }) => {
             <div />
           )}
           <div>
-            <Link href={{ pathname: `profile/${studentId}` }} passHref>
-              <div>{name}</div>
+            <Link href={{ pathname: `/clubhome/${clubNo}` }} passHref>
+              <div>{clubName}</div>
             </Link>
             <div>
               <div>{inDate}</div>

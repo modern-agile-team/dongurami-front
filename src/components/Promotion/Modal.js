@@ -74,7 +74,7 @@ const Modal = ({ setOpenModal, postId }) => {
               <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
             )}
             <div onClick={(e) => e.stopPropagation()}>
-              <IoIosArrowForward onClick={() => prevSlide()} size={70} />
+              <IoIosArrowForward onClick={() => nextSlide()} size={70} />
             </div>
           </div>
           <Post postId={postId} post={post} />
