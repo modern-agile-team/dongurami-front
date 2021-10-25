@@ -112,10 +112,7 @@ const Apply = () => {
     )
       .then((res) => {
         alert(res.data.msg);
-        router.push({
-          pathname: '/clubhome/club',
-          query: { no: router.query.id }
-        });
+        router.reload();
       })
       .catch((err) => alert(err.response.data.msg));
   };

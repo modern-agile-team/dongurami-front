@@ -126,6 +126,9 @@
 @media screen and (max-width: 480px) {
   .container {
     .myHeader {
+      & > div:nth-of-type(1) {
+        right: 25px;
+      }
       .topMenu {
         width: 45%;
       }
