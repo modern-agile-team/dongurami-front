@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { postSignUp } from 'apis/user';
 import { getNaverOauth } from 'apis/user';
+import getToken from 'utils/getToken';
 
 function SignUpForm() {
   const [id, setId] = useState('');
@@ -33,6 +34,16 @@ function SignUpForm() {
     }
   };
   useEffect(UserProfile, []);
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (getToken()) {
+        alert('로그인이 되어있습니다.\n메인 페이지로 이동합니다.');
+        router.push('/');
+      }
+    }, 1000);
+    return () => clearInterval(countdown);
+  }, []);
 
   const majorCategory = [
     { value: '00', label: '학과 선택' },
