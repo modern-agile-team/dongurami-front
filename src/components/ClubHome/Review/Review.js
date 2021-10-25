@@ -128,14 +128,24 @@ const Review = () => {
   // 필터링
   const onFilterChange = (e) => {
     const filter = e.target.value;
-    const dateFilter = reviewList.slice(0).sort((a, b) => {
-      return a.no - b.no;
+    const latestOrder = reviewList.slice(0).sort((a, b) => {
+      return b.no - a.no;
     });
-    const starFilter = reviewList.slice(0).sort((a, b) => {
+    const rateHigh = reviewList.slice(0).sort((a, b) => {
       return b.score - a.score;
     });
-
-    filter === '1' ? setReviewList(dateFilter) : setReviewList(starFilter);
+    const rateLow = reviewList.slice(0).reverse();
+    switch (filter) {
+      case '0':
+        setReviewList(latestOrder);
+        break;
+      case '1':
+        setReviewList(rateHigh);
+        break;
+      case '2':
+        setReviewList(rateLow);
+        break;
+    }
   };
 
   useEffect(() => {

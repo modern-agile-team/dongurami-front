@@ -1,12 +1,13 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Review/ReviewFilter.module.scss";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Review/ReviewFilter.module.scss';
 
 const ReviewFilter = ({ onFilterChange }) => {
   return (
     <div className={styles.filter}>
       <select onChange={onFilterChange} name="filter">
-        <option value={1}>최신순</option>
-        <option value={0}>별점 높은순</option>
+        <option value={0}>최신순</option>
+        <option value={1}>별점 높은 순</option>
+        <option value={2}>별점 낮은 순</option>
       </select>
     </div>
   );
