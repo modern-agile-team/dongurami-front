@@ -8,7 +8,7 @@
    & > img {
      max-width: 50%;
      @media screen and (max-width: 768px) {
-     max-width: 100%;
+      max-width: 100%;
      }
    }
  }
@@ -26,6 +26,9 @@
     padding-left: 1rem;
     border: 1px solid lightgray;
     color: black;
+    background-color: white;
+    width: 10rem;
+    margin: 0 auto;
    }
 }
  & > button {

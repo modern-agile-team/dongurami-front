@@ -34,7 +34,7 @@ function NoticeTable({ posts, page, category }) {
               )}
             </td>
             <td>{post.studentName}</td>
-            <td>{post.inDate}</td>
+            <td>{new Date(post.inDate).toLocaleDateString()}</td>
             <td>{post.hit}</td>
           </tr>
         ))}
