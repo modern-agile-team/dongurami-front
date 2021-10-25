@@ -14,7 +14,7 @@ import {
 import { MdRateReview } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 
-const board = (clubName) => {
+const boards = (clubName) => {
   return [
     clubName,
     '공지 사항',
@@ -91,7 +91,7 @@ const SideBar = ({ setComp, comp }) => {
   return (
     <div className={hide ? styles.hide : styles.sideBar} id={styles.open}>
       <div className={styles.menu} id={styles.show}>
-        {board(clubName.result[0].name).map((el, i) => {
+        {boards(clubName.result[0].name).map((board, i) => {
           return (
             <div
               className={styles.board}
@@ -103,7 +103,7 @@ const SideBar = ({ setComp, comp }) => {
               key={i}
             >
               {icons()[i]}
-              <span>{el}</span>
+              <span>{board}</span>
             </div>
           );
         })}
