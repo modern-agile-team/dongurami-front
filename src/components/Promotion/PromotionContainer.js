@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
 import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
-import { BsPencil } from 'react-icons/bs';
+
 import Modal from './Modal';
 import Promotion from './Promotion';
 import Link from 'next/link';
@@ -47,7 +47,6 @@ const PromotionContainer = () => {
         searchItem === 'whole' ||
         (search === false && searchItem === '')
       ) {
-        console.log(itemNo, '값');
         await getBoardData(itemNo).then((response) => {
           const result = response.data.boards;
           itemNo = result[result.length - 1].no;
@@ -119,6 +118,8 @@ const PromotionContainer = () => {
     );
 
     const WINDOW_HEIGHT = window.innerHeight;
+    let clientHeight = document.documentElement.clientHeight;
+    console.log(scrollTop, clientHeight, scrollHeight);
 
     if (scrollTop + WINDOW_HEIGHT >= scrollHeight) {
       getDatas();
@@ -146,26 +147,23 @@ const PromotionContainer = () => {
         onSearch={onSearch}
         categorySearch={categorySearch}
       />
-      <Link href={`/promotion/write`} passHref>
-        <button className={styles.writeBtn}>
-          <BsPencil />
-          글쓰기
-        </button>
-      </Link>
-      <div className={styles.section}>
-        {boarddata.map((el) => (
-          <Promotion
-            key={el.no}
-            pId={el.no}
-            date={el.inDate}
-            clubName={el.clubName}
-            name={el.studentName}
-            img={el.url}
-            category={el.category}
-            setOpenModal={setOpenModal}
-            setPostId={setPostId}
-          />
-        ))}
+      <div className={styles.sectionWrap}>
+        <div className={styles.section}>
+          {boarddata.map((el) => (
+            <div className={styles.poster} key={el.no}>
+              <Promotion
+                pId={el.no}
+                date={el.inDate}
+                clubName={el.clubName}
+                name={el.studentName}
+                img={el.url}
+                category={el.category}
+                setOpenModal={setOpenModal}
+                setPostId={setPostId}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       {openModal && <Modal setOpenModal={setOpenModal} postId={postId} />}
     </>

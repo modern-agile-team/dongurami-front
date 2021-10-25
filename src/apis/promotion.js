@@ -18,7 +18,7 @@ export function getSearchData(type, keyword, no) {
   );
 }
 
-export function getpost(postId) {
+export function getBoardPost(postId) {
   return axios.get(`api/board/promotion/${postId}`);
 }
 

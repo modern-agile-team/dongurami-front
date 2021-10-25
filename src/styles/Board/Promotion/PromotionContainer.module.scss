@@ -1,92 +1,45 @@
-@font-face {
-  font-family: 'twayair';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-.writeBtn {
-  position: absolute;
-  right: 20%;
-  top: 20%;
-  font-family: 'twayair';
-  padding: 8px;
-  width: 7%;
-  font-size: 16px;
+.sectionWrap {
   display: flex;
-  align-items: center;
-  border: none;
-  background: #c2f2dc;
-  cursor: pointer;
-
-  svg {
-    margin-right: 10px;
-    font-size: 22px;
-  }
-
-  &:hover {
-    background: #3fcdb8;
-  }
+  justify-content: center;
 }
 .section {
-  padding: 20px;
   margin-top: 5em;
   -moz-column-width: 18em;
   -webkit-column-width: 21em;
 }
 
-@media (max-width: 1300px) {
-  .writeBtn {
-    width: 9%;
-  }
-}
+// @media screen and (max-width: 768px) {
+//   .
+// }
 
-@media (max-width: 770px) {
-  .writeBtn {
-    width: 18%;
-    right: 100%;
-  }
-}
+// @media (max-width: 580px) {
+//   .writeBtn {
+//     width: 19%;
+//     right: 10%;
+//     top: 22%;
+//   }
 
-@media (max-width: 1050px) {
-  .writeBtn {
-    width: 12%;
-    right: 10%;
-    top: 21%;
-  }
-}
-
-@media (max-width: 1024px) {
-  .writeBtn {
-    width: 12%;
-    right: 10%;
-  }
-}
-
-@media (max-width: 580px) {
-  .writeBtn {
-    width: 19%;
-    right: 10%;
-    top: 22%;
-  }
-
-  .section {
-    display: flex;
-    flex-direction: column;
-  }
-}
+//   .section {
+//     display: flex;
+//     flex-direction: column;
+//   }
+// }
 
 @media screen and (max-width: 480px) {
-  .writeBtn {
-    width: 25%;
-    top: 39%;
-    right: -5%;
-    font-size: 15px;
+  .sectionWrap {
+    .section {
+      // justify-content: center;
+    }
   }
-  .section {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-  }
+  // .writeBtn {
+  //   width: 25%;
+  //   top: 39%;
+  //   right: -5%;
+  //   font-size: 15px;
+  // }
+  // .section {
+  //   display: flex;
+  //   width: 100%;
+  //   flex-wrap: wrap;
+  // }
 }

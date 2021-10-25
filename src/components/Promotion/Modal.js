@@ -3,7 +3,7 @@ import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import Post from './Post';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import ZoomImg from './ZoomImg';
-import { getpost } from 'apis/promotion';
+import { getBoardPost } from 'apis/promotion';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 
@@ -11,11 +11,11 @@ const Modal = ({ setOpenModal, postId }) => {
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
   const [imgUrl, setImgUrl] = useState('');
-  const [pid, setPid] = useState(postId);
+  const [images, setImages] = useState([]);
   const category = 'promotion';
+  const pid = postId;
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
-  const [images, setImages] = useState([]);
 
   const nextSlide = () => {
     let idx = index;
@@ -41,7 +41,7 @@ const Modal = ({ setOpenModal, postId }) => {
 
   useEffect(async () => {
     dispatch(getPost({ category, pid }));
-    await getpost(pid).then((res) => {
+    await getBoardPost(pid).then((res) => {
       setImages(res.data.images);
       setImgUrl(res.data.images[index].imgPath);
     });
