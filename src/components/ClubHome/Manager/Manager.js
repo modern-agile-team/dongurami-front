@@ -72,13 +72,17 @@ export const Manager = () => {
         },
         router.query.id
       )
-        .then((res) => alert(res.data.msg))
+        .then((res) => {
+          if (applicantInfo.length === 1) router.reload();
+          alert(res.data.msg);
+        })
         .catch((err) => alert(err.response.data.msg)));
   };
 
   // 가입 거절 PUT
   const onApplyReject = async (e) => {
     if (!e.target.id) return;
+
     confirm('가입을 거절합니까?') &&
       (await putApply(
         {
@@ -87,6 +91,7 @@ export const Manager = () => {
         router.query.id
       )
         .then((res) => {
+          if (applicantInfo.length === 1) router.reload();
           alert(res.data.msg);
         })
         .catch((err) => alert(err.response.data.msg)));
