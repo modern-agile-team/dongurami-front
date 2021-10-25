@@ -19,8 +19,9 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     border-radius: 3px;
     padding: 5px;
     cursor: pointer;
+    background-color: white;
     &:hover {
-      background-color: rgba(192, 192, 192, 0.363);
+      filter: brightness(90%);
     }
   }
 }
