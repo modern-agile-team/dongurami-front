@@ -5,14 +5,13 @@ const getPost = createAsyncThunk(
   'post/getPost',
   async (arg, { getState }) => {
     const state = getState();
-    let { category, no: pid } = state.post;
+    let { category, no: pid, clubNo: clubNum } = state.post;
     if (arg) {
-      ({ category, pid } = arg);
+      ({ category, pid, clubNum } = arg);
     }
-    const response = await api.getPost(category, pid);
+    const response = await api.getPost(category, pid, clubNum);
     return response.data;
-  }
-);
+});
 
 const postSlice = createSlice({
   name: 'post',
@@ -23,14 +22,14 @@ const postSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getPost.fulfilled, (state, action) => {
-        return {
-          ...action.payload.board,
-          category: state.category,
-          comments: action.payload.comments
-        }
-      });
+    builder.addCase(getPost.fulfilled, (state, action) => {
+      return {
+        ...action.payload.board,
+        category: state.category,
+        comments: action.payload.comments,
+        images: action.payload.images
+      };
+    });
   }
 });
 

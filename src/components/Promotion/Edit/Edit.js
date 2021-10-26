@@ -4,35 +4,31 @@ import Container from './Container';
 import WriteContent from './WriteContent';
 import Modal from 'components/Common/Modal';
 import ImageEdit from './ImageEdit';
-import { getPost } from 'apis/promotion';
+import { getBoardPost, putPost } from 'apis/promotion';
 
 function Edit({ pid }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [posterImages, setPosterImages] = useState([]);
   const [images, setImages] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     const getData = (async () => {
-      await getPost(pid).then((response) => {
+      await getBoardPost(pid).then((response) => {
         if (response.data.success) {
-          setImages(response.data.images);
+          setPosterImages(response.data.images);
           setTitle(response.data.board.title);
           setDescription(response.data.board.description);
         }
       });
-      /*
-      setTitle(post.board.title);
-      setDescription(post.board.description);
-      setImages(post.images);
-      */
     })();
   }, []);
 
-  const onSubmit = () => {
-    api.putPost(title, description).then(() => {
-      router.back();
+  const onSubmit = async () => {
+    await putPost(pid, title, description, images).then((response) => {
+      if (response.data.success) router.back();
     });
   };
 
@@ -42,6 +38,11 @@ function Edit({ pid }) {
 
   const onOpen = () => {
     setShowModal(true);
+  };
+
+  const onEditImages = (editImages) => {
+    setImages(editImages);
+    setShowModal(false);
   };
 
   return (
@@ -56,9 +57,14 @@ function Edit({ pid }) {
           onOpen={onOpen}
         />
       </Container>
-      {images.length > 0 && (
+      {posterImages.length > 0 && (
         <Modal show={showModal} onClose={onClose}>
-          <ImageEdit images={images} title={title} />
+          <ImageEdit
+            posterImages={posterImages}
+            title={title}
+            onSubmit={onSubmit}
+            onEditImages={onEditImages}
+          />
         </Modal>
       )}
     </>

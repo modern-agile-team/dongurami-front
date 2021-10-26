@@ -30,6 +30,10 @@ export const Manager = () => {
 
   const router = useRouter();
 
+  const toClubHome = () => {
+    router.push(`/clubhome/${router.query.id}`);
+  };
+
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
     getMember(router.query.id)
@@ -72,13 +76,17 @@ export const Manager = () => {
         },
         router.query.id
       )
-        .then((res) => alert(res.data.msg))
+        .then((res) => {
+          if (applicantInfo.length === 1) router.reload();
+          alert(res.data.msg);
+        })
         .catch((err) => alert(err.response.data.msg)));
   };
 
   // 가입 거절 PUT
   const onApplyReject = async (e) => {
     if (!e.target.id) return;
+
     confirm('가입을 거절합니까?') &&
       (await putApply(
         {
@@ -87,6 +95,7 @@ export const Manager = () => {
         router.query.id
       )
         .then((res) => {
+          if (applicantInfo.length === 1) router.reload();
           alert(res.data.msg);
         })
         .catch((err) => alert(err.response.data.msg)));
@@ -130,7 +139,7 @@ export const Manager = () => {
       .then((res) => {
         alert(res.data.msg);
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => alert(err.response.data.msg));
     await getMembersData();
   };
 
@@ -159,10 +168,6 @@ export const Manager = () => {
     setBoardAuth(boolOfBoardAuth);
   };
   //-------------------------------------------------------------//
-
-  const toClubHome = () => {
-    router.push(`/clubhome/${router.query.id}`);
-  };
 
   useEffect(() => {
     if (applicantInfo.length > 0 && mergedApplicantQNA.length > 0) {

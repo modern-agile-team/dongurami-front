@@ -27,6 +27,9 @@ $color-light-mint: #c2f2dc;
       color: $color-heavy-mint;
     }
   }
+  a, a:active {
+    color: $color-heavy-mint;
+  }
 }
 
 .activities {

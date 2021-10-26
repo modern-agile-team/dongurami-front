@@ -21,25 +21,11 @@
     }
   }
 
-  select {
-    border-radius: 3px;
-    height: 2rem;
-    padding: 0.5rem;
-    border: 1px solid lightgray;
-    // position: absolute;
-    // right: 70%;
-    // top: 68%;
-  }
-
-  .body {
-    display: flex;
-    margin-top: 2%;
-    align-items: center;
-  }
   .searchContainer {
     // border: 1px solid;
     // padding: 0.8rem 2rem;
     margin: 0% 5%;
+    margin-top: 30px;
     // margin-top: 8px;
     // margin-right: 0.8em;
     width: 35vw;
@@ -95,12 +81,41 @@
     }
   }
 }
+@media screen and (max-width: 1024px) {
+  .container {
+    margin-top: 1rem;
+    ul {
+      li {
+        padding: 0.8rem 1.1rem;
+        font-size: 15px;
+        margin-right: 6px;
 
+        &:hover {
+          filter: brightness(96%);
+          // background-color: #ced4da;
+        }
+      }
+    }
+    .searchContainer {
+      width: 100%;
+      margin-top: 30px;
+      .searchElement {
+        svg {
+          border-left: solid black;
+          padding-left: 4px;
+          padding-right: 5px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
 @media screen and (max-width: 768px) {
   .container {
     margin-top: 1rem;
     .searchContainer {
       width: 50vw;
+      margin-top: 30px;
       .searchElement {
         svg {
           border-left: solid black;
@@ -141,28 +156,14 @@
         font-size: 12px;
       }
     }
-    .body {
-      width: 95%;
-      select {
-        padding: 0;
-        font-size: 12px;
-        // width: 3rem;
-      }
-      .searchContainer {
-        width: 120%;
-        height: 38px;
-        margin: 5px;
-        svg {
-          width: 1rem;
-          margin-right: 5px;
-        }
-      }
-      .writeBtn {
-        width: 5rem;
-        height: 2.2rem;
-        span {
-          display: none;
-        }
+
+    .searchContainer {
+      width: 70%;
+      height: 38px;
+      margin: 5px;
+      svg {
+        width: 1rem;
+        margin-right: 5px;
       }
     }
   }
@@ -230,25 +231,25 @@
   // }
 }
 /*
-  .container {
-    .tagList {
-      li {
-        width: 13vw;
-        margin: 10px;
-        font-size: 15px;
+    .container {
+      .tagList {
+        li {
+          width: 13vw;
+          margin: 10px;
+          font-size: 15px;
+        }
       }
-    }
-    .searchContainer {
-      width: 50vw;
-      .searchElement {
-        svg {
-          border-left: solid black;
-          padding-left: 4px;
-          padding-right: 5px;
-          font-size: 1.2rem;
+      .searchContainer {
+        width: 50vw;
+        .searchElement {
+          svg {
+            border-left: solid black;
+            padding-left: 4px;
+            padding-right: 5px;
+            font-size: 1.2rem;
+          }
         }
       }
     }
   }
-}
-*/
+  */

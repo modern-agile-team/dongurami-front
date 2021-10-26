@@ -13,7 +13,7 @@ function WritePromition({ title, description }) {
     const imagesURL = await Promise.all([...e.target.files].map(async (file) => {
       const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (await getS3PresignedURL(file.name)).data;
       await uploadImage(presignedURL, file);
-      return { imgPath: imageURL };
+      return imageURL;
     }));
     setImage(imagesURL);
   }
@@ -32,7 +32,7 @@ function WritePromition({ title, description }) {
           <img src="https://www.pngfind.com/pngs/m/66-661092_png-file-upload-image-icon-png-transparent-png.png" alt="preview" />
         ) :
         images.map((image, index) => (
-          <img key={index} src={image.path} alt="preview" />
+          <img key={index} src={image} alt="preview" />
         ))}
         <p>사진 업로드</p>
       </label>
