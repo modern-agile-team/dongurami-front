@@ -16,13 +16,12 @@ const WriteScrpas = () => {
     if (data.scrapNum !== undefined) {
       addScrapPost(data.clubNum, data.scrapNum, {
         title,
-        description,
+        description
       })
-      .then(res => alert(res.data.msg))
-      .catch(err => alert(err))
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err));
       router.push(`/profile/${data.pid}`);
-    }
-    else {
+    } else {
       await addPost(data.pid, data.clubNum, {
         title,
         description,
