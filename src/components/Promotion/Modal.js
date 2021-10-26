@@ -81,7 +81,7 @@ const Modal = ({ setOpenModal, postId }) => {
 
   return (
     <div className={styles.background} onClick={() => setOpenModal(false)}>
-      <div className={styles.image}>
+      <div className={styles.image} onClick={(e) => e.stopPropagation()}>
         {images.length && (
           <Swiper
             className="banner"
@@ -92,13 +92,15 @@ const Modal = ({ setOpenModal, postId }) => {
           >
             {testImage.map((image, index) => {
               return (
-                <SwiperSlide key={index} className={styles.slider}>
-                  <img
-                    src={image.imgPath}
-                    alt="이미지"
-                    className="detail-image"
-                  />
-                </SwiperSlide>
+                <div>
+                  <SwiperSlide key={index} className={styles.slider}>
+                    <img
+                      src={image.imgPath}
+                      alt="이미지"
+                      className="detail-image"
+                    />
+                  </SwiperSlide>
+                </div>
               );
             })}
           </Swiper>

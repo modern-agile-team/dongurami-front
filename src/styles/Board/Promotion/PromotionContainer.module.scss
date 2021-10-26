@@ -8,21 +8,12 @@
   -webkit-column-width: 21em;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .sectionWrap {
     .section {
-      // justify-content: center;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
     }
   }
-  // .writeBtn {
-  //   width: 25%;
-  //   top: 39%;
-  //   right: -5%;
-  //   font-size: 15px;
-  // }
-  // .section {
-  //   display: flex;
-  //   width: 100%;
-  //   flex-wrap: wrap;
-  // }
 }

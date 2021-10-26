@@ -150,19 +150,18 @@ const PromotionContainer = () => {
         <div className={styles.section}>
           {boarddata.map((el) => {
             return (
-              <div className={styles.poster} key={el.no}>
-                <Promotion
-                  pId={el.no}
-                  date={el.inDate}
-                  clubName={el.clubName}
-                  name={el.studentName}
-                  img={el.url}
-                  clubNo={el.clubNo}
-                  category={el.category}
-                  setOpenModal={setOpenModal}
-                  setPostId={setPostId}
-                />
-              </div>
+              <Promotion
+                key={el.no}
+                pId={el.no}
+                date={el.inDate}
+                clubName={el.clubName}
+                name={el.studentName}
+                img={el.url}
+                clubNo={el.clubNo}
+                category={el.category}
+                setOpenModal={setOpenModal}
+                setPostId={setPostId}
+              />
             );
           })}
         </div>
