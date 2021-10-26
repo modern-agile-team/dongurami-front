@@ -3,9 +3,11 @@
   margin: 1rem auto;
   border: 2px solid #90e2d6;
   padding: 1rem 2rem;
-  @media screen and (max-width: 768px) {
+  box-sizing: border-box;
+  @media screen and (max-width: 576px) {
     margin: 0 auto;
-    width: 80%;
+    padding: 1rem;
+    width: 100%;
   }
   & h1 {
     margin: 0;
@@ -44,9 +46,9 @@
   & > hr {
     border: 0.5px solid #90e2d6;
   }
-  & > div:nth-of-type(2) {
-    margin: 2rem;
-  }
+  // & > div:nth-of-type(2) {
+  //   margin: 2rem;
+  // }
 }
 
 .container a {
