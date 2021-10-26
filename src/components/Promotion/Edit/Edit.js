@@ -11,6 +11,7 @@ function Edit({ pid }) {
   const [description, setDescription] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [posterImages, setPosterImages] = useState([]);
+  const [images, setImages] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -25,9 +26,9 @@ function Edit({ pid }) {
     })();
   }, []);
 
-  const onSubmit = async (images) => {
-    await putPost(title, description, images).then(() => {
-      router.back();
+  const onSubmit = async () => {
+    await putPost(pid, title, description, images).then((response) => {
+      if (response.data.success) router.back();
     });
   };
 
@@ -37,6 +38,11 @@ function Edit({ pid }) {
 
   const onOpen = () => {
     setShowModal(true);
+  };
+
+  const onEditImages = (editImages) => {
+    setImages(editImages);
+    setShowModal(false);
   };
 
   return (
@@ -57,6 +63,7 @@ function Edit({ pid }) {
             posterImages={posterImages}
             title={title}
             onSubmit={onSubmit}
+            onEditImages={onEditImages}
           />
         </Modal>
       )}

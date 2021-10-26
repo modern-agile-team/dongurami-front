@@ -1,6 +1,6 @@
 .promotion {
   display: inline-block;
-  padding: 0.25rem;
+  padding: 0.5rem;
   position: relative;
   margin-right: 6%;
 
@@ -93,7 +93,7 @@
 
 @media screen and (max-width: 480px) {
   .promotion {
-    padding: 4rem;
+    padding: 3rem;
   }
   // .promotion {
   //   width: 50%;

@@ -22,6 +22,14 @@ export function getBoardPost(postId) {
   return axios.get(`api/board/promotion/${postId}`);
 }
 
+export function putPost(postId, title, description, images) {
+  return axios.put(`api/board/promotion/${postId}`, {
+    title,
+    description,
+    images
+  });
+}
+
 export function deletePost(postId) {
   return axios.delete(`api/board/promotion/${postId}`);
 }
