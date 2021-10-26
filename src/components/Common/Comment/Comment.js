@@ -43,7 +43,7 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
 
   return (
     <div className={styles.comment}>
-      <img src={comment.profileImageUrl ?? 'https://via.placeholder.com/100'} alt="profile" />
+      <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
       <div>
         <div>
           <p>{comment.studentName}</p>
@@ -57,7 +57,7 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
         </div>
         <div ref={descriptionDiv} contentEditable={isContentEditable} suppressContentEditableWarning={true}>{comment.description}</div>
         <div>
-          <p>{comment.inDate}</p>
+          <p>{new Date(comment.inDate).toLocaleDateString()}</p>
           {(user && comment.no === comment.groupNo) && (
             <p onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
           )}
