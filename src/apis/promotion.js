@@ -31,7 +31,7 @@ export function putPost(postId, title, description, images) {
 }
 
 export function deletePost(postId) {
-  return axios.delete(`api/board/promotion/659`);
+  return axios.delete(`api/board/promotion/${postId}`);
 }
 
 export function editComment(postId, commentNo, description) {

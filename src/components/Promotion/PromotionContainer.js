@@ -5,7 +5,7 @@ import TypeSearch from './TypeSearch';
 
 import Modal from './Modal';
 import Promotion from './Promotion';
-import Link from 'next/link';
+
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
 
 const PromotionContainer = () => {
@@ -18,10 +18,12 @@ const PromotionContainer = () => {
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
 
+  let isLoading = false;
   let itemNo = 0;
 
   const getDatas = async () => {
     try {
+      isLoading = true;
       if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
@@ -60,11 +62,13 @@ const PromotionContainer = () => {
     } catch (e) {
       console.log(e);
     }
+    isLoading = false;
   };
 
   const firstGetDatas = async () => {
     itemNo = 0;
     try {
+      isLoading = true;
       if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
@@ -93,6 +97,7 @@ const PromotionContainer = () => {
     } catch (e) {
       console.log(e);
     }
+    isLoading = false;
   };
 
   const onSearch = () => {
@@ -115,7 +120,7 @@ const PromotionContainer = () => {
       document.body.scrollTop
     );
     const clientHeight = document.documentElement.clientHeight;
-    if (scrollTop + clientHeight >= scrollHeight) {
+    if (scrollTop + clientHeight + 200 >= scrollHeight && isLoading === false) {
       getDatas();
     }
   };

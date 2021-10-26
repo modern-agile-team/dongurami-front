@@ -81,7 +81,35 @@
     }
   }
 }
+@media screen and (max-width: 1024px) {
+  .container {
+    margin-top: 1rem;
+    ul {
+      li {
+        padding: 0.8rem 1.1rem;
+        font-size: 15px;
+        margin-right: 6px;
 
+        &:hover {
+          filter: brightness(96%);
+          // background-color: #ced4da;
+        }
+      }
+    }
+    .searchContainer {
+      width: 100%;
+      margin-top: 30px;
+      .searchElement {
+        svg {
+          border-left: solid black;
+          padding-left: 4px;
+          padding-right: 5px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
 @media screen and (max-width: 768px) {
   .container {
     margin-top: 1rem;
