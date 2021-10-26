@@ -5,6 +5,9 @@ import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from 'react';
 import { getUser } from 'redux/slices/user';
 import { BsFillArrowUpCircleFill } from 'react-icons/bs';
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
 
 function ReduxWrapper({ children }) {
   const dispatch = useDispatch();

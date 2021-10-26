@@ -24,17 +24,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    svg {
-      position: relative;
-      cursor: pointer;
-    }
-    .imgContainer {
-      height: 80%;
+    width: 28%;
+    .slider {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      & > div:nth-child(1) {
+        display: none;
+      }
       img {
         margin-right: 50px;
-        height: 100%;
-        max-width: 30vw;
+        width: 100%;
         margin-left: 50px;
       }
     }
@@ -81,7 +81,7 @@
 
       img {
         height: 100%;
-        width: 60%;
+        width: 100%;
         margin-right: 50px;
 
         margin-left: 50px;
