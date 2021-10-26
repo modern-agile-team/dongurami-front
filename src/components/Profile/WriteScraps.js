@@ -1,7 +1,6 @@
-import styles from 'styles/Profile/WriteScraps.module.scss';
 import Container from 'components/Write/Container';
 import WriteContent from 'components/Write/WriteContent';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { addPost, addScrapPost } from 'apis/profile';
 import { useRouter } from 'next/router';
 import router from 'next/router';

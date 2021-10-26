@@ -14,17 +14,17 @@ function Scraps({
   clubNo,
   setClubNo
 }) {
-  if (comp === '스크랩') {
-    useEffect(() => {
-      getScraps(profile.id, clubNo).then((res) => {
-        setDataArr(
-          res.data.scraps
-            .concat(res.data.boards)
-            .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
-        );
-      });
-    }, []);
+  useEffect(() => {
+    getScraps(profile.id, clubNo).then((res) => {
+      setDataArr(
+        res.data.scraps
+          .concat(res.data.boards)
+          .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
+      );
+    });
+  }, []);
 
+  if (comp === '스크랩') {
     return (
       <div className={styles.wrap}>
         <div className={styles.container}>
