@@ -14,38 +14,46 @@ function Profile() {
   const [clubNo, setClubNo] = useState(0);
   const [dataArr, setDataArr] = useState([]);
   const [token, setToken] = useState(getToken());
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   const uRouter = useRouter();
 
   const logout = () => {
-    window.localStorage.removeItem("jwt");
-    router.push('/')
+    window.localStorage.removeItem('jwt');
+    router.push('/');
   };
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
-  useEffect(() => { 
+  useEffect(() => {
     if (!uRouter.isReady) return;
-    setId(uRouter.query.pid)
-    setToken(getToken())
+    setId(uRouter.query.pid);
+    setToken(getToken());
     getUserInfo(uRouter.query.pid, token)
-    .then((res) => {
-      setUserInfo(res.data.userInfo);
-      setProfile(res.data.profile);
-      setClubNo(res.data.profile.clubs.length === 0 ? 0 : res.data.profile.clubs[0].no);
-    })
-    .catch((err) => {
-      alert(err)
-      router.back()
-    });
+      .then((res) => {
+        setUserInfo(res.data.userInfo);
+        setProfile(res.data.profile);
+        setClubNo(
+          res.data.profile.clubs.length === 0 ? 0 : res.data.profile.clubs[0].no
+        );
+      })
+      .catch((err) => {
+        alert(err);
+        router.back();
+      });
   }, [token, uRouter]);
 
   return (
     <div className={styles.container}>
       <div className={styles.profileHeader}>
-        <button style={comp === '프로필' ? { borderRight: 0 } : null} className={styles.profileBtn} onClick={() => setComp('프로필')}>프로필</button>
+        <button
+          style={comp === '프로필' ? { borderRight: 0 } : null}
+          className={styles.profileBtn}
+          onClick={() => setComp('프로필')}
+        >
+          프로필
+        </button>
         <button
           style={comp === '스크랩' ? { borderRight: 0 } : null}
           className={styles.scrapBtn}
@@ -62,8 +70,8 @@ function Profile() {
                   );
                 })
                 .catch((err) => {
-                  alert('로그인 한 사용자만 열람할 수 있습니다.')
-                  setComp('프로필')
+                  alert('로그인 한 사용자만 열람할 수 있습니다.');
+                  setComp('프로필');
                 });
               setComp('스크랩');
             } else alert('가입된 동아리가 없습니다.');
@@ -82,6 +90,7 @@ function Profile() {
         setIsOpen={setIsOpen}
       />
       <Scraps
+        uRouter={uRouter}
         userInfo={userInfo}
         profile={profile}
         comp={comp}

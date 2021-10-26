@@ -12,9 +12,11 @@ function Scraps({
   dataArr,
   id,
   clubNo,
-  setClubNo
+  setClubNo,
+  uRouter
 }) {
   useEffect(() => {
+    if (!uRouter.isready) return;
     getScraps(profile.id, clubNo).then((res) => {
       setDataArr(
         res.data.scraps
@@ -22,7 +24,7 @@ function Scraps({
           .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
       );
     });
-  }, []);
+  }, [uRouter]);
 
   if (comp === '스크랩') {
     return (
