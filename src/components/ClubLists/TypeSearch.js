@@ -18,7 +18,12 @@ const TypeSearch = ({ onCategorySearch, onSearch }) => {
     <div className={styles.container}>
       <ul
         className={styles.tagList}
-        onClick={(event) => onCategorySearch(event.target.getAttribute('name'))}
+        onClick={
+          (event) =>
+            console.log(
+              event.target.value
+            ) /*onCategorySearch(event.target.getAttribute('name'))</div>*/
+        }
       >
         <li name="">#전체</li>
         <li name="IT">#IT</li>

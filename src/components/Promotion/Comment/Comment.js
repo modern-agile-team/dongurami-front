@@ -4,17 +4,24 @@ import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import ReplyCommentContainer from './ReplyCommentContainer';
 import ReplyAddComment from './ReplyAddComment';
 import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   deleteComment,
   editComment,
   editReplyComment,
   deleteReplyComment
 } from 'apis/promotion';
+import { getPost } from 'redux/slices/post';
 
-const Comment = ({ comment, postId, getData, studentId }) => {
+const Comment = ({ comment, postId, studentId }) => {
   const [replyComment, setReplyComment] = useState(false);
   const [isContentEditable, setIsContentEditable] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const post = useSelector((state) => state.post);
   const descriptionDiv = useRef();
+  const category = 'promotion';
+  const pid = postId;
   const onClick = () => {
     setReplyComment(!replyComment);
   };
@@ -28,7 +35,7 @@ const Comment = ({ comment, postId, getData, studentId }) => {
           comment.no,
           descriptionDiv.current.textContent
         ).then((response) => {
-          if (response.data.success) getData();
+          if (response.data.success) dispatch(getPost({ category, pid }));
           else alert(response.data.msg);
         });
       } else {
@@ -37,26 +44,25 @@ const Comment = ({ comment, postId, getData, studentId }) => {
           comment.no,
           descriptionDiv.current.textContent
         ).then((response) => {
-          if (response.data.success) getData();
+          if (response.data.success) dispatch(getPost({ category, pid }));
           else alert(response.data.msg);
         });
       }
     }
     setIsContentEditable(!isContentEditable);
-    console.log(descriptionDiv.current.textContent);
   };
 
   const onDelete = async () => {
     if (comment.groupNo !== comment.no) {
       await deleteReplyComment(postId, comment.groupNo, comment.no).then(
         (response) => {
-          if (response.data.success) getData();
+          if (response.data.success) dispatch(getPost({ category, pid }));
           else alert(response.data.msg);
         }
       );
     } else {
       await deleteComment(postId, comment.no).then((response) => {
-        if (response.data.success) getData();
+        if (response.data.success) dispatch(getPost({ category, pid }));
         else alert(response.data.msg);
       });
     }
@@ -73,22 +79,28 @@ const Comment = ({ comment, postId, getData, studentId }) => {
             <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
               <p>{comment.studentName}</p>
             </Link>
-            <p>작성자</p>
-            <div>
-              <button onClick={onEdit} className={styles['action-button']}>
-                {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
-              </button>
-              <button onClick={onDelete} className={styles['action-button']}>
-                <AiOutlineDelete />
-              </button>
-            </div>
+            {post.studentId === comment.studentId && <p>작성자</p>}
+            {user.id === comment.studentId && (
+              <div>
+                <button onClick={onEdit} className={styles['action-button']}>
+                  {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
+                </button>
+                <button onClick={onDelete} className={styles['action-button']}>
+                  <AiOutlineDelete />
+                </button>
+              </div>
+            )}
           </div>
-          <div ref={descriptionDiv} contentEditable={isContentEditable}>
+          <div
+            ref={descriptionDiv}
+            contentEditable={isContentEditable}
+            suppressContentEditableWarning={true}
+          >
             {comment.description}
           </div>
           <div>
             <p>{comment.inDate}</p>
-            {comment.no === comment.groupNo && (
+            {user && comment.no === comment.groupNo && (
               <p onClick={onClick}>답글 쓰기</p>
             )}
           </div>

@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import Post from './Post';
-import { MdClose } from 'react-icons/md';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import ZoomImg from './ZoomImg';
-import { getPost } from 'apis/promotion';
+import { getBoardPost } from 'apis/promotion';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPost } from 'redux/slices/post';
 
 const Modal = ({ setOpenModal, postId }) => {
   const [index, setIndex] = useState(0);
   const [zoom, setZoom] = useState(false);
-  const [images, setImages] = useState([]);
   const [imgUrl, setImgUrl] = useState('');
-  const [postData, setPostData] = useState([]);
-  const [comments, setComments] = useState([]);
+  const [images, setImages] = useState([]);
+  const category = 'promotion';
+  const pid = postId;
+  const dispatch = useDispatch();
+  const post = useSelector((state) => state.post);
 
   const nextSlide = () => {
     let idx = index;
@@ -36,20 +39,13 @@ const Modal = ({ setOpenModal, postId }) => {
     setImgUrl(images[index].imgPath);
   };
 
-  const getData = async () => {
-    await getPost(postId).then((res) => {
-      if (res.data.success) {
-        setImages(res.data.images);
-        setImgUrl(res.data.images[index].imgPath);
-        setPostData(res.data.board);
-        setComments(res.data.comments);
-      } else alert(res.data.msg);
+  useEffect(async () => {
+    dispatch(getPost({ category, pid }));
+    await getBoardPost(pid).then((res) => {
+      setImages(res.data.images);
+      setImgUrl(res.data.images[index].imgPath);
     });
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.background} onClick={() => setOpenModal(false)}>
@@ -81,13 +77,7 @@ const Modal = ({ setOpenModal, postId }) => {
               <IoIosArrowForward onClick={() => prevSlide()} size={70} />
             </div>
           </div>
-          <Post
-            postData={postData}
-            postId={postId}
-            setPostData={setPostData}
-            comments={comments}
-            getData={getData}
-          />
+          <Post postId={postId} post={post} />
         </>
       )}
     </div>

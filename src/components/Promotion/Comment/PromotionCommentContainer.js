@@ -41,7 +41,7 @@ const PromotionCommentContainer = ({
               )}
             </>
           ))}
-        <AddComment comments={comments} postId={postId} getData={getData} />
+        <AddComment comments={comments} postId={postId} />
       </div>
     </>
   );

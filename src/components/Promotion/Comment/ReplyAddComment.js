@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from '../../../styles/Board/Promotion/AddComment.module.scss';
-import axios from 'axios';
-import getToken from 'utils/getToken';
 import { replyAddComment } from 'apis/promotion';
+import { useDispatch } from 'react-redux';
+import { getPost } from 'redux/slices/post';
 
-function ReplyAddComment({
-  postId,
-  getData,
-  parentCommentId,
-  setReplyComment
-}) {
+function ReplyAddComment({ postId, parentCommentId }) {
   const [description, setDescription] = useState('');
-  const token = getToken();
+  const dispatch = useDispatch();
+  const category = 'promotion';
+  const pid = postId;
 
   const onChange = (e) => {
     console.log(e.target.value);
@@ -22,7 +19,7 @@ function ReplyAddComment({
 
     replyAddComment(postId, parentCommentId, description).then((res) => {
       if (res.data.success) {
-        getData();
+        dispatch(getPost({ category, pid }));
       } else alert(res.data.msg);
     });
     setDescription('');
