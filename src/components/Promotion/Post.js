@@ -26,48 +26,49 @@ const Post = ({ postId, getData, post }) => {
   };
 
   return (
-    <div className={styles.post} onClick={(e) => e.stopPropagation()}>
-      <div className={styles.container}>
-        <div>
-          <div>홍보게시판</div>
-          <div>{title}</div>
-          {user.id === studentId ? (
-            <div>
-              <Link
-                href={{
-                  pathname: `${router.pathname}/${postId}/edit`,
-                  query: router.query
-                }}
-                passHref
-              >
-                <button>수정하기</button>
-              </Link>
-              <button onClick={onDelete}>삭제하기</button>
-            </div>
-          ) : (
-            <div />
-          )}
-          <div>
-            <Link href={{ pathname: `/clubhome/${clubNo}` }} passHref>
-              <div>{clubName}</div>
+    <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.header}>
+        <div className={styles.title}>
+          <h2>{title}</h2>
+        </div>
+        {user.id === studentId && (
+          <div className={styles.buttons}>
+            <Link
+              href={{
+                pathname: `${router.pathname}/${postId}/edit`,
+                query: router.query
+              }}
+              passHref
+            >
+              <button>수정하기</button>
             </Link>
-            <div>
-              <div>{inDate}</div>
-              <div>조회 {hit}</div>
-            </div>
+            <button onClick={onDelete}>삭제하기</button>
+          </div>
+        )}
+        <div className={styles.boardInfo}>
+          <Link href={{ pathname: `/clubhome/${clubNo}` }} passHref>
+            <h3>{clubName}</h3>
+          </Link>
+          <div>
+            <span>{inDate.slice(0, 10)}</span>
+            <span>조회 {hit}</span>
           </div>
         </div>
-        <hr />
-        <ReactQuill value={description || ''} theme="bubble" readOnly />
-        {post.comments && (
-          <PromotionCommentContainer
-            comments={post.comments}
-            postId={postId}
-            studentId={studentId}
-            getData={getData}
-          />
-        )}
       </div>
+      <ReactQuill
+        className={styles.description}
+        value={description || ''}
+        theme="bubble"
+        readOnly
+      />
+      {post.comments && (
+        <PromotionCommentContainer
+          comments={post.comments}
+          postId={postId}
+          studentId={studentId}
+          getData={getData}
+        />
+      )}
     </div>
   );
 };

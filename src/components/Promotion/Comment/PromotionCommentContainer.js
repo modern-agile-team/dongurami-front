@@ -13,7 +13,6 @@ const PromotionCommentContainer = ({
   return (
     <>
       <p>댓글 {comments.length}</p>
-      <hr />
       <div className={style.container}>
         {comments &&
           comments.map((comment, index) => (
