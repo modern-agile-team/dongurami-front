@@ -1,7 +1,7 @@
 import styles from '../../../styles/Club/Home/Intro/ClubIntro.module.scss';
 import ClubInfo from './ClubInfo';
 import Desc from './Desc';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Skeleton from './Skeleton';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import { patchIntroDesc, putLogo } from 'apis/clubhome';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
 
 const ClubIntro = ({ visitTime }) => {
-  const [descUpdate, setDescUpdate] = useState(false);
+  const [isDescriptionUpdate, setIsDescriptionUpdate] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [introDesc, setIntroDesc] = useState('');
 
@@ -19,28 +19,33 @@ const ClubIntro = ({ visitTime }) => {
 
   const dispatch = useDispatch();
 
-  const infos = useSelector((state) => state.clubhome.info);
+  const clubInfo = useSelector((state) => state.clubhome.info);
   const error = useSelector((err) => err.clubhome.error);
 
-  const onDescUpdate = () => {
-    setDescUpdate(!descUpdate);
+  const toggleDescription = () => {
+    setIsDescriptionUpdate(!isDescriptionUpdate);
   };
 
-  const patchClubIntro = (data) => {
+  const patchIntroduction = (data) => {
     return patchIntroDesc(data, clubId).then(dispatch(putDesc(data, clubId)));
   };
 
   const putClubLogo = (data) => {
-    return putLogo(data, clubId).then(dispatch(putDesc(data, clubId)));
+    return putLogo(data, clubId)
+      .then(dispatch(putDesc(data, clubId)))
+      .catch((err) => alert(err.response.data.msg));
   };
 
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
-    patchClubIntro({ introduce: introDesc }).then(() => {
+    patchIntroduction({
+      leader: clubInfo.clientInfo.leader,
+      introduce: introDesc
+    }).then(() => {
       alert('동아리 소개글이 수정되었습니다.');
       dispatch(getClubInfo(clubId));
     });
-    setDescUpdate(!descUpdate);
+    toggleDescription();
   };
 
   // 로고 수정
@@ -50,19 +55,14 @@ const ClubIntro = ({ visitTime }) => {
       await getS3PresignedURL({ img: e.target.files[0].name })
     ).data;
     await uploadImage(presignedURL, file);
-    await putClubLogo({ logoUrl: imageURL });
-    s;
+    await putClubLogo({
+      leader: clubInfo.clientInfo.leader,
+      logoUrl: imageURL
+    });
     dispatch(getClubInfo(clubId));
   };
 
-  useEffect(() => {
-    if (!clubId) return;
-    setIsLoading(true);
-    dispatch(getClubInfo(clubId));
-    setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
-  }, [dispatch, clubId, visitTime]);
-
-  useEffect(() => {
+  const printError = useCallback(() => {
     if (!error) return;
     else if (error.message.includes('401')) {
       alert('로그인 후 이용해주세요.');
@@ -74,15 +74,27 @@ const ClubIntro = ({ visitTime }) => {
       alert('알 수 없는 오류입니다. 개발자에게 문의해주세요');
       router.back();
     }
-  }, [router, error]);
+  }, [error, router]);
 
   useEffect(() => {
-    if (infos) {
-      setIntroDesc(infos.result[0].introduce);
-    }
-  }, [infos]);
+    if (!clubId) return;
+    dispatch(getClubInfo(clubId));
+  }, [dispatch, clubId]);
 
-  if (!infos) return null;
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
+  }, [visitTime]);
+
+  useEffect(() => {
+    printError();
+  }, [printError]);
+
+  useEffect(() => {
+    if (clubInfo) setIntroDesc(clubInfo.result[0].introduce);
+  }, [clubInfo]);
+
+  if (!clubInfo) return null;
 
   return (
     <div className={styles.container}>
@@ -90,12 +102,12 @@ const ClubIntro = ({ visitTime }) => {
         <Skeleton />
       ) : (
         <>
-          <ClubInfo infos={infos} onChangeLogo={onChangeLogo} />
+          <ClubInfo infos={clubInfo} onChangeLogo={onChangeLogo} />
           <Desc
-            infos={infos}
+            infos={clubInfo}
             onDescSubnmit={onDescSubnmit}
-            onDescUpdate={onDescUpdate}
-            descUpdate={descUpdate}
+            toggleDescription={toggleDescription}
+            isDescriptionUpdate={isDescriptionUpdate}
             introDesc={introDesc}
             setIntroDesc={setIntroDesc}
           />
