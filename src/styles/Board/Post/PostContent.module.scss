@@ -46,9 +46,11 @@
   & > hr {
     border: 0.5px solid #90e2d6;
   }
-  // & > div:nth-of-type(2) {
-  //   margin: 2rem;
-  // }
+  & > div:nth-of-type(2) {
+    img {
+      max-width: 100%;
+    }
+  }
 }
 
 .container a {
