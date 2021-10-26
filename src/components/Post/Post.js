@@ -19,7 +19,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
 
   useEffect(() => {
     dispatch(setCategory(category));
-  }, [category, dispatch]);
+  }, [category, router, dispatch]);
 
   const title = {
     notice: '공지 게시판',
@@ -30,7 +30,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
   };
 
   const onDelete = optionalOnDelete || (async () => {
-      await api.deletePost(category, post.no);
+      await api.deletePost(category, post.no, router.query.id);
       router.back();
     });
 

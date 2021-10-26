@@ -5,11 +5,11 @@ const getPost = createAsyncThunk(
   'post/getPost',
   async (arg, { getState }) => {
     const state = getState();
-    let { category, no: pid } = state.post;
+    let { category, no: pid, clubNo: clubNum } = state.post;
     if (arg) {
-      ({ category, pid } = arg);
+      ({ category, pid, clubNum } = arg);
     }
-    const response = await api.getPost(category, pid);
+    const response = await api.getPost(category, pid, clubNum);
     return response.data;
   }
 );
