@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import Post from './Post';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
@@ -70,14 +70,17 @@ const Modal = ({ setOpenModal, postId }) => {
     setImgUrl(images[index].imgPath);
   };
   */
-
-  useEffect(async () => {
-    dispatch(getPost({ category, pid }));
+  const awaitFetchData = useCallback(async () => {
     await getBoardPost(pid).then((res) => {
       setImages(res.data.images);
       setImgUrl(res.data.images[index].imgPath);
     });
-  }, [dispatch]);
+  }, [index, pid]);
+
+  useEffect(() => {
+    dispatch(getPost({ category, pid }));
+    awaitFetchData();
+  }, [dispatch, awaitFetchData, pid]);
 
   return (
     <div className={styles.background} onClick={() => setOpenModal(false)}>
@@ -85,7 +88,7 @@ const Modal = ({ setOpenModal, postId }) => {
         {images.length && (
           <Swiper
             className="banner"
-            spaceBetween={50}
+            spaceBetween={0}
             slidesPerView={1}
             navigation
             pagination={{ clickable: true }}
