@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
 import { FaSearch } from 'react-icons/fa';
+import Link from 'next/link';
+import { BsPencil } from 'react-icons/bs';
 
 const TypeSearch = ({
   setSearchItem,
@@ -34,20 +36,27 @@ const TypeSearch = ({
         <li name="게임">#게임</li>
         <li name="운동">#운동</li>
       </ul>
-      <select value={type} onChange={onTypeChange}>
-        <option value="title">제목</option>
-        <option value="clubName">동아리명</option>
-      </select>
-      <div className={styles.searchContainer}>
-        <form className={styles.searchElement} onSubmit={onSubmit}>
-          <input
-            type="text"
-            placeholder="search"
-            value={searchKeyword}
-            onChange={onChange}
-          />
-          <FaSearch />
-        </form>
+      <div className={styles.body}>
+        <select value={type} onChange={onTypeChange}>
+          <option value="title">제목</option>
+          <option value="clubName">동아리명</option>
+        </select>
+        <div className={styles.searchContainer}>
+          <form className={styles.searchElement} onSubmit={onSubmit}>
+            <input
+              type="text"
+              placeholder="search"
+              value={searchKeyword}
+              onChange={onChange}
+            />
+            <FaSearch />
+          </form>
+        </div>
+        <Link href={`/promotion/write`} passHref>
+          <button className={styles.writeBtn}>
+            ✏️ <span>글쓰기</span>
+          </button>
+        </Link>
       </div>
     </div>
   );

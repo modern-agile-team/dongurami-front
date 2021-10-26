@@ -4,7 +4,10 @@ import '../styles/global.scss';
 import 'react-quill/dist/quill.snow.css';
 import { useEffect, useState } from 'react';
 import { getUser } from 'redux/slices/user';
-import { AiFillCaretUp } from 'react-icons/ai';
+import { BsFillArrowUpCircleFill } from 'react-icons/bs';
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
 
 function ReduxWrapper({ children }) {
   const dispatch = useDispatch();
@@ -23,7 +26,7 @@ function App({ Component, pageProps }) {
     if (typeof window !== 'undefined') {
       const scroll = window.setInterval(() => {
         const pos = window.pageYOffset;
-        const step = 50;
+        const step = 150;
         if (pos > 0) window.scrollTo(0, pos - step);
         else window.clearInterval(scroll);
       }, 1);
@@ -45,8 +48,7 @@ function App({ Component, pageProps }) {
         <Component {...pageProps} />
         {scrollY > 550 && (
           <div className="toTheTop" onClick={scrollToTop}>
-            <AiFillCaretUp />
-            <p>TOP</p>
+            <BsFillArrowUpCircleFill />
           </div>
         )}
       </ReduxWrapper>

@@ -1,11 +1,12 @@
+/*
 import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
 import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
-
+import { BsPencil } from 'react-icons/bs';
 import Modal from './Modal';
 import Promotion from './Promotion';
-
+import Link from 'next/link';
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
 
 const PromotionContainer = () => {
@@ -18,13 +19,11 @@ const PromotionContainer = () => {
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
 
-  let isLoading = false;
   let itemNo = 0;
 
   const getDatas = async () => {
     try {
-      isLoading = true;
-      if (searchItem !== 'whole' && searchItem) {
+      if (searchItem !== 'whole' && searchItem && itemNo !== 0) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
 
@@ -32,9 +31,11 @@ const PromotionContainer = () => {
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
+          } else {
+            itemNo = 0;
           }
         });
-      } else if (search) {
+      } else if (search && itemNp !== 0) {
         await getSearchData(type, searchKeyword, itemNo).then((response) => {
           const result = response.data.boards;
           console.log(result);
@@ -43,32 +44,33 @@ const PromotionContainer = () => {
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
+          } else {
+            itemNo = 0;
           }
         });
       } else if (
         searchItem === 'whole' ||
-        (search === false && searchItem === '')
+        (search === false && searchItem === '' && itemNo !== 0)
       ) {
         await getBoardData(itemNo).then((response) => {
           const result = response.data.boards;
           itemNo = result[result.length - 1].no;
-          console.log(result);
 
           if (result.length) {
             setBoardData((prev) => prev.concat(result));
+          } else {
+            itemNo = 0;
           }
         });
       }
     } catch (e) {
       console.log(e);
     }
-    isLoading = false;
   };
 
   const firstGetDatas = async () => {
     itemNo = 0;
     try {
-      isLoading = true;
       if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
@@ -97,7 +99,6 @@ const PromotionContainer = () => {
     } catch (e) {
       console.log(e);
     }
-    isLoading = false;
   };
 
   const onSearch = () => {
@@ -113,14 +114,20 @@ const PromotionContainer = () => {
   };
 
   const infiniteScroll = () => {
-    const scrollHeight = document.body.scrollHeight;
-
-    const scrollTop = Math.max(
+    let scrollHeight = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    );
+    let scrollTop = Math.max(
       document.documentElement.scrollTop,
       document.body.scrollTop
     );
-    const clientHeight = document.documentElement.clientHeight;
-    if (scrollTop + clientHeight + 200 >= scrollHeight && isLoading === false) {
+    let clientHeight = document.documentElement.clientHeight;
+    const WINDOW_HEIGHT = window.innerHeight;
+
+    console.log(WINDOW_HEIGHT, clientHeight);
+
+    if (scrollTop + clientHeight >= scrollHeight) {
       getDatas();
     }
   };
@@ -146,26 +153,26 @@ const PromotionContainer = () => {
         onSearch={onSearch}
         categorySearch={categorySearch}
       />
-      <div className={styles.sectionWrap}>
-        <div className={styles.section}>
-          {boarddata.map((el) => {
-            return (
-              <div className={styles.poster} key={el.no}>
-                <Promotion
-                  pId={el.no}
-                  date={el.inDate}
-                  clubName={el.clubName}
-                  name={el.studentName}
-                  img={el.url}
-                  clubNo={el.clubNo}
-                  category={el.category}
-                  setOpenModal={setOpenModal}
-                  setPostId={setPostId}
-                />
-              </div>
-            );
-          })}
-        </div>
+      <Link href={`/promotion/write`} passHref>
+        <button className={styles.writeBtn}>
+          <BsPencil />
+          글쓰기
+        </button>
+      </Link>
+      <div className={styles.section}>
+        {boarddata.map((el) => (
+          <Promotion
+            key={el.no}
+            pId={el.no}
+            date={el.inDate}
+            clubName={el.clubName}
+            name={el.studentName}
+            img={el.url}
+            category={el.category}
+            setOpenModal={setOpenModal}
+            setPostId={setPostId}
+          />
+        ))}
       </div>
       {openModal && <Modal setOpenModal={setOpenModal} postId={postId} />}
     </>
@@ -173,3 +180,4 @@ const PromotionContainer = () => {
 };
 
 export default PromotionContainer;
+*/

@@ -11,8 +11,7 @@ const getPost = createAsyncThunk(
     }
     const response = await api.getPost(category, pid, clubNum);
     return response.data;
-  }
-);
+});
 
 const postSlice = createSlice({
   name: 'post',
@@ -23,14 +22,14 @@ const postSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getPost.fulfilled, (state, action) => {
-        return {
-          ...action.payload.board,
-          category: state.category,
-          comments: action.payload.comments
-        }
-      });
+    builder.addCase(getPost.fulfilled, (state, action) => {
+      return {
+        ...action.payload.board,
+        category: state.category,
+        comments: action.payload.comments,
+        images: action.payload.images
+      };
+    });
   }
 });
 

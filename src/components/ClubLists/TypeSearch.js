@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
+import styles from '../../styles/Club/Lists/TypeSearch.module.scss';
 import { FaSearch } from 'react-icons/fa';
 
 const TypeSearch = ({ onCategorySearch, onSearch }) => {
