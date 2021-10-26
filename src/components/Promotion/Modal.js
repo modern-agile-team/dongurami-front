@@ -6,6 +6,10 @@ import ZoomImg from './ZoomImg';
 import { getBoardPost } from 'apis/promotion';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar]); //
 
 const Modal = ({ setOpenModal, postId }) => {
   const [index, setIndex] = useState(0);
@@ -16,7 +20,34 @@ const Modal = ({ setOpenModal, postId }) => {
   const pid = postId;
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
+  const testImage = [
+    {
+      imgPath:
+        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
+    },
+    {
+      imgPath:
+        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
+    },
+    {
+      imgPath:
+        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
+    },
+    {
+      imgPath:
+        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
+    },
+    {
+      imgPath:
+        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
+    },
+    {
+      imgPath:
+        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
+    }
+  ];
 
+  /*
   const nextSlide = () => {
     let idx = index;
 
@@ -38,6 +69,7 @@ const Modal = ({ setOpenModal, postId }) => {
     setIndex(idx);
     setImgUrl(images[index].imgPath);
   };
+  */
 
   useEffect(async () => {
     dispatch(getPost({ category, pid }));
@@ -49,37 +81,31 @@ const Modal = ({ setOpenModal, postId }) => {
 
   return (
     <div className={styles.background} onClick={() => setOpenModal(false)}>
-      {zoom && (
-        <ZoomImg
-          imgUrl={imgUrl}
-          setZoom={setZoom}
-          onClick={(e) => e.stopPropagation()}
-        />
-      )}
-      {!zoom && (
-        <>
-          <div className={styles.image}>
-            <div onClick={(e) => e.stopPropagation()}>
-              <IoIosArrowBack onClick={() => prevSlide()} size={70} />
-            </div>
+      <div className={styles.image}>
+        {images.length && (
+          <Swiper
+            className="banner"
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+          >
+            {testImage.map((image, index) => {
+              return (
+                <SwiperSlide key={index} className={styles.slider}>
+                  <img
+                    src={image.imgPath}
+                    alt="이미지"
+                    className="detail-image"
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        )}
+      </div>
 
-            {images.length ? (
-              <div
-                className={styles.imgContainer}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <img src={imgUrl} onClick={() => setZoom(true)} />
-              </div>
-            ) : (
-              <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
-            )}
-            <div onClick={(e) => e.stopPropagation()}>
-              <IoIosArrowForward onClick={() => nextSlide()} size={70} />
-            </div>
-          </div>
-          <Post postId={postId} post={post} />
-        </>
-      )}
+      <Post postId={postId} post={post} />
     </div>
   );
 };
