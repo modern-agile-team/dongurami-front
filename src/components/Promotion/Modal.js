@@ -13,7 +13,6 @@ SwiperCore.use([Navigation, Pagination, Scrollbar]); //
 
 const Modal = ({ setOpenModal, postId }) => {
   const [index, setIndex] = useState(0);
-  const [zoom, setZoom] = useState(false);
   const [imgUrl, setImgUrl] = useState('');
   const [images, setImages] = useState([]);
   const category = 'promotion';
@@ -47,29 +46,6 @@ const Modal = ({ setOpenModal, postId }) => {
     }
   ];
 
-  /*
-  const nextSlide = () => {
-    let idx = index;
-
-    if (idx !== images.length - 1) {
-      idx += 1;
-    } else if (idx === images.length - 1) {
-      idx = 0;
-    }
-
-    setIndex(idx);
-    setImgUrl(images[index].imgPath);
-  };
-
-  const prevSlide = () => {
-    let idx = index;
-
-    if (idx === 0) idx = images.length - 1;
-    else idx -= 1;
-    setIndex(idx);
-    setImgUrl(images[index].imgPath);
-  };
-  */
   const awaitFetchData = useCallback(async () => {
     await getBoardPost(pid).then((res) => {
       setImages(res.data.images);
@@ -81,6 +57,8 @@ const Modal = ({ setOpenModal, postId }) => {
     dispatch(getPost({ category, pid }));
     awaitFetchData();
   }, [dispatch, awaitFetchData, pid]);
+
+  if (!Object.keys(post).length) return null;
 
   return (
     <div className={styles.background} onClick={() => setOpenModal(false)}>
@@ -107,7 +85,6 @@ const Modal = ({ setOpenModal, postId }) => {
           </Swiper>
         )}
       </div>
-
       <Post postId={postId} post={post} />
     </div>
   );

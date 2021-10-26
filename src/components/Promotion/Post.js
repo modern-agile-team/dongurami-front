@@ -50,7 +50,7 @@ const Post = ({ postId, getData, post }) => {
             <h3>{clubName}</h3>
           </Link>
           <div>
-            <span>{inDate.slice(0, 10)}</span>
+            <span>{inDate.substr(0, 10)}</span>
             <span>조회 {hit}</span>
           </div>
         </div>
