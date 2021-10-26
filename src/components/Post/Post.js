@@ -69,7 +69,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
                 <button onClick={onDelete}>삭제하기</button>
               </>
             )}
-            <div>{post.inDate}</div>
+            <div>{new Date(post.inDate).toLocaleDateString()}</div>
             <div>조회 {post.hit}</div>
           </div>
         </div>
