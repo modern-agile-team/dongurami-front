@@ -4,9 +4,10 @@
   justify-content: space-around;
   height: 100%;
   .imageContainer {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     svg {
-      margin-bottom: 30%;
       cursor: pointer;
       &:hover {
         color: red;

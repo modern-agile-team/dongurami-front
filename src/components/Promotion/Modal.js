@@ -31,15 +31,14 @@ const Modal = ({ setOpenModal, postId }) => {
       <div className={styles.image} onClick={(e) => e.stopPropagation()}>
         {images.length && (
           <Swiper
-            className={styles.banner}
             slidesPerView={1}
             navigation
             pagination={{ clickable: true }}
-            slidesOffsetBefore={-182}
+            slidesOffsetBefore={0}
           >
             {images.map((image, index) => {
               return (
-                <div key={index}>
+                <div key={index} className={styles.banner}>
                   <SwiperSlide className={styles.slider}>
                     <img
                       src={image.imgPath}
