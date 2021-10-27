@@ -182,6 +182,7 @@ const PromotionContainer = () => {
                   img={el.url}
                   clubNo={el.clubNo}
                   category={el.category}
+                  title={el.title}
                   setOpenModal={setOpenModal}
                   setPostId={setPostId}
                 />
