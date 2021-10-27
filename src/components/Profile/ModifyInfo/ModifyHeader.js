@@ -4,7 +4,11 @@ import { FaCamera } from 'react-icons/fa';
 const ModifyHeader = ({ onChangeImg, baseImg, imgUrl }) => {
   return (
     <div className={styles.header}>
-      <img src={imgUrl ?? baseImg} alt="profileImg" />
+      <img
+        src={imgUrl ?? baseImg}
+        alt="profileImg"
+        className={styles.profileImg}
+      />
       <div>
         <label htmlFor="inputFile">
           <FaCamera />
