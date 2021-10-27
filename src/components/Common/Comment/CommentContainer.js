@@ -11,8 +11,8 @@ function CommentContainer({ comments }) {
 
   return (
     <>
-      <p>댓글 {comments.length}</p>
       <hr />
+      <p>댓글 {comments.length}</p>
       <div className={style.container}>
         {comments.map((comment) => (
           <React.Fragment key={comment.no}>

@@ -6,21 +6,21 @@ const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
-const Button = ({ descUpdate, onDescSubnmit, onDescUpdate }) => {
+const Button = ({ isDescriptionUpdate, onDescSubnmit, toggleDescription }) => {
   return (
     <>
-      {descUpdate ? (
+      {isDescriptionUpdate ? (
         <button onClick={onDescSubnmit}>Finish</button>
       ) : (
-        <button onClick={onDescUpdate}>✏️ Edit</button>
+        <button onClick={toggleDescription}>✏️ Edit</button>
       )}
     </>
   );
 };
 
 const Desc = ({
-  onDescUpdate,
-  descUpdate,
+  toggleDescription,
+  isDescriptionUpdate,
   onDescSubnmit,
   setIntroDesc,
   infos,
@@ -32,7 +32,7 @@ const Desc = ({
     <div className={styles.intro}>
       <span>동아리 소개</span>
       <div className={styles.desc}>
-        {descUpdate ? (
+        {isDescriptionUpdate ? (
           <ReactQuillContainer
             setDescription={setIntroDesc}
             description={introDesc}
@@ -48,9 +48,9 @@ const Desc = ({
       {client.leader === 1 ? (
         <div className={styles.button}>
           <Button
-            descUpdate={descUpdate}
+            isDescriptionUpdate={isDescriptionUpdate}
             onDescSubnmit={onDescSubnmit}
-            onDescUpdate={onDescUpdate}
+            toggleDescription={toggleDescription}
           />
         </div>
       ) : (

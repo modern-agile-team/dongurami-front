@@ -111,7 +111,6 @@ const Comment = ({ comment, postId, studentId }) => {
           <ReplyAddComment
             parentCommentId={comment.groupNo}
             postId={postId}
-            getData={getData}
             setReplyComment={setReplyComment}
             studentId={studentId}
           />

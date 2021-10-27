@@ -4,6 +4,7 @@ import api from 'apis/post';
 import styles from '../../../styles/Common/Comment/Comment.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
+import { useRouter } from 'next/router';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
 function setEndOfContenteditable(contentEditableElement) {
@@ -18,6 +19,7 @@ function setEndOfContenteditable(contentEditableElement) {
 
 function Comment({ comment, parentCommentID, setParentCommentID }) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
   const [isContentEditable, setIsContentEditable] = useState(false);
@@ -30,20 +32,20 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
 
   const onEdit = async () => {
     if (isContentEditable) {
-      await api.putComment({ category: post.category, pid: post.no, commentID: comment.no, description: descriptionDiv.current.textContent, parentCommentID });
+      await api.putComment({ category: post.category, pid: post.no, commentID: comment.no, description: descriptionDiv.current.textContent, parentCommentID, clubNum: router.query.id });
       dispatch(getPost());
     }
     setIsContentEditable(!isContentEditable);
     setEndOfContenteditable(descriptionDiv.current);
   }
   const onDelete = async () => {
-    await api.deleteComment({ category: post.category, pid: post.no, commentID: comment.no, parentCommentID });
+    await api.deleteComment({ category: post.category, pid: post.no, commentID: comment.no, parentCommentID, clubNum: router.query.id });
     dispatch(getPost());
   }
 
   return (
     <div className={styles.comment}>
-      <img src={comment.profileImageUrl ?? 'https://via.placeholder.com/100'} alt="profile" />
+      <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
       <div>
         <div>
           <p>{comment.studentName}</p>
@@ -57,7 +59,7 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
         </div>
         <div ref={descriptionDiv} contentEditable={isContentEditable} suppressContentEditableWarning={true}>{comment.description}</div>
         <div>
-          <p>{comment.inDate}</p>
+          <p>{new Date(comment.inDate).toLocaleDateString()}</p>
           {(user && comment.no === comment.groupNo) && (
             <p onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
           )}

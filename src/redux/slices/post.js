@@ -1,14 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import api from 'apis/post';
 
-const getPost = createAsyncThunk('post/getPost', async (arg, { getState }) => {
-  const state = getState();
-  let { category, no: pid } = state.post;
-  if (arg) {
-    ({ category, pid } = arg);
-  }
-  const response = await api.getPost(category, pid);
-  return response.data;
+const getPost = createAsyncThunk(
+  'post/getPost',
+  async (arg, { getState }) => {
+    const state = getState();
+    let { category, no: pid, clubNo: clubNum } = state.post;
+    if (arg) {
+      ({ category, pid, clubNum } = arg);
+    }
+    const response = await api.getPost(category, pid, clubNum);
+    return response.data;
 });
 
 const postSlice = createSlice({
