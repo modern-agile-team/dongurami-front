@@ -1,7 +1,6 @@
-import styles from 'styles/Profile/WriteScraps.module.scss';
 import Container from 'components/Write/Container';
 import WriteContent from 'components/Write/WriteContent';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { addPost, addScrapPost } from 'apis/profile';
 import { useRouter } from 'next/router';
 import router from 'next/router';
@@ -16,13 +15,12 @@ const WriteScrpas = () => {
     if (data.scrapNum !== undefined) {
       addScrapPost(data.clubNum, data.scrapNum, {
         title,
-        description,
+        description
       })
-      .then(res => alert(res.data.msg))
-      .catch(err => alert(err))
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err));
       router.push(`/profile/${data.pid}`);
-    }
-    else {
+    } else {
       await addPost(data.pid, data.clubNum, {
         title,
         description,
