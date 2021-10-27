@@ -30,6 +30,9 @@ const postSlice = createSlice({
         images: action.payload.images
       };
     });
+    builder.addCase(getPost.rejected, () => {
+      return {};
+    })
   }
 });
 

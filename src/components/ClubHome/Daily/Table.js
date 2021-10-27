@@ -1,8 +1,7 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Schedule/Table.module.scss";
-
+import React from 'react';
+import styles from '../../../styles/Club/Home/Schedule/Table.module.scss';
+const yoil = ['일', '월', '화', '수', '목', '금', '토'];
 const Table = ({ calendarArr }) => {
-  const yoil = ["일", "월", "화", "수", "목", "금", "토"];
   return (
     <div>
       <div className={styles.yoil}>

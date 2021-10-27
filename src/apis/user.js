@@ -33,4 +33,9 @@ export const getNaverOauth = (token) => {
 // user 정보 가져오기
 export const getUserData = () => {
   return instance.get('api/student');
-}
+};
+
+//비밀번호 변경
+export const patchChangePW = (data) => {
+  return instance.patch('api/reset-password', data);
+};

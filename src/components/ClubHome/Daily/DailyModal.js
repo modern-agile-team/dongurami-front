@@ -5,28 +5,27 @@ import axios from 'axios';
 import Router from 'next/router';
 import { getInfo, addSchedule } from 'apis/calendar';
 
-const DailyModal = ({ colors, setPop, pop, today, setSchedule }) => {
+const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
   const [startDate, setStartDate] = useState(today.format('YYYY-MM-DD'));
   const [endDate, setEndDate] = useState(today.format('YYYY-MM-DD'));
   const [color, setColor] = useState('#FFFFFF');
   const startInput = useRef();
   const endInput = useRef();
-  const colorCode = useRef();
   const title = useRef();
 
   useEffect(() => {
     setStartDate(today.format('YYYY-MM-DD'));
     setEndDate(today.format('YYYY-MM-DD'));
     setColor('#FFFFFF');
-  }, [pop]);
+  }, [pop, today]);
 
   const moveCal = () => {
     setPop('Calendar');
   };
 
   //추가하는 함수
-  const onClickAdd = () => {
-    addSchedule({
+  const onClickAdd = async () => {
+    await addSchedule(Qdata.id, {
       colorCode: color,
       title: title.current.value,
       startDate: startDate,
@@ -37,7 +36,7 @@ const DailyModal = ({ colors, setPop, pop, today, setSchedule }) => {
     })
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response.data.msg));
-    getInfo(today)
+    await getInfo(Qdata.id, today.format('YYYY-MM'))
       .then((res) => setSchedule(res.data.result))
       .catch((err) => {
         alert(err);
@@ -53,9 +52,9 @@ const DailyModal = ({ colors, setPop, pop, today, setSchedule }) => {
       onClickAdd();
       moveCal();
     } else if (Date.parse(startDate) > Date.parse(endDate))
-      alert('날짜가 이상함');
+      alert('날짜를 확인해주세요');
     else if (title.current.value.length <= 0) {
-      alert('제목이 이상함');
+      alert('제목을 확인해주세요');
     }
   };
   if (pop === 'DailyModal') {

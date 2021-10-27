@@ -56,7 +56,7 @@ const ModifyInfo = () => {
       .then((res) => {
         console.log(res.data.msg);
       })
-      .catch((err) => console.log(err.response.data));
+      .catch((err) => alert(err.response.data));
     router.push(`/profile/${userInfo.id}`);
   };
 
