@@ -30,21 +30,24 @@ export const Manager = () => {
 
   const router = useRouter();
 
+  const clubId = router.query.id;
   const toClubHome = () => {
-    router.push(`/clubhome/${router.query.id}`);
+    router.push(`/clubhome/${clubId}`);
+  };
+
+  const setStates = (data) => {
+    setApplicantQNA(data.applicant.questionsAnswers);
+    setApplicantInfo(data.applicant.applicantInfo);
+    setLeader(data.clubAdminOption.leader);
+    setMembers(data.clubAdminOption.memberAndAuthList);
+    setMergedApplicantQNA(processQuesData(data.applicant.questionsAnswers));
   };
 
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
-    getMember(router.query.id)
+    getMember(clubId)
       .then((res) => {
-        setApplicantQNA(res.data.applicant.questionsAnswers);
-        setApplicantInfo(res.data.applicant.applicantInfo);
-        setLeader(res.data.clubAdminOption.leader);
-        setMembers(res.data.clubAdminOption.memberAndAuthList);
-        setMergedApplicantQNA(
-          processQuesData(res.data.applicant.questionsAnswers)
-        );
+        setStates(res.data);
       })
       .catch((err) => {
         switch (err.response.status) {
@@ -64,38 +67,47 @@ export const Manager = () => {
             router.push('/');
         }
       });
-  }, [router]);
+  }, [clubId, router]);
+
+  const handleAfterApply = (massage) => {
+    if (applicantInfo.length === 1) router.reload();
+    else getMembersData();
+    alert(massage);
+  };
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
     if (!e.target.id) return;
+    const body = [
+      {
+        applicant: mergedApplicantInfo[e.target.id].id,
+        url: `club/${clubId}`,
+        notiCategoryNum: 2
+      },
+      clubId
+    ];
     confirm('가입을 승인합니까?') &&
-      (await postApply(
-        {
-          applicant: mergedApplicantInfo[e.target.id].id
-        },
-        router.query.id
-      )
-        .then((res) => {
-          if (applicantInfo.length === 1) router.reload();
-          alert(res.data.msg);
-        })
+      (await postApply(...body)
+        .then((res) => handleAfterApply(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
   };
 
   // 가입 거절 PUT
   const onApplyReject = async (e) => {
     if (!e.target.id) return;
-
+    const body = [
+      {
+        applicant: mergedApplicantInfo[e.target.id].id,
+        url: `club/${clubId}`,
+        notiCategoryNum: 3
+      },
+      clubId
+    ];
     confirm('가입을 거절합니까?') &&
-      (await putApply(
-        {
-          applicant: mergedApplicantInfo[e.target.id].id
-        },
-        router.query.id
-      )
+      (await putApply(...body)
         .then((res) => {
           if (applicantInfo.length === 1) router.reload();
+          else getMembersData();
           alert(res.data.msg);
         })
         .catch((err) => alert(err.response.data.msg)));
@@ -104,41 +116,43 @@ export const Manager = () => {
   // 회장 양도 PUT
   const onLeaderChange = async (memberIndex) => {
     const newLeader = changeLeaderRef.current;
-
+    const body = [
+      {
+        newLeader: newLeader[memberIndex].id
+      },
+      clubId
+    ];
     confirm('회장을 양도하시겠습니까?') &&
-      (await putLeader(
-        {
-          newLeader: newLeader[memberIndex].id
-        },
-        router.query.id
-      )
+      (await putLeader(...body)
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
-
     await getMembersData();
   };
 
-  // 기능 권한 변경 PUT
-  const changeMembersAuth = async () => {
-    if (applyAuth.length === 0) return;
-    const adminOptions = [];
-    const tempArr = members.slice(0);
-    tempArr.map((member, index) => {
+  const changeAdminOptions = (adminOptions) => {
+    const result = adminOptions;
+    members.forEach((member, index) => {
       adminOptions.push({
         id: member.id,
         joinAdminFlag: applyAuth[index],
         boardAdminFlag: boardAuth[index]
       });
     });
-    await putAuth(
+    return result;
+  };
+
+  // 기능 권한 변경 PUT
+  const changeMembersAuth = async () => {
+    if (applyAuth.length === 0) return;
+    const adminOptions = [];
+    const body = [
       {
-        adminOptions: adminOptions
+        adminOptions: changeAdminOptions(adminOptions)
       },
-      router.query.id
-    )
-      .then((res) => {
-        alert(res.data.msg);
-      })
+      clubId
+    ];
+    await putAuth(...body)
+      .then((res) => alert(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
     await getMembersData();
   };
@@ -146,43 +160,54 @@ export const Manager = () => {
   // 동아리원 추방 DELETE
   const exileMember = async (index) => {
     const studentID = changeLeaderRef.current[index].id;
-    confirm(`${studentID}님을 동아리에서 추방시키겠습니까?`) &&
-      (await deleteMember(studentID, router.query.id)
+    const studentName =
+      changeLeaderRef.current[index].parentNode.parentNode.childNodes[1]
+        .childNodes[0].innerHTML;
+    confirm(`${studentName}님을 동아리에서 추방시키겠습니까?`) &&
+      (await deleteMember(studentID, clubId)
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
     await getMembersData();
   };
 
   //---------------------기능 권한 변경---------------------------//
-  const onApplyAuthClick = () => {
-    const newArr = applyAuthRef.current.slice(0);
-    const boolOfApplyAuth = [];
-    newArr.map((el) => boolOfApplyAuth.push(el.checked ? 1 : 0));
-    setApplyAuth(boolOfApplyAuth);
+  const setAuths = (authRef) => {
+    const result = [];
+    const currentAuth = authRef.current.slice(0);
+    currentAuth.forEach((el) => result.push(el.checked ? 1 : 0));
+    return result;
   };
 
-  const onBoardAuth = () => {
-    const newArr = boardAuthRef.current.slice(0);
-    const boolOfBoardAuth = [];
-    newArr.map((el) => boolOfBoardAuth.push(el.checked ? 1 : 0));
-    setBoardAuth(boolOfBoardAuth);
-  };
+  const onApplyAuthClick = useCallback(() => {
+    setApplyAuth(setAuths(applyAuthRef));
+  }, []);
+
+  const onBoardAuth = useCallback(() => {
+    setBoardAuth(setAuths(boardAuthRef));
+  }, []);
   //-------------------------------------------------------------//
 
   useEffect(() => {
-    if (applicantInfo.length > 0 && mergedApplicantQNA.length > 0) {
+    if (applicantInfo.length > 0 && mergedApplicantQNA.length > 0)
       setMergedApplicantInfo(
         processApplicantInfo(applicantInfo, mergedApplicantQNA)
       );
-    }
   }, [applicantInfo, mergedApplicantQNA]);
 
   useEffect(() => {
-    if (!router.query.id) return;
+    if (!clubId) return;
     getMembersData();
+  }, [getMembersData, clubId]);
+
+  useEffect(() => {
+    if (!clubId) return;
     onApplyAuthClick();
+  }, [onApplyAuthClick, clubId]);
+
+  useEffect(() => {
+    if (!clubId) return;
     onBoardAuth();
-  }, [getMembersData, router.query]);
+  }, [onBoardAuth, clubId]);
 
   return (
     <div className={styles.container}>
@@ -210,30 +235,38 @@ export const Manager = () => {
 
 export default Manager;
 
-// 가입 추가 질문 데이터 가공
-const processQuesData = (data) => {
-  const result = [];
-  for (let index in data) {
-    if (
-      index === '0' ||
-      (index > '0' && data[index - 1].id !== data[index].id)
-    ) {
-      result.push({
-        id: data[index].id,
-        questions: [data[index].question],
-        answers: [data[index].answer]
-      });
-    } else {
-      for (let info of result) {
-        if (info.id === data[index].id) {
-          info.questions.push(data[index].question);
-          info.answers.push(data[index].answer);
-        }
-      }
+//--------------------가입 추가 질문 데이터 가공---------------------//
+const handlePieceData = (index, data, additionalQuestion) => {
+  const result = additionalQuestion;
+  result.push({
+    id: data[index].id,
+    questions: [data[index].question],
+    answers: [data[index].answer]
+  });
+  return result;
+};
+
+const completeTheData = (index, data, incompleteData) => {
+  const result = incompleteData;
+  for (let info of result) {
+    if (info.id === data[index].id) {
+      info.questions.push(data[index].question);
+      info.answers.push(data[index].answer);
     }
   }
   return result;
 };
+
+const processQuesData = (data) => {
+  const result = [];
+  for (let index in data) {
+    if (index === '0' || (index > '0' && data[index - 1].id !== data[index].id))
+      handlePieceData(index, data, result);
+    else completeTheData(index, data, result);
+  }
+  return result;
+};
+//---------------------------------------------------------------------//
 
 // 가입 요청 데이터 가공
 const processApplicantInfo = (data, QNAs) => {
