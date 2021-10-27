@@ -6,7 +6,7 @@ import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 function ImageEdit({ posterImages, onEditImages }) {
   const router = useRouter();
-  const [displayImage, setDisplayImage] = useState([posterImages[0].imgPath]);
+  const [displayImage, setDisplayImage] = useState(posterImages[0].imgPath);
   const [images, setImages] = useState([]);
   const [index, setIndex] = useState(0);
   let deleteImage = [];

@@ -72,7 +72,13 @@ const Comment = ({ comment, postId, studentId }) => {
     <>
       <div className={styles.comment}>
         <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
-          <img src="https://picsum.photos/500" alt="profile" />
+          <img
+            src={
+              comment.profileImageUrl ??
+              'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+            }
+            alt="profile"
+          />
         </Link>
         <div>
           <div>
