@@ -23,7 +23,7 @@ const AlarmList = ({ alarm, onAlarmPatch }) => {
           onClick={() => onAlarmPatch(alarm.notificationNum)}
         />
       </div>
-      <Link href={alarm.url} passHref>
+      <Link href={`/${alarm.url}`} passHref>
         <div className={styles.bottom}>
           <p>{alarm.senderId}</p>
           <p>{alarm.inDate.substr(0, 10)}</p>
