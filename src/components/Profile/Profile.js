@@ -5,8 +5,11 @@ import UserInfo from './UserInfo';
 import router, { useRouter } from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';
+import { useDispatch } from 'react-redux';
+import { signOut } from 'redux/slices/user';
 
 function Profile() {
+  const dispatch = useDispatch();
   const [comp, setComp] = useState('프로필');
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
@@ -19,8 +22,9 @@ function Profile() {
   const uRouter = useRouter();
 
   const logout = () => {
-    window.localStorage.removeItem('jwt');
-    router.push('/');
+    window.localStorage.removeItem("jwt");
+    dispatch(signOut());
+    router.push('/')
   };
 
   const baseImg =

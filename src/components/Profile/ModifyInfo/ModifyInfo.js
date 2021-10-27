@@ -65,6 +65,7 @@ const ModifyInfo = () => {
         router.push(`/profile/${userInfo.id}`);
       })
       .catch((err) => alert(err.response.data.msg));
+
   };
 
   useEffect(() => {

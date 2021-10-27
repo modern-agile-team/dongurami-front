@@ -24,7 +24,7 @@ function WritePromition({ title, description }) {
       alert('동아리를 선택해 주세요');
       return;
     }
-    postPost('promotion', 1, { title, description, images }, clubNo);
+    postPost('promotion', { title, description, images }, clubNo);
     router.push('/promotion');
   };
   const onClubNoChange = (e) => {
