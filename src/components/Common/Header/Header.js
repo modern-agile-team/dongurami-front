@@ -65,7 +65,7 @@ function Header() {
           window.location.reload();
         });
     }
-  });
+  }, [token]);
 
   //알람 열람
   const alarmOpen = () => {

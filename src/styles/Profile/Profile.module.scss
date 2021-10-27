@@ -21,3 +21,21 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+  .profileHeader {
+    button {
+      border: 1px solid lightgray;
+      border-radius: 7px;
+      margin-right: 2px;
+      border-right: 1px solid lightgray !important;
+    }
+  }
+
+  .bottom {
+    margin: 0 auto;
+  }
+}
