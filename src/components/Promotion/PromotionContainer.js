@@ -60,6 +60,8 @@ const PromotionContainer = () => {
               window.removeEventListener('scroll', infiniteScroll);
             }
             setBoardData((prev) => prev.concat(result));
+          } else if (!result.length) {
+            window.removeEventListener('scroll', infiniteScroll);
           }
         });
       }
