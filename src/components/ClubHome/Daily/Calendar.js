@@ -8,7 +8,7 @@ import DailyControl from './DailyControl';
 import ScheduleModify from './ScheduleModify';
 import RightContainer from './RightContainer';
 import MakeTd from './MakeTd';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { getInfo } from 'apis/calendar';
 
 const Calendar = () => {
@@ -22,7 +22,9 @@ const Calendar = () => {
   const [color, setColor] = useState('');
   const [nowDay, setNowDay] = useState('');
   const nowDate = useRef();
-  const colors = ['#f7b5b5', '#ffee8f', '#aefff8', '#ffc2fc', '#e2e2e2']
+  const uRouter = useRouter();
+  const Qdata = uRouter.query;
+  const colors = ['#f7b5b5', '#ffee8f', '#aefff8', '#ffc2fc', '#e2e2e2'];
 
   const moveLogin = () => {
     Router.push('/LoginPage');
@@ -33,6 +35,7 @@ const Calendar = () => {
   };
 
   const today = momentTime;
+  const yearMonth = today.format('YYYY-MM');
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
     today.clone().endOf('month').week() === 1
@@ -45,7 +48,8 @@ const Calendar = () => {
 
   useEffect(() => {
     if (today.format('MM') === nowMonth) setNowDay(nowDate.current.id);
-    getInfo(today)
+    if (!uRouter.isReady) return;
+    getInfo(Qdata.id, yearMonth)
       .then((res) => setSchedule(res.data.result))
       .catch((err) => {
         alert(err.response.data.msg);
@@ -62,7 +66,7 @@ const Calendar = () => {
         )
           moveHome();
       });
-  }, [momentTime]);
+  }, [uRouter, momentTime, Qdata.id, nowMonth, today, yearMonth]);
 
   //달력만드는 함수
   const calendarArr = () => {
@@ -100,6 +104,7 @@ const Calendar = () => {
         />
       </div>
       <DailyModal
+        Qdata={Qdata}
         colors={colors}
         setSchedule={setSchedule}
         setPop={setPop}
@@ -107,6 +112,7 @@ const Calendar = () => {
         pop={pop}
       />
       <DailyControl
+        Qdata={Qdata}
         setNo={setNo}
         schedule={schedule}
         date={date}
@@ -119,6 +125,7 @@ const Calendar = () => {
         setSchedule={setSchedule}
       />
       <ScheduleModify
+        Qdata={Qdata}
         today={today}
         setSchedule={setSchedule}
         title={title}
@@ -127,6 +134,7 @@ const Calendar = () => {
         setPop={setPop}
         pop={pop}
         color={color}
+        colors={colors}
       />
     </>
   );

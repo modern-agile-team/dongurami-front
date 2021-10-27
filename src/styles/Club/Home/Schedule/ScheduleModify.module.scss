@@ -42,11 +42,20 @@
   }
 
   .modifyBtn {
-    margin-top: 4%;
-    width: 11vw;
-    height: 6vh;
-    border-radius: 10%;
-    background-color: white;
+    border: 2px solid #f2f2f2;
+    padding: 0.5rem 1em;
+    margin: 1em 1.5em;
+    float: right;
     cursor: pointer;
+    background-color: #fcf5c4;
+    border-radius: 8px;
+    &:hover {
+      filter: brightness(97%);
+    }
   }
+}
+.colorBtn {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 1em;
 }
