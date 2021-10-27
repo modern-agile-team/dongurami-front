@@ -25,11 +25,11 @@ const ScheduleModify = ({
     setEndDate(period[1]);
     setNewTitle(title);
     setColorCode(color);
-  }, [pop]);
+  }, [pop, color, period, title]);
 
-  const axiosPUT = () => {
+  const axiosPUT = async () => {
     if (newTitle.replace(/ /g, '').length === 0) setNewTitle(title);
-    modifySchedule(Qdata.id, no, {
+    await modifySchedule(Qdata.id, no, {
       colorCode: colorCode,
       title: newTitle,
       startDate: startDate,
@@ -39,7 +39,7 @@ const ScheduleModify = ({
     })
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response));
-    getInfo(Qdata.id, today.format('YYYY-MM'))
+    await getInfo(Qdata.id, today.format('YYYY-MM'))
       .then((res) => setSchedule(res.data.result))
       .catch((err) => {
         alert(err);

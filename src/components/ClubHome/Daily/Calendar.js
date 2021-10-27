@@ -66,7 +66,7 @@ const Calendar = () => {
         )
           moveHome();
       });
-  }, [uRouter, momentTime]);
+  }, [uRouter, momentTime, Qdata.id, nowMonth, today, yearMonth]);
 
   //달력만드는 함수
   const calendarArr = () => {

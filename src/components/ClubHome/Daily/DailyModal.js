@@ -17,15 +17,15 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
     setStartDate(today.format('YYYY-MM-DD'));
     setEndDate(today.format('YYYY-MM-DD'));
     setColor('#FFFFFF');
-  }, [pop]);
+  }, [pop, today]);
 
   const moveCal = () => {
     setPop('Calendar');
   };
 
   //추가하는 함수
-  const onClickAdd = () => {
-    addSchedule(Qdata.id, {
+  const onClickAdd = async () => {
+    await addSchedule(Qdata.id, {
       colorCode: color,
       title: title.current.value,
       startDate: startDate,
@@ -36,7 +36,7 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
     })
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response.data.msg));
-    getInfo(Qdata.id, today.format('YYYY-MM'))
+    await getInfo(Qdata.id, today.format('YYYY-MM'))
       .then((res) => setSchedule(res.data.result))
       .catch((err) => {
         alert(err);

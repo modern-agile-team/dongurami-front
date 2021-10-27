@@ -27,11 +27,11 @@ const DailyControl = ({
     setPop('ScheduleModify');
   };
 
-  const onDeleteSchedule = (el) => {
-    deleteSchedule(Qdata.id, el)
+  const onDeleteSchedule = async (el) => {
+    await deleteSchedule(Qdata.id, el)
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response.data.msg));
-    getInfo(Qdata.id, today.format('YYYY-MM'))
+    await getInfo(Qdata.id, today.format('YYYY-MM'))
       .then((res) => setSchedule(res.data.result))
       .catch((err) => {
         alert(err);
