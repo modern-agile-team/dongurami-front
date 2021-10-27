@@ -23,8 +23,7 @@ const WriteScrpas = () => {
     } else {
       await addPost(data.pid, data.clubNum, {
         title,
-        description,
-        images: []
+        description
       })
         .then((res) => console.log(res))
         .catch((err) => alert(err.response.data.msg));
