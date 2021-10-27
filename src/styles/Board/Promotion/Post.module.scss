@@ -15,12 +15,10 @@
 }
 
 .container::-webkit-scrollbar {
-  background-color: rgb(235, 235, 235);
-  width: 8px;
+  display: none;
 }
 .container::-webkit-scrollbar-thumb {
-  background-color: #64beb18c;
-  border-radius: 16px;
+  display: none;
 }
 
 .title {

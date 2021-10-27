@@ -22,12 +22,12 @@ const PromotionContainer = () => {
   let itemNo = 0;
 
   const getDatas = async () => {
-    console.log(itemNo);
     try {
       isLoading = true;
       if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
+          console.log(response);
 
           itemNo = result[result.length - 1].no;
 
@@ -38,7 +38,7 @@ const PromotionContainer = () => {
       } else if (search) {
         await getSearchData(type, searchKeyword, itemNo).then((response) => {
           const result = response.data.boards;
-          console.log(result);
+          console.log(response);
 
           itemNo = result[result.length - 1].no;
 
@@ -52,13 +52,16 @@ const PromotionContainer = () => {
       ) {
         await getBoardData(itemNo).then((response) => {
           const result = response.data.boards;
-          itemNo = result[result.length - 1].no;
-          console.log(result);
+
+          if (result.length === 0) {
+            window.removeEventListener('scroll', infiniteScroll);
+          }
 
           if (result.length) {
             if (result.length < 8) {
               window.removeEventListener('scroll', infiniteScroll);
             }
+            itemNo = result[result.length - 1].no;
             setBoardData((prev) => prev.concat(result));
           } else if (!result.length) {
             window.removeEventListener('scroll', infiniteScroll);
@@ -136,6 +139,22 @@ const PromotionContainer = () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
   }, [searchItem, isSearch]);
+
+  /*useEffect(() => {
+    function handleTouchMove(event) {
+      if (openModal) {
+        event.preventDefault(); // 여기가 핵심
+        console.log('안녕');
+      }
+    }
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleTouchMove, {
+        passive: false
+      });
+      return () => window.removeEventListener('scroll', handleTouchMove);
+    }
+  }, [openModal]);
+  */
 
   return (
     <>
