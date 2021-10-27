@@ -32,9 +32,11 @@
     }
   }
 }
+
 .slider {
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
   & > div:nth-child(1) {
     display: none;
@@ -58,6 +60,23 @@
     margin-top: 1em;
     img {
       width: 80%;
+    }
+  }
+}
+
+@media (max-width: 768px) and (max-height: 500px) {
+  .background {
+    flex-direction: column;
+    justify-content: flex-start;
+    .image {
+      width: 100%;
+    }
+  }
+  .slider {
+    margin: 0;
+    margin-top: 1em;
+    img {
+      display: none;
     }
   }
 }

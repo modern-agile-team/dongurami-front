@@ -31,28 +31,30 @@ const Post = ({ postId, getData, post }) => {
         <div className={styles.title}>
           <h2>{title}</h2>
         </div>
-        {user.id === studentId && (
-          <div className={styles.buttons}>
-            <Link
-              href={{
-                pathname: `${router.pathname}/${postId}/edit`,
-                query: router.query
-              }}
-              passHref
-            >
-              <button>수정하기</button>
-            </Link>
-            <button onClick={onDelete}>삭제하기</button>
-          </div>
-        )}
-        <div className={styles.boardInfo}>
+        <div className={styles.clubName}>
           <Link href={{ pathname: `/clubhome/${clubNo}` }} passHref>
             <h3>{clubName}</h3>
           </Link>
-          <div>
-            <span>{inDate.substr(0, 10)}</span>
+        </div>
+        <div className={styles.boardInfo}>
+          <div className={styles.dateHit}>
+            <span>{inDate}</span>
             <span>조회 {hit}</span>
           </div>
+          {user.id === studentId && (
+            <div className={styles.buttons}>
+              <Link
+                href={{
+                  pathname: `${router.pathname}/${postId}/edit`,
+                  query: router.query
+                }}
+                passHref
+              >
+                <button>수정하기</button>
+              </Link>
+              <button onClick={onDelete}>삭제하기</button>
+            </div>
+          )}
         </div>
       </div>
       <ReactQuill

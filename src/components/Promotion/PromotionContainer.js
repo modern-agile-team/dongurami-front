@@ -22,6 +22,7 @@ const PromotionContainer = () => {
   let itemNo = 0;
 
   const getDatas = async () => {
+    console.log(itemNo);
     try {
       isLoading = true;
       if (searchItem !== 'whole' && searchItem) {
@@ -55,7 +56,12 @@ const PromotionContainer = () => {
           console.log(result);
 
           if (result.length) {
+            if (result.length < 8) {
+              window.removeEventListener('scroll', infiniteScroll);
+            }
             setBoardData((prev) => prev.concat(result));
+          } else if (!result.length) {
+            window.removeEventListener('scroll', infiniteScroll);
           }
         });
       }
@@ -113,13 +119,10 @@ const PromotionContainer = () => {
   };
 
   const infiniteScroll = () => {
-    const scrollHeight = document.body.scrollHeight;
-
-    const scrollTop = Math.max(
-      document.documentElement.scrollTop,
-      document.body.scrollTop
-    );
-    const clientHeight = document.documentElement.clientHeight;
+    const { documentElement } = document;
+    const scrollHeight = documentElement.scrollHeight;
+    const scrollTop = documentElement.scrollTop;
+    const clientHeight = documentElement.clientHeight;
     if (scrollTop + clientHeight + 200 >= scrollHeight && isLoading === false) {
       getDatas();
     }
@@ -152,6 +155,7 @@ const PromotionContainer = () => {
             return (
               <div className={styles.poster} key={el.no}>
                 <Promotion
+                  key={el.no}
                   pId={el.no}
                   date={el.inDate}
                   clubName={el.clubName}

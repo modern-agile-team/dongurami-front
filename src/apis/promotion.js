@@ -8,7 +8,7 @@ export function getData(searchItem, no) {
 
 export function getBoardData(no) {
   return axios.get(
-    `/api/board/promotion/club?sort=inDate&order=desc&lastNum=${no}`
+    `api/board/promotion/club?sort=inDate&order=desc&lastNum=${no}`
   );
 }
 
