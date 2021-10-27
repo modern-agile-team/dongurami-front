@@ -109,5 +109,15 @@
   .promotion {
     width: 100%;
     padding: 0;
+    .img {
+      .creationInfo {
+        display: none;
+        .writerInfo {
+          & > div:nth-child(2) {
+            display: none;
+          }
+        }
+      }
+    }
   }
 }

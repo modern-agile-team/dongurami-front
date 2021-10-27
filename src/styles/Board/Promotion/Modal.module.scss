@@ -17,6 +17,23 @@
   justify-content: space-around;
   align-items: center;
   overflow: hidden;
+  .closeBtn {
+    position: fixed;
+    z-index: 99999;
+
+    top: 5vh;
+    right: 5vh;
+    background: none;
+    border: none;
+    transform: scale(2);
+    color: white;
+    padding: 0;
+    cursor: pointer;
+    &:hover {
+      color: black;
+    }
+  }
+
   .image {
     display: flex;
     justify-content: center;
@@ -51,8 +68,11 @@
   .background {
     flex-direction: column;
     justify-content: flex-start;
+    .closeBtn {
+      right: 2vh;
+    }
     .image {
-      width: 100%;
+      width: 80%;
     }
   }
   .slider {

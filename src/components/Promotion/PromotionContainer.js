@@ -174,7 +174,6 @@ const PromotionContainer = () => {
             return (
               <div className={styles.poster} key={el.no}>
                 <Promotion
-                  key={el.no}
                   pId={el.no}
                   date={el.inDate}
                   clubName={el.clubName}
