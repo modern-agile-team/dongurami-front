@@ -12,6 +12,11 @@ const getUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState: null,
+  reducers: {
+    signOut() {
+      state = null;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getUser.fulfilled, (_, action) => {

@@ -2,10 +2,12 @@ import { postPost } from 'apis/board';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
 import { useRouter } from 'next/router';
 import { useState } from "react";
+import { useSelector } from 'react-redux';
 import styles from "../../styles/Board/Write/WritePromotionContent.module.scss";
 
 function WritePromition({ title, description }) {
   const router = useRouter();
+  const user = useSelector((state) => state.user);
   const [images, setImage] = useState([]);
   const [clubNo, setClubNo] = useState("0");
 
@@ -18,6 +20,10 @@ function WritePromition({ title, description }) {
     setImage(imagesURL);
   }
   const onSubmit = () => {
+    if (clubNo === '0') {
+      alert('동아리를 선택해 주세요');
+      return;
+    }
     postPost('promotion', 1, { title, description, images }, clubNo);
     router.push('/promotion');
   };
@@ -40,8 +46,9 @@ function WritePromition({ title, description }) {
       <div className={styles.selectContainer}>
         <select value={clubNo} onChange={onClubNoChange}>
           <option value="0">동아리 선택</option>
-          <option value="1">우아한 애자일</option>
-          <option value="2">프리버드</option>
+          {(user?.club) && (user.club.map((club) => (
+            <option key={club.no} value={club.no}>{club.name}</option>
+          )))}
         </select>
       </div>
       <button onClick={onSubmit}>등록</button>
