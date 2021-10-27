@@ -6,7 +6,7 @@ function Write() {
   return (
     <>
       <Header />
-      <Edit category="free" api={api} />
+      <Edit category="free" />
       <Footer />
     </>
   );
