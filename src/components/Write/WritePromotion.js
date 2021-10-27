@@ -18,7 +18,7 @@ function WritePromition({ title, description }) {
     setImage(imagesURL);
   }
   const onSubmit = () => {
-    postPost('promotion', 1, { title, description, images, clubNo: Number(clubNo) });
+    postPost('promotion', 1, { title, description, images }, clubNo);
     router.push('/promotion');
   };
   const onClubNoChange = (e) => {

@@ -21,7 +21,7 @@ export function searchPosts({ category, clubNum, ...params }) {
   return axios.get(`/api/search/${category}?${queryString}`);
 }
 
-export function postPost(category, clubNum, body) {
+export function postPost(category, body, clubNum) {
   if (category === 'clubNotice') {
     return axios.post(`/api/club/board/clubNotice/${clubNum}`, { id: 'test1', ...body });
   }

@@ -56,7 +56,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
             <div>{post.name}</div>
           </Link>
           <div>
-            {(category === 'clubActivity' && user && user.clubNum.includes(clubNum)) && (
+            {(category === 'clubActivity' && user && user.club.some(({ no }) => no === clubNum)) && (
               <Link href={{ pathname: `/profile/${user.id}/${clubNum}/writescraps`, query: { scrapNum: post.no } }} passHref>
                 <button>스크랩하기</button>
               </Link>
