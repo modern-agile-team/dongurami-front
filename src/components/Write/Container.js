@@ -1,5 +1,4 @@
 import styles from '../../styles/Board/Write/Container.module.scss';
-import Header from '../Common/Header/Header';
 
 function Container({ children, category, type }) {
   const title =
