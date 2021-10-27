@@ -81,7 +81,7 @@ export const Manager = () => {
     const body = [
       {
         applicant: mergedApplicantInfo[e.target.id].id,
-        url: `club/${clubId}`,
+        url: `clubhome/${clubId}`,
         notiCategoryNum: 2
       },
       clubId
@@ -98,19 +98,16 @@ export const Manager = () => {
     const body = [
       {
         applicant: mergedApplicantInfo[e.target.id].id,
-        url: `club/${clubId}`,
+        url: `clubhome/${clubId}`,
         notiCategoryNum: 3
       },
       clubId
     ];
     confirm('가입을 거절합니까?') &&
       (await putApply(...body)
-        .then((res) => {
-          if (applicantInfo.length === 1) router.reload();
-          else getMembersData();
-          alert(res.data.msg);
-        })
+        .then((res) => handleAfterApply(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
+    await getMembersData();
   };
 
   // 회장 양도 PUT
@@ -271,7 +268,7 @@ const processQuesData = (data) => {
 // 가입 요청 데이터 가공
 const processApplicantInfo = (data, QNAs) => {
   const result = data;
-  for (let index in QNAs) {
+  for (let index in result) {
     if (QNAs[index].id === result[index].id) {
       result[index].answers = QNAs[index].answers;
       result[index].questions = QNAs[index].questions;
