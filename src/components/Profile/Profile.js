@@ -22,14 +22,9 @@ function Profile() {
   const uRouter = useRouter();
 
   const logout = () => {
-<<<<<<< HEAD
     window.localStorage.removeItem("jwt");
     dispatch(signOut());
     router.push('/')
-=======
-    window.localStorage.removeItem('jwt');
-    router.push('/');
->>>>>>> e3f557de0c57b7e64dbfebd81a8ecffe738f2789
   };
 
   const baseImg =
