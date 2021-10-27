@@ -17,7 +17,7 @@ function Write({ category }) {
       setShowModal(true);
       return;
     }
-    await postPost(category, { title, description });
+    await postPost(category, { title, description }, router.query.id);
     router.back();
   };
   const onClose = () => {
