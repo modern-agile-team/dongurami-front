@@ -10,7 +10,7 @@
   width: 28.5vw;
   height: 100%;
 
-  .todaySchedule {    
+  .todaySchedule {
     // border: solid 1px;
     display: flex;
     flex-direction: column;
@@ -35,8 +35,6 @@
     }
     .inSchedule {
       width: 90%;
-      // margin-top: 5%;
-      // margin-bottom: 2%;
       padding: 1.2rem 1rem;
       border-bottom: 1px solid #c2c2c246;
       span {
@@ -48,10 +46,10 @@
         color: gray;
         padding: 0.1rem;
         // float: right;
-       }
+      }
     }
   }
-  
+
   .importantSchedule {
     @extend .todaySchedule;
     h3 {

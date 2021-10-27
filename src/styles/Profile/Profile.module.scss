@@ -1,8 +1,10 @@
 .container {
-  width: 50%;
+  width: 55%;
   padding: 5em;
+  padding-left: 0;
   margin: 0 auto;
   display: flex;
+  min-height: 67vh;
   .profileHeader {
     z-index: 2;
     margin-top: 2%;
@@ -24,18 +26,42 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 0;
+    width: 70%;
+    padding: 6rem;
+    padding-top: 2rem;
+    padding-left: 0;
   }
   .profileHeader {
     button {
+      zoom: 1.2;
       border: 1px solid lightgray;
       border-radius: 7px;
       margin-right: 2px;
-      border-right: 1px solid lightgray !important;
+      // border-right: 1px solid lightgray !important;
     }
   }
 
   .bottom {
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem 4rem 4rem 0rem;
+    flex-direction: column;
+    .profileHeader {
+      display: flex;
+      width: 100%;
+      button {
+        // height: 100px;
+        width: 200px;
+        border-right: 1px solid lightgray !important;
+        border-bottom: none;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        // padding: 0rem 4rem;
+      }
+    }
   }
 }

@@ -12,32 +12,37 @@ const PostContainer = () => {
     getBPost(data.pid, data.clubNum, data.boardNum)
       .then((res) => setPost(res.data.board))
       .catch((err) => console.log(err.response));
-  }
+  };
 
   const getScrapPost = () => {
     getSPost(data.pid, data.clubNum, data.boardNum)
-    .then(res => {
-      setPost(res.data.scrap)
-      console.log(post)
-    })
-    .catch(err => console.log(err));
-  }
+      .then((res) => {
+        console.log(res.data.scrap);
+        setPost(res.data.scrap);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const scrapData = () => {
     return {
       ...post,
-      description:  post.description + `<br />` + post.scrapDescription
+      description: post.description + `<br />` + post.scrapDescription
     };
-  }
+  };
 
   useEffect(() => {
     if (!router.isReady) return;
-    data.no === 'board' ? getBoardPost() : getScrapPost()
+    data.no === 'board' ? getBoardPost() : getScrapPost();
   }, [router]);
 
-  if(!post?.description) return null;
+  if (!post?.description) return null;
 
-  return <Post category="personal" post={post.scrapDescription === undefined ? post : scrapData()} />;
+  return (
+    <Post
+      category="personal"
+      post={post.scrapDescription === undefined ? post : scrapData()}
+    />
+  );
 };
 
 export default PostContainer;

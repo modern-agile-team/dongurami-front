@@ -1,15 +1,16 @@
 .wrap {
   width: 100%;
   .container {
+    width: 108%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0px 8px 8px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     min-height: 60vh;
     .headerBox {
       width: 100%;
-      padding: 1rem;
+      padding-top: 2rem;
       display: flex;
       justify-content: flex-end;
       .header {
@@ -24,7 +25,7 @@
 .postItem {
   padding: 1rem;
   display: grid;
-  width: 100%;
+  // width: 100%;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(4, 1fr);
 }
@@ -58,5 +59,31 @@
   cursor: pointer;
   &:hover {
     filter: brightness(95%);
+  }
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    .container {
+      width: 118%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    .container {
+      width: 125%;
+      border-top-left-radius: 0px;
+      .headerBox {
+        justify-content: stretch;
+        .header {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          margin-left: 0;
+        }
+      }
+    }
   }
 }
