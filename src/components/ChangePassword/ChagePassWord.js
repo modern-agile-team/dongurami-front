@@ -1,7 +1,7 @@
 import styles from '../../styles/User/ChangePassword/ChangePassword.module.scss';
 import { useState } from 'react';
-import getToken from 'utils/getToken';
 import { patchChangePW } from 'apis/user';
+import { useRouter } from 'next/router';
 
 function ChangePW() {
   const [password, setPassword] = useState('');
@@ -16,21 +16,18 @@ function ChangePW() {
     if (name === 'checkNewPassword') setCheckNewPassword(value);
   };
 
+  const router = useRouter();
+
   const onSubmit = () => {
-    patchChangePW(
-      {
-        password,
-        newPassword,
-        checkNewPassword
-      },
-      {
-        headers: {
-          'Content-type': 'application/json; charset=utf-8',
-          'x-auth-token': getToken()
-        }
-      }
-    )
-      .then((res) => alert(res.data.msg))
+    patchChangePW({
+      password,
+      newPassword,
+      checkNewPassword
+    })
+      .then((res) => {
+        alert(res.data.msg);
+        router.back();
+      })
       .catch((err) => alert(err.response.data.msg));
   };
 
