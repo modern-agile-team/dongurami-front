@@ -35,7 +35,7 @@ export const Manager = () => {
     router.push(`/clubhome/${clubId}`);
   };
 
-  const setMemberState = (data) => {
+  const setStates = (data) => {
     setApplicantQNA(data.applicant.questionsAnswers);
     setApplicantInfo(data.applicant.applicantInfo);
     setLeader(data.clubAdminOption.leader);
@@ -47,7 +47,7 @@ export const Manager = () => {
   const getMembersData = useCallback(async () => {
     getMember(clubId)
       .then((res) => {
-        setMemberState(res.data);
+        setStates(res.data);
       })
       .catch((err) => {
         switch (err.response.status) {
