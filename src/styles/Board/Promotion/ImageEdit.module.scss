@@ -79,3 +79,77 @@
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .container {
+    .imageContainer {
+      width: 100%;
+      svg {
+        cursor: pointer;
+        width: 3em;
+        &:hover {
+          color: red;
+        }
+      }
+      & > img {
+        width: 10em;
+        @media screen and (max-width: 768px) {
+          max-width: 100%;
+        }
+      }
+    }
+    .updateBtn {
+      & > label {
+        width: 20px;
+        font-size: 5px;
+      }
+
+      & > button {
+        width: 5em;
+        font-size: 11px;
+      }
+    }
+    & > button {
+      width: 60em;
+      font-size: 1px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    .imageContainer {
+      svg {
+        cursor: pointer;
+        width: 3em;
+        &:hover {
+          color: red;
+        }
+      }
+      & > img {
+        width: 27em;
+        @media screen and (max-width: 768px) {
+          max-width: 100%;
+        }
+      }
+    }
+    .updateBtn {
+      & > label {
+        width: 50px;
+        font-size: 25px;
+      }
+
+      & > button {
+        width: 4em;
+        height: 2em;
+        font-size: 24px;
+      }
+    }
+    & > button {
+      width: 4em;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  }
+}
