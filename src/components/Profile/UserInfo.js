@@ -22,7 +22,6 @@ const UserInfo = ({
             src={profile.profileImageUrl ?? baseImg}
             alt="profileImg"
           />
-          <hr />
           <div className={styles.bottom}>
             <div className={styles.name}>
               <FaUserCircle className={styles.icon} />
