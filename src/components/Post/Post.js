@@ -70,7 +70,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
               </>
             )}
             <div>{new Date(post.inDate).toLocaleDateString()}</div>
-            <div>조회 {post.hit}</div>
+            {category !== 'personal' && <div>조회 {post.hit}</div>}
           </div>
         </div>
       </div>
