@@ -4,7 +4,6 @@ import styles from "../../styles/Board/Board/Table.module.scss";
 
 function NoticeTable({ posts, page, category }) {
   const router = useRouter();
-
   const postsByPage = posts.slice(10 * (page - 1), 10 * page);
 
   return (
@@ -20,23 +19,19 @@ function NoticeTable({ posts, page, category }) {
       </thead>
       <tbody>
         {postsByPage.map((post) => (
-          <tr key={post.no}>
-            <td>{post.no}</td>
-            <td>
-              {(category === 'clubNotice') ? (
-                <Link href={{ pathname: `${router.pathname}/notice/${post.no}`, query: router.query }} passHref>
-                  <a>{post.title}</a>
-                </Link>
-              ) : (
-                <Link href={{ pathname: `${router.pathname}/${post.no}` }} passHref>
-                  <a>{post.title}</a>
-                </Link>
-              )}
-            </td>
-            <td>{post.studentName}</td>
-            <td>{new Date(post.inDate).toLocaleDateString()}</td>
-            <td>{post.hit}</td>
-          </tr>
+          <Link key={post.no} href={{
+            pathname: (category === 'clubNotice') ?
+              `${router.pathname}/notice/${post.no}` : `${router.pathname}/${post.no}`,
+            query: router.query
+          }} passHref>
+            <tr key={post.no}>
+              <td>{post.no}</td>
+              <td>{post.title}</td>
+              <td>{post.studentName}</td>
+              <td>{new Date(post.inDate).toLocaleDateString()}</td>
+              <td>{post.hit}</td>
+            </tr>
+          </Link>
         ))}
       </tbody>
     </table>
