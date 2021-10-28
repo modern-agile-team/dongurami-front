@@ -17,6 +17,7 @@
     display: flex;
     flex-direction: column;
     z-index: 9999;
+    padding: 1rem;
 
     .header {
       display: flex;
@@ -58,4 +59,40 @@
   width: 2rem;
   height: 2rem;
   margin-bottom: 1em;
+}
+
+@media (max-width: 1024px) {
+  .wrap {
+    .modal {
+      width: 45vw;
+      padding: 2rem 1rem;
+      .body {
+        // margin: 0 auto;
+        width: 100%;
+      }
+    }
+  }
+}
+@media (max-width: 480px) {
+  .wrap {
+    .modal {
+      width: 60vw;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .wrap {
+    .modal {
+      height: 73%;
+      width: 70%;
+      padding-top: 0;
+      .body {
+        width: 100%;
+      }
+      .modifyBtn {
+        margin-right: 0;
+      }
+    }
+  }
 }
