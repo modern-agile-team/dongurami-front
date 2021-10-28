@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import styles from '../../../styles/Board/Promotion/ImageEdit.module.scss';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { BsImage } from 'react-icons/bs';
 
 function ImageEdit({ images, onEditImages, setImages }) {
   const router = useRouter();
@@ -74,32 +75,40 @@ function ImageEdit({ images, onEditImages, setImages }) {
         {images.length > 1 && (
           <IoIosArrowBack size={70} onClick={() => prevSlide()} />
         )}
-        <img src={displayImage} alt="poster" />
+        {images.length > 0 ? (
+          <img src={displayImage} alt="poster" />
+        ) : (
+          <BsImage />
+        )}
+
         {images.length > 1 && (
           <IoIosArrowForward size={70} onClick={() => nextSlide()} />
         )}
       </div>
-      <div className={styles.updateBtn}>
-        <label htmlFor="update">수정</label>
-        <input
-          id="update"
-          type="file"
-          accept="image/*"
-          onChange={(e) => onChange(e)}
-          multiple
-        />
-        <label htmlFor="input">추가</label>
-        <input
-          id="input"
-          type="file"
-          accept="image/*"
-          onChange={(e) => onChange(e)}
-          multiple
-        />
-        <button onClick={() => onDelete()}>삭제</button>
+      <div className={styles.btnWrap}>
+        <div className={styles.btns}>
+          <div className={styles.updateBtn}>
+            <label htmlFor="update">수정</label>
+            <input
+              id="update"
+              type="file"
+              accept="image/*"
+              onChange={(e) => onChange(e)}
+              multiple
+            />
+            <label htmlFor="input">추가</label>
+            <input
+              id="input"
+              type="file"
+              accept="image/*"
+              onChange={(e) => onChange(e)}
+              multiple
+            />
+            <label onClick={() => onDelete()}>삭제</label>
+          </div>
+          <label onClick={() => onEditImages(images)}>등록</label>
+        </div>
       </div>
-
-      <button onClick={() => onEditImages(images)}>등록</button>
     </div>
   );
 }

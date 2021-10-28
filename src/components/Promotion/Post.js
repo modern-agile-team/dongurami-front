@@ -6,13 +6,15 @@ import Link from 'next/link';
 import { deletePost } from 'apis/promotion';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
+import { IoIosArrowForward } from 'react-icons/io';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
 const Post = ({ postId, getData, post }) => {
-  const { clubName, hit, title, inDate, description, studentId, clubNo } = post;
+  const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
+    post;
   const user = useSelector((state) => state.user);
   const router = useRouter();
 
@@ -27,50 +29,59 @@ const Post = ({ postId, getData, post }) => {
 
   return (
     <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-      <div className={styles.header}>
-        <div className={styles.title}>
-          <h2>{title}</h2>
-        </div>
-        <div className={styles.clubName}>
-          <Link href={{ pathname: `/clubhome/${clubNo}` }} passHref>
-            <h3>{clubName}</h3>
-          </Link>
-        </div>
-        <div className={styles.boardInfo}>
-          <div className={styles.dateHit}>
-            <span>{new Date(inDate).toLocaleDateString()}</span>
-            <span>조회 {hit}</span>
-          </div>
-          {user.id === studentId && (
-            <div className={styles.buttons}>
-              <Link
-                href={{
-                  pathname: `${router.pathname}/${postId}/edit`,
-                  query: router.query
-                }}
-                passHref
-              >
-                <button>수정하기</button>
-              </Link>
-              <button onClick={onDelete}>삭제하기</button>
+      <div className={styles.wrap}>
+        <div className={styles.header}>
+          <div className={styles.title}>
+            <h1>{title}</h1>
+            <div className={styles.info}>
+              {user && user.id === post.studentId && (
+                <div className={styles.buttons}>
+                  <Link
+                    href={{
+                      pathname: `${router.pathname}/${postId}/edit`,
+                      query: router.query
+                    }}
+                    passHref
+                  >
+                    <button>수정</button>
+                  </Link>
+                  <button onClick={onDelete}>삭제</button>
+                </div>
+              )}
+              <span className={styles.hit}>조회 {hit}</span>
             </div>
-          )}
+          </div>
+          <div className={styles.infoWrap}>
+            <div className={styles.club}>
+              {clubName}
+              <span>바로가기</span>
+              <IoIosArrowForward size={25} />
+            </div>
+            <div className={styles.boardInfo}>
+              <Link href={`/profile/${post.studentId}`} passHref>
+                <span>{name}</span>
+              </Link>
+              <div className={styles.dateHit}>
+                <span>{new Date(inDate).toLocaleDateString()}</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <ReactQuill
-        className={styles.description}
-        value={description || ''}
-        theme="bubble"
-        readOnly
-      />
-      {post.comments && (
-        <PromotionCommentContainer
-          comments={post.comments}
-          postId={postId}
-          studentId={studentId}
-          getData={getData}
+        <ReactQuill
+          className={styles.description}
+          value={description || ''}
+          theme="bubble"
+          readOnly
         />
-      )}
+        {post.comments && (
+          <PromotionCommentContainer
+            comments={post.comments}
+            postId={postId}
+            studentId={studentId}
+            getData={getData}
+          />
+        )}
+      </div>
     </div>
   );
 };
