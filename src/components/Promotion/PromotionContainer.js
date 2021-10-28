@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
 import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
+import { useRouter } from 'next/router';
 
 import Modal from './Modal';
 import Promotion from './Promotion';
@@ -18,6 +19,8 @@ const PromotionContainer = () => {
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
 
+  const router = useRouter();
+
   let isLoading = false;
   let itemNo = 0;
 
@@ -26,23 +29,25 @@ const PromotionContainer = () => {
       isLoading = true;
       if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
-          const result = response.data.boards;
-          console.log(response);
-
-          itemNo = result[result.length - 1].no;
-
-          if (result.length) {
+          if (result.length === 0) {
+            window.removeEventListener('scroll', infiniteScroll);
+          } else if (result.length) {
+            if (result.length < 8) {
+              window.removeEventListener('scroll', infiniteScroll);
+            }
+            itemNo = result[result.length - 1].no;
             setBoardData((prev) => prev.concat(result));
           }
         });
       } else if (search) {
         await getSearchData(type, searchKeyword, itemNo).then((response) => {
-          const result = response.data.boards;
-          console.log(response);
-
-          itemNo = result[result.length - 1].no;
-
-          if (result.length) {
+          if (result.length === 0) {
+            window.removeEventListener('scroll', infiniteScroll);
+          } else if (result.length) {
+            if (result.length < 8) {
+              window.removeEventListener('scroll', infiniteScroll);
+            }
+            itemNo = result[result.length - 1].no;
             setBoardData((prev) => prev.concat(result));
           }
         });
@@ -78,6 +83,10 @@ const PromotionContainer = () => {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
           if (result.length) itemNo = result[result.length - 1].no;
+          else {
+            alert('게시글이 존재하지 않습니다');
+            router.reload();
+          }
 
           setBoardData(result);
         });
@@ -86,6 +95,10 @@ const PromotionContainer = () => {
           const result = response.data.boards;
           console.log(result);
           if (result.length) itemNo = result[result.length - 1].no;
+          else {
+            alert('게시글이 존재하지 않습니다');
+            router.reload();
+          }
           setBoardData(result);
         });
       } else if (

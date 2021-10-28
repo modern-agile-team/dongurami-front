@@ -26,7 +26,7 @@ function AddComment({ postId, parentCommentId }) {
 
   return (
     <div className={styles.container}>
-      <div>{user.name}</div>
+      <div>{user ? user.name : '닉네임'}</div>
       <form onSubmit={onSubmit}>
         <input
           type="text"

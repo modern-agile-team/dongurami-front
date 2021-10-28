@@ -1,16 +1,55 @@
 .container {
   background: white;
-  border: 2px solid #90e2d6;
   overflow-y: auto;
-  padding: 1em;
-  border-radius: 16px;
-  width: 40%;
+  padding: 2em;
+  width: 42%;
   max-height: 80%;
-  h2,
-  h3 {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin-right: 3%;
+  .wrap {
+    box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.24);
+    padding: 1.5em;
+    border-radius: 16px;
+  }
+  * {
+    font-family: sans-serif;
+  }
+  h1 {
+    margin-bottom: 0%;
+    zoom: 1.15;
+    width: 80%;
+  }
+  & > div:nth-of-type(2) {
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+.infoWrap {
+  display: flex;
+  justify-content: space-between;
+  .club {
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: #fcf5c4;
+    padding: 10px;
+    padding-left: 16px;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    span {
+      font-weight: 400;
+      margin-left: 5px;
+    }
+    svg {
+      color: white;
+    }
+  }
+  .boardInfo {
+    text-align: right;
+    margin-top: 3rem;
   }
 }
 
@@ -23,50 +62,37 @@
 
 .title {
   display: flex;
-  flex-direction: column;
-  span {
-    margin: 5px 0;
-  }
-}
-.header {
-  border-bottom: 1px solid rgb(218, 218, 218);
-}
-
-.clubName {
-  margin-top: 5px;
-  display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
-  position: relative;
-}
-.boardInfo {
-  display: flex;
-  flex-direction: column;
-  .dateHit {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    span {
-      margin-bottom: 10px;
+  height: 8em;
+  .info {
+    text-align: right;
+    .hit {
+      vertical-align: text-bottom;
+      color: rgb(71, 71, 71);
     }
   }
   .buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
     button {
-      margin-right: 8px;
-      background: inherit;
-      border: 2px solid #90e2d6;
-      border-radius: 1rem;
-      margin: 0.25rem;
+      background-color: #f2f2f2;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
       cursor: pointer;
-      color: black;
+      margin-left: 5px;
+      margin-bottom: 1rem;
+      box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.288);
     }
   }
 }
+.header {
+  border-bottom: 1px solid #90e2d6;
+}
+
 .description {
   p {
+    font-size: 130%;
+    margin-top: 1em;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
