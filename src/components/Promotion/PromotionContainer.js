@@ -55,16 +55,12 @@ const PromotionContainer = () => {
 
           if (result.length === 0) {
             window.removeEventListener('scroll', infiniteScroll);
-          }
-
-          if (result.length) {
+          } else if (result.length) {
             if (result.length < 8) {
               window.removeEventListener('scroll', infiniteScroll);
             }
             itemNo = result[result.length - 1].no;
             setBoardData((prev) => prev.concat(result));
-          } else if (!result.length) {
-            window.removeEventListener('scroll', infiniteScroll);
           }
         });
       }
@@ -140,21 +136,9 @@ const PromotionContainer = () => {
     };
   }, [searchItem, isSearch]);
 
-  /*useEffect(() => {
-    function handleTouchMove(event) {
-      if (openModal) {
-        event.preventDefault(); // 여기가 핵심
-        console.log('안녕');
-      }
-    }
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', handleTouchMove, {
-        passive: false
-      });
-      return () => window.removeEventListener('scroll', handleTouchMove);
-    }
+  useEffect(() => {
+    document.body.style.overflow = openModal ? 'hidden' : 'auto';
   }, [openModal]);
-  */
 
   return (
     <>
