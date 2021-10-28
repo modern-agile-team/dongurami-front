@@ -8,11 +8,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
+import { MdClose } from 'react-icons/md';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]); //
 
 const Modal = ({ setOpenModal, postId }) => {
-  const [index, setIndex] = useState(0);
   const [images, setImages] = useState([]);
   const category = 'promotion';
   const pid = postId;
@@ -28,6 +28,9 @@ const Modal = ({ setOpenModal, postId }) => {
 
   return (
     <div className={styles.background} onClick={() => setOpenModal(false)}>
+      <button className={styles.closeBtn}>
+        <MdClose />
+      </button>
       <div className={styles.image} onClick={(e) => e.stopPropagation()}>
         {images.length && (
           <Swiper

@@ -22,12 +22,12 @@ const PromotionContainer = () => {
   let itemNo = 0;
 
   const getDatas = async () => {
-    console.log(itemNo);
     try {
       isLoading = true;
       if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
+          console.log(response);
 
           itemNo = result[result.length - 1].no;
 
@@ -38,7 +38,7 @@ const PromotionContainer = () => {
       } else if (search) {
         await getSearchData(type, searchKeyword, itemNo).then((response) => {
           const result = response.data.boards;
-          console.log(result);
+          console.log(response);
 
           itemNo = result[result.length - 1].no;
 
@@ -52,16 +52,15 @@ const PromotionContainer = () => {
       ) {
         await getBoardData(itemNo).then((response) => {
           const result = response.data.boards;
-          itemNo = result[result.length - 1].no;
-          console.log(result);
 
-          if (result.length) {
+          if (result.length === 0) {
+            window.removeEventListener('scroll', infiniteScroll);
+          } else if (result.length) {
             if (result.length < 8) {
               window.removeEventListener('scroll', infiniteScroll);
             }
+            itemNo = result[result.length - 1].no;
             setBoardData((prev) => prev.concat(result));
-          } else if (!result.length) {
-            window.removeEventListener('scroll', infiniteScroll);
           }
         });
       }
@@ -137,6 +136,10 @@ const PromotionContainer = () => {
     };
   }, [searchItem, isSearch]);
 
+  useEffect(() => {
+    document.body.style.overflow = openModal ? 'hidden' : 'auto';
+  }, [openModal]);
+
   return (
     <>
       <Header />
@@ -155,7 +158,6 @@ const PromotionContainer = () => {
             return (
               <div className={styles.poster} key={el.no}>
                 <Promotion
-                  key={el.no}
                   pId={el.no}
                   date={el.inDate}
                   clubName={el.clubName}
@@ -163,6 +165,7 @@ const PromotionContainer = () => {
                   img={el.url}
                   clubNo={el.clubNo}
                   category={el.category}
+                  title={el.title}
                   setOpenModal={setOpenModal}
                   setPostId={setPostId}
                 />

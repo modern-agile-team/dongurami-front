@@ -4,16 +4,11 @@ import { useState, useEffect } from 'react';
 import styles from '../../../styles/Board/Promotion/ImageEdit.module.scss';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
-function ImageEdit({ posterImages, onEditImages }) {
+function ImageEdit({ images, onEditImages, setImages }) {
   const router = useRouter();
-  const [displayImage, setDisplayImage] = useState(posterImages[0].imgPath);
-  const [images, setImages] = useState([]);
+  const [displayImage, setDisplayImage] = useState(images[0]);
   const [index, setIndex] = useState(0);
   let deleteImage = [];
-
-  useEffect(() => {
-    setImages(posterImages.map((el) => el.imgPath));
-  }, []);
 
   const nextSlide = () => {
     let idx = index;
@@ -70,7 +65,7 @@ function ImageEdit({ posterImages, onEditImages }) {
       if (el !== displayImage) deleteImage.push(el);
     });
     setImages(deleteImage);
-    setDisplayImage(images[index]);
+    setDisplayImage(images[0]);
   };
 
   return (

@@ -38,7 +38,7 @@ const Post = ({ postId, getData, post }) => {
         </div>
         <div className={styles.boardInfo}>
           <div className={styles.dateHit}>
-            <span>{inDate}</span>
+            <span>{new Date(inDate).toLocaleDateString()}</span>
             <span>조회 {hit}</span>
           </div>
           {user.id === studentId && (
