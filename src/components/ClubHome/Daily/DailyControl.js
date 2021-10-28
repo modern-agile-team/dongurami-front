@@ -63,24 +63,26 @@ const DailyControl = ({
                 return Date.parse(el.startDate) <= Date.parse(date) &&
                   Date.parse(date) <= Date.parse(el.endDate) ? (
                   <div key={index} className={styles.des}>
-                    {el.important ? (
-                      <AiFillStar
-                        className={styles.fillStar}
-                        onClick={() => {
-                          axiosPATCH(el, 0);
-                        }}
-                      />
-                    ) : (
-                      <AiOutlineStar
-                        className={styles.outLineStar}
-                        onClick={() => {
-                          axiosPATCH(el, 1);
-                        }}
-                      />
-                    )}
-                    <span style={{ color: 'black' }} key={el.no}>
-                      {el.title}
-                    </span>
+                    <div className={styles.importantSchedule}>
+                      {el.important ? (
+                        <AiFillStar
+                          className={styles.fillStar}
+                          onClick={() => {
+                            axiosPATCH(el, 0);
+                          }}
+                        />
+                      ) : (
+                        <AiOutlineStar
+                          className={styles.outLineStar}
+                          onClick={() => {
+                            axiosPATCH(el, 1);
+                          }}
+                        />
+                      )}
+                      <span style={{ color: 'black' }} key={el.no}>
+                        {el.title}
+                      </span>
+                    </div>
                     <div className={styles.edit}>
                       <HiPencil
                         onClick={() => onClickModify(el)}
