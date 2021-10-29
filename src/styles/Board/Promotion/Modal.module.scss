@@ -32,12 +32,21 @@
     align-items: center;
     width: 40%;
     margin-left: 3%;
+
     & > div:nth-of-type(1) {
       & > div:nth-of-type(1) {
-        display: none;
+        position: absolute;
+        color: white;
+        cursor: pointer;
       }
       & > div:nth-of-type(2) {
-        display: none;
+        position: absolute;
+        color: #ffffff;
+
+        cursor: pointer;
+        &:hover {
+          color: black;
+        }
       }
     }
   }
@@ -48,13 +57,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   & > div:nth-child(1) {
-    display: none;
   }
   img {
     border-radius: 16px;
-    min-width: 60%;
-    max-width: 90%;
+    /*min-width: 60%;*/
+    /*max-width: 50em;*/
+    width: 60%;
   }
 }
 @media (max-width: 768px) {

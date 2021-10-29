@@ -50,30 +50,17 @@ const Promotion = ({
         )}
         <div
           className={styles.creationInfo}
-          onClick={(e) => {
+          onClick={() => {
             setPostId(pId);
             setOpenModal(true);
           }}
         >
-          <div
-            className={styles.writerInfo}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
+          <div className={styles.writerInfo}>
             <div className={styles.writer}>{name}</div>
-            <Link href={{ pathname: `/clubhome/${clubNo}` }} passHref>
-              <div className={styles.writer}>{clubName}</div>
-            </Link>
+
+            <div className={styles.writer}>{clubName}</div>
           </div>
-          <div
-            className={styles.date}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            {date.slice(2, -9)}
-          </div>
+          <div className={styles.date}>{date.slice(2, -9)}</div>
         </div>
       </div>
       <div
@@ -83,8 +70,11 @@ const Promotion = ({
         }}
       >
         <div className={styles.title}>{title}</div>
-        <p className={styles.hashtag}>#{category}</p>
-        <p className={styles.time}>{displayedAt(date)}</p>
+        <div className={styles.extraInfo}>
+          <span className={styles.none}>left</span>
+          <span className={styles.hashtag}>#{category}</span>
+          <span className={styles.time}>{displayedAt(date)}</span>
+        </div>
       </div>
     </div>
   );

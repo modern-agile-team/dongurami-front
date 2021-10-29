@@ -107,9 +107,11 @@ const PromotionContainer = () => {
       ) {
         await getBoardData(itemNo).then((response) => {
           console.log(response);
-          const result = response.data.boards;
-          itemNo = result[result.length - 1].no;
-          setBoardData(result);
+          if (response.data.success) {
+            const result = response.data.boards;
+            itemNo = result[result.length - 1].no;
+            setBoardData(result);
+          }
         });
       }
     } catch (e) {

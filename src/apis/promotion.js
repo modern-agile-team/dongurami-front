@@ -32,7 +32,6 @@ export function putPost(postId, title, description, images) {
 }
 
 export function deletePost(postId) {
-  postId = 792;
   return axios.delete(`api/board/promotion/${postId}`);
 }
 
