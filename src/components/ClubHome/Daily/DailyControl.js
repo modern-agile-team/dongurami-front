@@ -4,7 +4,6 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { MdClose } from 'react-icons/md';
 import { getInfo, deleteSchedule, importantSchedule } from 'apis/calendar';
-import { useEffect } from 'react';
 
 const DailyControl = ({
   setTitle,
@@ -33,9 +32,7 @@ const DailyControl = ({
       .catch((err) => console.log(err.response.data.msg));
     await getInfo(Qdata.id, today.format('YYYY-MM'))
       .then((res) => setSchedule(res.data.result))
-      .catch((err) => {
-        alert(err);
-      });
+      .catch((err) => alert(err));
   };
 
   const axiosPATCH = (el, e) => {
@@ -46,37 +43,35 @@ const DailyControl = ({
     );
   };
 
-  if (pop === 'DailyControl')
-    return (
-      <div className={styles.wrap} onClick={() => setPop('Calendar')}>
-        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-          <div className={styles.header}>
-            <h3>{date} 일정</h3>
-          </div>
-          <MdClose
-            className={styles.closeBtn}
-            onClick={() => setPop('Calendar')}
-          />
-          <div className={styles.body}>
-            <div className={styles.schedule}>
-              {schedule.map((el, index) => {
-                return Date.parse(el.startDate) <= Date.parse(date) &&
-                  Date.parse(date) <= Date.parse(el.endDate) ? (
+  if (pop !== 'DailyControl') return null;
+
+  return (
+    <div className={styles.wrap} onClick={() => setPop('Calendar')}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.header}>
+          <h3>{date} 일정</h3>
+        </div>
+        <MdClose
+          className={styles.closeBtn}
+          onClick={() => setPop('Calendar')}
+        />
+        <div className={styles.body}>
+          <div className={styles.schedule}>
+            {schedule.map((el, index) => {
+              return (
+                Date.parse(el.startDate) <= Date.parse(date) &&
+                Date.parse(date) <= Date.parse(el.endDate) && (
                   <div key={index} className={styles.des}>
                     <div className={styles.importantSchedule}>
                       {el.important ? (
                         <AiFillStar
                           className={styles.fillStar}
-                          onClick={() => {
-                            axiosPATCH(el, 0);
-                          }}
+                          onClick={() => axiosPATCH(el, 0)}
                         />
                       ) : (
                         <AiOutlineStar
                           className={styles.outLineStar}
-                          onClick={() => {
-                            axiosPATCH(el, 1);
-                          }}
+                          onClick={() => axiosPATCH(el, 1)}
                         />
                       )}
                       <span style={{ color: 'black' }} key={el.no}>
@@ -90,22 +85,21 @@ const DailyControl = ({
                       />
                       <FaTrashAlt
                         onClick={() => {
-                          if (el.important === 0) {
-                            onDeleteSchedule(el);
-                          } else alert('주요 일정은 삭제 할 수 없습니다.');
+                          if (el.important === 0) onDeleteSchedule(el);
+                          else alert('주요 일정은 삭제 할 수 없습니다.');
                         }}
                         className={styles.delete}
                       />
                     </div>
                   </div>
-                ) : null;
-              })}
-            </div>
+                )
+              );
+            })}
           </div>
         </div>
       </div>
-    );
-  else return null;
+    </div>
+  );
 };
 
 export default DailyControl;

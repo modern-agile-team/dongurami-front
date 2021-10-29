@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from '../../../styles/Club/Home/Schedule/Table.module.scss';
-const yoil = ['일', '월', '화', '수', '목', '금', '토'];
+const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 const Table = ({ calendarArr }) => {
   return (
     <div className={styles.wrap}>
-      <div className={styles.yoil}>
-        {yoil.map((el, index) => {
+      <div className={styles.weekdays}>
+        {weekdays.map((el, index) => {
           return <span key={index}>{el}</span>;
         })}
       </div>

@@ -26,13 +26,9 @@ const Calendar = () => {
   const Qdata = uRouter.query;
   const colors = ['#f7b5b5', '#ffee8f', '#aefff8', '#ffc2fc', '#e2e2e2'];
 
-  const moveLogin = () => {
-    Router.push('/LoginPage');
-  };
+  const moveLogin = () => Router.push('/LoginPage');
 
-  const moveHome = () => {
-    window.location.reload();
-  };
+  const moveHome = () => window.location.reload();
 
   const today = momentTime;
   const yearMonth = today.format('YYYY-MM');
