@@ -23,9 +23,9 @@ const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
           {schedule.map((el, index) => {
             return (
               Date.parse(el.startDate) <=
-                (Date.parse(days.format('YYYY-MM-DD')) &&
-                  Date.parse(days.format('YYYY-MM-DD')) <=
-                    Date.parse(el.endDate)) && (
+                Date.parse(days.format('YYYY-MM-DD')) &&
+              Date.parse(days.format('YYYY-MM-DD')) <=
+                Date.parse(el.endDate) && (
                 <span
                   className={styles.scheduleSpan}
                   style={{ background: `${el.colorCode}` }}

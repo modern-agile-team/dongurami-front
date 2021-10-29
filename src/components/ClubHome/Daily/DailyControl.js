@@ -18,11 +18,11 @@ const DailyControl = ({
   setSchedule,
   Qdata
 }) => {
-  const onClickModify = (el) => {
-    setTitle(el.title);
-    setPeriod([el.startDate, el.endDate]);
-    setNo(el.no);
-    setColor(el.colorCode);
+  const onClickModify = (schedule) => {
+    setTitle(schedule.title);
+    setPeriod([schedule.startDate, schedule.endDate]);
+    setNo(schedule.no);
+    setColor(schedule.colorCode);
     setPop('ScheduleModify');
   };
 
@@ -35,8 +35,8 @@ const DailyControl = ({
       .catch((err) => alert(err));
   };
 
-  const axiosPATCH = (el, e) => {
-    importantSchedule(Qdata.id, el, { important: e }).then((res) =>
+  const axiosPATCH = (schedule, e) => {
+    importantSchedule(Qdata.id, schedule, { important: e }).then((res) =>
       getInfo(Qdata.id, today.format('YYYY-MM')).then((res) =>
         setSchedule(res.data.result)
       )
@@ -57,35 +57,36 @@ const DailyControl = ({
         />
         <div className={styles.body}>
           <div className={styles.schedule}>
-            {schedule.map((el, index) => {
+            {schedule.map((eachScedule, index) => {
               return (
-                Date.parse(el.startDate) <= Date.parse(date) &&
-                Date.parse(date) <= Date.parse(el.endDate) && (
+                Date.parse(eachScedule.startDate) <= Date.parse(date) &&
+                Date.parse(date) <= Date.parse(eachScedule.endDate) && (
                   <div key={index} className={styles.des}>
                     <div className={styles.importantSchedule}>
-                      {el.important ? (
+                      {eachScedule.important ? (
                         <AiFillStar
                           className={styles.fillStar}
-                          onClick={() => axiosPATCH(el, 0)}
+                          onClick={() => axiosPATCH(eachScedule, 0)}
                         />
                       ) : (
                         <AiOutlineStar
                           className={styles.outLineStar}
-                          onClick={() => axiosPATCH(el, 1)}
+                          onClick={() => axiosPATCH(eachScedule, 1)}
                         />
                       )}
-                      <span style={{ color: 'black' }} key={el.no}>
-                        {el.title}
+                      <span style={{ color: 'black' }} key={eachScedule.no}>
+                        {eachScedule.title}
                       </span>
                     </div>
                     <div className={styles.edit}>
                       <HiPencil
-                        onClick={() => onClickModify(el)}
+                        onClick={() => onClickModify(eachScedule)}
                         className={styles.pencil}
                       />
                       <FaTrashAlt
                         onClick={() => {
-                          if (el.important === 0) onDeleteSchedule(el);
+                          if (eachScedule.important === 0)
+                            onDeleteSchedule(eachScedule);
                           else alert('주요 일정은 삭제 할 수 없습니다.');
                         }}
                         className={styles.delete}
