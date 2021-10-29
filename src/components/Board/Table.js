@@ -1,3 +1,4 @@
+import moment from 'moment';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../../styles/Board/Board/Table.module.scss";
@@ -28,7 +29,7 @@ function NoticeTable({ posts, page, category }) {
               <td>{post.no}</td>
               <td>{post.title}</td>
               <td>{post.studentName}</td>
-              <td>{new Date(post.inDate).toLocaleDateString()}</td>
+              <td>{moment(post.inDate).format('YYYY-MM-DD')}</td>
               <td>{post.hit}</td>
             </tr>
           </Link>
