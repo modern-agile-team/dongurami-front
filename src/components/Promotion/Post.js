@@ -20,7 +20,7 @@ const Post = ({ postId, getData, post }) => {
   const router = useRouter();
 
   const onClick = () => {
-    if (getToken() === '') alert('로그인 후 이용해주세요.');
+    if (!getToken()) alert('로그인 후 이용해주세요.');
     else router.push(`/clubhome/${clubNo}`);
   };
 
