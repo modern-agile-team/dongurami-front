@@ -11,7 +11,7 @@
   color: rgb(187, 183, 183);
 }
 
-.yoil {
+.weekDays {
   display: flex;
   justify-content: space-around;
   margin-bottom: 0.5%;
@@ -90,7 +90,7 @@
 
 @media (max-width: 480px) {
   .wrap {
-    .yoil {
+    .weekDays {
       font-size: 1vw;
     }
     .num {
