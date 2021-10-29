@@ -50,7 +50,7 @@ const Promotion = ({
         )}
         <div
           className={styles.creationInfo}
-          onClick={(e) => {
+          onClick={() => {
             setPostId(pId);
             setOpenModal(true);
           }}
@@ -62,9 +62,8 @@ const Promotion = ({
             }}
           >
             <div className={styles.writer}>{name}</div>
-            <Link href={{ pathname: `/clubhome/${clubNo}` }} passHref>
-              <div className={styles.writer}>{clubName}</div>
-            </Link>
+
+            <div className={styles.writer}>{clubName}</div>
           </div>
           <div
             className={styles.date}

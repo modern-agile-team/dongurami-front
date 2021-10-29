@@ -86,7 +86,7 @@ const Comment = ({ comment, postId, studentId }) => {
               <p>{comment.studentName}</p>
             </Link>
             {post.studentId === comment.studentId && <p>작성자</p>}
-            {user.id === comment.studentId && (
+            {user && user.id === comment.studentId && (
               <div>
                 <button onClick={onEdit} className={styles['action-button']}>
                   {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
