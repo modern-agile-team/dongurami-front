@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
 import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
+import { useRouter } from 'next/router';
 
 import Modal from './Modal';
 import Promotion from './Promotion';
@@ -18,6 +19,8 @@ const PromotionContainer = () => {
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
 
+  const router = useRouter();
+
   let isLoading = false;
   let itemNo = 0;
 
@@ -26,22 +29,25 @@ const PromotionContainer = () => {
       isLoading = true;
       if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
-          const result = response.data.boards;
-
-          itemNo = result[result.length - 1].no;
-
-          if (result.length) {
+          if (result.length === 0) {
+            window.removeEventListener('scroll', infiniteScroll);
+          } else if (result.length) {
+            if (result.length < 8) {
+              window.removeEventListener('scroll', infiniteScroll);
+            }
+            itemNo = result[result.length - 1].no;
             setBoardData((prev) => prev.concat(result));
           }
         });
       } else if (search) {
         await getSearchData(type, searchKeyword, itemNo).then((response) => {
-          const result = response.data.boards;
-          console.log(result);
-
-          itemNo = result[result.length - 1].no;
-
-          if (result.length) {
+          if (result.length === 0) {
+            window.removeEventListener('scroll', infiniteScroll);
+          } else if (result.length) {
+            if (result.length < 8) {
+              window.removeEventListener('scroll', infiniteScroll);
+            }
+            itemNo = result[result.length - 1].no;
             setBoardData((prev) => prev.concat(result));
           }
         });
@@ -51,10 +57,14 @@ const PromotionContainer = () => {
       ) {
         await getBoardData(itemNo).then((response) => {
           const result = response.data.boards;
-          itemNo = result[result.length - 1].no;
-          console.log(result);
 
-          if (result.length) {
+          if (result.length === 0) {
+            window.removeEventListener('scroll', infiniteScroll);
+          } else if (result.length) {
+            if (result.length < 8) {
+              window.removeEventListener('scroll', infiniteScroll);
+            }
+            itemNo = result[result.length - 1].no;
             setBoardData((prev) => prev.concat(result));
           }
         });
@@ -73,6 +83,10 @@ const PromotionContainer = () => {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
           if (result.length) itemNo = result[result.length - 1].no;
+          else {
+            alert('게시글이 존재하지 않습니다');
+            router.reload();
+          }
 
           setBoardData(result);
         });
@@ -81,6 +95,10 @@ const PromotionContainer = () => {
           const result = response.data.boards;
           console.log(result);
           if (result.length) itemNo = result[result.length - 1].no;
+          else {
+            alert('게시글이 존재하지 않습니다');
+            router.reload();
+          }
           setBoardData(result);
         });
       } else if (
@@ -113,13 +131,10 @@ const PromotionContainer = () => {
   };
 
   const infiniteScroll = () => {
-    const scrollHeight = document.body.scrollHeight;
-
-    const scrollTop = Math.max(
-      document.documentElement.scrollTop,
-      document.body.scrollTop
-    );
-    const clientHeight = document.documentElement.clientHeight;
+    const { documentElement } = document;
+    const scrollHeight = documentElement.scrollHeight;
+    const scrollTop = documentElement.scrollTop;
+    const clientHeight = documentElement.clientHeight;
     if (scrollTop + clientHeight + 200 >= scrollHeight && isLoading === false) {
       getDatas();
     }
@@ -133,6 +148,10 @@ const PromotionContainer = () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
   }, [searchItem, isSearch]);
+
+  useEffect(() => {
+    document.body.style.overflow = openModal ? 'hidden' : 'auto';
+  }, [openModal]);
 
   return (
     <>
@@ -159,6 +178,7 @@ const PromotionContainer = () => {
                   img={el.url}
                   clubNo={el.clubNo}
                   category={el.category}
+                  title={el.title}
                   setOpenModal={setOpenModal}
                   setPostId={setPostId}
                 />

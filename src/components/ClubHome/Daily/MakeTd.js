@@ -1,9 +1,9 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Schedule/Table.module.scss";
-import OtherDays from "./OtherDays";
-import MonthDays from "./MonthDays";
-import TodayTd from "./TodayTd";
-import moment from "moment";
+import React from 'react';
+import styles from '../../../styles/Club/Home/Schedule/Table.module.scss';
+import OtherDays from './OtherDays';
+import MonthDays from './MonthDays';
+import TodayTd from './TodayTd';
+import moment from 'moment';
 
 const MakeTd = ({ setDate, setPop, schedule, nowDate, today, week }) => {
   return (
@@ -13,13 +13,14 @@ const MakeTd = ({ setDate, setPop, schedule, nowDate, today, week }) => {
         .map((data, index) => {
           let days = today
             .clone()
-            .startOf("year")
+            .startOf('year')
             .week(week)
-            .startOf("week")
-            .add(index, "day");
-          if (moment().format("YYYYMMDD") === days.format("YYYYMMDD")) {
+            .startOf('week')
+            .add(index, 'day');
+          if (moment().format('YYYYMMDD') === days.format('YYYYMMDD')) {
             return (
               <TodayTd
+                key={index}
                 index={index}
                 days={days}
                 schedule={schedule}
@@ -28,9 +29,10 @@ const MakeTd = ({ setDate, setPop, schedule, nowDate, today, week }) => {
                 setDate={setDate}
               />
             );
-          } else if (days.format("MM") !== today.format("MM")) {
+          } else if (days.format('MM') !== today.format('MM')) {
             return (
               <OtherDays
+                key={index}
                 setPop={setPop}
                 index={index}
                 days={days}
@@ -41,6 +43,7 @@ const MakeTd = ({ setDate, setPop, schedule, nowDate, today, week }) => {
           } else {
             return (
               <MonthDays
+                key={index}
                 setPop={setPop}
                 index={index}
                 schedule={schedule}

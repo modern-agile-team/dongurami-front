@@ -1,4 +1,5 @@
 import axios from 'apis/index';
+import post from 'redux/slices/post';
 
 export function getData(searchItem, no) {
   return axios.get(
@@ -8,7 +9,7 @@ export function getData(searchItem, no) {
 
 export function getBoardData(no) {
   return axios.get(
-    `/api/board/promotion/club?sort=inDate&order=desc&lastNum=${no}`
+    `api/board/promotion/club?sort=inDate&order=desc&lastNum=${no}`
   );
 }
 
@@ -31,6 +32,7 @@ export function putPost(postId, title, description, images) {
 }
 
 export function deletePost(postId) {
+  postId = 792;
   return axios.delete(`api/board/promotion/${postId}`);
 }
 

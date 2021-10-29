@@ -4,6 +4,7 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { MdClose } from 'react-icons/md';
 import { getInfo, deleteSchedule, importantSchedule } from 'apis/calendar';
+import { useEffect } from 'react';
 
 const DailyControl = ({
   setTitle,
@@ -15,7 +16,8 @@ const DailyControl = ({
   pop,
   setColor,
   today,
-  setSchedule
+  setSchedule,
+  Qdata
 }) => {
   const onClickModify = (el) => {
     setTitle(el.title);
@@ -25,11 +27,11 @@ const DailyControl = ({
     setPop('ScheduleModify');
   };
 
-  const onDeleteSchedule = (el) => {
-    deleteSchedule(el)
+  const onDeleteSchedule = async (el) => {
+    await deleteSchedule(Qdata.id, el)
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response.data.msg));
-    getInfo(today)
+    await getInfo(Qdata.id, today.format('YYYY-MM'))
       .then((res) => setSchedule(res.data.result))
       .catch((err) => {
         alert(err);
@@ -37,8 +39,10 @@ const DailyControl = ({
   };
 
   const axiosPATCH = (el, e) => {
-    importantSchedule(el, { important: e }).then((res) =>
-      getInfo(today).then((res) => setSchedule(res.data.result))
+    importantSchedule(Qdata.id, el, { important: e }).then((res) =>
+      getInfo(Qdata.id, today.format('YYYY-MM')).then((res) =>
+        setSchedule(res.data.result)
+      )
     );
   };
 
@@ -59,24 +63,26 @@ const DailyControl = ({
                 return Date.parse(el.startDate) <= Date.parse(date) &&
                   Date.parse(date) <= Date.parse(el.endDate) ? (
                   <div key={index} className={styles.des}>
-                    {el.important ? (
-                      <AiFillStar
-                        className={styles.fillStar}
-                        onClick={() => {
-                          axiosPATCH(el, 0);
-                        }}
-                      />
-                    ) : (
-                      <AiOutlineStar
-                        className={styles.outLineStar}
-                        onClick={() => {
-                          axiosPATCH(el, 1);
-                        }}
-                      />
-                    )}
-                    <span style={{ color: 'black' }} key={el.no}>
-                      {el.title}
-                    </span>
+                    <div className={styles.importantSchedule}>
+                      {el.important ? (
+                        <AiFillStar
+                          className={styles.fillStar}
+                          onClick={() => {
+                            axiosPATCH(el, 0);
+                          }}
+                        />
+                      ) : (
+                        <AiOutlineStar
+                          className={styles.outLineStar}
+                          onClick={() => {
+                            axiosPATCH(el, 1);
+                          }}
+                        />
+                      )}
+                      <span style={{ color: 'black' }} key={el.no}>
+                        {el.title}
+                      </span>
+                    </div>
                     <div className={styles.edit}>
                       <HiPencil
                         onClick={() => onClickModify(el)}

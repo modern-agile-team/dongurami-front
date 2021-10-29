@@ -19,6 +19,7 @@ const ImmutableData = ({ userInfo, setGrade, grade }) => {
           onChange={(e) => setGrade(e.target.value)}
           defaultValue={grade ?? '학년선택'}
         >
+          <option style={{ color: 'gray' }}>{grade} 학년</option>
           {gradeArr.map((grade, index) => {
             return (
               <option key={index} value={grade}>

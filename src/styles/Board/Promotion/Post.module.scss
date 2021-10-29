@@ -1,56 +1,98 @@
 .container {
   background: white;
-  border: 2px solid #90e2d6;
   overflow-y: auto;
-  padding: 1em;
-  border-radius: 16px;
-  width: 40%;
+  padding: 2em;
+  width: 42%;
   max-height: 80%;
-  h2,
-  h3 {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin-right: 3%;
+  .wrap {
+    box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.24);
+    padding: 1.5em;
+    border-radius: 16px;
   }
-}
-
-.container::-webkit-scrollbar {
-  background-color: rgb(235, 235, 235);
-  width: 8px;
-}
-.container::-webkit-scrollbar-thumb {
-  background-color: #64beb18c;
-  border-radius: 16px;
-}
-
-.title {
-  display: flex;
-  flex-direction: column;
-  span {
-    margin: 5px 0;
+  * {
+    font-family: sans-serif;
   }
-}
-.header {
-  border-bottom: 1px solid rgb(218, 218, 218);
-}
-
-.boardInfo {
-  margin-top: 5px;
-  display: flex;
-  justify-content: space-between;
-
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    span {
-      margin-bottom: 10px;
+  h1 {
+    margin-bottom: 0%;
+    zoom: 1.15;
+    width: 20vw;
+  }
+  & > div:nth-of-type(2) {
+    img {
+      max-width: 100%;
     }
   }
 }
 
+.infoWrap {
+  display: flex;
+  justify-content: space-between;
+  .club {
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: #c2f2dc93;
+    padding: 10px;
+    padding-left: 16px;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    span {
+      font-weight: 400;
+      margin-left: 5px;
+    }
+    svg {
+      color: white;
+    }
+  }
+  .boardInfo {
+    text-align: right;
+    margin-top: 3rem;
+  }
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+.container::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 8em;
+  .info {
+    text-align: right;
+    .hit {
+      vertical-align: text-bottom;
+      color: rgb(71, 71, 71);
+    }
+  }
+  .buttons {
+    button {
+      background-color: #f2f2f2;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      margin-left: 5px;
+      margin-bottom: 1rem;
+      border: 0.5px solid rgb(231, 231, 231);
+    }
+  }
+}
+.header {
+  border-bottom: 1px solid #a7a7a7;
+}
+
 .description {
+  margin-top: 1em;
   p {
+    font-size: 130%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }

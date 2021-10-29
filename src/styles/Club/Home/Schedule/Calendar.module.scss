@@ -9,9 +9,13 @@
   }
 }
 
-@media (max-width: 768) {
+@media (max-width: 1024px) {
   .wrap {
     display: flex;
     flex-direction: column;
+  }
+  .right {
+    width: 100%;
+    // overflow: hidden;
   }
 }

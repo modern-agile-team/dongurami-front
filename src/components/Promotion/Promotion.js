@@ -31,11 +31,18 @@ const Promotion = ({
   pId,
   setPostId,
   category,
-  clubNo
+  clubNo,
+  title
 }) => {
   return (
     <div className={styles.promotion}>
-      <div className={styles.img}>
+      <div
+        className={styles.img}
+        onClick={(e) => {
+          setPostId(pId);
+          setOpenModal(true);
+        }}
+      >
         {!img ? (
           <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
         ) : (
@@ -75,7 +82,7 @@ const Promotion = ({
           e.stopPropagation();
         }}
       >
-        <p className={styles.description}>{clubName}</p>
+        <div className={styles.title}>{title}</div>
         <p className={styles.hashtag}>#{category}</p>
         <p className={styles.time}>{displayedAt(date)}</p>
       </div>
