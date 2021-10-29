@@ -17,7 +17,7 @@ function AddComment({ parentCommentID }) {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (description === '') return;
+    if (description.trim() === '') return;
     await api.postComment({ category: post.category, pid: post.no, id: 'test1', description, parentCommentID, clubNum: router.query.id });
     setDescription('');
     dispatch(getPost());
