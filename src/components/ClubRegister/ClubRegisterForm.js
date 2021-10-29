@@ -1,5 +1,6 @@
+import Link from 'next/link';
 import React from "react";
-import style from './ClubRegisterForm.module.css';
+import style from '../../styles/Club/Resister/ClubRegisterForm.module.scss';
 
 
 const ClubRegisterForm = () => {
@@ -34,7 +35,9 @@ const ClubRegisterForm = () => {
                 </div>
            </form>
            <div className={style.btn}>
-               <button>신청</button>
+                <Link href="/ClubHome" passHref>
+                    <button>신청</button>
+                </Link>
            </div>
         </div> 
     )

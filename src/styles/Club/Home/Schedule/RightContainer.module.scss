@@ -1,0 +1,63 @@
+.control {
+  width: 70vw;
+  display: flex;
+  justify-content: center;
+  font-size: 140%;
+  z-index: 9;
+  margin-top: 1.5em;
+  .lastmonth {
+    cursor: pointer;
+    margin-right: 2%;
+    color: black;
+    &:hover {
+      color: #90e2d6;
+    }
+  }
+  .thisMonth {
+    align-items: stretch;
+    font-size: 120%;
+  }
+  .nextmonth {
+    cursor: pointer;
+    margin-left: 2%;
+    color: black;
+    &:hover {
+      color: #90e2d6;
+    }
+  }
+}
+
+.add {
+  display: flex;
+  justify-content: flex-end;
+  margin: -2.5% 2% 4% 0%;
+  span {
+    padding: 0.8rem;
+    color: black;
+    cursor: pointer;
+    background-color: #fcf5c4;
+    border-radius: 6px;
+    &:hover {
+      filter: brightness(97%);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .control {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .control {
+    font-size: 100%;
+  }
+  .add {
+    margin: 5% 2% 10% 0%;
+    span {
+      font-size: x-small;
+      padding: 0.4rem;
+    }
+  }
+}

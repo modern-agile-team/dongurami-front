@@ -1,0 +1,23 @@
+.container {
+  background-color: white;
+  div {
+    display: flex;
+    background-color: #c5e2f0;
+    border-radius: 10px;
+    margin-top: 1em;
+    padding: 5px 1em;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    h1 {
+      padding: 0 10px;
+    }
+    div {
+      border-radius: 0px;
+    }
+  }
+}

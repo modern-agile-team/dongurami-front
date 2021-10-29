@@ -1,0 +1,132 @@
+.wrap {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 15%;
+  h1 {
+    font-size: 230%;
+    font-weight: 100;
+    padding: 2rem;
+    margin-left: 1.5%;
+    margin-bottom: 0px;
+  }
+  .imgs {
+    width: 93%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    display: flex;
+    margin-top: 2%;
+    margin-bottom: 15%;
+    gap: 6%;
+    .list {
+      display: flex;
+      flex-direction: column;
+      img {
+        box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.199);
+      }
+      span {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin-top: 8%;
+        text-align: center;
+      }
+      &:hover {
+        margin-top: -1%;
+      }
+    }
+    .promotion {
+      @extend .list;
+    }
+    .home {
+      @extend .list;
+    }
+  }
+  img {
+    width: 280px;
+    height: 280px;
+    border-radius: 150px;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrap {
+    width: 100%;
+    margin-top: 15%;
+    h1 {
+      font-size: 3.5vw;
+      width: 70%;
+      margin: 0%;
+    }
+    img {
+      width: 170px;
+      height: 170px;
+    }
+    .imgs {
+      width: 95%;
+      margin-top: 0%;
+      gap: 0%;
+      .list {
+        width: 100%;
+        img {
+          margin: 0 auto;
+          box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.164);
+        }
+        span {
+          font-size: 60%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wrap {
+    width: 100%;
+    h1 {
+      width: 100%;
+      font-size: 6.5vw;
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    img {
+      width: 95px;
+      height: 95px;
+    }
+    .imgs {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      .list {
+        width: 100%;
+        align-items: center;
+        pointer-events: none;
+        margin-top: 15%;
+        img {
+          box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.137);
+        }
+        span {
+          width: 100%;
+          margin-top: 25px;
+          font-size: 3.2vw;
+        }
+      }
+      .promotion {
+        margin-top: 22vh;
+        pointer-events: none;
+        span {
+          margin-top: 25px;
+        }
+      }
+      .home {
+        margin-top: 22vh;
+        pointer-events: none;
+        span {
+          margin-top: 25px;
+        }
+      }
+    }
+    img {
+      zoom: 2.1;
+    }
+  }
+}

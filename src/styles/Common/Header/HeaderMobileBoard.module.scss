@@ -1,0 +1,36 @@
+.container {
+  display: none;
+}
+
+#now {
+  color: #3fcdb8;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    display: inline;
+    width: 100%;
+    .mobile {
+      list-style: none;
+      font-size: 90%;
+      padding: 0;
+    }
+    li {
+      padding: 1.5rem;
+      text-align: center;
+      border-bottom: 0.1px solid #dddbdb;
+      &:hover {
+        background-color: #bfe7e17e;
+        color: black;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    li {
+      font-size: 95%;
+    }
+  }
+}

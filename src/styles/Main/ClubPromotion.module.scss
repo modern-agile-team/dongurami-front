@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400&display=swap');
+
+.container {
+  background-color: #fff;
+  margin-top: 15em;
+  text-align: center;
+  h1 {
+    font-size: 350%;
+    font-weight: 100;
+    margin-bottom: 0px;
+    margin: 0;
+  }
+  .listWrap {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .list {
+    display: flex;
+    .club {
+      margin-left: 20px;
+      color: #3fcdb8;
+    }
+    .br {
+      margin-left: 20px;
+    }
+  }
+  .promoWrap {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 12rem;
+  }
+  .promotion {
+    display: flex;
+    .recruit {
+      margin-left: 22px;
+      color: #3fcdb8;
+    }
+    .br {
+      margin-left: 20px;
+    }
+  }
+  button {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 50%;
+    font-weight: 800;
+    width: 10em;
+    margin-bottom: 8%;
+    zoom: 2.5;
+    border-radius: 15px;
+    border-style: hidden;
+    background-color: #90e2d6;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+      background-color: #3fcdb8;
+    }
+  }
+  .listBtn {
+    margin-top: 2rem;
+  }
+  .promotionBtn {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    h1 {
+      font-size: 5vw;
+      padding-left: 3rem;
+    }
+    .btn {
+      padding-right: 1.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 28%;
+    h1 {
+      font-size: 5.7vw;
+      padding: 0%;
+      margin-right: -40%;
+    }
+    .listBtn {
+      width: 9vw;
+    }
+    .promotionBtn {
+      width: 9vw;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    margin-top: 12em;
+    margin-bottom: 20em;
+    h1 {
+      font-size: 9vw;
+    }
+    .list {
+      .club {
+        margin-left: 10px;
+      }
+      .br {
+        margin-top: 25%;
+        margin-left: -79vw;
+      }
+    }
+    .promoWrap {
+      margin-top: 30%;
+    }
+    .promotion {
+      .recruit {
+        margin-left: 10px;
+      }
+      .br {
+        margin-top: 25%;
+        margin-left: -83.5vw;
+      }
+    }
+    .listBtn {
+      width: 11em;
+      height: 1.5rem;
+      font-weight: 800;
+      zoom: 1.4;
+      margin-top: 120%;
+    }
+    .promotionBtn {
+      width: 11em;
+      height: 1.5rem;
+      font-weight: 800;
+      zoom: 1.4;
+      margin-top: 120%;
+    }
+  }
+}

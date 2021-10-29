@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
+}
+.questions {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .container {
+    background-color: rgba(238, 238, 238, 0.673);
+  }
+}

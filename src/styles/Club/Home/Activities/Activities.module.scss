@@ -1,0 +1,40 @@
+$color-mint: #90e2d6;
+$color-heavy-mint: #3fcdb8;
+$color-light-mint: #c2f2dc;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+#clubName {
+  font-size: 200%;
+  text-align: center;
+  p {
+    margin: 0;
+  }
+}
+
+#add {
+  height: 5vh;
+  text-align: right;
+  svg {
+    height: 5vh;
+    width: 5vh;
+    cursor: pointer;
+    &:hover {
+      color: $color-heavy-mint;
+    }
+  }
+  a, a:active {
+    color: $color-heavy-mint;
+  }
+}
+
+.activities {
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, auto));
+  gap: 1rem;
+}

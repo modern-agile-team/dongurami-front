@@ -1,0 +1,30 @@
+.pagination {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  width: 40%;
+  margin: 2rem auto;
+  justify-content: space-around;
+  li {
+    margin: 0 0.3rem;
+    button {
+      font-size: 1rem;
+      background: inherit;
+      border: none;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      padding: 0;
+      color: black;
+    }
+  }
+}
+
+.pagination .selected {
+  background-color: #6AE8DF;
+  border-radius: 50%;
+}
+
+.pagination .collapse {
+  cursor: default;
+}

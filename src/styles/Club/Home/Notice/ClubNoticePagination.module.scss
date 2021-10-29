@@ -1,0 +1,27 @@
+.pagination {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  width: 40%;
+  margin: 3rem auto;
+  justify-content: space-around;
+  li {
+    margin: 0 0.3rem;
+    button {
+      font-size: 1rem;
+      background: inherit;
+      border: none;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+  }
+  li:nth-child(5) > button {
+    color: white;
+    background-color: #6ae8df;
+    border-radius: 50%;
+  }
+  li:nth-child(7) > button {
+    cursor: default;
+  }
+}

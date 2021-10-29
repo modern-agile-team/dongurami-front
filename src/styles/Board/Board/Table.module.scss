@@ -1,0 +1,29 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  tbody > tr {
+    background-color: white;
+    cursor: pointer;
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+  th,
+  td {
+    padding: .75rem 0;
+    border-bottom: 1px solid #d3d3d3;
+    text-align: center;
+    word-break: break-all;
+    font-size: calc(.5rem + 1vmin);
+    font-family: '애플 SD 산돌고딕 Neo';
+    a {
+      font-family: '애플 SD 산돌고딕 Neo';
+    }
+  }
+  th:nth-of-type(2), td:nth-of-type(2) {
+    width: 50%;
+  }
+  thead {
+    background-color: #DDF7EC;
+  }
+}

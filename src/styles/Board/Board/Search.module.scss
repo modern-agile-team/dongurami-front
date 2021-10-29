@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  select {
+    border-radius: 1rem;
+    height: 2rem;
+    padding: 0 1rem;
+    border: 1px solid lightgray;
+    color: black;
+    background-color: white;
+  }
+  form {
+    display: flex;
+    width: 50%;
+    border: 1px solid lightgray;
+    border-radius: .25rem;
+    overflow: hidden;
+    input {
+      flex: 1;
+      border: none;
+      min-width: 0;
+      &:focus {
+        outline: none;
+      }
+    }
+    button {
+      border: none;
+      margin: 0;
+      background-color: lightgray;
+    }
+  }
+}

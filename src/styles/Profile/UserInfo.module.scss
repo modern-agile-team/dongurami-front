@@ -1,0 +1,109 @@
+.wrap {
+  width: 100%;
+}
+
+.profileBody {
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  padding: 2rem;
+}
+
+.profileImg {
+  margin: 5px;
+  width: 200px;
+  height: 200px;
+  // width: 30%;
+  // height: 30%;
+  border-radius: 50%;
+}
+
+.clubBtn {
+  background-color: white;
+  margin: 5px;
+  padding: 5px 12px;
+  border-radius: 0.5rem;
+  border: lightgray 1px solid;
+  &:hover {
+    filter: brightness(95%);
+  }
+}
+
+.clubList {
+  display: flex;
+  // border: 1px solid;
+  flex-direction: column;
+  align-items: center;
+  * {
+    margin: 2px;
+  }
+  a:link {
+    color: black;
+    text-decoration: none;
+  }
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #90e2d6;
+  }
+}
+
+.onlyMe {
+  span {
+    color: rgb(177, 177, 177);
+    font-size: small;
+    margin: 3px;
+    &:hover {
+      cursor: pointer;
+      color: #90e2d6;
+    }
+  }
+}
+
+.bottom {
+  margin-top: 4%;
+  // padding: 1.5rem;
+  gap: 10px;
+  font-size: 110%;
+  display: flex;
+  flex-direction: column;
+
+  div {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+
+    svg {
+      margin-right: 6px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profileBody {
+    width: 100%;
+  }
+  .profileImg {
+    width: 180px;
+    height: 180px;
+  }
+  .bottom {
+    gap: 15px;
+    margin-top: 8%;
+  }
+  .onlyMe {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileBody {
+    border-top-left-radius: 0px;
+  }
+}

@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 200%;
+  border-bottom: 2px solid #c9eee8;
+  padding: 1em 0.5em;
+  svg {
+    color: #ffc949;
+    margin-right: 5px;
+  }
+}
+
+.star {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .header {
+    width: 100%;
+    padding: 0 0 1em 0;
+    font-size: 100%;
+  }
+}

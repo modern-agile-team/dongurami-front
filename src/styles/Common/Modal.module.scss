@@ -1,0 +1,46 @@
+.modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  & > div {
+    background-color: white;
+    width: 50%;
+    padding: 2rem;
+    max-height: 80%;
+    overflow: auto;
+    @media screen and (max-width: 768px) {
+      padding: 0;
+      width: 80%;
+    }
+  }
+  & > button {
+    position: fixed;
+    top: 5vh;
+    right: 5vh;
+    background: none;
+    border: none;
+    transform: scale(2);
+    color: white;
+    padding: 0;
+    cursor: pointer;
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.open {
+  @extend .modal;
+  display: flex;
+}
+
+.close {
+  @extend .modal;
+  display: none;
+}

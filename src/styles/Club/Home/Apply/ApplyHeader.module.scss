@@ -1,0 +1,12 @@
+.header {
+  margin: 0 2em;
+  h1 {
+    font-weight: 400;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header {
+    margin: 0;
+  }
+}

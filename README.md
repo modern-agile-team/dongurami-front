@@ -16,7 +16,10 @@
   
 * <a href="#-협업">협업</a> 
 
+<<<<<<< HEAD
 * <a href="https://lovelyoch.notion.site/Dongurami-b5054bb288994d9c90d2d88a1642cb50">Notion</a>
+=======
+>>>>>>> 222a26d94478efe7ba2c3874494c2679b2973dc1
 <br/>
 <br/>
 <br/>
@@ -30,9 +33,13 @@
   <img src="https://img.shields.io/badge/HTML-white?logo=html5"/>
   <img src= "https://img.shields.io/badge/CSS-blue?logo=css3"/>
   <img src= "https://img.shields.io/badge/Scss-pink?logo=sass"/>
-  <img src= "https://img.shields.io/badge/React-blue?logo=react"/>
+  <img src= "https://img.shields.io/badge/Next-blue?logo=react"/>
   <img src= "https://img.shields.io/badge/Next.js-black?logo=next-dot-js&logoColor=white"/>
   <img src= "https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript"/>
+<<<<<<< HEAD
+=======
+  <img src="https://img.shields.io/badge/Redux-purple?logo=Redux&logoColor=white">
+>>>>>>> 222a26d94478efe7ba2c3874494c2679b2973dc1
 </p>
 
 <h3 align="center">  
@@ -126,6 +133,13 @@
      - 기능 구현을 시작할 때나 완료하였을 때는 기술 스택은 어떤 것을 사용했고, 왜 사용했는지 등에 대해 구체적으로 나누었으며, 더 좋은 방안은 없는지 팀원들의 피드백을 수렴했다.
    - 스프린트:
      - `GitHub`의 `Issue`를 활용.
+<<<<<<< HEAD
+=======
+     - 1주 ~ 4주의 기간동안 스프린트를 진행했다.
+     - 스프린트가 시작되는 날에는 스프린트 회의를 통해 공동의 목표를 세우고 기간을 설정했다.
+     - 스프린트가 끝나면 스프린트 리뷰를 통해 해당 스프린트의 좋았던 점과 아쉬웠던 점 그리고 결과물을 공유했다.
+     - 공동의 목표가 세워지면 큰 목표를 달성하기 위한 작은 목표를 다시 세우고 인원을 분배했다.
+>>>>>>> 222a26d94478efe7ba2c3874494c2679b2973dc1
      - 개개인이 주도적으로 자신의 개발 프로세스를 선정하고 **스프린트(Issue)** 를 작성했다.
      - 각 **스프린트** 는 프로젝트 **칸반보드**의 ToDo가 되었으며, 이를 각 팀원이 직접 **오늘 할 일**을 지정하여 In Progress로 옮겨 작업하였다.
      - 팀원이 미처 발견하지 못한 Issue가 있을 경우에는 회장 **오창훈** / 부회장(프론트 팀장) **민순기** / 백엔드 팀장 **이석호** 가 최종 스프린트를 작성하였다.

@@ -1,0 +1,17 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  th,
+  td {
+    padding: 15px;
+    border-bottom: 1px solid #d3d3d3;
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+  }
+  th:nth-child(2),
+  td:nth-child(2) {
+    text-align: left;
+    width: auto;
+  }
+}

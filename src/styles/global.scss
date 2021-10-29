@@ -1,0 +1,34 @@
+html,
+body {
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'twayair';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.toTheTop {
+  text-align: center;
+  position: fixed;
+  right: 10%;
+  bottom: 20%;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  svg {
+    color: rgba(160, 160, 160, 0.51);
+    width: 100%;
+    height: 100%;
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+* {
+  font-family: 'twayair';
+}

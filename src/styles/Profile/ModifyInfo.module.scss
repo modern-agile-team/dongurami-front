@@ -1,0 +1,121 @@
+.wrap {
+  width: 50%;
+  padding: 3em 3em 4em 0rem;
+  margin: 0 auto;
+  min-height: 70vh;
+  .profileBody {
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    padding: 2rem;
+  }
+}
+.psword {
+  color: rgb(177, 177, 177);
+  font-size: small;
+  margin-bottom: 3px;
+  cursor: pointer;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    margin: 5px;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+  }
+}
+
+.header label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 50px;
+  left: 6vw;
+  width: 25px;
+  height: 25px;
+  z-index: 2;
+  cursor: pointer;
+  background-color: rgb(235, 235, 235);
+  border-radius: 50%;
+  padding: 1px;
+  &:hover {
+    filter: brightness(90%);
+  }
+}
+
+.data {
+  padding: 1em;
+  input {
+    border-radius: 3px;
+    border: lightgray 1px solid;
+  }
+
+  select {
+    border-radius: 3px;
+    border: lightgray 1px solid;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  div {
+    svg {
+      margin-right: 6px;
+    }
+    margin: 5px 0;
+  }
+}
+
+.modifyBtn {
+  background-color: white;
+  margin: 1em 0;
+  padding: 5px;
+  border-radius: 0.5rem;
+  border: lightgray 1px solid;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(95%);
+  }
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    width: 60%;
+    min-height: 68vh;
+  }
+  .profileBody {
+    .header {
+      img {
+        width: 180px;
+        height: 180px;
+      }
+      label {
+        left: 70px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    width: 70%;
+    padding: 3em 4em 3em 0rem;
+  }
+  .profileBody {
+    // border-top-left-radius: 0px;
+    .header {
+      img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.container {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 768px) {
+    width: 80%;
+  }
+  & > div {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid #90e2d6;
+    border-radius: 1rem;
+  }
+}

@@ -1,0 +1,27 @@
+.img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 100%;
+    cursor: zoom-out;
+  }
+}
+@media (max-width: 1024px) {
+  .img {
+    img {
+      width: 70vw;
+      cursor: zoom-out;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .img {
+    img {
+      width: 90vw;
+      cursor: zoom-out;
+      margin-bottom: 1em;
+    }
+  }
+}
