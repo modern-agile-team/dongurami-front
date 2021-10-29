@@ -41,81 +41,74 @@ const ScheduleModify = ({
       .catch((err) => console.log(err.response));
     await getInfo(Qdata.id, today.format('YYYY-MM'))
       .then((res) => setSchedule(res.data.result))
-      .catch((err) => {
-        alert(err);
-      });
+      .catch((err) => alert(err));
   };
-  if (pop === 'ScheduleModify')
-    return (
-      <div className={styles.wrap} onClick={() => setPop('Calendar')}>
-        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-          <div className={styles.header}>
-            <h3>일정 수정하기</h3>
-          </div>
-          <MdClose
-            className={styles.closeBtn}
-            onClick={() => setPop('Calendar')}
+  if (pop !== 'ScheduleModify') return null;
+
+  return (
+    <div className={styles.wrap} onClick={() => setPop('Calendar')}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.header}>
+          <h3>일정 수정하기</h3>
+        </div>
+        <MdClose
+          className={styles.closeBtn}
+          onClick={() => setPop('Calendar')}
+        />
+        <div className={styles.body}>
+          <p>시작하는 날짜</p>
+          <input
+            type="date"
+            id="startDate"
+            onChange={(e) => setStartDate(e.target.value)}
           />
-          <div className={styles.body}>
-            <p>시작하는 날짜</p>
-            <input
-              type="date"
-              id="startDate"
-              onChange={(e) => {
-                setStartDate(e.target.value);
-              }}
-            />
-            <p>끝나는 날짜</p>
-            <input
-              type="date"
-              id="endDate"
-              onChange={(e) => {
-                setEndDate(e.target.value);
-              }}
-            />
-            <br />
-            <br />
-            {startDate} ~ {endDate}
-            <p>일정 제목</p>
-            <input
-              type="text"
-              placeholder={title}
-              onChange={(e) => {
-                setNewTitle(e.target.value);
-              }}
-            />
-            <br />
-            <p>일정 색상</p>
-            {colors.map((color, index) => {
-              return (
-                <button
-                  className={styles.colorBtn}
-                  key={index}
-                  style={{ background: color }}
-                  onClick={() => setColorCode(`${color}`)}
-                ></button>
-              );
-            })}
-            <span
-              className={styles.modifyBtn}
-              onClick={() => {
-                if (Date.parse(startDate) <= Date.parse(endDate)) {
-                  axiosPUT();
-                  setPop('Calendar');
-                } else alert('날짜를 확인해주세요');
-              }}
-            >
-              수정
-            </span>
-            <br />
-            <span className={styles.sample} style={{ background: colorCode }}>
-              색상 미리보기
-            </span>
-          </div>
+          <p>끝나는 날짜</p>
+          <input
+            type="date"
+            id="endDate"
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+          <br />
+          <br />
+          {startDate} ~ {endDate}
+          <p>일정 제목</p>
+          <input
+            className={styles.titleInput}
+            type="text"
+            placeholder={title}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+          <br />
+          <p>일정 색상</p>
+          {colors.map((color, index) => {
+            return (
+              <button
+                className={styles.colorBtn}
+                key={index}
+                style={{ background: color }}
+                onClick={() => setColorCode(`${color}`)}
+              ></button>
+            );
+          })}
+          <span
+            className={styles.modifyBtn}
+            onClick={() => {
+              if (Date.parse(startDate) <= Date.parse(endDate)) {
+                axiosPUT();
+                setPop('Calendar');
+              } else alert('날짜를 확인해주세요');
+            }}
+          >
+            ✏️수정
+          </span>
+          <br />
+          <span className={styles.sample} style={{ background: colorCode }}>
+            색상 미리보기
+          </span>
         </div>
       </div>
-    );
-  else return null;
+    </div>
+  );
 };
 
 export default ScheduleModify;

@@ -1,5 +1,5 @@
 import styles from '../../../styles/Club/Home/Schedule/Calendar.module.scss';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import DailyModal from './DailyModal';
@@ -26,13 +26,9 @@ const Calendar = () => {
   const Qdata = uRouter.query;
   const colors = ['#f7b5b5', '#ffee8f', '#aefff8', '#ffc2fc', '#e2e2e2'];
 
-  const moveLogin = () => {
-    Router.push('/LoginPage');
-  };
+  const moveLogin = () => Router.push('/LoginPage');
 
-  const moveHome = () => {
-    window.location.reload();
-  };
+  const moveHome = () => window.location.reload();
 
   const today = momentTime;
   const yearMonth = today.format('YYYY-MM');
@@ -47,6 +43,7 @@ const Calendar = () => {
   if (nowMonth.length === 1) nowMonth = '0' + nowMonth;
 
   useEffect(() => {
+    console.log(1);
     if (today.format('MM') === nowMonth) setNowDay(nowDate.current.id);
     if (!uRouter.isReady) return;
     getInfo(Qdata.id, yearMonth)
@@ -66,10 +63,10 @@ const Calendar = () => {
         )
           moveHome();
       });
-  }, [uRouter, momentTime, Qdata.id, nowMonth, today, yearMonth]);
+  }, [pop, uRouter, momentTime, Qdata.id, nowMonth, today, yearMonth]);
 
   //달력만드는 함수
-  const calendarArr = () => {
+  const calendarArr = useCallback(() => {
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -85,7 +82,7 @@ const Calendar = () => {
       );
     }
     return result;
-  };
+  }, [schedule, nowDate, today, setPop, setDate]);
   return (
     <>
       <div className={styles.wrap}>
@@ -139,4 +136,4 @@ const Calendar = () => {
     </>
   );
 };
-export default Calendar;
+export default React.memo(Calendar);
