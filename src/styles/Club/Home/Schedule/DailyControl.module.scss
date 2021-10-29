@@ -104,3 +104,36 @@
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 }
+
+@media (max-width: 1024px) {
+  .wrap {
+    .modal {
+      width: 50vw;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    .outLineStar {
+      margin-right: 0;
+      font-size: small;
+    }
+    .fillStar {
+      margin-right: 0;
+      font-size: x-small;
+    }
+    .pencil {
+      font-size: small;
+    }
+    .delete {
+      font-size: small;
+    }
+    .modal {
+      width: 60vw;
+      span {
+        font-size: x-small;
+      }
+    }
+  }
+}

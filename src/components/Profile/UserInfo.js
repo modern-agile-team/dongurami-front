@@ -2,7 +2,6 @@ import styles from '../../styles/Profile/UserInfo.module.scss';
 import { FaGraduationCap, FaUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import ClubModal from './ClubModal';
-import { useRouter } from 'next/router';
 
 const UserInfo = ({
   isOpen,
@@ -47,7 +46,9 @@ const UserInfo = ({
                     pathname: `/modifyinfo/${userInfo.id}`
                   }}
                 >
-                  개인정보 수정
+                  <span>
+                  개인정보수정
+                  </span>
                 </Link>
                 <span onClick={() => logout()}>로그아웃</span>
               </div>

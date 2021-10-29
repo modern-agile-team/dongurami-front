@@ -1,28 +1,18 @@
 .container {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  // margin-right: 1em;
-  // border: 1px solid;
   box-shadow: 5px 3px 9px -5px rgba(0, 0, 0, 0.342);
   border-radius: 3px;
-  // margin-top: ;
   width: 28.5vw;
   height: 100%;
 
   .todaySchedule {
-    // border: solid 1px;
     display: flex;
     flex-direction: column;
-    // align-items: center;
     width: 100%;
     height: 40%;
-
-    // height: 50%;
-    // margin-bottom: 2%;
     h3 {
       padding: 2rem 1rem;
-      // margin: 2%;
       margin: 0%;
       border-top: 1px solid #c2c2c2;
       border-bottom: 1px solid #c2c2c2;
@@ -31,7 +21,7 @@
       width: 100%;
     }
     .scheduleWrap {
-      overflow: auto !important;
+      overflow-y: scroll;
     }
     .inSchedule {
       width: 90%;
@@ -47,7 +37,6 @@
         font-size: 85%;
         color: gray;
         padding: 0.1rem;
-        // float: right;
       }
     }
   }
@@ -56,6 +45,45 @@
     @extend .todaySchedule;
     h3 {
       border-top: none;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: row;
+    width: 100%;
+    max-height: 25%;
+    .todaySchedule {
+      height: 100%;
+      h3 {
+        border-top: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    .importantSchedule {
+      width: 50%;
+    }
+    .todaySchedule {
+      width: 50%;
+      h3 {
+        font-size: 5vw;
+        padding: 1em 1rem;
+        padding-top: 0;
+      }
+      .inSchedule {
+        span {
+          font-size: 4.5vw;
+        }
+        .date {
+          font-size: 3.5vw;
+        }
+      }
     }
   }
 }

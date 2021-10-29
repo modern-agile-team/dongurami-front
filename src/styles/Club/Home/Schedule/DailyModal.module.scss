@@ -56,6 +56,9 @@
   .colorBtn {
     width: 2rem;
     height: 2rem;
+    border-radius: 50%;
+    margin: 0 4px;
+    border: 1px solid white;
   }
 
   .addBtn {
@@ -68,6 +71,49 @@
     border-radius: 8px;
     &:hover {
       filter: brightness(97%);
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .wrap {
+    .modal {
+      width: 45vw;
+      padding: 2rem 1rem;
+      .body {
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    .modal {
+      .body {
+        .titleInput {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    .modal {
+      width: 60vw;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .wrap {
+    .modal {
+      height: 73%;
+    }
+    .addBtn {
+      margin-top: 13px;
     }
   }
 }

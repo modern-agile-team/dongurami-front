@@ -55,19 +55,14 @@
 }
 
 .onlyMe {
-  * {
-    &:hover {
-      cursor: pointer;
-    }
+  span {
     color: rgb(177, 177, 177);
     font-size: small;
     margin: 3px;
-  }
-  a:link {
-    text-decoration: none;
-  }
-  a:visited {
-    text-decoration: none;
+    &:hover {
+      cursor: pointer;
+      color: #90e2d6;
+    }
   }
 }
 
