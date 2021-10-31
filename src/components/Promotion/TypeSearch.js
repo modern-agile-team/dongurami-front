@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
-import { BsPencil } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
 const TypeSearch = ({
   setSearchItem,
@@ -13,6 +13,7 @@ const TypeSearch = ({
   onSearch,
   categorySearch
 }) => {
+  const user = useSelector((state) => state.user);
   const onChange = (e) => {
     setSearchKeyword(e.target.value);
   };
@@ -52,11 +53,13 @@ const TypeSearch = ({
             <FaSearch />
           </form>
         </div>
-        <Link href={`/promotion/write`} passHref>
-          <button className={styles.writeBtn}>
-            ✏️ <span>글쓰기</span>
-          </button>
-        </Link>
+        {user && (
+          <Link href={`/promotion/write`} passHref>
+            <button className={styles.writeBtn}>
+              ✏️ <span>글쓰기</span>
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
