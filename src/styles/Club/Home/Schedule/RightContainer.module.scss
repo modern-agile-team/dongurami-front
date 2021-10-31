@@ -35,10 +35,31 @@
     padding: 0.8rem;
     color: black;
     cursor: pointer;
-    background-color: #fcf5c4;
+    background-color: white;
     border-radius: 6px;
+    border: 1px solid lightgray;
     &:hover {
+      cursor: pointer;
       filter: brightness(97%);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .control {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .control {
+    font-size: 100%;
+  }
+  .add {
+    margin: 5% 2% 10% 0%;
+    span {
+      font-size: x-small;
+      padding: 0.4rem;
     }
   }
 }

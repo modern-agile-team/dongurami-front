@@ -1,7 +1,9 @@
 .container {
   width: 60%;
   margin: 1rem auto;
-  border: 2px solid #90e2d6;
+  // border: 2px solid #90e2d6;
+  box-shadow: 0px 1px 6px 0px rgb(0 0 0 / 24%);
+  border-radius: 1rem;
   padding: 1rem 2rem;
   box-sizing: border-box;
   * {
@@ -48,7 +50,7 @@
     }
   }
   & > hr {
-    border: 0.5px solid #90e2d6;
+    border: 1px solid lightgray;
   }
   & > div:nth-of-type(2) {
     img {

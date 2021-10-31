@@ -10,7 +10,6 @@ function Edit({ pid }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [posterImages, setPosterImages] = useState([]);
   const [images, setImages] = useState([]);
   const router = useRouter();
 
@@ -18,7 +17,7 @@ function Edit({ pid }) {
     const getData = (async () => {
       await getBoardPost(pid).then((response) => {
         if (response.data.success) {
-          setPosterImages(response.data.images);
+          setImages(response.data.images.map((el) => el.imgPath));
           setTitle(response.data.board.title);
           setDescription(response.data.board.description);
         }
@@ -57,10 +56,11 @@ function Edit({ pid }) {
           onOpen={onOpen}
         />
       </Container>
-      {posterImages.length > 0 && (
+      {title && (
         <Modal show={showModal} onClose={onClose}>
           <ImageEdit
-            posterImages={posterImages}
+            images={images}
+            setImages={setImages}
             title={title}
             onSubmit={onSubmit}
             onEditImages={onEditImages}

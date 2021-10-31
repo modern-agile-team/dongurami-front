@@ -31,11 +31,18 @@ const Promotion = ({
   pId,
   setPostId,
   category,
-  clubNo
+  clubNo,
+  title
 }) => {
   return (
     <div className={styles.promotion}>
-      <div className={styles.img}>
+      <div
+        className={styles.img}
+        onClick={(e) => {
+          setPostId(pId);
+          setOpenModal(true);
+        }}
+      >
         {!img ? (
           <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
         ) : (
@@ -43,30 +50,17 @@ const Promotion = ({
         )}
         <div
           className={styles.creationInfo}
-          onClick={(e) => {
+          onClick={() => {
             setPostId(pId);
             setOpenModal(true);
           }}
         >
-          <div
-            className={styles.writerInfo}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
+          <div className={styles.writerInfo}>
             <div className={styles.writer}>{name}</div>
-            <Link href={{ pathname: `/clubhome/${clubNo}` }} passHref>
-              <div className={styles.writer}>{clubName}</div>
-            </Link>
+
+            <div className={styles.writer}>{clubName}</div>
           </div>
-          <div
-            className={styles.date}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            {date.slice(2, -9)}
-          </div>
+          <div className={styles.date}>{date.slice(2, -9)}</div>
         </div>
       </div>
       <div
@@ -75,9 +69,12 @@ const Promotion = ({
           e.stopPropagation();
         }}
       >
-        <p className={styles.description}>{clubName}</p>
-        <p className={styles.hashtag}>#{category}</p>
-        <p className={styles.time}>{displayedAt(date)}</p>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.extraInfo}>
+          <span className={styles.none}>left</span>
+          <span className={styles.hashtag}>#{category}</span>
+          <span className={styles.time}>{displayedAt(date)}</span>
+        </div>
       </div>
     </div>
   );

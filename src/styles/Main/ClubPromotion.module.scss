@@ -86,18 +86,20 @@
       margin-right: -40%;
     }
     .listBtn {
-      width: 9vw;
+      width: 10vw;
     }
     .promotionBtn {
-      width: 9vw;
+      width: 10vw;
     }
   }
 }
 
 @media screen and (max-width: 480px) {
   .container {
+    margin-top: 12em;
+    margin-bottom: 20em;
     h1 {
-      font-size: 180%;
+      font-size: 9vw;
     }
     .list {
       .club {
@@ -105,11 +107,11 @@
       }
       .br {
         margin-top: 25%;
-        margin-left: -255px;
+        margin-left: -79vw;
       }
     }
     .promoWrap {
-      margin-top: 30%;
+      margin-top: 35%;
     }
     .promotion {
       .recruit {
@@ -117,22 +119,24 @@
       }
       .br {
         margin-top: 25%;
-        margin-left: -270px;
+        margin-left: -83.5vw;
       }
     }
     .listBtn {
-      width: 9em;
-      height: 1.3rem;
-      font-weight: 600;
-      zoom: 1.3;
-      margin-top: 100%;
+      width: 10em;
+      height: 1.6rem;
+      font-weight: 800;
+      font-size: 60%;
+      zoom: 1.4;
+      margin-top: 90%;
     }
     .promotionBtn {
-      width: 9em;
-      height: 1.3rem;
-      font-weight: 600;
-      zoom: 1.3;
-      margin-top: 100%;
+      width: 10em;
+      height: 1.6rem;
+      font-weight: 800;
+      font-size: 60%;
+      zoom: 1.4;
+      margin-top: 90%;
     }
   }
 }

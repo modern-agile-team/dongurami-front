@@ -72,7 +72,13 @@ const Comment = ({ comment, postId, studentId }) => {
     <>
       <div className={styles.comment}>
         <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
-          <img src="https://picsum.photos/500" alt="profile" />
+          <img
+            src={
+              comment.profileImageUrl ??
+              'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+            }
+            alt="profile"
+          />
         </Link>
         <div>
           <div>
@@ -80,7 +86,7 @@ const Comment = ({ comment, postId, studentId }) => {
               <p>{comment.studentName}</p>
             </Link>
             {post.studentId === comment.studentId && <p>작성자</p>}
-            {user.id === comment.studentId && (
+            {user && user.id === comment.studentId && (
               <div>
                 <button onClick={onEdit} className={styles['action-button']}>
                   {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}

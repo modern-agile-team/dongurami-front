@@ -7,6 +7,7 @@ import api from 'apis/post';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setCategory } from 'redux/slices/post';
+import moment from 'moment';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -56,7 +57,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
             <div>{post.name}</div>
           </Link>
           <div>
-            {(category === 'clubActivity' && user && user.clubNum.includes(clubNum)) && (
+            {(category === 'clubActivity' && user && user.club.some(({ no }) => no === clubNum)) && (
               <Link href={{ pathname: `/profile/${user.id}/${clubNum}/writescraps`, query: { scrapNum: post.no } }} passHref>
                 <button>스크랩하기</button>
               </Link>
@@ -69,8 +70,8 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
                 <button onClick={onDelete}>삭제하기</button>
               </>
             )}
-            <div>{new Date(post.inDate).toLocaleDateString()}</div>
-            <div>조회 {post.hit}</div>
+            <div>{moment(post.inDate).format('YYYY-MM-DD')}</div>
+            {(category !== 'personal') && <div>조회 {post.hit}</div>}
           </div>
         </div>
       </div>

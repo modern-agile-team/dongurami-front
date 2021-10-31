@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import { getInfo, modifySchedule } from 'apis/calendar';
 
 const ScheduleModify = ({
+  Qdata,
   today,
   setSchedule,
   color,
+  colors,
   title,
   period,
   no,
@@ -23,90 +25,90 @@ const ScheduleModify = ({
     setEndDate(period[1]);
     setNewTitle(title);
     setColorCode(color);
-  }, [pop]);
+  }, [pop, color, period, title]);
 
-  const axiosPUT = () => {
-    modifySchedule(no, {
+  const axiosPUT = async () => {
+    if (newTitle.replace(/ /g, '').length === 0) setNewTitle(title);
+    await modifySchedule(Qdata.id, no, {
       colorCode: colorCode,
       title: newTitle,
       startDate: startDate,
       endDate: endDate,
-      clubName: '우아한 애자일',
-      url: 'http://3.36.72.145:8080/api/club/schedule/1',
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/club/schedule/${Qdata.id}`,
       notiCategoryNum: 5
     })
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response));
-    getInfo(today)
+    await getInfo(Qdata.id, today.format('YYYY-MM'))
       .then((res) => setSchedule(res.data.result))
-      .catch((err) => {
-        alert(err);
-      });
+      .catch((err) => alert(err));
   };
-  if (pop === 'ScheduleModify')
-    return (
-      <div className={styles.wrap}>
-        <div className={styles.modal}>
-          <div className={styles.header}>
-            <h3>일정 수정하기</h3>
-          </div>
-          <MdClose
-            className={styles.closeBtn}
-            onClick={() => setPop('Calendar')}
-          />
-          <div className={styles.body}>
-            <p>시작하는 날짜</p>
-            <input
-              type="date"
-              id="startDate"
-              onChange={(e) => {
-                setStartDate(e.target.value);
-              }}
-            />
-            <p>끝나는 날짜</p>
-            <input
-              type="date"
-              id="endDate"
-              onChange={(e) => {
-                setEndDate(e.target.value);
-              }}
-            />
-            <br />
-            <br />
-            {startDate} ~ {endDate}
-            <p>일정 제목</p>
-            <input
-              type="text"
-              placeholder={title}
-              onChange={(e) => {
-                setNewTitle(e.target.value);
-              }}
-            />
-            <br />
-            <p>일정 색상</p>
-            <input
-              type="color"
-              value={colorCode}
-              onChange={(e) => {
-                setColorCode(e.target.value);
-              }}
-            />
-          </div>
+  if (pop !== 'ScheduleModify') return null;
+
+  return (
+    <div className={styles.wrap} onClick={() => setPop('Calendar')}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.header}>
+          <h3>일정 수정하기</h3>
         </div>
-        <button
-          className={styles.modifyBtn}
-          onClick={() => {
-            if (Date.parse(startDate) <= Date.parse(endDate)) {
-              axiosPUT();
-              setPop('Calendar');
-            } else alert('날짜가 이상함');
-          }}
-        >
-          수정하기
-        </button>
+        <MdClose
+          className={styles.closeBtn}
+          onClick={() => setPop('Calendar')}
+        />
+        <div className={styles.body}>
+          <p>시작하는 날짜</p>
+          <input
+            type="date"
+            id="startDate"
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <p>끝나는 날짜</p>
+          <input
+            type="date"
+            id="endDate"
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+          <br />
+          <br />
+          {startDate} ~ {endDate}
+          <p>일정 제목</p>
+          <input
+            className={styles.titleInput}
+            type="text"
+            placeholder={title}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+          <br />
+          <p>일정 색상</p>
+          {colors.map((color, index) => {
+            return (
+              <button
+                className={styles.colorBtn}
+                key={index}
+                style={{ background: color }}
+                onClick={() => setColorCode(`${color}`)}
+              ></button>
+            );
+          })}
+          <span
+            className={styles.modifyBtn}
+            onClick={() => {
+              if (Date.parse(startDate) <= Date.parse(endDate)) {
+                axiosPUT();
+                setPop('Calendar');
+              } else alert('날짜를 확인해주세요');
+            }}
+          >
+            ✏️수정
+          </span>
+          <br />
+          <span className={styles.sample} style={{ background: colorCode }}>
+            색상 미리보기
+          </span>
+        </div>
       </div>
-    );
-  else return null;
+    </div>
+  );
 };
 
 export default ScheduleModify;

@@ -1,6 +1,10 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  tbody > tr {
+    background-color: white;
+    cursor: pointer;
+  }
   th,
   td {
     padding: .75rem 0;

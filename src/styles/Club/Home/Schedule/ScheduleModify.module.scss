@@ -13,10 +13,11 @@
   .modal {
     border-radius: 3%;
     background-color: white;
-    width: 30vw;
+    width: 25vw;
     display: flex;
     flex-direction: column;
     z-index: 9999;
+    padding: 1rem;
 
     .header {
       display: flex;
@@ -38,15 +39,85 @@
     .body {
       margin-left: 2%;
       margin-bottom: 2%;
+      .titleInput {
+        width: 20vw;
+        height: 2.5em;
+      }
     }
   }
 
   .modifyBtn {
-    margin-top: 4%;
-    width: 11vw;
-    height: 6vh;
-    border-radius: 10%;
-    background-color: white;
+    border: 2px solid lightgray;
+    padding: 0.3em;
+    margin: 1em 1.5em;
+    float: right;
     cursor: pointer;
+    background-color: white;
+    border-radius: 8px;
+    &:hover {
+      filter: brightness(97%);
+    }
+  }
+}
+.colorBtn {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 1em;
+  border-radius: 50%;
+  margin: 0 4px;
+  margin-bottom: 1rem;
+  border: 1px solid white;
+}
+
+@media (max-width: 1024px) {
+  .wrap {
+    .modal {
+      width: 45vw;
+      padding: 2rem 1rem;
+      .body {
+        // margin: 0 auto;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    .modal {
+      .body {
+        .titleInput {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    .modal {
+      width: 60vw;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .wrap {
+    .modal {
+      height: 75%;
+      width: 80%;
+      padding-top: 0;
+      .closeBtn {
+        top: 3%;
+      }
+      .body {
+        width: 100%;
+      }
+      .modifyBtn {
+        margin-right: 0;
+        margin-top: 0;
+      }
+    }
   }
 }

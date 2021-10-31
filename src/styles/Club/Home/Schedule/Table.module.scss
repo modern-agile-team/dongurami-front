@@ -1,10 +1,7 @@
 .calendar {
   width: 70vw;
   height: 50vh;
-  // border: solid 3px #3fcdb8;
-  // border-radius: 15px;
   padding: 10px;
-  // background-color: #e9fffc;
 }
 .today {
   color: red;
@@ -14,22 +11,22 @@
   color: rgb(187, 183, 183);
 }
 
-.yoil {
+.weekDays {
   display: flex;
   justify-content: space-around;
   margin-bottom: 0.5%;
-  // padding-bottom: 1rem;
 }
-// .monthdays {
-// }
+
 .scheduleSpan {
   font-size: small;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .num {
   td {
     border: solid 1px #3fcdb8;
-    width: 14.28571428571429%;
-    height: 10vh;
+    width: 10px;
+    height: 6rem;
     border-radius: 3px;
     background-color: white;
     border: solid 1px rgba(0, 0, 0, 0.192);
@@ -45,6 +42,7 @@
       .scheduleTitle {
         display: flex;
         flex-direction: column;
+        width: 9.25vw;
         height: 8vh;
         margin-left: 1%;
         span {
@@ -52,5 +50,66 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 1024px) {
+  .calendar {
+    width: 100%;
+  }
+  .num {
+    td {
+      .tdBlock {
+        .scheduleTitle {
+          width: 13vw;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    .num {
+      td {
+        .tdBlock {
+          width: 5vw;
+          .scheduleTitle {
+            overflow: hidden;
+            .scheduleSpan {
+              width: 100vw;
+              height: 15px;
+              margin-bottom: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    .weekDays {
+      font-size: 1vw;
+    }
+    .num {
+      td {
+        height: 3rem;
+        .tdBlock {
+          width: 3vw;
+          .scheduleTitle {
+            .scheduleSpan {
+              height: 11px;
+              font-size: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .calendar {
+    font-size: 2vw;
+    padding: 1px;
   }
 }

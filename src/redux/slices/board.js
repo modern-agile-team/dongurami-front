@@ -21,6 +21,10 @@ const boardSlice = createSlice({
     builder.addCase(getBoardPosts.fulfilled, (state, action) => {
       state.posts = action.payload;
     });
+    builder.addCase(getBoardPosts.rejected, () => {
+      alert('동아리에 가입된 사람만 접근할 수 있습니다!');
+      return { posts: [] };
+    })
   }
 });
 

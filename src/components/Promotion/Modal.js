@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import Post from './Post';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
@@ -8,83 +8,54 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
+import { MdClose } from 'react-icons/md';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]); //
 
 const Modal = ({ setOpenModal, postId }) => {
-  const [index, setIndex] = useState(0);
-  const [imgUrl, setImgUrl] = useState('');
   const [images, setImages] = useState([]);
   const category = 'promotion';
   const pid = postId;
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
-  const testImage = [
-    {
-      imgPath:
-        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
-    },
-    {
-      imgPath:
-        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
-    },
-    {
-      imgPath:
-        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
-    },
-    {
-      imgPath:
-        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
-    },
-    {
-      imgPath:
-        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
-    },
-    {
-      imgPath:
-        'https://i.pinimg.com/236x/c6/94/75/c6947507e7afc960c41877421a6e52b1.jpg'
-    }
-  ];
 
-  const awaitFetchData = useCallback(async () => {
+  useEffect(async () => {
+    dispatch(getPost({ category, pid }));
     await getBoardPost(pid).then((res) => {
       setImages(res.data.images);
-      setImgUrl(res.data.images[index].imgPath);
     });
-  }, [index, pid]);
-
-  useEffect(() => {
-    dispatch(getPost({ category, pid }));
-    awaitFetchData();
-  }, [dispatch, awaitFetchData, pid]);
-
-  if (!Object.keys(post).length) return null;
+  }, [dispatch]);
 
   return (
     <div className={styles.background} onClick={() => setOpenModal(false)}>
-      <div className={styles.image}>
+      <button className={styles.closeBtn}>
+        <MdClose />
+      </button>
+      <div className={styles.image} onClick={(e) => e.stopPropagation()}>
         {images.length && (
           <Swiper
-            className="banner"
-            spaceBetween={0}
             slidesPerView={1}
             navigation
             pagination={{ clickable: true }}
+            slidesOffsetBefore={0}
           >
-            {testImage.map((image, index) => {
+            {images.map((image, index) => {
               return (
-                <SwiperSlide key={index} className={styles.slider}>
-                  <img
-                    src={image.imgPath}
-                    alt="이미지"
-                    className="detail-image"
-                  />
-                </SwiperSlide>
+                <div key={index} className={styles.banner}>
+                  <SwiperSlide className={styles.slider}>
+                    <img
+                      src={image.imgPath}
+                      alt="이미지"
+                      className="detail-image"
+                    />
+                  </SwiperSlide>
+                </div>
               );
             })}
           </Swiper>
         )}
       </div>
+
       <Post postId={postId} post={post} />
     </div>
   );

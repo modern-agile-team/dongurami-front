@@ -8,13 +8,13 @@ const ClubList = ({ img, categories, title, clubNo }) => {
   const router = useRouter();
 
   const onClick = () => {
-    if (getToken() === '') alert('로그인 후 이용해주세요.');
+    if (!getToken()) alert('로그인 후 이용해주세요.');
     else router.push(`/clubhome/${clubNo}`);
   };
 
   return (
-    <div className={styles.container}>
-      {!img ? <BsImage /> : <img src={img} alt="동아리" onClick={onClick} />}
+    <div className={styles.container} onClick={onClick}>
+      {!img ? <BsImage /> : <img src={img} alt="동아리" />}
       <div>
         <p id={styles.desc}>{title}</p>
         <p>#{categories}</p>

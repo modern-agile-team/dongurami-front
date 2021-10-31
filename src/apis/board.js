@@ -3,8 +3,7 @@ import axios from 'apis/index';
 export function getPosts({ category, clubNum, ...params }) {
   const queryString = new URLSearchParams(params).toString();
   if (category === 'clubNotice') {
-    return axios.get(`/api/club/board/clubNotice/${clubNum}?${queryString}`)
-      .catch(() => alert('동아리에 가입된 사람만 접근할 수 있습니다!'))
+    return axios.get(`/api/club/board/clubNotice/${clubNum}?${queryString}`);
   }
   if (category === 'clubActivity') {
     return axios.get(`/api/club/board/clubActivity/${clubNum}?${queryString}`);
@@ -21,12 +20,15 @@ export function searchPosts({ category, clubNum, ...params }) {
   return axios.get(`/api/search/${category}?${queryString}`);
 }
 
-export function postPost(category, clubNum, body) {
+export function postPost(category, body, clubNum) {
   if (category === 'clubNotice') {
-    return axios.post(`/api/club/board/clubNotice/${clubNum}`, { id: 'test1', ...body });
+    return axios.post(`/api/club/board/clubNotice/${clubNum}`, { ...body });
   }
   if (category === 'clubActivity') {
-    return axios.post(`/api/club/board/clubActivity/${clubNum}`, { id: 'test1', ...body });
+    return axios.post(`/api/club/board/clubActivity/${clubNum}`, { ...body });
+  }
+  if (category === 'promotion') {
+    return axios.post(`/api/board/promotion`, { clubNo: clubNum, ...body })
   }
   return axios.post(`/api/board/${category}`, { ...body });
 }

@@ -15,91 +15,92 @@ const DailyControl = ({
   pop,
   setColor,
   today,
-  setSchedule
+  setSchedule,
+  Qdata
 }) => {
-  const onClickModify = (el) => {
-    setTitle(el.title);
-    setPeriod([el.startDate, el.endDate]);
-    setNo(el.no);
-    setColor(el.colorCode);
+  const onClickModify = (schedule) => {
+    setTitle(schedule.title);
+    setPeriod([schedule.startDate, schedule.endDate]);
+    setNo(schedule.no);
+    setColor(schedule.colorCode);
     setPop('ScheduleModify');
   };
 
-  const onDeleteSchedule = (el) => {
-    deleteSchedule(el)
+  const onDeleteSchedule = async (el) => {
+    await deleteSchedule(Qdata.id, el)
       .then((res) => console.log(res))
       .catch((err) => console.log(err.response.data.msg));
-    getInfo(today)
+    await getInfo(Qdata.id, today.format('YYYY-MM'))
       .then((res) => setSchedule(res.data.result))
-      .catch((err) => {
-        alert(err);
-      });
+      .catch((err) => alert(err));
   };
 
-  const axiosPATCH = (el, e) => {
-    importantSchedule(el, { important: e }).then((res) =>
-      getInfo(today).then((res) => setSchedule(res.data.result))
+  const axiosPATCH = (schedule, e) => {
+    importantSchedule(Qdata.id, schedule, { important: e }).then((res) =>
+      getInfo(Qdata.id, today.format('YYYY-MM')).then((res) =>
+        setSchedule(res.data.result)
+      )
     );
   };
 
-  if (pop === 'DailyControl')
-    return (
-      <div className={styles.wrap} onClick={() => setPop('Calendar')}>
-        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-          <div className={styles.header}>
-            <h3>{date} 일정</h3>
-          </div>
-          <MdClose
-            className={styles.closeBtn}
-            onClick={() => setPop('Calendar')}
-          />
-          <div className={styles.body}>
-            <div className={styles.schedule}>
-              {schedule.map((el, index) => {
-                return Date.parse(el.startDate) <= Date.parse(date) &&
-                  Date.parse(date) <= Date.parse(el.endDate) ? (
+  if (pop !== 'DailyControl') return null;
+
+  return (
+    <div className={styles.wrap} onClick={() => setPop('Calendar')}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.header}>
+          <h3>{date} 일정</h3>
+        </div>
+        <MdClose
+          className={styles.closeBtn}
+          onClick={() => setPop('Calendar')}
+        />
+        <div className={styles.body}>
+          <div className={styles.schedule}>
+            {schedule.map((eachScedule, index) => {
+              return (
+                Date.parse(eachScedule.startDate) <= Date.parse(date) &&
+                Date.parse(date) <= Date.parse(eachScedule.endDate) && (
                   <div key={index} className={styles.des}>
-                    {el.important ? (
-                      <AiFillStar
-                        className={styles.fillStar}
-                        onClick={() => {
-                          axiosPATCH(el, 0);
-                        }}
-                      />
-                    ) : (
-                      <AiOutlineStar
-                        className={styles.outLineStar}
-                        onClick={() => {
-                          axiosPATCH(el, 1);
-                        }}
-                      />
-                    )}
-                    <span style={{ color: 'black' }} key={el.no}>
-                      {el.title}
-                    </span>
+                    <div className={styles.importantSchedule}>
+                      {eachScedule.important ? (
+                        <AiFillStar
+                          className={styles.fillStar}
+                          onClick={() => axiosPATCH(eachScedule, 0)}
+                        />
+                      ) : (
+                        <AiOutlineStar
+                          className={styles.outLineStar}
+                          onClick={() => axiosPATCH(eachScedule, 1)}
+                        />
+                      )}
+                      <span style={{ color: 'black' }} key={eachScedule.no}>
+                        {eachScedule.title}
+                      </span>
+                    </div>
                     <div className={styles.edit}>
                       <HiPencil
-                        onClick={() => onClickModify(el)}
+                        onClick={() => onClickModify(eachScedule)}
                         className={styles.pencil}
                       />
                       <FaTrashAlt
                         onClick={() => {
-                          if (el.important === 0) {
-                            onDeleteSchedule(el);
-                          } else alert('주요 일정은 삭제 할 수 없습니다.');
+                          if (eachScedule.important === 0)
+                            onDeleteSchedule(eachScedule);
+                          else alert('주요 일정은 삭제 할 수 없습니다.');
                         }}
                         className={styles.delete}
                       />
                     </div>
                   </div>
-                ) : null;
-              })}
-            </div>
+                )
+              );
+            })}
           </div>
         </div>
       </div>
-    );
-  else return null;
+    </div>
+  );
 };
 
 export default DailyControl;

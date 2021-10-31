@@ -1,5 +1,5 @@
 import styles from '../../../styles/Club/Home/Schedule/Calendar.module.scss';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import DailyModal from './DailyModal';
@@ -8,7 +8,7 @@ import DailyControl from './DailyControl';
 import ScheduleModify from './ScheduleModify';
 import RightContainer from './RightContainer';
 import MakeTd from './MakeTd';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { getInfo } from 'apis/calendar';
 
 const Calendar = () => {
@@ -22,17 +22,16 @@ const Calendar = () => {
   const [color, setColor] = useState('');
   const [nowDay, setNowDay] = useState('');
   const nowDate = useRef();
-  const colors = ['#f7b5b5', '#ffee8f', '#aefff8', '#ffc2fc', '#e2e2e2']
+  const uRouter = useRouter();
+  const Qdata = uRouter.query;
+  const colors = ['#f7b5b5', '#ffee8f', '#aefff8', '#ffc2fc', '#e2e2e2'];
 
-  const moveLogin = () => {
-    Router.push('/LoginPage');
-  };
+  const moveLogin = () => Router.push('/LoginPage');
 
-  const moveHome = () => {
-    window.location.reload();
-  };
+  const moveHome = () => window.location.reload();
 
   const today = momentTime;
+  const yearMonth = today.format('YYYY-MM');
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
     today.clone().endOf('month').week() === 1
@@ -44,8 +43,10 @@ const Calendar = () => {
   if (nowMonth.length === 1) nowMonth = '0' + nowMonth;
 
   useEffect(() => {
+    console.log(1);
     if (today.format('MM') === nowMonth) setNowDay(nowDate.current.id);
-    getInfo(today)
+    if (!uRouter.isReady) return;
+    getInfo(Qdata.id, yearMonth)
       .then((res) => setSchedule(res.data.result))
       .catch((err) => {
         alert(err.response.data.msg);
@@ -62,10 +63,10 @@ const Calendar = () => {
         )
           moveHome();
       });
-  }, [momentTime]);
+  }, [pop, uRouter, momentTime, Qdata.id, nowMonth, today, yearMonth]);
 
   //달력만드는 함수
-  const calendarArr = () => {
+  const calendarArr = useCallback(() => {
     let result = [];
     let week = firstWeek;
     for (week; week <= lastWeek; week++) {
@@ -81,7 +82,7 @@ const Calendar = () => {
       );
     }
     return result;
-  };
+  }, [schedule, nowDate, today, setPop, setDate]);
   return (
     <>
       <div className={styles.wrap}>
@@ -100,6 +101,7 @@ const Calendar = () => {
         />
       </div>
       <DailyModal
+        Qdata={Qdata}
         colors={colors}
         setSchedule={setSchedule}
         setPop={setPop}
@@ -107,6 +109,7 @@ const Calendar = () => {
         pop={pop}
       />
       <DailyControl
+        Qdata={Qdata}
         setNo={setNo}
         schedule={schedule}
         date={date}
@@ -119,6 +122,7 @@ const Calendar = () => {
         setSchedule={setSchedule}
       />
       <ScheduleModify
+        Qdata={Qdata}
         today={today}
         setSchedule={setSchedule}
         title={title}
@@ -127,8 +131,9 @@ const Calendar = () => {
         setPop={setPop}
         pop={pop}
         color={color}
+        colors={colors}
       />
     </>
   );
 };
-export default Calendar;
+export default React.memo(Calendar);

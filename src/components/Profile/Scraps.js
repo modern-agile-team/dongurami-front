@@ -1,6 +1,7 @@
 import styles from '../../styles/Profile/Scraps.module.scss';
-import { BsFileText} from 'react-icons/bs';
+import { AiOutlineFileText } from 'react-icons/ai';
 import Link from 'next/dist/client/link';
+import { useEffect } from 'react';
 
 function Scraps({
   comp,
@@ -11,42 +12,58 @@ function Scraps({
   dataArr,
   id,
   clubNo,
-  setClubNo
+  setClubNo,
+  uRouter
 }) {
+  useEffect(() => {
+    if (!uRouter.isready) return;
+    getScraps(profile.id, clubNo).then((res) => {
+      setDataArr(
+        res.data.scraps
+          .concat(res.data.boards)
+          .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
+      );
+    });
+  }, [uRouter]);
+
   if (comp === '스크랩') {
     return (
       <div className={styles.wrap}>
         <div className={styles.container}>
-          <div className={styles.header}>
-            {profile.id === userInfo.id ? (
-              <Link
-                href={{
-                  pathname: `/profile/${id}/${clubNo}/writescraps`
+          <div className={styles.headerBox}>
+            <div className={styles.header}>
+              {profile.id === userInfo.id ? (
+                <Link
+                  href={{
+                    pathname: `/profile/${id}/${clubNo}/writescraps`
+                  }}
+                >
+                  <span className={styles.addBtn}>✏️글작성</span>
+                </Link>
+              ) : null}
+              <select
+                onChange={(e) => {
+                  setClubNo(e.target.value);
+                  getScraps(profile.id, e.target.value).then((res) => {
+                    setDataArr(
+                      res.data.scraps
+                        .concat(res.data.boards)
+                        .sort(
+                          (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
+                        )
+                    );
+                  });
                 }}
               >
-                <span>글 작성</span>
-              </Link>
-            ) : null}
-            <select
-              onChange={(e) => {
-                setClubNo(e.target.value);
-                getScraps(profile.id, e.target.value).then((res) => {
-                  setDataArr(
-                    res.data.scraps
-                      .concat(res.data.boards)
-                      .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
+                {profile.clubs.map((club, index) => {
+                  return (
+                    <option value={club.no} key={index}>
+                      {club.name}
+                    </option>
                   );
-                });
-              }}
-            >
-              {profile.clubs.map((club, index) => {
-                return (
-                  <option value={club.no} key={index}>
-                    {club.name}
-                  </option>
-                );
-              })}
-            </select>
+                })}
+              </select>
+            </div>
           </div>
           <div className={styles.postItem}>
             {dataArr.map((post, index) => {
@@ -54,17 +71,20 @@ function Scraps({
                 <Link
                   key={index}
                   href={
-                    post.scrapNo === undefined ? {
-                    pathname: `/profile/${id}/${clubNo}/${post.boardNo}`,
-                    query: {no: 'board'}
-                  } : {
-                    pathname: `/profile/${id}/${clubNo}/${post.scrapNo}`,
-                    query: {no: 'scrap'}
-                  }}
+                    post.scrapNo === undefined
+                      ? {
+                          pathname: `/profile/${id}/${clubNo}/${post.boardNo}`,
+                          query: { no: 'board' }
+                        }
+                      : {
+                          pathname: `/profile/${id}/${clubNo}/${post.scrapNo}`,
+                          query: { no: 'scrap' }
+                        }
+                  }
                 >
-                  <div>
-                    {post.imgPath === "" ? (
-                      <BsFileText className={styles.thumbnail} />
+                  <div className={styles.items}>
+                    {post.imgPath === null ? (
+                      <AiOutlineFileText className={styles.baseImg} />
                     ) : (
                       <img className={styles.thumbnail} src={post.imgPath} />
                     )}
