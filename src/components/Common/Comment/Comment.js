@@ -61,7 +61,7 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
         <div>
           <p>{new Date(comment.inDate).toLocaleDateString()}</p>
           {(user && comment.no === comment.groupNo) && (
-            <p onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
+            <p className={styles.reply} onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
           )}
         </div>
       </div>
