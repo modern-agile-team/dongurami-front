@@ -52,14 +52,14 @@ function Profile() {
     <div className={styles.container}>
       <div className={styles.profileHeader}>
         <button
-          style={comp === '프로필' ? { borderRight: 0 } : null}
+          style={comp === '프로필' ? { background: 'lightgray' } : null}
           className={styles.profileBtn}
           onClick={() => setComp('프로필')}
         >
           프로필
         </button>
         <button
-          style={comp === '스크랩' ? { borderRight: 0 } : null}
+          style={comp === '스크랩' ? { background: 'lightgray' } : null}
           className={styles.scrapBtn}
           onClick={() => {
             if (profile.clubs.length > 0) {

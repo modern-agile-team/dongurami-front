@@ -8,7 +8,7 @@ export const getUserInfo = (id, token) => {
     headers: {
       'x-auth-token': token
     }
-  })
+  });
   return setInterceptors(inst).get(`api/profile/${id}`);
 };
 
@@ -24,22 +24,43 @@ export const getBPost = (id, clubNum, boardNum) => {
   return instance.get(`/api/my-page/${id}/personal/${clubNum}/${boardNum}`);
 };
 
-export const getSPost = (id, clubNum, scrapNum ) => {
-  return instance.get(`/api/my-page/${id}/personal/scrap/${clubNum}/${scrapNum}`)
-}
+export const getSPost = (id, clubNum, scrapNum) => {
+  return instance.get(
+    `/api/my-page/${id}/personal/scrap/${clubNum}/${scrapNum}`
+  );
+};
 
 export const addPost = (id, clubNum, body) => {
   return instance.post(`/api/my-page/${id}/personal/${clubNum}`, body);
 };
 
 export const modifyBPost = (id, clubNum, boardNum, body) => {
-  return instance.put(`/api/my-page/${id}/personal/${clubNum}/${boardNum}`, body)
-}
+  return instance.put(
+    `/api/my-page/${id}/personal/${clubNum}/${boardNum}`,
+    body
+  );
+};
 
 export const modifySPost = (id, clubNum, scrapNum, body) => {
-  return instance.put(`/api/my-page/${id}/personal/scrap/${clubNum}/${scrapNum}`, body)
-}
+  return instance.put(
+    `/api/my-page/${id}/personal/scrap/${clubNum}/${scrapNum}`,
+    body
+  );
+};
 
 export const addScrapPost = (clubNum, boardNum, body) => {
-  return instance.post(`/api/club/board/clubActivity/personal/scrap/${clubNum}/${boardNum}`, body)
-}
+  return instance.post(
+    `/api/club/board/clubActivity/personal/scrap/${clubNum}/${boardNum}`,
+    body
+  );
+};
+
+export const deleteBPost = (id, clubNum, boardNum) => {
+  return instance.delete(`/api/my-page/${id}/personal/${clubNum}/${boardNum}`);
+};
+
+export const deleteSPost = (id, clubNum, boardNum) => {
+  return instance.delete(
+    `/api/my-page/${id}/personal/scrap/${clubNum}/${boardNum}`
+  );
+};
