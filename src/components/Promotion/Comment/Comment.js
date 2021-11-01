@@ -107,7 +107,9 @@ const Comment = ({ comment, postId, studentId }) => {
           <div>
             <p>{comment.inDate}</p>
             {user && comment.no === comment.groupNo && (
-              <p onClick={onClick}>답글 쓰기</p>
+              <p className={styles.reply} onClick={onClick}>
+                답글 쓰기
+              </p>
             )}
           </div>
         </div>
