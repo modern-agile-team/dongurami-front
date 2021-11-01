@@ -18,6 +18,7 @@ const ClubListContainer = () => {
 
   const onSearch = (data) => {
     const searchData = originData.filter((el) => el.name.includes(data));
+    console.log(data);
     setClubData(searchData);
   };
 

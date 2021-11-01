@@ -47,11 +47,23 @@
 @media (max-width: 768px) {
   .container {
     width: 44%;
+    img {
+      width: 100%;
+      height: 30vh;
+    }
   }
 }
 
 @media screen and (max-width: 480px) {
   .container {
-    width: 60%;
+    width: 42%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 100%;
+      height: 30vh;
+    }
   }
 }

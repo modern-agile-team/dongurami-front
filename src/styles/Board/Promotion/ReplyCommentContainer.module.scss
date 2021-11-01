@@ -1,6 +1,7 @@
 .container {
   display: flex;
-  background-color: rgb(233, 233, 233);
+  background-color: white;
+  filter: brightness(0.95);
   border-radius: 1rem;
   align-items: center;
   padding: 1rem 0;

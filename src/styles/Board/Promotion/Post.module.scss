@@ -104,6 +104,10 @@
     width: 100%;
     border: none;
     border-radius: 3px;
+    .wrap {
+      border: none;
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.24);
+    }
     h1 {
       width: 62vw;
     }

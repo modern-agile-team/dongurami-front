@@ -13,6 +13,16 @@ const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
+function formatDate(date) {
+  var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+  return [year, month, day].join('-');
+}
+
 const Post = ({ postId, getData, post }) => {
   const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
     post;
@@ -20,7 +30,7 @@ const Post = ({ postId, getData, post }) => {
   const router = useRouter();
 
   const onClick = () => {
-    if (getToken() === '') alert('로그인 후 이용해주세요.');
+    if (!getToken()) alert('로그인 후 이용해주세요.');
     else router.push(`/clubhome/${clubNo}`);
   };
 
@@ -68,7 +78,7 @@ const Post = ({ postId, getData, post }) => {
                 <span>{name}</span>
               </Link>
               <div className={styles.dateHit}>
-                <span>{new Date(inDate).toLocaleDateString()}</span>
+                <span>{formatDate(inDate)}</span>
               </div>
             </div>
           </div>

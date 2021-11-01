@@ -44,9 +44,6 @@
         color: #ffffff;
 
         cursor: pointer;
-        &:hover {
-          color: black;
-        }
       }
     }
   }
@@ -76,6 +73,20 @@
     }
     .image {
       width: 80%;
+      & > div:nth-of-type(1) {
+        & > div:nth-of-type(1) {
+          position: absolute;
+          color: white;
+          cursor: pointer;
+          left: 0;
+        }
+        & > div:nth-of-type(2) {
+          position: absolute;
+          color: #ffffff;
+          right: 0;
+          cursor: pointer;
+        }
+      }
     }
   }
   .slider {
