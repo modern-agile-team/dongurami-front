@@ -17,6 +17,10 @@ function Write({ category }) {
       alert('제목과 본문을 작성해 주세요!');
       return;
     }
+    if (title.length > 255) {
+      alert('제목을 255자 이하로 작성해 주세요!');
+      return;
+    }
     if (category === 'promotion') {
       setShowModal(true);
       return;
