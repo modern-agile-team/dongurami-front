@@ -54,6 +54,21 @@
   }
 }
 
+.count {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  top: 10px;
+  transform: translateX(90%);
+  border-radius: 50%;
+  background-color: red;
+  font-size: 10px;
+  width: 1.5em;
+  height: 1.5em;
+  color: white;
+}
+
 @media screen and (max-width: 1024px) {
   .myHeader {
     .topMenu {
@@ -120,6 +135,9 @@
         display: none;
       }
     }
+  }
+  .count {
+    top: 7.5vh;
   }
 }
 
