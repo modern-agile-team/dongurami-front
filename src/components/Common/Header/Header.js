@@ -11,12 +11,15 @@ import Link from 'next/link';
 import getToken from 'utils/getToken';
 import { useRouter } from 'next/router';
 import { getUserData } from 'apis/user';
+import { getAlarm, putAlarm, patchAlarm } from 'apis/alarm';
 
 function Header() {
   const [open, setOpen] = useState(false);
   const [isAlarmOpen, setIsAlarmOpen] = useState(false);
   const [token, setToken] = useState('');
   const [user, setUser] = useState();
+  const [alarmList, setAlarmList] = useState([]);
+  const [alarmShow, setAlarmShow] = useState(3);
 
   const closeRef = useRef(null);
   const router = useRouter();
@@ -36,6 +39,34 @@ function Header() {
       };
     }, [ref]);
   };
+
+  // 알람 조회
+  const getAlarmData = () => {
+    getAlarm()
+      .then((res) => setAlarmList(res.data.notifications))
+      .catch((err) => alert(err.response.data.msg));
+  };
+
+  // 알람 전체 삭제
+  const onAlarmDeleteAll = async () => {
+    confirm('전체 알람을 삭제하시겠습니까?') &&
+      (await putAlarm()
+        .then((res) => alert(res.data.msg))
+        .catch((err) => alert(err.response.data.msg)));
+    getAlarmData();
+  };
+
+  // 알람 일부 삭제
+  const onAlarmPatch = async (notiNum) => {
+    await patchAlarm(notiNum).catch((err) => console.log(err.response.data));
+    getAlarmData();
+  };
+
+  const showMoreAlarm = () => {
+    const temp = alarmShow;
+    setAlarmShow(temp + 3);
+  };
+
   CloseSidebar(closeRef);
 
   // localStorage의 JWT값 불러와 token state에 저장
@@ -67,6 +98,10 @@ function Header() {
     }
   }, [token]);
 
+  useEffect(() => {
+    getAlarmData();
+  }, []);
+
   //알람 열람
   const alarmOpen = () => {
     setIsAlarmOpen(!isAlarmOpen);
@@ -91,8 +126,26 @@ function Header() {
                 id={open ? styles.show : styles.hide}
               >
                 <div className={styles.alarm}>
+                  {alarmList.length > 0 && (
+                    <div className={styles.count}>
+                      {alarmList.length <= 9 ? (
+                        <span>{alarmList.length}</span>
+                      ) : (
+                        <span>9+</span>
+                      )}
+                    </div>
+                  )}
                   <BiBell onClick={alarmOpen} className={styles.bell} />
-                  {isAlarmOpen && <AlarmContainer />}
+                  {isAlarmOpen && (
+                    <AlarmContainer
+                      alarmList={alarmList}
+                      showMoreAlarm={showMoreAlarm}
+                      onAlarmDeleteAll={onAlarmDeleteAll}
+                      onAlarmPatch={onAlarmPatch}
+                      alarmShow={alarmShow}
+                      getAlarmData={getAlarmData}
+                    />
+                  )}
                 </div>
                 <FaUserCircle
                   className={styles.Profile}
