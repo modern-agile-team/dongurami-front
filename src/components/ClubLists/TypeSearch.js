@@ -17,16 +17,19 @@ const TypeSearch = ({ onCategorySearch, onSearch }) => {
   return (
     <div className={styles.container}>
       <ul className={styles.tagList}>
-        {category.map((el) => (
-          <li
-            name={el}
-            onClick={(event) =>
-              onCategorySearch(event.target.getAttribute('name'))
-            }
-          >
-            #{el}
-          </li>
-        ))}
+        {category.map((el, index) => {
+          return (
+            <li
+              key={index}
+              name={el}
+              onClick={(event) =>
+                onCategorySearch(event.target.getAttribute('name'))
+              }
+            >
+              #{el}
+            </li>
+          );
+        })}
       </ul>
 
       <div className={styles.searchContainer}>
