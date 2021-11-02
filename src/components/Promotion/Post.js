@@ -64,6 +64,7 @@ const Post = ({ postId, getData, post }) => {
                   <button onClick={onDelete}>삭제</button>
                 </div>
               )}
+              <div></div>
               <span className={styles.hit}>조회 {hit}</span>
             </div>
           </div>

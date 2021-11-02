@@ -69,7 +69,9 @@ const Promotion = ({
           e.stopPropagation();
         }}
       >
-        <div className={styles.title}>{title}</div>
+        <span className={styles.title}>
+          {title.length > 15 ? `${title.substr(0, 15)}...` : title}
+        </span>
         <div className={styles.extraInfo}>
           <span className={styles.none}>left</span>
           <span className={styles.hashtag}>#{category}</span>
