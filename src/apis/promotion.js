@@ -14,7 +14,6 @@ export function getBoardData(no) {
 }
 
 export function getSearchData(type, keyword, no) {
-  console.log(type, keyword, no);
   return axios.get(
     `api/search/promotion/category?type=${type}&keyword=${keyword}&sort=inDate&order=desc&lastNum=${no}`
   );
