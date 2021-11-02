@@ -3,16 +3,21 @@ import styles from '../../../styles/Club/Home/Manager/ApproveList.module.scss';
 import { AiOutlineUserAdd, AiOutlineUserDelete } from 'react-icons/ai';
 
 const ApproveInfo = ({ info, index, onApplyAccept, onApplyReject }) => {
+  const sex = info.gender === 1 ? '남' : '여';
   return (
     <>
       <div className={styles.applierInfo}>
         <div>
           <span>이름</span>
-          <p>{info.name}</p>
+          <p>
+            {info.name} [{sex}]
+          </p>
         </div>
         <div>
           <span>학과</span>
-          <p>{info.major}</p>
+          <p>
+            {info.major} [{info.grade}학년]
+          </p>
         </div>
         <div>
           <span>학번</span>
