@@ -3,7 +3,7 @@ import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
 import styles from '../../styles/Club/Lists/ClubLists.module.scss';
 import ClubList from './ClubList';
-import { getDatas } from 'apis/clublist';
+import { getDatas, searchDatas } from 'apis/clublist';
 
 const ClubListContainer = () => {
   const [clubData, setClubData] = useState([]);
@@ -12,13 +12,18 @@ const ClubListContainer = () => {
   const onCategorySearch = (element) => {
     const searchData = originData.filter((el) => el.category === element);
 
-    if (element === '') setClubData(originData);
+    if (element === '전체') setClubData(originData);
     else setClubData(searchData);
   };
 
-  const onSearch = (data) => {
-    const searchData = originData.filter((el) => el.name.includes(data));
-    setClubData(searchData);
+  const onSearch = async (data) => {
+    await searchDatas(data).then((response) => {
+      if (response.data.clubs.length === 0) {
+        alert('검색결과가 없습니다');
+        return;
+      }
+      setClubData(response.data.clubs);
+    });
   };
 
   useEffect(() => {

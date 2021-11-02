@@ -2,9 +2,10 @@
 
 .container {
   background-color: #fff;
-  margin-top: 15em;
+  padding-top: 15em;
   text-align: center;
   h1 {
+    font-family: 'twayair';
     font-size: 350%;
     font-weight: 100;
     margin-bottom: 0px;
@@ -17,10 +18,12 @@
   .list {
     display: flex;
     .club {
+      font-family: 'twayair';
       margin-left: 20px;
       color: #3fcdb8;
     }
     .br {
+      font-family: 'twayair';
       margin-left: 20px;
     }
   }
@@ -32,10 +35,12 @@
   .promotion {
     display: flex;
     .recruit {
+      font-family: 'twayair';
       margin-left: 22px;
       color: #3fcdb8;
     }
     .br {
+      font-family: 'twayair';
       margin-left: 20px;
     }
   }
@@ -60,6 +65,7 @@
   }
   .promotionBtn {
     margin-top: 2rem;
+    margin-left: -8px;
   }
 }
 
@@ -77,9 +83,12 @@
 
 @media screen and (max-width: 768px) {
   .container {
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 28%;
+    width: 100%;
+    padding-top: 18em;
+    .wrap {
+      width: 90%;
+      margin: 0% auto;
+    }
     h1 {
       font-size: 5.7vw;
       padding: 0%;
@@ -96,8 +105,8 @@
 
 @media screen and (max-width: 480px) {
   .container {
-    margin-top: 12em;
-    margin-bottom: 20em;
+    padding-top: 13em;
+    padding-bottom: 12em;
     h1 {
       font-size: 9vw;
     }
@@ -137,6 +146,7 @@
       font-size: 60%;
       zoom: 1.4;
       margin-top: 90%;
+      margin-left: 0px;
     }
   }
 }

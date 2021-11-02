@@ -17,23 +17,25 @@ const TodayTd = ({ setDate, setPop, nowDate, index, days, schedule }) => {
         }}
       >
         <div className={styles.date}>
-          <span className={styles.today}>{days.format('D')}</span>
+          <div className={styles.todayContainer}>
+            <span className={styles.today}>{days.format('D')}</span>
+          </div>
         </div>
         <div className={styles.scheduleTitle}>
-          {schedule.map((el, index) => {
+          {schedule.map((schedule, index) => {
             return (
-              Date.parse(el.startDate) <=
+              Date.parse(schedule.startDate) <=
                 Date.parse(days.format('YYYY-MM-DD')) &&
               Date.parse(days.format('YYYY-MM-DD')) <=
-                Date.parse(el.endDate) && (
+                Date.parse(schedule.endDate) && (
                 <span
                   className={styles.scheduleSpan}
-                  style={{ background: `${el.colorCode}` }}
+                  style={{ background: `${schedule.colorCode}` }}
                   key={index}
                 >
-                  {el.title.split(' ').join('').length < 9
-                    ? el.title
-                    : el.title.slice(0, 8) + '..'}
+                  {schedule.title.split(' ').join('').length < 9
+                    ? schedule.title
+                    : schedule.title.slice(0, 8) + '..'}
                 </span>
               )
             );

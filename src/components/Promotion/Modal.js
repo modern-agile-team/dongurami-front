@@ -20,10 +20,14 @@ const Modal = ({ setOpenModal, postId }) => {
   const post = useSelector((state) => state.post);
 
   useEffect(async () => {
-    dispatch(getPost({ category, pid }));
+    dispatch(getPost({ category, pid })).then((response) => {
+      setImages(response.payload.images);
+    });
+    /*
     await getBoardPost(pid).then((res) => {
       setImages(res.data.images);
     });
+    */
   }, [dispatch]);
 
   return (

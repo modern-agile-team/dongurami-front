@@ -1,11 +1,12 @@
 .wrap {
   width: 100%;
   background-color: #fff;
-  margin-top: 15%;
+  padding-top: 15%;
   h1 {
+    font-family: 'twayair';
     font-size: 230%;
     font-weight: 100;
-    padding: 2rem;
+    padding: 2rem 3rem;
     margin-left: 1.5%;
     margin-bottom: 0px;
   }
@@ -15,7 +16,7 @@
     justify-content: space-evenly;
     display: flex;
     margin-top: 2%;
-    margin-bottom: 15%;
+    padding-bottom: 13%;
     gap: 6%;
     .list {
       display: flex;
@@ -50,7 +51,7 @@
 @media screen and (max-width: 768px) {
   .wrap {
     width: 100%;
-    margin-top: 15%;
+    padding-top: 33%;
     h1 {
       font-size: 3.5vw;
       width: 70%;
@@ -81,6 +82,7 @@
 @media screen and (max-width: 480px) {
   .wrap {
     width: 100%;
+    padding-top: 10%;
     h1 {
       width: 100%;
       font-size: 6.5vw;

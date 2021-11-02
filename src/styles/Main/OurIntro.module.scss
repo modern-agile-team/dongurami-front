@@ -1,8 +1,8 @@
 .wrap {
   width: 100%;
   background-color: #fff;
-  margin-top: 10%;
-  margin-bottom: 13%;
+  padding-top: 10%;
+  padding-bottom: 13%;
   display: flex;
   justify-content: center;
   img {
@@ -17,6 +17,7 @@
     margin-top: 3%;
     margin-left: 10%;
     h1 {
+      font-family: 'twayair';
       font-weight: 500;
     }
   }
@@ -25,7 +26,8 @@
 @media screen and (max-width: 768px) {
   .wrap {
     width: 100%;
-    margin-top: 20%;
+    padding-top: 25%;
+    padding-bottom: 22%;
     img {
       margin-top: 2%;
       width: 170px;
@@ -42,7 +44,8 @@
     width: 100%;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 60%;
+    padding-top: 20%;
+    padding-bottom: 66%;
     img {
       margin: 0%;
       margin-top: 180%;

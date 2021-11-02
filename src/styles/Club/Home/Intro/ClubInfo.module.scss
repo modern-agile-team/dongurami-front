@@ -14,11 +14,13 @@
   align-items: center;
   width: 50%;
   h1 {
+    font-family: 'twayair';
     font-weight: lighter;
     margin-bottom: 0;
     font-size: 300%;
   }
   p {
+    font-family: 'twayair';
     font-size: 150%;
     margin-bottom: 0;
   }
@@ -26,6 +28,7 @@
 
 .population {
   display: relative;
+  margin-top: 1.2em;
   max-height: 40%;
   width: 100%;
   height: 100%;

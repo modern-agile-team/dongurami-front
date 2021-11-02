@@ -9,6 +9,7 @@
   flex: 1;
   & > form {
     display: flex;
+    gap: 1rem;
     & > input {
       flex: 1;
       border: none;
@@ -19,6 +20,7 @@
       border-radius: .25rem;
       padding: .5rem;
       color: black;
+      cursor: pointer;
     }
   }
 }

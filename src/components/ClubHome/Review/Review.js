@@ -51,8 +51,8 @@ const Review = () => {
 
   // 후기 작성
   const onReviewSubmit = async () => {
-    if (reviewRate === 0) alert('별점을 입력해주세요');
-    else if (reviewInput === '') alert('후기를 입력해주세요');
+    if (reviewRate === 0) alert('별점을 입력해주세요.');
+    else if (reviewInput === '') alert('후기를 입력해주세요.');
     else {
       await postReview(
         {
@@ -81,8 +81,8 @@ const Review = () => {
 
   // 내 후기 수정
   const onReviewUpdate = async () => {
-    if (reviewRate === 0) alert('별점을 입력해주세요');
-    else if (reviewInput === '') alert('후기를 입력해주세요');
+    if (reviewRate === 0) alert('별점을 입력해주세요.');
+    else if (reviewInput === '') alert('후기를 입력해주세요.');
     else {
       await putReview(
         {
@@ -174,7 +174,6 @@ const Review = () => {
           score={reviewMine[0].score}
           description={reviewMine[0].description}
           inDate={reviewMine[0].inDate.substring(0, 10)}
-          clubInfo={clubInfo}
         />
       ) : (
         <></>
@@ -186,7 +185,7 @@ const Review = () => {
             rate={review.score}
             desc={review.description}
             date={review.inDate.substring(0, 10)}
-            clubInfo={clubInfo}
+            index={index}
           />
         );
       })}

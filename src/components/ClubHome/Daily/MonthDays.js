@@ -15,19 +15,19 @@ const MonthDays = ({ setDate, setPop, index, schedule, days }) => {
           <span className={styles.monthdays}>{days.format('D')}</span>
         </div>
         <div className={styles.scheduleTitle}>
-          {schedule.map((el) => {
-            return Date.parse(el.startDate) <=
+          {schedule.map((schedule, index) => {
+            return Date.parse(schedule.startDate) <=
               Date.parse(days.format('YYYY-MM-DD')) &&
               Date.parse(days.format('YYYY-MM-DD')) <=
-                Date.parse(el.endDate) ? (
+                Date.parse(schedule.endDate) ? (
               <span
                 className={styles.scheduleSpan}
-                style={{ background: `${el.colorCode}` }}
-                key={days.format('YYYY-MM-DD')}
+                style={{ background: `${schedule.colorCode}` }}
+                key={index}
               >
-                {el.title.split(' ').join('').length < 9
-                  ? el.title
-                  : el.title.slice(0, 8) + '..'}
+                {schedule.title.split(' ').join('').length < 9
+                  ? schedule.title
+                  : schedule.title.slice(0, 8) + '..'}
               </span>
             ) : null;
           })}

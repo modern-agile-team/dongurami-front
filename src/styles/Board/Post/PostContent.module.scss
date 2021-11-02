@@ -1,7 +1,6 @@
 .container {
   width: 60%;
   margin: 1rem auto;
-  // border: 2px solid #90e2d6;
   box-shadow: 0px 1px 6px 0px rgb(0 0 0 / 24%);
   border-radius: 1rem;
   padding: 1rem 2rem;
@@ -9,11 +8,12 @@
   * {
     font-family: sans-serif;
   }
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 768px) {
     margin: 0 auto;
     padding: 1rem;
     width: 100%;
     border: none;
+    box-shadow: none;
   }
   & h1 {
     margin: 0;
@@ -37,7 +37,7 @@
         cursor: pointer;
       }
       & > div:nth-of-type(2) {
-        text-align: center;
+        text-align: right;
       }
       & button {
         background: inherit;
@@ -55,6 +55,9 @@
   & > div:nth-of-type(2) {
     img {
       max-width: 100%;
+    }
+    & > div {
+      font-size: 1rem;
     }
   }
 }

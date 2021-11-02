@@ -63,8 +63,10 @@ function Board({ category }) {
   };
   const canWrite = (() => {
     if (!user) return false;
-    if (clubNum && user.club.every(({ no }) => no !== clubNum)) return false;
-    return true;
+    if (['free', 'questionAndAnswer'].includes(category)) return true;
+    if (category === 'notice' && user.isAdmin) return true;
+    if (clubNum && user.club.some(({ no }) => no === clubNum)) return true;
+    return false;
   })();
 
   if (!posts) return null;
