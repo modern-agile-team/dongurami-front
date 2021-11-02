@@ -74,12 +74,18 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 }
 
 .delete {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
   padding-right: 10px;
   svg {
     &:hover {
       color: rgb(233, 49, 3);
     }
+  }
+  span {
+    font-size: 10px;
+    font-family: $sans-font;
+    color: red;
   }
 }
 
