@@ -17,6 +17,11 @@ function AddComment({ postId, parentCommentId }) {
   };
   const onSubmit = (e) => {
     e.preventDefault();
+    if (description.trim() === '') return;
+    if (description.length > 255) {
+      alert('댓글을 255자 이하로 작성해 주세요!');
+      return;
+    }
     addComment(postId, description).then((res) => {
       if (res.data.success) dispatch(getPost({ category, pid }));
       else alert(res.data.msg);

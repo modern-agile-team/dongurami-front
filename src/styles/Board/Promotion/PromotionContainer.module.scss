@@ -37,10 +37,12 @@
     margin-top: 5em;
     /*column-width: 14em;*/
     /*-moz-column-width: 13em;*/
-    -webkit-column-width: 19em;
+    -webkit-column-width: 15em;
+    width: 90%;
 
     .poster {
-      margin-bottom: 15px;
+      margin-right: 0 !important;
+      margin-bottom: 40px;
     }
   }
 }
