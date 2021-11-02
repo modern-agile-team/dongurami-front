@@ -4,7 +4,6 @@ import { AiOutlineUserAdd, AiOutlineUserDelete } from 'react-icons/ai';
 
 const ApproveInfo = ({ info, index, onApplyAccept, onApplyReject }) => {
   const sex = info.gender === 1 ? '남' : '여';
-  console.log(info.grade);
   return (
     <>
       <div className={styles.applierInfo}>
