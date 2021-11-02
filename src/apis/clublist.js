@@ -5,6 +5,5 @@ export function getDatas() {
 }
 
 export function searchDatas(data) {
-  console.log(data);
   return axios.get(`api/search/club-list/category?name=${data}`);
 }
