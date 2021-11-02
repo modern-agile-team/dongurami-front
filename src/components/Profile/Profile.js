@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Scraps from './Scraps';
 import styles from '../../styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo';
@@ -21,15 +21,23 @@ function Profile() {
 
   const uRouter = useRouter();
 
-  const logout = () => {
-    window.localStorage.removeItem("jwt");
+  const logout = useCallback(() => {
+    window.localStorage.removeItem('jwt');
     dispatch(signOut());
-    router.push('/')
-  };
+    router.push('/');
+  }, [router]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
+  const matchTitle = useCallback((title) => {
+    if (matchMedia('screen and (max-width: 280px)').matches) {
+      return title.length >= 5 ? title.substring(0, 3) + '..' : title;
+    } else if (matchMedia('screen and (max-width: 530px)').matches) {
+      return title.length >= 6 ? title.substring(0, 4) + '..' : title;
+    }
+    return title.length >= 8 ? title.substring(0, 6) + '..' : title;
+  }, []);
   useEffect(() => {
     if (!uRouter.isReady) return;
     setId(uRouter.query.pid);
@@ -52,14 +60,14 @@ function Profile() {
     <div className={styles.container}>
       <div className={styles.profileHeader}>
         <button
-          style={comp === '프로필' ? { borderRight: 0 } : null}
+          style={comp !== '프로필' ? { background: '#f2f2f2' } : null}
           className={styles.profileBtn}
           onClick={() => setComp('프로필')}
         >
           프로필
         </button>
         <button
-          style={comp === '스크랩' ? { borderRight: 0 } : null}
+          style={comp !== '스크랩' ? { background: '#f2f2f2' } : null}
           className={styles.scrapBtn}
           onClick={() => {
             if (profile.clubs.length > 0) {
@@ -104,6 +112,7 @@ function Profile() {
         dataArr={dataArr}
         setDataArr={setDataArr}
         id={id}
+        matchTitle={matchTitle}
       />
     </div>
   );

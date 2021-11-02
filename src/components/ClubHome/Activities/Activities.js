@@ -15,8 +15,15 @@ const Activities = () => {
   const dispatch = useDispatch();
   const [selectedID, setSelectedID] = useState();
   const posts = useSelector((state) => state.board.posts);
+  const user = useSelector((state) => state.user);
 
   const clubNum = Number(router.query.id);
+
+  const canWrite = (() => {
+    if (!user) return false;
+    if (clubNum && user.club.every(({ no }) => no !== clubNum)) return false;
+    return true;
+  })();
 
   useEffect(() => {
     dispatch(getBoardPosts({ category: 'clubActivity', sort: 'inDate', order: 'DESC', clubNum }));
@@ -38,11 +45,13 @@ const Activities = () => {
       <div id={styles.clubName}>
         <p>우아한 애자일의 활동</p>
       </div>
-      <div id={styles.add}>
-        <Link href={{ pathname: `${router.pathname}/write-activity`, query: router.query }} passHref>
-          <a><IoIosAddCircleOutline /></a>
-        </Link>
-      </div>
+      {(canWrite) && (
+        <div id={styles.add}>
+          <Link href={{ pathname: `${router.pathname}/write-activity`, query: router.query }} passHref>
+            <a><IoIosAddCircleOutline /></a>
+          </Link>
+        </div>
+      )}
       <div className={styles.activities}>
         {posts.map((post) => {
           return (

@@ -94,6 +94,10 @@ const ClubIntro = ({ visitTime }) => {
     if (clubInfo) setIntroDesc(clubInfo.result[0].introduce);
   }, [clubInfo]);
 
+  useEffect(() => {
+    document.body.style.overflow = 'visible';
+  }, []);
+
   if (!clubInfo) return null;
 
   return (

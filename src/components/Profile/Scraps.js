@@ -13,17 +13,20 @@ function Scraps({
   id,
   clubNo,
   setClubNo,
-  uRouter
+  uRouter,
+  matchTitle
 }) {
   useEffect(() => {
     if (!uRouter.isready) return;
-    getScraps(profile.id, clubNo).then((res) => {
-      setDataArr(
-        res.data.scraps
-          .concat(res.data.boards)
-          .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
-      );
-    });
+    getScraps(profile.id, clubNo)
+      .then((res) => {
+        setDataArr(
+          res.data.scraps
+            .concat(res.data.boards)
+            .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
+        );
+      })
+      .catch((err) => alert(err.response.data.msg));
   }, [uRouter]);
 
   if (comp === '스크랩') {
@@ -89,7 +92,9 @@ function Scraps({
                       <img className={styles.thumbnail} src={post.imgPath} />
                     )}
                     <br />
-                    <span>{post.title}</span>
+                    <span className={styles.itemTitle}>
+                      {matchTitle(post.title)}
+                    </span>
                   </div>
                 </Link>
               );

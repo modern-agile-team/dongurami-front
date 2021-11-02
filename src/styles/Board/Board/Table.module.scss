@@ -4,9 +4,6 @@
   tbody > tr {
     background-color: white;
     cursor: pointer;
-    &:hover {
-      filter: brightness(0.9);
-    }
   }
   th,
   td {

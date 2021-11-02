@@ -2,7 +2,7 @@
 
 .container {
   background-color: #fff;
-  margin-top: 15em;
+  padding-top: 15em;
   text-align: center;
   h1 {
     font-size: 350%;
@@ -79,25 +79,25 @@
   .container {
     width: 90%;
     margin: 0 auto;
-    margin-top: 28%;
+    padding-top: 18em;
     h1 {
       font-size: 5.7vw;
       padding: 0%;
       margin-right: -40%;
     }
     .listBtn {
-      width: 9vw;
+      width: 10vw;
     }
     .promotionBtn {
-      width: 9vw;
+      width: 10vw;
     }
   }
 }
 
 @media screen and (max-width: 480px) {
   .container {
-    margin-top: 12em;
-    margin-bottom: 20em;
+    padding-top: 13em;
+    padding-bottom: 12em;
     h1 {
       font-size: 9vw;
     }
@@ -111,7 +111,7 @@
       }
     }
     .promoWrap {
-      margin-top: 30%;
+      margin-top: 35%;
     }
     .promotion {
       .recruit {
@@ -123,18 +123,20 @@
       }
     }
     .listBtn {
-      width: 11em;
-      height: 1.5rem;
+      width: 10em;
+      height: 1.6rem;
       font-weight: 800;
+      font-size: 60%;
       zoom: 1.4;
-      margin-top: 120%;
+      margin-top: 90%;
     }
     .promotionBtn {
-      width: 11em;
-      height: 1.5rem;
+      width: 10em;
+      height: 1.6rem;
       font-weight: 800;
+      font-size: 60%;
       zoom: 1.4;
-      margin-top: 120%;
+      margin-top: 90%;
     }
   }
 }

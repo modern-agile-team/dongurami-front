@@ -34,7 +34,7 @@
 
   img {
     width: 510px;
-    margin-top: 16em;
+    padding-top: 16em;
   }
 }
 
@@ -45,7 +45,6 @@
     }
     h1 {
       font-size: 6.8vw;
-      // font-size: 400%;
     }
     span {
       font-size: 90%;
@@ -61,7 +60,7 @@
 
 @media screen and (max-width: 768px) {
   .container {
-    margin-top: 5%;
+    padding-top: 5%;
     .wrap {
       flex-direction: column;
       align-items: center;
@@ -71,7 +70,6 @@
     }
     h1 {
       font-size: 10vw;
-      // padding: 0 3rem;
     }
     span {
       font-size: 2.5vw;
@@ -80,7 +78,7 @@
     }
     img {
       width: 180%;
-      margin-top: 8em;
+      padding-top: 8em;
       margin-left: -17vw;
     }
   }
@@ -102,7 +100,6 @@
       padding: 0 2rem;
     }
     img {
-      margin-top: 5rem;
       margin-left: -4rem;
     }
   }

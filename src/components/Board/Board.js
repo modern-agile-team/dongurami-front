@@ -61,6 +61,13 @@ function Board({ category }) {
     clubNotice: '동아리 공지 게시판',
     questionAndAnswer: 'Q&A 게시판'
   };
+  const canWrite = (() => {
+    if (!user) return false;
+    if (['free', 'questionAndAnswer'].includes(category)) return true;
+    if (category === 'notice' && user.isAdmin) return true;
+    if (clubNum && user.club.some(({ no }) => no === clubNum)) return true;
+    return false;
+  })();
 
   if (!posts) return null;
 
@@ -74,7 +81,7 @@ function Board({ category }) {
         </Link>
         <hr />
         <div className={styles.orderBy}>
-          {(user) && (
+          {(canWrite) && (
             <Link href={{ pathname: `${router.pathname}/write`, query: router.query }} passHref>
               <button>✏️ 글쓰기</button>
             </Link>

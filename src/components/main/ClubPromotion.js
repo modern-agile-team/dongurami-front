@@ -14,7 +14,7 @@ function ClubPromotion() {
           </h1>
           <div className={styles.btn}>
             <Link href="/clublists" passHref>
-              <button className={styles.listBtn}>Let&apos;s go</button>
+              <button className={styles.listBtn}>확인하러 가기</button>
             </Link>
           </div>
         </Fade>
@@ -27,7 +27,7 @@ function ClubPromotion() {
           </h1>
           <div className={styles.btn}>
             <Link href="/promotion" passHref>
-              <button className={styles.promotionBtn}>Let&apos;s go</button>
+              <button className={styles.promotionBtn}>확인하러 가기</button>
             </Link>
           </div>
         </Fade>

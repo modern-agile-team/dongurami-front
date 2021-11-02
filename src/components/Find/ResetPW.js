@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from '../../styles/User/Find/ResetPW.module.scss';
 import { patchResetPW } from 'apis/user';
+import { useRouter } from 'next/router';
 
 function ResetPW() {
   const [id, setId] = useState('');
@@ -20,6 +21,8 @@ function ResetPW() {
     setUserToken(window.localStorage.getItem('user_token'));
   }, []);
 
+  const router = useRouter();
+
   const onSubmit = (e) => {
     e.preventDefault();
     patchResetPW(
@@ -32,6 +35,7 @@ function ResetPW() {
     )
       .then((res) => {
         alert(res.data.msg);
+        router.push('/LoginPage');
       })
       .catch((err) => {
         if (err.response.data.useable === false) {

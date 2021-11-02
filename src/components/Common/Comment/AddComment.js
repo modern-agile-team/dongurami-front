@@ -17,7 +17,11 @@ function AddComment({ parentCommentID }) {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (description === '') return;
+    if (description.trim() === '') return;
+    if (description.length > 255) {
+      alert('댓글을 255자 이하로 작성해 주세요!');
+      returnl
+    }
     await api.postComment({ category: post.category, pid: post.no, id: 'test1', description, parentCommentID, clubNum: router.query.id });
     setDescription('');
     dispatch(getPost());

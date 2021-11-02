@@ -5,8 +5,8 @@ const AlarmBody = ({
   alarmList,
   alarmShow,
   showMoreAlarm,
-  getAlarmData,
-  onAlarmPatch
+  onAlarmPatch,
+  setIsDelete
 }) => {
   return (
     <div className={styles.alarms}>
@@ -15,8 +15,8 @@ const AlarmBody = ({
           <AlarmList
             key={index}
             alarm={alarm}
-            getAlarmData={getAlarmData}
             onAlarmPatch={onAlarmPatch}
+            setIsDelete={setIsDelete}
           />
         );
       })}

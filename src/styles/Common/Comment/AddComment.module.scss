@@ -9,17 +9,18 @@
   flex: 1;
   & > form {
     display: flex;
+    gap: 1rem;
     & > input {
       flex: 1;
       border: none;
       background-color: inherit;
     }
     & > button {
-      background-color: #F3BE96;
       border: none;
       border-radius: .25rem;
       padding: .5rem;
       color: black;
+      cursor: pointer;
     }
   }
 }
