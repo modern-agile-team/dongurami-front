@@ -52,7 +52,7 @@ const ClubIntro = ({ visitTime }) => {
   const onChangeLogo = async (e) => {
     const file = e.target.files[0];
     const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (
-      await getS3PresignedURL({ img: e.target.files[0].name })
+      await getS3PresignedURL(e.target.files[0].name)
     ).data;
     await uploadImage(presignedURL, file);
     await putClubLogo({
