@@ -14,19 +14,21 @@ const OtherDays = ({ setPop, setDate, index, days, schedule }) => {
         <div className={styles.date}>
           <span className={styles.otherday}>{days.format('D')}</span>
         </div>
-        {schedule.map((el) => {
+        {schedule.map((schedule, index) => {
           return (
-            Date.parse(el.startDate) <= Date.parse(days.format('YYYY-MM-DD')) &&
-            Date.parse(days.format('YYYY-MM-DD')) <= Date.parse(el.endDate) && (
+            Date.parse(schedule.startDate) <=
+              Date.parse(days.format('YYYY-MM-DD')) &&
+            Date.parse(days.format('YYYY-MM-DD')) <=
+              Date.parse(schedule.endDate) && (
               <>
                 <span
                   className={styles.scheduleSpan}
-                  style={{ color: `${el.colorCode}` }}
-                  key={days.format('YYYY-MM-DD')}
+                  style={{ color: `${schedule.colorCode}` }}
+                  key={index}
                 >
-                  {el.title.split(' ').join('').length < 9
-                    ? el.title
-                    : el.title.slice(0, 8) + '..'}
+                  {schedule.title.split(' ').join('').length < 9
+                    ? schedule.title
+                    : schedule.title.slice(0, 8) + '..'}
                 </span>
               </>
             )
