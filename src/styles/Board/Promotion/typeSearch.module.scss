@@ -12,6 +12,7 @@
       border-radius: 15px;
       padding: 0.8rem 1.5rem;
       font-size: 16px;
+      font-family: 'twayair';
       margin-right: 6px;
 
       &:hover {
@@ -26,6 +27,7 @@
     height: 2rem;
     padding: 0.5rem;
     border: 1px solid lightgray;
+    font-family: 'twayair';
     // position: absolute;
     // right: 70%;
     // top: 68%;
@@ -59,6 +61,7 @@
         height: 90%;
         margin-left: 20px;
         font-size: 15px;
+        font-family: 'twayair';
 
         outline: none;
       }
@@ -88,6 +91,7 @@
     border-radius: 0.5rem;
     cursor: pointer;
     color: black;
+    font-family: 'twayair';
     // padding: 0.2rem 2rem;
     &:hover {
       filter: brightness(98%);

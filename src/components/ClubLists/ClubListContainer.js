@@ -18,6 +18,10 @@ const ClubListContainer = () => {
 
   const onSearch = async (data) => {
     await searchDatas(data).then((response) => {
+      if (response.data.clubs.length === 0) {
+        alert('검색결과가 없습니다');
+        return;
+      }
       setClubData(response.data.clubs);
     });
   };
