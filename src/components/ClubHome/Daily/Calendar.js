@@ -24,7 +24,7 @@ const Calendar = () => {
   const nowDate = useRef();
   const uRouter = useRouter();
   const Qdata = uRouter.query;
-  const colors = ['#f7b5b5', '#ffee8f', '#aefff8', '#ffc2fc', '#e2e2e2'];
+  const colors = ['#ff9d9d', '#ffb482', '#ffee8f', '#a1ffa9', '#b5eaff'];
 
   const moveLogin = () => Router.push('/LoginPage');
 
@@ -43,7 +43,6 @@ const Calendar = () => {
   if (nowMonth.length === 1) nowMonth = '0' + nowMonth;
 
   useEffect(() => {
-    console.log(1);
     if (today.format('MM') === nowMonth) setNowDay(nowDate.current.id);
     if (!uRouter.isReady) return;
     getInfo(Qdata.id, yearMonth)

@@ -21,20 +21,22 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
 
   //추가하는 함수
   const onClickAdd = async () => {
-    await addSchedule(Qdata.id, {
-      colorCode: color,
-      title: title.current.value,
-      startDate: startDate,
-      endDate: endDate,
-      clubName: '우아한 애자일',
-      url: `${process.env.NEXT_PUBLIC_API_URL}/api/club/schedule/${Qdata.id}`,
-      notiCategoryNum: 4
-    })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err.response.data.msg));
-    await getInfo(Qdata.id, today.format('YYYY-MM'))
-      .then((res) => setSchedule(res.data.result))
-      .catch((err) => alert(err));
+    if (title.current.value.length > 50) alert('제목은 50자 이하여야 합니다.');
+    else {
+      await addSchedule(Qdata.id, {
+        colorCode: color,
+        title: title.current.value,
+        startDate: startDate,
+        endDate: endDate,
+        url: `clubhome/${Qdata.id}`,
+        notiCategoryNum: 4
+      })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err.response.data.msg));
+      await getInfo(Qdata.id, today.format('YYYY-MM'))
+        .then((res) => setSchedule(res.data.result))
+        .catch((err) => alert(err));
+    }
   };
 
   const onAddBtn = (e) => {
@@ -67,6 +69,7 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
           <input
             id="startDate"
             type="date"
+            value={startDate}
             ref={startInput}
             onChange={() => setStartDate(startInput.current.value)}
           />
@@ -74,6 +77,7 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
           <input
             id="endDate"
             type="date"
+            value={endDate}
             ref={endInput}
             onChange={() => setEndDate(endInput.current.value)}
           />{' '}
@@ -100,7 +104,7 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
               );
             })}
             <span className={styles.addBtn} onClick={(e) => onAddBtn(e)}>
-              ✏️추가
+              ✏️ 추가
             </span>
           </div>
           <br />
