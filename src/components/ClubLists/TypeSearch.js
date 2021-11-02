@@ -11,21 +11,22 @@ const TypeSearch = ({ onCategorySearch, onSearch }) => {
     e.preventDefault();
     onSearch(search);
     setSearch('');
-    console.log(e);
   };
+  const category = ['전체', 'IT', '음악', '친목', '게임', '운동'];
 
   return (
     <div className={styles.container}>
-      <ul
-        className={styles.tagList}
-        onClick={(event) => onCategorySearch(event.target.getAttribute('name'))}
-      >
-        <li name="">#전체</li>
-        <li name="IT">#IT</li>
-        <li name="음악">#음악</li>
-        <li name="친목">#친목</li>
-        <li name="게임">#게임</li>
-        <li name="운동">#운동</li>
+      <ul className={styles.tagList}>
+        {category.map((el) => (
+          <li
+            name={el}
+            onClick={(event) =>
+              onCategorySearch(event.target.getAttribute('name'))
+            }
+          >
+            #{el}
+          </li>
+        ))}
       </ul>
 
       <div className={styles.searchContainer}>
