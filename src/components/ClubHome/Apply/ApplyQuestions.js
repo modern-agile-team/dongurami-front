@@ -31,6 +31,7 @@ const ApplyQuestions = ({ onUserInfoChange, userInfo }) => {
             <option value={1}>1학년</option>
             <option value={2}>2학년</option>
             <option value={3}>3학년</option>
+            <option value={4}>4학년 (전공심화)</option>
           </select>
         </li>
         <li>
