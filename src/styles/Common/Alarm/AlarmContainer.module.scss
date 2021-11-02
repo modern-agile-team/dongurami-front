@@ -10,7 +10,6 @@
   top: 60px;
   margin-left: -70px;
   max-height: 50vh;
-  overflow-y: auto;
   hr {
     width: 90%;
     border-top: 0.1px dashed #f2f2f2;
@@ -26,23 +25,24 @@
   transform: rotate(45deg);
 }
 
-.container::-webkit-scrollbar {
-  display: none;
-}
-.container::-webkit-scrollbar-thumb {
-  display: none;
-}
-
 .alarms {
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: space-between;
   margin-top: 5px;
+  overflow-y: auto;
   p {
     font-size: 90%;
     margin: 0;
   }
+}
+
+.alarms::-webkit-scrollbar {
+  display: none;
+}
+.alarms::-webkit-scrollbar-thumb {
+  display: none;
 }
 
 .description {
