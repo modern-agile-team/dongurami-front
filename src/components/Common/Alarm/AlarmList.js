@@ -13,18 +13,32 @@ const alarmCategoriNum = {
   7: '동아리 공지가 생성되었습니다.'
 };
 
-const AlarmList = ({ alarm, onAlarmPatch }) => {
+const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
+  const clickDeleteIcon = (data) => {
+    setIsDelete(true);
+    onAlarmPatch(data);
+  };
   return (
     <div className={styles.description}>
       <div className={styles.top}>
-        <p id={styles.big}>{alarmCategoriNum[alarm.notificationCategoryNum]}</p>
+        <Link href={`/${alarm.url}`} passHref>
+          <p
+            id={styles.big}
+            onClick={() => onAlarmPatch(alarm.notificationNum)}
+          >
+            {alarmCategoriNum[alarm.notificationCategoryNum]}
+          </p>
+        </Link>
         <FiDelete
           size={15}
-          onClick={() => onAlarmPatch(alarm.notificationNum)}
+          onClick={() => clickDeleteIcon(alarm.notificationNum)}
         />
       </div>
       <Link href={`/${alarm.url}`} passHref>
-        <div className={styles.bottom}>
+        <div
+          className={styles.bottom}
+          onClick={() => onAlarmPatch(alarm.notificationNum)}
+        >
           <p>{alarm.senderId}</p>
           <p>{alarm.inDate.substr(0, 10)}</p>
         </div>

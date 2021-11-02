@@ -99,8 +99,8 @@ function Header() {
   }, [token]);
 
   useEffect(() => {
-    getAlarmData();
-  }, []);
+    if (token) getAlarmData();
+  }, [token]);
 
   //알람 열람
   const alarmOpen = () => {
