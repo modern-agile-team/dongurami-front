@@ -1,16 +1,9 @@
 import React from 'react';
 import styles from '../../../styles/Club/Home/Review/ReviewMine.module.scss';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { FaTrashAlt } from 'react-icons/fa';
-import { BsImage } from 'react-icons/bs';
+import { FaTrashAlt, FaUserCircle } from 'react-icons/fa';
 
-const ReviewMine = ({
-  description,
-  score,
-  inDate,
-  onReviewDelete,
-  clubInfo
-}) => {
+const ReviewMine = ({ description, score, inDate, onReviewDelete }) => {
   const stars = new Array(score).fill(score);
   const notStars = new Array(5 - score).fill(score);
 
@@ -18,11 +11,7 @@ const ReviewMine = ({
     <div className={styles.mine}>
       <div className={styles.header}>
         <div className={styles.club}>
-          {clubInfo.logoUrl === null ? (
-            <BsImage />
-          ) : (
-            <img src={clubInfo.logoUrl} alt="동아리 로고" />
-          )}
+          <FaUserCircle />
           <div id={styles.date}>
             <span>내가 작성한 후기</span>
             <p>{inDate}</p>
