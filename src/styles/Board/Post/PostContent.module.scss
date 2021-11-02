@@ -8,7 +8,7 @@
   * {
     font-family: sans-serif;
   }
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: 768px) {
     margin: 0 auto;
     padding: 1rem;
     width: 100%;
@@ -37,7 +37,7 @@
         cursor: pointer;
       }
       & > div:nth-of-type(2) {
-        text-align: center;
+        text-align: right;
       }
       & button {
         background: inherit;
@@ -55,6 +55,9 @@
   & > div:nth-of-type(2) {
     img {
       max-width: 100%;
+    }
+    & > div {
+      font-size: 1rem;
     }
   }
 }

@@ -30,10 +30,16 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     personal: '활동내용'
   };
 
-  const onDelete = optionalOnDelete || (async () => {
-      await api.deletePost(category, post.no, router.query.id);
-      router.back();
-    });
+
+  const onDelete = async () => {
+    if (!confirm('정말로 삭제하시겠습니까?')) return;
+    if (optionalOnDelete) {
+      optionalOnDelete();
+      return;
+    }
+    await api.deletePost(category, post.no, router.query.id);
+    router.back();
+  }
 
   const editHref = optionalEditHref || {
     pathname: `${router.pathname}/edit`,
