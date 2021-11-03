@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-
+import Script from 'next/script';
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
@@ -7,6 +7,14 @@ class MyDocument extends Document {
   }
 
   render() {
+    const naverScript = () => {
+      if (!wcs_add) var wcs_add = {};
+      wcs_add['wa'] = 'd0e2147f2bb310';
+      if (typeof window !== 'undefined' && window.wcs) {
+        wcs_do();
+      }
+    };
+
     return (
       <Html>
         <Head>
@@ -39,6 +47,8 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <Script type="text/javascript" src="//wcs.naver.net/wcslog.js" />
+          <Script type="text/javascript">{naverScript()}</Script>
         </body>
       </Html>
     );
