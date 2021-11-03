@@ -3,6 +3,9 @@ import Edit from 'components/Promotion/Edit/Edit';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import getToken from 'utils/getToken';
+import Footer from 'components/Common/Footer';
+import Header from 'components/Common/Header/Header';
+import Head from 'next/head';
 
 class Api {
   constructor(postNo) {
@@ -51,7 +54,16 @@ function Write() {
 
   if (!pid) return null;
 
-  return <Edit pid={pid} />;
+  return (
+    <>
+      <Head>
+        <title>동그라미 | 홍보 게시글 수정</title>
+      </Head>
+      <Header />
+      <Edit pid={pid} />
+      <Footer />
+    </>
+  );
 }
 
 export default Write;

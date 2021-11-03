@@ -1,7 +1,19 @@
-import Edit from "components/Profile/Edit";
+import Header from 'components/Common/Header/Header';
+import Footer from 'components/Common/Footer';
+import Edit from 'components/Profile/Edit';
+import Head from 'next/head';
 
 const edit = () => {
-  return <Edit />
-}
+  return (
+    <>
+      <Head>
+        <title>동그라미 | 동아리 공지 수정</title>
+      </Head>
+      <Header />
+      <Edit />
+      <Footer />
+    </>
+  );
+};
 
-export default edit
+export default edit;

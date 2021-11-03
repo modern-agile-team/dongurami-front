@@ -2,6 +2,8 @@ import axios from 'axios';
 import Header from 'components/Common/Header/Header';
 import Write from 'components/Write/Write';
 import getToken from 'utils/getToken';
+import Footer from 'components/Common/Footer';
+import Head from 'next/head';
 
 class Api {
   constructor(router) {
@@ -32,8 +34,12 @@ class Api {
 function write() {
   return (
     <>
+      <Head>
+        <title>동그라미 | 홍보 게시글 작성</title>
+      </Head>
       <Header />
       <Write category="promotion" Api={Api} />
+      <Footer />
     </>
   );
 }
