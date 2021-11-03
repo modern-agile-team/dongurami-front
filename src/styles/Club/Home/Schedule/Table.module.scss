@@ -3,9 +3,6 @@
   height: 50vh;
   padding: 10px;
 }
-.today {
-  color: red;
-}
 
 .otherday {
   color: rgb(187, 183, 183);
@@ -15,6 +12,13 @@
   display: flex;
   justify-content: space-around;
   margin-bottom: 0.5%;
+}
+
+.todayContainer {
+  background-color: #dce4ed;
+  border-radius: 50%;
+  width: 19px;
+  height: 18px;
 }
 
 .scheduleSpan {
@@ -38,6 +42,10 @@
       .date {
         margin: 2% 0 2% 1%;
         height: 20%;
+        span {
+          font-family: twayair;
+          padding: 5px;
+        }
       }
       .scheduleTitle {
         display: flex;
@@ -111,5 +119,9 @@
   .calendar {
     font-size: 2vw;
     padding: 1px;
+  }
+  .todayContainer {
+    width: 15px;
+    height: 15px;
   }
 }

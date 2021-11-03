@@ -1,6 +1,6 @@
-import Post from '../Post/Post';
+import Post from './Post';
 import { useRouter } from 'next/router';
-import { getBPost, getSPost } from 'apis/profile';
+import { getBPost, getSPost, deleteBPost, deleteSPost } from 'apis/profile';
 import { useEffect, useState } from 'react';
 
 const PostContainer = () => {
@@ -17,7 +17,6 @@ const PostContainer = () => {
   const getScrapPost = () => {
     getSPost(data.pid, data.clubNum, data.boardNum)
       .then((res) => {
-        console.log(res.data.scrap);
         setPost(res.data.scrap);
       })
       .catch((err) => console.log(err));
@@ -28,6 +27,17 @@ const PostContainer = () => {
       ...post,
       description: post.description + `<br />` + post.scrapDescription
     };
+  };
+
+  const onDelete = () => {
+    if (data.no === 'board') deleteBPost(data.pid, data.clubNum, data.boardNum);
+    else deleteSPost(data.pid, data.clubNum, data.boardNum);
+    router.back();
+  };
+
+  const editLink = {
+    pathname: `${data.boardNum}/edit`,
+    query: data
   };
 
   useEffect(() => {
@@ -41,6 +51,8 @@ const PostContainer = () => {
     <Post
       category="personal"
       post={post.scrapDescription === undefined ? post : scrapData()}
+      onDelete={onDelete}
+      editLink={editLink}
     />
   );
 };

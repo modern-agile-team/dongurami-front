@@ -52,12 +52,12 @@ const ClubIntro = ({ visitTime }) => {
   const onChangeLogo = async (e) => {
     const file = e.target.files[0];
     const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (
-      await getS3PresignedURL({ img: e.target.files[0].name })
+      await getS3PresignedURL(file.name)
     ).data;
     await uploadImage(presignedURL, file);
     await putClubLogo({
       leader: clubInfo.clientInfo.leader,
-      logoUrl: imageURL
+      logoUrl: `${imageURL}?w=300&h=300`
     });
     dispatch(getClubInfo(clubId));
   };
@@ -93,6 +93,10 @@ const ClubIntro = ({ visitTime }) => {
   useEffect(() => {
     if (clubInfo) setIntroDesc(clubInfo.result[0].introduce);
   }, [clubInfo]);
+
+  useEffect(() => {
+    document.body.style.overflow = 'visible';
+  }, []);
 
   if (!clubInfo) return null;
 

@@ -34,7 +34,7 @@ export const Login = () => {
           localStorage.setItem('jwt', res.data.jwt);
           dispatch(getUser());
         }
-        router.back();
+        router.push('/');
       })
       .catch((err) => alert(err.response.data.msg));
   };

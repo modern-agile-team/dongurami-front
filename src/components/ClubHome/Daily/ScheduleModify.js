@@ -29,19 +29,22 @@ const ScheduleModify = ({
 
   const axiosPUT = async () => {
     if (newTitle.replace(/ /g, '').length === 0) setNewTitle(title);
-    await modifySchedule(Qdata.id, no, {
-      colorCode: colorCode,
-      title: newTitle,
-      startDate: startDate,
-      endDate: endDate,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/api/club/schedule/${Qdata.id}`,
-      notiCategoryNum: 5
-    })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err.response));
-    await getInfo(Qdata.id, today.format('YYYY-MM'))
-      .then((res) => setSchedule(res.data.result))
-      .catch((err) => alert(err));
+    if (newTitle.length > 50) alert('제목은 50자 이하여야 합니다.');
+    else {
+      await modifySchedule(Qdata.id, no, {
+        colorCode: colorCode,
+        title: newTitle,
+        startDate: startDate,
+        endDate: endDate,
+        url: `clubhome/${Qdata.id}`,
+        notiCategoryNum: 5
+      })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err.response));
+      await getInfo(Qdata.id, today.format('YYYY-MM'))
+        .then((res) => setSchedule(res.data.result))
+        .catch((err) => alert(err));
+    }
   };
   if (pop !== 'ScheduleModify') return null;
 
@@ -99,7 +102,7 @@ const ScheduleModify = ({
               } else alert('날짜를 확인해주세요');
             }}
           >
-            ✏️수정
+            ✏️ 수정
           </span>
           <br />
           <span className={styles.sample} style={{ background: colorCode }}>

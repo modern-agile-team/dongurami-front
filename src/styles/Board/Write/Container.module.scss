@@ -1,6 +1,7 @@
 .container {
   width: 60%;
   margin: 0 auto;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   @media screen and (max-width: 768px) {

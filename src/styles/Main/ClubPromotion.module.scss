@@ -2,9 +2,10 @@
 
 .container {
   background-color: #fff;
-  margin-top: 15em;
+  padding-top: 15em;
   text-align: center;
   h1 {
+    font-family: 'twayair';
     font-size: 350%;
     font-weight: 100;
     margin-bottom: 0px;
@@ -17,10 +18,12 @@
   .list {
     display: flex;
     .club {
+      font-family: 'twayair';
       margin-left: 20px;
       color: #3fcdb8;
     }
     .br {
+      font-family: 'twayair';
       margin-left: 20px;
     }
   }
@@ -32,10 +35,12 @@
   .promotion {
     display: flex;
     .recruit {
+      font-family: 'twayair';
       margin-left: 22px;
       color: #3fcdb8;
     }
     .br {
+      font-family: 'twayair';
       margin-left: 20px;
     }
   }
@@ -60,44 +65,49 @@
   }
   .promotionBtn {
     margin-top: 2rem;
+    margin-left: -8px;
   }
 }
 
 @media screen and (max-width: 1024px) {
   .container {
+    padding-bottom: 6em;
     h1 {
-      font-size: 5vw;
-      padding-left: 3rem;
+      font-size: 4.5vw;
     }
-    .btn {
-      padding-right: 1.5rem;
+    button {
+      zoom: 2.2;
     }
   }
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 28%;
+    width: 100%;
+    padding-top: 18em;
+    padding-bottom: 3em;
+    .wrap {
+      width: 90%;
+      margin: 0% auto;
+      .btn {
+        padding-left: 3vw;
+      }
+    }
     h1 {
-      font-size: 5.7vw;
+      font-size: 5vw;
       padding: 0%;
       margin-right: -40%;
     }
-    .listBtn {
-      width: 10vw;
-    }
-    .promotionBtn {
-      width: 10vw;
+    button {
+      zoom: 2;
     }
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 500px) {
   .container {
-    margin-top: 12em;
-    margin-bottom: 20em;
+    padding-top: 13em;
+    padding-bottom: 12em;
     h1 {
       font-size: 9vw;
     }
@@ -137,6 +147,7 @@
       font-size: 60%;
       zoom: 1.4;
       margin-top: 90%;
+      margin-left: 0px;
     }
   }
 }

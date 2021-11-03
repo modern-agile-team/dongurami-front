@@ -26,8 +26,15 @@ function Edit({ pid }) {
   }, []);
 
   const onSubmit = async () => {
+    if (!title.length && !description.length) {
+      alert('제목 및 글 내용을 작성해주세요');
+      return;
+    }
     await putPost(pid, title, description, images).then((response) => {
-      if (response.data.success) router.back();
+      if (response.data.success) {
+        alert('게시글이 수정되었습니다');
+        router.back();
+      }
     });
   };
 
@@ -40,6 +47,10 @@ function Edit({ pid }) {
   };
 
   const onEditImages = (editImages) => {
+    if (!editImages.length) {
+      alert('이미지를 1개 이상 등록해주세요');
+      return;
+    }
     setImages(editImages);
     setShowModal(false);
   };

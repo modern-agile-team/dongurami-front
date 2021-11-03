@@ -1,5 +1,3 @@
-$sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-  Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 @import '../Manager/Members.module.scss';
 
 .intro {
@@ -9,13 +7,12 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   flex-direction: column;
   width: 80%;
   span {
+    font-family: 'twayair';
     margin-bottom: 1em;
     font-size: 200%;
   }
-  h1,
-  h2,
   p {
-    font-family: $sans-font;
+    font-size: 16px;
   }
 }
 
@@ -27,7 +24,6 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 .intro button {
   display: flex;
   align-items: center;
-  font-family: $sans-font;
   cursor: pointer;
   border: 1px solid $color1;
   background-color: white;
@@ -42,7 +38,6 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
 }
 
 .desc {
-  font-family: $sans-font;
   margin-bottom: 1em;
   & > div:nth-of-type(1) {
     & > div:nth-of-type(1) {

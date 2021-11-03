@@ -26,7 +26,7 @@ function App({ Component, pageProps }) {
     if (typeof window !== 'undefined') {
       const scroll = window.setInterval(() => {
         const pos = window.pageYOffset;
-        const step = 150;
+        const step = 75;
         if (pos > 0) window.scrollTo(0, pos - step);
         else window.clearInterval(scroll);
       }, 1);

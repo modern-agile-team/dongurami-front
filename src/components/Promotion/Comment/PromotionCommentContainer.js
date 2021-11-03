@@ -3,6 +3,7 @@ import AddComment from './AddComment';
 import React, { useState } from 'react';
 import Comment from './Comment';
 import ReplyComment from './ReplyComment';
+import { useSelector } from 'react-redux';
 
 const PromotionCommentContainer = ({
   comments,
@@ -10,6 +11,7 @@ const PromotionCommentContainer = ({
   getData,
   studentId
 }) => {
+  const user = useSelector((state) => state.user);
   return (
     <>
       <p>댓글 {comments.length}</p>
@@ -40,7 +42,7 @@ const PromotionCommentContainer = ({
               )}
             </>
           ))}
-        <AddComment comments={comments} postId={postId} />
+        {user && <AddComment comments={comments} postId={postId} />}
       </div>
     </>
   );

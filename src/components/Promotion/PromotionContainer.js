@@ -3,6 +3,7 @@ import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss'
 import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 import Modal from './Modal';
 import Promotion from './Promotion';

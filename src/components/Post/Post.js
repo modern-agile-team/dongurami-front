@@ -30,10 +30,16 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     personal: '활동내용'
   };
 
-  const onDelete = optionalOnDelete || (async () => {
-      await api.deletePost(category, post.no, router.query.id);
-      router.back();
-    });
+
+  const onDelete = async () => {
+    if (!confirm('정말로 삭제하시겠습니까?')) return;
+    if (optionalOnDelete) {
+      optionalOnDelete();
+      return;
+    }
+    await api.deletePost(category, post.no, router.query.id);
+    router.back();
+  }
 
   const editHref = optionalEditHref || {
     pathname: `${router.pathname}/edit`,
@@ -48,11 +54,18 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
   return (
     <div className={styles.container}>
       <div>
-        <Link href={boardURL} passHref>
-          <a>{title[category]}</a>
-        </Link>
+        {(category !== 'clubActivity') && (
+          <div className={styles.boardLinkContainer}>
+            <Link href={boardURL} passHref>
+              <a>{title[category]}</a>
+            </Link>
+            <Link href={boardURL} passHref>
+              <button>목록</button>
+            </Link>
+          </div>
+        )}
         <h1>{post.title}</h1>
-        <div>
+        <div className={styles.postHeader}>
           <Link href={`/profile/${post.studentId}`} passHref>
             <div>{post.name}</div>
           </Link>
