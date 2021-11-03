@@ -12,13 +12,13 @@ class MyDocument extends Document {
         <Head>
           <meta
             name="description"
-            content="인덕대학교 학생들을 동아리 서비스"
+            content="인덕대학교 학생들을 위한 동아리 서비스"
           />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="동그라미" />
           <meta
             property="og:description"
-            content="인덕대학교 학생들을 동아리 서비스"
+            content="인덕대학교 학생들을 위한 동아리 서비스"
           />
           <meta
             property="og:image"
@@ -29,7 +29,7 @@ class MyDocument extends Document {
           <meta property="twitter:title" content="동그라미" />
           <meta
             property="twitter:description"
-            content="인덕대학교 학생들을 동아리 서비스"
+            content="인덕대학교 학생들을 위한 동아리 서비스"
           />
           <meta
             property="twitter:image"
