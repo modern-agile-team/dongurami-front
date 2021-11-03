@@ -28,6 +28,7 @@
     "react-redux": "^7.2.5",
     "react-reveal": "^1.2.2",
     "react-slick": "^0.28.1",
+    "react-tooltip": "^4.2.21",
     "sass": "^1.37.5",
     "slick-carousel": "^1.8.1",
     "swiper": "^6.8.4"
