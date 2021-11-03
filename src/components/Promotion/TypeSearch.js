@@ -31,7 +31,7 @@ const TypeSearch = ({
     <div className={styles.container}>
       <ul className={styles.tagList} onClick={(event) => categorySearch(event)}>
         <li name="whole">#전체</li>
-        <li name="IT">#IT</li>
+        <li name="스터디">#스터디</li>
         <li name="음악">#음악</li>
         <li name="친목">#친목</li>
         <li name="게임">#게임</li>
