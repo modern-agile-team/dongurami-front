@@ -9,33 +9,39 @@
     font-family: 'twayair';
   }
   margin: 2vh;
-  div {
+  .description {
     width: 100%;
     padding: 1vh 0;
     border: none;
     background-color: white;
   }
-  svg {
-    width: 70%;
+  .image {
     height: 12em;
-    border-radius: 18px;
-    cursor: pointer;
-    color: #d1d1d1;
-    &:hover {
-      transform: scale(1.1);
-      transition: transform 0.35s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 70%;
+      height: 12em;
+      border-radius: 18px;
+      cursor: pointer;
+      color: #d1d1d1;
+      &:hover {
+        transform: scale(1.1);
+        transition: transform 0.35s;
+      }
     }
-  }
-  img {
-    width: 100%;
-    height: 12em;
-    border-radius: 18px;
-    border: none;
-    cursor: pointer;
+    img {
+      width: 12em;
+      max-height: 12em;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
 
-    &:hover {
-      transform: scale(1.1);
-      transition: transform 0.35s;
+      &:hover {
+        transform: scale(1.1);
+        transition: transform 0.35s;
+      }
     }
   }
 }
@@ -52,8 +58,7 @@
   .container {
     width: 44%;
     img {
-      width: 100%;
-      height: 12em;
+      width: 70%;
     }
   }
 }
@@ -65,9 +70,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    img {
-      width: 13em;
-      height: 30vh;
+    .image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 8em;
+      img {
+        width: 70%;
+      }
     }
   }
 }
