@@ -75,13 +75,15 @@ const Post = ({ postId, getData, post }) => {
             </div>
             <div className={styles.boardInfo}>
               <div className={styles.profile}>
-                <img
-                  src={
-                    post.profileImageUrl ??
-                    'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
-                  }
-                  alt="profile"
-                />
+                <Link href={`/profile/${post.studentId}`} passHref>
+                  <img
+                    src={
+                      post.profileImageUrl ??
+                      'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+                    }
+                    alt="profile"
+                  />
+                </Link>
                 <Link href={`/profile/${post.studentId}`} passHref>
                   <span>{name}</span>
                 </Link>
