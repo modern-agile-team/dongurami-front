@@ -12,7 +12,7 @@ const ModifyInfo = () => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [grade, setGrade] = useState(0);
-  const [comp, setComp] = useState('수정');
+  const [isOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState();
   const [fileId, setFileId] = useState();
   const [placeholder, setPlaceholder] = useState();
@@ -65,7 +65,6 @@ const ModifyInfo = () => {
         router.push(`/profile/${userInfo.id}`);
       })
       .catch((err) => alert(err.response.data.msg));
-
   };
 
   useEffect(() => {
@@ -80,10 +79,12 @@ const ModifyInfo = () => {
     <div className={styles.wrap}>
       <div className={styles.profileBody}>
         <ModifyHeader
-          imgUrl={imgUrl}
+          setImgUrl={setImgUrl}
           onChangeImg={onChangeImg}
+          imgUrl={imgUrl}
           userInfo={userInfo}
-          setComp={setComp}
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
           baseImg={baseImg}
         />
         <div className={styles.data}>
