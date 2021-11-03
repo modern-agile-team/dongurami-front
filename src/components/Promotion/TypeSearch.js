@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
 const TypeSearch = ({
-  setSearchItem,
-  setSearchKeyword,
   type,
   searchKeyword,
   setType,
@@ -31,11 +29,12 @@ const TypeSearch = ({
     <div className={styles.container}>
       <ul className={styles.tagList} onClick={(event) => categorySearch(event)}>
         <li name="whole">#전체</li>
-        <li name="IT">#IT</li>
+        <li name="스터디">#스터디</li>
         <li name="음악">#음악</li>
-        <li name="친목">#친목</li>
+        <li name="취미">#취미</li>
         <li name="게임">#게임</li>
         <li name="운동">#운동</li>
+        <li name="종교">#종교</li>
       </ul>
       <div className={styles.body}>
         <select value={type} onChange={onTypeChange}>
