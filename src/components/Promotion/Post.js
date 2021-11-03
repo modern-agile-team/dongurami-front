@@ -64,7 +64,6 @@ const Post = ({ postId, getData, post }) => {
                   <button onClick={onDelete}>삭제</button>
                 </div>
               )}
-              <div></div>
               <span className={styles.hit}>조회 {hit}</span>
             </div>
           </div>
@@ -75,9 +74,18 @@ const Post = ({ postId, getData, post }) => {
               <IoIosArrowForward size={25} />
             </div>
             <div className={styles.boardInfo}>
-              <Link href={`/profile/${post.studentId}`} passHref>
-                <span>{name}</span>
-              </Link>
+              <div className={styles.profile}>
+                <img
+                  src={
+                    post.profileImageUrl ??
+                    'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+                  }
+                  alt="profile"
+                />
+                <Link href={`/profile/${post.studentId}`} passHref>
+                  <span>{name}</span>
+                </Link>
+              </div>
               <div className={styles.dateHit}>
                 <span>{formatDate(inDate)}</span>
               </div>

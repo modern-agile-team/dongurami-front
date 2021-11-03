@@ -30,7 +30,6 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     personal: '활동내용'
   };
 
-
   const onDelete = async () => {
     if (!confirm('정말로 삭제하시겠습니까?')) return;
     if (optionalOnDelete) {
@@ -39,15 +38,15 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     }
     await api.deletePost(category, post.no, router.query.id);
     router.back();
-  }
+  };
 
   const editHref = optionalEditHref || {
     pathname: `${router.pathname}/edit`,
     query: router.query
   };
 
-  const boardURL = (category === 'clubNotice') ?
-    `/clubhome/${router.query.id}` : `/${category}`
+  const boardURL =
+    category === 'clubNotice' ? `/clubhome/${router.query.id}` : `/${category}`;
 
   const clubNum = Number(router.query.id);
 
@@ -63,12 +62,20 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
             <div>{post.name}</div>
           </Link>
           <div>
-            {(category === 'clubActivity' && user && user.club.some(({ no }) => no === clubNum)) && (
-              <Link href={{ pathname: `/profile/${user.id}/${clubNum}/writescraps`, query: { scrapNum: post.no } }} passHref>
-                <button>스크랩하기</button>
-              </Link>
-            )}
-            {(user?.id === post.studentId) && (
+            {category === 'clubActivity' &&
+              user &&
+              user.club.some(({ no }) => no === clubNum) && (
+                <Link
+                  href={{
+                    pathname: `/profile/${user.id}/${clubNum}/writescraps`,
+                    query: { scrapNum: post.no }
+                  }}
+                  passHref
+                >
+                  <button>스크랩하기</button>
+                </Link>
+              )}
+            {user?.id === post.studentId && (
               <>
                 <Link href={editHref} passHref>
                   <button>수정하기</button>
@@ -77,7 +84,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
               </>
             )}
             <div>{moment(post.inDate).format('YYYY-MM-DD')}</div>
-            {(category !== 'personal') && <div>조회 {post.hit}</div>}
+            {category !== 'personal' && <div>조회 {post.hit}</div>}
           </div>
         </div>
       </div>
