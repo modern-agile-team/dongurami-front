@@ -25,7 +25,7 @@ function Profile() {
     window.localStorage.removeItem('jwt');
     dispatch(signOut());
     router.push('/');
-  }, [router]);
+  }, [dispatch]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
@@ -38,23 +38,32 @@ function Profile() {
     }
     return title.length >= 8 ? title.substring(0, 6) + '..' : title;
   }, []);
+
+  const setState = (data) => {
+    setUserInfo(data.userInfo);
+    setProfile(data.profile);
+    setClubNo(data.profile.clubs.length === 0 ? 0 : data.profile.clubs[0].no);
+  };
+
   useEffect(() => {
     if (!uRouter.isReady) return;
-    setId(uRouter.query.pid);
-    setToken(getToken());
     getUserInfo(uRouter.query.pid, token)
-      .then((res) => {
-        setUserInfo(res.data.userInfo);
-        setProfile(res.data.profile);
-        setClubNo(
-          res.data.profile.clubs.length === 0 ? 0 : res.data.profile.clubs[0].no
-        );
-      })
+      .then((res) => setState(res.data))
       .catch((err) => {
         alert(err);
         router.back();
       });
   }, [token, uRouter]);
+
+  useEffect(() => {
+    if (!uRouter.isReady) return;
+    setId(uRouter.query.pid);
+    setToken(getToken());
+  }, [uRouter]);
+
+  useEffect(() => {
+    document.body.style.overflow = 'visible';
+  }, []);
 
   return (
     <div className={styles.container}>
