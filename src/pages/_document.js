@@ -7,6 +7,14 @@ class MyDocument extends Document {
   }
 
   render() {
+    const naverScript = () => {
+      if (!wcs_add) var wcs_add = {};
+      wcs_add['wa'] = 'd0e2147f2bb310';
+      if (window.wcs) {
+        wcs_do();
+      }
+    };
+
     return (
       <Html>
         <Head>
@@ -39,6 +47,8 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script type="text/javascript" src="//wcs.naver.net/wcslog.js" />
+          <script type="text/javascript">{naverScript()}</script>
         </body>
       </Html>
     );
