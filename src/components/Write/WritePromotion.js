@@ -21,7 +21,11 @@ function WritePromition({ title, description }) {
   }
   const onSubmit = () => {
     if (clubNo === '0') {
-      alert('동아리를 선택해 주세요');
+      alert('동아리를 선택해 주세요!');
+      return;
+    }
+    if (images.length === 0) {
+      alert('이미지를 업로드해주세요!');
       return;
     }
     postPost('promotion', { title, description, images }, clubNo);
