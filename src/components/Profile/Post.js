@@ -26,7 +26,7 @@ function Post({ category, post, onDelete, editLink }) {
   return (
     <div className={styles.container}>
       <div>
-        <a>활동내용</a>
+        <a onClick={() => router.back()}>활동내용</a>
         <h1>{post.title}</h1>
         <div>
           <Link href={`/profile/${post.studentId}`} passHref>
