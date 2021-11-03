@@ -71,12 +71,12 @@
 
 @media screen and (max-width: 1024px) {
   .container {
+    padding-bottom: 6em;
     h1 {
-      font-size: 5vw;
-      padding-left: 3rem;
+      font-size: 4.5vw;
     }
-    .btn {
-      padding-right: 1.5rem;
+    button {
+      zoom: 2.2;
     }
   }
 }
@@ -85,25 +85,26 @@
   .container {
     width: 100%;
     padding-top: 18em;
+    padding-bottom: 3em;
     .wrap {
       width: 90%;
       margin: 0% auto;
+      .btn {
+        padding-left: 3vw;
+      }
     }
     h1 {
-      font-size: 5.7vw;
+      font-size: 5vw;
       padding: 0%;
       margin-right: -40%;
     }
-    .listBtn {
-      width: 10vw;
-    }
-    .promotionBtn {
-      width: 10vw;
+    button {
+      zoom: 2;
     }
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 500px) {
   .container {
     padding-top: 13em;
     padding-bottom: 12em;
