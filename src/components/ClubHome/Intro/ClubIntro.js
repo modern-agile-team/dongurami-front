@@ -57,7 +57,7 @@ const ClubIntro = ({ visitTime }) => {
     await uploadImage(presignedURL, file);
     await putClubLogo({
       leader: clubInfo.clientInfo.leader,
-      logoUrl: `${imageURL}?w=300&h=300`
+      logoUrl: `${imageURL}`
     });
     dispatch(getClubInfo(clubId));
   };
