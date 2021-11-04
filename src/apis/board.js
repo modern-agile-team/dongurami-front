@@ -22,7 +22,9 @@ export function searchPosts({ category, clubNum, ...params }) {
 
 export function postPost(category, body, clubNum) {
   if (category === 'clubNotice') {
-    return axios.post(`/api/club/board/clubNotice/${clubNum}`, { ...body });
+    return axios.post(`/api/club/board/clubNotice/${clubNum}`, {
+      url: document.location.href, notiCategoryNum: 7, ...body
+    });
   }
   if (category === 'clubActivity') {
     return axios.post(`/api/club/board/clubActivity/${clubNum}`, { ...body });

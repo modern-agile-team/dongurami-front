@@ -16,9 +16,13 @@ const api = {
   postComment: ({ category, pid, id, description, parentCommentID, clubNum }) => {
     if (category === 'clubNotice') {
       if (parentCommentID) {
-        return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}`, { id, description });
+        return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}`, {
+          id, description, url: window.location.href, notiCategoryNum: 1
+        });
       } else {
-        return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}`, { id, description });
+        return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}`, {
+          id, description, url: window.location.href, notiCategoryNum: 0
+        });
       }
     }
     if (parentCommentID) {
