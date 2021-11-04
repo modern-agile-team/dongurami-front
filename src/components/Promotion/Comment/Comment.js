@@ -23,7 +23,13 @@ function formatDate(date) {
   return [year, month, day].join('-');
 }
 
-const Comment = ({ comment, postId, studentId }) => {
+const Comment = ({
+  comment,
+  postId,
+  studentId,
+  setParentCommentID,
+  parentCommentID
+}) => {
   const [replyComment, setReplyComment] = useState(false);
   const [isContentEditable, setIsContentEditable] = useState(false);
   const dispatch = useDispatch();
@@ -32,52 +38,33 @@ const Comment = ({ comment, postId, studentId }) => {
   const descriptionDiv = useRef();
   const category = 'promotion';
   const pid = postId;
-  const onClick = () => {
-    setReplyComment(!replyComment);
-  };
 
   const onEdit = async () => {
     if (isContentEditable) {
-      if (comment.groupNo !== comment.no) {
-        await editReplyComment(
-          postId,
-          comment.groupNo,
-          comment.no,
-          descriptionDiv.current.textContent
-        ).then((response) => {
-          if (response.data.success) dispatch(getPost({ category, pid }));
-          else alert(response.data.msg);
-        });
-      } else {
-        await editComment(
-          postId,
-          comment.no,
-          descriptionDiv.current.textContent
-        ).then((response) => {
-          if (response.data.success) dispatch(getPost({ category, pid }));
-          else alert(response.data.msg);
-        });
-      }
+      await editComment(
+        comment.no,
+        parentCommentID,
+        descriptionDiv.current.textContent,
+        post.no
+      ).then((response) => {
+        if (response.data.success)
+          dispatch(getPost({ category, pid: post.no }));
+        else alert(response.data.msg);
+      });
     }
     setIsContentEditable(!isContentEditable);
   };
 
   const onDelete = async () => {
-    if (comment.groupNo !== comment.no) {
-      await deleteReplyComment(postId, comment.groupNo, comment.no).then(
-        (response) => {
-          if (response.data.success) dispatch(getPost({ category, pid }));
-          else alert(response.data.msg);
-        }
-      );
-    } else {
-      await deleteComment(postId, comment.no).then((response) => {
-        if (response.data.success) dispatch(getPost({ category, pid }));
+    console.log(post.no);
+    await deleteComment(comment.no, parentCommentID, post.no).then(
+      (response) => {
+        if (response.data.success)
+          dispatch(getPost({ category, pid: post.no }));
         else alert(response.data.msg);
-      });
-    }
+      }
+    );
   };
-
   return (
     <>
       <div className={styles.comment}>
@@ -117,23 +104,16 @@ const Comment = ({ comment, postId, studentId }) => {
           <div>
             <p>{formatDate(comment.inDate)}</p>
             {user && comment.no === comment.groupNo && (
-              <p className={styles.reply} onClick={onClick}>
+              <p
+                className={styles.reply}
+                onClick={() => setParentCommentID(comment.no)}
+              >
                 답글 쓰기
               </p>
             )}
           </div>
         </div>
       </div>
-      {replyComment && (
-        <ReplyCommentContainer>
-          <ReplyAddComment
-            parentCommentId={comment.groupNo}
-            postId={postId}
-            setReplyComment={setReplyComment}
-            studentId={studentId}
-          />
-        </ReplyCommentContainer>
-      )}
     </>
   );
 };

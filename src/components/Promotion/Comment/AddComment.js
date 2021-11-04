@@ -5,7 +5,7 @@ import getToken from 'utils/getToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 
-function AddComment({ postId, parentCommentId }) {
+function AddComment({ postId, parentCommentID }) {
   const [description, setDescription] = useState('');
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function AddComment({ postId, parentCommentId }) {
       alert('댓글을 255자 이하로 작성해 주세요!');
       return;
     }
-    addComment(postId, description).then((res) => {
+    addComment(postId, description, parentCommentID).then((res) => {
       if (res.data.success) dispatch(getPost({ category, pid }));
       else alert(res.data.msg);
     });
