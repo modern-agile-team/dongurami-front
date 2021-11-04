@@ -21,12 +21,13 @@ function Post({ category, post, onDelete, editLink }) {
     dispatch(setCategory(category));
   }, [category, router, dispatch]);
 
-  const clubNum = Number(router.query.id);
-
   return (
     <div className={styles.container}>
       <div>
-        <a onClick={() => router.back()}>활동내용</a>
+        <a>활동내용</a>
+        <Link href={`/profile/${post.studentId}`} passHref>
+          <button>목록</button>
+        </Link>
         <h1>{post.title}</h1>
         <div>
           <Link href={`/profile/${post.studentId}`} passHref>

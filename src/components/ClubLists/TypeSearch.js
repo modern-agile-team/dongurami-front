@@ -12,7 +12,7 @@ const TypeSearch = ({ onCategorySearch, onSearch }) => {
     onSearch(search);
     setSearch('');
   };
-  const category = ['전체', 'IT', '음악', '친목', '게임', '운동'];
+  const category = ['전체', '스터디', '음악', '취미', '게임', '운동', '종교'];
 
   return (
     <div className={styles.container}>

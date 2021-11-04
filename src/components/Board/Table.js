@@ -29,7 +29,7 @@ function NoticeTable({ posts, page, category }) {
               <td>{post.no}</td>
               <td>{post.title}</td>
               <td>{post.studentName}</td>
-              <td>{moment(post.inDate).format('YYYY-MM-DD')}</td>
+              <td>{moment(post.inDate).format('MM-DD')}</td>
               <td>{post.hit}</td>
             </tr>
           </Link>

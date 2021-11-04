@@ -37,3 +37,9 @@ $color-light-mint: #c2f2dc;
   flex-wrap: wrap;
   justify-content: center;
 }
+
+@media (max-width: 768px) {
+  .container {
+    flex-wrap: wrap;
+  }
+}

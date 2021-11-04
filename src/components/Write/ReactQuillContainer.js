@@ -37,10 +37,14 @@ function ReactQuillContainer({ description, setDescription }) {
 
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
+
+    document.body.appendChild(input);
+
     input.click();
 
     input.onchange = async () => {
       const [file] = input.files;
+      console.log(file);
       const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (
         await getS3PresignedURL(file.name)
       ).data;
@@ -49,6 +53,8 @@ function ReactQuillContainer({ description, setDescription }) {
       const range = quillRef.current.getEditorSelection();
       quillRef.current.getEditor().insertEmbed(range.index, 'image', imageURL);
       quillRef.current.getEditor().setSelection(range.index + 1);
+
+      document.body.removeChild(input);
     };
   };
 
