@@ -12,17 +12,14 @@ function Edit({ category }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [pid, setPid] = useState();
   const post = useSelector((state) => state.post);
 
+  const { pid, id } = router.query;
+
   useEffect(() => {
-    if (!router.isReady) return;
-    setPid(router.query.pid);
-  }, [router]);
-  useEffect(() => {
-    if (!pid) return;
-    dispatch(getPost({ category, pid }));
-  }, [category, pid, dispatch]);
+    if (!pid || !id) return;
+    dispatch(getPost({ category, pid, clubNum: id }));
+  }, [category, pid, id, dispatch]);
   useEffect(() => {
     if (!post) return;
     setTitle(post.title);
@@ -32,6 +29,10 @@ function Edit({ category }) {
   const onSubmit = async () => {
     if (title.trim() === '' || description.trim() === '') {
       alert('제목과 본문을 작성해 주세요!');
+      return;
+    }
+    if (title.length > 255) {
+      alert('제목을 255자 이하로 작성해 주세요!');
       return;
     }
     await putPost(category, pid, { title, description });
