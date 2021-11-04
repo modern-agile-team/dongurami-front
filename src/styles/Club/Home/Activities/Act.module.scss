@@ -13,6 +13,7 @@
     object-fit: contain;
     object-position: center;
     flex: 1;
+    max-height: 200px;
     border-bottom: 1px solid lightgray;
   }
   & > div {
