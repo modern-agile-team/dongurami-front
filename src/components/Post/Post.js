@@ -65,9 +65,12 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
         )}
         <h1>{post.title}</h1>
         <div className={styles.postHeader}>
-          <Link href={`/profile/${post.studentId}`} passHref>
-            <div>{post.name}</div>
-          </Link>
+          <div className={styles.profileContainer}>
+            <img className={styles.profileImage} src={`${post.profileImageUrl ?? 'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'}?w=30`} alt="profileImage" />
+            <Link href={`/profile/${post.studentId}`} passHref>
+              <div className={styles.profileLink}>{post.name}</div>
+            </Link>
+          </div>
           <div>
             {category === 'clubActivity' &&
               user &&
