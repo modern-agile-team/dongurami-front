@@ -32,7 +32,10 @@ function ServiceLogo() {
         </div>
         <div className={styles.image}>
           <Reveal triggerOnce keyframes={customAnimation}>
-            <img src="https://cdn.pixabay.com/photo/2021/02/08/16/45/stick-kids-5995514_1280.png" />
+            <img
+              alt="동그라미 로고 이미지"
+              src="https://cdn.pixabay.com/photo/2021/02/08/16/45/stick-kids-5995514_1280.png"
+            />
           </Reveal>
         </div>
       </div>

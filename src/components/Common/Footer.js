@@ -41,6 +41,7 @@ export default function Footer() {
             data-type="light"
             data-border="true"
             data-border-color="#bbbbbb"
+            alt="인덕대학교"
             src="https://wooahan-agile.s3.ap-northeast-2.amazonaws.com/HomePage/induk-icon.png"
           />
           <ReactTooltip effect="solid" />
