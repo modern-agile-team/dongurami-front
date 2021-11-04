@@ -75,54 +75,44 @@ function Profile() {
         >
           프로필
         </button>
-        <button
-          style={comp !== '스크랩' ? { background: '#f2f2f2' } : null}
-          className={styles.scrapBtn}
-          onClick={() => {
-            if (profile.clubs.length > 0) {
-              getScraps(profile.id, profile.clubs[0].no)
-                .then((res) => {
-                  setDataArr(
-                    res.data.scraps
-                      .concat(res.data.boards)
-                      .sort(
-                        (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
-                      )
-                  );
-                })
-                .catch((err) => {
-                  alert('로그인 한 사용자만 열람할 수 있습니다.');
-                  setComp('프로필');
-                });
-              setComp('스크랩');
-            } else alert('가입된 동아리가 없습니다.');
-          }}
-        >
-          스크랩
-        </button>
+        {userInfo.id === profile.id && (
+          <button
+            style={comp !== '스크랩' ? { background: '#f2f2f2' } : null}
+            className={styles.scrapBtn}
+            onClick={() => {
+              if (profile.clubs.length > 0) setComp('스크랩');
+              else alert('가입된 동아리가 없습니다.');
+            }}
+          >
+            스크랩
+          </button>
+        )}
       </div>
-      <UserInfo
-        logout={logout}
-        baseImg={baseImg}
-        userInfo={userInfo}
-        profile={profile}
-        comp={comp}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
-      <Scraps
-        uRouter={uRouter}
-        userInfo={userInfo}
-        profile={profile}
-        comp={comp}
-        setClubNo={setClubNo}
-        clubNo={clubNo}
-        getScraps={getScraps}
-        dataArr={dataArr}
-        setDataArr={setDataArr}
-        id={id}
-        matchTitle={matchTitle}
-      />
+      {comp !== '스크랩' ? (
+        <UserInfo
+          logout={logout}
+          baseImg={baseImg}
+          userInfo={userInfo}
+          profile={profile}
+          comp={comp}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      ) : (
+        <Scraps
+          uRouter={uRouter}
+          userInfo={userInfo}
+          profile={profile}
+          comp={comp}
+          setClubNo={setClubNo}
+          clubNo={clubNo}
+          getScraps={getScraps}
+          dataArr={dataArr}
+          setDataArr={setDataArr}
+          id={id}
+          matchTitle={matchTitle}
+        />
+      )}
     </div>
   );
 }

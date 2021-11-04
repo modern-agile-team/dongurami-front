@@ -2,54 +2,59 @@ import Container from 'components/Write/Container';
 import WriteContent from 'components/Write/WriteContent';
 import router from 'next/router';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getBPost, getSPost, modifyBPost, modifySPost } from 'apis/profile';
 
 const Edit = () => {
   const uRouter = useRouter();
   const data = uRouter.query;
+  const queryData = [data.pid, data.clubNum, data.boardNum];
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [post, setPost] = useState();
 
-  const getBoardPost = useCallback(() => {
-    getBPost(data.pid, data.clubNum, data.boardNum)
+  const getBoardPost = () => {
+    getBPost(...queryData)
       .then((res) => {
         setPost(res.data.board);
         setDescription(res.data.board.description);
         setTitle(res.data.board.title);
       })
       .catch((err) => console.log(err.response));
-  }, [data.pid, data.clubNum, data.boardNum]);
+  };
 
-  const getScrapPost = useCallback(() => {
-    getSPost(data.pid, data.clubNum, data.boardNum)
+  const getScrapPost = () => {
+    getSPost(...queryData)
       .then((res) => {
         setPost(res.data.scrap);
-        setDescription(res.data.scrap.description);
+        setDescription(res.data.scrap.scrapDescription);
         setTitle(res.data.scrap.title);
       })
       .catch((err) => console.log(err));
-  }, [data.pid, data.clubNum, data.boardNum]);
+  };
 
   const onSubmit = () => {
     if (data.no === 'scrap')
-      modifySPost(data.pid, data.clubNum, data.boardNum, {
+      modifySPost(...queryData, {
         title,
         description
-      });
+      })
+        .then((res) => alert('수정이 완료되었습니다.'))
+        .catch((err) => alert(err.response.data.msg));
     else if (data.no === 'board')
-      modifyBPost(data.pid, data.clubNum, data.boardNum, {
+      modifyBPost(...queryData, {
         title,
         description
-      });
+      })
+        .then((res) => alert('수정이 완료되었습니다.'))
+        .catch((err) => alert(err.response.data.msg));
     router.push(`/profile/${data.pid}`);
   };
 
   useEffect(() => {
     if (!uRouter.isReady) return;
     data.no === 'board' ? getBoardPost() : getScrapPost();
-  }, [uRouter, data.no, getBoardPost, getScrapPost]);
+  }, [uRouter, data.no]);
 
   return (
     <Container category="personal" type="글 수정하기">
