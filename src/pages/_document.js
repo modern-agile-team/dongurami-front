@@ -43,6 +43,7 @@ class MyDocument extends Document {
             property="twitter:image"
             content="https://dongurami.co.kr/favicon.ico"
           />
+          <meta name="naver-site-verification" content="42fb378982eca00be16a13a360c4072c8c81c087" />
         </Head>
         <body>
           <Main />

@@ -43,9 +43,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      & > div:nth-of-type(1):hover {
-        text-decoration: underline;
-        cursor: pointer;
+      .profileContainer {
+        display: flex;
+        align-items: center;
+        gap: .25rem;
+        .profileImage {
+          border-radius: 50%;
+        }
+        .profileLink {
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
       }
       & > div:nth-of-type(2) {
         text-align: right;
