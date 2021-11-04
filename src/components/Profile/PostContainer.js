@@ -7,31 +7,32 @@ const PostContainer = () => {
   const [post, setPost] = useState();
   const router = useRouter();
   const data = router.query;
+  const queryData = [data.pid, data.clubNum, data.boardNum];
 
-  const getBoardPost = useCallback(() => {
-    getBPost(data.pid, data.clubNum, data.boardNum)
+  const getBoardPost = async () => {
+    await getBPost(...queryData)
       .then((res) => setPost(res.data.board))
-      .catch((err) => console.log(err.response));
-  }, [data.pid, data.clubNum, data.boardNum]);
+      .catch((err) => alert(err.response.data.msg));
+  };
 
-  const getScrapPost = useCallback(() => {
-    getSPost(data.pid, data.clubNum, data.boardNum)
+  const getScrapPost = async () => {
+    await getSPost(...queryData)
       .then((res) => {
         setPost(res.data.scrap);
       })
-      .catch((err) => console.log(err));
-  }, [data.pid, data.clubNum, data.boardNum]);
+      .catch((err) => alert(err.response.data.msg));
+  };
 
   const scrapData = () => {
     return {
       ...post,
-      description: post.description + `<br />` + post.scrapDescription
+      description: post.scrapDescription + `<br />` + post.boardDescription
     };
   };
 
   const onDelete = () => {
-    if (data.no === 'board') deleteBPost(data.pid, data.clubNum, data.boardNum);
-    else deleteSPost(data.pid, data.clubNum, data.boardNum);
+    if (data.no === 'board') deleteBPost(...queryData);
+    else deleteSPost(...queryData);
     router.back();
   };
 
@@ -43,14 +44,14 @@ const PostContainer = () => {
   useEffect(() => {
     if (!router.isReady) return;
     data.no === 'board' ? getBoardPost() : getScrapPost();
-  }, [router, data.no, getBoardPost, getScrapPost]);
+  }, [router, data]);
 
-  if (!post?.description) return null;
+  if (!post) return null;
 
   return (
     <Post
       category="personal"
-      post={post.scrapDescription === undefined ? post : scrapData()}
+      post={post.boardDescription === undefined ? post : scrapData()}
       onDelete={onDelete}
       editLink={editLink}
     />

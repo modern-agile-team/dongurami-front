@@ -13,11 +13,9 @@ function Scraps({
   id,
   clubNo,
   setClubNo,
-  uRouter,
   matchTitle
 }) {
   useEffect(() => {
-    if (!uRouter.isready) return;
     getScraps(profile.id, clubNo)
       .then((res) => {
         setDataArr(
@@ -27,9 +25,7 @@ function Scraps({
         );
       })
       .catch((err) => alert(err.response.data.msg));
-  }, [uRouter, clubNo, getScraps, profile.id, setDataArr]);
-
-  if (comp !== '스크랩') return null;
+  }, [clubNo, getScraps, profile.id, setDataArr]);
 
   return (
     <div className={styles.wrap}>
@@ -87,13 +83,13 @@ function Scraps({
                 }
               >
                 <div className={styles.items}>
-                  {post.imgPath.length === 0 ? (
+                  {post.imgPath === '' || post.imgPath === null ? (
                     <AiOutlineFileText className={styles.baseImg} />
                   ) : (
                     <img
                       className={styles.thumbnail}
                       src={post.imgPath}
-                      alt="profileImg"
+                      alt="thumbnail"
                     />
                   )}
                   <br />
