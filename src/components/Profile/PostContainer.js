@@ -1,26 +1,26 @@
 import Post from './Post';
 import { useRouter } from 'next/router';
 import { getBPost, getSPost, deleteBPost, deleteSPost } from 'apis/profile';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const PostContainer = () => {
   const [post, setPost] = useState();
   const router = useRouter();
   const data = router.query;
 
-  const getBoardPost = () => {
+  const getBoardPost = useCallback(() => {
     getBPost(data.pid, data.clubNum, data.boardNum)
       .then((res) => setPost(res.data.board))
       .catch((err) => console.log(err.response));
-  };
+  }, [data.pid, data.clubNum, data.boardNum]);
 
-  const getScrapPost = () => {
+  const getScrapPost = useCallback(() => {
     getSPost(data.pid, data.clubNum, data.boardNum)
       .then((res) => {
         setPost(res.data.scrap);
       })
       .catch((err) => console.log(err));
-  };
+  }, [data.pid, data.clubNum, data.boardNum]);
 
   const scrapData = () => {
     return {
@@ -43,7 +43,7 @@ const PostContainer = () => {
   useEffect(() => {
     if (!router.isReady) return;
     data.no === 'board' ? getBoardPost() : getScrapPost();
-  }, [router]);
+  }, [router, data.no, getBoardPost, getScrapPost]);
 
   if (!post?.description) return null;
 
