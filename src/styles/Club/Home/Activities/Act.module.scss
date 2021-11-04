@@ -10,10 +10,10 @@
   }
   & > img {
     width: 100%;
-    max-height: 30vh;
     object-fit: contain;
-    object-position: top;
+    object-position: center;
     flex: 1;
+    border-bottom: 1px solid lightgray;
   }
   & > div {
     padding: 1rem;
