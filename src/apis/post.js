@@ -26,9 +26,13 @@ const api = {
       }
     }
     if (parentCommentID) {
-      return axios.post(`/api/board/${category}/${pid}/${parentCommentID}`, { id, description });
+      return axios.post(`/api/board/${category}/${pid}/${parentCommentID}`, {
+        id, description, url: window.location.href, notiCategoryNum: 1
+      });
     } else {
-      return axios.post(`/api/board/${category}/${pid}`, { id, description });
+      return axios.post(`/api/board/${category}/${pid}`, {
+        id, description, url: window.location.href, notiCategoryNum: 0
+      });
     }
   },
   putComment: ({ category, pid, commentID, description, parentCommentID, clubNum }) => {
