@@ -43,6 +43,7 @@ export default function Footer() {
           <img
             onClick={goToInduk}
             className={styles.induk}
+            alt="인덕대학교"
             data-tip={'인덕대학교'}
             data-place={'bottom'}
             data-type={'light'}
