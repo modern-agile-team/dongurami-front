@@ -12,7 +12,8 @@ function selectSignUp() {
           type="text/javascript"
           src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
           charset="utf-8"
-        ></script>
+        />
+        <title>동그라미 | 회원가입</title>
       </Head>
       <Header />
       <SelectSignUp />

@@ -14,8 +14,10 @@ const ClubList = ({ img, categories, title, clubNo }) => {
 
   return (
     <div className={styles.container} onClick={onClick}>
-      {!img ? <BsImage /> : <img src={img} alt="동아리" />}
-      <div>
+      <div className={styles.image}>
+        {!img ? <BsImage /> : <img src={img} alt="동아리" />}
+      </div>
+      <div className={styles.description}>
         <p id={styles.desc}>{title}</p>
         <p>#{categories}</p>
       </div>

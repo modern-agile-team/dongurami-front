@@ -34,6 +34,9 @@
     margin-left: 3%;
 
     & > div:nth-of-type(1) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       & > div:nth-of-type(1) {
         position: absolute;
         color: white;
@@ -44,6 +47,10 @@
         color: #ffffff;
 
         cursor: pointer;
+      }
+      & > div:nth-of-type(4) {
+        display: flex;
+        align-items: center;
       }
     }
   }
@@ -56,11 +63,11 @@
   justify-content: center;
   cursor: pointer;
   & > div:nth-child(1) {
+    height: 100%;
   }
   img {
     border-radius: 16px;
-    /*min-width: 60%;*/
-    /*max-width: 50em;*/
+
     width: 60%;
   }
 }
