@@ -16,15 +16,23 @@ const api = {
   postComment: ({ category, pid, id, description, parentCommentID, clubNum }) => {
     if (category === 'clubNotice') {
       if (parentCommentID) {
-        return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}`, { id, description });
+        return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}`, {
+          id, description, url: `clubhome/${clubNum}/${category}/notice/${pid}`, notiCategoryNum: 1
+        });
       } else {
-        return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}`, { id, description });
+        return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}`, {
+          id, description, url: `clubhome/${clubNum}/${category}/notice/${pid}`, notiCategoryNum: 0
+        });
       }
     }
     if (parentCommentID) {
-      return axios.post(`/api/board/${category}/${pid}/${parentCommentID}`, { id, description });
+      return axios.post(`/api/board/${category}/${pid}/${parentCommentID}`, {
+        id, description, url: `${category}/${pid}`, notiCategoryNum: 1
+      });
     } else {
-      return axios.post(`/api/board/${category}/${pid}`, { id, description });
+      return axios.post(`/api/board/${category}/${pid}`, {
+        id, description, url: `${category}/${pid}`, notiCategoryNum: 0
+      });
     }
   },
   putComment: ({ category, pid, commentID, description, parentCommentID, clubNum }) => {
