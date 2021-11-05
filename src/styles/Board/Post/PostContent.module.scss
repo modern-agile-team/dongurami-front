@@ -49,6 +49,7 @@
         gap: .25rem;
         .profileImage {
           border-radius: 50%;
+          cursor: pointer;
         }
         .profileLink {
           &:hover {
