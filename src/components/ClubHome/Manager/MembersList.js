@@ -23,7 +23,9 @@ const MembersList = ({
         )}
       </div>
       <div className={styles.name}>
-        <span onClick={exileMember}>{memberInfo[0]}</span>
+        <span onClick={memberInfo[0] !== leader ? exileMember : null}>
+          {memberInfo[0]}
+        </span>
       </div>
       <div>
         <span ref={changeLeader} id={memberInfo[1]}>

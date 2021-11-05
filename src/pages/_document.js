@@ -19,6 +19,10 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <meta
+            name="keyword"
+            content="동그라미, 동아리, 인덕대학교, 우아한애자일"
+          />
+          <meta
             name="description"
             content="인덕대학교 학생들을 위한 동아리 서비스"
           />

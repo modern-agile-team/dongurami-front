@@ -13,7 +13,7 @@ import {
 import { useRouter } from 'next/router';
 
 export const Manager = () => {
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState();
   const [leader, setLeader] = useState('');
   const [applicantInfo, setApplicantInfo] = useState([]);
   const [applicantQNA, setApplicantQNA] = useState([]);
@@ -41,14 +41,18 @@ export const Manager = () => {
     setLeader(data.clubAdminOption.leader);
     setMembers(data.clubAdminOption.memberAndAuthList);
     setMergedApplicantQNA(processQuesData(data.applicant.questionsAnswers));
+    setApplyAuth(
+      data.clubAdminOption.memberAndAuthList.map((auth) => auth.joinAdminFlag)
+    );
+    setBoardAuth(
+      data.clubAdminOption.memberAndAuthList.map((auth) => auth.boardAdminFlag)
+    );
   };
 
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
     getMember(clubId)
-      .then((res) => {
-        setStates(res.data);
-      })
+      .then((res) => setStates(res.data))
       .catch((err) => {
         switch (err.response.status) {
           case 401:
@@ -126,10 +130,10 @@ export const Manager = () => {
     await getMembersData();
   };
 
-  const changeAdminOptions = (adminOptions) => {
-    const result = adminOptions;
+  const changeAdminOptions = () => {
+    const result = [];
     members.forEach((member, index) => {
-      adminOptions.push({
+      result.push({
         id: member.id,
         joinAdminFlag: applyAuth[index],
         boardAdminFlag: boardAuth[index]
@@ -141,10 +145,9 @@ export const Manager = () => {
   // 기능 권한 변경 PUT
   const changeMembersAuth = async () => {
     if (applyAuth.length === 0) return;
-    const adminOptions = [];
     const body = [
       {
-        adminOptions: changeAdminOptions(adminOptions)
+        adminOptions: changeAdminOptions()
       },
       clubId
     ];
@@ -206,6 +209,7 @@ export const Manager = () => {
     onBoardAuth();
   }, [onBoardAuth, clubId]);
 
+  if (!members) return null;
   return (
     <div className={styles.container}>
       <Members
