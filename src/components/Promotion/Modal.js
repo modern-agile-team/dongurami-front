@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import Post from './Post';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import ZoomImg from './ZoomImg';
-import { getBoardPost } from 'apis/promotion';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { Swiper, SwiperSlide } from 'swiper/react';

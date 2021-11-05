@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import styles from '../../../styles/Board/Promotion/Comment.module.scss';
-import ReplyCommentContainer from './ReplyCommentContainer';
-import ReplyAddComment from './ReplyAddComment';
+
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import {
