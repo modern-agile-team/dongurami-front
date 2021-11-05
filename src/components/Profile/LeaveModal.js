@@ -5,8 +5,12 @@ const LeaveModal = ({ setLeaveIsOpen, leaveIsOpen, setIsOpen, profile }) => {
   const onClick = (name, number) => {
     if (window.confirm(`정말로 ${name}에서 탈퇴하시겠습니까?`)) {
       quitClub(profile.id, number)
-        .then((res) => alert(res))
-        .catch((err) => console(err));
+        .then((res) => {
+          window.localStorage.setItem('jwt', res.data.jwt);
+          alert(res.data.msg);
+          location.reload();
+        })
+        .catch((err) => alert(err.response.data.msg));
       setLeaveIsOpen(!setLeaveIsOpen);
     } else setLeaveIsOpen(false);
   };
