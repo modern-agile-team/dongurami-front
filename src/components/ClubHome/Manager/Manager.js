@@ -52,7 +52,10 @@ export const Manager = () => {
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
     getMember(clubId)
-      .then((res) => setStates(res.data))
+      .then((res) => {
+        console.log(res.data.applicant);
+        setStates(res.data);
+      })
       .catch((err) => {
         switch (err.response.status) {
           case 401:
@@ -188,10 +191,11 @@ export const Manager = () => {
   //-------------------------------------------------------------//
 
   useEffect(() => {
-    if (applicantInfo.length > 0 && mergedApplicantQNA.length > 0)
-      setMergedApplicantInfo(
-        processApplicantInfo(applicantInfo, mergedApplicantQNA)
-      );
+    applicantInfo.length > 0 && mergedApplicantQNA.length > 0
+      ? setMergedApplicantInfo(
+          processApplicantInfo(applicantInfo, mergedApplicantQNA)
+        )
+      : setMergedApplicantInfo(applicantInfo);
   }, [applicantInfo, mergedApplicantQNA]);
 
   useEffect(() => {
