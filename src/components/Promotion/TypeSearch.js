@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 const TypeSearch = ({
   type,
   searchKeyword,
+  setSearchKeyword,
   setType,
   onSearch,
   categorySearch
