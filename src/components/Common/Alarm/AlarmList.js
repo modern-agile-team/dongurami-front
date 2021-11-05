@@ -22,24 +22,15 @@ const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
     <div className={styles.description}>
       <div className={styles.top}>
         <Link href={`/${alarm.url}`} passHref>
-          <p
-            id={styles.big}
-            onClick={() => onAlarmPatch(alarm.notificationNum)}
-          >
-            {alarmCategoriNum[alarm.notificationCategoryNum]}
+          <p id={styles.big} onClick={() => onAlarmPatch(alarm.no)}>
+            {alarmCategoriNum[alarm.notiCategoryNum]}
           </p>
         </Link>
-        <FiDelete
-          size={15}
-          onClick={() => clickDeleteIcon(alarm.notificationNum)}
-        />
+        <FiDelete size={15} onClick={() => clickDeleteIcon(alarm.no)} />
       </div>
       <Link href={`/${alarm.url}`} passHref>
-        <div
-          className={styles.bottom}
-          onClick={() => onAlarmPatch(alarm.notificationNum)}
-        >
-          <p>{alarm.senderId}</p>
+        <div className={styles.bottom} onClick={() => onAlarmPatch(alarm.no)}>
+          <p>{alarm.sender}</p>
           <p>{alarm.inDate.substr(0, 10)}</p>
         </div>
       </Link>
