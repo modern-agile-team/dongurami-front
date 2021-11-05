@@ -48,7 +48,10 @@
         align-items: center;
         gap: .25rem;
         .profileImage {
+          width: 30px;
+          height: 30px;
           border-radius: 50%;
+          cursor: pointer;
         }
         .profileLink {
           &:hover {

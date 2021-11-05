@@ -47,7 +47,9 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
 
   return (
     <div className={styles.comment}>
-      <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
+      <Link href={`/profile/${comment.studentId}`} passHref>
+        <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
+      </Link>
       <div>
         <div>
           <Link href={`/profile/${comment.studentId}`} passHref>
