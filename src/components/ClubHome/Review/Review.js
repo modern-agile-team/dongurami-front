@@ -128,6 +128,9 @@ const Review = () => {
   // 필터링
   const onFilterChange = (e) => {
     const filter = e.target.value;
+    const oldestOrder = reviewList.slice(0).sort((a, b) => {
+      return a.no - b.no;
+    });
     const latestOrder = reviewList.slice(0).sort((a, b) => {
       return b.no - a.no;
     });
@@ -139,12 +142,15 @@ const Review = () => {
     });
     switch (filter) {
       case '0':
-        setReviewList(latestOrder);
+        setReviewList(oldestOrder);
         break;
       case '1':
-        setReviewList(rateHigh);
+        setReviewList(latestOrder);
         break;
       case '2':
+        setReviewList(rateHigh);
+        break;
+      case '3':
         setReviewList(rateLow);
         break;
     }
