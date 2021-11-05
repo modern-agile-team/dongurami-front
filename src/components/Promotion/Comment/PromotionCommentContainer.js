@@ -2,7 +2,6 @@ import style from '../../../styles/Board/Promotion/PromotionCommentContainer.mod
 import AddComment from './AddComment';
 import React, { useState } from 'react';
 import Comment from './Comment';
-import ReplyComment from './ReplyComment';
 import ReplyCommentContainer from './ReplyCommentContainer';
 import { useSelector } from 'react-redux';
 

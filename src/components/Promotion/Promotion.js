@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Board/Promotion/Promotion.module.scss';
-import Link from 'next/link';
 
 function displayedAt(createdAt) {
   const time = new Date(createdAt);
@@ -44,7 +43,10 @@ const Promotion = ({
         }}
       >
         {!img ? (
-          <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
+          <img
+            src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg"
+            alt="poster"
+          />
         ) : (
           <img src={img} alt="poster" />
         )}
