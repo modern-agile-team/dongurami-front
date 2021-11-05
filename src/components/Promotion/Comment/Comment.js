@@ -1,26 +1,12 @@
 import { useRef, useState } from 'react';
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import styles from '../../../styles/Board/Promotion/Comment.module.scss';
+import moment from 'moment';
 
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  deleteComment,
-  editComment,
-  editReplyComment,
-  deleteReplyComment
-} from 'apis/promotion';
+import { deleteComment, editComment } from 'apis/promotion';
 import { getPost } from 'redux/slices/post';
-
-function formatDate(date) {
-  var d = new Date(date),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
-  return [year, month, day].join('-');
-}
 
 const Comment = ({
   comment,
@@ -101,7 +87,7 @@ const Comment = ({
             {comment.description}
           </div>
           <div>
-            <p>{formatDate(comment.inDate)}</p>
+            <p>{moment(comment.inDate).format('YYYY-MM-DD')}</p>
             {user && comment.no === comment.groupNo && (
               <p
                 className={styles.reply}
