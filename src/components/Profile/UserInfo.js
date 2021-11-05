@@ -2,6 +2,7 @@ import styles from '../../styles/Profile/UserInfo.module.scss';
 import { FaGraduationCap, FaUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import ClubModal from './ClubModal';
+import LeaveModal from './LeaveModal';
 
 const UserInfo = ({
   isOpen,
@@ -10,8 +11,15 @@ const UserInfo = ({
   comp,
   baseImg,
   userInfo,
-  profile
+  profile,
+  leaveIsOpen,
+  setLeaveIsOpen,
+  clubNo
 }) => {
+  const onSubmitLeave = () => {
+    setLeaveIsOpen(!leaveIsOpen);
+  };
+
   if (comp === '프로필')
     return (
       <div className={styles.wrap}>
@@ -32,14 +40,25 @@ const UserInfo = ({
             </div>
             <button
               className={styles.clubBtn}
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => {
+                setIsOpen(!isOpen);
+                setLeaveIsOpen(false);
+              }}
             >
               소속 동아리
             </button>
             <ClubModal isOpen={isOpen} profile={profile} />
-
+            <LeaveModal
+              setIsOpen={setIsOpen}
+              setLeaveIsOpen={setLeaveIsOpen}
+              leaveIsOpen={leaveIsOpen}
+              profile={profile}
+            />
             {userInfo.id === profile.id ? (
               <div className={styles.onlyMe}>
+                {clubNo !== 0 && (
+                  <span onClick={() => onSubmitLeave()}>동아리탈퇴</span>
+                )}
                 <Link
                   className={styles.linkClub}
                   href={{
