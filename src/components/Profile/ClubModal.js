@@ -6,7 +6,7 @@ const ClubModal = ({ isOpen, profile }) => {
     return (
       <div className={styles.clubList}>
         {profile.clubs.length === 0 ? (
-          <span>소속된 동아리가 없습니다.</span>
+          <Link href={`/promotion`}>동아리에 가입해보세요!</Link>
         ) : (
           profile.clubs.map((club, index) => {
             return (

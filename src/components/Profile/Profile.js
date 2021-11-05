@@ -25,7 +25,6 @@ function Profile() {
   const logout = useCallback(() => {
     window.localStorage.removeItem('jwt');
     dispatch(signOut());
-    E;
     router.push('/');
   }, [dispatch]);
 
