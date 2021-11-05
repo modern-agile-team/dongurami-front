@@ -4,7 +4,7 @@ import { BsArrowReturnRight } from 'react-icons/bs';
 function ReplyCommentContainer({ children }) {
   return (
     <div className={style.container}>
-      <BsArrowReturnRight size={28} />
+      <BsArrowReturnRight size={10} />
       {children}
     </div>
   );

@@ -45,10 +45,9 @@ const UserInfo = ({
                   href={{
                     pathname: `/modifyinfo/${userInfo.id}`
                   }}
+                  passHref
                 >
-                  <span>
-                  개인정보수정
-                  </span>
+                  <span>개인정보수정</span>
                 </Link>
                 <span onClick={() => logout()}>로그아웃</span>
               </div>

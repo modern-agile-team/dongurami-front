@@ -1,13 +1,12 @@
 .sectionWrap {
   display: flex;
   justify-content: center;
-  width: 98%;
+  width: 100%;
   margin: 0 auto;
 
   .section {
     width: 90%;
     height: 100%;
-    margin-top: 5em;
     margin: 0 auto;
 
     -webkit-column-width: 15em;

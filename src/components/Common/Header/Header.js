@@ -18,6 +18,7 @@ function Header() {
   const [isAlarmOpen, setIsAlarmOpen] = useState(false);
   const [token, setToken] = useState('');
   const [user, setUser] = useState();
+  const [userProflie, setUserProfile] = useState();
   const [alarmList, setAlarmList] = useState([]);
   const [alarmShow, setAlarmShow] = useState(3);
 
@@ -82,14 +83,10 @@ function Header() {
   //토큰 유효성 검사
   useEffect(() => {
     if (token) {
-      getUserData({
-        headers: {
-          'Content-type': 'application/json; charset=utf-8',
-          'x-auth-token': token
-        }
-      })
+      getUserData()
         .then((res) => {
           setUser(res.data.user.id);
+          setUserProfile(res.data.user.profilePath);
         })
         .catch((err) => {
           window.localStorage.removeItem('jwt');
@@ -147,10 +144,18 @@ function Header() {
                     />
                   )}
                 </div>
-                <FaUserCircle
-                  className={styles.Profile}
-                  onClick={showProfile}
-                />
+                {userProflie ? (
+                  <img
+                    src={userProflie}
+                    className={styles.userProflie}
+                    onClick={showProfile}
+                  />
+                ) : (
+                  <FaUserCircle
+                    className={styles.Profile}
+                    onClick={showProfile}
+                  />
+                )}
               </div>
             ) : (
               <div

@@ -1,5 +1,5 @@
 import styles from '../../../styles/Profile/ModifyInfo.module.scss';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ModifyHeader from './ModifyHeader';
 import ImmutableData from './ImmutableData';
 import MutableData from './MutableData';
@@ -28,7 +28,7 @@ const ModifyInfo = () => {
     setImgUrl(imgURL);
   };
 
-  const getData = () => {
+  const getData = useCallback(() => {
     getUserInfo(uRouter.query.pid)
       .then((res) => {
         if (res.data.profile.id !== res.data.userInfo.id) {
@@ -47,7 +47,7 @@ const ModifyInfo = () => {
         }
       })
       .catch((err) => console.log(err));
-  };
+  }, [uRouter.query.pid]);
 
   const modifyBtn = async () => {
     if (email.replace(/ /g, '').length <= 0) setEmail(placeholder[0]);
@@ -62,6 +62,7 @@ const ModifyInfo = () => {
       fileId
     })
       .then((res) => {
+        window.localStorage.setItem('jwt', res.data.jwt);
         router.push(`/profile/${userInfo.id}`);
       })
       .catch((err) => alert(err.response.data.msg));
@@ -70,7 +71,7 @@ const ModifyInfo = () => {
   useEffect(() => {
     if (!uRouter.isReady) return;
     getData();
-  }, [uRouter]);
+  }, [uRouter, getData]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';

@@ -1,21 +1,31 @@
 import Container from 'components/Write/Container';
 import WriteContent from 'components/Write/WriteContent';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { addPost, addScrapPost } from 'apis/profile';
+import api from 'apis/post';
 import { useRouter } from 'next/router';
 import router from 'next/router';
 
 const WriteScrpas = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [boardDescription, setBoardDescription] = useState('');
   const uRouter = useRouter();
   const data = uRouter.query;
+
+  useEffect(() => {
+    api
+      .getPost('clubActivity', data.scrapNum)
+      .then((res) => setBoardDescription(res.data.board.description))
+      .catch((err) => console.log(err));
+  }, []);
 
   const onSubmit = async () => {
     if (data.scrapNum !== undefined) {
       addScrapPost(data.clubNum, data.scrapNum, {
         title,
-        description
+        scrapDescription: description,
+        boardDescription
       })
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err));

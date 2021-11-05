@@ -46,3 +46,10 @@
     background-color: lightgray;
   }
 }
+
+.profileImage {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
