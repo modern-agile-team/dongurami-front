@@ -132,8 +132,6 @@ export const Manager = () => {
 
   const changeAdminOptions = () => {
     const result = [];
-    console.log(members);
-    console.log(applyAuth, boardAuth);
     members.forEach((member, index) => {
       result.push({
         id: member.id,
@@ -155,10 +153,7 @@ export const Manager = () => {
     ];
     await putAuth(...body)
       .then((res) => alert(res.data.msg))
-      .catch((err) => {
-        console.log(...body);
-        alert(err.response.data.msg);
-      });
+      .catch((err) => alert(err.response.data.msg));
     await getMembersData();
   };
 
