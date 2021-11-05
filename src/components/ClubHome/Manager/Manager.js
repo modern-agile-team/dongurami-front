@@ -52,10 +52,7 @@ export const Manager = () => {
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
     getMember(clubId)
-      .then((res) => {
-        console.log(res.data.applicant);
-        setStates(res.data);
-      })
+      .then((res) => setStates(res.data))
       .catch((err) => {
         switch (err.response.status) {
           case 401:
