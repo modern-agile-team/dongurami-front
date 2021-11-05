@@ -62,7 +62,8 @@ const ModifyInfo = () => {
       fileId
     })
       .then((res) => {
-        window.localStorage.setItem('jwt', res.data.jwt);
+        res.data.jwt !== undefined &&
+          window.localStorage.setItem('jwt', res.data.jwt);
         router.push(`/profile/${userInfo.id}`);
       })
       .catch((err) => alert(err.response.data.msg));
