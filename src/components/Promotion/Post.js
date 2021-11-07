@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { IoIosArrowForward } from 'react-icons/io';
 import getToken from 'utils/getToken';
+import moment from 'moment';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -89,7 +90,7 @@ const Post = ({ postId, getData, post }) => {
                 </Link>
               </div>
               <div className={styles.dateHit}>
-                <span>{formatDate(inDate)}</span>
+                <span>{moment(inDate).format('YYYY-MM-DD')}</span>
               </div>
             </div>
           </div>
