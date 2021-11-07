@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { useRouter } from 'next/router';
 import moment from 'moment';
+import Link from 'next/link';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
 function setEndOfContenteditable(contentEditableElement) {
@@ -46,10 +47,14 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
 
   return (
     <div className={styles.comment}>
-      <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
+      <Link href={`/profile/${comment.studentId}`} passHref>
+        <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
+      </Link>
       <div>
         <div>
-          <p>{comment.studentName}</p>
+          <Link href={`/profile/${comment.studentId}`} passHref>
+            <p className={styles.profileImage}>{comment.studentName}</p>
+          </Link>
           {(post.studentId === comment.studentId) && <p>작성자</p>}
           {(user?.id === comment.studentId) && (
             <div>

@@ -49,6 +49,21 @@
     }
   }
   .boardInfo {
+    .profile {
+      display: flex;
+      align-items: center;
+      img {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      span {
+        cursor: pointer;
+      }
+    }
+
     text-align: right;
     margin-top: 3rem;
   }
@@ -96,6 +111,9 @@
     font-size: 130%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  img {
+    max-width: 100%;
   }
 }
 

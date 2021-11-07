@@ -2,7 +2,7 @@ import style from '../../../styles/Board/Promotion/PromotionCommentContainer.mod
 import AddComment from './AddComment';
 import React, { useState } from 'react';
 import Comment from './Comment';
-import ReplyComment from './ReplyComment';
+import ReplyCommentContainer from './ReplyCommentContainer';
 import { useSelector } from 'react-redux';
 
 const PromotionCommentContainer = ({
@@ -12,35 +12,40 @@ const PromotionCommentContainer = ({
   studentId
 }) => {
   const user = useSelector((state) => state.user);
+  const [parentCommentID, setParentCommentID] = useState();
   return (
     <>
       <p>댓글 {comments.length}</p>
       <div className={style.container}>
         {comments &&
           comments.map((comment, index) => (
-            <>
-              {comment.groupNo === comment.no && (
-                <>
+            <React.Fragment key={comment.no}>
+              {comment.depth ? (
+                <ReplyCommentContainer>
                   <Comment
-                    key={index}
                     comment={comment}
                     postId={postId}
                     getData={getData}
                     studentId={studentId}
+                    parentCommentID={parentCommentID}
                   />
-                </>
-              )}
-              {comment.no !== comment.groupNo && (
-                <ReplyComment
-                  key={comment.no}
-                  commentList={comments}
-                  postId={postId}
-                  getData={getData}
-                  parentCommentId={comment.groupNo}
-                  studentId={studentId}
+                </ReplyCommentContainer>
+              ) : (
+                <Comment
+                  comment={comment}
+                  setParentCommentID={setParentCommentID}
                 />
               )}
-            </>
+              {parentCommentID === comment.no && (
+                <ReplyCommentContainer>
+                  <AddComment
+                    comments={comments}
+                    postId={postId}
+                    parentCommentID={parentCommentID}
+                  />
+                </ReplyCommentContainer>
+              )}
+            </React.Fragment>
           ))}
         {user && <AddComment comments={comments} postId={postId} />}
       </div>

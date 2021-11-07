@@ -5,6 +5,7 @@
     height: 50px;
     border-radius: 50%;
     margin: 0 10px;
+    cursor: pointer;
   }
   & > div {
     flex: 1;
@@ -44,5 +45,12 @@
   cursor: pointer;
   &:hover {
     background-color: lightgray;
+  }
+}
+
+.profileImage {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 }

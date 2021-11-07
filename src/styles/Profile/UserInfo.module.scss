@@ -14,6 +14,7 @@
 }
 
 .profileImg {
+  box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.1);
   margin: 5px;
   width: 200px;
   height: 200px;
@@ -21,7 +22,6 @@
 }
 
 .clubBtn {
-  // font-family: twayair;
   background-color: white;
   margin: 5px;
   padding: 5px 12px;
@@ -32,13 +32,35 @@
   }
 }
 
+.leaveModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  button {
+    background: white;
+    border: 1px solid lightgray;
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    &:hover {
+      filter: brightness(97%);
+    }
+  }
+  * {
+    margin: 5px;
+  }
+  span {
+    color: red;
+    cursor: pointer;
+  }
+}
+
 .clubList {
   display: flex;
   flex-direction: column;
   align-items: center;
   * {
-    // font-family: twayair;
-    margin: 2px;
+    margin: 5px;
   }
   a:link {
     color: black;
@@ -50,6 +72,7 @@
   }
   a:hover {
     color: #90e2d6;
+    cursor: pointer;
   }
 }
 
@@ -71,6 +94,7 @@
 .bottom {
   * {
     font-family: twayair;
+    font-size: 15px;
   }
   margin-top: 4%;
   gap: 10px;

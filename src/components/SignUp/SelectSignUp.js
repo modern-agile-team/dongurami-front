@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../../styles/User/SignUp/SelectSignUp.module.scss';
-import OAuth from './OAuth';
+// import OAuth from './OAuth';
 import Link from 'next/link';
 
 export const SelectSignUp = () => {
@@ -8,8 +8,8 @@ export const SelectSignUp = () => {
     <div className={styles.container}>
       <div className={styles.explain}>
         <span>
-          저희 &#39;동그라미&#39; 서비스는 인덕대학교 학생들의 동아리 활동에
-          원활한 소통과 교류가 이루어지도록 개발된 서비스입니다.
+          &#39;동그라미&#39; 서비스는 인덕대학교 학생들의 동아리 활동에 원활한
+          소통과 교류가 이루어지도록 개발된 서비스입니다.
         </span>
         <br />
         <span>
@@ -31,16 +31,16 @@ export const SelectSignUp = () => {
           주시길 바랍니다.
         </span>
         <div className={styles.naverInfo}>
-          <span>
+          {/* <span>
             아래의 &#39;네이버 아이디로 로그인&#39; 서비스를 이용하시면 보다
             편한 회원가입이 가능하니 참고하여 이용해 주시면 감사하겠습니다.
-          </span>
+          </span> */}
         </div>
         <hr />
         <div className={styles.selectBtn}>
-          <OAuth />
+          {/* <OAuth /> */}
           <Link href="/signup" passHref>
-            <button>이메일로 회원가입하기</button>
+            <button>회원가입하기</button>
           </Link>
         </div>
       </div>

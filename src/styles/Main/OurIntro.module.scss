@@ -23,6 +23,21 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .wrap {
+    width: 100%;
+    padding-top: 20%;
+    padding-bottom: 22%;
+    img {
+      width: 220px;
+      height: 220px;
+    }
+    .text {
+      font-size: 75%;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .wrap {
     width: 100%;

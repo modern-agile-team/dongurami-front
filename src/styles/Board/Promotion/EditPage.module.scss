@@ -1,9 +1,14 @@
+/*
 .container {
   display: flex;
   flex-direction: column;
+  * {
+    font-family: sans-serif;
+  }
   & > input {
     border: none;
     font-size: 2rem;
+    font-weight: bold;
   }
   & > input::placeholder {
     color: lightgray;
@@ -15,20 +20,68 @@
     background-color: #90e2d6;
   }
   & > div:nth-of-type(1) {
-    background-color: rgb(60, 60, 60);
-    width: 10%;
-    height: 1rem;
+    margin: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    & > div:nth-of-type(1) {
+      border-radius: 0.5rem;
+    }
+    & > div:nth-of-type(2) {
+      border: none;
+      min-height: 30vh;
+    }
   }
+  & > div:nth-of-type(2) {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-top: 2px solid #90e2d6;
+    border-bottom: 2px solid #90e2d6;
+    & > button {
+      border: 2px solid #90e2d6;
+      color: #90e2d6;
+      background-color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+    }
+  }
+}
+*/
+
+.container {
+  display: flex;
+  flex-direction: column;
+  * {
+    font-family: sans-serif;
+  }
+  & > input {
+    border: none;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  & > input::placeholder {
+    color: lightgray;
+  }
+  & > hr {
+    border: none;
+    height: 2px;
+    width: 100%;
+    background-color: #90e2d6;
+  }
+
   & > div:nth-of-type(2) {
     margin: 1rem;
     flex: 1;
     display: flex;
     flex-direction: column;
     & > div:nth-of-type(1) {
-      border: none;
+      border-radius: 0.5rem;
     }
     & > div:nth-of-type(2) {
       border: none;
+      min-height: 30vh;
     }
   }
   & > div:nth-of-type(3) {

@@ -24,6 +24,9 @@ function Edit({ pid }) {
       });
     })();
   }, []);
+  useEffect(() => {
+    document.body.style.overflow = 'visible';
+  }, []);
 
   const onSubmit = async () => {
     if (!title.length && !description.length) {

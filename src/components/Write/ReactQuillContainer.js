@@ -37,6 +37,9 @@ function ReactQuillContainer({ description, setDescription }) {
 
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
+
+    document.body.appendChild(input);
+
     input.click();
 
     input.onchange = async () => {
@@ -49,6 +52,8 @@ function ReactQuillContainer({ description, setDescription }) {
       const range = quillRef.current.getEditorSelection();
       quillRef.current.getEditor().insertEmbed(range.index, 'image', imageURL);
       quillRef.current.getEditor().setSelection(range.index + 1);
+
+      document.body.removeChild(input);
     };
   };
 
@@ -77,6 +82,7 @@ function ReactQuillContainer({ description, setDescription }) {
     <ReactQuill
       forwardedRef={quillRef}
       placeholder="본문을 입력하세요..."
+      scrollingContainer="html"
       modules={modules}
       formats={formats}
       value={description}

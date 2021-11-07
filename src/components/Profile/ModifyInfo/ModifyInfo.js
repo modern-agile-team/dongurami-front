@@ -1,5 +1,5 @@
 import styles from '../../../styles/Profile/ModifyInfo.module.scss';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ModifyHeader from './ModifyHeader';
 import ImmutableData from './ImmutableData';
 import MutableData from './MutableData';
@@ -12,7 +12,7 @@ const ModifyInfo = () => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [grade, setGrade] = useState(0);
-  const [comp, setComp] = useState('수정');
+  const [isOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState();
   const [fileId, setFileId] = useState();
   const [placeholder, setPlaceholder] = useState();
@@ -28,7 +28,7 @@ const ModifyInfo = () => {
     setImgUrl(imgURL);
   };
 
-  const getData = () => {
+  const getData = useCallback(() => {
     getUserInfo(uRouter.query.pid)
       .then((res) => {
         if (res.data.profile.id !== res.data.userInfo.id) {
@@ -47,7 +47,7 @@ const ModifyInfo = () => {
         }
       })
       .catch((err) => console.log(err));
-  };
+  }, [uRouter.query.pid]);
 
   const modifyBtn = async () => {
     if (email.replace(/ /g, '').length <= 0) setEmail(placeholder[0]);
@@ -62,16 +62,17 @@ const ModifyInfo = () => {
       fileId
     })
       .then((res) => {
+        res.data.jwt !== undefined &&
+          window.localStorage.setItem('jwt', res.data.jwt);
         router.push(`/profile/${userInfo.id}`);
       })
       .catch((err) => alert(err.response.data.msg));
-
   };
 
   useEffect(() => {
     if (!uRouter.isReady) return;
     getData();
-  }, [uRouter]);
+  }, [uRouter, getData]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
@@ -80,10 +81,12 @@ const ModifyInfo = () => {
     <div className={styles.wrap}>
       <div className={styles.profileBody}>
         <ModifyHeader
-          imgUrl={imgUrl}
+          setImgUrl={setImgUrl}
           onChangeImg={onChangeImg}
+          imgUrl={imgUrl}
           userInfo={userInfo}
-          setComp={setComp}
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
           baseImg={baseImg}
         />
         <div className={styles.data}>

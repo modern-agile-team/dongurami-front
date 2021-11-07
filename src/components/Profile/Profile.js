@@ -18,6 +18,7 @@ function Profile() {
   const [dataArr, setDataArr] = useState([]);
   const [token, setToken] = useState(getToken());
   const [isOpen, setIsOpen] = useState(false);
+  const [leaveIsOpen, setLeaveIsOpen] = useState(false);
 
   const uRouter = useRouter();
 
@@ -25,7 +26,7 @@ function Profile() {
     window.localStorage.removeItem('jwt');
     dispatch(signOut());
     router.push('/');
-  }, [router]);
+  }, [dispatch]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
@@ -38,23 +39,32 @@ function Profile() {
     }
     return title.length >= 8 ? title.substring(0, 6) + '..' : title;
   }, []);
+
+  const setState = (data) => {
+    setUserInfo(data.userInfo);
+    setProfile(data.profile);
+    setClubNo(data.profile.clubs.length === 0 ? 0 : data.profile.clubs[0].no);
+  };
+
   useEffect(() => {
     if (!uRouter.isReady) return;
-    setId(uRouter.query.pid);
-    setToken(getToken());
     getUserInfo(uRouter.query.pid, token)
-      .then((res) => {
-        setUserInfo(res.data.userInfo);
-        setProfile(res.data.profile);
-        setClubNo(
-          res.data.profile.clubs.length === 0 ? 0 : res.data.profile.clubs[0].no
-        );
-      })
+      .then((res) => setState(res.data))
       .catch((err) => {
         alert(err);
         router.back();
       });
   }, [token, uRouter]);
+
+  useEffect(() => {
+    if (!uRouter.isReady) return;
+    setId(uRouter.query.pid);
+    setToken(getToken());
+  }, [uRouter]);
+
+  useEffect(() => {
+    document.body.style.overflow = 'visible';
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -66,54 +76,47 @@ function Profile() {
         >
           프로필
         </button>
-        <button
-          style={comp !== '스크랩' ? { background: '#f2f2f2' } : null}
-          className={styles.scrapBtn}
-          onClick={() => {
-            if (profile.clubs.length > 0) {
-              getScraps(profile.id, profile.clubs[0].no)
-                .then((res) => {
-                  setDataArr(
-                    res.data.scraps
-                      .concat(res.data.boards)
-                      .sort(
-                        (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
-                      )
-                  );
-                })
-                .catch((err) => {
-                  alert('로그인 한 사용자만 열람할 수 있습니다.');
-                  setComp('프로필');
-                });
-              setComp('스크랩');
-            } else alert('가입된 동아리가 없습니다.');
-          }}
-        >
-          스크랩
-        </button>
+        {userInfo.id === profile.id && (
+          <button
+            style={comp !== '스크랩' ? { background: '#f2f2f2' } : null}
+            className={styles.scrapBtn}
+            onClick={() => {
+              if (profile.clubs.length > 0) setComp('스크랩');
+              else alert('가입된 동아리가 없습니다.');
+            }}
+          >
+            스크랩
+          </button>
+        )}
       </div>
-      <UserInfo
-        logout={logout}
-        baseImg={baseImg}
-        userInfo={userInfo}
-        profile={profile}
-        comp={comp}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
-      <Scraps
-        uRouter={uRouter}
-        userInfo={userInfo}
-        profile={profile}
-        comp={comp}
-        setClubNo={setClubNo}
-        clubNo={clubNo}
-        getScraps={getScraps}
-        dataArr={dataArr}
-        setDataArr={setDataArr}
-        id={id}
-        matchTitle={matchTitle}
-      />
+      {comp !== '스크랩' ? (
+        <UserInfo
+          logout={logout}
+          baseImg={baseImg}
+          userInfo={userInfo}
+          profile={profile}
+          comp={comp}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          leaveIsOpen={leaveIsOpen}
+          setLeaveIsOpen={setLeaveIsOpen}
+          clubNo={clubNo}
+        />
+      ) : (
+        <Scraps
+          uRouter={uRouter}
+          userInfo={userInfo}
+          profile={profile}
+          comp={comp}
+          setClubNo={setClubNo}
+          clubNo={clubNo}
+          getScraps={getScraps}
+          dataArr={dataArr}
+          setDataArr={setDataArr}
+          id={id}
+          matchTitle={matchTitle}
+        />
+      )}
     </div>
   );
 }
