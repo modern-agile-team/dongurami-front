@@ -1,5 +1,6 @@
 .promotion {
   display: inline-block;
+  
   width: 97%;
   position: relative;
   margin-right: 6%;
@@ -10,6 +11,7 @@
     border-bottom-right-radius: 6px;
     border-top: none;
   }
+  
   .img {
     position: relative;
     width: 100%;
@@ -61,6 +63,7 @@
         font-size: 15px;
         font-family: 'twayair';
       }
+      
       &:hover {
         opacity: 1;
       }
