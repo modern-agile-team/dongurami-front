@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from '../../../styles/Club/Home/Schedule/Table.module.scss';
-import OtherDays from './Tds/OtherDays';
-import MonthDays from './Tds/MonthDays';
-import TodayTd from './Tds/TodayTd';
+import styles from 'styles/Club/Home/Schedule/Table.module.scss';
+import OtherDays from '../Tds/OtherDays';
+import MonthDays from '../Tds/MonthDays';
+import TodayTd from '../Tds/TodayTd';
 import moment from 'moment';
 
 const MakeTd = ({ setDate, setPop, schedule, nowDate, today, week }) => {
