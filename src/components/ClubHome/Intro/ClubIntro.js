@@ -77,11 +77,6 @@ const ClubIntro = ({ visitTime }) => {
   }, [error, router]);
 
   useEffect(() => {
-    if (!clubId) return;
-    dispatch(getClubInfo(clubId));
-  }, [dispatch, clubId]);
-
-  useEffect(() => {
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
   }, [visitTime]);
