@@ -47,9 +47,11 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
     ) {
       onClickAdd();
       moveCal();
-    } else if (Date.parse(startDate) > Date.parse(endDate))
+    } else if (Date.parse(startDate) > Date.parse(endDate)) {
       alert('날짜를 확인해주세요');
-    else if (title.current.value.length <= 0) alert('제목을 확인해주세요');
+    } else if (title.current.value.length <= 0) {
+      alert('제목을 확인해주세요');
+    }
   };
 
   if (pop !== 'DailyModal') return null;
