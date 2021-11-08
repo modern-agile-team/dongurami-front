@@ -22,7 +22,7 @@ const AlarmContainer = ({
       <div className={styles.rect} />
       <div className={styles.container}>
         <div className={styles.delete}>
-          <div>{isDelete && <span>알람이 삭제되었습니다</span>}</div>
+          <div>{isDelete && <span>알람이 삭제되었습니다.</span>}</div>
           <div>
             <FaTrashAlt size={13} onClick={onAlarmDeleteAll} />
           </div>
