@@ -1,4 +1,4 @@
-import styles from '../../../styles/Club/Home/Schedule/DailyModal.module.scss';
+import styles from 'styles/Club/Home/Schedule/DailyModal.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { MdClose } from 'react-icons/md';
 import { getInfo, addSchedule } from 'apis/calendar';

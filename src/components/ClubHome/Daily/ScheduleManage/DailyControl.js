@@ -1,4 +1,4 @@
-import styles from '../../../styles/Club/Home/Schedule/DailyControl.module.scss';
+import styles from 'styles/Club/Home/Schedule/DailyControl.module.scss';
 import { HiPencil } from 'react-icons/hi';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';

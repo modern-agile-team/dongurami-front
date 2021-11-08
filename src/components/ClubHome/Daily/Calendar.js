@@ -2,15 +2,15 @@ import styles from '../../../styles/Club/Home/Schedule/Calendar.module.scss';
 import React, { useCallback } from 'react';
 import { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
-import DailyModal from './DailyModal';
+import DailyModal from './ScheduleManage/DailyModal';
 import Schedule from './Schedule';
-import DailyControl from './DailyControl';
-import ScheduleModify from './ScheduleModify';
+import DailyControl from './ScheduleManage/DailyControl';
+import ScheduleModify from './ScheduleManage/ScheduleModify';
 import RightContainer from './RightContainer';
 import MakeTd from './MakeTd';
 import Router, { useRouter } from 'next/router';
 import { getInfo } from 'apis/calendar';
-import { getSchedule, getData } from 'redux/slices/calendar';
+import { getSchedule } from 'redux/slices/calendar';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Calendar = () => {
@@ -24,14 +24,13 @@ const Calendar = () => {
   const [color, setColor] = useState('');
   const [nowDay, setNowDay] = useState('');
   const nowDate = useRef();
-  const uRouter = useRouter();
-  const Qdata = uRouter.query;
+  const router = useRouter();
+  const Qdata = router.query;
   const colors = ['#ff9d9d', '#ffb482', '#ffee8f', '#a1ffa9', '#b5eaff'];
   const todayData = useSelector((state) => state.calendar.info);
   const dispatch = useDispatch();
 
   const moveLogin = () => Router.push('/LoginPage');
-
   const moveHome = () => window.location.reload();
 
   const today = momentTime;
@@ -48,7 +47,7 @@ const Calendar = () => {
   useEffect(() => {
     if (today.format('YYYY-MM') === nowMonth)
       setNowDay(month.format('YYYY-MM-DD'));
-    if (!uRouter.isReady) return;
+    if (!router.isReady) return;
     dispatch(getSchedule({ clubId: Qdata.id, today: nowMonth }));
     getInfo(Qdata.id, yearMonth)
       .then((res) => setSchedule(res.data.result))
@@ -60,7 +59,7 @@ const Calendar = () => {
   }, [
     todayData,
     pop,
-    uRouter,
+    router,
     momentTime,
     Qdata.id,
     nowMonth,
