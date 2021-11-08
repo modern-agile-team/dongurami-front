@@ -1,11 +1,10 @@
 import styles from '../../../styles/Club/Home/Schedule/Schedule.module.scss';
-import Link from 'next/link';
 
-const Schedule = ({ schedule, nowDay }) => {
+const Schedule = ({ todayData, schedule, nowDay }) => {
   return (
     <div className={styles.container}>
       <div className={styles.importantSchedule}>
-        <h3>✔ 주요 일정</h3>
+        <h3>✔ 이달의 일정</h3>
         <div className={styles.scheduleWrap}>
           {schedule.map((el) => {
             return (
@@ -25,7 +24,7 @@ const Schedule = ({ schedule, nowDay }) => {
       <div className={styles.todaySchedule}>
         <h3>✔ 오늘의 일정</h3>
         <div className={styles.scheduleWrap}>
-          {schedule.map((el) => {
+          {todayData.result.map((el) => {
             return (
               Date.parse(el.startDate) <= Date.parse(nowDay) &&
               Date.parse(nowDay) <= Date.parse(el.endDate) && (

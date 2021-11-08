@@ -10,6 +10,8 @@ import RightContainer from './RightContainer';
 import MakeTd from './MakeTd';
 import Router, { useRouter } from 'next/router';
 import { getInfo } from 'apis/calendar';
+import { getSchedule, getData } from 'redux/slices/calendar';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Calendar = () => {
   const [momentTime, setMoment] = useState(moment());
@@ -25,6 +27,8 @@ const Calendar = () => {
   const uRouter = useRouter();
   const Qdata = uRouter.query;
   const colors = ['#ff9d9d', '#ffb482', '#ffee8f', '#a1ffa9', '#b5eaff'];
+  const todayData = useSelector((state) => state.calendar.info);
+  const dispatch = useDispatch();
 
   const moveLogin = () => Router.push('/LoginPage');
 
@@ -38,31 +42,31 @@ const Calendar = () => {
       ? 53
       : today.clone().endOf('month').week();
 
-  let month = new Date();
-  let nowMonth = `${month.getMonth() + 1}`;
-  if (nowMonth.length === 1) nowMonth = '0' + nowMonth;
+  let month = moment();
+  let nowMonth = month.format('YYYY-MM');
 
   useEffect(() => {
-    if (today.format('MM') === nowMonth) setNowDay(nowDate.current.id);
+    if (today.format('YYYY-MM') === nowMonth)
+      setNowDay(month.format('YYYY-MM-DD'));
     if (!uRouter.isReady) return;
+    dispatch(getSchedule({ clubId: Qdata.id, today: nowMonth }));
     getInfo(Qdata.id, yearMonth)
       .then((res) => setSchedule(res.data.result))
       .catch((err) => {
         alert(err.response.data.msg);
-        if (
-          err.response.data.msg ===
-            'JWT 토큰이 존재하지 않습니다. 로그인 후 이용해주세요.' ||
-          err.response.data.msg ===
-            '유효 시간이 만료된 토큰입니다. 다시 로그인 후 이용해주세요.'
-        )
-          moveLogin();
-        else if (
-          err.response.data.msg === '해당 동아리에 가입하지 않았습니다.' ||
-          err.response.data.msg === '존재하지 않는 동아리입니다.'
-        )
-          moveHome();
+        if (err.response.status === 401) moveLogin();
+        else if (err.response.status === 403) moveHome();
       });
-  }, [pop, uRouter, momentTime, Qdata.id, nowMonth, today, yearMonth]);
+  }, [
+    todayData,
+    pop,
+    uRouter,
+    momentTime,
+    Qdata.id,
+    nowMonth,
+    today,
+    yearMonth
+  ]);
 
   //달력만드는 함수
   const calendarArr = useCallback(() => {
@@ -82,6 +86,9 @@ const Calendar = () => {
     }
     return result;
   }, [schedule, nowDate, today, setPop, setDate]);
+
+  if (!todayData) return null;
+
   return (
     <>
       <div className={styles.wrap}>
@@ -89,6 +96,7 @@ const Calendar = () => {
           className={styles.scheduleComp}
           schedule={schedule}
           nowDay={nowDay}
+          todayData={todayData}
         />
         <RightContainer
           className={styles.rightContainer}
