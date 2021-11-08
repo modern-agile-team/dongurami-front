@@ -31,9 +31,11 @@ const PostContainer = () => {
   };
 
   const onDelete = () => {
-    if (data.no === 'board') deleteBPost(...queryData);
-    else deleteSPost(...queryData);
-    router.back();
+    if (window.confirm('글을 삭제하시겠습니까?')) {
+      if (data.no === 'board') deleteBPost(...queryData);
+      else deleteSPost(...queryData);
+      router.back();
+    }
   };
 
   const editLink = {
