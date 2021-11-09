@@ -7,20 +7,29 @@ import { getPost } from 'redux/slices/post';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { MdClose } from 'react-icons/md';
+import { useRouter } from 'next/router';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]); //
 
 const Modal = ({ setOpenModal, postId }) => {
   const [images, setImages] = useState([]);
   const category = 'promotion';
-  const pid = postId;
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
+  const router = useRouter();
+  let pid = postId;
 
   useEffect(async () => {
-    dispatch(getPost({ category, pid })).then((response) => {
-      setImages(response.payload.images);
-    });
+    if (postId) {
+      dispatch(getPost({ category, pid })).then((response) => {
+        setImages(response.payload.images);
+      });
+    } else {
+      pid = router.query.id;
+      dispatch(getPost({ category, pid })).then((response) => {
+        setImages(response.payload.images);
+      });
+    }
     /*
     await getBoardPost(pid).then((res) => {
       setImages(res.data.images);
@@ -29,7 +38,12 @@ const Modal = ({ setOpenModal, postId }) => {
   }, [dispatch]);
 
   return (
-    <div className={styles.background} onClick={() => setOpenModal(false)}>
+    <div
+      className={styles.background}
+      onClick={() => {
+        router.replace(`promotion`);
+      }}
+    >
       <button className={styles.closeBtn}>
         <MdClose />
       </button>
