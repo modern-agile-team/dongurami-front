@@ -13,7 +13,7 @@ import { getData, getBoardData, getSearchData } from 'apis/promotion';
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
   const [postId, setPostId] = useState('');
-  const [boarddata, setBoardData] = useState([]);
+  const [boardData, setBoardData] = useState([]);
   const [searchItem, setSearchItem] = useState('');
   const [searchKeyword, setSearchKeyword] = useState('');
   const [type, setType] = useState('title');
@@ -70,8 +70,8 @@ const PromotionContainer = () => {
           }
         });
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      alert(err.response.data.msg);
     }
     isLoading = false;
   };
@@ -115,8 +115,8 @@ const PromotionContainer = () => {
           }
         });
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      alert(err.response.data.msg);
     }
     isLoading = false;
   };
@@ -176,7 +176,7 @@ const PromotionContainer = () => {
       />
       <div className={styles.sectionWrap}>
         <div className={styles.section}>
-          {boarddata.map((el) => {
+          {boardData.map((el) => {
             return (
               <div className={styles.poster} key={el.no}>
                 <Promotion
