@@ -22,12 +22,18 @@ function ReduxWrapper({ children }) {
 function App({ Component, pageProps }) {
   const [scrollY, setScrollY] = useState(0);
 
+  const scrollSpeed = () => {
+    if (typeof window !== 'undefined') {
+      const pos = window.pageYOffset;
+      return (pos / 550) * 75;
+    }
+  };
+
   const scrollToTop = () => {
     if (typeof window !== 'undefined') {
       const scroll = window.setInterval(() => {
         const pos = window.pageYOffset;
-        const step = 75;
-        if (pos > 0) window.scrollTo(0, pos - step);
+        if (pos > 0) window.scrollTo(0, pos - scrollSpeed());
         else window.clearInterval(scroll);
       }, 1);
     }
@@ -38,6 +44,7 @@ function App({ Component, pageProps }) {
       if (typeof window !== 'undefined') setScrollY(window.scrollY);
     });
   };
+
   useEffect(() => {
     scrollPosition();
   }, [scrollY]);
