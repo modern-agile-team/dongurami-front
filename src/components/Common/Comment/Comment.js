@@ -65,7 +65,7 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
         </div>
         <div ref={descriptionDiv} contentEditable={isContentEditable} suppressContentEditableWarning={true}>{comment.description}</div>
         <div>
-          <p>{moment(comment.indate).format('YYYY-MM-DD')}</p>
+          <p>{moment(comment.inDate).format('YYYY-MM-DD')}</p>
           {(user && comment.no === comment.groupNo) && (
             <p className={styles.reply} onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
           )}
