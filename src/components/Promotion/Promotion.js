@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Board/Promotion/Promotion.module.scss';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 
 function displayedAt(createdAt) {
   const time = moment(createdAt);
@@ -34,6 +35,7 @@ const Promotion = ({
   clubNo,
   title
 }) => {
+  const router = useRouter();
   return (
     <div className={styles.promotion}>
       <div
@@ -55,7 +57,8 @@ const Promotion = ({
           className={styles.creationInfo}
           onClick={() => {
             setPostId(pId);
-            setOpenModal(true);
+            setOpenModal();
+            router.replace(`promotion?id=${pId}`);
           }}
         >
           <div className={styles.writerInfo}>

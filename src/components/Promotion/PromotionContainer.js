@@ -154,7 +154,13 @@ const PromotionContainer = () => {
 
   useEffect(() => {
     document.body.style.overflow = openModal ? 'hidden' : 'auto';
-  }, [openModal]);
+    console.log(router.query);
+    if (Object.keys(router.query).length > 0) {
+      setOpenModal(true);
+    } else {
+      setOpenModal(false);
+    }
+  }, [openModal, router]);
 
   return (
     <>
@@ -182,7 +188,7 @@ const PromotionContainer = () => {
                   clubNo={el.clubNo}
                   category={el.category}
                   title={el.title}
-                  setOpenModal={setOpenModal}
+                  setOpenModal={() => setOpenModal(true)}
                   setPostId={setPostId}
                 />
               </div>
