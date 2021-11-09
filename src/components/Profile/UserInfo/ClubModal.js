@@ -1,5 +1,5 @@
 import Link from 'next/dist/client/link';
-import styles from '../../styles/Profile/UserInfo.module.scss';
+import styles from 'styles/Profile/UserInfo.module.scss';
 
 const ClubModal = ({ isOpen, profile }) => {
   if (isOpen) {

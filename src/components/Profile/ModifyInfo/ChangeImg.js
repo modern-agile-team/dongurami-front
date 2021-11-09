@@ -1,4 +1,4 @@
-import styles from '../../../styles/Profile/ModifyInfo.module.scss';
+import styles from 'styles/Profile/ModifyInfo.module.scss';
 import { MdClose } from 'react-icons/md';
 
 const ChangeImg = ({ baseImg, setImgUrl, setIsOpen, isOpen, onChangeImg }) => {

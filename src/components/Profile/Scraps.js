@@ -1,4 +1,4 @@
-import styles from '../../styles/Profile/Scraps.module.scss';
+import styles from 'styles/Profile/Scraps.module.scss';
 import { AiOutlineFileText } from 'react-icons/ai';
 import Link from 'next/dist/client/link';
 import { useEffect } from 'react';

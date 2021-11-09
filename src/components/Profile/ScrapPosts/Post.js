@@ -2,7 +2,7 @@ import CommentContainer from 'components/Common/Comment/CommentContainer';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styles from '../../styles/Board/Post/PostContent.module.scss';
+import styles from 'styles/Board/Post/PostContent.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setCategory } from 'redux/slices/post';
