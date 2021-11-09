@@ -107,7 +107,6 @@ function Profile() {
           uRouter={uRouter}
           userInfo={userInfo}
           profile={profile}
-          comp={comp}
           setClubNo={setClubNo}
           clubNo={clubNo}
           getScraps={getScraps}

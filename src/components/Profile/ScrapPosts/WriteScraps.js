@@ -34,9 +34,7 @@ const WriteScrpas = () => {
       await addPost(data.pid, data.clubNum, {
         title,
         description
-      })
-        .then((res) => console.log(res))
-        .catch((err) => alert(err.response.data.msg));
+      }).catch((err) => alert(err.response.data.msg));
       router.push(`/profile/${data.pid}`);
     }
   };
