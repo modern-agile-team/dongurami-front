@@ -1,6 +1,6 @@
 import styles from '../../../styles/Club/Home/Schedule/Schedule.module.scss';
 
-const Schedule = ({ todayData, schedule, nowDay }) => {
+const Schedule = ({ inDate, todayData, schedule, nowDay }) => {
   return (
     <div className={styles.container}>
       <div className={styles.importantSchedule}>
@@ -26,8 +26,7 @@ const Schedule = ({ todayData, schedule, nowDay }) => {
         <div className={styles.scheduleWrap}>
           {todayData.result.map((el) => {
             return (
-              Date.parse(el.startDate) <= Date.parse(nowDay) &&
-              Date.parse(nowDay) <= Date.parse(el.endDate) && (
+              inDate(el.startDate, nowDay, el.endDate) && (
                 <div key={el.no} className={styles.inSchedule}>
                   <span>{el.title}</span>
                   <br />

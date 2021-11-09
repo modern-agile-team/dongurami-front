@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import styles from 'styles/Club/Home/Schedule/Table.module.scss';
 
-const MonthDays = ({ setDate, schedule, days, flag }) => {
+const MonthDays = ({ inDate, setDate, schedule, days, flag }) => {
   const dataStructure = useMemo(() => {
     if (flag === 'other') {
       return {
@@ -30,10 +30,11 @@ const MonthDays = ({ setDate, schedule, days, flag }) => {
         <div className={styles.scheduleTitle}>
           {schedule.map((schedule, index) => {
             return (
-              Date.parse(schedule.startDate) <=
-                Date.parse(days.format('YYYY-MM-DD')) &&
-              Date.parse(days.format('YYYY-MM-DD')) <=
-                Date.parse(schedule.endDate) && (
+              inDate(
+                schedule.startDate,
+                days.format('YYYY-MM-DD'),
+                schedule.endDate
+              ) && (
                 <span
                   className={styles.scheduleSpan}
                   style={{ [dataStructure.styleKey]: `${schedule.colorCode}` }}

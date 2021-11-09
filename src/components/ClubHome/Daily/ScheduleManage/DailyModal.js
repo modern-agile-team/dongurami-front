@@ -32,10 +32,10 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
         notiCategoryNum: 4
       })
         .then((res) => console.log(res))
-        .catch((err) => console.log(err.response.data.msg));
+        .catch((err) => alert(err.response.data.msg));
       await getInfo(Qdata.id, today.format('YYYY-MM'))
         .then((res) => setSchedule(res.data.result))
-        .catch((err) => alert(err));
+        .catch((err) => alert(err.response.data.msg));
     }
   };
 
