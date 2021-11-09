@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import styles from 'styles/Club/Home/Schedule/Table.module.scss';
 import MonthDays from './MonthDays';
 
-const MakeTd = ({ setDate, setPop, schedule, today, week }) => {
+const MakeTd = ({ inDate, setDate, setPop, schedule, today, week }) => {
   const checkFlag = useCallback(
     (days) => {
       if (moment().format('YYYYMMDD') === days.format('YYYYMMDD')) {
@@ -38,6 +38,7 @@ const MakeTd = ({ setDate, setPop, schedule, today, week }) => {
                 setPop('DailyControl');
                 setDate(days.format('YYYY-MM-DD'));
               }}
+              inDate={inDate}
             />
           );
         })}
