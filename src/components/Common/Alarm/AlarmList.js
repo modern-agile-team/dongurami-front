@@ -1,6 +1,8 @@
 import styles from '../../../styles/Common/Alarm/AlarmContainer.module.scss';
 import { FiDelete } from 'react-icons/fi';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { changeComp } from 'redux/slices/chageComp';
 
 const alarmCategoriNum = {
   0: '댓글이 달렸습니다.',
@@ -13,6 +15,19 @@ const alarmCategoriNum = {
 };
 
 const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
+  const dispatch = useDispatch();
+
+  const selectComp = () => {
+    if (alarm.notiCategoryNum === 4 || alarm.notiCategoryNum === 5) return 4;
+    else if (alarm.notiCategoryNum === 6) return 2;
+    return 1;
+  };
+
+  const moveWhenClickAlarm = (data) => {
+    dispatch(changeComp(selectComp()));
+    onAlarmPatch(data);
+  };
+
   const clickDeleteIcon = (data) => {
     setIsDelete(true);
     onAlarmPatch(data);
@@ -21,14 +36,17 @@ const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
     <div className={styles.description}>
       <div className={styles.top}>
         <Link href={`/${alarm.url}`} passHref>
-          <p id={styles.big} onClick={() => onAlarmPatch(alarm.no)}>
+          <p id={styles.big} onClick={() => moveWhenClickAlarm(alarm.no)}>
             {alarmCategoriNum[alarm.notiCategoryNum]}
           </p>
         </Link>
         <FiDelete size={15} onClick={() => clickDeleteIcon(alarm.no)} />
       </div>
       <Link href={`/${alarm.url}`} passHref>
-        <div className={styles.bottom} onClick={() => onAlarmPatch(alarm.no)}>
+        <div
+          className={styles.bottom}
+          onClick={() => moveWhenClickAlarm(alarm.no)}
+        >
           <p>{alarm.sender}</p>
           <p>{alarm.inDate.substr(0, 10)}</p>
         </div>
