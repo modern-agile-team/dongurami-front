@@ -11,6 +11,9 @@ const api = {
     if (category === 'clubNotice') {
       return axios.delete(`/api/club/board/clubNotice/${clubNum}/${pid}`);
     }
+    if (category === 'clubActivity') {
+      return axios.delete(`/api/club/board/clubActivity/${clubNum}/${pid}`);
+    }
     return axios.delete(`/api/board/${category}/${pid}`);
   },
   postComment: ({ category, pid, id, description, parentCommentID, clubNum }) => {
