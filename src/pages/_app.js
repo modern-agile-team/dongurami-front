@@ -8,9 +8,16 @@ import { BsFillArrowUpCircleFill } from 'react-icons/bs';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
+import { useRouter } from 'next/router';
+import { changeComp } from 'redux/slices/chageComp';
 
 function ReduxWrapper({ children }) {
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.pathname !== '/clubhome/[id]') dispatch(changeComp(1));
+  }, [router.pathname]);
 
   useEffect(() => {
     dispatch(getUser());
