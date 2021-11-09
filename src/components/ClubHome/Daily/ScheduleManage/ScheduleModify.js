@@ -1,4 +1,4 @@
-import styles from '../../../styles/Club/Home/Schedule/ScheduleModify.module.scss';
+import styles from 'styles/Club/Home/Schedule/ScheduleModify.module.scss';
 import { MdClose } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import { getInfo, modifySchedule } from 'apis/calendar';

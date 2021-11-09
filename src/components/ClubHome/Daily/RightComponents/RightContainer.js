@@ -1,14 +1,14 @@
-import React from "react";
-import styles from "../../../styles/Club/Home/Schedule/Calendar.module.scss";
-import Table from "./Table";
-import Control from "./Control";
+import React from 'react';
+import styles from 'styles/Club/Home/Schedule/Calendar.module.scss';
+import Table from './Table';
+import Control from './Control';
 
 const RightContainer = ({
   setMoment,
   momentTime,
   today,
   setPop,
-  calendarArr,
+  calendarArr
 }) => {
   return (
     <div className={styles.right}>
