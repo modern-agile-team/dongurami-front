@@ -7,10 +7,18 @@ import Calendar from '../Daily/Calendar';
 import ClubNotice from '../Notice/ClubNotice';
 import { useCallback, useEffect, useState } from 'react';
 import Apply from '../Apply/Apply';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { getClubInfo } from 'redux/slices/clubhome';
 
 const Frame = () => {
   const [comp, setComp] = useState(1);
   const [isVisit, setIsVisit] = useState(false);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const clubId = router.query.id;
 
   const Comp = useCallback(() => {
     if (comp === 1) return <ClubIntro isVisit={isVisit} />;
@@ -26,6 +34,11 @@ const Frame = () => {
       setIsVisit(true);
     }
   }, [comp, isVisit]);
+
+  useEffect(() => {
+    if (!clubId) return;
+    dispatch(getClubInfo(clubId));
+  }, [dispatch, clubId]);
   return (
     <>
       <div className={styles.container}>
