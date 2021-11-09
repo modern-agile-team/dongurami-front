@@ -1,4 +1,4 @@
-import styles from '../../styles/Profile/UserInfo.module.scss';
+import styles from 'styles/Profile/UserInfo.module.scss';
 import { quitClub } from 'apis/profile';
 
 const LeaveModal = ({ setLeaveIsOpen, leaveIsOpen, setIsOpen, profile }) => {

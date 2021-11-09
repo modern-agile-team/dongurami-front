@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import Scraps from './Scraps';
-import styles from '../../styles/Profile/Profile.module.scss';
-import UserInfo from './UserInfo';
+import styles from 'styles/Profile/Profile.module.scss';
+import UserInfo from './UserInfo/UserInfo';
 import router, { useRouter } from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';

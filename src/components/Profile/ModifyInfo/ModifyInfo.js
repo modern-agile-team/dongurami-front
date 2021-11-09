@@ -1,4 +1,4 @@
-import styles from '../../../styles/Profile/ModifyInfo.module.scss';
+import styles from 'styles/Profile/ModifyInfo.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import ModifyHeader from './ModifyHeader';
 import ImmutableData from './ImmutableData';

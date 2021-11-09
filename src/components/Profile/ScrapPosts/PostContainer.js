@@ -1,7 +1,7 @@
 import Post from './Post';
 import { useRouter } from 'next/router';
 import { getBPost, getSPost, deleteBPost, deleteSPost } from 'apis/profile';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const PostContainer = () => {
   const [post, setPost] = useState();
@@ -31,9 +31,11 @@ const PostContainer = () => {
   };
 
   const onDelete = () => {
-    if (data.no === 'board') deleteBPost(...queryData);
-    else deleteSPost(...queryData);
-    router.back();
+    if (confirm('글을 삭제하시겠습니까?')) {
+      if (data.no === 'board') deleteBPost(...queryData);
+      else deleteSPost(...queryData);
+      router.back();
+    }
   };
 
   const editLink = {

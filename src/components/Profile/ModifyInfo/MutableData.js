@@ -1,6 +1,6 @@
 import { FaPhoneAlt } from 'react-icons/fa';
 import { IoIosMail } from 'react-icons/io';
-import styles from '../../../styles/Profile/ModifyInfo.module.scss';
+import styles from 'styles/Profile/ModifyInfo.module.scss';
 
 const MutableData = ({ userInfo, setEmail, setPhoneNumber }) => {
   return (

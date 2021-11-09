@@ -1,4 +1,4 @@
-import styles from '../../styles/Profile/UserInfo.module.scss';
+import styles from 'styles/Profile/UserInfo.module.scss';
 import { FaGraduationCap, FaUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import ClubModal from './ClubModal';
