@@ -1,4 +1,4 @@
-import styles from '../../../styles/Club/Home/Schedule/ScheduleModify.module.scss';
+import styles from 'styles/Club/Home/Schedule/ScheduleModify.module.scss';
 import { MdClose } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import { getInfo, modifySchedule } from 'apis/calendar';
@@ -40,10 +40,10 @@ const ScheduleModify = ({
         notiCategoryNum: 5
       })
         .then((res) => console.log(res))
-        .catch((err) => console.log(err.response));
+        .catch((err) => alert(err.response.data.msg));
       await getInfo(Qdata.id, today.format('YYYY-MM'))
         .then((res) => setSchedule(res.data.result))
-        .catch((err) => alert(err));
+        .catch((err) => alert(err.reponse.data.msg));
     }
   };
   if (pop !== 'ScheduleModify') return null;

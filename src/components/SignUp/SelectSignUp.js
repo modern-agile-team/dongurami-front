@@ -8,8 +8,8 @@ export const SelectSignUp = () => {
     <div className={styles.container}>
       <div className={styles.explain}>
         <span>
-          저희 &#39;동그라미&#39; 서비스는 인덕대학교 학생들의 동아리 활동에
-          원활한 소통과 교류가 이루어지도록 개발된 서비스입니다.
+          &#39;동그라미&#39; 서비스는 인덕대학교 학생들의 동아리 활동에 원활한
+          소통과 교류가 이루어지도록 개발된 서비스입니다.
         </span>
         <br />
         <span>

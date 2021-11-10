@@ -1,4 +1,4 @@
-import styles from '../../../styles/Club/Home/Schedule/DailyModal.module.scss';
+import styles from 'styles/Club/Home/Schedule/DailyModal.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { MdClose } from 'react-icons/md';
 import { getInfo, addSchedule } from 'apis/calendar';
@@ -32,10 +32,10 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
         notiCategoryNum: 4
       })
         .then((res) => console.log(res))
-        .catch((err) => console.log(err.response.data.msg));
+        .catch((err) => alert(err.response.data.msg));
       await getInfo(Qdata.id, today.format('YYYY-MM'))
         .then((res) => setSchedule(res.data.result))
-        .catch((err) => alert(err));
+        .catch((err) => alert(err.response.data.msg));
     }
   };
 
@@ -47,9 +47,11 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
     ) {
       onClickAdd();
       moveCal();
-    } else if (Date.parse(startDate) > Date.parse(endDate))
+    } else if (Date.parse(startDate) > Date.parse(endDate)) {
       alert('날짜를 확인해주세요');
-    else if (title.current.value.length <= 0) alert('제목을 확인해주세요');
+    } else if (title.current.value.length <= 0) {
+      alert('제목을 확인해주세요');
+    }
   };
 
   if (pop !== 'DailyModal') return null;

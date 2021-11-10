@@ -47,7 +47,9 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
 
   return (
     <div className={styles.comment}>
-      <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
+      <Link href={`/profile/${comment.studentId}`} passHref>
+        <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
+      </Link>
       <div>
         <div>
           <Link href={`/profile/${comment.studentId}`} passHref>
@@ -63,7 +65,7 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
         </div>
         <div ref={descriptionDiv} contentEditable={isContentEditable} suppressContentEditableWarning={true}>{comment.description}</div>
         <div>
-          <p>{moment(comment.indate).format('YYYY-MM-DD')}</p>
+          <p>{moment(comment.inDate).format('YYYY-MM-DD')}</p>
           {(user && comment.no === comment.groupNo) && (
             <p className={styles.reply} onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
           )}

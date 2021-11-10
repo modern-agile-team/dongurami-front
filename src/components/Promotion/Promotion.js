@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Board/Promotion/Promotion.module.scss';
-import Link from 'next/link';
+import moment from 'moment';
+import { useRouter } from 'next/router';
 
 function displayedAt(createdAt) {
-  const time = new Date(createdAt);
-  const milliSeconds = new Date() - time;
+  const time = moment(createdAt);
+  const milliSeconds = moment() - time;
   const seconds = milliSeconds / 1000;
 
   if (seconds < 60) return `방금 전`;
@@ -34,6 +35,7 @@ const Promotion = ({
   clubNo,
   title
 }) => {
+  const router = useRouter();
   return (
     <div className={styles.promotion}>
       <div
@@ -44,7 +46,10 @@ const Promotion = ({
         }}
       >
         {!img ? (
-          <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
+          <img
+            src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg"
+            alt="poster"
+          />
         ) : (
           <img src={img} alt="poster" />
         )}
@@ -52,7 +57,8 @@ const Promotion = ({
           className={styles.creationInfo}
           onClick={() => {
             setPostId(pId);
-            setOpenModal(true);
+            setOpenModal();
+            router.replace(`promotion?id=${pId}`);
           }}
         >
           <div className={styles.writerInfo}>

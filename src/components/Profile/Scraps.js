@@ -1,10 +1,9 @@
-import styles from '../../styles/Profile/Scraps.module.scss';
+import styles from 'styles/Profile/Scraps.module.scss';
 import { AiOutlineFileText } from 'react-icons/ai';
 import Link from 'next/dist/client/link';
 import { useEffect } from 'react';
 
 function Scraps({
-  comp,
   profile,
   userInfo,
   getScraps,
@@ -32,7 +31,7 @@ function Scraps({
       <div className={styles.container}>
         <div className={styles.headerBox}>
           <div className={styles.header}>
-            {profile.id === userInfo.id ? (
+            {profile.id === userInfo.id && (
               <Link
                 href={{
                   pathname: `/profile/${id}/${clubNo}/writescraps`
@@ -40,19 +39,21 @@ function Scraps({
               >
                 <span className={styles.addBtn}>✏️글작성</span>
               </Link>
-            ) : null}
+            )}
             <select
               onChange={(e) => {
                 setClubNo(e.target.value);
-                getScraps(profile.id, e.target.value).then((res) => {
-                  setDataArr(
-                    res.data.scraps
-                      .concat(res.data.boards)
-                      .sort(
-                        (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
-                      )
-                  );
-                });
+                getScraps(profile.id, e.target.value)
+                  .then((res) => {
+                    setDataArr(
+                      res.data.scraps
+                        .concat(res.data.boards)
+                        .sort(
+                          (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
+                        )
+                    );
+                  })
+                  .catch((err) => alert(err.reponse.data.msg));
               }}
             >
               {profile.clubs.map((club, index) => {

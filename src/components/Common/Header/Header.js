@@ -43,9 +43,7 @@ function Header() {
 
   // 알람 조회
   const getAlarmData = () => {
-    getAlarm()
-      .then((res) => setAlarmList(res.data.notifications))
-      .catch((err) => alert(err.response.data.msg));
+    getAlarm().then((res) => setAlarmList(res.data.notifications));
   };
 
   // 알람 전체 삭제

@@ -62,14 +62,14 @@ export function addComment(postId, description, parentCommentID) {
     return axios.post(`/api/board/promotion/${postId}/${parentCommentID}`, {
       id: 'test1',
       description,
-      url: `/promotion`,
+      url: `promotion?id=${postId}`,
       notiCategoryNum: 1
     });
   }
   return axios.post(`api/board/promotion/${postId}`, {
     id: 'test1',
     description,
-    url: `/promotion`,
+    url: `promotion?id=${postId}`,
     notiCategoryNum: 0
   });
 }

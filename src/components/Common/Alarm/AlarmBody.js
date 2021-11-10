@@ -10,20 +10,24 @@ const AlarmBody = ({
 }) => {
   return (
     <div className={styles.alarms}>
-      {alarmList.slice(0, alarmShow).map((alarm, index) => {
-        return (
-          <AlarmList
-            key={index}
-            alarm={alarm}
-            onAlarmPatch={onAlarmPatch}
-            setIsDelete={setIsDelete}
-          />
-        );
-      })}
+      {alarmList.length > 0 ? (
+        alarmList.slice(0, alarmShow).map((alarm, index) => {
+          return (
+            <AlarmList
+              key={index}
+              alarm={alarm}
+              onAlarmPatch={onAlarmPatch}
+              setIsDelete={setIsDelete}
+            />
+          );
+        })
+      ) : (
+        <span>생성된 알람이 없습니다.</span>
+      )}
       {alarmList.length > alarmShow && (
         <div className={styles.leftAlarms}>
           <span onClick={showMoreAlarm}>
-            {alarmList.slice(alarmShow).length}개의 알람이 더 있습니다
+            {alarmList.slice(alarmShow).length}개의 알람이 더 있습니다.
           </span>
         </div>
       )}

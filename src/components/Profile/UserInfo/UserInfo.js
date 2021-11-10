@@ -1,17 +1,17 @@
-import styles from '../../styles/Profile/UserInfo.module.scss';
+import styles from 'styles/Profile/UserInfo.module.scss';
 import { FaGraduationCap, FaUserCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import ClubModal from './ClubModal';
 import LeaveModal from './LeaveModal';
 
 const UserInfo = ({
-  isOpen,
-  setIsOpen,
   logout,
-  comp,
   baseImg,
   userInfo,
   profile,
+  comp,
+  isOpen,
+  setIsOpen,
   leaveIsOpen,
   setLeaveIsOpen,
   clubNo
@@ -54,7 +54,7 @@ const UserInfo = ({
               leaveIsOpen={leaveIsOpen}
               profile={profile}
             />
-            {userInfo.id === profile.id ? (
+            {userInfo.id === profile.id && (
               <div className={styles.onlyMe}>
                 {clubNo !== 0 && (
                   <span onClick={() => onSubmitLeave()}>동아리탈퇴</span>
@@ -70,7 +70,7 @@ const UserInfo = ({
                 </Link>
                 <span onClick={() => logout()}>로그아웃</span>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>

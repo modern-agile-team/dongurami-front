@@ -35,7 +35,7 @@ function Edit({ category }) {
       alert('제목을 255자 이하로 작성해 주세요!');
       return;
     }
-    await putPost(category, pid, { title, description });
+    await putPost(category, pid, { title, description }, router.query.id);
     router.back();
   };
 

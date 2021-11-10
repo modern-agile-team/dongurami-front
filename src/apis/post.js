@@ -11,17 +11,20 @@ const api = {
     if (category === 'clubNotice') {
       return axios.delete(`/api/club/board/clubNotice/${clubNum}/${pid}`);
     }
+    if (category === 'clubActivity') {
+      return axios.delete(`/api/club/board/clubActivity/${clubNum}/${pid}`);
+    }
     return axios.delete(`/api/board/${category}/${pid}`);
   },
   postComment: ({ category, pid, id, description, parentCommentID, clubNum }) => {
     if (category === 'clubNotice') {
       if (parentCommentID) {
         return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}`, {
-          id, description, url: `clubhome/${clubNum}/${category}/notice/${pid}`, notiCategoryNum: 1
+          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 1
         });
       } else {
         return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}`, {
-          id, description, url: `clubhome/${clubNum}/${category}/notice/${pid}`, notiCategoryNum: 0
+          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 0
         });
       }
     }

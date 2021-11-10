@@ -1,4 +1,4 @@
-import WriteScraps from 'components/Profile/WriteScraps';
+import WriteScraps from 'components/Profile/ScrapPosts/WriteScraps';
 import Footer from 'components/Common/Footer';
 import Header from 'components/Common/Header/Header';
 import Head from 'next/head';

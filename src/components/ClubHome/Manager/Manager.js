@@ -188,10 +188,11 @@ export const Manager = () => {
   //-------------------------------------------------------------//
 
   useEffect(() => {
-    if (applicantInfo.length > 0 && mergedApplicantQNA.length > 0)
-      setMergedApplicantInfo(
-        processApplicantInfo(applicantInfo, mergedApplicantQNA)
-      );
+    applicantInfo.length > 0 && mergedApplicantQNA.length > 0
+      ? setMergedApplicantInfo(
+          processApplicantInfo(applicantInfo, mergedApplicantQNA)
+        )
+      : setMergedApplicantInfo(applicantInfo);
   }, [applicantInfo, mergedApplicantQNA]);
 
   useEffect(() => {

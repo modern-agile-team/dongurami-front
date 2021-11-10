@@ -1,4 +1,4 @@
-import styles from '../../../styles/Profile/ModifyInfo.module.scss';
+import styles from 'styles/Profile/ModifyInfo.module.scss';
 import ChangeImg from './ChangeImg';
 import { FaCamera } from 'react-icons/fa';
 

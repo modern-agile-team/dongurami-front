@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../styles/Club/Home/Schedule/RightContainer.module.scss';
+import styles from 'styles/Club/Home/Schedule/RightContainer.module.scss';
 
 const Control = ({ setMoment, momentTime, today, setPop }) => {
   return (

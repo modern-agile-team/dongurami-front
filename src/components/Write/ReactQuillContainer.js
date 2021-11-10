@@ -44,7 +44,6 @@ function ReactQuillContainer({ description, setDescription }) {
 
     input.onchange = async () => {
       const [file] = input.files;
-      console.log(file);
       const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (
         await getS3PresignedURL(file.name)
       ).data;
@@ -83,6 +82,7 @@ function ReactQuillContainer({ description, setDescription }) {
     <ReactQuill
       forwardedRef={quillRef}
       placeholder="본문을 입력하세요..."
+      scrollingContainer="html"
       modules={modules}
       formats={formats}
       value={description}

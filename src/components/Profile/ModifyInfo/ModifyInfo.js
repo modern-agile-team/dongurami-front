@@ -1,4 +1,4 @@
-import styles from '../../../styles/Profile/ModifyInfo.module.scss';
+import styles from 'styles/Profile/ModifyInfo.module.scss';
 import { useCallback, useEffect, useState } from 'react';
 import ModifyHeader from './ModifyHeader';
 import ImmutableData from './ImmutableData';
@@ -46,7 +46,7 @@ const ModifyInfo = () => {
           ]);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.msg));
   }, [uRouter.query.pid]);
 
   const modifyBtn = async () => {
@@ -62,7 +62,8 @@ const ModifyInfo = () => {
       fileId
     })
       .then((res) => {
-        window.localStorage.setItem('jwt', res.data.jwt);
+        res.data.jwt !== undefined &&
+          window.localStorage.setItem('jwt', res.data.jwt);
         router.push(`/profile/${userInfo.id}`);
       })
       .catch((err) => alert(err.response.data.msg));

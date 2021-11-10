@@ -12,7 +12,8 @@ import {
   AiOutlinePicture
 } from 'react-icons/ai';
 import { MdRateReview } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeComp } from 'redux/slices/chageComp';
 
 const boards = (clubName) => {
   return [
@@ -50,7 +51,7 @@ const throttle = (callback, waitTime) => {
   };
 };
 
-const SideBar = ({ setComp, comp }) => {
+const SideBar = ({ comp }) => {
   const [pageY, setPageY] = useState(0);
   const [hide, setHide] = useState(false);
 
@@ -58,6 +59,7 @@ const SideBar = ({ setComp, comp }) => {
 
   const documentRef = useRef(typeof window === 'object' && document);
 
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const checkManageAuth = async () => {
@@ -97,7 +99,7 @@ const SideBar = ({ setComp, comp }) => {
               className={styles.board}
               id={comp === i + 1 ? styles.now : 0}
               onClick={() => {
-                i === 6 ? checkManageAuth() : setComp(i + 1);
+                i === 6 ? checkManageAuth() : dispatch(changeComp(i + 1));
                 window.scrollTo(0, 0);
               }}
               key={i}

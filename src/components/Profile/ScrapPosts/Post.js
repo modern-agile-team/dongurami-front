@@ -2,7 +2,7 @@ import CommentContainer from 'components/Common/Comment/CommentContainer';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styles from '../../styles/Board/Post/PostContent.module.scss';
+import styles from 'styles/Board/Post/PostContent.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setCategory } from 'redux/slices/post';
@@ -36,14 +36,16 @@ function Post({ category, post, onDelete, editLink }) {
 
         <div className={styles.postHeader}>
           <div className={styles.profileContainer}>
-            <img
-              className={styles.profileImage}
-              src={`${
-                post.profileImageUrl ??
-                'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
-              }?w=30`}
-              alt="profileImage"
-            />
+            <Link href={`/profile/${post.studentId}`} passHref>
+              <img
+                className={styles.profileImage}
+                src={`${
+                  post.profileImageUrl ??
+                  'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
+                }?w=30`}
+                alt="profileImage"
+              />
+            </Link>
             <Link href={`/profile/${post.studentId}`} passHref>
               <div className={styles.profileLink}>{post.name}</div>
             </Link>

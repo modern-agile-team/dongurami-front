@@ -1,4 +1,4 @@
-import styles from '../../../styles/Club/Home/Schedule/DailyControl.module.scss';
+import styles from 'styles/Club/Home/Schedule/DailyControl.module.scss';
 import { HiPencil } from 'react-icons/hi';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
@@ -16,8 +16,14 @@ const DailyControl = ({
   setColor,
   today,
   setSchedule,
-  Qdata
+  Qdata,
+  inDate
 }) => {
+  const getData = () => {
+    getInfo(Qdata.id, today.format('YYYY-MM'))
+      .then((res) => setSchedule(res.data.result))
+      .catch((err) => alert(err.response.data.msg));
+  };
   const onClickModify = (schedule) => {
     setTitle(schedule.title);
     setPeriod([schedule.startDate, schedule.endDate]);
@@ -29,17 +35,13 @@ const DailyControl = ({
   const onDeleteSchedule = async (el) => {
     await deleteSchedule(Qdata.id, el)
       .then((res) => console.log(res))
-      .catch((err) => console.log(err.response.data.msg));
-    await getInfo(Qdata.id, today.format('YYYY-MM'))
-      .then((res) => setSchedule(res.data.result))
-      .catch((err) => alert(err));
+      .catch((err) => alert(err.response.data.msg));
+    await getData();
   };
 
-  const axiosPATCH = (schedule, e) => {
+  const importantModify = (schedule, e) => {
     importantSchedule(Qdata.id, schedule, { important: e }).then((res) =>
-      getInfo(Qdata.id, today.format('YYYY-MM')).then((res) =>
-        setSchedule(res.data.result)
-      )
+      getData()
     );
   };
 
@@ -59,24 +61,21 @@ const DailyControl = ({
           <div className={styles.schedule}>
             {schedule.map((eachScedule, index) => {
               return (
-                Date.parse(eachScedule.startDate) <= Date.parse(date) &&
-                Date.parse(date) <= Date.parse(eachScedule.endDate) && (
+                inDate(eachScedule.startDate, date, eachScedule.endDate) && (
                   <div key={index} className={styles.des}>
                     <div className={styles.importantSchedule}>
                       {eachScedule.important ? (
                         <AiFillStar
                           className={styles.fillStar}
-                          onClick={() => axiosPATCH(eachScedule, 0)}
+                          onClick={() => importantModify(eachScedule, 0)}
                         />
                       ) : (
                         <AiOutlineStar
                           className={styles.outLineStar}
-                          onClick={() => axiosPATCH(eachScedule, 1)}
+                          onClick={() => importantModify(eachScedule, 1)}
                         />
                       )}
-                      <span style={{ color: 'black' }} key={eachScedule.no}>
-                        {eachScedule.title}
-                      </span>
+                      <span key={eachScedule.no}>{eachScedule.title}</span>
                     </div>
                     <div className={styles.edit}>
                       <HiPencil
