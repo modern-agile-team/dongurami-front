@@ -10,6 +10,7 @@ import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import { useRouter } from 'next/router';
 import { changeComp } from 'redux/slices/chageComp';
+import * as gtag from '../lib/gtags'
 
 function ReduxWrapper({ children }) {
   const dispatch = useDispatch();
@@ -22,6 +23,16 @@ function ReduxWrapper({ children }) {
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return children;
 }
