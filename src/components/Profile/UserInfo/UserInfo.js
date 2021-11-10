@@ -5,13 +5,13 @@ import ClubModal from './ClubModal';
 import LeaveModal from './LeaveModal';
 
 const UserInfo = ({
-  isOpen,
-  setIsOpen,
   logout,
-  comp,
   baseImg,
   userInfo,
   profile,
+  comp,
+  isOpen,
+  setIsOpen,
   leaveIsOpen,
   setLeaveIsOpen,
   clubNo

@@ -20,7 +20,7 @@ const Edit = () => {
         setDescription(res.data.board.description);
         setTitle(res.data.board.title);
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => alert(err.response.data.msg));
   };
 
   const getScrapPost = () => {
@@ -30,7 +30,7 @@ const Edit = () => {
         setDescription(res.data.scrap.scrapDescription);
         setTitle(res.data.scrap.title);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.reponse.data.msg));
   };
 
   const onSubmit = () => {
@@ -54,7 +54,7 @@ const Edit = () => {
   useEffect(() => {
     if (!uRouter.isReady) return;
     data.no === 'board' ? getBoardPost() : getScrapPost();
-  }, [uRouter, data.no]);
+  }, [uRouter, data.no, queryData]);
 
   return (
     <Container category="personal" type="글 수정하기">

@@ -43,15 +43,17 @@ function Scraps({
             <select
               onChange={(e) => {
                 setClubNo(e.target.value);
-                getScraps(profile.id, e.target.value).then((res) => {
-                  setDataArr(
-                    res.data.scraps
-                      .concat(res.data.boards)
-                      .sort(
-                        (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
-                      )
-                  );
-                });
+                getScraps(profile.id, e.target.value)
+                  .then((res) => {
+                    setDataArr(
+                      res.data.scraps
+                        .concat(res.data.boards)
+                        .sort(
+                          (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
+                        )
+                    );
+                  })
+                  .catch((err) => alert(err.reponse.data.msg));
               }}
             >
               {profile.clubs.map((club, index) => {

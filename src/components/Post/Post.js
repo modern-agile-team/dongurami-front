@@ -96,7 +96,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
               </>
             )}
             <div>{moment(post.inDate).format('YYYY-MM-DD')}</div>
-            {category !== 'personal' && <div>조회 {post.hit}</div>}
+            <div>조회 {post.hit}</div>
           </div>
         </div>
       </div>
