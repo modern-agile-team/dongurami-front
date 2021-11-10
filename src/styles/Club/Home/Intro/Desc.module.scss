@@ -40,17 +40,32 @@
 .desc {
   margin-bottom: 1em;
   & > div:nth-of-type(1) {
+    position: sticky;
+    top: 60px;
     & > div:nth-of-type(1) {
       display: flex;
-      border: 1px solid;
+      position: sticky;
+      top: 60px;
+      z-index: 999;
       justify-content: space-between;
+      background-color: white;
+      border: 1px solid;
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       span {
         margin: 0;
-      }
-      & > div:nth-of-type(1) {
-        padding: 0;
+      } // ql-formats
+      & > span:nth-of-type(1) {
+        svg {
+          display: none;
+        } // ql-header
+        & > span:nth-of-type(1) {
+          width: 100%;
+          // ql-picker-options
+          & > span:nth-of-type(2) {
+            font-size: 100%;
+          }
+        }
       }
     }
     & > div:nth-of-type(2) {
