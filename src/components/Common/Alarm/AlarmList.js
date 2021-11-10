@@ -3,6 +3,7 @@ import { FiDelete } from 'react-icons/fi';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { changeComp } from 'redux/slices/chageComp';
+import { useRouter } from 'next/router';
 
 const alarmCategoriNum = {
   0: '댓글이 달렸습니다.',
@@ -16,6 +17,7 @@ const alarmCategoriNum = {
 
 const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const selectComp = () => {
     if (alarm.notiCategoryNum === 4 || alarm.notiCategoryNum === 5) return 4;
@@ -23,7 +25,8 @@ const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
     return 1;
   };
 
-  const moveWhenClickAlarm = (data) => {
+  const moveWhenClickAlarm = async (data) => {
+    await router.push(`/${alarm.url}`);
     dispatch(changeComp(selectComp()));
     onAlarmPatch(data);
   };
@@ -35,22 +38,18 @@ const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
   return (
     <div className={styles.description}>
       <div className={styles.top}>
-        <Link href={`/${alarm.url}`} passHref>
-          <p id={styles.big} onClick={() => moveWhenClickAlarm(alarm.no)}>
-            {alarmCategoriNum[alarm.notiCategoryNum]}
-          </p>
-        </Link>
+        <p id={styles.big} onClick={() => moveWhenClickAlarm(alarm.no)}>
+          {alarmCategoriNum[alarm.notiCategoryNum]}
+        </p>
         <FiDelete size={15} onClick={() => clickDeleteIcon(alarm.no)} />
       </div>
-      <Link href={`/${alarm.url}`} passHref>
-        <div
-          className={styles.bottom}
-          onClick={() => moveWhenClickAlarm(alarm.no)}
-        >
-          <p>{alarm.sender}</p>
-          <p>{alarm.inDate.substr(0, 10)}</p>
-        </div>
-      </Link>
+      <div
+        className={styles.bottom}
+        onClick={() => moveWhenClickAlarm(alarm.no)}
+      >
+        <p>{alarm.sender}</p>
+        <p>{alarm.inDate.substr(0, 10)}</p>
+      </div>
     </div>
   );
 };
