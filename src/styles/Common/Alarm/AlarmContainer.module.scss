@@ -46,6 +46,8 @@
 }
 
 .description {
+  transition-duration: 1s;
+  -webkit-transition-duration: 0.4s; /* Safari */
   div {
     display: flex;
     justify-content: space-between;
@@ -55,6 +57,9 @@
   padding: 10px;
   &:hover {
     background-color: #eeeeee94;
+  }
+  &:active {
+    background-color: #b1b1b194;
   }
 }
 
@@ -80,7 +85,6 @@
   }
   span {
     font-size: 10px;
-
     color: red;
   }
 }

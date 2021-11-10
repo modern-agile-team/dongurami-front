@@ -121,16 +121,18 @@ function Header() {
                 id={open ? styles.show : styles.hide}
               >
                 <div className={styles.alarm}>
-                  {alarmList.length > 0 && (
-                    <div className={styles.count}>
-                      {alarmList.length <= 9 ? (
-                        <span>{alarmList.length}</span>
-                      ) : (
-                        <span>9+</span>
-                      )}
-                    </div>
-                  )}
-                  <BiBell onClick={alarmOpen} className={styles.bell} />
+                  <div className={styles.bell} onClick={alarmOpen}>
+                    {alarmList.length > 0 && (
+                      <div className={styles.count}>
+                        {alarmList.length <= 9 ? (
+                          <span>{alarmList.length}</span>
+                        ) : (
+                          <span>9+</span>
+                        )}
+                      </div>
+                    )}
+                    <BiBell />
+                  </div>
                   {isAlarmOpen && (
                     <AlarmContainer
                       alarmList={alarmList}
