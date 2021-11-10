@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
+
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
@@ -47,7 +48,27 @@ class MyDocument extends Document {
             property="twitter:image"
             content="https://dongurami.co.kr/favicon.ico"
           />
-          <meta name="naver-site-verification" content="42fb378982eca00be16a13a360c4072c8c81c087" />
+          <meta
+            name="naver-site-verification"
+            content="42fb378982eca00be16a13a360c4072c8c81c087"
+          />
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${process.env.NEXT_PUBLIC_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `
+            }}
+          />
         </Head>
         <body>
           <Main />
