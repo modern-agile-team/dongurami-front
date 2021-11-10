@@ -74,7 +74,7 @@ function Board({ category }) {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <Link href={router.pathname} passHref>
+        <Link href={{ pathname: router.pathname, query: { id: router.query.id } }} passHref>
           <h1>
             <a>{title[category]}</a>
           </h1>
