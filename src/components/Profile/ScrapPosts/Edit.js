@@ -54,7 +54,7 @@ const Edit = () => {
   useEffect(() => {
     if (!uRouter.isReady) return;
     data.no === 'board' ? getBoardPost() : getScrapPost();
-  }, [uRouter, data.no, queryData]);
+  }, [uRouter, data.no]);
 
   return (
     <Container category="personal" type="글 수정하기">
