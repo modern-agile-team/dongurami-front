@@ -30,11 +30,7 @@ const Calendar = () => {
   const dispatch = useDispatch();
 
   const moveLogin = useCallback(() => router.push('/LoginPage'), [router]);
-  //라우팅? setComp?
-  const moveHome = useCallback(
-    () => router.push(`/clubhome/${Qdata.id}`),
-    [router, Qdata.id]
-  );
+  const moveHome = useCallback(() => location.reload(), []);
 
   const today = momentTime;
   const yearMonth = today.format('YYYY-MM');
