@@ -20,10 +20,10 @@ const ImmutableData = ({ userInfo, setGrade, grade }) => {
           defaultValue={grade ?? '학년선택'}
         >
           <option style={{ color: 'gray' }}>{grade} 학년</option>
-          {gradeArr.map((grade, index) => {
+          {gradeArr.map((gradeEl, index) => {
             return (
-              <option key={index} value={grade}>
-                {grade === 4 ? '4 학년(졸업생)' : `${grade} 학년`}
+              <option key={index} value={gradeEl}>
+                {gradeEl === 4 ? '4 학년(졸업생)' : `${gradeEl} 학년`}
               </option>
             );
           })}

@@ -36,14 +36,16 @@ function Post({ category, post, onDelete, editLink }) {
 
         <div className={styles.postHeader}>
           <div className={styles.profileContainer}>
-            <img
-              className={styles.profileImage}
-              src={`${
-                post.profileImageUrl ??
-                'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
-              }?w=30`}
-              alt="profileImage"
-            />
+            <Link href={`/profile/${post.studentId}`} passHref>
+              <img
+                className={styles.profileImage}
+                src={`${
+                  post.profileImageUrl ??
+                  'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
+                }?w=30`}
+                alt="profileImage"
+              />
+            </Link>
             <Link href={`/profile/${post.studentId}`} passHref>
               <div className={styles.profileLink}>{post.name}</div>
             </Link>

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Scraps from './Scraps';
 import styles from 'styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo/UserInfo';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';
 import { useDispatch } from 'react-redux';
@@ -20,13 +20,13 @@ function Profile() {
   const [isOpen, setIsOpen] = useState(false);
   const [leaveIsOpen, setLeaveIsOpen] = useState(false);
 
-  const uRouter = useRouter();
+  const router = useRouter();
 
   const logout = useCallback(() => {
     window.localStorage.removeItem('jwt');
     dispatch(signOut());
     router.push('/');
-  }, [dispatch]);
+  }, [dispatch, router]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
@@ -47,20 +47,20 @@ function Profile() {
   };
 
   useEffect(() => {
-    if (!uRouter.isReady) return;
-    getUserInfo(uRouter.query.pid, token)
+    if (!router.isReady) return;
+    getUserInfo(router.query.pid, token)
       .then((res) => setState(res.data))
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.msg);
         router.back();
       });
-  }, [token, uRouter]);
+  }, [token, router]);
 
   useEffect(() => {
-    if (!uRouter.isReady) return;
-    setId(uRouter.query.pid);
+    if (!router.isReady) return;
+    setId(router.query.pid);
     setToken(getToken());
-  }, [uRouter]);
+  }, [router]);
 
   useEffect(() => {
     document.body.style.overflow = 'visible';
@@ -104,10 +104,8 @@ function Profile() {
         />
       ) : (
         <Scraps
-          uRouter={uRouter}
           userInfo={userInfo}
           profile={profile}
-          comp={comp}
           setClubNo={setClubNo}
           clubNo={clubNo}
           getScraps={getScraps}

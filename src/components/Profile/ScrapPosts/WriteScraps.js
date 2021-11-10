@@ -17,8 +17,8 @@ const WriteScrpas = () => {
     api
       .getPost('clubActivity', data.scrapNum)
       .then((res) => setBoardDescription(res.data.board.description))
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => alert(err.response.data.msg));
+  }, [data.scrapNum]);
 
   const onSubmit = async () => {
     if (data.scrapNum !== undefined) {
@@ -28,15 +28,13 @@ const WriteScrpas = () => {
         boardDescription
       })
         .then((res) => alert(res.data.msg))
-        .catch((err) => alert(err));
+        .catch((err) => alert(err.response.data.msg));
       router.push(`/profile/${data.pid}`);
     } else {
       await addPost(data.pid, data.clubNum, {
         title,
         description
-      })
-        .then((res) => console.log(res))
-        .catch((err) => alert(err.response.data.msg));
+      }).catch((err) => alert(err.response.data.msg));
       router.push(`/profile/${data.pid}`);
     }
   };
