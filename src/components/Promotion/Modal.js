@@ -9,9 +9,9 @@ import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { MdClose } from 'react-icons/md';
 import { useRouter } from 'next/router';
 
-SwiperCore.use([Navigation, Pagination, Scrollbar]); //
+SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
-const Modal = ({ setOpenModal, postId }) => {
+const Modal = ({ postId }) => {
   const [images, setImages] = useState([]);
   const category = 'promotion';
   const dispatch = useDispatch();
@@ -30,11 +30,6 @@ const Modal = ({ setOpenModal, postId }) => {
         setImages(response.payload.images);
       });
     }
-    /*
-    await getBoardPost(pid).then((res) => {
-      setImages(res.data.images);
-    });
-    */
   }, [dispatch]);
 
   return (
