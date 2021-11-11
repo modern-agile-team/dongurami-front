@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../../../styles/Club/Home/Review/ReviewWrite.module.scss';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 const ReviewWrite = ({
   onReviewInput,
@@ -26,9 +27,13 @@ const ReviewWrite = ({
       <div className={styles.comment}>
         <input ref={inputRef} onChange={onReviewInput} />
         {isReviewMine ? (
-          <button onClick={onReviewUpdate}>✏️ 수정</button>
+          <DonguramiOutlineButton onClick={onReviewUpdate}>
+            ✏️ 수정
+          </DonguramiOutlineButton>
         ) : (
-          <button onClick={onReviewSubmit}>✏️ 등록</button>
+          <DonguramiOutlineButton onClick={onReviewSubmit}>
+            ✏️ 등록
+          </DonguramiOutlineButton>
         )}
       </div>
     </div>
