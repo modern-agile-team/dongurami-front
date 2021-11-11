@@ -6,21 +6,6 @@ $color1: #9fa4a240;
   justify-content: flex-end;
 }
 
-.container button {
-  display: flex;
-  align-items: center;
-  border-radius: 6px;
-  height: 3em;
-  background-color: white;
-  border: 1px solid $color1;
-  cursor: pointer;
-  &:hover {
-    background-color: $color1;
-  }
-  svg {
-    margin-right: 5px;
-  }
-}
 .headers {
   display: flex;
   align-items: center;

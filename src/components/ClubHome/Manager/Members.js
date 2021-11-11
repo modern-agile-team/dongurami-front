@@ -3,6 +3,7 @@ import styles from '../../../styles/Club/Home/Manager/Members.module.scss';
 import MembersList from './MembersList';
 import MembersPreface from './MembersPreface';
 import { AiOutlineHome } from 'react-icons/ai';
+import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 export const Members = ({
   members,
@@ -46,7 +47,9 @@ export const Members = ({
         })}
       </div>
       <div className={styles.addBtn}>
-        <button onClick={changeMembersAuth}>✏️ 권한 수정</button>
+        <DonguramiOutlineButton onClick={changeMembersAuth}>
+          ✏️ 권한 수정
+        </DonguramiOutlineButton>
       </div>
     </div>
   );

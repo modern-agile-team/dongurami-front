@@ -46,15 +46,6 @@
   }
   button {
     margin-left: 1em;
-    padding: 5px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-weight: lighter;
-    background-color: white;
-    border: 1px solid $color1;
-    &:hover {
-      background-color: $color1;
-    }
   }
 }
 

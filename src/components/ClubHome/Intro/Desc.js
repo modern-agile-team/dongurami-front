@@ -1,6 +1,7 @@
 import styles from '../../../styles/Club/Home/Intro/Desc.module.scss';
 import ReactQuillContainer from 'components/Write/ReactQuillContainer';
 import dynamic from 'next/dynamic';
+import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -10,9 +11,13 @@ const Button = ({ isDescriptionUpdate, onDescSubnmit, toggleDescription }) => {
   return (
     <>
       {isDescriptionUpdate ? (
-        <button onClick={onDescSubnmit}>Finish</button>
+        <DonguramiOutlineButton onClick={onDescSubnmit}>
+          Finish
+        </DonguramiOutlineButton>
       ) : (
-        <button onClick={toggleDescription}>✏️ Edit</button>
+        <DonguramiOutlineButton onClick={toggleDescription}>
+          ✏️ Edit
+        </DonguramiOutlineButton>
       )}
     </>
   );
