@@ -42,7 +42,7 @@ const Promotion = ({
         className={styles.img}
         onClick={(e) => {
           setPostId(pId);
-          setOpenModal(true);
+          router.replace(`promotion?id=${pId}`);
         }}
       >
         {!img ? (
@@ -57,7 +57,6 @@ const Promotion = ({
           className={styles.creationInfo}
           onClick={() => {
             setPostId(pId);
-            setOpenModal();
             router.replace(`promotion?id=${pId}`);
           }}
         >
