@@ -144,18 +144,20 @@ function Header() {
                     />
                   )}
                 </div>
-                {userProflie ? (
-                  <img
-                    src={userProflie}
-                    className={styles.userProflie}
-                    onClick={showProfile}
-                  />
-                ) : (
-                  <FaUserCircle
-                    className={styles.Profile}
-                    onClick={showProfile}
-                  />
-                )}
+                <div className={styles.profileWrap}>
+                  {userProflie ? (
+                    <img
+                      src={userProflie}
+                      className={styles.userProflie}
+                      onClick={showProfile}
+                    />
+                  ) : (
+                    <FaUserCircle
+                      className={styles.Profile}
+                      onClick={showProfile}
+                    />
+                  )}
+                </div>
               </div>
             ) : (
               <div
