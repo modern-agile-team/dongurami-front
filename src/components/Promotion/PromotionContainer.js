@@ -3,7 +3,6 @@ import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss'
 import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
 
 import Modal from './Modal';
 import Promotion from './Promotion';
@@ -30,6 +29,7 @@ const PromotionContainer = () => {
       isLoading = true;
       if (searchItem !== 'whole' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
+          const result = response.data.boards;
           if (result.length === 0) {
             window.removeEventListener('scroll', infiniteScroll);
           } else if (result.length) {
@@ -42,6 +42,7 @@ const PromotionContainer = () => {
         });
       } else if (search) {
         await getSearchData(type, searchKeyword, itemNo).then((response) => {
+          const result = response.data.boards;
           if (result.length === 0) {
             window.removeEventListener('scroll', infiniteScroll);
           } else if (result.length) {
@@ -94,7 +95,7 @@ const PromotionContainer = () => {
       } else if (search) {
         await getSearchData(type, searchKeyword, itemNo).then((response) => {
           const result = response.data.boards;
-          console.log(result);
+
           if (result.length) itemNo = result[result.length - 1].no;
           else {
             alert('게시글이 존재하지 않습니다');
@@ -107,7 +108,6 @@ const PromotionContainer = () => {
         (search === false && searchItem === '')
       ) {
         await getBoardData(itemNo).then((response) => {
-          console.log(response);
           if (response.data.success) {
             const result = response.data.boards;
             itemNo = result[result.length - 1].no;
@@ -154,7 +154,6 @@ const PromotionContainer = () => {
 
   useEffect(() => {
     document.body.style.overflow = openModal ? 'hidden' : 'auto';
-    console.log(router.query);
     if (Object.keys(router.query).length > 0) {
       setOpenModal(true);
     } else {
