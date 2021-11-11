@@ -2,6 +2,7 @@ import styles from 'styles/Club/Home/Schedule/ScheduleModify.module.scss';
 import { MdClose } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import { getInfo, modifySchedule } from 'apis/calendar';
+import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 const ScheduleModify = ({
   Qdata,
@@ -93,21 +94,23 @@ const ScheduleModify = ({
               ></button>
             );
           })}
-          <span
-            className={styles.modifyBtn}
-            onClick={() => {
-              if (Date.parse(startDate) <= Date.parse(endDate)) {
-                axiosPUT();
-                setPop('Calendar');
-              } else alert('날짜를 확인해주세요');
-            }}
-          >
-            ✏️ 수정
-          </span>
           <br />
-          <span className={styles.sample} style={{ background: colorCode }}>
-            색상 미리보기
-          </span>
+          <div className={styles.btnContainer}>
+            <span className={styles.sample} style={{ background: colorCode }}>
+              색상 미리보기
+            </span>
+            <DonguramiOutlineButton
+              className={styles.modifyBtn}
+              onClick={() => {
+                if (Date.parse(startDate) <= Date.parse(endDate)) {
+                  axiosPUT();
+                  setPop('Calendar');
+                } else alert('날짜를 확인해주세요');
+              }}
+            >
+              ✏️ 수정
+            </DonguramiOutlineButton>
+          </div>
         </div>
       </div>
     </div>
