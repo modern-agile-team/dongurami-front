@@ -2,6 +2,7 @@ import styles from 'styles/Profile/Scraps.module.scss';
 import { AiOutlineFileText } from 'react-icons/ai';
 import Link from 'next/dist/client/link';
 import { useEffect } from 'react';
+import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 function Scraps({
   profile,
@@ -37,7 +38,7 @@ function Scraps({
                   pathname: `/profile/${id}/${clubNo}/writescraps`
                 }}
               >
-                <span className={styles.addBtn}>✏️글작성</span>
+                <DonguramiOutlineButton>✏️글작성</DonguramiOutlineButton>
               </Link>
             )}
             <select
