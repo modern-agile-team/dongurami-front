@@ -17,17 +17,26 @@
 }
 
 #changeLeader {
+  transition-duration: 0.5s;
   color: rgba(244, 244, 244, 0.7);
   &:hover {
+    transform: scale(1.1);
     color: #fae100;
+  }
+  &:active {
+    transform: scale(1);
   }
 }
 
 .name span {
   cursor: pointer;
+  transition-duration: 0.3s;
   &:hover {
     text-decoration: line-through;
     color: rgb(201, 0, 40);
+  }
+  &:active {
+    font-size: 95%;
   }
 }
 
