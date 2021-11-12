@@ -25,7 +25,7 @@ const Calendar = () => {
   const [nowDay, setNowDay] = useState('');
   const router = useRouter();
   const Qdata = router.query;
-  const colors = ['#ff9d9d', '#ffb482', '#ffee8f', '#a1ffa9', '#b5eaff'];
+  const colors = ['#F9AE7B', '#FEDD01', '#E3E931', '#B5EAFF', '#E9D9EF'];
   const todayData = useSelector((state) => state.calendar.info);
   const dispatch = useDispatch();
 
