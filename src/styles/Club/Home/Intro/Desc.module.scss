@@ -21,22 +21,6 @@
   justify-content: flex-end;
 }
 
-.intro button {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border: 1px solid $color1;
-  background-color: white;
-  border-radius: 3px;
-  padding: 5px;
-  &:hover {
-    filter: brightness(90%);
-  }
-  svg {
-    margin-right: 5px;
-  }
-}
-
 .desc {
   margin-bottom: 1em;
   & > div:nth-of-type(1) {
