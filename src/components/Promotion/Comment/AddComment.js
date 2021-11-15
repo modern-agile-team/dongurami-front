@@ -12,7 +12,6 @@ function AddComment({ postId, parentCommentID }) {
   const category = 'promotion';
   const pid = postId;
   const onChange = (e) => {
-    console.log(e.target.value);
     setDescription(e.target.value);
   };
   const onSubmit = (e) => {
