@@ -19,13 +19,7 @@ const TypeSearch = ({ onCategorySearch, onSearch }) => {
       <ul className={styles.tagList}>
         {category.map((el, index) => {
           return (
-            <li
-              key={index}
-              name={el}
-              onClick={(event) =>
-                onCategorySearch(event.target.getAttribute('name'))
-              }
-            >
+            <li key={index} name={el} onClick={() => onCategorySearch(el)}>
               #{el}
             </li>
           );
