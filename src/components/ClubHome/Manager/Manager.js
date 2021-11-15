@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from '../../../styles/Club/Home/Manager/Manager.module.scss';
-import Approve from './Approve';
-import Members from './Members';
+import Approve from './Approve/Approve';
+import Members from './Member/Members';
 import {
   deleteMember,
   getMember,
@@ -48,7 +48,7 @@ export const Manager = () => {
       data.clubAdminOption.memberAndAuthList.map((auth) => auth.boardAdminFlag)
     );
   };
-
+  console.log(members);
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
     getMember(clubId)

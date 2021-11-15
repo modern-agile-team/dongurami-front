@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsToggleOn, BsToggleOff } from 'react-icons/bs';
-import styles from '../../../styles/Club/Home/Manager/ApproveHeader.module.scss';
+import styles from 'styles/Club/Home/Manager/ApproveHeader.module.scss';
 
 const ApproveHeader = ({ applicantInfo, onClick, listOpen }) => {
   const iconSize = 33;

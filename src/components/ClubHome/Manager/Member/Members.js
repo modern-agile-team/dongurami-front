@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../styles/Club/Home/Manager/Members.module.scss';
+import styles from 'styles/Club/Home/Manager/Members.module.scss';
 import MembersList from './MembersList';
 import MembersPreface from './MembersPreface';
 import { AiOutlineHome } from 'react-icons/ai';
@@ -28,12 +28,7 @@ export const Members = ({
           return (
             <MembersList
               key={index}
-              memberInfo={[
-                member.name,
-                member.id,
-                member.joinAdminFlag,
-                member.boardAdminFlag
-              ]}
+              memberInfo={member}
               leader={leader}
               onLeaderChange={() => onLeaderChange(index)}
               onApplyAuthClick={onApplyAuthClick}
