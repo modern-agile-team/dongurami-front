@@ -89,15 +89,17 @@ function Profile() {
             스크랩
           </button>
         )}
-        <button
-          style={comp !== '작성글' ? { background: '#f2f2f2' } : null}
-          className={styles.myPost}
-          onClick={() => {
-            setComp('작성글');
-          }}
-        >
-          작성글
-        </button>
+        {userInfo.id === profile.id && (
+          <button
+            style={comp !== '작성글' ? { background: '#f2f2f2' } : null}
+            className={styles.myPost}
+            onClick={() => {
+              setComp('작성글');
+            }}
+          >
+            작성글
+          </button>
+        )}
       </div>
       {comp !== '스크랩' ? (
         <UserInfo
