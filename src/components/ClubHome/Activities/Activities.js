@@ -13,12 +13,12 @@ import { getBoardPosts } from 'redux/slices/board';
 const Activities = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [selectedID, setSelectedID] = useState();
   const posts = useSelector((state) => state.board.posts);
   const user = useSelector((state) => state.user);
-  const clubName = useSelector((state) => state.clubhome.info.result[0].name);
+  const clubName = useSelector((state) => state.clubhome.info?.result[0].name);
 
   const clubNum = Number(router.query.id);
+  const selectedID = Number(router.query.pid);
 
   const canWrite = (() => {
     if (!user) return false;
@@ -38,13 +38,24 @@ const Activities = () => {
   }, [clubNum, dispatch]);
 
   const onClick = (id) => {
-    setSelectedID(id);
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        pid: id
+      }
+    });
   };
   const closeModal = () => {
-    setSelectedID();
+    router.push({
+      pathname: router.pathname,
+      query: {
+        id: router.query.id
+      }
+    });
   };
 
-  const isModalOpened = selectedID !== undefined;
+  const isModalOpened = Boolean(selectedID);
 
   if (!posts) return null;
 
