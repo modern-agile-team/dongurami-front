@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import api from 'apis/post';
 import styles from '../../../styles/Common/Comment/AddComment.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { useRouter } from 'next/router';
 
-function AddComment({ parentCommentID }) {
+function AddComment({ parentCommentID, scroll }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
   const [description, setDescription] = useState('');
+  const ref = useRef();
 
   const onChange = (e) => {
     setDescription(e.target.value);
@@ -27,8 +28,14 @@ function AddComment({ parentCommentID }) {
     dispatch(getPost());
   }
 
+  useEffect(() => {
+    if (scroll) {
+      ref.current.scrollIntoView();
+    }
+  }, [scroll]);
+
   return (
-    <div className={styles.container}>
+    <div ref={ref} className={styles.container}>
       <div>{user.name}</div>
       <form onSubmit={onSubmit}>
         <input type="text" placeholder="댓글을 남겨보세요" value={description} onChange={onChange} />
