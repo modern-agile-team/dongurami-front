@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Scraps from './Scraps';
 import styles from 'styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo/UserInfo';
+import MyPost from './MyPost';
 import { useRouter } from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';
@@ -88,6 +89,15 @@ function Profile() {
             스크랩
           </button>
         )}
+        <button
+          style={comp !== '작성글' ? { background: '#f2f2f2' } : null}
+          className={styles.myPost}
+          onClick={() => {
+            setComp('작성글');
+          }}
+        >
+          작성글
+        </button>
       </div>
       {comp !== '스크랩' ? (
         <UserInfo
@@ -115,6 +125,7 @@ function Profile() {
           matchTitle={matchTitle}
         />
       )}
+      {comp === '작성글' && <MyPost />}
     </div>
   );
 }
