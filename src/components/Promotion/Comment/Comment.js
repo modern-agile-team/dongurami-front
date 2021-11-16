@@ -8,21 +8,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment, editComment } from 'apis/promotion';
 import { getPost } from 'redux/slices/post';
 
-const Comment = ({
-  comment,
-  postId,
-  studentId,
-  setParentCommentID,
-  parentCommentID
-}) => {
-  const [replyComment, setReplyComment] = useState(false);
+const Comment = ({ comment, postId, setParentCommentID, parentCommentID }) => {
   const [isContentEditable, setIsContentEditable] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
   const descriptionDiv = useRef();
   const category = 'promotion';
-  const pid = postId;
 
   const onEdit = async () => {
     if (isContentEditable) {

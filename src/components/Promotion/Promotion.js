@@ -27,12 +27,10 @@ const Promotion = ({
   img,
   name,
   clubName,
-  setOpenModal,
   date,
   pId,
   setPostId,
   category,
-  clubNo,
   title
 }) => {
   const router = useRouter();

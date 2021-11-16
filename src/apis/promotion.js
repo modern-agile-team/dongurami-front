@@ -1,5 +1,4 @@
 import axios from 'apis/index';
-import post from 'redux/slices/post';
 
 export function getData(searchItem, no) {
   return axios.get(
@@ -48,7 +47,6 @@ export function editComment(commentNo, parentCommentID, description, postId) {
 }
 
 export function deleteComment(commentNo, parentCommentID, postId) {
-  console.log(postId);
   if (parentCommentID) {
     return axios.delete(
       `/api/board/promotion/${postId}/${parentCommentID}/${commentNo}`
