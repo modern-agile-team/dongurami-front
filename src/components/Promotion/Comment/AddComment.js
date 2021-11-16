@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../../../styles/Board/Promotion/AddComment.module.scss';
 import { addComment } from 'apis/promotion';
 import getToken from 'utils/getToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 
-function AddComment({ postId, parentCommentID }) {
+function AddComment({ postId, parentCommentID, scroll }) {
   const [description, setDescription] = useState('');
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const ref = useRef();
   const category = 'promotion';
   const pid = postId;
   const onChange = (e) => {
@@ -28,8 +29,14 @@ function AddComment({ postId, parentCommentID }) {
     setDescription('');
   };
 
+  useEffect(() => {
+    if (scroll) {
+      ref.current.scrollIntoView();
+    }
+  }, [scroll]);
+
   return (
-    <div className={styles.container}>
+    <div ref={ref} className={styles.container}>
       <div>{user ? user.name : '닉네임'}</div>
       <form onSubmit={onSubmit}>
         <input

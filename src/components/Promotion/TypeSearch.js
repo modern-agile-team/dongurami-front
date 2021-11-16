@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
@@ -26,16 +26,18 @@ const TypeSearch = ({
     onSearch();
   };
 
+  const category = ['전체', '스터디', '음악', '취미', '게임', '운동', '종교'];
+
   return (
     <div className={styles.container}>
-      <ul className={styles.tagList} onClick={(event) => categorySearch(event)}>
-        <li name="whole">#전체</li>
-        <li name="스터디">#스터디</li>
-        <li name="음악">#음악</li>
-        <li name="취미">#취미</li>
-        <li name="게임">#게임</li>
-        <li name="운동">#운동</li>
-        <li name="종교">#종교</li>
+      <ul className={styles.tagList}>
+        {category.map((el, index) => {
+          return (
+            <li key={index} name={el} onClick={() => categorySearch(el)}>
+              #{el}
+            </li>
+          );
+        })}
       </ul>
       <div className={styles.body}>
         <select value={type} onChange={onTypeChange}>
