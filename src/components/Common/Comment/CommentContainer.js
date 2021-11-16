@@ -10,7 +10,7 @@ function CommentContainer({ comments }) {
   const [parentCommentID, setParentCommentID] = useState();
 
   const toggleParentCommentID = (id) => {
-    if (parentCommentID) setParentCommentID();
+    if (parentCommentID === id) setParentCommentID();
     else setParentCommentID(id);
   };
 
@@ -30,7 +30,7 @@ function CommentContainer({ comments }) {
             )}
             {(comment.groupNo === parentCommentID && comments[index + 1]?.depth !== 1) && (
               <ReplyContainer>
-                <AddComment parentCommentID={parentCommentID} />
+                <AddComment parentCommentID={parentCommentID} scroll />
               </ReplyContainer>
             )}
           </React.Fragment>
