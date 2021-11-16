@@ -27,7 +27,7 @@ const PromotionContainer = () => {
   const getDatas = async () => {
     try {
       isLoading = true;
-      if (searchItem !== 'whole' && searchItem) {
+      if (searchItem !== '전체' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
           if (result.length === 0) {
@@ -54,7 +54,7 @@ const PromotionContainer = () => {
           }
         });
       } else if (
-        searchItem === 'whole' ||
+        searchItem === '전체' ||
         (search === false && searchItem === '')
       ) {
         await getBoardData(itemNo).then((response) => {
@@ -81,7 +81,7 @@ const PromotionContainer = () => {
     itemNo = 0;
     try {
       isLoading = true;
-      if (searchItem !== 'whole' && searchItem) {
+      if (searchItem !== '전체' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
           if (result.length) itemNo = result[result.length - 1].no;
@@ -104,7 +104,7 @@ const PromotionContainer = () => {
           setBoardData(result);
         });
       } else if (
-        searchItem === 'whole' ||
+        searchItem === '전체' ||
         (search === false && searchItem === '')
       ) {
         await getBoardData(itemNo).then((response) => {
@@ -127,10 +127,10 @@ const PromotionContainer = () => {
     setSearchItem('');
   };
 
-  const categorySearch = (event) => {
+  const categorySearch = (el) => {
     setSearch(false);
     setSearchKeyword('');
-    setSearchItem(event.target.getAttribute('name'));
+    setSearchItem(el);
   };
 
   const infiniteScroll = () => {

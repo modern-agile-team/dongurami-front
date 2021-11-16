@@ -5,11 +5,15 @@
   border-top-right-radius: 6px;
   background-color: #c5e2f0;
   padding: 10px 0;
+  margin-bottom: 0;
   span {
     font-weight: bold;
   }
+  li {
+    list-style: none;
+  }
 }
-.preface div {
+.preface li {
   width: 100%;
   text-align: center;
 }
@@ -29,7 +33,7 @@
     justify-content: space-between;
     border-radius: 0px;
     padding: 10px;
-    div {
+    li {
       display: flex;
       justify-content: center;
       width: 100%;

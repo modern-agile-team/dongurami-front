@@ -1,0 +1,60 @@
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  padding: 5px;
+  margin-top: 0;
+  background-color: rgb(243, 243, 243);
+  box-shadow: 0 1px 5px 1px rgb(230, 230, 230);
+  animation: fadein 0.5s;
+}
+.info li {
+  text-align: center;
+  & > p:nth-child(1) {
+    font-weight: bold;
+  }
+  p {
+    font-size: 90%;
+    margin: 3px 0;
+  }
+  button {
+    display: flex;
+    align-items: center;
+    border: none;
+    svg {
+      height: 100%;
+      color: rgb(239, 83, 80);
+      margin-right: 3px;
+    }
+    &:hover {
+      background-color: rgb(253, 237, 237);
+      color: rgb(95, 33, 32);
+    }
+  }
+}
+
+.close {
+  li {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .info li {
+    p {
+      font-size: 80%;
+    }
+  }
+}

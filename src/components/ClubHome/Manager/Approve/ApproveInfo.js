@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../styles/Club/Home/Manager/ApproveList.module.scss';
+import styles from 'styles/Club/Home/Manager/ApproveList.module.scss';
 import { AiOutlineUserAdd, AiOutlineUserDelete } from 'react-icons/ai';
 
 const ApproveInfo = ({ info, index, onApplyAccept, onApplyReject }) => {

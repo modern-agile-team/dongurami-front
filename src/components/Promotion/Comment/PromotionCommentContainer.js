@@ -13,6 +13,11 @@ const PromotionCommentContainer = ({
 }) => {
   const user = useSelector((state) => state.user);
   const [parentCommentID, setParentCommentID] = useState();
+
+  const toggleParentCommentId = (id) => {
+    if (parentCommentID === id) setParentCommentID();
+    else setParentCommentID(id);
+  };
   return (
     <>
       <p>댓글 {comments.length}</p>
@@ -27,24 +32,26 @@ const PromotionCommentContainer = ({
                     postId={postId}
                     getData={getData}
                     studentId={studentId}
-                    parentCommentID={parentCommentID}
+                    parentCommentID={comment.groupNo}
                   />
                 </ReplyCommentContainer>
               ) : (
                 <Comment
                   comment={comment}
-                  setParentCommentID={setParentCommentID}
+                  setParentCommentID={toggleParentCommentId}
                 />
               )}
-              {parentCommentID === comment.no && (
-                <ReplyCommentContainer>
-                  <AddComment
-                    comments={comments}
-                    postId={postId}
-                    parentCommentID={parentCommentID}
-                  />
-                </ReplyCommentContainer>
-              )}
+              {comment.groupNo === parentCommentID &&
+                comments[index + 1]?.depth !== 1 && (
+                  <ReplyCommentContainer>
+                    <AddComment
+                      comments={comments}
+                      postId={postId}
+                      parentCommentID={parentCommentID}
+                      scroll
+                    />
+                  </ReplyCommentContainer>
+                )}
             </React.Fragment>
           ))}
         {user && <AddComment comments={comments} postId={postId} />}

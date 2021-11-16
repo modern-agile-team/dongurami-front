@@ -14,9 +14,16 @@
       font-size: 16px;
       font-family: 'twayair';
       margin-right: 6px;
+      transition-duration: 0.5s;
+      -webkit-transition-duration: 0.5s;
 
       &:hover {
+        transition: 0.3s;
         filter: brightness(96%);
+      }
+      &:active {
+        transition: 0.1s;
+        filter: brightness(100%);
       }
     }
   }
