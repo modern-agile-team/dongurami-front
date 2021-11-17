@@ -2,14 +2,20 @@ import { useRef, useState } from 'react';
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import moment from 'moment';
-
+import Modal from 'components/Common/Modal';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment, editComment } from 'apis/promotion';
 import { getPost } from 'redux/slices/post';
 
-const Comment = ({ comment, postId, setParentCommentID, parentCommentID }) => {
+const Comment = ({
+  comment,
+  setParentCommentID,
+  parentCommentID,
+  sendMessage
+}) => {
   const [isContentEditable, setIsContentEditable] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
@@ -33,7 +39,6 @@ const Comment = ({ comment, postId, setParentCommentID, parentCommentID }) => {
   };
 
   const onDelete = async () => {
-    console.log(post.no);
     await deleteComment(comment.no, parentCommentID, post.no).then(
       (response) => {
         if (response.data.success)
@@ -86,6 +91,11 @@ const Comment = ({ comment, postId, setParentCommentID, parentCommentID }) => {
                 onClick={() => setParentCommentID(comment.no)}
               >
                 답글 쓰기
+              </p>
+            )}
+            {user && (
+              <p className={styles.reply} onClick={sendMessage}>
+                쪽지
               </p>
             )}
           </div>

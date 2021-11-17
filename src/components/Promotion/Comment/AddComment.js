@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from '../../../styles/Board/Promotion/AddComment.module.scss';
 import { addComment } from 'apis/promotion';
-import getToken from 'utils/getToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 

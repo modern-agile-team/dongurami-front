@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../styles/Board/Promotion/Promotion.module.scss';
 import moment from 'moment';
 import { useRouter } from 'next/router';
@@ -38,7 +38,7 @@ const Promotion = ({
     <div className={styles.promotion}>
       <div
         className={styles.img}
-        onClick={(e) => {
+        onClick={() => {
           setPostId(pId);
           router.replace(`promotion?id=${pId}`);
         }}

@@ -9,7 +9,8 @@ const PromotionCommentContainer = ({
   comments,
   postId,
   getData,
-  studentId
+  studentId,
+  sendMessage
 }) => {
   const user = useSelector((state) => state.user);
   const [parentCommentID, setParentCommentID] = useState();
@@ -33,12 +34,14 @@ const PromotionCommentContainer = ({
                     getData={getData}
                     studentId={studentId}
                     parentCommentID={comment.groupNo}
+                    sendMessage={sendMessage}
                   />
                 </ReplyCommentContainer>
               ) : (
                 <Comment
                   comment={comment}
                   setParentCommentID={toggleParentCommentId}
+                  sendMessage={sendMessage}
                 />
               )}
               {comment.groupNo === parentCommentID &&

@@ -14,7 +14,7 @@ const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
-const Post = ({ postId, getData, post }) => {
+const Post = ({ postId, getData, post, sendMessage }) => {
   const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
     post;
   const user = useSelector((state) => state.user);
@@ -97,6 +97,7 @@ const Post = ({ postId, getData, post }) => {
             postId={postId}
             studentId={studentId}
             getData={getData}
+            sendMessage={sendMessage}
           />
         )}
       </div>
