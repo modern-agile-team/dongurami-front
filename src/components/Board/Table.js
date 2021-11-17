@@ -16,6 +16,7 @@ function NoticeTable({ posts, page, category }) {
           <th>작성자</th>
           <th>작성일</th>
           <th>조회수</th>
+          <th>좋아요</th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +32,7 @@ function NoticeTable({ posts, page, category }) {
               <td>{post.studentName}</td>
               <td>{moment(post.inDate).format('MM-DD')}</td>
               <td>{post.hit}</td>
+              <td>10</td>
             </tr>
           </Link>
         ))}
