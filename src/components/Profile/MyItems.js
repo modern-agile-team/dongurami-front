@@ -4,9 +4,6 @@ const MyItems = ({ category, myPosts, myComments, router }) => {
   if (!myPosts) return null;
   if (!myComments) return null;
 
-  console.log(category);
-  console.log(myPosts);
-
   const movePage = (el) => {
     if (el.boardCategoryNum === 5)
       router.push(`/clubhome/${el.clubNo}/notice/${el.no}`);
@@ -20,36 +17,47 @@ const MyItems = ({ category, myPosts, myComments, router }) => {
   };
   return (
     <div className={styles.body}>
-      <div className={styles.itemContainer}>
-        <span className={styles.divHead}>작성글</span>
-        <hr />
-        {myPosts.length !== 0 &&
-          myPosts.map((post) => {
-            return (
-              post.boardCategoryNum == category && (
-                <div className={styles.item}>
-                  <span onClick={() => movePage(post)}>{post.title}</span>
-                  <span>{post.inDate}</span>
-                </div>
-              )
-            );
-          })}
+      <div className={styles.halfBody}>
+        <div className={styles.divHeader}>
+          <span className={styles.divHead}>✏️ 작성글</span>
+        </div>
+        <div className={styles.itemContainer}>
+          {myPosts.length !== 0 &&
+            myPosts.map((post) => {
+              return (
+                post.boardCategoryNum == category && (
+                  <div className={styles.item} onClick={() => movePage(post)}>
+                    <span>{post.title}</span>
+                    <span>{post.inDate}</span>
+                  </div>
+                )
+              );
+            })}
+        </div>
       </div>
-      <div className={styles.itemContainer}>
-        <span className={styles.divHead}>작성댓글</span>
-        <hr />
-        {myComments.length !== 0 &&
-          myComments.map((comment) => {
-            return (
-              comment.boardCategoryNum == category && (
-                <div className={styles.item}>
-                  <span onClick={() => movePage(comment)}>{comment.title}</span>
-                  <span>내 댓글 : {comment.description}</span>
-                  <span>{comment.inDate}</span>
-                </div>
-              )
-            );
-          })}
+      <div className={styles.halfBody}>
+        <div className={styles.divHeader}>
+          <span className={styles.divHead}>💬 작성댓글</span>
+        </div>
+        <div className={styles.itemContainer}>
+          {myComments.length !== 0 &&
+            myComments.map((comment) => {
+              return (
+                comment.boardCategoryNum == category && (
+                  <div
+                    className={styles.item}
+                    onClick={() => movePage(comment)}
+                  >
+                    <span>{comment.title}</span>
+                    <div className={styles.under}>
+                      <span>내 댓글 : {comment.description}</span>
+                      <span className={styles.date}>{comment.inDate}</span>
+                    </div>
+                  </div>
+                )
+              );
+            })}
+        </div>
       </div>
     </div>
   );
