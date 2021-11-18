@@ -1,18 +1,21 @@
 import styles from '../../../styles/Common/Alarm/AlarmContainer.module.scss';
 import { FiDelete } from 'react-icons/fi';
-import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { changeComp } from 'redux/slices/chageComp';
 import { useRouter } from 'next/router';
 
-const alarmCategoriNum = {
-  0: '댓글이 달렸습니다.',
-  1: '답글이 달렸습니다.',
-  2: '동아리 가입이 승인되었습니다.',
-  3: '동아리 가입이 거절되었습니다.',
-  4: '일정이 생성되었습니다.',
-  5: '일정이 수정되었습니다.',
-  6: '동아리에 공지가 생성되었습니다.'
+const alarmCategoriNum = (name) => {
+  return {
+    0: '댓글이 달렸습니다.',
+    1: '답글이 달렸습니다.',
+    2: '동아리 가입이 승인되었습니다.',
+    3: '동아리 가입이 거절되었습니다.',
+    4: '일정이 생성되었습니다.',
+    5: '일정이 수정되었습니다.',
+    6: '동아리에 공지가 생성되었습니다.',
+    7: `${name}님이 동아리에 지원했습니다.`,
+    8: `${name}님이 동아리에서 탈퇴했습니다.`
+  };
 };
 
 const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
@@ -35,11 +38,12 @@ const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
     setIsDelete(true);
     onAlarmPatch(data);
   };
+
   return (
     <div className={styles.description}>
       <div className={styles.top}>
         <p id={styles.big} onClick={() => moveWhenClickAlarm(alarm.no)}>
-          {alarmCategoriNum[alarm.notiCategoryNum]}
+          {alarmCategoriNum(alarm.sender)[alarm.notiCategoryNum]}
         </p>
         <FiDelete size={15} onClick={() => clickDeleteIcon(alarm.no)} />
       </div>

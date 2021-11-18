@@ -106,7 +106,9 @@ const Apply = () => {
           gender: parseInt(sex),
           phoneNum: phoneNumber.match(/[0-9]/g).join('')
         },
-        extra: data
+        extra: data,
+        url: `manager/${router.query.id}`,
+        notiCategoryNum: 7
       },
       router.query.id
     )

@@ -63,7 +63,7 @@ function Header() {
 
   const showMoreAlarm = () => {
     const temp = alarmShow;
-    setAlarmShow(temp + 3);
+    setAlarmShow(temp + 10);
   };
 
   CloseSidebar(closeRef);
@@ -107,7 +107,10 @@ function Header() {
       <nav>
         <div className={styles.myHeader} ref={closeRef}>
           <Link href="/" passHref>
-            <img src="https://lovelyoch.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F439c0672-c274-4f90-b273-9928548c4081%2Flogo.jpg?table=block&id=99568f38-6c02-4bbc-b04b-1b7152648016&spaceId=69eb8ea8-3d04-47ec-8bb7-004e8aa31f9e&width=7460&userId=&cache=v2" />
+            <img
+              alt="동그라미"
+              src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/cfb255ff-10a0-4095-aabb-3b0c62e1ebf6/logo-removebg.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211118%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211118T013809Z&X-Amz-Expires=86400&X-Amz-Signature=5aa879d499d197a582fd1af097f299812f483690a9cb4cae30c5a668d02f9193&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22logo-removebg.png%22&x-id=GetObject"
+            />
           </Link>
           <Hamburger rounded toggled={open} toggle={setOpen} size={25} />
           <div className={styles.topMenu}>
@@ -124,10 +127,10 @@ function Header() {
                   <div className={styles.bell} onClick={alarmOpen}>
                     {alarmList.length > 0 && (
                       <div className={styles.count}>
-                        {alarmList.length <= 9 ? (
+                        {alarmList.length <= 99 ? (
                           <span>{alarmList.length}</span>
                         ) : (
-                          <span>9+</span>
+                          <span>99+</span>
                         )}
                       </div>
                     )}
@@ -147,6 +150,7 @@ function Header() {
                 <div className={styles.profileWrap}>
                   {userProflie ? (
                     <img
+                      alt="유저 프로필"
                       src={userProflie}
                       className={styles.userProflie}
                       onClick={showProfile}
