@@ -5,15 +5,28 @@ const MyItems = ({ category, myPosts, myComments, router }) => {
   if (!myComments) return null;
 
   const movePage = (el) => {
-    if (el.boardCategoryNum === 5)
-      router.push(`/clubhome/${el.clubNo}/notice/${el.no}`);
-    else if (el.boardCategoryNum === 6)
-      router.push(`/clubhome/${el.clubNo}?pid=${el.no}`);
-    else if (el.boardCategoryNum === 4) router.push(`/promotion?id=${el.no}`);
-    else if (el.boardCategoryNum === 3)
-      router.push(`/questionAndAnswer/${el.no}`);
-    else if (el.boardCategoryNum === 2) router.push(`/free/${el.no}`);
-    else if (el.boardCategoryNum === 1) router.push(`/notice/${el.no}`);
+    switch (el.boardCategoryNum) {
+      case 5:
+        router.push(`/clubhome/${el.clubNo}/notice/${el.no}`);
+        break;
+      case 6:
+        router.push(`/clubhome/${el.clubNo}?pid=${el.no}`);
+        break;
+      case 4:
+        router.push(`/promotion?id=${el.no}`);
+        break;
+      case 3:
+        router.push(`/questionAndAnswer/${el.no}`);
+        break;
+      case 2:
+        router.push(`/free/${el.no}`);
+        break;
+      case 1:
+        router.push(`/notice/${el.no}`);
+        break;
+      default:
+        break;
+    }
   };
   return (
     <div className={styles.body}>
