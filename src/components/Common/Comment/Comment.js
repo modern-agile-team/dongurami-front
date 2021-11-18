@@ -7,6 +7,7 @@ import { getPost } from 'redux/slices/post';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 import Link from 'next/link';
+import { AiFillHeart } from 'react-icons/ai';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
 function setEndOfContenteditable(contentEditableElement) {
@@ -24,8 +25,8 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
   const router = useRouter();
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
-  const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
+  const [isContentEditable, setIsContentEditable] = useState(false);
 
   useEffect(() => {
     if (!isContentEditable) return;
@@ -69,6 +70,10 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
           {(user && comment.no === comment.groupNo) && (
             <p className={styles.reply} onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
           )}
+          <button className={`${styles.likeButton} ${styles.like}`}>
+            <AiFillHeart />
+            <span>3</span>
+          </button>
         </div>
       </div>
     </div>

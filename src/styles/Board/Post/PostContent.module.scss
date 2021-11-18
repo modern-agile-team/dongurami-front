@@ -91,3 +91,26 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.likeButton {
+  padding: .25rem .5rem;
+  margin: auto;
+  display: flex;
+  border: 1px solid gray;
+  border-radius: .25rem;
+  background-color: white;
+  color: gray;
+  &:hover {
+    color: indianred;
+    background-color: white;
+  }
+  & > svg {
+    display: block;
+    margin: auto;
+  }
+}
+
+.like {
+  color: white;
+  background-color: indianred;
+}

@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setCategory } from 'redux/slices/post';
 import moment from 'moment';
+import { AiFillHeart } from 'react-icons/ai';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -53,7 +54,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
   return (
     <div className={styles.container}>
       <div>
-        {(category !== 'clubActivity') && (
+        {category !== 'clubActivity' && (
           <div className={styles.boardLinkContainer}>
             <Link href={boardURL} passHref>
               <a>{title[category]}</a>
@@ -67,7 +68,14 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
         <div className={styles.postHeader}>
           <div className={styles.profileContainer}>
             <Link href={`/profile/${post.studentId}`} passHref>
-              <img className={styles.profileImage} src={`${post.profileImageUrl ?? 'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'}?w=30`} alt="profileImage" />
+              <img
+                className={styles.profileImage}
+                src={`${
+                  post.profileImageUrl ??
+                  'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
+                }?w=30`}
+                alt="profileImage"
+              />
             </Link>
             <Link href={`/profile/${post.studentId}`} passHref>
               <div className={styles.profileLink}>{post.name}</div>
@@ -102,6 +110,10 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
       </div>
       <hr />
       <ReactQuill value={post.description} theme="bubble" readOnly />
+      <button className={`${styles.likeButton}`}>
+        <AiFillHeart />
+        <span>3</span>
+      </button>
       {post.comments && <CommentContainer comments={post.comments} />}
     </div>
   );
