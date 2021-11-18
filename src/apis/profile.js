@@ -68,3 +68,7 @@ export const deleteSPost = (id, clubNum, boardNum) => {
 export const quitClub = (id, clubNum) => {
   return instance.delete(`/api/my-page/${id}/personal/${clubNum}`);
 };
+
+export const getMyPosts = (id) => {
+  return instance.get(`/api/my-page/${id}/my-post`);
+};
