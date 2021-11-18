@@ -48,7 +48,7 @@ export const Manager = () => {
       data.clubAdminOption.memberAndAuthList.map((auth) => auth.boardAdminFlag)
     );
   };
-  console.log(members);
+
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
     getMember(clubId)
