@@ -33,7 +33,6 @@
   padding: 1rem;
   border-top: 1px solid rgb(167, 167, 167);
   border-bottom: 1px solid rgb(167, 167, 167);
-  // width: 90%;
 }
 .body {
   display: flex;
@@ -68,9 +67,7 @@
 }
 
 .halfBody {
-  // box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.1);
   border-radius: 7px;
-  // margin-bottom: 2rem;
   width: 100%;
 }
 .item {
@@ -79,7 +76,6 @@
   border-bottom: 1px solid lightgray;
   padding: 0.5rem;
   padding-bottom: 5px;
-  // width: 65%;
   cursor: pointer;
   span {
     padding: 5px;
