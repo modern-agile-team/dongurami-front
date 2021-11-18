@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #a19d9d;
+
+  .info {
+    display: flex;
+    align-items: center;
+    .arrow {
+      flex: 1;
+      svg {
+        color: green;
+      }
+    }
+    .indate {
+      font-size: 5px;
+      font-color: gray;
+    }
+  }
+  .message {
+    word-break: break-all;
+    margin-bottom: 13px;
+    .description {
+      font-size: 12px;
+      font-color: gray;
+    }
+  }
+}
