@@ -22,25 +22,25 @@ const api = {
   unLikePost: (pid) => {
     return axios.patch(`/api/emotion/unliked/board/${pid}`);
   },
-  postComment: ({ category, pid, id, description, parentCommentID, clubNum }) => {
+  postComment: ({ category, pid, id, description, parentCommentID, clubNum, hiddenFlag }) => {
     if (category === 'clubNotice') {
       if (parentCommentID) {
         return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}`, {
-          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 1
+          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 1, hiddenFlag
         });
       } else {
         return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}`, {
-          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 0
+          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 0, hiddenFlag
         });
       }
     }
     if (parentCommentID) {
       return axios.post(`/api/board/${category}/${pid}/${parentCommentID}`, {
-        id, description, url: `${category}/${pid}`, notiCategoryNum: 1
+        id, description, url: `${category}/${pid}`, notiCategoryNum: 1, hiddenFlag
       });
     } else {
       return axios.post(`/api/board/${category}/${pid}`, {
-        id, description, url: `${category}/${pid}`, notiCategoryNum: 0
+        id, description, url: `${category}/${pid}`, notiCategoryNum: 0, hiddenFlag
       });
     }
   },

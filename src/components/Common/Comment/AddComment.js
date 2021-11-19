@@ -24,7 +24,7 @@ function AddComment({ parentCommentID, scroll }) {
       alert('댓글을 255자 이하로 작성해 주세요!');
       returnl
     }
-    await api.postComment({ category: post.category, pid: post.no, id: 'test1', description, parentCommentID, clubNum: router.query.id });
+    await api.postComment({ category: post.category, pid: post.no, id: 'test1', description, parentCommentID, clubNum: router.query.id, hiddenFlag: Number(Boolean(isAnon)) });
     setDescription('');
     dispatch(getPost());
   }
