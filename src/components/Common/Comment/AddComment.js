@@ -11,6 +11,7 @@ function AddComment({ parentCommentID, scroll }) {
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
   const [description, setDescription] = useState('');
+  const [isAnon, setIsAnon] = useState(false);
   const ref = useRef();
 
   const onChange = (e) => {
@@ -36,7 +37,13 @@ function AddComment({ parentCommentID, scroll }) {
 
   return (
     <div ref={ref} className={styles.container}>
-      <div>{user.name}</div>
+      <div className={styles.topBar}>
+        <div>{user.name}</div>
+        <div className={styles.anonContainer}>
+          <label htmlFor={`anon${parentCommentID}`}>익명</label>
+          <input type="checkbox" id={`anon${parentCommentID}`} value={isAnon} onChange={(e) => setIsAnon(e.target.value)} />
+        </div>
+      </div>
       <form onSubmit={onSubmit}>
         <input type="text" placeholder="댓글을 남겨보세요" value={description} onChange={onChange} />
         <button type="submit">등록</button>

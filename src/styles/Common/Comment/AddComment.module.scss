@@ -7,6 +7,16 @@
   padding: 1rem;
   margin: 0 1rem;
   flex: 1;
+  .topBar {
+    display: flex;
+    justify-content: space-between;
+    .anonContainer {
+      label {
+        vertical-align: top;
+        font-size: small;
+      }
+    }
+  }
   & > form {
     display: flex;
     gap: 1rem;
