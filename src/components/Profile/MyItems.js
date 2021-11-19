@@ -36,10 +36,14 @@ const MyItems = ({ category, myPosts, myComments, router }) => {
         </div>
         <div className={styles.itemContainer}>
           {myPosts.length !== 0 &&
-            myPosts.map((post) => {
+            myPosts.map((post, index) => {
               return (
                 post.boardCategoryNum == category && (
-                  <div className={styles.item} onClick={() => movePage(post)}>
+                  <div
+                    className={styles.item}
+                    onClick={() => movePage(post)}
+                    key={index}
+                  >
                     <span>{post.title}</span>
                     <span>{post.inDate}</span>
                   </div>
@@ -54,12 +58,13 @@ const MyItems = ({ category, myPosts, myComments, router }) => {
         </div>
         <div className={styles.itemContainer}>
           {myComments.length !== 0 &&
-            myComments.map((comment) => {
+            myComments.map((comment, index) => {
               return (
                 comment.boardCategoryNum == category && (
                   <div
                     className={styles.item}
                     onClick={() => movePage(comment)}
+                    key={index}
                   >
                     <span>{comment.title}</span>
                     <div className={styles.under}>

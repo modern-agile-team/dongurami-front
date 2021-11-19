@@ -43,7 +43,9 @@ const MyPost = () => {
           </div>
         </div>
         {!isHave ? (
-          <span>작성한 게시물이 없습니다.</span>
+          <div className={styles.spanDiv}>
+            <span className={styles.noPost}>작성한 게시물이 없습니다.</span>
+          </div>
         ) : (
           <MyItems
             category={category}
