@@ -11,6 +11,7 @@ import {
   putLeader
 } from 'apis/manager';
 import { useRouter } from 'next/router';
+import _ from 'lodash';
 
 export const Manager = () => {
   const [members, setMembers] = useState();
@@ -36,16 +37,21 @@ export const Manager = () => {
   };
 
   const setStates = (data) => {
-    setApplicantQNA(data.applicant.questionsAnswers);
-    setApplicantInfo(data.applicant.applicantInfo);
-    setLeader(data.clubAdminOption.leader);
-    setMembers(data.clubAdminOption.memberAndAuthList);
-    setMergedApplicantQNA(processQuesData(data.applicant.questionsAnswers));
+    const newData = _.cloneDeep(data);
+    setApplicantQNA(newData.applicant.questionsAnswers);
+    setApplicantInfo(newData.applicant.applicantInfo);
+    setLeader(newData.clubAdminOption.leader);
+    setMembers(newData.clubAdminOption.memberAndAuthList);
+    setMergedApplicantQNA(processQuesData(newData.applicant.questionsAnswers));
     setApplyAuth(
-      data.clubAdminOption.memberAndAuthList.map((auth) => auth.joinAdminFlag)
+      newData.clubAdminOption.memberAndAuthList.map(
+        (auth) => auth.joinAdminFlag
+      )
     );
     setBoardAuth(
-      data.clubAdminOption.memberAndAuthList.map((auth) => auth.boardAdminFlag)
+      newData.clubAdminOption.memberAndAuthList.map(
+        (auth) => auth.boardAdminFlag
+      )
     );
   };
 
@@ -73,11 +79,14 @@ export const Manager = () => {
       });
   }, [clubId, router]);
 
-  const handleAfterApply = (massage) => {
-    if (applicantInfo.length === 1) router.reload();
-    else getMembersData();
-    alert(massage);
-  };
+  const handleAfterApply = useCallback(
+    (massage) => {
+      if (applicantInfo.length === 1) router.reload();
+      else getMembersData();
+      alert(massage);
+    },
+    [applicantInfo.length, router, getMembersData]
+  );
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
@@ -97,22 +106,25 @@ export const Manager = () => {
   };
 
   // 가입 거절 PUT
-  const onApplyReject = async (e) => {
-    if (!e.target.id) return;
-    const body = [
-      {
-        applicant: mergedApplicantInfo[e.target.id].id,
-        url: `clubhome/${clubId}`,
-        notiCategoryNum: 3
-      },
-      clubId
-    ];
-    confirm('가입을 거절합니까?') &&
-      (await putApply(...body)
-        .then((res) => handleAfterApply(res.data.msg))
-        .catch((err) => alert(err.response.data.msg)));
-    await getMembersData();
-  };
+  const onApplyReject = useCallback(
+    async (e) => {
+      if (!e.target.id) return;
+      const body = [
+        {
+          applicant: mergedApplicantInfo[e.target.id].id,
+          url: `clubhome/${clubId}`,
+          notiCategoryNum: 3
+        },
+        clubId
+      ];
+      confirm('가입을 거절합니까?') &&
+        (await putApply(...body)
+          .then((res) => handleAfterApply(res.data.msg))
+          .catch((err) => alert(err.response.data.msg)));
+      await getMembersData();
+    },
+    [clubId, getMembersData, handleAfterApply, mergedApplicantInfo]
+  );
 
   // 회장 양도 PUT
   const onLeaderChange = async (memberIndex) => {
@@ -239,7 +251,7 @@ export default Manager;
 
 //--------------------가입 추가 질문 데이터 가공---------------------//
 const handlePieceData = (index, data, additionalQuestion) => {
-  const result = additionalQuestion;
+  const result = [...additionalQuestion];
   result.push({
     id: data[index].id,
     questions: [data[index].question],
@@ -249,7 +261,7 @@ const handlePieceData = (index, data, additionalQuestion) => {
 };
 
 const completeTheData = (index, data, incompleteData) => {
-  const result = incompleteData;
+  const result = [...incompleteData];
   for (let info of result) {
     if (info.id === data[index].id) {
       info.questions.push(data[index].question);
@@ -260,11 +272,11 @@ const completeTheData = (index, data, incompleteData) => {
 };
 
 const processQuesData = (data) => {
-  const result = [];
+  let result = [];
   for (let index in data) {
     if (index === '0' || (index > '0' && data[index - 1].id !== data[index].id))
-      handlePieceData(index, data, result);
-    else completeTheData(index, data, result);
+      result = handlePieceData(index, data, result);
+    else result = completeTheData(index, data, result);
   }
   return result;
 };
