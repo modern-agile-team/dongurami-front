@@ -90,7 +90,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
             </Link>
           </div>
           <div>
-            {category === 'clubActivity' &&
+            {Boolean === 'clubActivity' &&
               user &&
               user.club.some(({ no }) => no === clubNum) && (
                 <Link
@@ -103,7 +103,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
                   <button>스크랩하기</button>
                 </Link>
               )}
-            {user?.id === post.studentId && (
+            {(Boolean(post.isWriter)) && (
               <>
                 <Link href={editHref} passHref>
                   <button>수정하기</button>

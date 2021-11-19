@@ -64,8 +64,8 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
           <Link href={`/profile/${comment.studentId}`} passHref>
             <p className={styles.profileImage}>{comment.studentName}</p>
           </Link>
-          {(post.studentId === comment.studentId) && <p>작성자</p>}
-          {(user?.id === comment.studentId) && (
+          {(Boolean(post.isWriter)) && <p>작성자</p>}
+          {(Boolean(comment.isWriter)) && (
             <div>
               <button onClick={onEdit} className={styles['action-button']}>{(isContentEditable) ? <AiOutlineCheck /> : <AiOutlineEdit />}</button>
               <button onClick={onDelete} className={styles['action-button']}><AiOutlineDelete /></button>
