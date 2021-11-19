@@ -71,6 +71,18 @@ const api = {
     } else {
       return axios.delete(`/api/board/${category}/${pid}/${commentID}`);
     }
+  },
+  likeComment: ({ commentID, parentCommentID }) => {
+    if (parentCommentID) {
+      return axios.patch(`/api/emotion/liked/reply-comment/${commentID}`);
+    }
+    return axios.patch(`/api/emotion/liked/comment/${commentID}`);
+  },
+  unLikeComment: ({ commentID, parentCommentID }) => {
+    if (parentCommentID) {
+      return axios.patch(`/api/emotion/unliked/reply-comment/${commentID}`);
+    }
+    return axios.patch(`/api/emotion/unliked/comment/${commentID}`);
   }
 }
 
