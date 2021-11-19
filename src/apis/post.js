@@ -16,6 +16,12 @@ const api = {
     }
     return axios.delete(`/api/board/${category}/${pid}`);
   },
+  likePost: (pid) => {
+    return axios.patch(`/api/emotion/liked/board/${pid}`);
+  },
+  unLikePost: (pid) => {
+    return axios.patch(`/api/emotion/unliked/board/${pid}`);
+  },
   postComment: ({ category, pid, id, description, parentCommentID, clubNum }) => {
     if (category === 'clubNotice') {
       if (parentCommentID) {

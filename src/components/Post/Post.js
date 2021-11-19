@@ -6,7 +6,7 @@ import styles from '../../styles/Board/Post/PostContent.module.scss';
 import api from 'apis/post';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { setCategory } from 'redux/slices/post';
+import { getPost, setCategory } from 'redux/slices/post';
 import moment from 'moment';
 import { AiFillHeart } from 'react-icons/ai';
 
@@ -40,6 +40,14 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     await api.deletePost(category, post.no, router.query.id);
     router.back();
   };
+  const onClickLike = async () => {
+    if (post.likedFlag) {
+      await api.unLikePost(post.no);
+    } else {
+      await api.likePost(post.no);
+    }
+    dispatch(getPost());
+  }
 
   const editHref = optionalEditHref || {
     pathname: `${router.pathname}/edit`,
@@ -110,9 +118,9 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
       </div>
       <hr />
       <ReactQuill value={post.description} theme="bubble" readOnly />
-      <button className={`${styles.likeButton}`}>
+      <button className={`${styles.likeButton} ${(post.likedFlag) && styles.like}`} onClick={onClickLike}>
         <AiFillHeart />
-        <span>3</span>
+        <span>&nbsp;{post.emotionCount}</span>
       </button>
       {post.comments && <CommentContainer comments={post.comments} />}
     </div>
