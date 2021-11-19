@@ -109,7 +109,7 @@ function Header() {
           <Link href="/" passHref>
             <img
               alt="동그라미"
-              src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/cfb255ff-10a0-4095-aabb-3b0c62e1ebf6/logo-removebg.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211118%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211118T013809Z&X-Amz-Expires=86400&X-Amz-Signature=5aa879d499d197a582fd1af097f299812f483690a9cb4cae30c5a668d02f9193&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22logo-removebg.png%22&x-id=GetObject"
+              src="https://lovelyoch.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fcfb255ff-10a0-4095-aabb-3b0c62e1ebf6%2Flogo-removebg.png?table=block&id=58d3c93f-aa6e-4b62-9c49-df57fae3f5fe&spaceId=69eb8ea8-3d04-47ec-8bb7-004e8aa31f9e&width=2000&userId=&cache=v2"
             />
           </Link>
           <Hamburger rounded toggled={open} toggle={setOpen} size={25} />
