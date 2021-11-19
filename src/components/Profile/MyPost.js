@@ -20,7 +20,7 @@ const MyPost = () => {
         setMyPosts(res.data.boards);
         setMyComments(res.data.comments);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.response.data.msg));
   }, [router]);
 
   return (
