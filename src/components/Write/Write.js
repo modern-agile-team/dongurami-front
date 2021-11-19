@@ -37,6 +37,7 @@ function Write({ category }) {
     <>
       <Container category={category} type="글 작성하기">
         <WriteContent
+          category={category}
           title={title}
           description={description}
           isAnon={isAnon}
