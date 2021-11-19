@@ -40,11 +40,20 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
     }
     setIsContentEditable(!isContentEditable);
     setEndOfContenteditable(descriptionDiv.current);
-  }
+  };
   const onDelete = async () => {
     await api.deleteComment({ category: post.category, pid: post.no, commentID: comment.no, parentCommentID, clubNum: router.query.id });
     dispatch(getPost());
-  }
+  };
+  const onClickLike = async () => {
+    if (!user) return;
+    if (comment.likedFlag) {
+      await api.unLikeComment({ commentID: comment.no, parentCommentID });
+    } else {
+      await api.likeComment({ commentID: comment.no, parentCommentID });
+    }
+    dispatch(getPost());
+  };
 
   return (
     <div className={styles.comment}>
@@ -56,8 +65,8 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
           <Link href={`/profile/${comment.studentId}`} passHref>
             <p className={styles.profileImage}>{comment.studentName}</p>
           </Link>
-          {(post.studentId === comment.studentId) && <p>작성자</p>}
-          {(user?.id === comment.studentId) && (
+          {(Boolean(post.isWriter)) && <p>작성자</p>}
+          {(Boolean(comment.isWriter)) && (
             <div>
               <button onClick={onEdit} className={styles['action-button']}>{(isContentEditable) ? <AiOutlineCheck /> : <AiOutlineEdit />}</button>
               <button onClick={onDelete} className={styles['action-button']}><AiOutlineDelete /></button>
@@ -70,9 +79,9 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
           {(user && comment.no === comment.groupNo) && (
             <p className={styles.reply} onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
           )}
-          <button className={`${styles.likeButton} ${styles.like}`}>
+          <button className={`${styles.likeButton} ${(comment.likedFlag) && styles.like}`} onClick={onClickLike}>
             <AiFillHeart />
-            <span>3</span>
+            <span>{comment.emotionCount}</span>
           </button>
         </div>
       </div>

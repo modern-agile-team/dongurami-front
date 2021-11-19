@@ -38,6 +38,8 @@
   & > div:nth-of-type(2) {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
     margin: .5rem;
     padding: .5rem;
     border-top: 2px solid #90E2D6;

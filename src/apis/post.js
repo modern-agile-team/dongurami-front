@@ -16,25 +16,31 @@ const api = {
     }
     return axios.delete(`/api/board/${category}/${pid}`);
   },
-  postComment: ({ category, pid, id, description, parentCommentID, clubNum }) => {
+  likePost: (pid) => {
+    return axios.patch(`/api/emotion/liked/board/${pid}`);
+  },
+  unLikePost: (pid) => {
+    return axios.patch(`/api/emotion/unliked/board/${pid}`);
+  },
+  postComment: ({ category, pid, id, description, parentCommentID, clubNum, hiddenFlag }) => {
     if (category === 'clubNotice') {
       if (parentCommentID) {
         return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}`, {
-          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 1
+          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 1, hiddenFlag
         });
       } else {
         return axios.post(`/api/club/board/clubNotice/${clubNum}/${pid}`, {
-          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 0
+          id, description, url: `clubhome/${clubNum}/notice/${pid}`, notiCategoryNum: 0, hiddenFlag
         });
       }
     }
     if (parentCommentID) {
       return axios.post(`/api/board/${category}/${pid}/${parentCommentID}`, {
-        id, description, url: `${category}/${pid}`, notiCategoryNum: 1
+        id, description, url: `${category}/${pid}`, notiCategoryNum: 1, hiddenFlag
       });
     } else {
       return axios.post(`/api/board/${category}/${pid}`, {
-        id, description, url: `${category}/${pid}`, notiCategoryNum: 0
+        id, description, url: `${category}/${pid}`, notiCategoryNum: 0, hiddenFlag
       });
     }
   },
@@ -65,6 +71,18 @@ const api = {
     } else {
       return axios.delete(`/api/board/${category}/${pid}/${commentID}`);
     }
+  },
+  likeComment: ({ commentID, parentCommentID }) => {
+    if (parentCommentID) {
+      return axios.patch(`/api/emotion/liked/reply-comment/${commentID}`);
+    }
+    return axios.patch(`/api/emotion/liked/comment/${commentID}`);
+  },
+  unLikeComment: ({ commentID, parentCommentID }) => {
+    if (parentCommentID) {
+      return axios.patch(`/api/emotion/unliked/reply-comment/${commentID}`);
+    }
+    return axios.patch(`/api/emotion/unliked/comment/${commentID}`);
   }
 }
 
