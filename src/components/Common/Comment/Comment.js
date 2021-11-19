@@ -46,6 +46,7 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
     dispatch(getPost());
   };
   const onClickLike = async () => {
+    if (!user) return;
     if (comment.likedFlag) {
       await api.unLikeComment({ commentID: comment.no, parentCommentID });
     } else {

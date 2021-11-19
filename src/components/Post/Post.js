@@ -41,6 +41,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     router.back();
   };
   const onClickLike = async () => {
+    if (!user) return;
     if (post.likedFlag) {
       await api.unLikePost(post.no);
     } else {
