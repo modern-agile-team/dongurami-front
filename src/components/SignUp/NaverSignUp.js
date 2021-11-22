@@ -18,26 +18,25 @@ export const NaverSignUp = () => {
 
   //네이버 oAuth의 프로필 정보 가져오기
   const UserProfile = () => {
-    window.location.href.includes('access_token') && GetUser();
-    function GetUser() {
-      const token = window.location.href.split('=')[1].split('&')[0];
-      getNaverOauth(token)
-        .then((res) => {
-          router.push('/');
-          localStorage.setItem('jwt', res.data.jwt);
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            setCheckClientInfo(false);
-            setNames(err.response.data.name);
-            setEmail(err.response.data.email);
-            setUniqueId(err.response.data.snsId);
-          }
-          if (err.response.status === 401) {
-            alert('인증 유효시간이 지났습니다.\n재인증 해주세요.');
-          }
-        });
-    }
+    location.href.includes('access_token') && getUser();
+  };
+  const getUser = () => {
+    const token = window.location.href.split('=')[1].split('&')[0];
+    getNaverOauth(token)
+      .then((res) => {
+        router.push('/');
+        localStorage.setItem('jwt', res.data.jwt);
+      })
+      .catch((err) => {
+        if (err.response.status === 400) {
+          setCheckClientInfo(false);
+          setNames(err.response.data.name);
+          setEmail(err.response.data.email);
+          setUniqueId(err.response.data.snsId);
+        } else if (err.response.status === 401) {
+          alert('인증 유효시간이 지났습니다.\n재인증 해주세요.');
+        }
+      });
   };
   useEffect(UserProfile, []);
 
@@ -94,12 +93,22 @@ export const NaverSignUp = () => {
   const onChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'id') setId(value);
-    if (name === 'names') setNames(value);
-    if (name === 'email') setEmail(value);
-    if (name === 'major') {
-      setMajorNum(value);
-      setMajor(majorCategory.find((el) => el.value === value)?.label);
+    switch (name) {
+      case 'id':
+        setId(value);
+        break;
+      case 'names':
+        setNames(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'major':
+        setMajorNum(value);
+        setMajor(majorCategory.find((el) => el.value === value)?.label);
+        break;
+      default:
+        break;
     }
   };
 
@@ -135,22 +144,27 @@ export const NaverSignUp = () => {
     } else if (major === '' || major === '학과 선택') {
       setCheckSignUp('학과를 선택해주세요.');
     } else {
-      postNaverSignUp({
-        id,
-        name: names,
-        email,
-        major,
-        snsId: uniqueId
-      })
-        .then((res) => {
-          alert('회원가입이 완료되었습니다.');
-          router.push('/');
-          localStorage.setItem('jwt', res.data.jwt);
-        })
-        .catch((err) => {
-          alert(err.response.data.msg);
-        });
+      naverSignUp();
     }
+  };
+
+  //네이버로 회원가입 하기
+  const naverSignUp = () => {
+    postNaverSignUp({
+      id,
+      name: names,
+      email,
+      major,
+      snsId: uniqueId
+    })
+      .then((res) => {
+        alert('회원가입이 완료되었습니다.');
+        router.push('/');
+        localStorage.setItem('jwt', res.data.jwt);
+      })
+      .catch((err) => {
+        alert(err.response.data.msg);
+      });
   };
 
   return (
