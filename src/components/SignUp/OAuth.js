@@ -16,7 +16,7 @@ export default function OAuth() {
   function Naver() {
     const naverLogin = new naver.LoginWithNaverId({
       clientId: 'x83IzQrhnNOf9S_P1RdE',
-      callbackUrl: 'http://localhost:3000/signup',
+      callbackUrl: 'https://dongurami.co.kr/naversignup',
       isPopup: false,
       loginButton: { color: 'white', type: 3, height: 50 },
       callbackHandle: true
