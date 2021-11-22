@@ -1,72 +1,38 @@
 import styles from '../../../styles/Common/Header/Header.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
-import { BiBell } from 'react-icons/bi';
 import Hamburger from 'hamburger-react';
 import HeaderBoard from './HeaderBoard';
 import HeaderUser from './HeaderUser';
-import AlarmContainer from '../Alarm/AlarmContainer';
 import HeaderMobileBoard from './HeaderMobileBoard';
 import Link from 'next/link';
 import getToken from 'utils/getToken';
 import { useRouter } from 'next/router';
 import { getUserData } from 'apis/user';
-import { getAlarm, putAlarm, patchAlarm } from 'apis/alarm';
+import Alarm from '../Alarm';
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const [isAlarmOpen, setIsAlarmOpen] = useState(false);
   const [token, setToken] = useState('');
   const [user, setUser] = useState();
   const [userProflie, setUserProfile] = useState();
-  const [alarmList, setAlarmList] = useState([]);
-  const [alarmShow, setAlarmShow] = useState(3);
 
   const closeRef = useRef(null);
   const router = useRouter();
 
+  function handleClickOutside(event) {
+    if (closeRef.current && !closeRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  }
+
   //영역밖 클릭 시 사이드바 제거
-  const CloseSidebar = (ref) => {
-    useEffect(() => {
-      function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setOpen(false);
-          setIsAlarmOpen(false);
-        }
-      }
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [ref]);
-  };
-
-  // 알람 조회
-  const getAlarmData = () => {
-    getAlarm().then((res) => setAlarmList(res.data.notifications));
-  };
-
-  // 알람 전체 삭제
-  const onAlarmDeleteAll = async () => {
-    confirm('전체 알람을 삭제하시겠습니까?') &&
-      (await putAlarm()
-        .then((res) => alert(res.data.msg))
-        .catch((err) => alert(err.response.data.msg)));
-    getAlarmData();
-  };
-
-  // 알람 일부 삭제
-  const onAlarmPatch = async (notiNum) => {
-    await patchAlarm(notiNum).catch((err) => alert(err.response.data));
-    getAlarmData();
-  };
-
-  const showMoreAlarm = () => {
-    const temp = alarmShow;
-    setAlarmShow(temp + 10);
-  };
-
-  CloseSidebar(closeRef);
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // localStorage의 JWT값 불러와 token state에 저장
   useEffect(() => {
@@ -93,15 +59,6 @@ function Header() {
     }
   }, [token]);
 
-  useEffect(() => {
-    if (token) getAlarmData();
-  }, [token]);
-
-  //알람 열람
-  const alarmOpen = () => {
-    setIsAlarmOpen(!isAlarmOpen);
-  };
-
   return (
     <header className={styles.container}>
       <nav>
@@ -123,30 +80,7 @@ function Header() {
                 className={styles.tokenIcons}
                 id={open ? styles.show : styles.hide}
               >
-                <div className={styles.alarm}>
-                  <div className={styles.bell} onClick={alarmOpen}>
-                    {alarmList.length > 0 && (
-                      <div className={styles.count}>
-                        {alarmList.length <= 99 ? (
-                          <span>{alarmList.length}</span>
-                        ) : (
-                          <span>99+</span>
-                        )}
-                      </div>
-                    )}
-                    <BiBell />
-                  </div>
-                  {isAlarmOpen && (
-                    <AlarmContainer
-                      alarmList={alarmList}
-                      showMoreAlarm={showMoreAlarm}
-                      onAlarmDeleteAll={onAlarmDeleteAll}
-                      onAlarmPatch={onAlarmPatch}
-                      alarmShow={alarmShow}
-                      getAlarmData={getAlarmData}
-                    />
-                  )}
-                </div>
+                <Alarm token={token} />
                 <div className={styles.profileWrap}>
                   {userProflie ? (
                     <img

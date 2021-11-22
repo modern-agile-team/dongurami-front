@@ -284,7 +284,7 @@ const processQuesData = (data) => {
 
 // 가입 요청 데이터 가공
 const processApplicantInfo = (data, QNAs) => {
-  const result = data;
+  const result = [...data];
   for (let index in result) {
     if (QNAs[index].id === result[index].id) {
       result[index].answers = QNAs[index].answers;
