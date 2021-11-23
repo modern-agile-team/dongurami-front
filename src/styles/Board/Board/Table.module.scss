@@ -22,6 +22,9 @@
     white-space: nowrap;
     width: 50%;
   }
+  td:nth-of-type(2) > span {
+    color: gray;
+  }
   thead {
     background-color: #DDF7EC;
   }
