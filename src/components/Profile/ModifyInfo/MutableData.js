@@ -7,12 +7,16 @@ const MutableData = ({ userInfo, setEmail, setPhoneNumber }) => {
     <>
       <div className={styles.email}>
         <IoIosMail />
-        <input
-          placeholder={userInfo.email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
+        {userInfo.isNaverUser === 1 ? (
+          <span>{userInfo.email}</span>
+        ) : (
+          <input
+            placeholder={userInfo.email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+        )}
       </div>
       <div className={styles.phone}>
         <FaPhoneAlt />
