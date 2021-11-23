@@ -81,7 +81,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
                 className={styles.profileImage}
                 src={`${
                   post.profileImageUrl ??
-                  'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
+                  'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
                 }?w=30`}
                 alt="profileImage"
               />
