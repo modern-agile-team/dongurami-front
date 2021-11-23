@@ -28,11 +28,11 @@ function NoticeTable({ posts, page, category }) {
           }} passHref>
             <tr key={post.no}>
               <td>{post.no}</td>
-              <td>{post.title}</td>
+              <td>{post.title} <span>{`[${post.commentCount}]`}</span></td>
               <td>{post.studentName}</td>
               <td>{moment(post.inDate).format('MM-DD')}</td>
               <td>{post.hit}</td>
-              <td>10</td>
+              <td>{post.emotionCount}</td>
             </tr>
           </Link>
         ))}
