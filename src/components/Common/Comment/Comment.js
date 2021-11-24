@@ -50,7 +50,7 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
     if (comment.likedFlag) {
       await api.unLikeComment({ commentID: comment.no, parentCommentID });
     } else {
-      await api.likeComment({ commentID: comment.no, parentCommentID });
+      await api.likeComment({ commentID: comment.no, parentCommentID, url: router.asPath });
     }
     dispatch(getPost());
   };
