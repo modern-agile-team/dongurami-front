@@ -25,11 +25,6 @@ export const postSignUp = (data) => {
   return instance.post(`api/sign-up`, data);
 };
 
-//oAuth
-export const getNaverOauth = (token) => {
-  return instance.get(`api/naver-login?token=${token}`);
-};
-
 // user 정보 가져오기
 export const getUserData = () => {
   return instance.get('api/student');
@@ -38,4 +33,14 @@ export const getUserData = () => {
 //비밀번호 변경
 export const patchChangePW = (data) => {
   return instance.patch('api/reset-password', data);
+};
+
+//oAuth
+export const getNaverOauth = (token) => {
+  return instance.get(`api/naver/login?token=${token}`);
+};
+
+//네이버로 회원가입
+export const postNaverSignUp = (data) => {
+  return instance.post(`api/naver/sign-up`, data);
 };
