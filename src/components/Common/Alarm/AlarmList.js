@@ -23,7 +23,6 @@ const alarmCategoriNum = (data) => {
 const AlarmList = ({ alarm, onAlarmPatch, setIsDelete }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log(alarm);
   const selectComp = () => {
     if (alarm.notiCategoryNum === 4 || alarm.notiCategoryNum === 5) return 4;
     else if (alarm.notiCategoryNum === 6) return 2;
