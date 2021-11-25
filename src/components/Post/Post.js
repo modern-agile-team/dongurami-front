@@ -45,7 +45,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     if (post.likedFlag) {
       await api.unLikePost(post.no);
     } else {
-      await api.likePost(post.no);
+      await api.likePost({ pid: post.no, url: router.asPath });
     }
     dispatch(getPost());
   }

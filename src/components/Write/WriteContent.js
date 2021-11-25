@@ -10,7 +10,7 @@ function Write({ category, title, description, isAnon, setTitle, setDescription,
       <div>
         {(category !== 'promotion') && (<label>
           익명여부:
-          <input type="checkbox" value={isAnon} onChange={(e) => setIsAnon(e.target.value)} />
+          <input type="checkbox" checked={isAnon} onChange={() => setIsAnon(!isAnon)} />
         </label>)}
         <button onClick={onSubmit}>등록</button>
       </div>

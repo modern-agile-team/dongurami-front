@@ -12,6 +12,7 @@ function Edit({ category }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [isAnon, setIsAnon] = useState(false);
   const post = useSelector((state) => state.post);
 
   const { pid, id } = router.query;
@@ -24,6 +25,7 @@ function Edit({ category }) {
     if (!post) return;
     setTitle(post.title);
     setDescription(post.description);
+    setIsAnon(Boolean(post.writerHiddenFlag));
   }, [post])
 
   const onSubmit = async () => {
@@ -35,13 +37,13 @@ function Edit({ category }) {
       alert('제목을 255자 이하로 작성해 주세요!');
       return;
     }
-    await putPost(category, pid, { title, description }, router.query.id);
+    await putPost(category, pid, { title, description, hiddenFlag: Boolean(isAnon) }, router.query.id);
     router.back();
   };
 
   return (
     <Container category={category} type="글 수정하기">
-      <WriteContent title={title} description={description} setTitle={setTitle} setDescription={setDescription} onSubmit={onSubmit} />
+      <WriteContent title={title} description={description} isAnon={isAnon} setTitle={setTitle} setDescription={setDescription} onSubmit={onSubmit} setIsAnon={setIsAnon} />
     </Container>
   );
 }
