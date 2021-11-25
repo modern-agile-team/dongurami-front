@@ -15,10 +15,12 @@ const MyPost = () => {
     if (!router.isReady) return;
     getMyPosts(router.query.pid)
       .then((res) => {
-        res.data.comments.length + res.data.boards.length > 0 &&
-          setIsHave(true);
-        setMyPosts(res.data.boards);
-        setMyComments(res.data.comments);
+        if (res.data.msg.length < 18) {
+          res.data.comments.length + res.data.boards.length > 0 &&
+            setIsHave(true);
+          setMyPosts(res.data.boards);
+          setMyComments(res.data.comments);
+        }
       })
       .catch((err) => alert(err.response.data.msg));
   }, [router]);
