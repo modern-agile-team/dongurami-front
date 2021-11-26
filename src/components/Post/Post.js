@@ -6,7 +6,7 @@ import styles from '../../styles/Board/Post/PostContent.module.scss';
 import api from 'apis/post';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { setCategory } from 'redux/slices/post';
+import { getPost, setCategory } from 'redux/slices/post';
 import moment from 'moment';
 import { AiFillHeart } from 'react-icons/ai';
 
@@ -40,6 +40,15 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
     await api.deletePost(category, post.no, router.query.id);
     router.back();
   };
+  const onClickLike = async () => {
+    if (!user) return;
+    if (post.likedFlag) {
+      await api.unLikePost(post.no);
+    } else {
+      await api.likePost({ pid: post.no, url: router.asPath });
+    }
+    dispatch(getPost());
+  }
 
   const editHref = optionalEditHref || {
     pathname: `${router.pathname}/edit`,
@@ -72,7 +81,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
                 className={styles.profileImage}
                 src={`${
                   post.profileImageUrl ??
-                  'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
+                  'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
                 }?w=30`}
                 alt="profileImage"
               />
@@ -82,7 +91,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
             </Link>
           </div>
           <div>
-            {category === 'clubActivity' &&
+            {Boolean === 'clubActivity' &&
               user &&
               user.club.some(({ no }) => no === clubNum) && (
                 <Link
@@ -95,7 +104,7 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
                   <button>스크랩하기</button>
                 </Link>
               )}
-            {user?.id === post.studentId && (
+            {(Boolean(post.isWriter)) && (
               <>
                 <Link href={editHref} passHref>
                   <button>수정하기</button>
@@ -110,9 +119,9 @@ function Post({ category, post, optionalOnDelete, optionalEditHref }) {
       </div>
       <hr />
       <ReactQuill value={post.description} theme="bubble" readOnly />
-      <button className={`${styles.likeButton}`}>
+      <button className={`${styles.likeButton} ${(post.likedFlag) && styles.like}`} onClick={onClickLike}>
         <AiFillHeart />
-        <span>3</span>
+        <span>&nbsp;{post.emotionCount}</span>
       </button>
       {post.comments && <CommentContainer comments={post.comments} />}
     </div>

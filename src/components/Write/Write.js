@@ -10,6 +10,7 @@ function Write({ category }) {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [isAnon, setIsAnon] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const onSubmit = async () => {
@@ -25,7 +26,7 @@ function Write({ category }) {
       setShowModal(true);
       return;
     }
-    await postPost(category, { title, description }, router.query.id);
+    await postPost(category, { title, description, hiddenFlag: Boolean(isAnon) }, router.query.id);
     router.back();
   };
   const onClose = () => {
@@ -36,10 +37,13 @@ function Write({ category }) {
     <>
       <Container category={category} type="글 작성하기">
         <WriteContent
+          category={category}
           title={title}
           description={description}
+          isAnon={isAnon}
           setTitle={setTitle}
           setDescription={setDescription}
+          setIsAnon={setIsAnon}
           onSubmit={onSubmit}
         />
       </Container>

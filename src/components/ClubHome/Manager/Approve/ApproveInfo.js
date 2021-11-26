@@ -28,11 +28,11 @@ const ApproveInfo = ({ info, index, onApplyAccept, onApplyReject }) => {
           <p>{info.phoneNum}</p>
         </div>
         {info.questions &&
-          info.questions.map((question, i) => {
+          info.questions[0].map((question, i) => {
             return (
               <div key={question + info.id}>
                 <span>{question}</span>
-                <p>{info.answers[i]}</p>
+                <p>{info.answers[0][i]}</p>
               </div>
             );
           })}
