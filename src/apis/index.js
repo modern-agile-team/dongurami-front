@@ -6,7 +6,8 @@ const createInstance = () => {
   const ins = axios.create({
     baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
     headers: {
-      'x-auth-token': getToken()
+      'x-auth-token': getToken(),
+      'api-key': process.env.NEXT_PUBLIC_API_KEY
     }
   });
   return setInterceptors(ins);
