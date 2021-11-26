@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { getMessages } from 'apis/message';
 import styles from '../../styles/Message/MessageList.module.scss';
 import MessagePreview from './MessagePreview';
 import DetailMessageList from './DetailMessageList';
@@ -8,14 +10,33 @@ import { FiRefreshCcw } from 'react-icons/fi';
 import { BsTrash } from 'react-icons/bs';
 const MessageList = () => {
   const [openModal, setOpenModal] = useState(false);
-
+  const [messages, setMessages] = useState([]);
+  const user = useSelector(state => state.user);
+  
+  const getLetterDatas = async() => {
+    if (user) {
+     await getMessages(user.id).then((response) => {
+        if (response.data.success) setMessages(response.data.letters);
+     })
+    } else return;
+  }
+  
+   useEffect(() => {
+    getLetterDatas();
+  },[user])
+  
+  
+  
   return (
     <div className={styles.container}>
       <div className={styles.entireMessage}>
         <div className={styles.header}>
           <h2>쪽지함</h2>
         </div>
-        <MessagePreview />
+        {messages.map(message => {
+          return (
+        <MessagePreview key={message.no} message={message}/>
+          )})}
       </div>
       <div className={styles.detailMessage}>
         <div className={styles.header}>

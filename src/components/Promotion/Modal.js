@@ -19,6 +19,7 @@ const Modal = ({ postId, sendMessage }) => {
   const router = useRouter();
   let pid = postId;
 
+  
   useEffect(async () => {
     if (postId) {
       dispatch(getPost({ category, pid })).then((response) => {

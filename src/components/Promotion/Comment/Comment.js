@@ -15,7 +15,6 @@ const Comment = ({
   sendMessage
 }) => {
   const [isContentEditable, setIsContentEditable] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
@@ -94,7 +93,7 @@ const Comment = ({
               </p>
             )}
             {user && (
-              <p className={styles.reply} onClick={sendMessage}>
+              <p className={styles.reply} onClick={() => sendMessage(comment)}>
                 쪽지
               </p>
             )}

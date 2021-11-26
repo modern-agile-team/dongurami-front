@@ -20,7 +20,7 @@ const PromotionContainer = () => {
   const [type, setType] = useState('title');
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
-
+  const [letter, setLetter] = useState();
   const router = useRouter();
 
   let isLoading = false;
@@ -135,6 +135,13 @@ const PromotionContainer = () => {
     setSearchItem(el);
   };
 
+  const sendMessage = (comment) => {
+    setLetter(comment);
+    setOpenMessage(true);
+
+  }
+
+
   const infiniteScroll = () => {
     const { documentElement } = document;
     const scrollHeight = documentElement.scrollHeight;
@@ -198,9 +205,9 @@ const PromotionContainer = () => {
         </div>
       </div>
       {openModal && (
-        <Modal postId={postId} sendMessage={() => setOpenMessage(true)} />
+        <Modal postId={postId} sendMessage={sendMessage} />
       )}
-      <SendMessage show={openMessage} onClose={() => setOpenMessage(false)} />
+      <SendMessage show={openMessage} onClose={() => setOpenMessage(false)} letter={letter} />
     </>
   );
 };
