@@ -30,7 +30,6 @@
   <img src= "https://img.shields.io/badge/CSS-blue?logo=css3"/>
   <img src= "https://img.shields.io/badge/Scss-pink?logo=sass"/>
   <img src= "https://img.shields.io/badge/Next-blue?logo=react"/>
-  <img src= "https://img.shields.io/badge/Next.js-black?logo=next-dot-js&logoColor=white"/>
   <img src= "https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript"/>
   <img src="https://img.shields.io/badge/Redux-purple?logo=Redux&logoColor=white">
 </p>
