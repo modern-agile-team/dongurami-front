@@ -66,6 +66,9 @@
     }
     .Profile {
       margin-right: 2rem;
+      width: 25px;
+      height: 25px;
+      transform: translateY(6%);
       color: rgb(172, 172, 172);
       &:hover {
         transform: scale(1.15);
