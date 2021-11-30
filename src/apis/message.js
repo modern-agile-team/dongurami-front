@@ -18,3 +18,14 @@ export function getMessages(id) {
       `api/letter/${id}`
     );
   }
+
+  export function getDetailMessages(id,letterNo) {
+    return axios.get(
+      `api/letter/${id}/${letterNo}`
+    );
+  }
+export function deleteMessage() {
+  return axios.put(
+    `/api/letter/entire`
+  ); 
+}

@@ -1,20 +1,24 @@
 import styles from '../../styles/Message/DetailMessageList.module.scss';
-import { FaLongArrowAltRight } from 'react-icons/fa';
+import { FaLongArrowAltRight, FaLongArrowAltLeft } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
-const DetailMessageList = () => {
+const DetailMessageList = ({ message }) => {
+  const user = useSelector((state) => state.user);
+
   return (
     <div className={styles.container}>
       <div className={styles.info}>
         <div className={styles.arrow}>
-          <FaLongArrowAltRight size={30} />
+          {user?.id === message.senderId ? (
+            <FaLongArrowAltRight className={styles.rightArrow} size={30} />
+          ) : (
+            <FaLongArrowAltLeft className={styles.leftArrow} size={30} />
+          )}
         </div>
-        <p className={styles.indate}>2021-11-18</p>
+        <p className={styles.indate}>{message.inDate}</p>
       </div>
       <div className={styles.message}>
-        <span className={styles.description}>
-          앗 반가워요 뭐가
-          힘드신가요?ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        </span>
+        <span className={styles.description}>{message.description}</span>
       </div>
     </div>
   );

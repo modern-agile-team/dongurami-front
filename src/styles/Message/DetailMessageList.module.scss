@@ -9,9 +9,12 @@
     align-items: center;
     .arrow {
       flex: 1;
-      svg {
+      .rightArrow {
         color: green;
       }
+      .leftArrow {
+      color: red;
+     }
     }
     .indate {
       font-size: 5px;

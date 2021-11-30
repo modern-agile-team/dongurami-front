@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #a19d9d;
+  cursor: pointer;
 
   .info {
     display: flex;
@@ -22,3 +23,30 @@
     font-color: gray;
   }
 }
+
+.clickedcontainer {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #a19d9d;
+  background-color: #eeeeee;
+
+  .info {
+    display: flex;
+    align-items: center;
+    .name {
+      flex: 1;
+      font-size: 16px;
+    }
+    .indate {
+      font-size: 5px;
+      font-color: gray;
+    }
+  }
+  .description {
+    font-size: 12px;
+    font-color: gray;
+  }
+}
+
