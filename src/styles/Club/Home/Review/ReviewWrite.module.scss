@@ -16,14 +16,11 @@
   margin-top: 1em;
   height: 35px;
   svg {
-    color: #ffc949;
+    color: lightgray;
     height: 30px;
     width: 30px;
     cursor: pointer;
-    &:hover {
-      height: 35px;
-      width: 35px;
-    }
+    margin: 0 2px;
   }
 }
 .comment {
@@ -47,6 +44,11 @@
   button {
     margin-left: 1em;
   }
+}
+
+.able {
+  color: #ffc949 !important;
+  transform: scale(1.2);
 }
 
 @media (max-width: 768px) {
