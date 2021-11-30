@@ -25,7 +25,6 @@
   }
   .topMenu {
     display: flex;
-    justify-content: space-between;
   }
   .menus {
     display: flex;
@@ -42,23 +41,14 @@
 }
 .tokenIcons {
   display: flex;
-  justify-content: space-around;
   align-items: center;
   margin: auto;
   svg {
     cursor: pointer;
     font-size: 135%;
   }
-  .message {
-    margin: 0 1.5em;
-    position: relative;
-    display: flex;
-    align-items: center;
-    svg {
-      margin-top: 1.8px;
-      width: 25px;
-      height: 25px;
-    }
+  .bell {
+    margin-right: 2.5rem;
   }
   .profileWrap {
     .userProflie {
@@ -90,7 +80,7 @@
 
 .count {
   z-index: 99;
-  display: flex;
+
   position: absolute;
   bottom: 23px;
   left: 23px;
@@ -100,26 +90,10 @@
   background-color: red;
   font-size: 10px;
   color: white;
-  width: 30%;
-  height: 30%;
+  width: 10%;
+  height: 10%;
   padding: 3px;
-}
-
-.messagecount {
-  z-index: 99;
-  display: flex;
-  position: absolute;
-  bottom: 18px;
-  left: 23px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: red;
-  font-size: 10px;
-  color: white;
-  width: 43%;
-  height: 43%;
-  padding: 3px;
+  display: none;
 }
 
 .bell {

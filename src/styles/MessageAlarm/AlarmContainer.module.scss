@@ -3,12 +3,12 @@
   flex-direction: column;
   position: absolute;
   padding: 1em;
-  width: fit-content;
+  width: 25%;
   border-radius: 6px;
   box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.1);
   background-color: white;
   top: 60px;
-  right: 70px;
+  right: 10px;
   margin-left: -70px;
   max-height: 50vh;
   hr {
@@ -23,6 +23,7 @@
   height: 15px;
   border: 1px solid rgba(0, 0, 0, 0.07);
   top: 53px;
+  right: 11em;
   transform: rotate(45deg);
 }
 
