@@ -2,6 +2,7 @@ import { postPost } from 'apis/board';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
 import { useRouter } from 'next/router';
 import { useState } from "react";
+import { AiFillCloseCircle } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 import styles from "../../styles/Board/Write/WritePromotionContent.module.scss";
 
@@ -17,7 +18,11 @@ function WritePromition({ title, description }) {
       await uploadImage(presignedURL, file);
       return imageURL;
     }));
-    setImage(imagesURL);
+    setImage([...images, ...imagesURL]);
+  }
+  const onRemove = (e, removeIndex) => {
+    e.preventDefault();
+    setImage(images.filter((_, i) => removeIndex !== i));
   }
   const onSubmit = () => {
     if (clubNo === '0') {
@@ -39,12 +44,17 @@ function WritePromition({ title, description }) {
     <div className={styles.container}>
       <label htmlFor="imageInput">
         {(images.length === 0) ? (
-          <img src="https://www.pngfind.com/pngs/m/66-661092_png-file-upload-image-icon-png-transparent-png.png" alt="preview" />
+          <div className={styles.previewImageContainer}>
+            <img src="https://www.pngfind.com/pngs/m/66-661092_png-file-upload-image-icon-png-transparent-png.png" alt="preview" />
+          </div>
         ) :
         images.map((image, index) => (
-          <img key={index} src={image} alt="preview" />
+          <div className={styles.previewImageContainer} key={image}>
+            <AiFillCloseCircle onClick={(e) => onRemove(e, index)} />
+            <img src={image} alt="preview" />
+          </div>
         ))}
-        <p>사진 업로드</p>
+        <p>사진 추가하기</p>
       </label>
       <input id="imageInput" type="file" accept="image/*" onChange={onChange} multiple />
       <div className={styles.selectContainer}>

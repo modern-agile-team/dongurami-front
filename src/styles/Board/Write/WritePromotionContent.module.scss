@@ -5,11 +5,16 @@
   height: 100%;
  & > label {
    text-align: center;
-   & > img {
-     max-width: 50%;
-     @media screen and (max-width: 768px) {
-      max-width: 100%;
+   .previewImageContainer {
+     & > svg {
+       vertical-align: top;
      }
+     & > img {
+      max-width: 50%;
+      @media screen and (max-width: 768px) {
+      max-width: 100%;
+      }
+    }
    }
  }
  & > input {
