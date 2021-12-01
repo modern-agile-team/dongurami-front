@@ -128,33 +128,36 @@ const Review = () => {
   // 필터링
   const onFilterChange = (e) => {
     const filter = e.target.value;
-
-    const oldestOrder = reviewList.slice(0).sort((a, b) => {
-      return a.no - b.no;
+    const oldestOrder = [...reviewList].sort((a, b) => {
+      if (filter === 0) return a.no - b.no;
+      else if (filter === 1) return b.no - a.no;
+      else if (filter === 2) return b.score - a.score;
+      else return a.score - b.score;
     });
-    const latestOrder = reviewList.slice(0).sort((a, b) => {
-      return b.no - a.no;
-    });
-    const rateHigh = reviewList.slice(0).sort((a, b) => {
-      return b.score - a.score;
-    });
-    const rateLow = reviewList.slice(0).sort((a, b) => {
-      return a.score - b.score;
-    });
-    switch (filter) {
-      case '0':
-        setReviewList(oldestOrder);
-        break;
-      case '1':
-        setReviewList(latestOrder);
-        break;
-      case '2':
-        setReviewList(rateHigh);
-        break;
-      case '3':
-        setReviewList(rateLow);
-        break;
-    }
+    // const latestOrder = [...reviewList].sort((a, b) => {
+    //   return b.no - a.no;
+    // });
+    // const rateHigh = [...reviewList].sort((a, b) => {
+    //   return b.score - a.score;
+    // });
+    // const rateLow = [...reviewList].sort((a, b) => {
+    //   return a.score - b.score;
+    // });
+    // switch (filter) {
+    //   case 0:
+    //     setReviewList(oldestOrder);
+    //     break;
+    //   case 1:
+    //     setReviewList(latestOrder);
+    //     break;
+    //   case 2:
+    //     setReviewList(rateHigh);
+    //     break;
+    //   case 3:
+    //     setReviewList(rateLow);
+    //     break;
+    // }
+    setReviewList(oldestOrder);
   };
 
   useEffect(() => {
