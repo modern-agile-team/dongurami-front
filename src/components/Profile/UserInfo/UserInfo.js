@@ -1,5 +1,6 @@
 import styles from 'styles/Profile/UserInfo.module.scss';
 import { FaGraduationCap, FaUserCircle } from 'react-icons/fa';
+import { FiMail } from 'react-icons/fi';
 import Link from 'next/link';
 import ClubModal from './ClubModal';
 import LeaveModal from './LeaveModal';
@@ -37,6 +38,11 @@ const UserInfo = ({
             <div className={styles.major}>
               <FaGraduationCap className={styles.icon} />
               <span> {profile.major}</span>
+            </div>
+            <div>
+              <FiMail className={styles.icon} />
+              <span>메세지</span>
+              {/* 링크나오면 라우팅 */}
             </div>
             <button
               className={styles.clubBtn}
