@@ -21,6 +21,11 @@
     font-weight: 400;
     margin-bottom: 35px;
   }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
   .idInput {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 90%;
