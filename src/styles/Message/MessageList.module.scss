@@ -36,7 +36,7 @@
       justify-content: center;
       align-items: center;
     }
-   
+
     .header {
       width: 100%;
       display: flex;
@@ -45,20 +45,30 @@
         width: 100%;
         display: flex;
         align-items: center;
-      h3 {
-        flex: 1;
-       
-      }
-      .option {
-        svg {
-          margin-right: 19px;
-          cursor: pointer;
-          &:hover {
-            color: blanchedalmond;
+        h3 {
+          flex: 1;
+        }
+        .option {
+          svg {
+            margin-right: 19px;
+            cursor: pointer;
+            &:hover {
+              color: blanchedalmond;
+            }
           }
         }
       }
     }
   }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    .entireMessage {
+      display: none;
+    }
+    .detailMessage {
+      display: none;
+    }
   }
 }

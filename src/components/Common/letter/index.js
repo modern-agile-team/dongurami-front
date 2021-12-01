@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { TiMessages } from 'react-icons/ti';
+import { FiMail } from 'react-icons/fi';
 import { getMessageAlarm, deleteMessageAlarm } from 'apis/message';
 import styles from '../../../styles/Common/Header/Header.module.scss';
 import AlarmContainer from './AlarmContainer';
+import { useRouter } from 'next/router';
 
 const MessageAlarm = ({ token }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [alarmList, setAlarmList] = useState([]);
   const [alarmShow, setAlarmShow] = useState(3);
   const ref = useRef(null);
+  const router = useRouter();
 
   const getAlarmData = () => {
     getMessageAlarm().then((res) => setAlarmList(res.data.letters));
@@ -23,7 +25,7 @@ const MessageAlarm = ({ token }) => {
   const onAlarmDeleteAll = async () => {
     confirm('전체 알람을 삭제하시겠습니까?') &&
       (await deleteMessageAlarm()
-        .then((res) => alert(res.data.msg))
+        .then((res) => alert('삭제가 완료되었습니다'))
         .catch((err) => alert(err.response.data.msg)));
     getAlarmData();
   };
@@ -40,7 +42,7 @@ const MessageAlarm = ({ token }) => {
 
   useEffect(() => {
     if (token) getAlarmData();
-  }, [token]);
+  }, [token, router]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -62,7 +64,7 @@ const MessageAlarm = ({ token }) => {
               )}
             </div>
           )}
-          <TiMessages size={24} />
+          <FiMail size={20} />
         </div>
         {isOpen && (
           <AlarmContainer

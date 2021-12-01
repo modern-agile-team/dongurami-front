@@ -25,6 +25,10 @@ export function getMessages(id) {
 export function getDetailMessages(id, letterNo) {
   return axios.get(`api/letter/${id}/${letterNo}`);
 }
+export function deleteMessage(recipientId, id) {
+  return axios.put(`/api/letter/${recipientId}/${id}`);
+}
+
 export function deleteMessageAlarm() {
   return axios.put(`/api/letter/entire`);
 }

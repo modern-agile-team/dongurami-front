@@ -4,9 +4,11 @@ import PromotionCommentContainer from './Comment/PromotionCommentContainer';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { deletePost } from 'apis/promotion';
+import api from 'apis/post';
 import dynamic from 'next/dynamic';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IoIosArrowForward } from 'react-icons/io';
+import { AiFillHeart } from 'react-icons/ai';
 import getToken from 'utils/getToken';
 import moment from 'moment';
 
@@ -14,15 +16,26 @@ const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
-const Post = ({ postId, getData, post, sendMessage }) => {
+const Post = ({ postId, getData, post, sendMessage, getPostData }) => {
   const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
     post;
   const user = useSelector((state) => state.user);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const onClick = () => {
     if (!getToken()) alert('로그인 후 이용해주세요.');
     else router.push(`/clubhome/${clubNo}`);
+  };
+
+  const onClickLike = async () => {
+    if (!user) return;
+    if (post.likedFlag) {
+      await api.unLikePost(post.no);
+    } else {
+      await api.likePost({ pid: post.no, url: router.asPath });
+    }
+    getPostData();
   };
 
   const onDelete = async () => {
@@ -91,6 +104,13 @@ const Post = ({ postId, getData, post, sendMessage }) => {
           theme="bubble"
           readOnly
         />
+        <button
+          className={`${styles.likeButton} ${post.likedFlag && styles.like}`}
+          onClick={onClickLike}
+        >
+          <AiFillHeart />
+          <span>&nbsp;{post.emotionCount}</span>
+        </button>
         {post.comments && (
           <PromotionCommentContainer
             comments={post.comments}

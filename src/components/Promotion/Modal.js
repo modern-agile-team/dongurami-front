@@ -19,18 +19,20 @@ const Modal = ({ postId, sendMessage }) => {
   const router = useRouter();
   let pid = postId;
 
-  
-  useEffect(async () => {
+  const getPostData = async () => {
     if (postId) {
-      dispatch(getPost({ category, pid })).then((response) => {
+      await dispatch(getPost({ category, pid })).then((response) => {
         setImages(response.payload.images);
       });
     } else {
       pid = router.query.id;
-      dispatch(getPost({ category, pid })).then((response) => {
+      await dispatch(getPost({ category, pid })).then((response) => {
         setImages(response.payload.images);
       });
     }
+  };
+  useEffect(() => {
+    getPostData();
   }, [dispatch]);
 
   return (
@@ -68,7 +70,12 @@ const Modal = ({ postId, sendMessage }) => {
         )}
       </div>
 
-      <Post postId={postId} post={post} sendMessage={sendMessage} />
+      <Post
+        postId={postId}
+        post={post}
+        sendMessage={sendMessage}
+        getPostData={getPostData}
+      />
     </div>
   );
 };

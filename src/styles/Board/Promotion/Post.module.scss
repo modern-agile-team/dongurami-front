@@ -116,6 +116,27 @@
     max-width: 100%;
   }
 }
+.likeButton {
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+  background-color: white;
+  color: gray;
+  &:hover {
+    color: indianred;
+    background-color: white;
+  }
+  & > svg {
+    display: block;
+    margin: auto;
+  }
+}
+
+.like {
+  color: white;
+  background-color: indianred;
+}
 
 @media screen and (max-width: 768px) {
   .container {
