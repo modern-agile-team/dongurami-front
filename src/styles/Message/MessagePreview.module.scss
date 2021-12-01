@@ -9,18 +9,23 @@
   .info {
     display: flex;
     align-items: center;
+
     .name {
+      display: flex;
       flex: 1;
-      font-size: 16px;
+      font-size: 14px;
+      margin-left: 10px;
     }
     .indate {
       font-size: 5px;
       font-color: gray;
+      margin-right: 8px;
     }
   }
   .description {
     font-size: 12px;
     font-color: gray;
+    margin-left: 10px;
   }
 }
 
@@ -37,16 +42,40 @@
     align-items: center;
     .name {
       flex: 1;
-      font-size: 16px;
+      font-size: 14px;
+      margin-left: 10px;
     }
     .indate {
       font-size: 5px;
       font-color: gray;
+      margin-right: 8px;
     }
   }
   .description {
     font-size: 12px;
     font-color: gray;
+    margin-left: 10px;
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .info {
+    display: flex;
+    align-items: center;
+    .name {
+      flex: 1;
+      font-size: 16px;
+      margin-left: 15px;
+    }
+    .indate {
+      font-size: 5px;
+      font-color: gray;
+      margin-right: 13px;
+    }
+  }
+  .description {
+    font-size: 12px;
+    font-color: gray;
+    margin-left: 15px;
+  }
+}

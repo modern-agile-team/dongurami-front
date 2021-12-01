@@ -4,22 +4,25 @@ import { useRouter } from 'next/router';
 import { getMessages, getDetailMessages, deleteMessage } from 'apis/message';
 import MobileEntireMessage from './MobileEntireMessage';
 import styles from '../../styles/Message/MessageList.module.scss';
-
 import SendMessage from './SendMessage';
 import Spinner from './Spiner';
 import DetailMessageListContainer from './DetailMessageListContainer';
 import EntireMessageList from './EntireMessageList';
+import MobileDetailMessage from './MobileDetailMessage';
 
 const MessageList = () => {
   const [messages, setMessages] = useState([]);
   const [recipientId, setRecipientId] = useState('');
   const [detailMessage, setDetailMessage] = useState([]);
   const [recipient, setRecipient] = useState('');
+  const [groupNo, setGroupNo] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
   const user = useSelector((state) => state.user);
   const router = useRouter();
+
+  let isRecipientId = '';
 
   const getLetterDatas = async () => {
     if (user) {
@@ -34,12 +37,17 @@ const MessageList = () => {
     setLoading(true);
     await getDetailMessages(user.id, letterNo).then((response) => {
       setDetailMessage(response.data.letters);
-      setRecipientId(
-        response.data.letters.find((el) => el.senderId !== user.id).senderId
+      isRecipientId = response.data.letters.find(
+        (el) => el.senderId !== user.id
       );
-      setRecipient(
-        response.data.letters.find((el) => el.senderId !== user.id).name
-      );
+      if (isRecipientId) {
+        console.log('1');
+        setRecipientId(isRecipientId.senderId);
+      } else {
+        setRecipientId(response.data.letters[0].recipientId);
+      }
+      setGroupNo(response.data.letters[0].groupNo);
+      setRecipient(response.data.letters[0].name);
       setLoading(false);
     });
   };
@@ -57,7 +65,8 @@ const MessageList = () => {
 
   const onDelete = async (id) => {
     alert('대화내용을 전부 삭제하시겠습니까?');
-    await deleteMessage(recipientId, id).then((response) => {
+    await deleteMessage(recipientId, id, groupNo).then((response) => {
+      console.log(recipientId, id, groupNo);
       alert(response.data.msg);
       router.replace(`message`);
     });
@@ -92,13 +101,26 @@ const MessageList = () => {
             inquiryMessage={inquiryMessage}
             setOpenModal={setOpenModal}
             onDelete={onDelete}
+            messages={messages}
           />
         )}
       </div>
-      <MobileEntireMessage
-        messages={messages}
-        onClickInquiry={onClickInquiry}
-      />
+      {router.query.id ? (
+        <MobileDetailMessage
+          detailMessage={detailMessage}
+          recipient={recipient}
+          inquiryMessage={inquiryMessage}
+          setOpenModal={setOpenModal}
+          onDelete={onDelete}
+          messages={messages}
+          isLoading={isLoading}
+        />
+      ) : (
+        <MobileEntireMessage
+          messages={messages}
+          onClickInquiry={onClickInquiry}
+        />
+      )}
       <SendMessage
         show={openModal}
         onClose={() => setOpenModal(false)}
@@ -106,6 +128,7 @@ const MessageList = () => {
         letterNo={router.query.id}
         inquiryMessage={inquiryMessage}
         otherId={recipientId}
+        groupNo={groupNo}
       />
     </div>
   );

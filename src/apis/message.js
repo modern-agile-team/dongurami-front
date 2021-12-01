@@ -18,6 +18,21 @@ export function sendLetter(
   });
 }
 
+export function replyLetter(
+  recipientId,
+  description,
+  writerHiddenFlag,
+  groupNo,
+  letterNo
+) {
+  return axios.post(`api/letter/${recipientId}/${letterNo}`, {
+    recipientId,
+    description,
+    writerHiddenFlag,
+    groupNo
+  });
+}
+
 export function getMessages(id) {
   return axios.get(`api/letter/${id}`);
 }
@@ -25,8 +40,11 @@ export function getMessages(id) {
 export function getDetailMessages(id, letterNo) {
   return axios.get(`api/letter/${id}/${letterNo}`);
 }
-export function deleteMessage(recipientId, id) {
-  return axios.put(`/api/letter/${recipientId}/${id}`);
+export function deleteMessage(recipientId, id, groupNo) {
+  console.log(groupNo);
+  return axios.put(`api/letter/${recipientId}/${id}`, {
+    groupNo
+  });
 }
 
 export function deleteMessageAlarm() {

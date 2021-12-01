@@ -3,7 +3,6 @@ import MessagePreview from './MessagePreview';
 import { useRouter } from 'next/router';
 
 const EntireMessageList = ({ messages, onClickInquiry }) => {
-  const router = useRouter();
   return (
     <>
       <div className={styles.header}>

@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { MdClose } from 'react-icons/md';
-import { sendLetter } from 'apis/message';
+import { sendLetter, replyLetter } from 'apis/message';
 
 import styles from '../../styles/Message/SendMessage.module.scss';
+import router from 'next/router';
 
 function SendMessage({
   show,
@@ -12,7 +13,8 @@ function SendMessage({
   detailMessage,
   letterNo,
   inquiryMessage,
-  otherId
+  otherId,
+  groupNo
 }) {
   const [description, setDescription] = useState('');
   const [isCheck, setIsCheck] = useState(false);
@@ -44,36 +46,60 @@ function SendMessage({
       recipientId = post.studentId;
       boardNo = post.no;
       boardFlag = 1;
+      await sendLetter(
+        recipientId,
+        description,
+        boardNo,
+        commentNo,
+        boardFlag,
+        writerHiddenFlag
+      ).then((response) => {
+        if (response.data.success) {
+          alert('쪽지가 전송되었습니다');
+          onClose();
+
+          setDescription('');
+        }
+      });
     } else if (!letter && detailMessage) {
       recipientId = otherId;
       boardFlag = detailMessage.boardFlag;
       boardNo = detailMessage.boardNo;
-      console.log(recipientId, boardFlag, boardNo);
-    } else if (letter) {
-      commentNo = letter.no;
-      recipientId = letter.studentId;
-      boardNo = post.no;
-    }
-    await sendLetter(
-      recipientId,
-      description,
-      boardNo,
-      commentNo,
-      boardFlag,
-      writerHiddenFlag
-    ).then((response) => {
-      if (response.data.success) {
-        if (detailMessage) {
+      await replyLetter(
+        recipientId,
+        description,
+        writerHiddenFlag,
+        groupNo,
+        router.query.id
+      ).then((response) => {
+        if (response.data.success) {
           alert('쪽지가 전송되었습니다');
           onClose();
-          inquiryMessage(letterNo);
-        } else {
-          alert('쪽지가 전송되었습니다');
-          onClose();
+          inquiryMessage(groupNo);
+          setDescription('');
         }
-        setDescription('');
-      }
-    });
+      });
+    } else if (letter) {
+      if (!Number(letter.studentId)) recipientId = '';
+      else recipientId = letter.studentId;
+      commentNo = letter.no;
+      boardNo = post.no;
+      await sendLetter(
+        recipientId,
+        description,
+        boardNo,
+        commentNo,
+        boardFlag,
+        writerHiddenFlag
+      ).then((response) => {
+        if (response.data.success) {
+          alert('쪽지가 전송되었습니다');
+          onClose();
+
+          setDescription('');
+        }
+      });
+    }
   };
 
   return (

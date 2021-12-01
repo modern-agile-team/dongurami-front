@@ -13,7 +13,9 @@ const MessageAlarm = ({ token }) => {
   const router = useRouter();
 
   const getAlarmData = () => {
-    getMessageAlarm().then((res) => setAlarmList(res.data.letters));
+    getMessageAlarm().then((res) => {
+      if (res.data.letters) setAlarmList(res.data.letters);
+    });
   };
 
   const showMoreAlarm = () => {
@@ -55,7 +57,7 @@ const MessageAlarm = ({ token }) => {
     <>
       <div className={styles.alarm} ref={ref}>
         <div className={styles.message} onClick={() => setIsOpen(!isOpen)}>
-          {alarmList.length > 0 && (
+          {alarmList && alarmList.length > 0 && (
             <div className={styles.messagecount}>
               {alarmList.length <= 99 ? (
                 <span>{alarmList.length}</span>
@@ -73,6 +75,7 @@ const MessageAlarm = ({ token }) => {
             onAlarmDeleteAll={onAlarmDeleteAll}
             alarmShow={alarmShow}
             getAlarmData={getAlarmData}
+            setIsOpen={setIsOpen}
           />
         )}
       </div>

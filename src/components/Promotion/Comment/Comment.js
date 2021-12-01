@@ -1,12 +1,18 @@
 import { useRef, useState } from 'react';
-import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import {
+  AiOutlineCheck,
+  AiOutlineDelete,
+  AiOutlineEdit,
+  AiFillHeart
+} from 'react-icons/ai';
+import api from 'apis/post';
 import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import moment from 'moment';
-import Modal from 'components/Common/Modal';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment, editComment } from 'apis/promotion';
 import { getPost } from 'redux/slices/post';
+import { useRouter } from 'next/router';
 
 const Comment = ({
   comment,
@@ -18,6 +24,7 @@ const Comment = ({
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
+  const router = useRouter();
   const descriptionDiv = useRef();
   const category = 'promotion';
 
@@ -46,6 +53,21 @@ const Comment = ({
       }
     );
   };
+
+  const onClickLike = async () => {
+    if (!user) return;
+    if (comment.likedFlag) {
+      await api.unLikeComment({ commentID: comment.no, parentCommentID });
+    } else {
+      await api.likeComment({
+        commentID: comment.no,
+        parentCommentID,
+        url: router.asPath
+      });
+    }
+    dispatch(getPost({ category, pid: post.no }));
+  };
+
   return (
     <>
       <div className={styles.comment}>
@@ -63,8 +85,8 @@ const Comment = ({
             <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
               <p>{comment.studentName}</p>
             </Link>
-            {post.studentId === comment.studentId && <p>작성자</p>}
-            {user && user.id === comment.studentId && (
+            {Boolean(post.isWriter) && <p>작성자</p>}
+            {Boolean(comment.isWriter) && (
               <div>
                 <button onClick={onEdit} className={styles['action-button']}>
                   {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
@@ -92,11 +114,20 @@ const Comment = ({
                 답글 쓰기
               </p>
             )}
-            {user && (
+            {user && user.id !== comment.studentId && (
               <p className={styles.reply} onClick={() => sendMessage(comment)}>
                 쪽지
               </p>
             )}
+            <button
+              className={`${styles.likeButton} ${
+                comment.likedFlag && styles.like
+              }`}
+              onClick={onClickLike}
+            >
+              <AiFillHeart />
+              <span>{comment.emotionCount}</span>
+            </button>
           </div>
         </div>
       </div>
