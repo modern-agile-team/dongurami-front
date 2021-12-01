@@ -44,7 +44,7 @@
   background: inherit;
   cursor: pointer;
   &:hover {
-    background-color: lightgray;
+    color: lightgray;
   }
 }
 
@@ -63,6 +63,7 @@
   border-radius: .25rem;
   background-color: white;
   color: gray;
+  cursor: pointer;
   &:hover {
     color: indianred;
     background-color: white;
