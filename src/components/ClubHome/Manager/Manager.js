@@ -18,8 +18,6 @@ export const Manager = () => {
   const [leader, setLeader] = useState('');
   const [applicantInfo, setApplicantInfo] = useState([]);
   const [applicantQNA, setApplicantQNA] = useState([]);
-  const [mergedApplicantQNA, setMergedApplicantQNA] = useState([]);
-  const [mergedApplicantInfo, setMergedApplicantInfo] = useState([]);
   const [applyAuth, setApplyAuth] = useState();
   const [boardAuth, setBoardAuth] = useState();
 
@@ -42,7 +40,6 @@ export const Manager = () => {
     setApplicantInfo(newData.applicant.applicantInfo);
     setLeader(newData.clubAdminOption.leader);
     setMembers(newData.clubAdminOption.memberAndAuthList);
-    setMergedApplicantQNA(processQuesData(newData.applicant.questionsAnswers));
     setApplyAuth(
       newData.clubAdminOption.memberAndAuthList.map(
         (auth) => auth.joinAdminFlag
@@ -93,7 +90,7 @@ export const Manager = () => {
     if (!e.target.id) return;
     const body = [
       {
-        applicant: mergedApplicantInfo[e.target.id].id,
+        applicant: applicantInfo[e.target.id].id,
         url: `clubhome/${clubId}`,
         notiCategoryNum: 2
       },
@@ -111,7 +108,7 @@ export const Manager = () => {
       if (!e.target.id) return;
       const body = [
         {
-          applicant: mergedApplicantInfo[e.target.id].id,
+          applicant: applicantInfo[e.target.id].id,
           url: `clubhome/${clubId}`,
           notiCategoryNum: 3
         },
@@ -123,7 +120,7 @@ export const Manager = () => {
           .catch((err) => alert(err.response.data.msg)));
       await getMembersData();
     },
-    [clubId, getMembersData, handleAfterApply, mergedApplicantInfo]
+    [clubId, getMembersData, handleAfterApply, applicantInfo]
   );
 
   // 회장 양도 PUT
@@ -198,14 +195,9 @@ export const Manager = () => {
     setBoardAuth(setAuths(boardAuthRef));
   }, []);
   //-------------------------------------------------------------//
-
   useEffect(() => {
-    applicantInfo.length > 0 && mergedApplicantQNA.length > 0
-      ? setMergedApplicantInfo(
-          processApplicantInfo(applicantInfo, mergedApplicantQNA)
-        )
-      : setMergedApplicantInfo(applicantInfo);
-  }, [applicantInfo, mergedApplicantQNA]);
+    applicantInfo.length > 0 && setApplicantInfo(applicantInfo);
+  }, [applicantInfo]);
 
   useEffect(() => {
     if (!clubId) return;
@@ -241,55 +233,9 @@ export const Manager = () => {
         onApplyReject={onApplyReject}
         applicantInfo={applicantInfo}
         applicantQNA={applicantQNA}
-        mergedApplicantInfo={mergedApplicantInfo}
       />
     </div>
   );
 };
 
 export default Manager;
-
-//--------------------가입 추가 질문 데이터 가공---------------------//
-const handlePieceData = (index, data, additionalQuestion) => {
-  const result = [...additionalQuestion];
-  result.push({
-    id: data[index].id,
-    questions: [data[index].question],
-    answers: [data[index].answer]
-  });
-  return result;
-};
-
-const completeTheData = (index, data, incompleteData) => {
-  const result = [...incompleteData];
-  for (let info of result) {
-    if (info.id === data[index].id) {
-      info.questions.push(data[index].question);
-      info.answers.push(data[index].answer);
-    }
-  }
-  return result;
-};
-
-const processQuesData = (data) => {
-  let result = [];
-  for (let index in data) {
-    if (index === '0' || (index > '0' && data[index - 1].id !== data[index].id))
-      result = handlePieceData(index, data, result);
-    else result = completeTheData(index, data, result);
-  }
-  return result;
-};
-//---------------------------------------------------------------------//
-
-// 가입 요청 데이터 가공
-const processApplicantInfo = (data, QNAs) => {
-  const result = [...data];
-  for (let index in result) {
-    if (QNAs[index].id === result[index].id) {
-      result[index].answers = QNAs[index].answers;
-      result[index].questions = QNAs[index].questions;
-    }
-  }
-  return result;
-};

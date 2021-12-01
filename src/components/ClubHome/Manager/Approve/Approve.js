@@ -6,11 +6,10 @@ import ApproveList from './ApproveList';
 const Approve = ({
   onApplyAccept,
   applicantInfo,
-  mergedApplicantInfo,
-  onApplyReject
+  onApplyReject,
+  applicantQNA
 }) => {
   const [listOpen, setListOpen] = useState(false);
-
   const onApplyListOpen = () => {
     setListOpen(!listOpen);
   };
@@ -26,7 +25,8 @@ const Approve = ({
         <ApproveList
           onApplyReject={onApplyReject}
           onApplyAccept={onApplyAccept}
-          applicantInfo={mergedApplicantInfo}
+          applicantInfo={applicantInfo}
+          applicantQNA={applicantQNA}
         />
       )}
     </div>
