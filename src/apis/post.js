@@ -18,7 +18,7 @@ const api = {
   },
   likePost: ({ pid, url }) => {
     return axios.patch(`/api/emotion/liked/board/${pid}`, {
-      url, notiCategoryNum: 9
+      url: url.slice(1), notiCategoryNum: 9
     });
   },
   unLikePost: (pid) => {
@@ -77,11 +77,11 @@ const api = {
   likeComment: ({ commentID, parentCommentID, url }) => {
     if (parentCommentID) {
       return axios.patch(`/api/emotion/liked/reply-comment/${commentID}`, {
-        url, notiCategoryNum: 11
+        url: url.slice(1), notiCategoryNum: 11
       });
     }
     return axios.patch(`/api/emotion/liked/comment/${commentID}`, {
-      url, notiCategoryNum: 10
+      url: url.slice(1), notiCategoryNum: 10
     });
   },
   unLikeComment: ({ commentID, parentCommentID }) => {
