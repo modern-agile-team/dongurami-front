@@ -15,12 +15,12 @@ const AlarmBody = ({ alarmList, alarmShow, showMoreAlarm, setIsDelete }) => {
           );
         })
       ) : (
-        <span>생성된 알람이 없습니다.</span>
+        <span>생성된 쪽지가 없습니다.</span>
       )}
       {alarmList.length > alarmShow && (
         <div className={styles.leftAlarms}>
           <span onClick={showMoreAlarm}>
-            {alarmList.slice(alarmShow).length}개의 알람이 더 있습니다.
+            {alarmList.slice(alarmShow).length}개의 쪽지가 더 있습니다.
           </span>
         </div>
       )}
