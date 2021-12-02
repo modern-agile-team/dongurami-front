@@ -4,8 +4,10 @@ import { FiRefreshCcw } from 'react-icons/fi';
 import { BsTrash } from 'react-icons/bs';
 import DetailMessageList from './DetailMessageList';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { SiNotion } from 'react-icons/si';
+import ReactTooltip from 'react-tooltip';
 
 const DetailMessageListContainer = ({
   detailMessage,
@@ -15,6 +17,12 @@ const DetailMessageListContainer = ({
   onDelete
 }) => {
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  });
+
   return (
     <>
       <div className={styles.header}>
@@ -22,15 +30,31 @@ const DetailMessageListContainer = ({
           <div className={styles.contain}>
             <h3>{recipient}</h3>
             <div className={styles.option}>
+              {isMounted && <ReactTooltip effect="solid" />}
               <IoPaperPlaneOutline
                 size={20}
                 onClick={() => setOpenModal(true)}
+                data-tip={'답장 보내기'}
+                data-type={'light'}
+                data-border={'true'}
+                data-border-color={'#bbbbbb'}
               />
               <FiRefreshCcw
                 size={20}
                 onClick={() => inquiryMessage(router.query.id)}
+                data-tip={'새로고침'}
+                data-type={'light'}
+                data-border={'true'}
+                data-border-color={'#bbbbbb'}
               />
-              <BsTrash size={20} onClick={() => onDelete(router.query.id)} />
+              <BsTrash
+                size={20}
+                onClick={() => onDelete(router.query.id)}
+                data-tip={'대화 전체 삭제'}
+                data-type={'light'}
+                data-border={'true'}
+                data-border-color={'#bbbbbb'}
+              />
             </div>
           </div>
         )}
