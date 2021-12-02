@@ -36,6 +36,9 @@
     font-size: 90%;
     margin: 0;
   }
+  span {
+    text-align: center;
+  }
 }
 
 .alarms::-webkit-scrollbar {
@@ -92,6 +95,8 @@
 .leftAlarms {
   font-size: 90%;
   margin-top: 1em;
+  display: flex;
+  justify-content: center;
   span {
     cursor: pointer;
     &:hover {

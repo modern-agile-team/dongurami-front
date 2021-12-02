@@ -5,18 +5,17 @@ import { changeComp } from 'redux/slices/chageComp';
 import { useRouter } from 'next/router';
 
 const alarmCategoriNum = (data) => {
-  const result = data.substr(0, 10) + '...';
-  const club = data;
+  const result = data.length > 15 ? data.substr(0, 15) + '...' : data;
   return {
     0: `${result}에 댓글이 달렸습니다.`,
     1: `${result}에 답글이 달렸습니다.`,
-    2: `${club}에서 가입이 승인되었습니다.`,
-    3: `${club}에서 가입이 거절되었습니다.`,
-    4: `${club}에 일정이 생성되었습니다.`,
-    5: `${club}에 일정이 수정되었습니다.`,
-    6: `${club}에 공지가 생성되었습니다.`,
-    7: `${club}에 지원했습니다.`,
-    8: `${club}에서 탈퇴했습니다.`,
+    2: `${result}에서 가입이 승인되었습니다.`,
+    3: `${result}에서 가입이 거절되었습니다.`,
+    4: `${result}에 일정이 생성되었습니다.`,
+    5: `${result}에 일정이 수정되었습니다.`,
+    6: `${result}에 공지가 생성되었습니다.`,
+    7: `${result}에 지원했습니다.`,
+    8: `${result}에서 탈퇴했습니다.`,
     9: `${result}에 좋아요가 생겼습니다.`
   };
 };
