@@ -72,9 +72,27 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
     dispatch(getPost());
   };
 
+  const profileImage = (
+    <img
+      src={
+        comment.profileImageUrl ??
+        'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+      }
+      alt="profile"
+    />
+  );
+
+  const WithProfileLink = ({ children }) => (
+    (comment.profileImageUrl) ?
+    (<Link href={`/profile/${comment.studentId}`} passHref>
+      {children}
+    </Link>) :
+    children
+  );
+
   return (
     <div className={styles.comment}>
-      <Link href={`/profile/${comment.studentId}`} passHref>
+      <WithProfileLink>
         <img
           src={
             comment.profileImageUrl ??
@@ -82,12 +100,12 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
           }
           alt="profile"
         />
-      </Link>
+      </WithProfileLink>
       <div>
         <div>
-          <Link href={`/profile/${comment.studentId}`} passHref>
+          <WithProfileLink>
             <p className={styles.profileImage}>{comment.studentName}</p>
-          </Link>
+          </WithProfileLink>
           {Boolean(post.isWriter) && <p>작성자</p>}
           {Boolean(comment.isWriter) && (
             <div>
