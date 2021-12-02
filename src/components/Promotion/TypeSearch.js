@@ -3,6 +3,7 @@ import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
+import CategoriTags from 'components/Common/CategoriTags';
 
 const TypeSearch = ({
   type,
@@ -26,19 +27,9 @@ const TypeSearch = ({
     onSearch();
   };
 
-  const category = ['전체', '스터디', '음악', '취미', '게임', '운동', '종교'];
-
   return (
     <div className={styles.container}>
-      <ul className={styles.tagList}>
-        {category.map((el, index) => {
-          return (
-            <li key={index} name={el} onClick={() => categorySearch(el)}>
-              #{el}
-            </li>
-          );
-        })}
-      </ul>
+      <CategoriTags onCategorySearch={categorySearch} />
       <div className={styles.body}>
         <select value={type} onChange={onTypeChange}>
           <option value="title">제목</option>

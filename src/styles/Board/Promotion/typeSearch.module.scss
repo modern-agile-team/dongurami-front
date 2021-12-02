@@ -3,33 +3,6 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 40px;
-  ul {
-    display: flex;
-    list-style: none;
-
-    li {
-      cursor: pointer;
-      background-color: #f1f3f5;
-      border-radius: 15px;
-      padding: 0.8rem 1.5rem;
-      font-size: 16px;
-      font-family: 'twayair';
-      margin-right: 6px;
-
-      transition-duration: 0.5s;
-      -webkit-transition-duration: 0.5s;
-
-      &:hover {
-        transition: 0.3s;
-        filter: brightness(96%);
-      }
-      &:active {
-        transition: 0.1s;
-        filter: brightness(100%);
-      }
-    }
-  }
-
   select {
     border-radius: 3px;
     height: 2rem;
@@ -74,7 +47,6 @@
       }
     }
   }
-
   .writeBtn {
     width: 7em;
     height: 2.5rem;
@@ -91,7 +63,6 @@
     }
   }
 }
-
 @media screen and (max-width: 768px) {
   .container {
     margin-top: 1rem;
@@ -113,20 +84,6 @@
 @media screen and (max-width: 480px) {
   .container {
     margin-bottom: 20px;
-    ul {
-      padding: 0%;
-      margin-top: 0%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      li {
-        padding: 10px;
-        margin: 5px;
-        width: 20%;
-        text-align: center;
-        font-size: 12px;
-      }
-    }
     .body {
       width: 95%;
       select {
