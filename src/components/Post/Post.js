@@ -106,7 +106,7 @@ function Post({
             <div className={styles.profileLink}>{post.name}</div>
           </div>
           <div>
-            {Boolean === 'clubActivity' &&
+            {category === 'clubActivity' &&
               user &&
               user.club.some(({ no }) => no === clubNum) && (
                 <Link
