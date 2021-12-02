@@ -20,7 +20,7 @@ function setEndOfContenteditable(contentEditableElement) {
   selection.addRange(range); //make the range you have just created the visible selection
 }
 
-function Comment({ comment, parentCommentID, setParentCommentID }) {
+function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const post = useSelector((state) => state.post);
@@ -35,14 +35,27 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
 
   const onEdit = async () => {
     if (isContentEditable) {
-      await api.putComment({ category: post.category, pid: post.no, commentID: comment.no, description: descriptionDiv.current.textContent, parentCommentID, clubNum: router.query.id });
+      await api.putComment({
+        category: post.category,
+        pid: post.no,
+        commentID: comment.no,
+        description: descriptionDiv.current.textContent,
+        parentCommentID,
+        clubNum: router.query.id
+      });
       dispatch(getPost());
     }
     setIsContentEditable(!isContentEditable);
     setEndOfContenteditable(descriptionDiv.current);
   };
   const onDelete = async () => {
-    await api.deleteComment({ category: post.category, pid: post.no, commentID: comment.no, parentCommentID, clubNum: router.query.id });
+    await api.deleteComment({
+      category: post.category,
+      pid: post.no,
+      commentID: comment.no,
+      parentCommentID,
+      clubNum: router.query.id
+    });
     dispatch(getPost());
   };
   const onClickLike = async () => {
@@ -50,7 +63,11 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
     if (comment.likedFlag) {
       await api.unLikeComment({ commentID: comment.no, parentCommentID });
     } else {
-      await api.likeComment({ commentID: comment.no, parentCommentID, url: router.asPath });
+      await api.likeComment({
+        commentID: comment.no,
+        parentCommentID,
+        url: router.asPath
+      });
     }
     dispatch(getPost());
   };
@@ -58,28 +75,61 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
   return (
     <div className={styles.comment}>
       <Link href={`/profile/${comment.studentId}`} passHref>
-        <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
+        <img
+          src={
+            comment.profileImageUrl ??
+            'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+          }
+          alt="profile"
+        />
       </Link>
       <div>
         <div>
           <Link href={`/profile/${comment.studentId}`} passHref>
             <p className={styles.profileImage}>{comment.studentName}</p>
           </Link>
-          {(Boolean(post.isWriter)) && <p>작성자</p>}
-          {(Boolean(comment.isWriter)) && (
+          {Boolean(post.isWriter) && <p>작성자</p>}
+          {Boolean(comment.isWriter) && (
             <div>
-              <button onClick={onEdit} className={styles['action-button']}>{(isContentEditable) ? <AiOutlineCheck /> : <AiOutlineEdit />}</button>
-              <button onClick={onDelete} className={styles['action-button']}><AiOutlineDelete /></button>
+              <button onClick={onEdit} className={styles['action-button']}>
+                {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
+              </button>
+              <button onClick={onDelete} className={styles['action-button']}>
+                <AiOutlineDelete />
+              </button>
             </div>
           )}
         </div>
-        <div ref={descriptionDiv} contentEditable={isContentEditable} suppressContentEditableWarning={true}>{comment.description}</div>
+        <div
+          ref={descriptionDiv}
+          contentEditable={isContentEditable}
+          suppressContentEditableWarning={true}
+        >
+          {comment.description}
+        </div>
         <div>
           <p>{moment(comment.inDate).format('YYYY-MM-DD')}</p>
-          {(user && comment.no === comment.groupNo) && (
-            <p className={styles.reply} onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
+          {user && comment.no === comment.groupNo && (
+            <p
+              className={styles.reply}
+              onClick={() => {
+                setParentCommentID(comment.no);
+              }}
+            >
+              답글 쓰기
+            </p>
           )}
-          <button className={`${styles.likeButton} ${(comment.likedFlag) && styles.like}`} onClick={onClickLike}>
+          {user && user.id !== comment.studentId && (
+            <p className={styles.reply} onClick={() => sendLetter(comment)}>
+              쪽지
+            </p>
+          )}
+          <button
+            className={`${styles.likeButton} ${
+              comment.likedFlag && styles.like
+            }`}
+            onClick={onClickLike}
+          >
             <AiFillHeart />
             <span>{comment.emotionCount}</span>
           </button>

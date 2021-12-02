@@ -8,6 +8,10 @@ export function sendLetter(
   boardFlag,
   writerHiddenFlag
 ) {
+  if (!description.length) {
+    alert('내용을 적어주세요');
+    return;
+  }
   return axios.post(`api/letter`, {
     recipientId,
     description,
@@ -22,14 +26,13 @@ export function replyLetter(
   recipientId,
   description,
   writerHiddenFlag,
-  groupNo,
-  letterNo
+  letterNo,
+  userId
 ) {
-  return axios.post(`api/letter/${recipientId}/${letterNo}`, {
+  return axios.post(`api/letter/${userId}/${letterNo}`, {
     recipientId,
     description,
-    writerHiddenFlag,
-    groupNo
+    writerHiddenFlag
   });
 }
 
@@ -48,7 +51,7 @@ export function deleteMessage(recipientId, id, groupNo) {
 }
 
 export function deleteMessageAlarm() {
-  return axios.put(`/api/letter/entire`);
+  return axios.put(`api/letter/entire`);
 }
 
 export function getMessageAlarm() {

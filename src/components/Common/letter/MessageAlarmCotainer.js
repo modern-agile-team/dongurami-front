@@ -1,11 +1,11 @@
 import styles from '../../../styles/MessageAlarm/AlarmContainer.module.scss';
-import AlarmBody from './AlarmBody';
+import MessageAlarmBody from './MessageAlarmBody';
 import { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import router, { useRouter } from 'next/router';
 import { MdOutlineRouter } from 'react-icons/md';
 
-const AlarmContainer = ({
+const MessageAlarmContainer = ({
   alarmList,
   showMoreAlarm,
   onAlarmDeleteAll,
@@ -16,7 +16,7 @@ const AlarmContainer = ({
   const [isDelete, setIsDelete] = useState(false);
   const onRoute = () => {
     setIsOpen(false);
-    router.push('message');
+    router.push('/message');
   };
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const AlarmContainer = ({
             <FaTrashAlt size={13} onClick={onAlarmDeleteAll} />
           </div>
         </div>
-        <AlarmBody
+        <MessageAlarmBody
           setIsDelete={setIsDelete}
           alarmList={alarmList}
           alarmShow={alarmShow}
@@ -48,4 +48,4 @@ const AlarmContainer = ({
   );
 };
 
-export default AlarmContainer;
+export default MessageAlarmContainer;

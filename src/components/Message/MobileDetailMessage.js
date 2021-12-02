@@ -50,6 +50,7 @@ const MobileDetailMessage = ({
             )}
           </div>
           {router?.query.id &&
+            detailMessage &&
             detailMessage.map((message, idx) => {
               return <DetailMessageList key={idx} message={message} />;
             })}
