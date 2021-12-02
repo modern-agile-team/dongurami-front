@@ -7,6 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setCategory } from 'redux/slices/post';
 import moment from 'moment';
+import {
+  DonguramiFillButton,
+  DonguramiOutlineButton
+} from 'components/Common/DonguramiButton';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -54,9 +58,11 @@ function Post({ category, post, onDelete, editLink }) {
             {user?.id === post.studentId && (
               <>
                 <Link href={editLink} passHref>
-                  <button>수정하기</button>
+                  <DonguramiFillButton>수정하기</DonguramiFillButton>
                 </Link>
-                <button onClick={onDelete}>삭제하기</button>
+                <DonguramiFillButton onClick={onDelete}>
+                  삭제하기
+                </DonguramiFillButton>
               </>
             )}
             <div>{moment(post.inDate).format('YYYY-MM-DD')}</div>
