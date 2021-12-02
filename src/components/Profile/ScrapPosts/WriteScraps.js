@@ -43,6 +43,7 @@ const WriteScrpas = () => {
   return (
     <Container category="personal" type="글 작성하기">
       <WriteContent
+        category="personal"
         title={title}
         description={description}
         setTitle={setTitle}

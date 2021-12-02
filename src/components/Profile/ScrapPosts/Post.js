@@ -7,10 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setCategory } from 'redux/slices/post';
 import moment from 'moment';
-import {
-  DonguramiFillButton,
-  DonguramiOutlineButton
-} from 'components/Common/DonguramiButton';
+import { DonguramiFillButton } from 'components/Common/DonguramiButton';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -45,7 +42,7 @@ function Post({ category, post, onDelete, editLink }) {
                 className={styles.profileImage}
                 src={`${
                   post.profileImageUrl ??
-                  'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
+                  'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
                 }`}
                 alt="profileImage"
               />

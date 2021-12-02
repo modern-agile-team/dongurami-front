@@ -9,7 +9,7 @@ function Write({ category, title, description, isAnon, setTitle, setDescription,
       <hr />
       <ReactQuillContainer description={description} setDescription={setDescription} />
       <div>
-        {(category !== 'promotion' && category !== 'notice' && category !== 'clubNotice' && category !== 'clubActivity') && (<label>
+        {(category !== 'promotion' && category !== 'notice' && category !== 'clubNotice' && category !== 'clubActivity' && category !== 'personal') && (<label>
           익명여부:
           <input type="checkbox" checked={isAnon} onChange={() => setIsAnon(!isAnon)} />
         </label>)}
