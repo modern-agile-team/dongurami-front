@@ -31,7 +31,7 @@ const Option = ({ setOpenOptions, setOpenMessage, routePath }) => {
             쪽지 보내기
           </li>
         )}
-        {!NaN == parseInt(post?.studentId) && (
+        {!(NaN == parseInt(post?.studentId)) && user && (
           <li className={styles.profile} onClick={() => router.push(routePath)}>
             프로필
           </li>
