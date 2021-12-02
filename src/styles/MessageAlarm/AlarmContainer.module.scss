@@ -3,12 +3,13 @@
   flex-direction: column;
   position: absolute;
   padding: 1em;
-  width: 25%;
+  width: 20vw;
+  min-width: max-content;
   border-radius: 6px;
   box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.1);
   background-color: white;
-  top: 60px;
-  right: 10px;
+  top: 45px;
+  right: 0;
   margin-left: -70px;
   max-height: 50vh;
   hr {
@@ -22,8 +23,8 @@
   width: 15px;
   height: 15px;
   border: 1px solid rgba(0, 0, 0, 0.07);
-  top: 53px;
-  right: 11em;
+  top: 40px;
+  right: calc(6em + 1px);
   transform: rotate(45deg);
 }
 
@@ -118,15 +119,21 @@
 }
 
 .entireMessage {
-  font-size: 13px;
-  text-decoration: underline;
+  display: flex;
   position: absolute;
-  margin-right: 10px;
-  margin-top: 13px;
+  justify-content: center;
+  width: 90%;
+  font-size: 80%;
   padding-bottom: 5px;
-  right: 0;
   bottom: 0;
+  color: #66b6a9;
   cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:active {
+    transform: scale(95%);
+  }
 }
 
 @media (max-width: 1024px) {
