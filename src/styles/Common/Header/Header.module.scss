@@ -54,7 +54,8 @@
     .userProflie {
       padding: 0 5px;
       padding-top: 5px;
-      margin-right: 1.5rem;
+      margin-right: -22px;
+      margin-left: 5px;
       width: 30px;
       height: 30px;
       border-radius: 50%;
@@ -67,10 +68,11 @@
       }
     }
     .Profile {
-      margin-right: 2rem;
+      margin-right: -18px;
+      margin-left: 8px;
       width: 25px;
       height: 25px;
-      transform: translateY(6%);
+      transform: translateY(8%);
       color: rgb(172, 172, 172);
       &:hover {
         transform: scale(1.15);
