@@ -44,8 +44,7 @@ function SendMessage({
     let boardNo = 0;
 
     if (isCheck) writerHiddenFlag = 1;
-    if (!letter && !detailMessage) {
-      console.log('작성자');
+    if (!letter || (!letter.length && !detailMessage)) {
       if (!Number(post.studentId)) recipientId = '';
       else recipientId = post.studentId;
       boardNo = post.no;
@@ -85,7 +84,6 @@ function SendMessage({
         }
       });
     } else if (letter.length) {
-      console.log('댓글');
       if (!Number(letter.studentId)) recipientId = '';
       else recipientId = letter.studentId;
       commentNo = letter.no;

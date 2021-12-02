@@ -8,10 +8,6 @@ export function sendLetter(
   boardFlag,
   writerHiddenFlag
 ) {
-  if (!description.length) {
-    alert('내용을 적어주세요');
-    return;
-  }
   return axios.post(`api/letter`, {
     recipientId,
     description,
@@ -44,7 +40,6 @@ export function getDetailMessages(id, letterNo) {
   return axios.get(`api/letter/${id}/${letterNo}`);
 }
 export function deleteMessage(recipientId, id, groupNo) {
-  console.log(groupNo);
   return axios.put(`api/letter/${recipientId}/${id}`, {
     groupNo
   });
