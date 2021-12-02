@@ -27,5 +27,8 @@
       color: gray;
       font-size: .75rem;
     }
+    & > .emotion {
+      float: right;
+    }
   }
 }
