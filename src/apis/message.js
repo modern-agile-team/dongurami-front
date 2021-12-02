@@ -8,7 +8,6 @@ export function sendLetter(
   boardFlag,
   writerHiddenFlag
 ) {
-  console.log('안녕');
   return axios.post(`api/letter`, {
     recipientId,
     description,
