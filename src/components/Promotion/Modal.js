@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
-const Modal = ({ postId }) => {
+const Modal = ({ postId, sendMessage, setOpenMessage }) => {
   const [images, setImages] = useState([]);
   const category = 'promotion';
   const dispatch = useDispatch();
@@ -19,17 +19,20 @@ const Modal = ({ postId }) => {
   const router = useRouter();
   let pid = postId;
 
-  useEffect(async () => {
+  const getPostData = async () => {
     if (postId) {
-      dispatch(getPost({ category, pid })).then((response) => {
+      await dispatch(getPost({ category, pid })).then((response) => {
         setImages(response.payload.images);
       });
     } else {
       pid = router.query.id;
-      dispatch(getPost({ category, pid })).then((response) => {
+      await dispatch(getPost({ category, pid })).then((response) => {
         setImages(response.payload.images);
       });
     }
+  };
+  useEffect(() => {
+    getPostData();
   }, [dispatch]);
 
   return (
@@ -67,7 +70,13 @@ const Modal = ({ postId }) => {
         )}
       </div>
 
-      <Post postId={postId} post={post} />
+      <Post
+        postId={postId}
+        post={post}
+        sendMessage={sendMessage}
+        getPostData={getPostData}
+        setOpenMessage={setOpenMessage}
+      />
     </div>
   );
 };

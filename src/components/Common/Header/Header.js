@@ -10,6 +10,7 @@ import getToken from 'utils/getToken';
 import { useRouter } from 'next/router';
 import { getUserData } from 'apis/user';
 import Alarm from '../Alarm';
+import MessageAlarm from '../letter';
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -81,6 +82,8 @@ function Header() {
                 id={open ? styles.show : styles.hide}
               >
                 <Alarm token={token} />
+                <MessageAlarm className={styles.message} token={token} />
+
                 <div className={styles.profileWrap}>
                   {userProflie ? (
                     <img

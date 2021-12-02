@@ -3,12 +3,12 @@
   flex-direction: column;
   position: absolute;
   padding: 1em;
-  width: fit-content;
+  width: 25%;
   border-radius: 6px;
   box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.1);
   background-color: white;
   top: 60px;
-  right: 70px;
+  right: 10px;
   margin-left: -70px;
   max-height: 50vh;
   hr {
@@ -23,21 +23,21 @@
   height: 15px;
   border: 1px solid rgba(0, 0, 0, 0.07);
   top: 53px;
+  right: 11em;
   transform: rotate(45deg);
 }
 
 .alarms {
   display: flex;
   flex-direction: column;
+  text-align: center;
   justify-content: space-between;
   margin-top: 5px;
   overflow-y: auto;
+  margin-bottom: 10px;
   p {
     font-size: 90%;
     margin: 0;
-  }
-  span {
-    text-align: center;
   }
 }
 
@@ -95,8 +95,6 @@
 .leftAlarms {
   font-size: 90%;
   margin-top: 1em;
-  display: flex;
-  justify-content: center;
   span {
     cursor: pointer;
     &:hover {
@@ -111,11 +109,24 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    p:nth-child(2) {
+    margin-top: 10px;
+    p:nth-child(1) {
       color: #66b6a9;
     }
   }
   align-items: flex-end;
+}
+
+.entireMessage {
+  font-size: 13px;
+  text-decoration: underline;
+  position: absolute;
+  margin-right: 10px;
+  margin-top: 13px;
+  padding-bottom: 5px;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
 }
 
 @media (max-width: 1024px) {

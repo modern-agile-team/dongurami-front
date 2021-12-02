@@ -1,0 +1,16 @@
+.header {
+  display: none;
+  width: 100%;
+}
+.mobile {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    display: flex;
+  }
+  .mobile {
+    display: flex;
+  }
+}

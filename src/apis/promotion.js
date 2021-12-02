@@ -55,19 +55,20 @@ export function deleteComment(commentNo, parentCommentID, postId) {
   return axios.delete(`api/board/promotion/${postId}/${commentNo}`);
 }
 
-export function addComment(postId, description, parentCommentID) {
+export function addComment(postId, description, parentCommentID, hiddenFlag) {
+  console.log(postId);
   if (parentCommentID) {
     return axios.post(`/api/board/promotion/${postId}/${parentCommentID}`, {
-      id: 'test1',
       description,
       url: `promotion?id=${postId}`,
-      notiCategoryNum: 1
+      notiCategoryNum: 1,
+      hiddenFlag
     });
   }
   return axios.post(`api/board/promotion/${postId}`, {
-    id: 'test1',
     description,
     url: `promotion?id=${postId}`,
-    notiCategoryNum: 0
+    notiCategoryNum: 0,
+    hiddenFlag
   });
 }

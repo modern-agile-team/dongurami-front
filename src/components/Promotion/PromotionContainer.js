@@ -6,11 +6,13 @@ import { useRouter } from 'next/router';
 
 import Modal from './Modal';
 import Promotion from './Promotion';
+import SendMessage from 'components/Message/SendMessage';
 
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openMessage, setOpenMessage] = useState(false);
   const [postId, setPostId] = useState('');
   const [boardData, setBoardData] = useState([]);
   const [searchItem, setSearchItem] = useState('');
@@ -18,7 +20,7 @@ const PromotionContainer = () => {
   const [type, setType] = useState('title');
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
-
+  const [letter, setLetter] = useState();
   const router = useRouter();
 
   let isLoading = false;
@@ -133,6 +135,11 @@ const PromotionContainer = () => {
     setSearchItem(el);
   };
 
+  const sendMessage = (comment) => {
+    setLetter(comment);
+    setOpenMessage(true);
+  };
+
   const infiniteScroll = () => {
     const { documentElement } = document;
     const scrollHeight = documentElement.scrollHeight;
@@ -195,7 +202,18 @@ const PromotionContainer = () => {
           })}
         </div>
       </div>
-      {openModal && <Modal setOpenModal={setOpenModal} postId={postId} />}
+      {openModal && (
+        <Modal
+          postId={postId}
+          sendMessage={sendMessage}
+          setOpenMessage={setOpenMessage}
+        />
+      )}
+      <SendMessage
+        show={openMessage}
+        onClose={() => setOpenMessage(false)}
+        letter={letter}
+      />
     </>
   );
 };

@@ -1,0 +1,39 @@
+.rect {
+  left: 18px;
+  top: 33px;
+  transform: rotate(135deg);
+  position: absolute;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+  width: 10px;
+  height: 10px;
+}
+
+.dropdownMenu {
+  display: flex;
+  flex-direction: column;
+  top: 20px;
+  left: 0;
+  padding: 16px;
+  list-style-type: none;
+  position: absolute;
+  box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  z-index: 99999;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    &:hover {
+      svg {
+        color: #c2f2dc;
+      }
+      color: gray;
+    }
+    cursor: pointer;
+  }
+  svg {
+    margin-right: 5px;
+  }
+}

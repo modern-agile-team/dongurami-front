@@ -50,6 +50,7 @@
   }
   .boardInfo {
     .profile {
+      position: relative;
       display: flex;
       align-items: center;
       img {
@@ -67,6 +68,12 @@
     text-align: right;
     margin-top: 3rem;
   }
+}
+
+.options {
+  border: 1px solid;
+  top: 30px;
+  position: absolute;
 }
 
 .container::-webkit-scrollbar {
@@ -115,6 +122,27 @@
   img {
     max-width: 100%;
   }
+}
+.likeButton {
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+  background-color: white;
+  color: gray;
+  &:hover {
+    color: indianred;
+    background-color: white;
+  }
+  & > svg {
+    display: block;
+    margin: auto;
+  }
+}
+
+.like {
+  color: white;
+  background-color: indianred;
 }
 
 @media screen and (max-width: 768px) {
