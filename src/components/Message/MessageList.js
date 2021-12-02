@@ -35,22 +35,24 @@ const MessageList = () => {
   };
   const inquiryMessage = async (letterNo) => {
     setLoading(true);
-    await getDetailMessages(user.id, letterNo).then((response) => {
-      setDetailMessage(response.data.letters);
-      isRecipientId = response.data.letters.find(
-        (el) => el.senderId !== user.id
-      );
+    if (user) {
+      await getDetailMessages(user.id, letterNo).then((response) => {
+        setDetailMessage(response.data.letters);
+        isRecipientId = response.data.letters.find(
+          (el) => el.senderId !== user.id
+        );
 
-      if (isRecipientId) {
-        setRecipientId(isRecipientId.senderId);
-      } else {
-        setRecipientId(response.data.letters[0].recipientId);
-      }
+        if (isRecipientId) {
+          setRecipientId(isRecipientId.senderId);
+        } else {
+          setRecipientId(response.data.letters[0].recipientId);
+        }
 
-      setGroupNo(response.data.letters[0].groupNo);
-      setRecipient(response.data.letters[0].name);
-      setLoading(false);
-    });
+        setGroupNo(response.data.letters[0].groupNo);
+        setRecipient(response.data.letters[0].name);
+        setLoading(false);
+      });
+    }
   };
 
   const onClickInquiry = (no) => {
@@ -77,7 +79,7 @@ const MessageList = () => {
   }, [user]);
 
   useEffect(() => {
-    if (router.query.id && user?.id) inquiryMessage(router.query.id);
+    if (router?.query.id && user?.id) inquiryMessage(router.query.id);
     else getLetterDatas();
   }, [user, router]);
   return (
@@ -127,7 +129,7 @@ const MessageList = () => {
         letterNo={router.query.id}
         inquiryMessage={inquiryMessage}
         otherId={recipientId}
-        userId={user.id}
+        user={user}
       />
     </div>
   );

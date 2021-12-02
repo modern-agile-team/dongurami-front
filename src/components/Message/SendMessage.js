@@ -14,11 +14,12 @@ function SendMessage({
   inquiryMessage,
   otherId,
   letterNo,
-  userId
+  user
 }) {
   const [description, setDescription] = useState('');
   const [isCheck, setIsCheck] = useState(false);
   const post = useSelector((state) => state.post);
+  const userId = user?.id;
 
   const modalContainer = useRef();
 
