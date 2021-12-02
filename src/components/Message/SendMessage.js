@@ -44,7 +44,7 @@ function SendMessage({
     let boardNo = 0;
 
     if (isCheck) writerHiddenFlag = 1;
-    if (!letter || (!letter.length && !detailMessage)) {
+    if (!detailMessage && (!letter || !letter?.length)) {
       if (!Number(post.studentId)) recipientId = '';
       else recipientId = post.studentId;
       boardNo = post.no;
