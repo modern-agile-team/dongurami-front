@@ -39,11 +39,14 @@ const UserInfo = ({
               <FaGraduationCap className={styles.icon} />
               <span> {profile.major}</span>
             </div>
-            <div>
-              <FiMail className={styles.icon} />
-              <span>메세지</span>
-              {/* 링크나오면 라우팅 */}
-            </div>
+            {userInfo.id === profile.id && (
+              <div>
+                <FiMail className={styles.icon} />
+                <Link href={{ pathname: '/message' }} passHref>
+                  <span className={styles.message}>쪽지함</span>
+                </Link>
+              </div>
+            )}
             <button
               className={styles.clubBtn}
               onClick={() => {
