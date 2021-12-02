@@ -11,7 +11,7 @@ import { getPost, setCategory } from 'redux/slices/post';
 import moment from 'moment';
 import { AiFillHeart } from 'react-icons/ai';
 import Option from 'components/Common/letter/Option';
-import { DonguramiFillButton, DonguramiOutlineButton } from 'components/Common/DonguramiButton';
+import { DonguramiFillButton } from 'components/Common/DonguramiButton';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -92,7 +92,7 @@ function Post({
               src={`${
                 post.profileImageUrl ??
                 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
-              }?w=30`}
+              }`}
               alt="profileImage"
               onClick={() => setOpenOptions(!openOptions)}
             />
