@@ -46,7 +46,7 @@ function Post({ category, post, onDelete, editLink }) {
                 src={`${
                   post.profileImageUrl ??
                   'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
-                }?w=30`}
+                }`}
                 alt="profileImage"
               />
             </Link>
