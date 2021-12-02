@@ -21,10 +21,10 @@ const MonthDays = ({ inDate, setDate, schedule, days, flag }) => {
         <div className={styles.date}>
           {flag === 'today' ? (
             <div className={styles.todayContainer}>
-              <span className={dataStructure.class}>{days.format('D')}</span>
+              <span className={dataStructure.class}>{days.format('DD')}</span>
             </div>
           ) : (
-            <span className={dataStructure.class}>{days.format('D')}</span>
+            <span className={dataStructure.class}>{days.format('DD')}</span>
           )}
         </div>
         <div className={styles.scheduleTitle}>
