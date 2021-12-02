@@ -1,5 +1,5 @@
 import styles from '../../../styles/MessageAlarm/AlarmContainer.module.scss';
-import AlarmList from './AlarmList';
+import MessageAlarmList from './MessageAlarmList';
 
 const AlarmBody = ({ alarmList, alarmShow, showMoreAlarm, setIsDelete }) => {
   return (
@@ -7,7 +7,11 @@ const AlarmBody = ({ alarmList, alarmShow, showMoreAlarm, setIsDelete }) => {
       {alarmList.length > 0 ? (
         alarmList.slice(0, alarmShow).map((alarm) => {
           return (
-            <AlarmList key={alarm.no} alarm={alarm} setIsDelete={setIsDelete} />
+            <MessageAlarmList
+              key={alarm.no}
+              alarm={alarm}
+              setIsDelete={setIsDelete}
+            />
           );
         })
       ) : (

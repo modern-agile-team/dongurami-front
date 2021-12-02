@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FiMail } from 'react-icons/fi';
 import { getMessageAlarm, deleteMessageAlarm } from 'apis/message';
 import styles from '../../../styles/Common/Header/Header.module.scss';
-import AlarmContainer from './AlarmContainer';
+import MessageAlarmContainer from './MessageAlarmCotainer';
 import { useRouter } from 'next/router';
 
 const MessageAlarm = ({ token }) => {
@@ -12,10 +12,10 @@ const MessageAlarm = ({ token }) => {
   const ref = useRef(null);
   const router = useRouter();
 
-  const getAlarmData = () => {
-    console.log('안녕');
+  const getAlarmData = (n) => {
     getMessageAlarm().then((res) => {
       if (res.data.letters) setAlarmList(res.data.letters);
+      else setAlarmList([]);
     });
   };
 
@@ -30,7 +30,7 @@ const MessageAlarm = ({ token }) => {
       (await deleteMessageAlarm()
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
-    getAlarmData();
+    getAlarmData(1);
   };
 
   // 알람 일부 삭제
@@ -70,7 +70,7 @@ const MessageAlarm = ({ token }) => {
           <FiMail size={20} />
         </div>
         {isOpen && (
-          <AlarmContainer
+          <MessageAlarmContainer
             alarmList={alarmList}
             showMoreAlarm={showMoreAlarm}
             onAlarmDeleteAll={onAlarmDeleteAll}

@@ -35,21 +35,24 @@ const MessageList = () => {
   };
   const inquiryMessage = async (letterNo) => {
     setLoading(true);
-    await getDetailMessages(user.id, letterNo).then((response) => {
-      setDetailMessage(response.data.letters);
-      isRecipientId = response.data.letters.find(
-        (el) => el.senderId !== user.id
-      );
-      if (isRecipientId) {
-        console.log('1');
-        setRecipientId(isRecipientId.senderId);
-      } else {
-        setRecipientId(response.data.letters[0].recipientId);
-      }
-      setGroupNo(response.data.letters[0].groupNo);
-      setRecipient(response.data.letters[0].name);
-      setLoading(false);
-    });
+    if (user) {
+      await getDetailMessages(user.id, letterNo).then((response) => {
+        setDetailMessage(response.data.letters);
+        isRecipientId = response.data.letters.find(
+          (el) => el.senderId !== user.id
+        );
+
+        if (isRecipientId) {
+          setRecipientId(isRecipientId.senderId);
+        } else {
+          setRecipientId(response.data.letters[0].recipientId);
+        }
+
+        setGroupNo(response.data.letters[0].groupNo);
+        setRecipient(response.data.letters[0].name);
+        setLoading(false);
+      });
+    }
   };
 
   const onClickInquiry = (no) => {
@@ -66,7 +69,6 @@ const MessageList = () => {
   const onDelete = async (id) => {
     alert('대화내용을 전부 삭제하시겠습니까?');
     await deleteMessage(recipientId, id, groupNo).then((response) => {
-      console.log(recipientId, id, groupNo);
       alert(response.data.msg);
       router.replace(`message`);
     });
@@ -77,10 +79,9 @@ const MessageList = () => {
   }, [user]);
 
   useEffect(() => {
-    if (router.query.id && user?.id) inquiryMessage(router.query.id);
+    if (router?.query.id && user?.id) inquiryMessage(router.query.id);
     else getLetterDatas();
   }, [user, router]);
-
   return (
     <div className={styles.container}>
       <div className={styles.entireMessage}>
@@ -128,7 +129,7 @@ const MessageList = () => {
         letterNo={router.query.id}
         inquiryMessage={inquiryMessage}
         otherId={recipientId}
-        groupNo={groupNo}
+        user={user}
       />
     </div>
   );
