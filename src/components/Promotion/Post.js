@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/Board/Promotion/Post.module.scss';
 import PromotionCommentContainer from './Comment/PromotionCommentContainer';
 import { useRouter } from 'next/router';
@@ -11,17 +11,26 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { AiFillHeart } from 'react-icons/ai';
 import getToken from 'utils/getToken';
 import moment from 'moment';
+import Option from 'components/Common/letter/Option';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
-const Post = ({ postId, getData, post, sendMessage, getPostData }) => {
+const Post = ({
+  postId,
+  getData,
+  post,
+  sendMessage,
+  getPostData,
+  setOpenMessage
+}) => {
+  const [openOptions, setOpenOptions] = useState(false);
   const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
     post;
+
   const user = useSelector((state) => state.user);
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const onClick = () => {
     if (!getToken()) alert('로그인 후 이용해주세요.');
@@ -79,18 +88,23 @@ const Post = ({ postId, getData, post, sendMessage, getPostData }) => {
             </div>
             <div className={styles.boardInfo}>
               <div className={styles.profile}>
-                <Link href={`/profile/${post.studentId}`} passHref>
-                  <img
-                    src={
-                      post.profileImageUrl ??
-                      'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
-                    }
-                    alt="profile"
+                <img
+                  onClick={() => setOpenOptions(!openOptions)}
+                  src={
+                    post.profileImageUrl ??
+                    'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+                  }
+                  alt="profile"
+                />
+                {openOptions && user && (
+                  <Option
+                    setOpenOptions={setOpenOptions}
+                    setOpenMessage={setOpenMessage}
+                    routePath={`/profile/${post.studentId}`}
                   />
-                </Link>
-                <Link href={`/profile/${post.studentId}`} passHref>
-                  <span>{name}</span>
-                </Link>
+                )}
+
+                <span onClick={() => setOpenOptions(!openOptions)}>{name}</span>
               </div>
               <div className={styles.dateHit}>
                 <span>{moment(inDate).format('YYYY-MM-DD')}</span>

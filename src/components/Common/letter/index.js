@@ -13,6 +13,7 @@ const MessageAlarm = ({ token }) => {
   const router = useRouter();
 
   const getAlarmData = () => {
+    console.log('안녕');
     getMessageAlarm().then((res) => {
       if (res.data.letters) setAlarmList(res.data.letters);
     });
@@ -27,7 +28,7 @@ const MessageAlarm = ({ token }) => {
   const onAlarmDeleteAll = async () => {
     confirm('전체 알람을 삭제하시겠습니까?') &&
       (await deleteMessageAlarm()
-        .then((res) => alert('삭제가 완료되었습니다'))
+        .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
     getAlarmData();
   };

@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
-const Modal = ({ postId, sendMessage }) => {
+const Modal = ({ postId, sendMessage, setOpenMessage }) => {
   const [images, setImages] = useState([]);
   const category = 'promotion';
   const dispatch = useDispatch();
@@ -75,6 +75,7 @@ const Modal = ({ postId, sendMessage }) => {
         post={post}
         sendMessage={sendMessage}
         getPostData={getPostData}
+        setOpenMessage={setOpenMessage}
       />
     </div>
   );

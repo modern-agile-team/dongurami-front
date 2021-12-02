@@ -1,40 +1,42 @@
-import { useRef, useState } from 'react';
-import styles from '../../../styles/Board/Promotion/Comment.module.scss';
+import styles from '../../../styles/Message/Option.module.scss';
+import { FiMail } from 'react-icons/fi';
+import { useRef, useEffect } from 'react';
+import router from 'next/router';
+import { useSelector } from 'react-redux';
 
-const option = () => {
+const Option = ({ setOpenOptions, setOpenMessage, routePath }) => {
+  const ref = useRef(null);
+  const user = useSelector((state) => state.user);
+  const post = useSelector((state) => state.post);
+
+  function handleClickOutside(event) {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setOpenOptions(false);
+    }
+  }
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div>
-      <ul className={styles.dropdownMenu}>
-        <li
-          className={styles.notice}
-          id={nowPath === '/notice' ? styles.now : undefined}
-          onClick={() => {
-            router.push('/notice');
-          }}
-        >
-          공지게시판
-        </li>
-        <li
-          className={styles.free}
-          id={nowPath === '/free' ? styles.now : undefined}
-          onClick={() => {
-            router.push('/free');
-          }}
-        >
-          자유게시판
-        </li>
-        <li
-          className={styles.QnA}
-          id={nowPath === '/questionAndAnswer' ? styles.now : undefined}
-          onClick={() => {
-            router.push('/questionAndAnswer');
-          }}
-        >
-          Q&#38;A
+      <div className={styles.rect} />
+      <ul ref={ref} className={styles.dropdownMenu}>
+        {user?.id !== post?.studentId && (
+          <li className={styles.send} onClick={() => setOpenMessage(true)}>
+            <FiMail />
+            쪽지 보내기
+          </li>
+        )}
+        <li className={styles.profile} onClick={() => router.push(routePath)}>
+          프로필
         </li>
       </ul>
     </div>
   );
 };
 
-export default option;
+export default Option;

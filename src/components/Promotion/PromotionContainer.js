@@ -138,9 +138,7 @@ const PromotionContainer = () => {
   const sendMessage = (comment) => {
     setLetter(comment);
     setOpenMessage(true);
-
-  }
-
+  };
 
   const infiniteScroll = () => {
     const { documentElement } = document;
@@ -205,9 +203,17 @@ const PromotionContainer = () => {
         </div>
       </div>
       {openModal && (
-        <Modal postId={postId} sendMessage={sendMessage} />
+        <Modal
+          postId={postId}
+          sendMessage={sendMessage}
+          setOpenMessage={setOpenMessage}
+        />
       )}
-      <SendMessage show={openMessage} onClose={() => setOpenMessage(false)} letter={letter} />
+      <SendMessage
+        show={openMessage}
+        onClose={() => setOpenMessage(false)}
+        letter={letter}
+      />
     </>
   );
 };
