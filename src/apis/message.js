@@ -26,18 +26,13 @@ export function replyLetter(
   recipientId,
   description,
   writerHiddenFlag,
-  groupNo,
-  letterNo
+  letterNo,
+  userId
 ) {
-  if (!description.length) {
-    alert('내용을 적어주세요');
-    return;
-  }
-  return axios.post(`api/letter/${recipientId}/${letterNo}`, {
+  return axios.post(`api/letter/${userId}/${letterNo}`, {
     recipientId,
     description,
-    writerHiddenFlag,
-    groupNo
+    writerHiddenFlag
   });
 }
 

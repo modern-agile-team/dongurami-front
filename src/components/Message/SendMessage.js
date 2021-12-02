@@ -13,11 +13,13 @@ function SendMessage({
   detailMessage,
   inquiryMessage,
   otherId,
-  groupNo
+  letterNo,
+  userId
 }) {
   const [description, setDescription] = useState('');
   const [isCheck, setIsCheck] = useState(false);
   const post = useSelector((state) => state.post);
+
   const modalContainer = useRef();
 
   const onClick = (e) => {
@@ -42,6 +44,7 @@ function SendMessage({
 
     if (isCheck) writerHiddenFlag = 1;
     if (!letter && !detailMessage) {
+      console.log('작성자');
       if (!Number(post.studentId)) recipientId = '';
       else recipientId = post.studentId;
       boardNo = post.no;
@@ -62,15 +65,16 @@ function SendMessage({
         }
       });
     } else if (!letter && detailMessage) {
-      recipientId = otherId;
+      if (!Number(otherId)) recipientId = '';
+      else recipientId = otherId;
       boardFlag = detailMessage.boardFlag;
       boardNo = detailMessage.boardNo;
       await replyLetter(
         recipientId,
         description,
         writerHiddenFlag,
-        groupNo,
-        router.query.id
+        letterNo,
+        userId
       ).then((response) => {
         if (response.data.success) {
           alert('쪽지가 전송되었습니다');
@@ -79,11 +83,13 @@ function SendMessage({
           setDescription('');
         }
       });
-    } else if (letter) {
+    } else if (letter.length) {
+      console.log('댓글');
       if (!Number(letter.studentId)) recipientId = '';
       else recipientId = letter.studentId;
       commentNo = letter.no;
       boardNo = post.no;
+      boardFlag = 0;
       await sendLetter(
         recipientId,
         description,

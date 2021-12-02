@@ -40,11 +40,13 @@ const MessageList = () => {
       isRecipientId = response.data.letters.find(
         (el) => el.senderId !== user.id
       );
+
       if (isRecipientId) {
         setRecipientId(isRecipientId.senderId);
       } else {
         setRecipientId(response.data.letters[0].recipientId);
       }
+
       setGroupNo(response.data.letters[0].groupNo);
       setRecipient(response.data.letters[0].name);
       setLoading(false);
@@ -78,7 +80,6 @@ const MessageList = () => {
     if (router.query.id && user?.id) inquiryMessage(router.query.id);
     else getLetterDatas();
   }, [user, router]);
-
   return (
     <div className={styles.container}>
       <div className={styles.entireMessage}>
@@ -126,7 +127,7 @@ const MessageList = () => {
         letterNo={router.query.id}
         inquiryMessage={inquiryMessage}
         otherId={recipientId}
-        groupNo={groupNo}
+        userId={user.id}
       />
     </div>
   );
