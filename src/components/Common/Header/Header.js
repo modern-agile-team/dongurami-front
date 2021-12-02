@@ -83,7 +83,6 @@ function Header() {
               >
                 <Alarm token={token} />
                 <MessageAlarm className={styles.message} token={token} />
-
                 <div className={styles.profileWrap}>
                   {userProflie ? (
                     <img
