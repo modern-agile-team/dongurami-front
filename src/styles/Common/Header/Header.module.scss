@@ -58,7 +58,8 @@
       margin-left: 5px;
       width: 30px;
       height: 30px;
-      border-radius: 50%;
+      border-radius: 70%;
+      overflow: hidden;
       &:hover {
         transform: scale(1.1);
         transition: 0.5s;
