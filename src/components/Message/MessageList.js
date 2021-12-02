@@ -41,7 +41,6 @@ const MessageList = () => {
         (el) => el.senderId !== user.id
       );
       if (isRecipientId) {
-        console.log('1');
         setRecipientId(isRecipientId.senderId);
       } else {
         setRecipientId(response.data.letters[0].recipientId);
@@ -66,7 +65,6 @@ const MessageList = () => {
   const onDelete = async (id) => {
     alert('대화내용을 전부 삭제하시겠습니까?');
     await deleteMessage(recipientId, id, groupNo).then((response) => {
-      console.log(recipientId, id, groupNo);
       alert(response.data.msg);
       router.replace(`message`);
     });

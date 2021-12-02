@@ -11,7 +11,6 @@ function SendMessage({
   onClose,
   letter,
   detailMessage,
-  letterNo,
   inquiryMessage,
   otherId,
   groupNo
@@ -43,7 +42,8 @@ function SendMessage({
 
     if (isCheck) writerHiddenFlag = 1;
     if (!letter && !detailMessage) {
-      recipientId = post.studentId;
+      if (!Number(post.studentId)) recipientId = '';
+      else recipientId = post.studentId;
       boardNo = post.no;
       boardFlag = 1;
       await sendLetter(
@@ -75,7 +75,7 @@ function SendMessage({
         if (response.data.success) {
           alert('쪽지가 전송되었습니다');
           onClose();
-          inquiryMessage(groupNo);
+          inquiryMessage(router.query.id);
           setDescription('');
         }
       });

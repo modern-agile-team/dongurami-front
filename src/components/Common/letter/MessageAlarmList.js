@@ -3,7 +3,7 @@ import { FiDelete } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
-const AlarmList = ({ alarm, setIsDelete }) => {
+const MessageAlarmList = ({ alarm, setIsDelete }) => {
   const router = useRouter();
 
   const clickAlarm = () => {
@@ -20,11 +20,15 @@ const AlarmList = ({ alarm, setIsDelete }) => {
       </div>
       <div className={styles.bottom} onClick={clickAlarm}>
         <div>
-          <p>{alarm.description}</p>
+          <p>
+            {alarm.description.length > 20
+              ? alarm.description.substr(0, 20) + '.....'
+              : alarm.description}
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default AlarmList;
+export default MessageAlarmList;

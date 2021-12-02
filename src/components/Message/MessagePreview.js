@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 const MessagePreview = ({ message, onClickInquiry }) => {
   const router = useRouter();
-
+  console.log(message);
   return (
     <div
       className={
@@ -19,7 +19,11 @@ const MessagePreview = ({ message, onClickInquiry }) => {
         <p className={styles.indate}>{message.inDate}</p>
       </div>
 
-      <span className={styles.description}>{message.description}</span>
+      <span className={styles.description}>
+        {message.description.length > 20
+          ? message.description.substr(0, 20) + '.....'
+          : message.description}
+      </span>
     </div>
   );
 };
