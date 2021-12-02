@@ -7,6 +7,7 @@ import Pagination from './Pagination';
 import Search from './Search';
 import styles from '../../styles/Board/Board/Board.module.scss';
 import { getBoardPosts } from 'redux/slices/board';
+import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 function getQuery(router) {
   return {
@@ -83,7 +84,7 @@ function Board({ category }) {
         <div className={styles.orderBy}>
           {(canWrite) && (
             <Link href={{ pathname: `${router.pathname}/write`, query: router.query }} passHref>
-              <button>✏️ 글쓰기</button>
+              <DonguramiOutlineButton>✏️ 글쓰기</DonguramiOutlineButton>
             </Link>
           )}
           <select value={`${sort} ${order}`} onChange={onOrderChange}>

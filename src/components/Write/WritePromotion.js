@@ -1,5 +1,6 @@
 import { postPost } from 'apis/board';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
+import { DonguramiFillButton } from 'components/Common/DonguramiButton';
 import { useRouter } from 'next/router';
 import { useState } from "react";
 import { AiFillCloseCircle } from 'react-icons/ai';
@@ -65,7 +66,7 @@ function WritePromition({ title, description }) {
           )))}
         </select>
       </div>
-      <button onClick={onSubmit}>등록</button>
+      <DonguramiFillButton onClick={onSubmit}>등록</DonguramiFillButton>
     </div>
   );
 }

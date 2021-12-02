@@ -11,6 +11,7 @@ import { getPost, setCategory } from 'redux/slices/post';
 import moment from 'moment';
 import { AiFillHeart } from 'react-icons/ai';
 import Option from 'components/Common/letter/Option';
+import { DonguramiFillButton, DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -106,7 +107,7 @@ function Post({
             <div className={styles.profileLink}>{post.name}</div>
           </div>
           <div>
-            {Boolean === 'clubActivity' &&
+            {category === 'clubActivity' &&
               user &&
               user.club.some(({ no }) => no === clubNum) && (
                 <Link
@@ -116,15 +117,15 @@ function Post({
                   }}
                   passHref
                 >
-                  <button>스크랩하기</button>
+                  <DonguramiFillButton>스크랩하기</DonguramiFillButton>
                 </Link>
               )}
             {Boolean(post.isWriter) && (
               <>
                 <Link href={editHref} passHref>
-                  <button>수정하기</button>
+                  <DonguramiFillButton>수정하기</DonguramiFillButton>
                 </Link>
-                <button onClick={onDelete}>삭제하기</button>
+                <DonguramiFillButton onClick={onDelete}>삭제하기</DonguramiFillButton>
               </>
             )}
             <div>{moment(post.inDate).format('YYYY-MM-DD')}</div>
