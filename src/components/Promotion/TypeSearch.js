@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
@@ -13,6 +13,8 @@ const TypeSearch = ({
   onSearch,
   categorySearch
 }) => {
+  const [selected, setSelected] = useState([true]);
+
   const user = useSelector((state) => state.user);
   const onChange = (e) => {
     setSearchKeyword(e.target.value);
@@ -23,13 +25,18 @@ const TypeSearch = ({
   };
 
   const onSubmit = (e) => {
+    setSelected([true]);
     e.preventDefault();
     onSearch();
   };
 
   return (
     <div className={styles.container}>
-      <CategoriTags onCategorySearch={categorySearch} />
+      <CategoriTags
+        onCategorySearch={categorySearch}
+        selected={selected}
+        setSelected={setSelected}
+      />
       <div className={styles.body}>
         <select value={type} onChange={onTypeChange}>
           <option value="title">제목</option>
