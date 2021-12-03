@@ -20,7 +20,10 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: 50%;
+    width: 40%;
+  }
+  th:nth-of-type(3), td:nth-of-type(3) {
+    width: 20%;
   }
   td:nth-of-type(2) > span {
     color: gray;
