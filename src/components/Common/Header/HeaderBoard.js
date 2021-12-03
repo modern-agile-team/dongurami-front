@@ -53,7 +53,11 @@ export const HeaderBoard = () => {
         </li>
         <li
           className={styles.clublist}
-          id={nowPath === '/clublists' ? styles.now : undefined}
+          id={
+            nowPath === '/clublists' || nowPath.includes('/clubhome')
+              ? styles.now
+              : undefined
+          }
           onClick={() => {
             router.push('/clublists');
           }}
