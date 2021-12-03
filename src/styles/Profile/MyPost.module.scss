@@ -52,11 +52,13 @@
   margin-bottom: 3.5rem;
   border-left: 1px solid rgb(216, 216, 216);
   border-right: 1px solid rgb(216, 216, 216);
+  border-bottom: 1px solid rgb(216, 216, 216);
 }
 
 .itemContainer {
   height: 17em;
   overflow-y: scroll;
+  overflow-x: hidden;
   background-color: rgba(227, 243, 241, 0.103);
 }
 
