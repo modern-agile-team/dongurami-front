@@ -22,7 +22,7 @@ const DetailMessageListContainer = ({
   });
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.header}>
         {router?.query.id && (
           <div className={styles.contain}>
@@ -64,7 +64,7 @@ const DetailMessageListContainer = ({
             return <DetailMessageList key={idx} message={message} />;
           })}
       </div>
-    </>
+    </div>
   );
 };
 

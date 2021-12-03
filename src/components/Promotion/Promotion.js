@@ -76,7 +76,7 @@ const Promotion = ({
           {title.length > 15 ? `${title.substr(0, 15)}...` : title}
         </span>
         <div className={styles.extraInfo}>
-          <span className={styles.none}>left</span>
+          <span className={styles.none}></span>
           <span className={styles.hashtag}>#{category}</span>
           <span className={styles.time}>{displayedAt(date)}</span>
         </div>
