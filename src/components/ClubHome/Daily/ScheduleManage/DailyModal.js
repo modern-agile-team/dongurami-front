@@ -37,6 +37,7 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
       await getInfo(Qdata.id, today.format('YYYY-MM'))
         .then((res) => setSchedule(res.data.result))
         .catch((err) => alert(err.response.data.msg));
+      moveCal();
     }
   };
 
@@ -47,7 +48,6 @@ const DailyModal = ({ Qdata, colors, setPop, pop, today, setSchedule }) => {
       title.current.value.length > 0
     ) {
       onClickAdd();
-      moveCal();
     } else if (Date.parse(startDate) > Date.parse(endDate)) {
       alert('날짜를 확인해주세요');
     } else if (title.current.value.length <= 0) {
