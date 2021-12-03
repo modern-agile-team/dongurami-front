@@ -120,9 +120,12 @@ const Apply = () => {
   };
 
   const onResumeSubmit = () => {
+    console.log(addQuestion, questions, userInfo);
     if (
       addQuestion.length === questions.length &&
       userInfo.phoneNumber !== '' &&
+      userInfo.phoneNumber !== null &&
+      userInfo.grade !== null &&
       userInfo.grade !== '0' &&
       userInfo.sex !== '0'
     ) {
