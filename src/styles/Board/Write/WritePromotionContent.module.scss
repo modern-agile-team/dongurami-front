@@ -3,37 +3,42 @@
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
- & > label {
-   text-align: center;
-   .previewImageContainer {
-     & > svg {
-       vertical-align: top;
-     }
-     & > img {
-      max-width: 50%;
-      @media screen and (max-width: 768px) {
-      max-width: 100%;
+  & > label {
+    text-align: center;
+    cursor: pointer;
+    .previewImageContainer {
+      & > svg {
+        vertical-align: top;
+      }
+      & > img {
+        max-width: 50%;
+        @media screen and (max-width: 768px) {
+          max-width: 100%;
+        }
       }
     }
-   }
- }
- & > input {
-   display: none;
- }
- .selectContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  & > select {
-    border-radius: 1rem;
-    height: 2rem;
-    padding-left: 1rem;
-    border: 1px solid lightgray;
-    color: black;
-    background-color: white;
-    width: 10rem;
-    margin: 0 auto;
-   }
+    & > button {
+      margin: 1rem 0;
+      pointer-events: none;
+    }
+  }
+  & > input {
+    display: none;
+  }
+  .selectContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    & > select {
+      border-radius: 1rem;
+      height: 2rem;
+      padding-left: 1rem;
+      border: 1px solid lightgray;
+      color: black;
+      background-color: white;
+      width: 10rem;
+      margin: 0 auto;
+    }
   }
 }

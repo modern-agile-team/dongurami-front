@@ -55,7 +55,7 @@ function WritePromition({ title, description }) {
             <img src={image} alt="preview" />
           </div>
         ))}
-        <p>사진 추가하기</p>
+        <DonguramiFillButton>사진 추가하기</DonguramiFillButton>
       </label>
       <input id="imageInput" type="file" accept="image/*" onChange={onChange} multiple />
       <div className={styles.selectContainer}>
