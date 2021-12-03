@@ -1,9 +1,13 @@
 .container {
   display: flex;
   flex-direction: column;
+  * {
+    font-family: sans-serif;
+  }
   & > input {
     border: none;
     font-size: 2rem;
+    font-weight: bold;
   }
   & > input::placeholder {
     color: lightgray;
@@ -15,35 +19,30 @@
     background-color: #90E2D6;
   }
   & > div:nth-of-type(1) {
-    background-color: rgb(60, 60, 60);
-    width: 10%;
-    height: 1rem;
-  }
-  & > div:nth-of-type(2) {
     margin: 1rem;
     flex: 1;
     display: flex;
     flex-direction: column;
     & > div:nth-of-type(1) {
-      border: none;
+      border-radius: .5rem;
+      position: sticky;
+      top: calc(60px + 1rem);
+      z-index: 999;
+      background-color: white;
     }
     & > div:nth-of-type(2) {
-      border: none
+      border: none;
+      min-height: 30vh;
     }
   }
-  & > div:nth-of-type(3) {
+  & > div:nth-of-type(2) {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
     margin: .5rem;
     padding: .5rem;
     border-top: 2px solid #90E2D6;
     border-bottom: 2px solid #90E2D6;
-    & > button {
-      border: 2px solid #90E2D6;
-      color: #90E2D6;
-      background-color: white;
-      padding: .5rem 1rem;
-      border-radius: .5rem;
-    }
   }
 }

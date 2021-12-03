@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from '../../../styles/Club/Home/Manager/Manager.module.scss';
-import Approve from './Approve';
-import Members from './Members';
+import Approve from './Approve/Approve';
+import Members from './Member/Members';
 import {
   deleteMember,
   getMember,
@@ -11,14 +11,13 @@ import {
   putLeader
 } from 'apis/manager';
 import { useRouter } from 'next/router';
+import _ from 'lodash';
 
 export const Manager = () => {
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState();
   const [leader, setLeader] = useState('');
   const [applicantInfo, setApplicantInfo] = useState([]);
   const [applicantQNA, setApplicantQNA] = useState([]);
-  const [mergedApplicantQNA, setMergedApplicantQNA] = useState([]);
-  const [mergedApplicantInfo, setMergedApplicantInfo] = useState([]);
   const [applyAuth, setApplyAuth] = useState();
   const [boardAuth, setBoardAuth] = useState();
 
@@ -36,19 +35,27 @@ export const Manager = () => {
   };
 
   const setStates = (data) => {
-    setApplicantQNA(data.applicant.questionsAnswers);
-    setApplicantInfo(data.applicant.applicantInfo);
-    setLeader(data.clubAdminOption.leader);
-    setMembers(data.clubAdminOption.memberAndAuthList);
-    setMergedApplicantQNA(processQuesData(data.applicant.questionsAnswers));
+    const newData = _.cloneDeep(data);
+    setApplicantQNA(newData.applicant.questionsAnswers);
+    setApplicantInfo(newData.applicant.applicantInfo);
+    setLeader(newData.clubAdminOption.leader);
+    setMembers(newData.clubAdminOption.memberAndAuthList);
+    setApplyAuth(
+      newData.clubAdminOption.memberAndAuthList.map(
+        (auth) => auth.joinAdminFlag
+      )
+    );
+    setBoardAuth(
+      newData.clubAdminOption.memberAndAuthList.map(
+        (auth) => auth.boardAdminFlag
+      )
+    );
   };
 
   // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
     getMember(clubId)
-      .then((res) => {
-        setStates(res.data);
-      })
+      .then((res) => setStates(res.data))
       .catch((err) => {
         switch (err.response.status) {
           case 401:
@@ -69,18 +76,21 @@ export const Manager = () => {
       });
   }, [clubId, router]);
 
-  const handleAfterApply = (massage) => {
-    if (applicantInfo.length === 1) router.reload();
-    else getMembersData();
-    alert(massage);
-  };
+  const handleAfterApply = useCallback(
+    (massage) => {
+      if (applicantInfo.length === 1) router.reload();
+      else getMembersData();
+      alert(massage);
+    },
+    [applicantInfo.length, router, getMembersData]
+  );
 
   // 가입 승인 POST
   const onApplyAccept = async (e) => {
     if (!e.target.id) return;
     const body = [
       {
-        applicant: mergedApplicantInfo[e.target.id].id,
+        applicant: applicantInfo[e.target.id].id,
         url: `clubhome/${clubId}`,
         notiCategoryNum: 2
       },
@@ -93,22 +103,25 @@ export const Manager = () => {
   };
 
   // 가입 거절 PUT
-  const onApplyReject = async (e) => {
-    if (!e.target.id) return;
-    const body = [
-      {
-        applicant: mergedApplicantInfo[e.target.id].id,
-        url: `clubhome/${clubId}`,
-        notiCategoryNum: 3
-      },
-      clubId
-    ];
-    confirm('가입을 거절합니까?') &&
-      (await putApply(...body)
-        .then((res) => handleAfterApply(res.data.msg))
-        .catch((err) => alert(err.response.data.msg)));
-    await getMembersData();
-  };
+  const onApplyReject = useCallback(
+    async (e) => {
+      if (!e.target.id) return;
+      const body = [
+        {
+          applicant: applicantInfo[e.target.id].id,
+          url: `clubhome/${clubId}`,
+          notiCategoryNum: 3
+        },
+        clubId
+      ];
+      confirm('가입을 거절합니까?') &&
+        (await putApply(...body)
+          .then((res) => handleAfterApply(res.data.msg))
+          .catch((err) => alert(err.response.data.msg)));
+      await getMembersData();
+    },
+    [clubId, getMembersData, handleAfterApply, applicantInfo]
+  );
 
   // 회장 양도 PUT
   const onLeaderChange = async (memberIndex) => {
@@ -126,10 +139,10 @@ export const Manager = () => {
     await getMembersData();
   };
 
-  const changeAdminOptions = (adminOptions) => {
-    const result = adminOptions;
+  const changeAdminOptions = () => {
+    const result = [];
     members.forEach((member, index) => {
-      adminOptions.push({
+      result.push({
         id: member.id,
         joinAdminFlag: applyAuth[index],
         boardAdminFlag: boardAuth[index]
@@ -141,10 +154,9 @@ export const Manager = () => {
   // 기능 권한 변경 PUT
   const changeMembersAuth = async () => {
     if (applyAuth.length === 0) return;
-    const adminOptions = [];
     const body = [
       {
-        adminOptions: changeAdminOptions(adminOptions)
+        adminOptions: changeAdminOptions()
       },
       clubId
     ];
@@ -183,13 +195,9 @@ export const Manager = () => {
     setBoardAuth(setAuths(boardAuthRef));
   }, []);
   //-------------------------------------------------------------//
-
   useEffect(() => {
-    if (applicantInfo.length > 0 && mergedApplicantQNA.length > 0)
-      setMergedApplicantInfo(
-        processApplicantInfo(applicantInfo, mergedApplicantQNA)
-      );
-  }, [applicantInfo, mergedApplicantQNA]);
+    applicantInfo.length > 0 && setApplicantInfo(applicantInfo);
+  }, [applicantInfo]);
 
   useEffect(() => {
     if (!clubId) return;
@@ -206,6 +214,7 @@ export const Manager = () => {
     onBoardAuth();
   }, [onBoardAuth, clubId]);
 
+  if (!members) return null;
   return (
     <div className={styles.container}>
       <Members
@@ -224,55 +233,9 @@ export const Manager = () => {
         onApplyReject={onApplyReject}
         applicantInfo={applicantInfo}
         applicantQNA={applicantQNA}
-        mergedApplicantInfo={mergedApplicantInfo}
       />
     </div>
   );
 };
 
 export default Manager;
-
-//--------------------가입 추가 질문 데이터 가공---------------------//
-const handlePieceData = (index, data, additionalQuestion) => {
-  const result = additionalQuestion;
-  result.push({
-    id: data[index].id,
-    questions: [data[index].question],
-    answers: [data[index].answer]
-  });
-  return result;
-};
-
-const completeTheData = (index, data, incompleteData) => {
-  const result = incompleteData;
-  for (let info of result) {
-    if (info.id === data[index].id) {
-      info.questions.push(data[index].question);
-      info.answers.push(data[index].answer);
-    }
-  }
-  return result;
-};
-
-const processQuesData = (data) => {
-  const result = [];
-  for (let index in data) {
-    if (index === '0' || (index > '0' && data[index - 1].id !== data[index].id))
-      handlePieceData(index, data, result);
-    else completeTheData(index, data, result);
-  }
-  return result;
-};
-//---------------------------------------------------------------------//
-
-// 가입 요청 데이터 가공
-const processApplicantInfo = (data, QNAs) => {
-  const result = data;
-  for (let index in result) {
-    if (QNAs[index].id === result[index].id) {
-      result[index].answers = QNAs[index].answers;
-      result[index].questions = QNAs[index].questions;
-    }
-  }
-  return result;
-};

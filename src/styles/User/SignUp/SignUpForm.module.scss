@@ -2,8 +2,11 @@
   width: 100%;
   margin-top: 3%;
   margin-bottom: 5%;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
   .container {
-    width: 40%;
+    width: 35em;
     box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.342);
     border-radius: 50px;
     padding: 1rem;
@@ -11,7 +14,7 @@
     text-align: center;
   }
   h1 {
-    font-weight: 100;
+    font-weight: 400;
     margin-bottom: 10%;
   }
   input {
@@ -23,6 +26,11 @@
     border-bottom: 1.4px solid #dadada;
     outline-style: none;
     margin-bottom: 3%;
+  }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
   select {
     font-family: 'Noto Sans KR', sans-serif;

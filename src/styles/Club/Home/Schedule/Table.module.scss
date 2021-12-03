@@ -3,9 +3,6 @@
   height: 50vh;
   padding: 10px;
 }
-.today {
-  color: red;
-}
 
 .otherday {
   color: rgb(187, 183, 183);
@@ -17,10 +14,20 @@
   margin-bottom: 0.5%;
 }
 
+.todayContainer {
+  background-color: #dce4ed;
+  border-radius: 50%;
+  width: 19px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+}
+
 .scheduleSpan {
   font-size: small;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin-bottom: 2px;
 }
 .num {
   td {
@@ -36,8 +43,12 @@
       height: 100%;
       cursor: pointer;
       .date {
-        margin: 2% 0 2% 1%;
+        margin: 1% 0% 2% 1%;
         height: 20%;
+        span {
+          font-family: twayair;
+          padding: 1px;
+        }
       }
       .scheduleTitle {
         display: flex;
@@ -111,5 +122,9 @@
   .calendar {
     font-size: 2vw;
     padding: 1px;
+  }
+  .todayContainer {
+    width: 15px;
+    height: 15px;
   }
 }

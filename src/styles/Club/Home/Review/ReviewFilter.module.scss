@@ -1,13 +1,75 @@
+.container {
+  display: flex;
+  width: 80%;
+}
+
 .filter {
-  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
   margin-top: 2em;
   padding: 1em 0;
-  width: 80%;
-  select,
-  option {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 75%;
+  button {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    cursor: pointer;
+    padding: 5px 1em;
+    border-radius: 6px;
+    border: 2px solid #64beb18c;
+    padding-right: 3em;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.select {
+  width: 100%;
+  background-color: #e6f7f4;
+  border: 2px solid #64beb18c;
+  padding: 0;
+  list-style: none;
+  top: 35px;
+  position: absolute;
+  border-radius: 6px;
+  box-shadow: 1px 2px 10px -2px rgba(0, 0, 0, 0.3);
+}
+
+.select li {
+  font-size: 85%;
+  color: black;
+  cursor: pointer;
+  padding: 5px 1em;
+  border-bottom: 1px dashed #2e6f65;
+  &:nth-child(1) {
+    border-radius: 6px 6px 0 0;
+  }
+  &:nth-child(4) {
+    border-radius: 0 0 6px 6px;
+    border: none;
+  }
+  &:hover {
+    background-color: #c3ece5;
+  }
+}
+
+.arrow {
+  display: flex;
+  cursor: pointer;
+  z-index: 3;
+  position: relative;
+  right: 1.5em;
+  padding-left: 2px;
+  border-left: 1px solid #64beb18c;
+  #up {
+    transition-duration: 0.3s;
+    transform: rotate(180deg);
+  }
+  #down {
+    transition-duration: 0.3s;
+    transform: rotate(360deg);
   }
 }
 

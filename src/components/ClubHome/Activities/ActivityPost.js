@@ -20,7 +20,7 @@ function ActivityPost({ pid, closeModal }) {
   }, [pid, dispatch]);
 
   const onDelete = async () => {
-    await api.deletePost('clubActivity', post.no);
+    await api.deletePost('clubActivity', post.no, router.query.id);
     dispatch(getBoardPosts({ category: 'clubActivity', sort: 'inDate', order: 'DESC', clubNum }));
     closeModal();
   };

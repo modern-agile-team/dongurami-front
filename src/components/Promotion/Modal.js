@@ -1,33 +1,47 @@
 import { useState, useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import Post from './Post';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import ZoomImg from './ZoomImg';
-import { getBoardPost } from 'apis/promotion';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { MdClose } from 'react-icons/md';
+import { useRouter } from 'next/router';
 
-SwiperCore.use([Navigation, Pagination, Scrollbar]); //
+SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
-const Modal = ({ setOpenModal, postId }) => {
+const Modal = ({ postId, sendMessage, setOpenMessage }) => {
   const [images, setImages] = useState([]);
   const category = 'promotion';
-  const pid = postId;
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
+  const router = useRouter();
+  let pid = postId;
 
-  useEffect(async () => {
-    dispatch(getPost({ category, pid }));
-    await getBoardPost(pid).then((res) => {
-      setImages(res.data.images);
-    });
+  const getPostData = async () => {
+    if (postId) {
+      await dispatch(getPost({ category, pid })).then((response) => {
+        setImages(response.payload.images);
+      });
+    } else {
+      pid = router.query.id;
+      await dispatch(getPost({ category, pid })).then((response) => {
+        setImages(response.payload.images);
+      });
+    }
+  };
+  useEffect(() => {
+    getPostData();
   }, [dispatch]);
 
   return (
-    <div className={styles.background} onClick={() => setOpenModal(false)}>
+    <div
+      className={styles.background}
+      onClick={() => {
+        router.replace(`promotion`);
+      }}
+    >
       <button className={styles.closeBtn}>
         <MdClose />
       </button>
@@ -56,7 +70,13 @@ const Modal = ({ setOpenModal, postId }) => {
         )}
       </div>
 
-      <Post postId={postId} post={post} />
+      <Post
+        postId={postId}
+        post={post}
+        sendMessage={sendMessage}
+        getPostData={getPostData}
+        setOpenMessage={setOpenMessage}
+      />
     </div>
   );
 };

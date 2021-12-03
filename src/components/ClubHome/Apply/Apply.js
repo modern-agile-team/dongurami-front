@@ -78,7 +78,7 @@ const Apply = () => {
   const onRemove = async (i) => {
     await deleteApply({ description: newQuestion }, i, router.query.id)
       .then((res) => alert(res.data.msg))
-      .catch((err) => alert(err.response.data));
+      .catch((err) => alert(err.response.data.msg));
     getApplyQuestions();
   };
 
@@ -104,9 +104,11 @@ const Apply = () => {
         basic: {
           grade: parseInt(grade),
           gender: parseInt(sex),
-          phoneNum: phoneNumber
+          phoneNum: phoneNumber.match(/[0-9]/g).join('')
         },
-        extra: data
+        extra: data,
+        url: `manager/${router.query.id}`,
+        notiCategoryNum: 7
       },
       router.query.id
     )
@@ -118,9 +120,14 @@ const Apply = () => {
   };
 
   const onResumeSubmit = () => {
+    console.log(addQuestion, questions, userInfo);
     if (
       addQuestion.length === questions.length &&
-      userInfo.phoneNumber !== ''
+      userInfo.phoneNumber !== '' &&
+      userInfo.phoneNumber !== null &&
+      userInfo.grade !== null &&
+      userInfo.grade !== '0' &&
+      userInfo.sex !== '0'
     ) {
       post(
         addQuestion.map((el, i) => {
@@ -128,7 +135,7 @@ const Apply = () => {
         })
       );
     } else {
-      alert('질문에 대한 답변을 모두 입력해주세요');
+      alert('질문에 대한 답변을 모두 입력해주세요.');
     }
   };
   //---------------------------------------------------------------

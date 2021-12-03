@@ -11,8 +11,10 @@ $color-light-mint: #c2f2dc;
 #clubName {
   font-size: 200%;
   text-align: center;
+  margin-bottom: 1rem;
   p {
     margin: 0;
+    font-family: 'twayair';
   }
 }
 
@@ -37,4 +39,7 @@ $color-light-mint: #c2f2dc;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(10rem, auto));
   gap: 1rem;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(7rem, auto));
+  }
 }

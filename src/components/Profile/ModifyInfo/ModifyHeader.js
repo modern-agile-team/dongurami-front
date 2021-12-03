@@ -1,7 +1,15 @@
-import styles from '../../../styles/Profile/ModifyInfo.module.scss';
+import styles from 'styles/Profile/ModifyInfo.module.scss';
+import ChangeImg from './ChangeImg';
 import { FaCamera } from 'react-icons/fa';
 
-const ModifyHeader = ({ onChangeImg, baseImg, imgUrl }) => {
+const ModifyHeader = ({
+  setImgUrl,
+  isOpen,
+  setIsOpen,
+  baseImg,
+  imgUrl,
+  onChangeImg
+}) => {
   return (
     <div className={styles.header}>
       <img
@@ -10,16 +18,16 @@ const ModifyHeader = ({ onChangeImg, baseImg, imgUrl }) => {
         className={styles.profileImg}
       />
       <div>
-        <label htmlFor="inputFile">
-          <FaCamera />
-        </label>
-        <input
-          onChange={onChangeImg}
-          type="file"
-          id="inputFile"
-          style={{ display: 'none' }}
-          name="profileImg"
-          accept="image/jpg, image/png, image/jpeg"
+        <FaCamera
+          className={styles.cameraBtn}
+          onClick={() => setIsOpen(!isOpen)}
+        />
+        <ChangeImg
+          baseImg={baseImg}
+          setImgUrl={setImgUrl}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          onChangeImg={onChangeImg}
         />
       </div>
     </div>

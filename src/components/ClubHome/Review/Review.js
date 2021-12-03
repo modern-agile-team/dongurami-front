@@ -51,8 +51,8 @@ const Review = () => {
 
   // 후기 작성
   const onReviewSubmit = async () => {
-    if (reviewRate === 0) alert('별점을 입력해주세요');
-    else if (reviewInput === '') alert('후기를 입력해주세요');
+    if (reviewRate === 0) alert('별점을 입력해주세요.');
+    else if (reviewInput === '') alert('후기를 입력해주세요.');
     else {
       await postReview(
         {
@@ -81,8 +81,8 @@ const Review = () => {
 
   // 내 후기 수정
   const onReviewUpdate = async () => {
-    if (reviewRate === 0) alert('별점을 입력해주세요');
-    else if (reviewInput === '') alert('후기를 입력해주세요');
+    if (reviewRate === 0) alert('별점을 입력해주세요.');
+    else if (reviewInput === '') alert('후기를 입력해주세요.');
     else {
       await putReview(
         {
@@ -128,26 +128,36 @@ const Review = () => {
   // 필터링
   const onFilterChange = (e) => {
     const filter = e.target.value;
-    const latestOrder = reviewList.slice(0).sort((a, b) => {
-      return b.no - a.no;
+    const oldestOrder = [...reviewList].sort((a, b) => {
+      if (filter === 0) return a.no - b.no;
+      else if (filter === 1) return b.no - a.no;
+      else if (filter === 2) return b.score - a.score;
+      else return a.score - b.score;
     });
-    const rateHigh = reviewList.slice(0).sort((a, b) => {
-      return b.score - a.score;
-    });
-    const rateLow = reviewList.slice(0).sort((a, b) => {
-      return a.score - b.score;
-    });
-    switch (filter) {
-      case '0':
-        setReviewList(latestOrder);
-        break;
-      case '1':
-        setReviewList(rateHigh);
-        break;
-      case '2':
-        setReviewList(rateLow);
-        break;
-    }
+    // const latestOrder = [...reviewList].sort((a, b) => {
+    //   return b.no - a.no;
+    // });
+    // const rateHigh = [...reviewList].sort((a, b) => {
+    //   return b.score - a.score;
+    // });
+    // const rateLow = [...reviewList].sort((a, b) => {
+    //   return a.score - b.score;
+    // });
+    // switch (filter) {
+    //   case 0:
+    //     setReviewList(oldestOrder);
+    //     break;
+    //   case 1:
+    //     setReviewList(latestOrder);
+    //     break;
+    //   case 2:
+    //     setReviewList(rateHigh);
+    //     break;
+    //   case 3:
+    //     setReviewList(rateLow);
+    //     break;
+    // }
+    setReviewList(oldestOrder);
   };
 
   useEffect(() => {
@@ -174,7 +184,6 @@ const Review = () => {
           score={reviewMine[0].score}
           description={reviewMine[0].description}
           inDate={reviewMine[0].inDate.substring(0, 10)}
-          clubInfo={clubInfo}
         />
       ) : (
         <></>
@@ -186,7 +195,7 @@ const Review = () => {
             rate={review.score}
             desc={review.description}
             date={review.inDate.substring(0, 10)}
-            clubInfo={clubInfo}
+            index={index}
           />
         );
       })}

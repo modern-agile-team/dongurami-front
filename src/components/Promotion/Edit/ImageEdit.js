@@ -1,12 +1,10 @@
 import { getS3PresignedURL, uploadImage } from 'apis/image';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from '../../../styles/Board/Promotion/ImageEdit.module.scss';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { BsImage } from 'react-icons/bs';
 
 function ImageEdit({ images, onEditImages, setImages }) {
-  const router = useRouter();
   const [displayImage, setDisplayImage] = useState(images[0]);
   const [index, setIndex] = useState(0);
   let deleteImage = [];

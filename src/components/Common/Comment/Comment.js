@@ -5,6 +5,9 @@ import styles from '../../../styles/Common/Comment/Comment.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { useRouter } from 'next/router';
+import moment from 'moment';
+import Link from 'next/link';
+import { AiFillHeart } from 'react-icons/ai';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
 function setEndOfContenteditable(contentEditableElement) {
@@ -17,13 +20,13 @@ function setEndOfContenteditable(contentEditableElement) {
   selection.addRange(range); //make the range you have just created the visible selection
 }
 
-function Comment({ comment, parentCommentID, setParentCommentID }) {
+function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
-  const [isContentEditable, setIsContentEditable] = useState(false);
   const descriptionDiv = useRef();
+  const [isContentEditable, setIsContentEditable] = useState(false);
 
   useEffect(() => {
     if (!isContentEditable) return;
@@ -32,37 +35,122 @@ function Comment({ comment, parentCommentID, setParentCommentID }) {
 
   const onEdit = async () => {
     if (isContentEditable) {
-      await api.putComment({ category: post.category, pid: post.no, commentID: comment.no, description: descriptionDiv.current.textContent, parentCommentID, clubNum: router.query.id });
+      await api.putComment({
+        category: post.category,
+        pid: post.no,
+        commentID: comment.no,
+        description: descriptionDiv.current.textContent,
+        parentCommentID,
+        clubNum: router.query.id
+      });
       dispatch(getPost());
     }
     setIsContentEditable(!isContentEditable);
     setEndOfContenteditable(descriptionDiv.current);
-  }
+  };
   const onDelete = async () => {
-    await api.deleteComment({ category: post.category, pid: post.no, commentID: comment.no, parentCommentID, clubNum: router.query.id });
+    await api.deleteComment({
+      category: post.category,
+      pid: post.no,
+      commentID: comment.no,
+      parentCommentID,
+      clubNum: router.query.id
+    });
     dispatch(getPost());
-  }
+  };
+  const onClickLike = async () => {
+    if (!user) return;
+    if (comment.likedFlag) {
+      await api.unLikeComment({ commentID: comment.no, parentCommentID });
+    } else {
+      await api.likeComment({
+        commentID: comment.no,
+        parentCommentID,
+        url: router.asPath
+      });
+    }
+    dispatch(getPost());
+  };
+
+  const profileImage = (
+    <img
+      src={
+        comment.profileImageUrl ??
+        'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+      }
+      alt="profile"
+    />
+  );
+
+  const WithProfileLink = ({ children }) => (
+    (comment.profileImageUrl) ?
+    (<Link href={`/profile/${comment.studentId}`} passHref>
+      {children}
+    </Link>) :
+    children
+  );
 
   return (
     <div className={styles.comment}>
-      <img src={comment.profileImageUrl ?? 'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'} alt="profile" />
+      <WithProfileLink>
+        <img
+          src={
+            comment.profileImageUrl ??
+            'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+          }
+          alt="profile"
+        />
+      </WithProfileLink>
       <div>
         <div>
-          <p>{comment.studentName}</p>
-          {(post.studentId === comment.studentId) && <p>작성자</p>}
-          {(user?.id === comment.studentId) && (
+          <WithProfileLink>
+            <p className={styles.profileImage}>{comment.studentName}</p>
+          </WithProfileLink>
+          {Boolean(post.isWriter) && <p>작성자</p>}
+          {Boolean(comment.isWriter) && (
             <div>
-              <button onClick={onEdit} className={styles['action-button']}>{(isContentEditable) ? <AiOutlineCheck /> : <AiOutlineEdit />}</button>
-              <button onClick={onDelete} className={styles['action-button']}><AiOutlineDelete /></button>
+              <button onClick={onEdit} className={styles['action-button']}>
+                {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
+              </button>
+              <button onClick={onDelete} className={styles['action-button']}>
+                <AiOutlineDelete />
+              </button>
             </div>
           )}
         </div>
-        <div ref={descriptionDiv} contentEditable={isContentEditable} suppressContentEditableWarning={true}>{comment.description}</div>
+        <div
+          ref={descriptionDiv}
+          contentEditable={isContentEditable}
+          suppressContentEditableWarning={true}
+        >
+          {comment.description}
+        </div>
         <div>
-          <p>{new Date(comment.inDate).toLocaleDateString()}</p>
-          {(user && comment.no === comment.groupNo) && (
-            <p onClick={() => { setParentCommentID(comment.no); }}>답글 쓰기</p>
+          <p>{moment(comment.inDate).format('YYYY-MM-DD')}</p>
+          {user && comment.no === comment.groupNo && (
+            <p
+              className={styles.reply}
+              onClick={() => {
+                setParentCommentID(comment.no);
+              }}
+            >
+              답글 쓰기
+            </p>
           )}
+          {user && user.id !== comment.studentId && (
+            <p className={styles.reply} onClick={() => sendLetter(comment)}>
+              쪽지
+            </p>
+          )}
+          <button
+            className={`${styles.likeButton} ${
+              comment.likedFlag && styles.like
+            }`}
+            onClick={onClickLike}
+          >
+            <AiFillHeart />
+            <span>{comment.emotionCount}</span>
+          </button>
         </div>
       </div>
     </div>

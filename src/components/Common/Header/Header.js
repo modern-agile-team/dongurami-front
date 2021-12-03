@@ -1,42 +1,39 @@
 import styles from '../../../styles/Common/Header/Header.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
-import { BiBell } from 'react-icons/bi';
 import Hamburger from 'hamburger-react';
 import HeaderBoard from './HeaderBoard';
 import HeaderUser from './HeaderUser';
-import AlarmContainer from '../Alarm/AlarmContainer';
 import HeaderMobileBoard from './HeaderMobileBoard';
 import Link from 'next/link';
 import getToken from 'utils/getToken';
 import { useRouter } from 'next/router';
 import { getUserData } from 'apis/user';
+import Alarm from '../Alarm';
+import MessageAlarm from '../letter';
 
 function Header() {
   const [open, setOpen] = useState(false);
-  const [isAlarmOpen, setIsAlarmOpen] = useState(false);
   const [token, setToken] = useState('');
   const [user, setUser] = useState();
+  const [userProflie, setUserProfile] = useState();
 
   const closeRef = useRef(null);
   const router = useRouter();
 
+  function handleClickOutside(event) {
+    if (closeRef.current && !closeRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  }
+
   //영역밖 클릭 시 사이드바 제거
-  const CloseSidebar = (ref) => {
-    useEffect(() => {
-      function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
-          setOpen(false);
-          setIsAlarmOpen(false);
-        }
-      }
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [ref]);
-  };
-  CloseSidebar(closeRef);
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // localStorage의 JWT값 불러와 token state에 저장
   useEffect(() => {
@@ -51,14 +48,10 @@ function Header() {
   //토큰 유효성 검사
   useEffect(() => {
     if (token) {
-      getUserData({
-        headers: {
-          'Content-type': 'application/json; charset=utf-8',
-          'x-auth-token': token
-        }
-      })
+      getUserData()
         .then((res) => {
           setUser(res.data.user.id);
+          setUserProfile(res.data.user.profilePath);
         })
         .catch((err) => {
           window.localStorage.removeItem('jwt');
@@ -67,17 +60,15 @@ function Header() {
     }
   }, [token]);
 
-  //알람 열람
-  const alarmOpen = () => {
-    setIsAlarmOpen(!isAlarmOpen);
-  };
-
   return (
     <header className={styles.container}>
       <nav>
         <div className={styles.myHeader} ref={closeRef}>
           <Link href="/" passHref>
-            <img src="https://lovelyoch.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F439c0672-c274-4f90-b273-9928548c4081%2Flogo.jpg?table=block&id=99568f38-6c02-4bbc-b04b-1b7152648016&spaceId=69eb8ea8-3d04-47ec-8bb7-004e8aa31f9e&width=7460&userId=&cache=v2" />
+            <img
+              alt="동그라미"
+              src="https://lovelyoch.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fcfb255ff-10a0-4095-aabb-3b0c62e1ebf6%2Flogo-removebg.png?table=block&id=58d3c93f-aa6e-4b62-9c49-df57fae3f5fe&spaceId=69eb8ea8-3d04-47ec-8bb7-004e8aa31f9e&width=2000&userId=&cache=v2"
+            />
           </Link>
           <Hamburger rounded toggled={open} toggle={setOpen} size={25} />
           <div className={styles.topMenu}>
@@ -90,14 +81,23 @@ function Header() {
                 className={styles.tokenIcons}
                 id={open ? styles.show : styles.hide}
               >
-                <div className={styles.alarm}>
-                  <BiBell onClick={alarmOpen} className={styles.bell} />
-                  {isAlarmOpen && <AlarmContainer />}
+                <Alarm token={token} />
+                <MessageAlarm className={styles.message} token={token} />
+                <div className={styles.profileWrap}>
+                  {userProflie ? (
+                    <img
+                      alt="유저 프로필"
+                      src={userProflie}
+                      className={styles.userProflie}
+                      onClick={showProfile}
+                    />
+                  ) : (
+                    <FaUserCircle
+                      className={styles.Profile}
+                      onClick={showProfile}
+                    />
+                  )}
                 </div>
-                <FaUserCircle
-                  className={styles.Profile}
-                  onClick={showProfile}
-                />
               </div>
             ) : (
               <div

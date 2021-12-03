@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Scraps from './Scraps';
-import styles from '../../styles/Profile/Profile.module.scss';
-import UserInfo from './UserInfo';
-import router, { useRouter } from 'next/router';
+import styles from 'styles/Profile/Profile.module.scss';
+import UserInfo from './UserInfo/UserInfo';
+import MyPost from './MyPost';
+import { useRouter } from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';
 import { useDispatch } from 'react-redux';
@@ -18,93 +19,152 @@ function Profile() {
   const [dataArr, setDataArr] = useState([]);
   const [token, setToken] = useState(getToken());
   const [isOpen, setIsOpen] = useState(false);
+  const [leaveIsOpen, setLeaveIsOpen] = useState(false);
 
-  const uRouter = useRouter();
+  const router = useRouter();
 
-  const logout = () => {
+  const moveInfo = () => {
+    router.replace({
+      pathname: `/profile/${router.query.pid}`
+    });
+  };
+  const moveComp = (pageName) => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        category: pageName
+      }
+    });
+  };
+
+  const logout = useCallback(() => {
     window.localStorage.removeItem('jwt');
     dispatch(signOut());
     router.push('/');
-  };
+  }, [dispatch, router]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
+  const matchTitle = useCallback((title) => {
+    if (matchMedia('screen and (max-width: 280px)').matches) {
+      return title.length >= 5 ? title.substring(0, 3) + '..' : title;
+    } else if (matchMedia('screen and (max-width: 530px)').matches) {
+      return title.length >= 6 ? title.substring(0, 4) + '..' : title;
+    }
+    return title.length >= 8 ? title.substring(0, 6) + '..' : title;
+  }, []);
+
+  const setState = (data) => {
+    setUserInfo(data.userInfo);
+    setProfile(data.profile);
+    setClubNo(data.profile.clubs.length === 0 ? 0 : data.profile.clubs[0].no);
+  };
+
+  const fetchUserInfo = useCallback(async () => {
+    if (router.query.pid) {
+      await getUserInfo(router.query.pid, token)
+        .then((res) => setState(res.data))
+        .catch((err) => {
+          alert(err.response.data.msg);
+          router.back();
+        });
+    }
+  }, [router, token]);
+
   useEffect(() => {
-    if (!uRouter.isReady) return;
-    setId(uRouter.query.pid);
+    if (!router.isReady) return;
+    fetchUserInfo();
+  }, [router, token]);
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    setId(router.query.pid);
     setToken(getToken());
-    getUserInfo(uRouter.query.pid, token)
-      .then((res) => {
-        setUserInfo(res.data.userInfo);
-        setProfile(res.data.profile);
-        setClubNo(
-          res.data.profile.clubs.length === 0 ? 0 : res.data.profile.clubs[0].no
-        );
-      })
-      .catch((err) => {
-        alert(err);
-        router.back();
-      });
-  }, [token, uRouter]);
+  }, [router]);
+
+  useEffect(() => {
+    document.body.style.overflow = 'visible';
+  }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.profileHeader}>
         <button
-          style={comp === '프로필' ? { borderRight: 0 } : null}
+          style={
+            router.query.category !== undefined
+              ? { background: '#f2f2f2' }
+              : null
+          }
           className={styles.profileBtn}
-          onClick={() => setComp('프로필')}
+          onClick={() => {
+            moveInfo();
+          }}
         >
           프로필
         </button>
-        <button
-          style={comp === '스크랩' ? { borderRight: 0 } : null}
-          className={styles.scrapBtn}
-          onClick={() => {
-            if (profile.clubs.length > 0) {
-              getScraps(profile.id, profile.clubs[0].no)
-                .then((res) => {
-                  setDataArr(
-                    res.data.scraps
-                      .concat(res.data.boards)
-                      .sort(
-                        (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
-                      )
-                  );
-                })
-                .catch((err) => {
-                  alert('로그인 한 사용자만 열람할 수 있습니다.');
-                  setComp('프로필');
-                });
-              setComp('스크랩');
-            } else alert('가입된 동아리가 없습니다.');
-          }}
-        >
-          스크랩
-        </button>
+        {userInfo.id === profile.id && (
+          <button
+            style={
+              router.query.category !== 'scrap'
+                ? { background: '#f2f2f2' }
+                : null
+            }
+            className={styles.scrapBtn}
+            onClick={() => {
+              if (profile.clubs.length > 0) {
+                moveComp('scrap');
+              } else alert('가입된 동아리가 없습니다.');
+            }}
+          >
+            스크랩
+          </button>
+        )}
+        {userInfo.id === profile.id && (
+          <button
+            style={
+              router.query.category !== 'myPosts'
+                ? { background: '#f2f2f2' }
+                : null
+            }
+            className={styles.myPost}
+            onClick={() => {
+              moveComp('myPosts');
+            }}
+          >
+            작성글
+          </button>
+        )}
       </div>
-      <UserInfo
-        logout={logout}
-        baseImg={baseImg}
-        userInfo={userInfo}
-        profile={profile}
-        comp={comp}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
-      <Scraps
-        uRouter={uRouter}
-        userInfo={userInfo}
-        profile={profile}
-        comp={comp}
-        setClubNo={setClubNo}
-        clubNo={clubNo}
-        getScraps={getScraps}
-        dataArr={dataArr}
-        setDataArr={setDataArr}
-        id={id}
-      />
+      {router.query.category === undefined && (
+        <UserInfo
+          logout={logout}
+          baseImg={baseImg}
+          userInfo={userInfo}
+          profile={profile}
+          router={router.query.category}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          leaveIsOpen={leaveIsOpen}
+          setLeaveIsOpen={setLeaveIsOpen}
+          clubNo={clubNo}
+        />
+      )}
+      {router.query.category === 'scrap' && (
+        <Scraps
+          userInfo={userInfo}
+          profile={profile}
+          setClubNo={setClubNo}
+          clubNo={clubNo}
+          getScraps={getScraps}
+          dataArr={dataArr}
+          setDataArr={setDataArr}
+          id={id}
+          matchTitle={matchTitle}
+        />
+      )}
+      {router.query.category === 'myPosts' && <MyPost />}
     </div>
   );
 }

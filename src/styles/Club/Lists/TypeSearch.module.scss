@@ -2,32 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  ul {
-    display: flex;
-    list-style: none;
-
-    li {
-      cursor: pointer;
-      background-color: #f1f3f5;
-      border-radius: 15px;
-      padding: 0.8rem 1.5rem;
-      font-size: 16px;
-      margin-right: 6px;
-
-      &:hover {
-        filter: brightness(96%);
-        // background-color: #ced4da;
-      }
-    }
+  .selected {
+    filter: brightness(80%);
   }
-
   .searchContainer {
-    // border: 1px solid;
-    // padding: 0.8rem 2rem;
     margin: 0% 5%;
     margin-top: 30px;
-    // margin-top: 8px;
-    // margin-right: 0.8em;
+
     width: 35vw;
     height: 50px;
     border: solid #c2f2dc;
@@ -45,6 +26,7 @@
         height: 90%;
         margin-left: 20px;
         font-size: 15px;
+        font-family: 'twayair';
 
         outline: none;
       }
@@ -57,47 +39,26 @@
   }
 
   .writeBtn {
-    // position: absolute;
-    // right: 20%;
-    // top: 20%;
-    // padding: 8px;
     width: 7em;
     height: 2.5rem;
-    // font-size: 6px;
-    // display: flex;
-    // align-items: center;
-    // border: none;
-    // background: #c2f2dc;
-    // cursor: pointer;
+
     background: white;
     border: 1px solid lightgray;
     border-radius: 0.5rem;
     cursor: pointer;
     color: black;
-    // padding: 0.2rem 2rem;
+
     &:hover {
       filter: brightness(98%);
-      // background: #3fcdb8;
     }
   }
 }
 @media screen and (max-width: 1024px) {
   .container {
     margin-top: 1rem;
-    ul {
-      li {
-        padding: 0.8rem 1.1rem;
-        font-size: 15px;
-        margin-right: 6px;
 
-        &:hover {
-          filter: brightness(96%);
-          // background-color: #ced4da;
-        }
-      }
-    }
     .searchContainer {
-      width: 100%;
+      width: 30%;
       margin-top: 30px;
       .searchElement {
         svg {
@@ -128,35 +89,22 @@
   }
 }
 
-// @media screen and (max-width: 580px) {
-//   .container {
-//     .tagList {
-//       li {
-//         width: 13vw;
-//         margin: 10px;
-//         font-size: 20px;
-//       }
-//     }
-//   }
-// }
+@media screen and (max-width: 1024px) {
+  .container {
+    .searchContainer {
+      width: 70%;
+      height: 38px;
+      margin: 5px;
+      svg {
+        width: 1rem;
+        margin-right: 5px;
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 480px) {
   .container {
-    ul {
-      padding: 0%;
-      margin-top: 0%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      li {
-        padding: 10px;
-        margin: 5px;
-        width: 20%;
-        text-align: center;
-        font-size: 12px;
-      }
-    }
-
     .searchContainer {
       width: 70%;
       height: 38px;

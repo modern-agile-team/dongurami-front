@@ -1,5 +1,3 @@
-$sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-  Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 @import '../Manager/Members.module.scss';
 
 .intro {
@@ -9,13 +7,12 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   flex-direction: column;
   width: 80%;
   span {
+    font-family: 'twayair';
     margin-bottom: 1em;
     font-size: 200%;
   }
-  h1,
-  h2,
   p {
-    font-family: $sans-font;
+    font-size: 16px;
   }
 }
 
@@ -24,38 +21,35 @@ $sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
   justify-content: flex-end;
 }
 
-.intro button {
-  display: flex;
-  align-items: center;
-  font-family: $sans-font;
-  cursor: pointer;
-  border: 1px solid $color1;
-  background-color: white;
-  border-radius: 3px;
-  padding: 5px;
-  &:hover {
-    filter: brightness(90%);
-  }
-  svg {
-    margin-right: 5px;
-  }
-}
-
 .desc {
-  font-family: $sans-font;
   margin-bottom: 1em;
   & > div:nth-of-type(1) {
+    position: sticky;
+    top: 60px;
     & > div:nth-of-type(1) {
       display: flex;
-      border: 1px solid;
+      position: sticky;
+      top: 60px;
+      z-index: 999;
       justify-content: space-between;
+      background-color: white;
+      border: 1px solid;
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
       span {
         margin: 0;
-      }
-      & > div:nth-of-type(1) {
-        padding: 0;
+      } // ql-formats
+      & > span:nth-of-type(1) {
+        svg {
+          display: none;
+        } // ql-header
+        & > span:nth-of-type(1) {
+          width: 100%;
+          // ql-picker-options
+          & > span:nth-of-type(2) {
+            font-size: 100%;
+          }
+        }
       }
     }
     & > div:nth-of-type(2) {

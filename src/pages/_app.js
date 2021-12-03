@@ -8,13 +8,31 @@ import { BsFillArrowUpCircleFill } from 'react-icons/bs';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
+import { useRouter } from 'next/router';
+import { changeComp } from 'redux/slices/chageComp';
+import * as gtag from '../lib/gtags'
 
 function ReduxWrapper({ children }) {
   const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.pathname !== '/clubhome/[id]') dispatch(changeComp(1));
+  }, [router.pathname]);
 
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return children;
 }
@@ -22,12 +40,18 @@ function ReduxWrapper({ children }) {
 function App({ Component, pageProps }) {
   const [scrollY, setScrollY] = useState(0);
 
+  const scrollSpeed = () => {
+    if (typeof window !== 'undefined') {
+      const pos = window.pageYOffset;
+      return (pos / 550) * 75;
+    }
+  };
+
   const scrollToTop = () => {
     if (typeof window !== 'undefined') {
       const scroll = window.setInterval(() => {
         const pos = window.pageYOffset;
-        const step = 150;
-        if (pos > 0) window.scrollTo(0, pos - step);
+        if (pos > 0) window.scrollTo(0, pos - scrollSpeed());
         else window.clearInterval(scroll);
       }, 1);
     }
@@ -38,6 +62,7 @@ function App({ Component, pageProps }) {
       if (typeof window !== 'undefined') setScrollY(window.scrollY);
     });
   };
+
   useEffect(() => {
     scrollPosition();
   }, [scrollY]);

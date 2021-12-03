@@ -22,7 +22,7 @@ export function searchPosts({ category, clubNum, ...params }) {
 
 export function postPost(category, body, clubNum) {
   if (category === 'clubNotice') {
-    return axios.post(`/api/club/board/clubNotice/${clubNum}`, { ...body });
+    return axios.post(`/api/club/board/clubNotice/${clubNum}`, { ...body, url: `clubhome/${clubNum}`, notiCategoryNum: 6 });
   }
   if (category === 'clubActivity') {
     return axios.post(`/api/club/board/clubActivity/${clubNum}`, { ...body });
@@ -33,9 +33,12 @@ export function postPost(category, body, clubNum) {
   return axios.post(`/api/board/${category}`, { ...body });
 }
 
-export function putPost(category, pid, body) {
+export function putPost(category, pid, body, clubNum) {
   if (category === 'clubNotice') {
-    return axios.put(`/api/club/board/clubNotice/2/${pid}`, body)
+    return axios.put(`/api/club/board/clubNotice/${clubNum}/${pid}`, body);
+  }
+  if (category === 'clubActivity') {
+    return axios.put(`/api/club/board/clubActivity/${clubNum}/${pid}`, body);
   }
   return axios.put(`/api/board/${category}/${pid}`, body);
 }

@@ -7,6 +7,7 @@ import Pagination from './Pagination';
 import Search from './Search';
 import styles from '../../styles/Board/Board/Board.module.scss';
 import { getBoardPosts } from 'redux/slices/board';
+import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 function getQuery(router) {
   return {
@@ -63,8 +64,10 @@ function Board({ category }) {
   };
   const canWrite = (() => {
     if (!user) return false;
-    if (clubNum && user.club.every(({ no }) => no !== clubNum)) return false;
-    return true;
+    if (['free', 'questionAndAnswer'].includes(category)) return true;
+    if (category === 'notice' && user.isAdmin) return true;
+    if (clubNum && user.club.some(({ no }) => no === clubNum)) return true;
+    return false;
   })();
 
   if (!posts) return null;
@@ -72,7 +75,7 @@ function Board({ category }) {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <Link href={router.pathname} passHref>
+        <Link href={{ pathname: router.pathname, query: { id: router.query.id } }} passHref>
           <h1>
             <a>{title[category]}</a>
           </h1>
@@ -81,7 +84,7 @@ function Board({ category }) {
         <div className={styles.orderBy}>
           {(canWrite) && (
             <Link href={{ pathname: `${router.pathname}/write`, query: router.query }} passHref>
-              <button>✏️ 글쓰기</button>
+              <DonguramiOutlineButton>✏️ 글쓰기</DonguramiOutlineButton>
             </Link>
           )}
           <select value={`${sort} ${order}`} onChange={onOrderChange}>

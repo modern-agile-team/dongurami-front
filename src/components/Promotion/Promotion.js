@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../styles/Board/Promotion/Promotion.module.scss';
-import Link from 'next/link';
+import moment from 'moment';
+import { useRouter } from 'next/router';
 
 function displayedAt(createdAt) {
-  const time = new Date(createdAt);
-  const milliSeconds = new Date() - time;
+  const time = moment(createdAt);
+  const milliSeconds = moment() - time;
   const seconds = milliSeconds / 1000;
 
   if (seconds < 60) return `방금 전`;
@@ -26,25 +27,27 @@ const Promotion = ({
   img,
   name,
   clubName,
-  setOpenModal,
   date,
   pId,
   setPostId,
   category,
-  clubNo,
   title
 }) => {
+  const router = useRouter();
   return (
     <div className={styles.promotion}>
       <div
         className={styles.img}
-        onClick={(e) => {
+        onClick={() => {
           setPostId(pId);
-          setOpenModal(true);
+          router.replace(`promotion?id=${pId}`);
         }}
       >
         {!img ? (
-          <img src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg" />
+          <img
+            src="https://i.pinimg.com/236x/df/ef/48/dfef48b50816f9d55767a0260798f0d2.jpg"
+            alt="poster"
+          />
         ) : (
           <img src={img} alt="poster" />
         )}
@@ -52,7 +55,7 @@ const Promotion = ({
           className={styles.creationInfo}
           onClick={() => {
             setPostId(pId);
-            setOpenModal(true);
+            router.replace(`promotion?id=${pId}`);
           }}
         >
           <div className={styles.writerInfo}>
@@ -69,9 +72,11 @@ const Promotion = ({
           e.stopPropagation();
         }}
       >
-        <div className={styles.title}>{title}</div>
+        <span className={styles.title}>
+          {title.length > 15 ? `${title.substr(0, 15)}...` : title}
+        </span>
         <div className={styles.extraInfo}>
-          <span className={styles.none}>left</span>
+          <span className={styles.none}></span>
           <span className={styles.hashtag}>#{category}</span>
           <span className={styles.time}>{displayedAt(date)}</span>
         </div>

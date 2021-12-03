@@ -15,10 +15,22 @@
     background-color: white;
     width: 25vw;
     padding: 2rem;
-    padding-bottom: 10rem;
+    padding-bottom: 2rem;
+    height: 25em;
+    // padding-bottom: 10rem;
     display: flex;
     flex-direction: column;
     z-index: 9999;
+  }
+  .body::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+  .body::-webkit-scrollbar-thumb {
+    background-color: #4e4e4e46;
+  }
+  .body::-webkit-scrollbar-track {
+    background-color: white;
   }
 
   .header {
@@ -45,16 +57,17 @@
     }
   }
   .body {
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     margin-bottom: 2%;
+    height: 20em;
     .des {
       padding: 1.5rem 0rem;
       border-bottom: 1px solid #c2c2c269;
     }
     .edit {
       float: right;
-      margin-top: 6px;
     }
   }
 
@@ -131,6 +144,11 @@
     }
     .modal {
       width: 60vw;
+      .des {
+        svg {
+          margin-right: 5px;
+        }
+      }
       span {
         font-size: x-small;
       }

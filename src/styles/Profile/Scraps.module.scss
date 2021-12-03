@@ -15,7 +15,11 @@
       justify-content: flex-end;
       .header {
         margin: 0 1rem;
+        select {
+          padding: 0.3rem;
+        }
         * {
+          font-family: twayair;
           margin-left: 1rem;
         }
       }
@@ -25,9 +29,10 @@
 .postItem {
   padding: 1rem;
   display: grid;
-  // width: 100%;
+  width: 90%;
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
 }
 
 .items {
@@ -36,7 +41,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 92%;
+  width: 70%;
   height: 100%;
   overflow: hidden;
   margin: 2% 4%;
@@ -49,6 +54,11 @@
     width: 100%;
     height: 50%;
   }
+}
+
+.itemTitle {
+  font-family: twayair;
+  font-size: 15px;
 }
 
 .addBtn {

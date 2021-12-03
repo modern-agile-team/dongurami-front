@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import styles from '../../../styles/Club/Home/Review/ReviewWrite.module.scss';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { AiFillStar } from 'react-icons/ai';
+import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 const ReviewWrite = ({
   onReviewInput,
@@ -12,23 +13,51 @@ const ReviewWrite = ({
   onReviewUpdate,
   inputRef
 }) => {
+  const [index, setIndex] = useState(null);
+  const iconClassName = useCallback(
+    (state, i) => {
+      if (state) return styles.able;
+      else {
+        if (index !== null) {
+          if (i <= index) return styles.able;
+          return styles.disable;
+        }
+      }
+    },
+    [index]
+  );
   return (
     <div className={styles.write}>
-      <div className={styles.star}>
+      <div className={styles.star} onMouseOut={() => setIndex(null)}>
         {starState.map((state, i) => {
+          const classStyle = iconClassName(state, i);
           return state ? (
-            <AiFillStar key={i} onClick={() => onStarHandleFalse(i)} />
+            <AiFillStar
+              className={classStyle}
+              onMouseOver={() => setIndex(i)}
+              key={i}
+              onClick={() => onStarHandleFalse(i)}
+            />
           ) : (
-            <AiOutlineStar key={i} onClick={() => onStarHandleTrue(i)} />
+            <AiFillStar
+              className={classStyle}
+              onMouseOver={() => setIndex(i)}
+              key={i}
+              onClick={() => onStarHandleTrue(i)}
+            />
           );
         })}
       </div>
       <div className={styles.comment}>
         <input ref={inputRef} onChange={onReviewInput} />
         {isReviewMine ? (
-          <button onClick={onReviewUpdate}>✏️ 수정</button>
+          <DonguramiOutlineButton onClick={onReviewUpdate}>
+            ✏️ 수정
+          </DonguramiOutlineButton>
         ) : (
-          <button onClick={onReviewSubmit}>✏️ 등록</button>
+          <DonguramiOutlineButton onClick={onReviewSubmit}>
+            ✏️ 등록
+          </DonguramiOutlineButton>
         )}
       </div>
     </div>

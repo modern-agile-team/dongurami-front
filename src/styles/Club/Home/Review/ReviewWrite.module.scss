@@ -16,14 +16,11 @@
   margin-top: 1em;
   height: 35px;
   svg {
-    color: #ffc949;
+    color: lightgray;
     height: 30px;
     width: 30px;
     cursor: pointer;
-    &:hover {
-      height: 35px;
-      width: 35px;
-    }
+    margin: 0 2px;
   }
 }
 .comment {
@@ -32,6 +29,7 @@
   align-items: center;
   width: 80%;
   margin-top: 1em;
+  margin-left: 3em;
   padding-bottom: 2em;
   input {
     padding-left: 10px;
@@ -45,16 +43,12 @@
   }
   button {
     margin-left: 1em;
-    padding: 5px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-weight: lighter;
-    background-color: white;
-    border: 1px solid $color1;
-    &:hover {
-      background-color: $color1;
-    }
   }
+}
+
+.able {
+  color: #ffc949 !important;
+  transform: scale(1.2);
 }
 
 @media (max-width: 768px) {

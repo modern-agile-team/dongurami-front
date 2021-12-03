@@ -49,9 +49,31 @@
     }
   }
   .boardInfo {
+    .profile {
+      position: relative;
+      display: flex;
+      align-items: center;
+      img {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      span {
+        cursor: pointer;
+      }
+    }
+
     text-align: right;
     margin-top: 3rem;
   }
+}
+
+.options {
+  border: 1px solid;
+  top: 30px;
+  position: absolute;
 }
 
 .container::-webkit-scrollbar {
@@ -65,6 +87,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   .info {
     text-align: right;
     .hit {
@@ -96,6 +119,30 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
+  img {
+    max-width: 100%;
+  }
+}
+.likeButton {
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+  background-color: white;
+  color: gray;
+  &:hover {
+    color: indianred;
+    background-color: white;
+  }
+  & > svg {
+    display: block;
+    margin: auto;
+  }
+}
+
+.like {
+  color: white;
+  background-color: indianred;
 }
 
 @media screen and (max-width: 768px) {
@@ -104,6 +151,10 @@
     width: 100%;
     border: none;
     border-radius: 3px;
+    .wrap {
+      border: none;
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.24);
+    }
     h1 {
       width: 62vw;
     }

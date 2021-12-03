@@ -1,0 +1,166 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  padding: 1em;
+  width: 20vw;
+  min-width: max-content;
+  border-radius: 6px;
+  box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  top: 45px;
+  right: 0;
+  margin-left: -70px;
+  max-height: 50vh;
+  hr {
+    width: 90%;
+    border-top: 0.1px dashed #f2f2f2;
+  }
+}
+
+.rect {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  top: 40px;
+  right: calc(4em - 7px);
+  transform: rotate(45deg);
+}
+
+.alarms {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
+  margin-top: 5px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  p {
+    font-size: 90%;
+    margin: 0;
+  }
+}
+
+.alarms::-webkit-scrollbar {
+  display: none;
+}
+.alarms::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.description {
+  transition-duration: 1s;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+  border-bottom: 1px solid #cacacabd;
+  cursor: pointer;
+  padding: 10px;
+  &:hover {
+    background-color: #eeeeee94;
+  }
+  &:active {
+    background-color: #b1b1b194;
+  }
+}
+
+.top {
+  svg {
+    &:hover {
+      color: rgb(212, 67, 67);
+    }
+  }
+  p {
+    font-weight: bold;
+  }
+}
+
+.delete {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+  svg {
+    &:hover {
+      color: rgb(233, 49, 3);
+    }
+  }
+  span {
+    font-size: 10px;
+    color: red;
+  }
+}
+
+.leftAlarms {
+  font-size: 90%;
+  margin-top: 1em;
+  span {
+    cursor: pointer;
+    &:hover {
+      font-weight: bold;
+      border-bottom: 1px solid;
+    }
+  }
+}
+
+.bottom {
+  div {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-top: 10px;
+    p:nth-child(1) {
+      color: #66b6a9;
+    }
+  }
+  align-items: flex-end;
+}
+
+.entireMessage {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  width: 90%;
+  font-size: 80%;
+  padding-bottom: 5px;
+  bottom: 0;
+  color: #66b6a9;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:active {
+    transform: scale(95%);
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 30%;
+    margin-left: -20%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 150%;
+    top: 110px;
+    right: 0;
+  }
+  .rect {
+    top: 105px;
+  }
+  .leftAlarms {
+    font-size: 80%;
+  }
+  .alarms {
+    p {
+      font-size: 80%;
+    }
+  }
+  .top p {
+    font-size: 80%;
+  }
+}

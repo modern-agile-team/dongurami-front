@@ -5,32 +5,46 @@ import ReplyContainer from './ReplyContainer';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-function CommentContainer({ comments }) {
+function CommentContainer({ comments, sendLetter }) {
   const user = useSelector((state) => state.user);
   const [parentCommentID, setParentCommentID] = useState();
+
+  const toggleParentCommentID = (id) => {
+    if (parentCommentID === id) setParentCommentID();
+    else setParentCommentID(id);
+  };
 
   return (
     <>
       <hr />
       <p>댓글 {comments.length}</p>
       <div className={style.container}>
-        {comments.map((comment) => (
+        {comments.map((comment, index) => (
           <React.Fragment key={comment.no}>
             {comment.depth ? (
               <ReplyContainer>
-                <Comment comment={comment} parentCommentID={comment.groupNo} />
+                <Comment
+                  comment={comment}
+                  parentCommentID={comment.groupNo}
+                  sendLetter={sendLetter}
+                />
               </ReplyContainer>
             ) : (
-              <Comment comment={comment} setParentCommentID={setParentCommentID} />
+              <Comment
+                comment={comment}
+                setParentCommentID={toggleParentCommentID}
+                sendLetter={sendLetter}
+              />
             )}
-            {parentCommentID === comment.no && (
-              <ReplyContainer>
-                <AddComment parentCommentID={parentCommentID} />
-              </ReplyContainer>
-            )}
+            {comment.groupNo === parentCommentID &&
+              comments[index + 1]?.depth !== 1 && (
+                <ReplyContainer>
+                  <AddComment parentCommentID={parentCommentID} scroll />
+                </ReplyContainer>
+              )}
           </React.Fragment>
         ))}
-        {(user) && <AddComment />}
+        {user && <AddComment />}
       </div>
     </>
   );

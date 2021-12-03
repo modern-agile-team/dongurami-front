@@ -1,11 +1,12 @@
 .container {
+  min-height: calc(100vh - 18vh - 60px - 2rem - 7px);
   margin: 1rem 0;
   a {
     color: black;
     text-decoration: none;
+    font-family: 'twayair';
   }
   a:hover {
-    color: gray;
     text-decoration: none;
     cursor: pointer;
   }
@@ -25,13 +26,6 @@
   display: flex;
   margin-bottom: 1rem;
   justify-content: space-between;
-  button {
-    background: inherit;
-    border: 1px solid lightgray;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    color: black;
-  }
   select {
     border-radius: 1rem;
     height: 2rem;

@@ -6,8 +6,8 @@
 }
 
 .login {
-  width: 50%;
-  height: 29rem;
+  width: 45em;
+  padding: 2rem 0rem;
   margin: 3% auto;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.342);
   border-radius: 50px;
@@ -18,9 +18,13 @@
   h1 {
     margin: 0 auto;
     font-size: 240%;
-    font-weight: 100;
-    margin-top: 35px;
+    font-weight: 400;
     margin-bottom: 35px;
+  }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
   .idInput {
     font-family: 'Noto Sans KR', sans-serif;
@@ -53,17 +57,18 @@
     }
   }
   .buttons {
-    width: 60%;
-    margin: 0 auto;
     margin-top: 6%;
     text-align: center;
-    .loginBtn:hover {
-      filter: brightness(96%);
+    .loginBtn {
+      margin-bottom: 1.5em;
+      &:hover {
+        filter: brightness(96%);
+      }
     }
   }
   button {
     font-family: 'Noto Sans KR', sans-serif;
-    width: 100%;
+    width: 60%;
     height: 50px;
     font-size: 100%;
     border-radius: 5px;
@@ -77,7 +82,7 @@
       font-family: 'Noto Sans KR', sans-serif;
       font-size: 80%;
     }
-    margin-top: 7%;
+    // margin-top: 7%;
     .signupBtn {
       cursor: pointer;
       font-style: oblique;
@@ -109,6 +114,9 @@
       box-shadow: 0px 0px 0px 0px;
       .buttons {
         margin-top: 15%;
+        .loginBtn {
+          margin-bottom: 2rem;
+        }
       }
       button {
         height: 40px;

@@ -1,15 +1,17 @@
 import styles from '../../../styles/Club/Home/Schedule/Calendar.module.scss';
 import React, { useCallback } from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import moment from 'moment';
-import DailyModal from './DailyModal';
+import DailyModal from './ScheduleManage/DailyModal';
 import Schedule from './Schedule';
-import DailyControl from './DailyControl';
-import ScheduleModify from './ScheduleModify';
+import DailyControl from './ScheduleManage/DailyControl';
+import ScheduleModify from './ScheduleManage/ScheduleModify';
 import RightContainer from './RightContainer';
-import MakeTd from './MakeTd';
-import Router, { useRouter } from 'next/router';
+import MakeTd from './RightComponents/MakeTd';
+import { useRouter } from 'next/router';
 import { getInfo } from 'apis/calendar';
+import { getSchedule } from 'redux/slices/calendar';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Calendar = () => {
   const [momentTime, setMoment] = useState(moment());
@@ -21,14 +23,14 @@ const Calendar = () => {
   const [title, setTitle] = useState(null);
   const [color, setColor] = useState('');
   const [nowDay, setNowDay] = useState('');
-  const nowDate = useRef();
-  const uRouter = useRouter();
-  const Qdata = uRouter.query;
-  const colors = ['#f7b5b5', '#ffee8f', '#aefff8', '#ffc2fc', '#e2e2e2'];
+  const router = useRouter();
+  const Qdata = router.query;
+  const colors = ['#F9AE7B', '#FEDD01', '#E3E931', '#B5EAFF', '#E9D9EF'];
+  const todayData = useSelector((state) => state.calendar.info);
+  const dispatch = useDispatch();
 
-  const moveLogin = () => Router.push('/LoginPage');
-
-  const moveHome = () => window.location.reload();
+  const moveLogin = useCallback(() => router.push('/LoginPage'), [router]);
+  const moveHome = useCallback(() => location.reload(), []);
 
   const today = momentTime;
   const yearMonth = today.format('YYYY-MM');
@@ -38,33 +40,37 @@ const Calendar = () => {
       ? 53
       : today.clone().endOf('month').week();
 
-  let month = new Date();
-  let nowMonth = `${month.getMonth() + 1}`;
-  if (nowMonth.length === 1) nowMonth = '0' + nowMonth;
+  const nowMonth = moment().format('YYYY-MM');
 
   useEffect(() => {
-    console.log(1);
-    if (today.format('MM') === nowMonth) setNowDay(nowDate.current.id);
-    if (!uRouter.isReady) return;
+    if (today.format('YYYY-MM') === nowMonth)
+      setNowDay(moment().format('YYYY-MM-DD'));
+    if (!router.isReady) return;
+    dispatch(getSchedule({ clubId: Qdata.id, today: nowMonth }));
     getInfo(Qdata.id, yearMonth)
       .then((res) => setSchedule(res.data.result))
       .catch((err) => {
         alert(err.response.data.msg);
-        if (
-          err.response.data.msg ===
-            'JWT 토큰이 존재하지 않습니다. 로그인 후 이용해주세요.' ||
-          err.response.data.msg ===
-            '유효 시간이 만료된 토큰입니다. 다시 로그인 후 이용해주세요.'
-        )
-          moveLogin();
-        else if (
-          err.response.data.msg === '해당 동아리에 가입하지 않았습니다.' ||
-          err.response.data.msg === '존재하지 않는 동아리입니다.'
-        )
-          moveHome();
+        if (err.response.status === 401) moveLogin();
+        else if (err.response.status === 403) moveHome();
       });
-  }, [pop, uRouter, momentTime, Qdata.id, nowMonth, today, yearMonth]);
+  }, [
+    today,
+    nowMonth,
+    router,
+    Qdata.id,
+    yearMonth,
+    moveLogin,
+    moveHome,
+    dispatch
+  ]);
 
+  const inDate = useCallback((startDate, selectedDate, endDate) => {
+    return (
+      Date.parse(startDate) <= Date.parse(selectedDate) &&
+      Date.parse(selectedDate) <= Date.parse(endDate)
+    );
+  }, []);
   //달력만드는 함수
   const calendarArr = useCallback(() => {
     let result = [];
@@ -72,17 +78,21 @@ const Calendar = () => {
     for (week; week <= lastWeek; week++) {
       result = result.concat(
         <MakeTd
+          key={week}
           schedule={schedule}
-          nowDate={nowDate}
           today={today}
           week={week}
           setPop={setPop}
           setDate={setDate}
+          inDate={inDate}
         />
       );
     }
     return result;
-  }, [schedule, nowDate, today, setPop, setDate]);
+  }, [firstWeek, lastWeek, schedule, today, setPop, setDate, inDate]);
+
+  if (!todayData) return null;
+
   return (
     <>
       <div className={styles.wrap}>
@@ -90,6 +100,8 @@ const Calendar = () => {
           className={styles.scheduleComp}
           schedule={schedule}
           nowDay={nowDay}
+          todayData={todayData}
+          inDate={inDate}
         />
         <RightContainer
           className={styles.rightContainer}
@@ -120,6 +132,7 @@ const Calendar = () => {
         setColor={setColor}
         today={today}
         setSchedule={setSchedule}
+        inDate={inDate}
       />
       <ScheduleModify
         Qdata={Qdata}

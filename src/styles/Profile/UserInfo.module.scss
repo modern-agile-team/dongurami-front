@@ -13,12 +13,17 @@
   padding: 2rem;
 }
 
+.message {
+  cursor: pointer;
+  &:hover {
+    color: #90e2d6;
+  }
+}
 .profileImg {
+  box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.1);
   margin: 5px;
   width: 200px;
   height: 200px;
-  // width: 30%;
-  // height: 30%;
   border-radius: 50%;
 }
 
@@ -33,13 +38,35 @@
   }
 }
 
+.leaveModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  button {
+    background: white;
+    border: 1px solid lightgray;
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    &:hover {
+      filter: brightness(97%);
+    }
+  }
+  * {
+    margin: 5px;
+  }
+  span {
+    color: red;
+    cursor: pointer;
+  }
+}
+
 .clubList {
   display: flex;
-  // border: 1px solid;
   flex-direction: column;
   align-items: center;
   * {
-    margin: 2px;
+    margin: 5px;
   }
   a:link {
     color: black;
@@ -51,12 +78,15 @@
   }
   a:hover {
     color: #90e2d6;
+    cursor: pointer;
   }
 }
 
 .onlyMe {
   justify-content: center;
   span {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
     color: rgb(177, 177, 177);
     font-size: small;
     margin: 3px;
@@ -68,8 +98,11 @@
 }
 
 .bottom {
+  * {
+    font-family: twayair;
+    font-size: 15px;
+  }
   margin-top: 4%;
-  // padding: 1.5rem;
   gap: 10px;
   font-size: 110%;
   display: flex;

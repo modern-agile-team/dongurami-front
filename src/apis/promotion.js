@@ -1,5 +1,4 @@
 import axios from 'apis/index';
-import post from 'redux/slices/post';
 
 export function getData(searchItem, no) {
   return axios.get(
@@ -35,46 +34,41 @@ export function deletePost(postId) {
   return axios.delete(`api/board/promotion/${postId}`);
 }
 
-export function editComment(postId, commentNo, description) {
-  return axios.put(`api/board/promotion/${postId}/${commentNo}`, {
+export function editComment(commentNo, parentCommentID, description, postId) {
+  if (parentCommentID) {
+    return axios.put(
+      `/api/board/promotion/${postId}/${parentCommentID}/${commentNo}`,
+      { description }
+    );
+  }
+  return axios.put(`/api/board/promotion/${postId}/${commentNo}`, {
     description
   });
 }
 
-export function editReplyComment(
-  postId,
-  commentNo,
-  replyCommentNo,
-  description
-) {
-  return axios.put(
-    `api/board/promotion/${postId}/${commentNo}/${replyCommentNo}`,
-    {
-      description
-    }
-  );
-}
-
-export function deleteComment(postId, commentNo) {
+export function deleteComment(commentNo, parentCommentID, postId) {
+  if (parentCommentID) {
+    return axios.delete(
+      `/api/board/promotion/${postId}/${parentCommentID}/${commentNo}`
+    );
+  }
   return axios.delete(`api/board/promotion/${postId}/${commentNo}`);
 }
 
-export function deleteReplyComment(postId, commentNo, replyCommentNo) {
-  return axios.delete(
-    `api/board/promotion/${postId}/${commentNo}/${replyCommentNo}`
-  );
-}
-
-export function addComment(postId, description) {
+export function addComment(postId, description, parentCommentID, hiddenFlag) {
+  console.log(postId);
+  if (parentCommentID) {
+    return axios.post(`/api/board/promotion/${postId}/${parentCommentID}`, {
+      description,
+      url: `promotion?id=${postId}`,
+      notiCategoryNum: 1,
+      hiddenFlag
+    });
+  }
   return axios.post(`api/board/promotion/${postId}`, {
-    id: 'test1',
-    description
-  });
-}
-
-export function replyAddComment(postId, parentCommentId, description) {
-  return axios.post(`api/board/promotion/${postId}/${parentCommentId}`, {
-    id: 'test1',
-    description
+    description,
+    url: `promotion?id=${postId}`,
+    notiCategoryNum: 0,
+    hiddenFlag
   });
 }

@@ -3,11 +3,18 @@
   border-radius: .5rem;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
   &:hover {
     filter: brightness(0.8)
   }
   & > img {
     width: 100%;
+    object-fit: contain;
+    object-position: center;
+    flex: 1;
+    max-height: 200px;
+    border-bottom: 1px solid lightgray;
   }
   & > div {
     padding: 1rem;
@@ -19,6 +26,9 @@
       margin-top: .5rem;
       color: gray;
       font-size: .75rem;
+    }
+    & > .emotion {
+      float: right;
     }
   }
 }

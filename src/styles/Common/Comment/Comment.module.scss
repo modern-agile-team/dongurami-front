@@ -5,6 +5,8 @@
     height: 50px;
     border-radius: 50%;
     margin: 0 10px;
+    cursor: pointer;
+    object-fit: cover;
   }
   & > div {
     flex: 1;
@@ -13,7 +15,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: .5rem;
       & > p {
         margin: 0;
       }
@@ -27,6 +29,13 @@
     & > div:nth-of-type(3) {
       display: flex;
       gap: 1rem;
+      p {
+        margin: .5rem 0;
+        font-size: small;
+      }
+      .reply {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -36,6 +45,37 @@
   background: inherit;
   cursor: pointer;
   &:hover {
-    background-color: lightgray;
+    color: lightgray;
   }
+}
+
+.profileImage {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.likeButton {
+  padding: 0 .25rem;
+  margin: auto 0;
+  display: flex;
+  border: 1px solid gray;
+  border-radius: .25rem;
+  background-color: white;
+  color: gray;
+  cursor: pointer;
+  &:hover {
+    color: indianred;
+    background-color: white;
+  }
+  & > svg {
+    display: block;
+    margin: auto;
+  }
+}
+
+.like {
+  color: white;
+  background-color: indianred;
 }

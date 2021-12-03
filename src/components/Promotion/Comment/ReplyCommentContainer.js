@@ -1,10 +1,10 @@
-import style from "../../../styles/Board/Promotion/ReplyCommentContainer.module.scss";
-import { BsArrowReturnRight } from "react-icons/bs";
+import style from '../../../styles/Board/Promotion/ReplyCommentContainer.module.scss';
+import { BsArrowReturnRight } from 'react-icons/bs';
 
 function ReplyCommentContainer({ children }) {
   return (
     <div className={style.container}>
-      <BsArrowReturnRight />
+      <BsArrowReturnRight size={10} />
       {children}
     </div>
   );
