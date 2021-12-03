@@ -42,8 +42,13 @@
         bottom: 5rem;
         display: flex;
         justify-content: center;
+        align-items: center;
+        max-height: 3%;
 
         .writer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           margin-left: 1em;
           margin-right: 0.5em;
           font-size: 15px;
@@ -98,7 +103,8 @@
     align-items: center;
     // text-align: center;
     .none {
-      color: rgba(0, 0, 0, 0);
+      color: white;
+      width: 40px;
     }
     .hashtag {
       font-family: sans-serif;

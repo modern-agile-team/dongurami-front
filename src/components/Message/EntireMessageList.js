@@ -19,6 +19,11 @@ const EntireMessageList = ({ messages, onClickInquiry }) => {
               />
             );
           })}
+        {!messages && (
+          <div className={styles.emptylettercontainer}>
+            <span className={styles.emptyletter}>쪽지가 존재하지 않습니다</span>
+          </div>
+        )}
       </div>
     </>
   );
