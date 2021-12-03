@@ -5,8 +5,6 @@ import { BsTrash } from 'react-icons/bs';
 import DetailMessageList from './DetailMessageList';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { AiOutlineDelete } from 'react-icons/ai';
-import { SiNotion } from 'react-icons/si';
 import ReactTooltip from 'react-tooltip';
 
 const DetailMessageListContainer = ({
@@ -59,11 +57,13 @@ const DetailMessageListContainer = ({
           </div>
         )}
       </div>
-      {router?.query.id &&
-        detailMessage &&
-        detailMessage.map((message, idx) => {
-          return <DetailMessageList key={idx} message={message} />;
-        })}
+      <div className={styles.body}>
+        {router?.query.id &&
+          detailMessage &&
+          detailMessage.map((message, idx) => {
+            return <DetailMessageList key={idx} message={message} />;
+          })}
+      </div>
     </>
   );
 };
