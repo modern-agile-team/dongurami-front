@@ -23,6 +23,21 @@ function Profile() {
 
   const router = useRouter();
 
+  const moveInfo = () => {
+    router.replace({
+      pathname: `/profile/${router.query.pid}`
+    });
+  };
+  const moveComp = (pageName) => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        category: pageName
+      }
+    });
+  };
+
   const logout = useCallback(() => {
     window.localStorage.removeItem('jwt');
     dispatch(signOut());
@@ -47,15 +62,21 @@ function Profile() {
     setClubNo(data.profile.clubs.length === 0 ? 0 : data.profile.clubs[0].no);
   };
 
+  const fetchUserInfo = useCallback(async () => {
+    if (router.query.pid) {
+      await getUserInfo(router.query.pid, token)
+        .then((res) => setState(res.data))
+        .catch((err) => {
+          alert(err.response.data.msg);
+          router.back();
+        });
+    }
+  }, [router, token]);
+
   useEffect(() => {
     if (!router.isReady) return;
-    getUserInfo(router.query.pid, token)
-      .then((res) => setState(res.data))
-      .catch((err) => {
-        alert(err.response.data.msg);
-        router.back();
-      });
-  }, [token, router]);
+    fetchUserInfo();
+  }, [router, token]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -71,19 +92,30 @@ function Profile() {
     <div className={styles.container}>
       <div className={styles.profileHeader}>
         <button
-          style={comp !== '프로필' ? { background: '#f2f2f2' } : null}
+          style={
+            router.query.category !== undefined
+              ? { background: '#f2f2f2' }
+              : null
+          }
           className={styles.profileBtn}
-          onClick={() => setComp('프로필')}
+          onClick={() => {
+            moveInfo();
+          }}
         >
           프로필
         </button>
         {userInfo.id === profile.id && (
           <button
-            style={comp !== '스크랩' ? { background: '#f2f2f2' } : null}
+            style={
+              router.query.category !== 'scrap'
+                ? { background: '#f2f2f2' }
+                : null
+            }
             className={styles.scrapBtn}
             onClick={() => {
-              if (profile.clubs.length > 0) setComp('스크랩');
-              else alert('가입된 동아리가 없습니다.');
+              if (profile.clubs.length > 0) {
+                moveComp('scrap');
+              } else alert('가입된 동아리가 없습니다.');
             }}
           >
             스크랩
@@ -91,30 +123,35 @@ function Profile() {
         )}
         {userInfo.id === profile.id && (
           <button
-            style={comp !== '작성글' ? { background: '#f2f2f2' } : null}
+            style={
+              router.query.category !== 'myPosts'
+                ? { background: '#f2f2f2' }
+                : null
+            }
             className={styles.myPost}
             onClick={() => {
-              setComp('작성글');
+              moveComp('myPosts');
             }}
           >
             작성글
           </button>
         )}
       </div>
-      {comp !== '스크랩' ? (
+      {router.query.category === undefined && (
         <UserInfo
           logout={logout}
           baseImg={baseImg}
           userInfo={userInfo}
           profile={profile}
-          comp={comp}
+          router={router.query.category}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           leaveIsOpen={leaveIsOpen}
           setLeaveIsOpen={setLeaveIsOpen}
           clubNo={clubNo}
         />
-      ) : (
+      )}
+      {router.query.category === 'scrap' && (
         <Scraps
           userInfo={userInfo}
           profile={profile}
@@ -127,7 +164,7 @@ function Profile() {
           matchTitle={matchTitle}
         />
       )}
-      {comp === '작성글' && <MyPost />}
+      {router.query.category === 'myPosts' && <MyPost />}
     </div>
   );
 }

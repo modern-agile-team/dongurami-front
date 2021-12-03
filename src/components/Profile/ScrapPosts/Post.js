@@ -26,10 +26,10 @@ function Post({ category, post, onDelete, editLink }) {
     <div className={styles.container}>
       <div>
         <div className={styles.boardLinkContainer}>
-          <Link href={`/profile/${post.studentId}`} passHref>
+          <Link href={`/profile/${post.studentId}?category=scrap`} passHref>
             <a>스크랩</a>
           </Link>
-          <Link href={`/profile/${post.studentId}`} passHref>
+          <Link href={`/profile/${post.studentId}?category=scrap`} passHref>
             <button>목록</button>
           </Link>
         </div>
@@ -38,17 +38,21 @@ function Post({ category, post, onDelete, editLink }) {
         <div className={styles.postHeader}>
           <div className={styles.profileContainer}>
             <Link href={`/profile/${post.studentId}`} passHref>
-              <img
-                className={styles.profileImage}
-                src={`${
-                  post.profileImageUrl ??
-                  'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
-                }`}
-                alt="profileImage"
-              />
+              <a>
+                <img
+                  className={styles.profileImage}
+                  src={`${
+                    post.profileImageUrl ??
+                    'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+                  }`}
+                  alt="profileImage"
+                />
+              </a>
             </Link>
             <Link href={`/profile/${post.studentId}`} passHref>
-              <div className={styles.profileLink}>{post.name}</div>
+              <a>
+                <div className={styles.profileLink}>{post.name}</div>
+              </a>
             </Link>
           </div>
           <div>
