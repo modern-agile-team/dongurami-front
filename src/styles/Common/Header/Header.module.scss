@@ -17,7 +17,8 @@
     width: 81px;
     height: 36px;
     object-fit: cover;
-    margin-right: 20rem;
+    margin-right: 22vw;
+    margin-left: -2em;
     cursor: pointer;
   }
   & > div:nth-of-type(1) {
@@ -218,6 +219,7 @@
       img {
         position: absolute;
         left: 25px;
+        margin-left: 0;
       }
       & > div:nth-of-type(1) {
         display: inline;
