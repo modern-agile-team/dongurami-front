@@ -10,18 +10,17 @@ const UserInfo = ({
   baseImg,
   userInfo,
   profile,
-  comp,
   isOpen,
   setIsOpen,
   leaveIsOpen,
   setLeaveIsOpen,
+  router,
   clubNo
 }) => {
   const onSubmitLeave = () => {
     setLeaveIsOpen(!leaveIsOpen);
   };
-
-  if (comp === '프로필')
+  if (router === undefined)
     return (
       <div className={styles.wrap}>
         <div className={styles.profileBody}>

@@ -14,7 +14,7 @@ export const LoginPage = () => {
           src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
           charset="utf-8"
         />
-        <title>동그라미 | 회원가입</title>
+        <title>동그라미 | 로그인</title>
       </Head>
       <Header />
       <Login />
