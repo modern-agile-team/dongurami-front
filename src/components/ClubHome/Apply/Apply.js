@@ -78,7 +78,7 @@ const Apply = () => {
   const onRemove = async (i) => {
     await deleteApply({ description: newQuestion }, i, router.query.id)
       .then((res) => alert(res.data.msg))
-      .catch((err) => alert(err.response.data));
+      .catch((err) => alert(err.response.data.msg));
     getApplyQuestions();
   };
 
