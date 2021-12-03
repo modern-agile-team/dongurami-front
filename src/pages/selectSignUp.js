@@ -1,6 +1,4 @@
-import Footer from 'components/Common/Footer';
 import { SelectSignUp } from 'components/SignUp/SelectSignUp';
-import Header from '../components/Common/Header/Header';
 import Head from 'next/head';
 
 function selectSignUp() {
@@ -15,9 +13,7 @@ function selectSignUp() {
         />
         <title>동그라미 | 회원가입</title>
       </Head>
-      <Header />
       <SelectSignUp />
-      <Footer />
     </>
   );
 }

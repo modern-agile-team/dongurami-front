@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
 import styles from '../../styles/Club/Lists/ClubLists.module.scss';
 import ClubList from './ClubList';
@@ -41,7 +40,6 @@ const ClubListContainer = () => {
 
   return (
     <>
-      <Header />
       <TypeSearch onCategorySearch={onCategorySearch} onSearch={onSearch} />
       <div className={styles.container}>
         <div className={styles.activities}>
