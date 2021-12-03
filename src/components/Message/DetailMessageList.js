@@ -10,9 +10,13 @@ const DetailMessageList = ({ message }) => {
       <div className={styles.info}>
         <div className={styles.arrow}>
           {user?.id === message.senderId ? (
-            <FaLongArrowAltRight className={styles.rightArrow} size={30} />
+            <span className={styles.send}>
+              📤 <span>보낸 쪽지</span>
+            </span>
           ) : (
-            <FaLongArrowAltLeft className={styles.leftArrow} size={30} />
+            <span className={styles.recieve}>
+              📥 <span>받은 쪽지</span>
+            </span>
           )}
         </div>
         <p className={styles.indate}>{message.inDate}</p>

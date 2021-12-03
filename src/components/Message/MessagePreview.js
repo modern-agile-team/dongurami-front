@@ -1,6 +1,5 @@
 import styles from '../../styles/Message/MessagePreview.module.scss';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
 
 const MessagePreview = ({ message, onClickInquiry }) => {
   const router = useRouter();
@@ -15,7 +14,7 @@ const MessagePreview = ({ message, onClickInquiry }) => {
       onClick={() => onClickInquiry(message.groupNo)}
     >
       <div className={styles.info}>
-        <h4 className={styles.name}>{message.name}</h4>
+        <span className={styles.name}>{message.name}</span>
         <p className={styles.indate}>{message.inDate}</p>
       </div>
 
