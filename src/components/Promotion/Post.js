@@ -51,7 +51,7 @@ const Post = ({
     await deletePost(postId).then((res) => {
       if (res.data.success) {
         alert('글 삭제가 완료되었습니다');
-        router.reload();
+        router.replace(`promotion`);
       }
     });
   };

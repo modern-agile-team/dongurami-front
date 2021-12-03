@@ -170,7 +170,6 @@ const PromotionContainer = () => {
 
   return (
     <>
-      <Header />
       <TypeSearch
         setSearchItem={setSearchItem}
         setSearchKeyword={setSearchKeyword}
