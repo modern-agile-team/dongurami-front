@@ -27,7 +27,10 @@ function Write({ category }) {
       return;
     }
     await postPost(category, { title, description, hiddenFlag: Boolean(isAnon) }, router.query.id);
-    router.back();
+    if (['clubNotice', 'clubActivity'].includes(category)) router.back();
+    else {
+      router.push(`/${category}`);
+    }
   };
   const onClose = () => {
     setShowModal(!showModal);
