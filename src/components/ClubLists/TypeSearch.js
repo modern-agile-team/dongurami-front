@@ -5,6 +5,7 @@ import CategoriTags from 'components/Common/CategoriTags';
 
 const TypeSearch = ({ onCategorySearch, onSearch }) => {
   const [search, setSearch] = useState('');
+  const [selected, setSelected] = useState([true]);
 
   const onChange = (e) => {
     setSearch(e.target.value);
@@ -18,7 +19,11 @@ const TypeSearch = ({ onCategorySearch, onSearch }) => {
 
   return (
     <div className={styles.container}>
-      <CategoriTags onCategorySearch={onCategorySearch} />
+      <CategoriTags
+        onCategorySearch={onCategorySearch}
+        selected={selected}
+        setSelected={setSelected}
+      />
       <div className={styles.searchContainer}>
         <form className={styles.searchElement} onSubmit={onSubmit}>
           <input
