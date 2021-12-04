@@ -76,6 +76,21 @@
   }
 }
 
+.leaderInfo {
+  margin-top: 1em;
+  margin-bottom: -1em;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  img {
+    cursor: pointer;
+    margin-right: 1em;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+}
+
 @media (max-width: 1024px) {
   .desc {
     h1 {
@@ -112,6 +127,15 @@
   .imgContainer {
     img {
       height: 50%;
+    }
+  }
+  .leaderInfo {
+    img {
+      width: 30px;
+      height: 30px;
+    }
+    span {
+      font-size: 90%;
     }
   }
 }
