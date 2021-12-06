@@ -23,7 +23,6 @@ function AddComment({ postId, parentCommentID, scroll }) {
       alert('댓글을 255자 이하로 작성해 주세요!');
       return;
     }
-    console.log(post.no);
     addComment(
       post.no,
       description,

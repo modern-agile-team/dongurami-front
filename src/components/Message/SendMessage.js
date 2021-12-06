@@ -43,6 +43,15 @@ function SendMessage({
     let commentNo = '';
     let boardNo = 0;
 
+    if (!description.length) {
+      alert('내용을 작성해주세요');
+      return;
+    } else if (description.length > 255) {
+      alert('255자 이하로 작성해주세요');
+      setDescription('');
+      return;
+    }
+
     if (isCheck) writerHiddenFlag = 1;
     if (!detailMessage && (!letter || !letter?.length)) {
       if (!Number(post.studentId)) recipientId = '';

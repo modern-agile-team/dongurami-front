@@ -33,7 +33,7 @@ const Modal = ({ postId, sendMessage, setOpenMessage }) => {
   };
   useEffect(() => {
     getPostData();
-  }, [dispatch, router]);
+  }, [dispatch]);
 
   return (
     <div

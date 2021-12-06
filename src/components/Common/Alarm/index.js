@@ -29,10 +29,7 @@ const Alarm = ({ token }) => {
   };
 
   // 알람 일부 삭제
-  const onAlarmPatch = async (notiNum) => {
-    await patchAlarm(notiNum).catch((err) => alert(err.response.data));
-    getAlarmData();
-  };
+  
 
   function handleClickOutside(event) {
     if (ref.current && !ref.current.contains(event.target)) {

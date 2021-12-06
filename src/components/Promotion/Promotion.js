@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../../styles/Board/Promotion/Promotion.module.scss';
 import moment from 'moment';
 import { useRouter } from 'next/router';
+import { AiFillHeart } from 'react-icons/ai';
 
 function displayedAt(createdAt) {
   const time = moment(createdAt);
@@ -31,7 +32,8 @@ const Promotion = ({
   pId,
   setPostId,
   category,
-  title
+  title,
+  emotionCount
 }) => {
   const router = useRouter();
   return (
@@ -59,11 +61,17 @@ const Promotion = ({
           }}
         >
           <div className={styles.writerInfo}>
-            <div className={styles.writer}>{name}</div>
+            <p className={styles.writer}>{name}</p>
 
-            <div className={styles.writer}>{clubName}</div>
+            <p className={styles.writer}>{clubName}</p>
           </div>
-          <div className={styles.date}>{date.slice(2, -9)}</div>
+          <div className={styles.date}>
+            <p>{date.slice(2, -9)}</p>{' '}
+            <div className={styles.like}>
+              <AiFillHeart size={13} />
+              <span>&nbsp;{emotionCount}</span>
+            </div>
+          </div>
         </div>
       </div>
       <div
