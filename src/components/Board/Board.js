@@ -75,11 +75,11 @@ function Board({ category }) {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <Link href={{ pathname: router.pathname, query: { id: router.query.id } }} passHref>
-          <h1>
+        <h1>
+          <Link href={{ pathname: router.pathname, query: { id: router.query.id } }} passHref>
             <a>{title[category]}</a>
-          </h1>
-        </Link>
+          </Link>
+        </h1>
         <hr />
         <div className={styles.orderBy}>
           {(canWrite) && (
