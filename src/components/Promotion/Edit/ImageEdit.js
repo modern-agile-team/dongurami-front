@@ -1,5 +1,5 @@
 import { getS3PresignedURL, uploadImage } from 'apis/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from '../../../styles/Board/Promotion/ImageEdit.module.scss';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { BsImage } from 'react-icons/bs';
@@ -8,6 +8,10 @@ function ImageEdit({ images, onEditImages, setImages }) {
   const [displayImage, setDisplayImage] = useState(images[0]);
   const [index, setIndex] = useState(0);
   let deleteImage = [];
+
+  useEffect(() => {
+    setDisplayImage(images[index]);
+  }, [index]);
 
   const nextSlide = () => {
     let idx = index;
@@ -19,7 +23,6 @@ function ImageEdit({ images, onEditImages, setImages }) {
     }
 
     setIndex(idx);
-    setDisplayImage(images[index]);
   };
 
   const prevSlide = () => {
@@ -28,7 +31,6 @@ function ImageEdit({ images, onEditImages, setImages }) {
     if (idx === 0) idx = images.length - 1;
     else idx -= 1;
     setIndex(idx);
-    setDisplayImage(images[index]);
   };
 
   const onChange = async (e) => {
@@ -56,7 +58,9 @@ function ImageEdit({ images, onEditImages, setImages }) {
       setIndex(newImages.length - 1);
     }
   };
-
+  console.log(images);
+  console.log(index);
+  console.log(displayImage);
   const onDelete = () => {
     deleteImage = [];
 

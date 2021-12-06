@@ -19,6 +19,7 @@ function SendMessage({
   const [description, setDescription] = useState('');
   const [isCheck, setIsCheck] = useState(false);
   const post = useSelector((state) => state.post);
+  const clubLeader = useSelector((state) => state.clubhome.info?.leaderInfo);
   const userId = user?.id;
 
   const modalContainer = useRef();
@@ -54,9 +55,10 @@ function SendMessage({
 
     if (isCheck) writerHiddenFlag = 1;
     if (!detailMessage && (!letter || !letter?.length)) {
-      if (!Number(post.studentId)) recipientId = '';
-      else recipientId = post.studentId;
-      boardNo = post.no;
+      if (!Number(post?.studentId) && !clubLeader) recipientId = '';
+      else if (!post?.length && clubLeader) recipientId = clubLeader[0].id;
+      else recipientId = post?.studentId;
+      boardNo = post?.length ? post.no : '';
       boardFlag = 1;
       await sendLetter(
         recipientId,
@@ -69,7 +71,6 @@ function SendMessage({
         if (response.data.success) {
           alert('쪽지가 전송되었습니다');
           onClose();
-
           setDescription('');
         }
       });
