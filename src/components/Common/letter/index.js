@@ -33,8 +33,6 @@ const MessageAlarm = ({ token }) => {
     getAlarmData(1);
   };
 
-  // 알람 일부 삭제
-
   function handleClickOutside(event) {
     if (ref.current && !ref.current.contains(event.target)) {
       setIsOpen(false);
