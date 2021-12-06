@@ -157,7 +157,7 @@ const PromotionContainer = () => {
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
-  }, [searchItem, isSearch]);
+  }, [searchItem, isSearch, router]);
 
   useEffect(() => {
     document.body.style.overflow = openModal ? 'hidden' : 'auto';
@@ -179,27 +179,26 @@ const PromotionContainer = () => {
         onSearch={onSearch}
         categorySearch={categorySearch}
       />
-      <div className={styles.sectionWrap}>
-        <div className={styles.section}>
-          {boardData.map((el) => {
-            return (
-              <div className={styles.poster} key={el.no}>
-                <Promotion
-                  pId={el.no}
-                  date={el.inDate}
-                  clubName={el.clubName}
-                  name={el.studentName}
-                  img={el.url}
-                  clubNo={el.clubNo}
-                  category={el.category}
-                  title={el.title}
-                  setOpenModal={() => setOpenModal(true)}
-                  setPostId={setPostId}
-                />
-              </div>
-            );
-          })}
-        </div>
+
+      <div className={styles.section}>
+        {boardData.map((el) => {
+          return (
+            <Promotion
+              pId={el.no}
+              key={el.no}
+              date={el.inDate}
+              clubName={el.clubName}
+              name={el.studentName}
+              img={el.url}
+              clubNo={el.clubNo}
+              category={el.category}
+              title={el.title}
+              emotionCount={el.emotionCount}
+              setOpenModal={() => setOpenModal(true)}
+              setPostId={setPostId}
+            />
+          );
+        })}
       </div>
       {openModal && (
         <Modal

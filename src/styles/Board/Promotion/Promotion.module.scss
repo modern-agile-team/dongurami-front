@@ -1,22 +1,24 @@
 .promotion {
-  display: inline-block;
-
-  width: 97%;
+  width: 18%;
+  height: 30%;
+  display: flex;
+  margin-right: 30px;
+  margin-bottom: 50px;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  margin-right: 6%;
-  /*box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.24);*/
-  /*
+  /*  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.24);*/
   &:hover {
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.322);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
     border-top: none;
   }
-  */
 
   .img {
     position: relative;
     width: 100%;
+    height: 12em;
     img {
       width: 100%;
       height: 100%;
@@ -29,7 +31,8 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.6);
-      border-radius: 6px;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
       opacity: 0;
       display: flex;
       flex-direction: column;
@@ -44,6 +47,7 @@
         justify-content: center;
         align-items: center;
         max-height: 3%;
+        margin-bottom: 20px;
 
         .writer {
           display: flex;
@@ -62,13 +66,28 @@
         position: absolute;
         bottom: 2rem;
         border-radius: 10px;
-        padding: 5px;
+        padding: 0px;
         width: 80%;
+        height: 15%;
         background: white;
         display: flex;
-        justify-content: center;
-        font-size: 15px;
-        font-family: 'twayair';
+        justify-content: space-around;
+        align-items: center;
+
+        p {
+          font-size: 15px;
+          font-family: 'twayair';
+        }
+        .like {
+          padding: 2px;
+          display: flex;
+          align-items: center;
+          border: 1px solid gray;
+          border-radius: 0.25rem;
+          background-color: indianred;
+          color: white;
+          font-size: 5px;
+        }
       }
 
       &:hover {
@@ -114,16 +133,23 @@
       right: 0;
       font-size: 13px;
       font-family: sans-serif;
-      // width: 100%;
-      // margin-left: 10em;
+      margin-right: 8px;
     }
   }
 }
-
+@media screen and (max-width: 1024px) {
+  .promotion {
+    width: 30%;
+  }
+}
 @media screen and (max-width: 768px) {
   .promotion {
+    width: 35%;
+    margin-left: 10px;
+    /*
     padding: 2rem;
     margin-right: 0%;
+    */
     .img {
       .creationInfo {
         display: none;
@@ -153,8 +179,9 @@
 
 @media screen and (max-width: 480px) {
   .promotion {
-    width: 100%;
-    padding: 0;
+    width: 8.7em;
+    margin: 0;
+    margin-bottom: 30px;
     .img {
       .creationInfo {
         display: none;

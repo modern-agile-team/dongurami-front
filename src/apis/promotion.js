@@ -56,7 +56,7 @@ export function deleteComment(commentNo, parentCommentID, postId) {
 }
 
 export function addComment(postId, description, parentCommentID, hiddenFlag) {
-  console.log(postId);
+ 
   if (parentCommentID) {
     return axios.post(`/api/board/promotion/${postId}/${parentCommentID}`, {
       description,
