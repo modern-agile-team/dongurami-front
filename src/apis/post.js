@@ -89,6 +89,9 @@ const api = {
       return axios.patch(`/api/emotion/unliked/reply-comment/${commentID}`);
     }
     return axios.patch(`/api/emotion/unliked/comment/${commentID}`);
+  },
+  hitPost: ({ category, pid }) => {
+    return axios.patch(`/api/board/${category}/${pid}`);
   }
 }
 
