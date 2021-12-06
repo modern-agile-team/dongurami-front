@@ -3,6 +3,8 @@ import LogoUpdate from './LogoUpdate';
 import { ResponsiveBar } from '@nivo/bar';
 import { BsImage } from 'react-icons/bs';
 
+import LeaderInfo from './LeaderInfo';
+
 const ClubInfo = ({ infos, onChangeLogo }) => {
   const result = infos.result[0];
   const client = infos.clientInfo;
@@ -19,17 +21,7 @@ const ClubInfo = ({ infos, onChangeLogo }) => {
         <div className={styles.categori}>
           <p>{result.category} 동아리</p>
         </div>
-        <div className={styles.leaderInfo}>
-          {!infos.leaderInfo[0].profileImageUrl ? (
-            <img src="https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg" />
-          ) : (
-            <img
-              alt={infos.leaderInfo[0].name}
-              src={infos.leaderInfo[0].profileImageUrl}
-            />
-          )}
-          <span>{infos.leaderInfo[0].name}</span>
-        </div>
+        <LeaderInfo infos={infos.leaderInfo[0]} />
         <div className={styles.population}>
           <ResponsiveBar
             data={data}
