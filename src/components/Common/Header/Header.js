@@ -6,15 +6,13 @@ import HeaderBoard from './HeaderBoard';
 import HeaderUser from './HeaderUser';
 import HeaderMobileBoard from './HeaderMobileBoard';
 import Link from 'next/link';
-import getToken from 'utils/getToken';
 import { useRouter } from 'next/router';
 import { getUserData } from 'apis/user';
 import Alarm from '../Alarm';
 import MessageAlarm from '../letter';
 
-function Header() {
+function Header({ token }) {
   const [open, setOpen] = useState(false);
-  const [token, setToken] = useState('');
   const [user, setUser] = useState();
   const [userProflie, setUserProfile] = useState();
 
@@ -33,11 +31,6 @@ function Header() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
-
-  // localStorage의 JWT값 불러와 token state에 저장
-  useEffect(() => {
-    setToken(getToken());
   }, []);
 
   //마이페이지 routing
