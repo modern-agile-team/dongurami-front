@@ -13,6 +13,7 @@ import { changeComp } from 'redux/slices/chageComp';
 import * as gtag from '../lib/gtags';
 import Header from 'components/Common/Header/Header';
 import Footer from 'components/Common/Footer';
+import getToken from 'utils/getToken';
 
 function ReduxWrapper({ children }) {
   const dispatch = useDispatch();
@@ -41,6 +42,12 @@ function ReduxWrapper({ children }) {
 
 function App({ Component, pageProps }) {
   const [scrollY, setScrollY] = useState(0);
+  const [token, setToken] = useState();
+
+  // localStorage의 JWT값 불러와 token state에 저장
+  useEffect(() => {
+    setToken(getToken());
+  }, [getToken()]);
 
   const scrollSpeed = () => {
     if (typeof window !== 'undefined') {
@@ -72,7 +79,7 @@ function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <ReduxWrapper>
-        <Header />
+        <Header token={token} />
         <Component {...pageProps} />
         {scrollY > 550 && (
           <div className="toTheTop" onClick={scrollToTop}>
