@@ -1,5 +1,8 @@
+.wrapper {
+  min-height: calc(82vh - 60px);
+}
+
 .container {
-  min-height: calc(100vh - 18vh - 60px);
   width: 60%;
   margin: 1rem auto;
   box-shadow: 0px 1px 6px 0px rgb(0 0 0 / 24%);
