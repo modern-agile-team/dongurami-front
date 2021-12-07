@@ -8,6 +8,7 @@ const getPost = createAsyncThunk(
     let { category, no: pid, clubNo: clubNum } = state.post;
     if (arg) {
       ({ category, pid, clubNum } = arg);
+      await api.hitPost({ category, pid });
     }
     const response = await api.getPost(category, pid, clubNum);
     return response.data;
