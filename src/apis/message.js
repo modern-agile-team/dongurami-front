@@ -8,14 +8,22 @@ export function sendLetter(
   boardFlag,
   writerHiddenFlag
 ) {
-  return axios.post(`api/letter`, {
-    recipientId,
-    description,
-    boardNo,
-    commentNo,
-    boardFlag,
-    writerHiddenFlag
-  });
+  const body =
+    boardNo !== ''
+      ? {
+          recipientId,
+          description,
+          boardNo,
+          commentNo,
+          boardFlag,
+          writerHiddenFlag
+        }
+      : {
+          recipientId,
+          description,
+          writerHiddenFlag
+        };
+  return axios.post('api/letter', body);
 }
 
 export function replyLetter(
