@@ -122,6 +122,7 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
           ref={descriptionDiv}
           contentEditable={isContentEditable}
           suppressContentEditableWarning={true}
+          className={styles.commentText}
         >
           {comment.description}
         </div>
