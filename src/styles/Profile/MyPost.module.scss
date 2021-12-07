@@ -47,7 +47,7 @@
 .body {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 95%;
   margin: 1rem;
   margin-bottom: 3.5rem;
   border-left: 1px solid rgb(216, 216, 216);
@@ -121,7 +121,7 @@
   }
 
   .item {
-    width: 80%;
+    width: 95%;
   }
 
   .itemContainer::-webkit-scrollbar {
@@ -147,6 +147,6 @@
     }
   }
   .item {
-    width: 90%;
+    width: 95%;
   }
 }
