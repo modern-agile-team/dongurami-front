@@ -3,6 +3,7 @@ import { BiBell } from 'react-icons/bi';
 import { getAlarm, putAlarm, patchAlarm } from 'apis/alarm';
 import styles from '../../../styles/Common/Header/Header.module.scss';
 import AlarmContainer from './AlarmContainer';
+import Badge from '../Badge';
 
 const Alarm = ({ token }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,15 +58,7 @@ const Alarm = ({ token }) => {
     <>
       <div className={styles.alarm} ref={ref}>
         <div className={styles.bell} onClick={() => setIsOpen(!isOpen)}>
-          {alarmList.length > 0 && (
-            <div className={styles.count}>
-              {alarmList.length <= 99 ? (
-                <span>{alarmList.length}</span>
-              ) : (
-                <span>99+</span>
-              )}
-            </div>
-          )}
+          {alarmList.length > 0 && <Badge count={alarmList.length} />}
           <BiBell />
         </div>
         {isOpen && (

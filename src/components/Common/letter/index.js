@@ -4,6 +4,7 @@ import { getMessageAlarm, deleteMessageAlarm } from 'apis/message';
 import styles from '../../../styles/Common/Header/Header.module.scss';
 import MessageAlarmContainer from './MessageAlarmCotainer';
 import { useRouter } from 'next/router';
+import Badge from '../Badge';
 
 const MessageAlarm = ({ token }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ const MessageAlarm = ({ token }) => {
   const ref = useRef(null);
   const router = useRouter();
 
-  const getAlarmData = (n) => {
+  const getAlarmData = () => {
     getMessageAlarm().then((res) => {
       if (res.data.letters) setAlarmList(res.data.letters);
       else setAlarmList([]);
@@ -57,13 +58,7 @@ const MessageAlarm = ({ token }) => {
       <div className={styles.alarm} ref={ref}>
         <div className={styles.message} onClick={() => setIsOpen(!isOpen)}>
           {alarmList && alarmList.length > 0 && (
-            <div className={styles.messagecount}>
-              {alarmList.length <= 99 ? (
-                <span>{alarmList.length}</span>
-              ) : (
-                <span>99+</span>
-              )}
-            </div>
+            <Badge count={alarmList.length} />
           )}
           <FiMail size={20} />
         </div>
