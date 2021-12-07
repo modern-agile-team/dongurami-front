@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Post.module.scss';
 import PromotionCommentContainer from './Comment/PromotionCommentContainer';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { deletePost } from 'apis/promotion';
+import { getPost, setCategory } from 'redux/slices/post';
 import api from 'apis/post';
 import dynamic from 'next/dynamic';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,9 +29,15 @@ const Post = ({
   const [openOptions, setOpenOptions] = useState(false);
   const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
     post;
+  const category = 'promotion';
 
   const user = useSelector((state) => state.user);
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCategory(category));
+  }, [dispatch]);
 
   const onClick = () => {
     if (!getToken()) alert('로그인 후 이용해주세요.');
@@ -44,7 +51,7 @@ const Post = ({
     } else {
       await api.likePost({ pid: post.no, url: router.asPath });
     }
-    getPostData();
+    dispatch(getPost());
   };
 
   const onDelete = async () => {
@@ -67,8 +74,7 @@ const Post = ({
                 <div className={styles.buttons}>
                   <Link
                     href={{
-                      pathname: `${router.pathname}/${postId}/edit`,
-                      query: router.query
+                      pathname: `${router.pathname}/${router.query.id}/edit`
                     }}
                     passHref
                   >

@@ -54,7 +54,6 @@ function ImageEdit({ images, onEditImages, setImages }) {
     } else {
       newImages = images.concat(imagesURL[0].path);
       setImages(newImages);
-      setDisplayImage(newImages[newImages.length - 1]);
       setIndex(newImages.length - 1);
     }
   };
@@ -68,7 +67,7 @@ function ImageEdit({ images, onEditImages, setImages }) {
       if (el !== displayImage) deleteImage.push(el);
     });
     setImages(deleteImage);
-    setDisplayImage(images[0]);
+    setIndex(index + 1);
   };
 
   return (

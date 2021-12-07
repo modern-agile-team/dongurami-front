@@ -36,8 +36,7 @@ const Comment = ({
         descriptionDiv.current.textContent,
         post.no
       ).then((response) => {
-        if (response.data.success)
-          dispatch(getPost({ category, pid: post.no }));
+        if (response.data.success) dispatch(getPost());
         else alert(response.data.msg);
       });
     }
@@ -47,8 +46,7 @@ const Comment = ({
   const onDelete = async () => {
     await deleteComment(comment.no, parentCommentID, post.no).then(
       (response) => {
-        if (response.data.success)
-          dispatch(getPost({ category, pid: post.no }));
+        if (response.data.success) dispatch(getPost());
         else alert(response.data.msg);
       }
     );
@@ -65,7 +63,7 @@ const Comment = ({
         url: router.asPath
       });
     }
-    dispatch(getPost({ category, pid: post.no }));
+    dispatch(getPost());
   };
 
   return (
