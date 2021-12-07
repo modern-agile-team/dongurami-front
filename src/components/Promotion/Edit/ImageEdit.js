@@ -57,9 +57,7 @@ function ImageEdit({ images, onEditImages, setImages }) {
       setIndex(newImages.length - 1);
     }
   };
-  console.log(images);
-  console.log(index);
-  console.log(displayImage);
+
   const onDelete = () => {
     deleteImage = [];
 

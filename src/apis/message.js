@@ -9,7 +9,7 @@ export function sendLetter(
   writerHiddenFlag
 ) {
   return axios.post(
-    `api/letter`,
+    'api/letter',
     boardNo !== ''
       ? {
           recipientId,

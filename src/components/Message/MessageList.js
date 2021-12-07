@@ -67,11 +67,12 @@ const MessageList = () => {
   };
 
   const onDelete = async (id) => {
-    confirm('대화내용을 전부 삭제하시겠습니까?');
-    await deleteMessage(recipientId, id, groupNo).then((response) => {
-      alert(response.data.msg);
-      router.replace(`message`);
-    });
+    if (confirm('대화내용을 전부 삭제하시겠습니까?') === true) {
+      await deleteMessage(recipientId, id, groupNo).then((response) => {
+        alert(response.data.msg);
+        router.replace(`message`);
+      });
+    } else return;
   };
 
   useEffect(() => {

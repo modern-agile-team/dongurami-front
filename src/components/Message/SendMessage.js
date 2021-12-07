@@ -49,7 +49,6 @@ function SendMessage({
       return;
     } else if (description.length > 255) {
       alert('255자 이하로 작성해주세요');
-      setDescription('');
       return;
     }
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
   AiOutlineCheck,
   AiOutlineDelete,
@@ -26,7 +26,21 @@ const Comment = ({
   const post = useSelector((state) => state.post);
   const router = useRouter();
   const descriptionDiv = useRef();
-  const category = 'promotion';
+
+  useEffect(() => {
+    if (!isContentEditable) return;
+    descriptionDiv.current.focus();
+  }, [isContentEditable]);
+
+  function setEndOfContenteditable(contentEditableElement) {
+    let range, selection;
+    range = document.createRange(); //Create a range (a range is a like the selection but invisible)
+    range.selectNodeContents(contentEditableElement); //Select the entire contents of the element with the range
+    range.collapse(false); //collapse the range to the end point. false means collapse to end rather than the start
+    selection = window.getSelection(); //get the selection object (allows you to change selection)
+    selection.removeAllRanges(); //remove any selections already made
+    selection.addRange(range); //make the range you have just created the visible selection
+  }
 
   const onEdit = async () => {
     if (isContentEditable) {
@@ -41,6 +55,7 @@ const Comment = ({
       });
     }
     setIsContentEditable(!isContentEditable);
+    setEndOfContenteditable(descriptionDiv.current);
   };
 
   const onDelete = async () => {
