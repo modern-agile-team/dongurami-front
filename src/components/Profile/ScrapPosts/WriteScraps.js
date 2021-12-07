@@ -36,7 +36,7 @@ const WriteScrpas = () => {
         title,
         description
       }).catch((err) => alert(err.response.data.msg));
-      router.push(`/profile/${data.pid}`);
+      router.push(`/profile/${data.pid}?category=scrap`);
     }
   };
 
