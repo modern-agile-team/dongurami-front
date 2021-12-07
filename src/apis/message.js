@@ -8,8 +8,7 @@ export function sendLetter(
   boardFlag,
   writerHiddenFlag
 ) {
-  return axios.post(
-    'api/letter',
+  const body =
     boardNo !== ''
       ? {
           recipientId,
@@ -23,8 +22,8 @@ export function sendLetter(
           recipientId,
           description,
           writerHiddenFlag
-        }
-  );
+        };
+  return axios.post('api/letter', body);
 }
 
 export function replyLetter(
