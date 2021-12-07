@@ -30,6 +30,9 @@ export function postPost(category, body, clubNum) {
   if (category === 'promotion') {
     return axios.post(`/api/board/promotion`, { clubNo: clubNum, ...body })
   }
+  if (category === 'notice') {
+    return axios.post(`/api/board/${category}`, { ...body, url: 'notice', notiCategoryNum: 12 });
+  }
   return axios.post(`/api/board/${category}`, { ...body });
 }
 
