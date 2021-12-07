@@ -9,7 +9,7 @@ const Approve = ({
   onApplyReject,
   applicantQNA
 }) => {
-  const [listOpen, setListOpen] = useState(false);
+  const [listOpen, setListOpen] = useState(true);
   const onApplyListOpen = () => {
     setListOpen(!listOpen);
   };
