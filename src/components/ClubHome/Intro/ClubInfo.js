@@ -28,7 +28,7 @@ const ClubInfo = ({ infos, onChangeLogo }) => {
             keys={['인원(명)']}
             indexBy="gender"
             colors="gray"
-            padding={0.5}
+            padding={0.6}
             layout="horizontal"
             enableGridY={false}
             margin={{ top: 0, right: 0, bottom: 0, left: 40 }}
