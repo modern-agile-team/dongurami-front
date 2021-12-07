@@ -35,6 +35,15 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
 
   const onEdit = async () => {
     if (isContentEditable) {
+      if (descriptionDiv.current.textContent.length === 0) {
+        descriptionDiv.current.focus();
+        return;
+      }
+      if (descriptionDiv.current.textContent.length > 255) {
+        alert('댓글을 255자 이하로 작성해 주세요!');
+        descriptionDiv.current.focus();
+        return;
+      }
       await api.putComment({
         category: post.category,
         pid: post.no,
