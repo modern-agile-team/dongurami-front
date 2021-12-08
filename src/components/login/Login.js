@@ -48,6 +48,9 @@ export const Login = () => {
           <input
             className={styles.idInput}
             type="Number"
+            onKeyDown={(e) =>
+              (e.key === 'e' || e.key === '.') && e.preventDefault()
+            }
             placeholder="학번을 입력해 주세요."
             onChange={onChange}
             name="id"
