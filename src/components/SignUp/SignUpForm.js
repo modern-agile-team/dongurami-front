@@ -184,6 +184,9 @@ function SignUpForm() {
         <input
           className={styles.inputNum}
           type="number"
+          onKeyDown={(e) =>
+            (e.key === 'e' || e.key === '.') && e.preventDefault()
+          }
           placeholder="학번&#32;&#40;아이디로 사용됩니다.&#41;"
           onChange={onChange}
           name="id"
