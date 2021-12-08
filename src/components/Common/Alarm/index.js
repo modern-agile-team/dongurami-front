@@ -1,19 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BiBell } from 'react-icons/bi';
-import { getAlarm, putAlarm, patchAlarm } from 'apis/alarm';
+import { putAlarm, patchAlarm } from 'apis/alarm';
 import styles from '../../../styles/Common/Header/Header.module.scss';
 import AlarmContainer from './AlarmContainer';
 import Badge from '../Badge';
 
-const Alarm = ({ token }) => {
+const Alarm = ({ alarmList, getAlarmData }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [alarmList, setAlarmList] = useState([]);
   const [alarmShow, setAlarmShow] = useState(3);
   const ref = useRef(null);
-
-  const getAlarmData = () => {
-    getAlarm().then((res) => setAlarmList(res.data.notifications));
-  };
 
   const showMoreAlarm = () => {
     const temp = alarmShow;
@@ -40,12 +35,6 @@ const Alarm = ({ token }) => {
       setIsOpen(false);
     }
   }
-
-  //영역밖 클릭 시 사이드바 제거
-
-  useEffect(() => {
-    if (token) getAlarmData();
-  }, [token]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
