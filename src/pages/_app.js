@@ -62,11 +62,10 @@ function App({ Component, pageProps }) {
   };
 
   useEffect(() => {
-    if (token) getAlarmData();
-  }, [token, pageProps]);
-
-  useEffect(() => {
-    if (token) getMessage();
+    if (token) {
+      getAlarmData();
+      getMessage();
+    }
   }, [token, pageProps]);
 
   // localStorage의 JWT값 불러와 token state에 저장
