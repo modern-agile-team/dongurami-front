@@ -4,7 +4,7 @@ import styles from 'styles/Profile/MyPost.module.scss';
 import { useRouter } from 'next/router';
 import MyItems from './MyItems';
 
-const MyPost = () => {
+const MyPost = ({ matchTitle }) => {
   const [myPosts, setMyPosts] = useState();
   const [myComments, setMyComments] = useState();
   const [category, setCategory] = useState(1);
@@ -54,6 +54,7 @@ const MyPost = () => {
             myPosts={myPosts}
             myComments={myComments}
             router={router}
+            matchTitle={matchTitle}
           />
         )}
       </div>
