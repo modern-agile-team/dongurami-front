@@ -47,13 +47,17 @@ function Profile() {
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
-  const matchTitle = useCallback((title, a, b, c) => {
+  const matchTitle = useCallback((title, mobile, pad, deskTop) => {
     if (matchMedia('screen and (max-width: 280px)').matches) {
-      return title.length >= a ? title.substring(0, a - 2) + '..' : title;
+      return title.length >= mobile
+        ? title.substring(0, mobile - 2) + '..'
+        : title;
     } else if (matchMedia('screen and (max-width: 530px)').matches) {
-      return title.length >= b ? title.substring(0, b - 2) + '..' : title;
+      return title.length >= pad ? title.substring(0, pad - 2) + '..' : title;
     }
-    return title.length >= c ? title.substring(0, c - 2) + '..' : title;
+    return title.length >= deskTop
+      ? title.substring(0, deskTop - 2) + '..'
+      : title;
   }, []);
 
   const setState = (data) => {

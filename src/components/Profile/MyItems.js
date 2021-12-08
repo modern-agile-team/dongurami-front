@@ -44,8 +44,10 @@ const MyItems = ({ category, myPosts, myComments, router, matchTitle }) => {
                     onClick={() => movePage(post)}
                     key={index}
                   >
-                    <span>{matchTitle(post.title, 12, 20, 30)}</span>
-                    <span>{post.inDate}</span>
+                    <div className={styles.under}>
+                      <span>글 제목 : {matchTitle(post.title, 7, 15, 25)}</span>
+                      <span className={styles.date}>{post.inDate}</span>
+                    </div>
                   </div>
                 )
               );
@@ -66,7 +68,9 @@ const MyItems = ({ category, myPosts, myComments, router, matchTitle }) => {
                     onClick={() => movePage(comment)}
                     key={index}
                   >
-                    <span>{comment.title}</span>
+                    <span>
+                      글 제목 : {matchTitle(comment.title, 7, 15, 25)}
+                    </span>
                     <div className={styles.under}>
                       <span>
                         내 댓글 : {matchTitle(comment.description, 7, 15, 25)}
