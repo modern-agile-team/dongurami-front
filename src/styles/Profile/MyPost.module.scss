@@ -84,6 +84,7 @@
   padding: 0.5rem;
   padding-bottom: 5px;
   cursor: pointer;
+  max-width: 100%;
   span {
     padding: 5px;
   }
@@ -148,5 +149,20 @@
   }
   .item {
     width: 95%;
+    .under {
+      span {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 280px) {
+  .item {
+    .under {
+      span {
+        font-size: small;
+      }
+    }
   }
 }

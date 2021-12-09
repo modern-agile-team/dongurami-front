@@ -1,6 +1,6 @@
 import styles from 'styles/Profile/MyPost.module.scss';
 
-const MyItems = ({ category, myPosts, myComments, router }) => {
+const MyItems = ({ category, myPosts, myComments, router, matchTitle }) => {
   if (!myPosts) return null;
   if (!myComments) return null;
 
@@ -44,8 +44,10 @@ const MyItems = ({ category, myPosts, myComments, router }) => {
                     onClick={() => movePage(post)}
                     key={index}
                   >
-                    <span>{post.title}</span>
-                    <span>{post.inDate}</span>
+                    <div className={styles.under}>
+                      <span>글 제목 : {matchTitle(post.title, 7, 15, 25)}</span>
+                      <span className={styles.date}>{post.inDate}</span>
+                    </div>
                   </div>
                 )
               );
@@ -66,9 +68,13 @@ const MyItems = ({ category, myPosts, myComments, router }) => {
                     onClick={() => movePage(comment)}
                     key={index}
                   >
-                    <span>{comment.title}</span>
+                    <span>
+                      글 제목 : {matchTitle(comment.title, 7, 15, 25)}
+                    </span>
                     <div className={styles.under}>
-                      <span>내 댓글 : {comment.description}</span>
+                      <span>
+                        내 댓글 : {matchTitle(comment.description, 7, 15, 25)}
+                      </span>
                       <span className={styles.date}>{comment.inDate}</span>
                     </div>
                   </div>

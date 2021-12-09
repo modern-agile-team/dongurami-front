@@ -47,13 +47,17 @@ function Profile() {
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
-  const matchTitle = useCallback((title) => {
+  const matchTitle = useCallback((title, mobile, pad, deskTop) => {
     if (matchMedia('screen and (max-width: 280px)').matches) {
-      return title.length >= 5 ? title.substring(0, 3) + '..' : title;
+      return title.length >= mobile
+        ? title.substring(0, mobile - 2) + '..'
+        : title;
     } else if (matchMedia('screen and (max-width: 530px)').matches) {
-      return title.length >= 6 ? title.substring(0, 4) + '..' : title;
+      return title.length >= pad ? title.substring(0, pad - 2) + '..' : title;
     }
-    return title.length >= 8 ? title.substring(0, 6) + '..' : title;
+    return title.length >= deskTop
+      ? title.substring(0, deskTop - 2) + '..'
+      : title;
   }, []);
 
   const setState = (data) => {
@@ -164,7 +168,9 @@ function Profile() {
           matchTitle={matchTitle}
         />
       )}
-      {router.query.category === 'myPosts' && <MyPost />}
+      {router.query.category === 'myPosts' && (
+        <MyPost matchTitle={matchTitle} />
+      )}
     </div>
   );
 }
