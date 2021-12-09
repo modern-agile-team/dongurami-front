@@ -4,7 +4,7 @@ import { addComment } from 'apis/promotion';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 
-function AddComment({ postId, parentCommentID, scroll }) {
+function AddComment({ postId, parentCommentID, scroll, reply }) {
   const [description, setDescription] = useState('');
   const [isAnon, setIsAnon] = useState(false);
   const user = useSelector((state) => state.user);
@@ -40,7 +40,7 @@ function AddComment({ postId, parentCommentID, scroll }) {
     if (scroll) {
       ref.current.scrollIntoView();
     }
-    inputRef.current.focus();
+    if (reply) inputRef.current.focus();
   }, [scroll]);
 
   return (

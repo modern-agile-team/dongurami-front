@@ -52,6 +52,7 @@ const PromotionCommentContainer = ({
                       postId={postId}
                       parentCommentID={parentCommentID}
                       scroll
+                      reply
                     />
                   </ReplyCommentContainer>
                 )}
