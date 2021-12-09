@@ -1,11 +1,18 @@
 .section {
   width: 100%;
-  min-height: calc(70vh - 60px);
+
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
 
-  margin: 0 auto;
+  .sectionwrap {
+    display: flex;
+
+    width: 100%;
+    min-height: calc(70vh - 60px);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 768px) {

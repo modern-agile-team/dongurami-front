@@ -1,4 +1,4 @@
-.container {
+/*.container {
   display: flex;
   background-color: white;
   filter: brightness(0.95);
@@ -9,4 +9,21 @@
     transform: scale(2);
     margin-left: 3%;
   }
+}
+*/
+
+.container {
+  display: flex;
+  background-color: white;
+  filter: brightness(0.95);
+  border-radius: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  & > svg {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
 }

@@ -88,8 +88,7 @@ const Post = ({
           </div>
           <div className={styles.infoWrap}>
             <div className={styles.club} onClick={onClick}>
-              {clubName}
-              <span>바로가기</span>
+              <span>{clubName} 바로가기</span>
               <IoIosArrowForward size={25} />
             </div>
             <div className={styles.boardInfo}>

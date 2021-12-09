@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
-import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
 import { useRouter } from 'next/router';
-
 import Modal from './Modal';
 import Promotion from './Promotion';
 import SendMessage from 'components/Message/SendMessage';
@@ -25,6 +23,7 @@ const PromotionContainer = () => {
 
   let isLoading = false;
   let itemNo = 0;
+  let scrollPosition = 0;
 
   const getDatas = async () => {
     try {
@@ -150,24 +149,36 @@ const PromotionContainer = () => {
     }
   };
 
+  const forbiddenScroll = () => {
+    scrollPosition = window.pageYOffset;
+  };
+
   useEffect(() => {
     firstGetDatas();
-
+    console.log(1);
     window.addEventListener('scroll', infiniteScroll);
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
-  }, [searchItem, isSearch, router]);
+  }, [searchItem, isSearch]);
 
   useEffect(() => {
+    const body = document.querySelector('body');
+
+    window.addEventListener('scroll', forbiddenScroll);
+    /*if (openModal) {
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${window.scrollY}px`;
+    }
+    */
     document.body.style.overflow = openModal ? 'hidden' : 'auto';
+
     if (Object.keys(router.query).length > 0) {
       setOpenModal(true);
     } else {
       setOpenModal(false);
     }
   }, [openModal, router]);
-
   return (
     <>
       <TypeSearch
@@ -181,24 +192,25 @@ const PromotionContainer = () => {
       />
 
       <div className={styles.section}>
-        {boardData.map((el) => {
-          return (
-            <Promotion
-              pId={el.no}
-              key={el.no}
-              date={el.inDate}
-              clubName={el.clubName}
-              name={el.studentName}
-              img={el.url}
-              clubNo={el.clubNo}
-              category={el.category}
-              title={el.title}
-              emotionCount={el.emotionCount}
-              setOpenModal={() => setOpenModal(true)}
-              setPostId={setPostId}
-            />
-          );
-        })}
+        <div className={styles.sectionwrap}>
+          {boardData.map((el) => {
+            return (
+              <Promotion
+                pId={el.no}
+                key={el.no}
+                date={el.inDate}
+                clubName={el.clubName}
+                name={el.studentName}
+                img={el.url}
+                clubNo={el.clubNo}
+                category={el.category}
+                title={el.title}
+                emotionCount={el.emotionCount}
+                setPostId={setPostId}
+              />
+            );
+          })}
+        </div>
       </div>
       {openModal && (
         <Modal
@@ -216,4 +228,4 @@ const PromotionContainer = () => {
   );
 };
 
-export default PromotionContainer;
+export default React.memo(PromotionContainer);

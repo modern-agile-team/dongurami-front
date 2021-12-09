@@ -44,6 +44,15 @@ const Comment = ({
 
   const onEdit = async () => {
     if (isContentEditable) {
+      if (descriptionDiv.current.textContent.length === 0) {
+        descriptionDiv.current.focus();
+        return;
+      }
+      if (descriptionDiv.current.textContent.length > 255) {
+        alert('댓글을 255자 이하로 작성해 주세요!');
+        descriptionDiv.current.focus();
+        return;
+      }
       await editComment(
         comment.no,
         parentCommentID,
@@ -114,6 +123,7 @@ const Comment = ({
             ref={descriptionDiv}
             contentEditable={isContentEditable}
             suppressContentEditableWarning={true}
+            className={styles.commentText}
           >
             {comment.description}
           </div>

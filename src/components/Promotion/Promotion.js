@@ -42,7 +42,15 @@ const Promotion = ({
         className={styles.img}
         onClick={() => {
           setPostId(pId);
-          router.replace(`promotion?id=${pId}`);
+
+          router.push(
+            {
+              pathname: router.pathname,
+              query: { id: pId }
+            },
+            undefined,
+            { scroll: false }
+          );
         }}
       >
         {!img ? (
@@ -55,9 +63,17 @@ const Promotion = ({
         )}
         <div
           className={styles.creationInfo}
-          onClick={() => {
+          onClick={(e) => {
             setPostId(pId);
-            router.replace(`promotion?id=${pId}`);
+
+            router.push(
+              {
+                pathname: router.pathname,
+                query: { id: pId }
+              },
+              undefined,
+              { scroll: false }
+            );
           }}
         >
           <div className={styles.writerInfo}>

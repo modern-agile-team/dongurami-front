@@ -11,6 +11,7 @@ function AddComment({ postId, parentCommentID, scroll }) {
   const post = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const ref = useRef();
+  const inputRef = useRef();
   const category = 'promotion';
   const pid = postId;
   const onChange = (e) => {
@@ -29,7 +30,7 @@ function AddComment({ postId, parentCommentID, scroll }) {
       parentCommentID,
       Number(Boolean(isAnon))
     ).then((res) => {
-      if (res.data.success) dispatch(getPost({ category, pid: post.no }));
+      if (res.data.success) dispatch(getPost());
       else alert(res.data.msg);
     });
     setDescription('');
@@ -39,6 +40,7 @@ function AddComment({ postId, parentCommentID, scroll }) {
     if (scroll) {
       ref.current.scrollIntoView();
     }
+    inputRef.current.focus();
   }, [scroll]);
 
   return (
@@ -61,6 +63,7 @@ function AddComment({ postId, parentCommentID, scroll }) {
           placeholder="댓글을 남겨보세요"
           value={description}
           onChange={onChange}
+          ref={inputRef}
         />
         <button type="submit">등록</button>
       </form>
