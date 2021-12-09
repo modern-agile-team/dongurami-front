@@ -92,11 +92,11 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
   );
 
   const WithProfileLink = ({ children }) => (
-    (comment.profileImageUrl) ?
+    (comment.writerHiddenFlag) ?
+    children :
     (<Link href={`/profile/${comment.studentId}`} passHref>
       {children}
-    </Link>) :
-    children
+    </Link>)
   );
 
   return (
@@ -115,7 +115,7 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
           <WithProfileLink>
             <p className={styles.profileImage}>{comment.studentName}</p>
           </WithProfileLink>
-          {Boolean(post.isWriter) && <p>작성자</p>}
+          {(post.studentId === comment.studentId) && <p>작성자</p>}
           {Boolean(comment.isWriter) && (
             <div>
               <button onClick={onEdit} className={styles['action-button']}>

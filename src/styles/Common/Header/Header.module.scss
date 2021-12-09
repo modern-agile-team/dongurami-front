@@ -175,6 +175,9 @@
       .menus {
         width: 20vw;
       }
+      .users {
+        transform: translateX(20%);
+      }
     }
   }
 }
@@ -207,6 +210,7 @@
       }
       .users {
         margin: 0;
+        transform: translateX(0%);
       }
       li {
         cursor: pointer;
