@@ -92,11 +92,11 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
   );
 
   const WithProfileLink = ({ children }) => (
-    (comment.profileImageUrl) ?
+    (comment.writerHiddenFlag) ?
+    children :
     (<Link href={`/profile/${comment.studentId}`} passHref>
       {children}
-    </Link>) :
-    children
+    </Link>)
   );
 
   return (
