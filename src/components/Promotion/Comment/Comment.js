@@ -90,10 +90,19 @@ const Comment = ({
     dispatch(getPost());
   };
 
+  const WithProfileLink = ({ children }) =>
+    comment.writerHiddenFlag ? (
+      children
+    ) : (
+      <Link href={`/profile/${comment.studentId}`} passHref>
+        {children}
+      </Link>
+    );
+
   return (
     <>
       <div className={styles.comment}>
-        <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
+        <WithProfileLink>
           <img
             src={
               comment.profileImageUrl ??
@@ -101,12 +110,12 @@ const Comment = ({
             }
             alt="profile"
           />
-        </Link>
+        </WithProfileLink>
         <div>
           <div>
-            <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
+            <WithProfileLink>
               <p>{comment.studentName}</p>
-            </Link>
+            </WithProfileLink>
             {Boolean(post.isWriter) && <p>작성자</p>}
             {Boolean(comment.isWriter) && (
               <div>
