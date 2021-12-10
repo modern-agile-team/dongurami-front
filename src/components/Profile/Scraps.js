@@ -105,7 +105,7 @@ function Scraps({
                   )}
                   <br />
                   <span className={styles.itemTitle}>
-                    {matchTitle(post.title)}
+                    {matchTitle(post.title, 5, 6, 8)}
                   </span>
                 </div>
               </Link>

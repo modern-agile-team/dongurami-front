@@ -14,6 +14,8 @@ import * as gtag from '../lib/gtags';
 import Header from 'components/Common/Header/Header';
 import Footer from 'components/Common/Footer';
 import getToken from 'utils/getToken';
+import { getAlarm } from 'apis/alarm';
+import { getMessageAlarm } from 'apis/message';
 
 function ReduxWrapper({ children }) {
   const dispatch = useDispatch();
@@ -44,11 +46,33 @@ function App({ Component, pageProps }) {
   const [scrollY, setScrollY] = useState(0);
   const [token, setToken] = useState();
   const [open, setOpen] = useState(false);
+  const [alarmList, setAlarmList] = useState([]);
+  const [messageList, setMessageList] = useState([]);
+
+  const jwtToken = getToken();
+
+  const getMessage = () => {
+    getMessageAlarm().then((res) => {
+      if (res.data.letters) setMessageList(res.data.letters);
+      else setMessageList([]);
+    });
+  };
+
+  const getAlarmData = () => {
+    getAlarm().then((res) => setAlarmList(res.data.notifications));
+  };
+
+  useEffect(() => {
+    if (token) {
+      getAlarmData();
+      getMessage();
+    }
+  }, [token, pageProps]);
 
   // localStorage의 JWT값 불러와 token state에 저장
   useEffect(() => {
-    setToken(getToken());
-  }, [getToken()]);
+    setToken(jwtToken);
+  }, [jwtToken]);
 
   const scrollSpeed = () => {
     if (typeof window !== 'undefined') {
@@ -84,7 +108,15 @@ function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <ReduxWrapper>
-        <Header token={token} open={open} setOpen={setOpen} />
+        <Header
+          token={token}
+          alarmList={alarmList}
+          messageList={messageList}
+          getAlarmData={getAlarmData}
+          getMessage={getMessage}
+          open={open}
+          setOpen={setOpen}
+        />
         <Component {...pageProps} />
         {scrollY > 550 && (
           <div className="toTheTop" onClick={scrollToTop}>

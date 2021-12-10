@@ -11,7 +11,7 @@ import { getUserData } from 'apis/user';
 import Alarm from '../Alarm';
 import MessageAlarm from '../letter';
 
-function Header({ token, open, setOpen }) {
+function Header({ token, alarmList, messageList, getAlarmData, getMessage, open, setOpen }) {
   const [user, setUser] = useState();
   const [userProflie, setUserProfile] = useState();
 
@@ -73,8 +73,12 @@ function Header({ token, open, setOpen }) {
                 className={styles.tokenIcons}
                 id={open ? styles.show : styles.hide}
               >
-                <Alarm token={token} />
-                <MessageAlarm className={styles.message} token={token} />
+                <Alarm alarmList={alarmList} getAlarmData={getAlarmData} />
+                <MessageAlarm
+                  className={styles.message}
+                  messageList={messageList}
+                  getMessage={getMessage}
+                />
                 <div className={styles.profileWrap}>
                   {userProflie ? (
                     <img
