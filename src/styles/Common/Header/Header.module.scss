@@ -219,7 +219,10 @@
         width: 100%;
         margin: 0;
         padding: 4.2rem 0rem;
-        justify-content: space-evenly;
+        justify-content: space-around;
+        div {
+          width: fit-content;
+        }
         img {
           position: static;
         }
@@ -237,6 +240,9 @@
           margin: 0%;
           width: 33px;
           height: 33px;
+        }
+        .message {
+          margin: 0;
         }
       }
       #show {
