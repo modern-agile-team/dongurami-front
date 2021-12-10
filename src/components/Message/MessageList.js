@@ -38,6 +38,7 @@ const MessageList = () => {
     setLoading(true);
     if (user) {
       await getDetailMessages(user.id, letterNo).then((response) => {
+        console.log(response.data.letters);
         setDetailMessage(response.data.letters);
         isRecipientId = response.data.letters.find(
           (el) => el.senderId !== user.id
