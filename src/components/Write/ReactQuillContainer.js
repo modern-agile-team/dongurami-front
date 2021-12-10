@@ -5,11 +5,11 @@ import { useMemo, useRef } from 'react';
 const ReactQuill = dynamic(
   async () => {
     const { default: RQ } = await import('react-quill');
-    return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
+    return function comp({ forwardedRef, ...props }) {
+      return <RQ ref={forwardedRef} {...props} />;
+    };
   },
-  {
-    ssr: false
-  }
+  { ssr: false }
 );
 
 const formats = [
