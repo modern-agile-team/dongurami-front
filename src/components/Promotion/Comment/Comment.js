@@ -139,7 +139,7 @@ const Comment = ({
               {comment.studentName}
             </p>
 
-            {Boolean(post.isWriter) && <p>작성자</p>}
+            {post.studentId === comment.studentId && <p>작성자</p>}
             {Boolean(comment.isWriter) && (
               <div className={styles.button}>
                 <button onClick={onEdit} className={styles['action-button']}>
