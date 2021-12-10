@@ -20,6 +20,9 @@ function SendMessage({
   const [isCheck, setIsCheck] = useState(false);
   const post = useSelector((state) => state.post);
   const clubLeader = useSelector((state) => state.clubhome.info?.leaderInfo);
+  const clubLeaderIsWriter = useSelector(
+    (state) => state.clubhome.info?.clientInfo.leader
+  );
   const userId = user?.id;
 
   const modalContainer = useRef();
@@ -37,6 +40,24 @@ function SendMessage({
     setIsCheck(!isCheck);
   };
 
+  const submitCheck = () => {
+    if (!description.length) {
+      alert('내용을 작성해주세요');
+      return 0;
+    } else if (description.length > 255) {
+      alert('255자 이하로 작성해주세요');
+      return 0;
+    } else if (
+      post?.isWriter === 1 ||
+      clubLeaderIsWriter === 1 ||
+      letter?.isWriter === 1
+    ) {
+      alert('자신에게는 보낼 수 없습니다');
+      return 0;
+    }
+    return 1;
+  };
+
   const onSubmit = async () => {
     let boardFlag = 0;
     let writerHiddenFlag = 0;
@@ -44,11 +65,7 @@ function SendMessage({
     let commentNo = '';
     let boardNo = 0;
 
-    if (!description.length) {
-      alert('내용을 작성해주세요');
-      return;
-    } else if (description.length > 255) {
-      alert('255자 이하로 작성해주세요');
+    if (!submitCheck()) {
       return;
     }
 
