@@ -24,9 +24,6 @@
     & > div {
       @media screen and (max-width: 480px) {
         font-size: 3.5vw;
-        p {
-          font-size: 1vw;
-        }
       }
     }
     & > div:nth-of-type(1) {
