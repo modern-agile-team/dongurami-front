@@ -50,13 +50,12 @@ const ModifyInfo = () => {
   }, [uRouter.query.pid]);
 
   const modifyBtn = async () => {
-    if (email.replace(/ /g, '').length <= 0) setEmail(placeholder[0]);
-    if (phoneNumber.replace(/ /g, '').length <= 0) {
-      setPhoneNumber(placeholder[1]);
-    }
     await modifyInfo(uRouter.query.pid, {
-      email,
-      phoneNumber,
+      email: email.replace(/ /g, '').length <= 0 ? placeholder[0] : email,
+      phoneNumber:
+        phoneNumber.replace(/ /g, '').length <= 0
+          ? placeholder[1]
+          : phoneNumber,
       grade,
       profileImageUrl: imgUrl,
       fileId
@@ -76,6 +75,12 @@ const ModifyInfo = () => {
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
+
+  const movePage = () => {
+    if (userInfo.isNaverUser === 1) {
+      alert('네이버 아이디로 가입한 회원은 비밀번호 변경을 할 수 없습니다.');
+    } else router.push('/changepassword');
+  };
 
   return (
     <div className={styles.wrap}>
@@ -101,10 +106,8 @@ const ModifyInfo = () => {
             setPhoneNumber={setPhoneNumber}
           />
         </div>
-        <span
-          className={styles.psword}
-          onClick={() => router.push('/changepassword')}
-        >
+
+        <span className={styles.psword} onClick={() => movePage()}>
           비밀번호 변경
         </span>
         <button className={styles.modifyBtn} onClick={() => modifyBtn()}>

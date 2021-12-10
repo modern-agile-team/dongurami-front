@@ -3,6 +3,7 @@ import styles from '../../styles/Board/Promotion/typeSearch.module.scss';
 import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
+import CategoriTags from 'components/Common/CategoriTags';
 
 const TypeSearch = ({
   type,
@@ -12,6 +13,8 @@ const TypeSearch = ({
   onSearch,
   categorySearch
 }) => {
+  const [selected, setSelected] = useState([true]);
+
   const user = useSelector((state) => state.user);
   const onChange = (e) => {
     setSearchKeyword(e.target.value);
@@ -22,21 +25,18 @@ const TypeSearch = ({
   };
 
   const onSubmit = (e) => {
+    setSelected([true]);
     e.preventDefault();
     onSearch();
   };
 
   return (
     <div className={styles.container}>
-      <ul className={styles.tagList} onClick={(event) => categorySearch(event)}>
-        <li name="whole">#전체</li>
-        <li name="스터디">#스터디</li>
-        <li name="음악">#음악</li>
-        <li name="취미">#취미</li>
-        <li name="게임">#게임</li>
-        <li name="운동">#운동</li>
-        <li name="종교">#종교</li>
-      </ul>
+      <CategoriTags
+        onCategorySearch={categorySearch}
+        selected={selected}
+        setSelected={setSelected}
+      />
       <div className={styles.body}>
         <select value={type} onChange={onTypeChange}>
           <option value="title">제목</option>
@@ -50,7 +50,7 @@ const TypeSearch = ({
               value={searchKeyword}
               onChange={onChange}
             />
-            <FaSearch />
+            <FaSearch onClick={onSubmit} />
           </form>
         </div>
         {user && (

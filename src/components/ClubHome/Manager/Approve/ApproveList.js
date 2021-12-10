@@ -1,7 +1,12 @@
 import React from 'react';
 import ApproveInfo from './ApproveInfo';
 
-const ApproveList = ({ onApplyAccept, onApplyReject, applicantInfo }) => {
+const ApproveList = ({
+  onApplyAccept,
+  onApplyReject,
+  applicantInfo,
+  applicantQNA
+}) => {
   return (
     <>
       {applicantInfo.map((info, index) => {
@@ -10,6 +15,7 @@ const ApproveList = ({ onApplyAccept, onApplyReject, applicantInfo }) => {
             key={index}
             index={index}
             info={info}
+            QNA={applicantQNA[index]}
             onApplyAccept={onApplyAccept}
             onApplyReject={onApplyReject}
           />

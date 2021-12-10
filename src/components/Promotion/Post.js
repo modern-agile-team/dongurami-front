@@ -1,35 +1,58 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Post.module.scss';
 import PromotionCommentContainer from './Comment/PromotionCommentContainer';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { deletePost } from 'apis/promotion';
+import { getPost, setCategory } from 'redux/slices/post';
+import api from 'apis/post';
 import dynamic from 'next/dynamic';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IoIosArrowForward } from 'react-icons/io';
+import { FaHeart } from 'react-icons/fa';
 import getToken from 'utils/getToken';
 import moment from 'moment';
+import Option from 'components/Common/letter/Option';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
-const Post = ({ postId, getData, post }) => {
+const Post = ({ postId, getData, post, sendMessage, setOpenMessage }) => {
+  const [openOptions, setOpenOptions] = useState(false);
+  const [isComment, setIsComment] = useState(false);
   const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
     post;
+  const category = 'promotion';
+
   const user = useSelector((state) => state.user);
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCategory(category));
+  }, [dispatch]);
 
   const onClick = () => {
     if (!getToken()) alert('로그인 후 이용해주세요.');
     else router.push(`/clubhome/${clubNo}`);
   };
 
+  const onClickLike = async () => {
+    if (!user) return;
+    if (post.likedFlag) {
+      await api.unLikePost(post.no);
+    } else {
+      await api.likePost({ pid: post.no, url: router.asPath });
+    }
+    dispatch(getPost());
+  };
+
   const onDelete = async () => {
     await deletePost(postId).then((res) => {
       if (res.data.success) {
         alert('글 삭제가 완료되었습니다');
-        router.reload();
+        router.replace(`promotion`);
       }
     });
   };
@@ -45,8 +68,7 @@ const Post = ({ postId, getData, post }) => {
                 <div className={styles.buttons}>
                   <Link
                     href={{
-                      pathname: `${router.pathname}/${postId}/edit`,
-                      query: router.query
+                      pathname: `${router.pathname}/${router.query.id}/edit`
                     }}
                     passHref
                   >
@@ -60,24 +82,28 @@ const Post = ({ postId, getData, post }) => {
           </div>
           <div className={styles.infoWrap}>
             <div className={styles.club} onClick={onClick}>
-              {clubName}
-              <span>바로가기</span>
+              <span>{clubName} 바로가기</span>
               <IoIosArrowForward size={25} />
             </div>
             <div className={styles.boardInfo}>
               <div className={styles.profile}>
-                <Link href={`/profile/${post.studentId}`} passHref>
-                  <img
-                    src={
-                      post.profileImageUrl ??
-                      'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
-                    }
-                    alt="profile"
+                <img
+                  onClick={() => setOpenOptions(!openOptions)}
+                  src={
+                    post.profileImageUrl ??
+                    'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+                  }
+                  alt="profile"
+                />
+                {openOptions && !isComment && (
+                  <Option
+                    setOpenOptions={setOpenOptions}
+                    setOpenMessage={setOpenMessage}
+                    routePath={`/profile/${post.studentId}`}
                   />
-                </Link>
-                <Link href={`/profile/${post.studentId}`} passHref>
-                  <span>{name}</span>
-                </Link>
+                )}
+
+                <span onClick={() => setOpenOptions(!openOptions)}>{name}</span>
               </div>
               <div className={styles.dateHit}>
                 <span>{moment(inDate).format('YYYY-MM-DD')}</span>
@@ -91,12 +117,23 @@ const Post = ({ postId, getData, post }) => {
           theme="bubble"
           readOnly
         />
+        <button
+          className={`${styles.likeButton} ${post.likedFlag && styles.like}`}
+          onClick={onClickLike}
+        >
+          <FaHeart />
+          <span>&nbsp;{post.emotionCount}</span>
+        </button>
         {post.comments && (
           <PromotionCommentContainer
             comments={post.comments}
             postId={postId}
             studentId={studentId}
             getData={getData}
+            sendMessage={sendMessage}
+            openOptions={openOptions}
+            setOpenOptions={setOpenOptions}
+            setIsComment={setIsComment}
           />
         )}
       </div>

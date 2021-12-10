@@ -10,6 +10,7 @@ import Apply from '../Apply/Apply';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClubInfo } from 'redux/slices/clubhome';
+import { changeComp } from 'redux/slices/chageComp';
 
 const Frame = () => {
   const [isVisit, setIsVisit] = useState(false);
@@ -20,6 +21,10 @@ const Frame = () => {
 
   const router = useRouter();
   const clubId = router.query.id;
+
+  if (router.query.pid && comp !== 3) {
+    dispatch(changeComp(3))
+  }
 
   const ClubMenu = useCallback(() => {
     if (comp === 1) return <ClubIntro isVisit={isVisit} />;

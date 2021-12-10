@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from '../../../styles/Club/Home/Manager/ApproveList.module.scss';
+import styles from 'styles/Club/Home/Manager/ApproveList.module.scss';
 import { AiOutlineUserAdd, AiOutlineUserDelete } from 'react-icons/ai';
 
-const ApproveInfo = ({ info, index, onApplyAccept, onApplyReject }) => {
+const ApproveInfo = ({ info, index, onApplyAccept, onApplyReject, QNA }) => {
   const sex = info.gender === 1 ? '남' : '여';
   return (
     <>
@@ -27,12 +27,12 @@ const ApproveInfo = ({ info, index, onApplyAccept, onApplyReject }) => {
           <span>전화번호</span>
           <p>{info.phoneNum}</p>
         </div>
-        {info.questions &&
-          info.questions.map((question, i) => {
+        {QNA &&
+          QNA.map((qna, i) => {
             return (
-              <div key={question + info.id}>
-                <span>{question}</span>
-                <p>{info.answers[i]}</p>
+              <div key={i}>
+                <span>{qna.question}</span>
+                <p>{qna.answer}</p>
               </div>
             );
           })}

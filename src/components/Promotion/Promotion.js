@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../styles/Board/Promotion/Promotion.module.scss';
 import moment from 'moment';
 import { useRouter } from 'next/router';
+import { AiFillHeart } from 'react-icons/ai';
 
 function displayedAt(createdAt) {
   const time = moment(createdAt);
@@ -27,22 +28,29 @@ const Promotion = ({
   img,
   name,
   clubName,
-  setOpenModal,
   date,
   pId,
   setPostId,
   category,
-  clubNo,
-  title
+  title,
+  emotionCount
 }) => {
   const router = useRouter();
   return (
     <div className={styles.promotion}>
       <div
         className={styles.img}
-        onClick={(e) => {
+        onClick={() => {
           setPostId(pId);
-          router.replace(`promotion?id=${pId}`);
+
+          router.push(
+            {
+              pathname: router.pathname,
+              query: { id: pId }
+            },
+            undefined,
+            { scroll: false }
+          );
         }}
       >
         {!img ? (
@@ -57,15 +65,29 @@ const Promotion = ({
           className={styles.creationInfo}
           onClick={() => {
             setPostId(pId);
-            router.replace(`promotion?id=${pId}`);
+
+            router.push(
+              {
+                pathname: router.pathname,
+                query: { id: pId }
+              },
+              undefined,
+              { scroll: false }
+            );
           }}
         >
           <div className={styles.writerInfo}>
-            <div className={styles.writer}>{name}</div>
+            <p className={styles.writer}>{name}</p>
 
-            <div className={styles.writer}>{clubName}</div>
+            <p className={styles.writer}>{clubName}</p>
           </div>
-          <div className={styles.date}>{date.slice(2, -9)}</div>
+          <div className={styles.date}>
+            <p>{date.slice(2, -9)}</p>{' '}
+            <div className={styles.like}>
+              <AiFillHeart size={13} />
+              <span>&nbsp;{emotionCount}</span>
+            </div>
+          </div>
         </div>
       </div>
       <div
@@ -78,7 +100,7 @@ const Promotion = ({
           {title.length > 15 ? `${title.substr(0, 15)}...` : title}
         </span>
         <div className={styles.extraInfo}>
-          <span className={styles.none}>left</span>
+          <span className={styles.none}></span>
           <span className={styles.hashtag}>#{category}</span>
           <span className={styles.time}>{displayedAt(date)}</span>
         </div>

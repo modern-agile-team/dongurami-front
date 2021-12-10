@@ -1,7 +1,8 @@
 import styles from 'styles/Profile/Scraps.module.scss';
 import { AiOutlineFileText } from 'react-icons/ai';
 import Link from 'next/dist/client/link';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 function Scraps({
   profile,
@@ -15,16 +16,31 @@ function Scraps({
   matchTitle
 }) {
   useEffect(() => {
-    getScraps(profile.id, clubNo)
-      .then((res) => {
-        setDataArr(
-          res.data.scraps
-            .concat(res.data.boards)
-            .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
-        );
-      })
-      .catch((err) => alert(err.response.data.msg));
+    if (profile.id && clubNo) {
+      getScraps(profile.id, clubNo)
+        .then((res) => {
+          setDataArr(
+            res.data.scraps
+              .concat(res.data.boards)
+              .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
+          );
+        })
+        .catch((err) => alert(err.response.data.msg));
+    }
   }, [clubNo, getScraps, profile.id, setDataArr]);
+
+  const clubs = useMemo(() => {
+    if (Object.keys(profile).length > 0) {
+      return profile.clubs.map((club, index) => {
+        return (
+          <option value={club.no} key={index}>
+            {club.name}
+          </option>
+        );
+      });
+    }
+    return [];
+  }, [profile]);
 
   return (
     <div className={styles.wrap}>
@@ -37,7 +53,7 @@ function Scraps({
                   pathname: `/profile/${id}/${clubNo}/writescraps`
                 }}
               >
-                <span className={styles.addBtn}>✏️글작성</span>
+                <DonguramiOutlineButton>✏️글작성</DonguramiOutlineButton>
               </Link>
             )}
             <select
@@ -56,13 +72,7 @@ function Scraps({
                   .catch((err) => alert(err.reponse.data.msg));
               }}
             >
-              {profile.clubs.map((club, index) => {
-                return (
-                  <option value={club.no} key={index}>
-                    {club.name}
-                  </option>
-                );
-              })}
+              {clubs.length && clubs.map((el) => el)}
             </select>
           </div>
         </div>
@@ -95,7 +105,7 @@ function Scraps({
                   )}
                   <br />
                   <span className={styles.itemTitle}>
-                    {matchTitle(post.title)}
+                    {matchTitle(post.title, 5, 6, 8)}
                   </span>
                 </div>
               </Link>

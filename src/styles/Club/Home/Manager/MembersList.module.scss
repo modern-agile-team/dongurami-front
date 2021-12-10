@@ -1,12 +1,15 @@
 .member {
   display: flex;
   justify-content: space-around;
+  padding: 0;
+  margin: 0;
 }
 
-.member div {
+.member li {
   text-align: center;
-  width: 80%;
+  width: 100%;
   padding: 10px 0;
+  list-style: none;
 }
 
 .member svg {
@@ -17,17 +20,26 @@
 }
 
 #changeLeader {
+  transition-duration: 0.5s;
   color: rgba(244, 244, 244, 0.7);
   &:hover {
+    transform: scale(1.1);
     color: #fae100;
+  }
+  &:active {
+    transform: scale(1);
   }
 }
 
 .name span {
   cursor: pointer;
+  transition-duration: 0.3s;
   &:hover {
-    text-decoration: line-through;
-    color: rgb(201, 0, 40);
+    color: #3fcdb8;
+    font-weight: bold;
+  }
+  &:active {
+    font-size: 95%;
   }
 }
 
@@ -39,9 +51,10 @@
   display: flex;
   justify-content: center;
 }
+
 @media (max-width: 768px) {
   .member {
-    div {
+    li {
       display: flex;
       justify-content: center;
     }

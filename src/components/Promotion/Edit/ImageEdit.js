@@ -1,15 +1,17 @@
 import { getS3PresignedURL, uploadImage } from 'apis/image';
-import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import styles from '../../../styles/Board/Promotion/ImageEdit.module.scss';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { BsImage } from 'react-icons/bs';
 
 function ImageEdit({ images, onEditImages, setImages }) {
-  const router = useRouter();
   const [displayImage, setDisplayImage] = useState(images[0]);
   const [index, setIndex] = useState(0);
   let deleteImage = [];
+
+  useEffect(() => {
+    setDisplayImage(images[index]);
+  }, [index]);
 
   const nextSlide = () => {
     let idx = index;
@@ -21,7 +23,6 @@ function ImageEdit({ images, onEditImages, setImages }) {
     }
 
     setIndex(idx);
-    setDisplayImage(images[index]);
   };
 
   const prevSlide = () => {
@@ -30,7 +31,6 @@ function ImageEdit({ images, onEditImages, setImages }) {
     if (idx === 0) idx = images.length - 1;
     else idx -= 1;
     setIndex(idx);
-    setDisplayImage(images[index]);
   };
 
   const onChange = async (e) => {
@@ -54,7 +54,6 @@ function ImageEdit({ images, onEditImages, setImages }) {
     } else {
       newImages = images.concat(imagesURL[0].path);
       setImages(newImages);
-      setDisplayImage(newImages[newImages.length - 1]);
       setIndex(newImages.length - 1);
     }
   };
@@ -66,7 +65,7 @@ function ImageEdit({ images, onEditImages, setImages }) {
       if (el !== displayImage) deleteImage.push(el);
     });
     setImages(deleteImage);
-    setDisplayImage(images[0]);
+    setIndex(index + 1);
   };
 
   return (

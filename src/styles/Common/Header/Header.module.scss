@@ -17,7 +17,8 @@
     width: 81px;
     height: 36px;
     object-fit: cover;
-    margin-right: 20rem;
+    margin-right: 22vw;
+    margin-left: -2em;
     cursor: pointer;
   }
   & > div:nth-of-type(1) {
@@ -25,6 +26,7 @@
   }
   .topMenu {
     display: flex;
+    justify-content: space-between;
   }
   .menus {
     display: flex;
@@ -41,41 +43,130 @@
 }
 .tokenIcons {
   display: flex;
+  justify-content: space-around;
   align-items: center;
   margin: auto;
+  position: relative;
   svg {
     cursor: pointer;
     font-size: 135%;
   }
-  .bell {
-    margin-right: 2.5rem;
-  }
-  .userProflie {
-    margin-right: 2rem;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    transform: translate(0px, -5%);
-  }
-  .Profile {
-    margin-right: 2rem;
-    color: rgb(172, 172, 172);
+  .profileWrap {
+    .userProflie {
+      padding: 5px;
+      margin-right: -22px;
+      margin-left: 5px;
+      width: 30px;
+      height: 30px;
+      border-radius: 70%;
+      overflow: hidden;
+      &:hover {
+        transform: scale(1.1);
+        transition: 0.5s;
+      }
+      &:active {
+        transform: scale(1);
+      }
+    }
+    .Profile {
+      margin-right: -18px;
+      margin-left: 8px;
+      width: 25px;
+      height: 25px;
+      transform: translateY(8%);
+      color: rgb(172, 172, 172);
+      &:hover {
+        transform: scale(1.15);
+        transition: 0.5s;
+      }
+      &:active {
+        transform: scale(1);
+      }
+    }
   }
 }
 
-.count {
+.bell {
   display: flex;
-  position: absolute;
-  align-items: center;
   justify-content: center;
-  bottom: 35px;
-  transform: translateX(70%);
+  align-items: center;
+  position: relative;
+  cursor: pointer;
   border-radius: 50%;
-  background-color: red;
-  font-size: 10px;
-  width: 1.5em;
-  height: 1.5em;
-  color: white;
+  padding: 5px;
+  transition-duration: 1s;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.bell:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.bell:active:after {
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top: 0;
+  opacity: 1;
+}
+
+.bell::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  box-shadow: 0 0 10px 5px rgb(225, 225, 225);
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  margin: 0 1.5em;
+  border-radius: 50%;
+  padding: 5px;
+  transition-duration: 1s;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.message:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.message:active:after {
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top: 0;
+  opacity: 1;
+}
+
+.message::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  box-shadow: 0 0 10px 5px rgb(225, 225, 225);
 }
 
 @media screen and (max-width: 1024px) {
@@ -83,6 +174,9 @@
     .topMenu {
       .menus {
         width: 20vw;
+      }
+      .users {
+        transform: translateX(20%);
       }
     }
   }
@@ -94,6 +188,7 @@
       img {
         position: absolute;
         left: 25px;
+        margin-left: 0;
       }
       & > div:nth-of-type(1) {
         display: inline;
@@ -115,6 +210,7 @@
       }
       .users {
         margin: 0;
+        transform: translateX(0%);
       }
       li {
         cursor: pointer;
@@ -123,7 +219,10 @@
         width: 100%;
         margin: 0;
         padding: 4.2rem 0rem;
-        justify-content: space-evenly;
+        justify-content: space-around;
+        div {
+          width: fit-content;
+        }
         img {
           position: static;
         }
@@ -142,6 +241,9 @@
           width: 33px;
           height: 33px;
         }
+        .message {
+          margin: 0;
+        }
       }
       #show {
         display: flex;
@@ -152,10 +254,6 @@
         display: none;
       }
     }
-  }
-  .count {
-    bottom: auto;
-    transform: translate(100%, -30%);
   }
 }
 

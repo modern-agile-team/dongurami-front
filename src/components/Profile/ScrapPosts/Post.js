@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { setCategory } from 'redux/slices/post';
 import moment from 'moment';
+import { DonguramiFillButton } from 'components/Common/DonguramiButton';
 
 const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
@@ -25,10 +26,10 @@ function Post({ category, post, onDelete, editLink }) {
     <div className={styles.container}>
       <div>
         <div className={styles.boardLinkContainer}>
-          <Link href={`/profile/${post.studentId}`} passHref>
+          <Link href={`/profile/${post.studentId}?category=scrap`} passHref>
             <a>스크랩</a>
           </Link>
-          <Link href={`/profile/${post.studentId}`} passHref>
+          <Link href={`/profile/${post.studentId}?category=scrap`} passHref>
             <button>목록</button>
           </Link>
         </div>
@@ -37,26 +38,32 @@ function Post({ category, post, onDelete, editLink }) {
         <div className={styles.postHeader}>
           <div className={styles.profileContainer}>
             <Link href={`/profile/${post.studentId}`} passHref>
-              <img
-                className={styles.profileImage}
-                src={`${
-                  post.profileImageUrl ??
-                  'https://d19lmxaqvbojzg.cloudfront.net/c1f0ad3f1f_test.jpeg'
-                }?w=30`}
-                alt="profileImage"
-              />
+              <a>
+                <img
+                  className={styles.profileImage}
+                  src={`${
+                    post.profileImageUrl ??
+                    'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
+                  }`}
+                  alt="profileImage"
+                />
+              </a>
             </Link>
             <Link href={`/profile/${post.studentId}`} passHref>
-              <div className={styles.profileLink}>{post.name}</div>
+              <a>
+                <div className={styles.profileLink}>{post.name}</div>
+              </a>
             </Link>
           </div>
           <div>
             {user?.id === post.studentId && (
               <>
                 <Link href={editLink} passHref>
-                  <button>수정하기</button>
+                  <DonguramiFillButton>수정하기</DonguramiFillButton>
                 </Link>
-                <button onClick={onDelete}>삭제하기</button>
+                <DonguramiFillButton onClick={onDelete}>
+                  삭제하기
+                </DonguramiFillButton>
               </>
             )}
             <div>{moment(post.inDate).format('YYYY-MM-DD')}</div>

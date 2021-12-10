@@ -10,8 +10,8 @@ export const HeaderBoard = () => {
 
   //현재경로 표시
   useEffect(() => {
-    setNowPath(window.location.pathname);
-  }, []);
+    setNowPath(router.pathname);
+  }, [router.pathname]);
 
   useEffect(() => {
     window.localStorage.setItem('nowPath', nowPath);
@@ -53,7 +53,11 @@ export const HeaderBoard = () => {
         </li>
         <li
           className={styles.clublist}
-          id={nowPath === '/clublists' ? styles.now : undefined}
+          id={
+            nowPath === '/clublists' || nowPath.includes('/clubhome')
+              ? styles.now
+              : undefined
+          }
           onClick={() => {
             router.push('/clublists');
           }}

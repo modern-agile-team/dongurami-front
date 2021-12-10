@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
-import Header from '../Common/Header/Header';
 import TypeSearch from './TypeSearch';
 import { useRouter } from 'next/router';
-
 import Modal from './Modal';
 import Promotion from './Promotion';
+import SendMessage from 'components/Message/SendMessage';
 
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
 
 const PromotionContainer = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openMessage, setOpenMessage] = useState(false);
   const [postId, setPostId] = useState('');
   const [boardData, setBoardData] = useState([]);
   const [searchItem, setSearchItem] = useState('');
@@ -18,16 +18,17 @@ const PromotionContainer = () => {
   const [type, setType] = useState('title');
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
-
+  const [letter, setLetter] = useState();
   const router = useRouter();
 
   let isLoading = false;
   let itemNo = 0;
+  let scrollPosition = 0;
 
   const getDatas = async () => {
     try {
       isLoading = true;
-      if (searchItem !== 'whole' && searchItem) {
+      if (searchItem !== '전체' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
           if (result.length === 0) {
@@ -54,7 +55,7 @@ const PromotionContainer = () => {
           }
         });
       } else if (
-        searchItem === 'whole' ||
+        searchItem === '전체' ||
         (search === false && searchItem === '')
       ) {
         await getBoardData(itemNo).then((response) => {
@@ -81,7 +82,7 @@ const PromotionContainer = () => {
     itemNo = 0;
     try {
       isLoading = true;
-      if (searchItem !== 'whole' && searchItem) {
+      if (searchItem !== '전체' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
           if (result.length) itemNo = result[result.length - 1].no;
@@ -104,7 +105,7 @@ const PromotionContainer = () => {
           setBoardData(result);
         });
       } else if (
-        searchItem === 'whole' ||
+        searchItem === '전체' ||
         (search === false && searchItem === '')
       ) {
         await getBoardData(itemNo).then((response) => {
@@ -127,10 +128,15 @@ const PromotionContainer = () => {
     setSearchItem('');
   };
 
-  const categorySearch = (event) => {
+  const categorySearch = (el) => {
     setSearch(false);
     setSearchKeyword('');
-    setSearchItem(event.target.getAttribute('name'));
+    setSearchItem(el);
+  };
+
+  const sendMessage = (comment) => {
+    setLetter(comment);
+    setOpenMessage(true);
   };
 
   const infiniteScroll = () => {
@@ -154,16 +160,15 @@ const PromotionContainer = () => {
 
   useEffect(() => {
     document.body.style.overflow = openModal ? 'hidden' : 'auto';
+
     if (Object.keys(router.query).length > 0) {
       setOpenModal(true);
     } else {
       setOpenModal(false);
     }
   }, [openModal, router]);
-
   return (
     <>
-      <Header />
       <TypeSearch
         setSearchItem={setSearchItem}
         setSearchKeyword={setSearchKeyword}
@@ -173,31 +178,42 @@ const PromotionContainer = () => {
         onSearch={onSearch}
         categorySearch={categorySearch}
       />
-      <div className={styles.sectionWrap}>
-        <div className={styles.section}>
+
+      <div className={styles.section}>
+        <div className={styles.sectionwrap}>
           {boardData.map((el) => {
             return (
-              <div className={styles.poster} key={el.no}>
-                <Promotion
-                  pId={el.no}
-                  date={el.inDate}
-                  clubName={el.clubName}
-                  name={el.studentName}
-                  img={el.url}
-                  clubNo={el.clubNo}
-                  category={el.category}
-                  title={el.title}
-                  setOpenModal={() => setOpenModal(true)}
-                  setPostId={setPostId}
-                />
-              </div>
+              <Promotion
+                pId={el.no}
+                key={el.no}
+                date={el.inDate}
+                clubName={el.clubName}
+                name={el.studentName}
+                img={el.url}
+                clubNo={el.clubNo}
+                category={el.category}
+                title={el.title}
+                emotionCount={el.emotionCount}
+                setPostId={setPostId}
+              />
             );
           })}
         </div>
       </div>
-      {openModal && <Modal setOpenModal={setOpenModal} postId={postId} />}
+      {openModal && (
+        <Modal
+          postId={postId}
+          sendMessage={sendMessage}
+          setOpenMessage={setOpenMessage}
+        />
+      )}
+      <SendMessage
+        show={openMessage}
+        onClose={() => setOpenMessage(false)}
+        letter={letter}
+      />
     </>
   );
 };
 
-export default PromotionContainer;
+export default React.memo(PromotionContainer);

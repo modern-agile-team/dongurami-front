@@ -6,7 +6,8 @@ export const getUserInfo = (id, token) => {
   const inst = axios.create({
     baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
     headers: {
-      'x-auth-token': token
+      'x-auth-token': token,
+      'api-key': process.env.NEXT_PUBLIC_API_KEY
     }
   });
   return setInterceptors(inst).get(`api/profile/${id}`);
@@ -67,4 +68,8 @@ export const deleteSPost = (id, clubNum, boardNum) => {
 
 export const quitClub = (id, clubNum) => {
   return instance.delete(`/api/my-page/${id}/personal/${clubNum}`);
+};
+
+export const getMyPosts = (id) => {
+  return instance.get(`/api/my-page/${id}/my-post`);
 };

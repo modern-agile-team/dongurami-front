@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Scraps from './Scraps';
 import styles from 'styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo/UserInfo';
+import MyPost from './MyPost';
 import { useRouter } from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';
@@ -22,6 +23,21 @@ function Profile() {
 
   const router = useRouter();
 
+  const moveInfo = () => {
+    router.replace({
+      pathname: `/profile/${router.query.pid}`
+    });
+  };
+  const moveComp = (pageName) => {
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...router.query,
+        category: pageName
+      }
+    });
+  };
+
   const logout = useCallback(() => {
     window.localStorage.removeItem('jwt');
     dispatch(signOut());
@@ -31,13 +47,17 @@ function Profile() {
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
-  const matchTitle = useCallback((title) => {
+  const matchTitle = useCallback((title, mobile, pad, deskTop) => {
     if (matchMedia('screen and (max-width: 280px)').matches) {
-      return title.length >= 5 ? title.substring(0, 3) + '..' : title;
+      return title.length >= mobile
+        ? title.substring(0, mobile - 2) + '..'
+        : title;
     } else if (matchMedia('screen and (max-width: 530px)').matches) {
-      return title.length >= 6 ? title.substring(0, 4) + '..' : title;
+      return title.length >= pad ? title.substring(0, pad - 2) + '..' : title;
     }
-    return title.length >= 8 ? title.substring(0, 6) + '..' : title;
+    return title.length >= deskTop
+      ? title.substring(0, deskTop - 2) + '..'
+      : title;
   }, []);
 
   const setState = (data) => {
@@ -46,15 +66,21 @@ function Profile() {
     setClubNo(data.profile.clubs.length === 0 ? 0 : data.profile.clubs[0].no);
   };
 
+  const fetchUserInfo = useCallback(async () => {
+    if (router.query.pid) {
+      await getUserInfo(router.query.pid, token)
+        .then((res) => setState(res.data))
+        .catch((err) => {
+          alert(err.response.data.msg);
+          router.back();
+        });
+    }
+  }, [router, token]);
+
   useEffect(() => {
     if (!router.isReady) return;
-    getUserInfo(router.query.pid, token)
-      .then((res) => setState(res.data))
-      .catch((err) => {
-        alert(err.response.data.msg);
-        router.back();
-      });
-  }, [token, router]);
+    fetchUserInfo();
+  }, [router, token]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -70,39 +96,66 @@ function Profile() {
     <div className={styles.container}>
       <div className={styles.profileHeader}>
         <button
-          style={comp !== '프로필' ? { background: '#f2f2f2' } : null}
+          style={
+            router.query.category !== undefined
+              ? { background: '#f2f2f2' }
+              : null
+          }
           className={styles.profileBtn}
-          onClick={() => setComp('프로필')}
+          onClick={() => {
+            moveInfo();
+          }}
         >
           프로필
         </button>
         {userInfo.id === profile.id && (
           <button
-            style={comp !== '스크랩' ? { background: '#f2f2f2' } : null}
+            style={
+              router.query.category !== 'scrap'
+                ? { background: '#f2f2f2' }
+                : null
+            }
             className={styles.scrapBtn}
             onClick={() => {
-              if (profile.clubs.length > 0) setComp('스크랩');
-              else alert('가입된 동아리가 없습니다.');
+              if (profile.clubs.length > 0) {
+                moveComp('scrap');
+              } else alert('가입된 동아리가 없습니다.');
             }}
           >
             스크랩
           </button>
         )}
+        {userInfo.id === profile.id && (
+          <button
+            style={
+              router.query.category !== 'myPosts'
+                ? { background: '#f2f2f2' }
+                : null
+            }
+            className={styles.myPost}
+            onClick={() => {
+              moveComp('myPosts');
+            }}
+          >
+            작성글
+          </button>
+        )}
       </div>
-      {comp !== '스크랩' ? (
+      {router.query.category === undefined && (
         <UserInfo
           logout={logout}
           baseImg={baseImg}
           userInfo={userInfo}
           profile={profile}
-          comp={comp}
+          router={router.query.category}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           leaveIsOpen={leaveIsOpen}
           setLeaveIsOpen={setLeaveIsOpen}
           clubNo={clubNo}
         />
-      ) : (
+      )}
+      {router.query.category === 'scrap' && (
         <Scraps
           userInfo={userInfo}
           profile={profile}
@@ -114,6 +167,9 @@ function Profile() {
           id={id}
           matchTitle={matchTitle}
         />
+      )}
+      {router.query.category === 'myPosts' && (
+        <MyPost matchTitle={matchTitle} />
       )}
     </div>
   );

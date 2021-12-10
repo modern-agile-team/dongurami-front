@@ -17,6 +17,7 @@
   h1 {
     margin-bottom: 0%;
     width: 28vw;
+    word-break: break-all;
   }
   & > div:nth-of-type(2) {
     img {
@@ -41,7 +42,7 @@
     margin-bottom: 1rem;
     margin-top: 3rem;
     span {
-      font-weight: 400;
+      font-weight: 800;
       margin-left: 5px;
     }
     svg {
@@ -50,6 +51,7 @@
   }
   .boardInfo {
     .profile {
+      position: relative;
       display: flex;
       align-items: center;
       img {
@@ -67,6 +69,12 @@
     text-align: right;
     margin-top: 3rem;
   }
+}
+
+.options {
+  border: 1px solid;
+  top: 30px;
+  position: absolute;
 }
 
 .container::-webkit-scrollbar {
@@ -116,8 +124,38 @@
     max-width: 100%;
   }
 }
+.likeButton {
+  padding: 6px 10px;
+  margin: auto 0;
+  display: flex;
+  border: 0.5px solid lightgray;
+  border-radius: 3px;
+  background-color: white;
+  color: gray;
+  cursor: pointer;
+  &:hover {
+    color: indianred;
+    background-color: white;
+  }
+  & > svg {
+    display: block;
+    margin: auto;
+    margin-right: 4px;
+    width: 11px;
+    height: 11px;
+  }
+}
 
-@media screen and (max-width: 768px) {
+.like {
+  color: black;
+  background-color: rgba(211, 47, 47, 0.076);
+  border-color: rgba(211, 47, 47, 0.178);
+  svg {
+    color: rgb(211, 47, 47);
+  }
+}
+
+@media screen and (max-width: 1024px) {
   .container {
     margin-top: 1em;
     width: 100%;
@@ -130,5 +168,67 @@
     h1 {
       width: 62vw;
     }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    .wrap {
+    }
+    * {
+    }
+    h1 {
+    }
+    & > div:nth-of-type(2) {
+      img {
+      }
+    }
+  }
+
+  .infoWrap {
+    .club {
+      span {
+        width: 100%;
+        font-size: 12px;
+      }
+      svg {
+      }
+    }
+    .boardInfo {
+      .profile {
+        img {
+        }
+        span {
+        }
+      }
+    }
+  }
+
+  .options {
+  }
+
+  .title {
+    .info {
+      .hit {
+      }
+    }
+    .buttons {
+      button {
+      }
+    }
+  }
+  .header {
+  }
+
+  .description {
+    p {
+    }
+    img {
+    }
+  }
+  .likeButton {
+  }
+
+  .like {
   }
 }

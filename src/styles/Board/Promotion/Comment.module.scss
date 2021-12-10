@@ -6,15 +6,23 @@
     border-radius: 50%;
     margin: 0 10px;
     cursor: pointer;
+    object-fit: cover;
+  }
+  .profile {
+    width: 60px;
+    position: relative;
   }
   & > div {
-    flex: 1;
     margin: 0 0.5rem;
     & > div:nth-of-type(1) {
       display: flex;
-      gap: 1rem;
       align-items: center;
+      gap: 1rem;
       margin-bottom: 0.5rem;
+      @media screen and (max-width: 768px) {
+        gap: 0;
+      }
+      font-size: min(1rem, 4vmin);
       & > p {
         margin: 0;
       }
@@ -23,6 +31,7 @@
         border: 2px solid #90e2d6;
         border-radius: 1rem;
         padding: 0 1rem;
+        margin-left: 10px;
       }
     }
     & > div:nth-of-type(3) {
@@ -44,6 +53,48 @@
   background: inherit;
   cursor: pointer;
   &:hover {
-    background-color: lightgray;
+    color: lightgray;
   }
+}
+
+.profileImage {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.likeButton {
+  padding: 1px 6px;
+  margin: auto 0;
+  display: flex;
+  border: 0.5px solid lightgray;
+  border-radius: 3px;
+  background-color: white;
+  color: gray;
+  cursor: pointer;
+  &:hover {
+    color: indianred;
+    background-color: white;
+  }
+  & > svg {
+    display: block;
+    margin: auto;
+    margin-right: 4px;
+    width: 11px;
+    height: 11px;
+  }
+}
+
+.like {
+  color: black;
+  background-color: rgba(211, 47, 47, 0.076);
+  border-color: rgba(211, 47, 47, 0.178);
+  svg {
+    color: rgb(211, 47, 47);
+  }
+}
+
+.commentText {
+  word-break: break-all;
 }

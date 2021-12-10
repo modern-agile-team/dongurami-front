@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import styles from "../../../styles/Club/Home/Manager/Approve.module.scss";
-import ApproveHeader from "./ApproveHeader";
-import ApproveList from "./ApproveList";
+import React, { useState } from 'react';
+import styles from 'styles/Club/Home/Manager/Approve.module.scss';
+import ApproveHeader from './ApproveHeader';
+import ApproveList from './ApproveList';
 
 const Approve = ({
   onApplyAccept,
   applicantInfo,
-  mergedApplicantInfo,
   onApplyReject,
+  applicantQNA
 }) => {
-  const [listOpen, setListOpen] = useState(false);
-
+  const [listOpen, setListOpen] = useState(true);
   const onApplyListOpen = () => {
     setListOpen(!listOpen);
   };
@@ -26,7 +25,8 @@ const Approve = ({
         <ApproveList
           onApplyReject={onApplyReject}
           onApplyAccept={onApplyAccept}
-          applicantInfo={mergedApplicantInfo}
+          applicantInfo={applicantInfo}
+          applicantQNA={applicantQNA}
         />
       )}
     </div>

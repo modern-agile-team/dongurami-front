@@ -68,6 +68,11 @@
   margin-bottom: 1rem;
   border: 1px solid white;
 }
+.btnContainer {
+  button {
+    float: right;
+  }
+}
 
 @media (max-width: 1024px) {
   .wrap {
@@ -75,7 +80,6 @@
       width: 45vw;
       padding: 2rem 1rem;
       .body {
-        // margin: 0 auto;
         width: 100%;
       }
     }

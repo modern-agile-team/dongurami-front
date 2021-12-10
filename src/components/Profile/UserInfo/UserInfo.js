@@ -1,5 +1,6 @@
 import styles from 'styles/Profile/UserInfo.module.scss';
 import { FaGraduationCap, FaUserCircle } from 'react-icons/fa';
+import { FiMail } from 'react-icons/fi';
 import Link from 'next/link';
 import ClubModal from './ClubModal';
 import LeaveModal from './LeaveModal';
@@ -9,18 +10,17 @@ const UserInfo = ({
   baseImg,
   userInfo,
   profile,
-  comp,
   isOpen,
   setIsOpen,
   leaveIsOpen,
   setLeaveIsOpen,
+  router,
   clubNo
 }) => {
   const onSubmitLeave = () => {
     setLeaveIsOpen(!leaveIsOpen);
   };
-
-  if (comp === '프로필')
+  if (router === undefined)
     return (
       <div className={styles.wrap}>
         <div className={styles.profileBody}>
@@ -38,6 +38,14 @@ const UserInfo = ({
               <FaGraduationCap className={styles.icon} />
               <span> {profile.major}</span>
             </div>
+            {userInfo.id === profile.id && (
+              <div>
+                <FiMail className={styles.icon} />
+                <Link href={{ pathname: '/message' }} passHref>
+                  <span className={styles.message}>쪽지함</span>
+                </Link>
+              </div>
+            )}
             <button
               className={styles.clubBtn}
               onClick={() => {

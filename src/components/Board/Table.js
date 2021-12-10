@@ -16,6 +16,7 @@ function NoticeTable({ posts, page, category }) {
           <th>작성자</th>
           <th>작성일</th>
           <th>조회수</th>
+          <th>좋아요</th>
         </tr>
       </thead>
       <tbody>
@@ -27,10 +28,17 @@ function NoticeTable({ posts, page, category }) {
           }} passHref>
             <tr key={post.no}>
               <td>{post.no}</td>
-              <td>{post.title}</td>
+              <td>
+                <div className={styles.titleContainer}>
+                  <div className={styles.title}>{post.title}</div>
+                  &nbsp;
+                  <div className={styles.commentCount}>{`[${post.commentCount}]`}</div>
+                </div>
+              </td>
               <td>{post.studentName}</td>
               <td>{moment(post.inDate).format('MM-DD')}</td>
               <td>{post.hit}</td>
+              <td>{post.emotionCount}</td>
             </tr>
           </Link>
         ))}

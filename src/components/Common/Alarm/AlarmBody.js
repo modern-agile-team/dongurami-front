@@ -11,10 +11,10 @@ const AlarmBody = ({
   return (
     <div className={styles.alarms}>
       {alarmList.length > 0 ? (
-        alarmList.slice(0, alarmShow).map((alarm, index) => {
+        alarmList.slice(0, alarmShow).map((alarm) => {
           return (
             <AlarmList
-              key={index}
+              key={alarm.no}
               alarm={alarm}
               onAlarmPatch={onAlarmPatch}
               setIsDelete={setIsDelete}

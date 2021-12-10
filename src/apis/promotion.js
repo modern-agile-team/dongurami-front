@@ -1,5 +1,4 @@
 import axios from 'apis/index';
-import post from 'redux/slices/post';
 
 export function getData(searchItem, no) {
   return axios.get(
@@ -35,20 +34,26 @@ export function deletePost(postId) {
   return axios.delete(`api/board/promotion/${postId}`);
 }
 
-export function editComment(commentNo, parentCommentID, description, postId) {
+export function editComment(
+  commentNo,
+  parentCommentID,
+  description,
+  postId,
+  hiddenFlag
+) {
   if (parentCommentID) {
     return axios.put(
       `/api/board/promotion/${postId}/${parentCommentID}/${commentNo}`,
-      { description }
+      { description, hiddenFlag }
     );
   }
   return axios.put(`/api/board/promotion/${postId}/${commentNo}`, {
-    description
+    description,
+    hiddenFlag
   });
 }
 
 export function deleteComment(commentNo, parentCommentID, postId) {
-  console.log(postId);
   if (parentCommentID) {
     return axios.delete(
       `/api/board/promotion/${postId}/${parentCommentID}/${commentNo}`
@@ -57,19 +62,19 @@ export function deleteComment(commentNo, parentCommentID, postId) {
   return axios.delete(`api/board/promotion/${postId}/${commentNo}`);
 }
 
-export function addComment(postId, description, parentCommentID) {
+export function addComment(postId, description, parentCommentID, hiddenFlag) {
   if (parentCommentID) {
     return axios.post(`/api/board/promotion/${postId}/${parentCommentID}`, {
-      id: 'test1',
       description,
       url: `promotion?id=${postId}`,
-      notiCategoryNum: 1
+      notiCategoryNum: 1,
+      hiddenFlag
     });
   }
   return axios.post(`api/board/promotion/${postId}`, {
-    id: 'test1',
     description,
     url: `promotion?id=${postId}`,
-    notiCategoryNum: 0
+    notiCategoryNum: 0,
+    hiddenFlag
   });
 }

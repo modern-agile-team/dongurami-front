@@ -5,12 +5,18 @@ import ReplyContainer from './ReplyContainer';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-function CommentContainer({ comments }) {
+function CommentContainer({
+  comments,
+  sendLetter,
+  setIsComment,
+  setOpenOptions,
+  openOptions
+}) {
   const user = useSelector((state) => state.user);
   const [parentCommentID, setParentCommentID] = useState();
 
   const toggleParentCommentID = (id) => {
-    if (parentCommentID) setParentCommentID();
+    if (parentCommentID === id) setParentCommentID();
     else setParentCommentID(id);
   };
 
@@ -23,19 +29,34 @@ function CommentContainer({ comments }) {
           <React.Fragment key={comment.no}>
             {comment.depth ? (
               <ReplyContainer>
-                <Comment comment={comment} parentCommentID={comment.groupNo} />
+                <Comment
+                  comment={comment}
+                  parentCommentID={comment.groupNo}
+                  sendLetter={sendLetter}
+                  setIsComment={setIsComment}
+                  setOpenOptions={setOpenOptions}
+                  openOptions={openOptions}
+                />
               </ReplyContainer>
             ) : (
-              <Comment comment={comment} setParentCommentID={toggleParentCommentID} />
+              <Comment
+                comment={comment}
+                setParentCommentID={toggleParentCommentID}
+                sendLetter={sendLetter}
+                setIsComment={setIsComment}
+                setOpenOptions={setOpenOptions}
+                openOptions={openOptions}
+              />
             )}
-            {(comment.groupNo === parentCommentID && comments[index + 1]?.depth !== 1) && (
-              <ReplyContainer>
-                <AddComment parentCommentID={parentCommentID} />
-              </ReplyContainer>
-            )}
+            {comment.groupNo === parentCommentID &&
+              comments[index + 1]?.depth !== 1 && (
+                <ReplyContainer>
+                  <AddComment parentCommentID={parentCommentID} scroll />
+                </ReplyContainer>
+              )}
           </React.Fragment>
         ))}
-        {(user) && <AddComment />}
+        {user && <AddComment />}
       </div>
     </>
   );

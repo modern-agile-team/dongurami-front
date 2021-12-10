@@ -2,25 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  ul {
-    display: flex;
-    list-style: none;
-
-    li {
-      cursor: pointer;
-      background-color: #f1f3f5;
-      border-radius: 15px;
-      padding: 0.8rem 1.5rem;
-      font-size: 16px;
-      font-family: 'twayair';
-      margin-right: 6px;
-
-      &:hover {
-        filter: brightness(96%);
-      }
-    }
+  .selected {
+    filter: brightness(80%);
   }
-
   .searchContainer {
     margin: 0% 5%;
     margin-top: 30px;
@@ -72,17 +56,7 @@
 @media screen and (max-width: 1024px) {
   .container {
     margin-top: 1rem;
-    ul {
-      li {
-        padding: 0.8rem 1.1rem;
-        font-size: 15px;
-        margin-right: 6px;
 
-        &:hover {
-          filter: brightness(96%);
-        }
-      }
-    }
     .searchContainer {
       width: 30%;
       margin-top: 30px;
@@ -117,21 +91,6 @@
 
 @media screen and (max-width: 1024px) {
   .container {
-    ul {
-      padding: 0%;
-      margin-top: 0%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      li {
-        padding: 10px;
-        margin: 5px;
-        width: 20%;
-        text-align: center;
-        font-size: 12px;
-      }
-    }
-
     .searchContainer {
       width: 70%;
       height: 38px;
@@ -146,21 +105,6 @@
 
 @media screen and (max-width: 480px) {
   .container {
-    ul {
-      padding: 0%;
-      margin-top: 0%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      li {
-        padding: 10px;
-        margin: 5px;
-        width: 20%;
-        text-align: center;
-        font-size: 12px;
-      }
-    }
-
     .searchContainer {
       width: 70%;
       height: 38px;

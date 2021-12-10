@@ -17,12 +17,26 @@
     font-size: calc(.5rem + 1vmin);
   }
   th:nth-of-type(2), td:nth-of-type(2) {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 50%;
+    width: 40%;
+  }
+  th:nth-of-type(3), td:nth-of-type(3) {
+    width: 20%;
   }
   thead {
     background-color: #DDF7EC;
+  }
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  .title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .commentCount {
+    color: gray;
+    white-space: nowrap;
   }
 }

@@ -3,11 +3,13 @@
   flex-direction: column;
   position: absolute;
   padding: 1em;
-  width: 20%;
   border-radius: 6px;
   box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.1);
   background-color: white;
-  top: 60px;
+  top: 45px;
+  right: 0;
+  width: 20vw;
+  min-width: max-content;
   margin-left: -70px;
   max-height: 50vh;
   hr {
@@ -21,20 +23,23 @@
   width: 15px;
   height: 15px;
   border: 1px solid rgba(0, 0, 0, 0.07);
-  top: 53px;
+  top: 40px;
+  left: 9px;
   transform: rotate(45deg);
 }
 
 .alarms {
   display: flex;
   flex-direction: column;
-  text-align: center;
   justify-content: space-between;
   margin-top: 5px;
   overflow-y: auto;
   p {
     font-size: 90%;
     margin: 0;
+  }
+  span {
+    text-align: center;
   }
 }
 
@@ -46,15 +51,20 @@
 }
 
 .description {
+  transition-duration: 1s;
+  -webkit-transition-duration: 0.4s; /* Safari */
   div {
     display: flex;
     justify-content: space-between;
   }
   border-bottom: 1px solid #cacacabd;
   cursor: pointer;
-  padding: 10px;
+  padding: 10px 0;
   &:hover {
     background-color: #eeeeee94;
+  }
+  &:active {
+    background-color: #b1b1b194;
   }
 }
 
@@ -80,7 +90,6 @@
   }
   span {
     font-size: 10px;
-
     color: red;
   }
 }
@@ -88,14 +97,27 @@
 .leftAlarms {
   font-size: 90%;
   margin-top: 1em;
+  display: flex;
+  justify-content: center;
   span {
     cursor: pointer;
-
     &:hover {
       font-weight: bold;
       border-bottom: 1px solid;
     }
   }
+}
+
+.bottom {
+  div {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    p:nth-child(2) {
+      color: #66b6a9;
+    }
+  }
+  align-items: flex-end;
 }
 
 @media (max-width: 1024px) {
@@ -112,7 +134,7 @@
     right: 0;
   }
   .rect {
-    top: 105px;
+    display: none;
   }
   .leftAlarms {
     font-size: 80%;

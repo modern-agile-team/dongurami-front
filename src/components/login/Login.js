@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { postLogin } from 'apis/user';
 import { useDispatch } from 'react-redux';
 import { getUser } from 'redux/slices/user';
+import OAuth from 'components/SignUp/OAuth';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ export const Login = () => {
           <input
             className={styles.idInput}
             type="Number"
+            onKeyDown={(e) =>
+              (e.key === 'e' || e.key === '.') && e.preventDefault()
+            }
             placeholder="학번을 입력해 주세요."
             onChange={onChange}
             name="id"
@@ -74,6 +78,7 @@ export const Login = () => {
           <button className={styles.loginBtn} onClick={onSubmit}>
             로그인
           </button>
+          <OAuth />
           <br />
           <div className={styles.signup}>
             <span>아직 계정이 없으신가요?</span>

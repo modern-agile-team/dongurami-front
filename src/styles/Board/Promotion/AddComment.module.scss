@@ -7,12 +7,23 @@
   padding: 1rem;
   margin: 0 1rem;
   flex: 1;
+  .topBar {
+    display: flex;
+    justify-content: space-between;
+    .anonContainer {
+      label {
+        vertical-align: top;
+        font-size: small;
+      }
+    }
+  }
   & > form {
     display: flex;
     & > input {
       flex: 1;
       border: none;
       background-color: inherit;
+      margin-right: 20px;
     }
     & > button {
       border: none;

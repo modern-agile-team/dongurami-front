@@ -34,21 +34,25 @@ const Edit = () => {
   };
 
   const onSubmit = () => {
-    if (data.no === 'scrap')
-      modifySPost(...queryData, {
-        title,
-        description
-      })
-        .then((res) => alert('수정이 완료되었습니다.'))
-        .catch((err) => alert(err.response.data.msg));
-    else if (data.no === 'board')
-      modifyBPost(...queryData, {
-        title,
-        description
-      })
-        .then((res) => alert('수정이 완료되었습니다.'))
-        .catch((err) => alert(err.response.data.msg));
-    router.push(`/profile/${data.pid}`);
+    if (title.length > 255) {
+      alert('제목은 255자 이하여야 합니다.');
+    } else {
+      if (data.no === 'scrap')
+        modifySPost(...queryData, {
+          title,
+          description
+        })
+          .then((res) => alert('수정이 완료되었습니다.'))
+          .catch((err) => alert(err.response.data.msg));
+      else if (data.no === 'board')
+        modifyBPost(...queryData, {
+          title,
+          description
+        })
+          .then((res) => alert('수정이 완료되었습니다.'))
+          .catch((err) => alert(err.response.data.msg));
+      router.push(`/profile/${data.pid}`);
+    }
   };
 
   useEffect(() => {

@@ -13,6 +13,12 @@
   padding: 2rem;
 }
 
+.message {
+  cursor: pointer;
+  &:hover {
+    color: #90e2d6;
+  }
+}
 .profileImg {
   box-shadow: 0px 5px 8px 3px rgba(0, 0, 0, 0.1);
   margin: 5px;
@@ -96,6 +102,7 @@
     font-family: twayair;
     font-size: 15px;
   }
+  min-width: 11rem;
   margin-top: 4%;
   gap: 10px;
   font-size: 110%;

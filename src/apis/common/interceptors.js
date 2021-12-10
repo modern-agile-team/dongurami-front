@@ -22,7 +22,8 @@ function setInterceptors(instance) {
           method: config.method,
           headers: {
             'x-auth-token': getToken(),
-            'Content-type': 'application/json; charset=utf-8'
+            'Content-type': 'application/json; charset=utf-8',
+            'api-key': process.env.NEXT_PUBLIC_API_KEY
           }
         };
         return axios(

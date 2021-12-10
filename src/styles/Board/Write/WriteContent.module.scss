@@ -38,16 +38,11 @@
   & > div:nth-of-type(2) {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
     margin: .5rem;
     padding: .5rem;
     border-top: 2px solid #90E2D6;
     border-bottom: 2px solid #90E2D6;
-    & > button {
-      border: 2px solid #90E2D6;
-      color: #90E2D6;
-      background-color: white;
-      padding: .5rem 1rem;
-      border-radius: .5rem;
-    }
   }
 }

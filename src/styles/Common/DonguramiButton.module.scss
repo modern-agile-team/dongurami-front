@@ -1,0 +1,41 @@
+.fillButton {
+  cursor: pointer;
+  padding: 6px 1em;
+  border: none;
+  background-color: rgb(239, 239, 239);
+  border-radius: 4px;
+  font-weight: 500;
+  color: black;
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s; /* Safari */
+}
+
+.outlineButton {
+  cursor: pointer;
+  padding: 6px 10px;
+  border: 1px solid rgb(225, 225, 225);
+  color: black;
+  border-radius: 4px;
+  font-weight: 500;
+  background-color: white;
+}
+
+.fillButton:hover {
+  transition: 0.3s;
+  filter: brightness(90%);
+}
+
+.fillButton:active {
+  transition: 0.1s;
+  filter: brightness(100%);
+}
+
+.outlineButton:hover {
+  transition: 0.3s;
+  filter: brightness(95%);
+}
+
+.outlineButton:active {
+  transition: 0.1s;
+  filter: brightness(100%);
+}
