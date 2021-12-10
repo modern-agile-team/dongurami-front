@@ -10,8 +10,8 @@ export const HeaderMobileBoard = () => {
 
   //현재경로 표시
   useEffect(() => {
-    setNowPath(window.location.pathname);
-  }, []);
+    setNowPath(router.pathname);
+  }, [router.pathname]);
 
   useEffect(() => {
     window.localStorage.setItem('nowPath', nowPath);

@@ -17,6 +17,11 @@
     font-weight: 400;
     margin-top: 0%;
   }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
   p {
     margin: 2em 0%;
   }
