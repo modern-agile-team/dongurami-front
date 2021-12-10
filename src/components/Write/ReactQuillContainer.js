@@ -37,6 +37,7 @@ function ReactQuillContainer({ description, setDescription }) {
 
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
+    input.style.display = 'none';
 
     document.body.appendChild(input);
 

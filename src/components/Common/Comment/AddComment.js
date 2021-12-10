@@ -41,11 +41,11 @@ function AddComment({ parentCommentID, scroll }) {
         <div>{user.name}</div>
         <div className={styles.anonContainer}>
           <label htmlFor={`anon${parentCommentID}`}>익명</label>
-          <input type="checkbox" id={`anon${parentCommentID}`} value={isAnon} onChange={(e) => setIsAnon(e.target.value)} />
+          <input type="checkbox" id={`anon${parentCommentID}`} checked={isAnon} onChange={(e) => setIsAnon(e.target.checked)} />
         </div>
       </div>
       <form onSubmit={onSubmit}>
-        <input type="text" placeholder="댓글을 남겨보세요" value={description} onChange={onChange} />
+        <input type="text" placeholder="댓글을 남겨보세요" value={description} onChange={onChange} autoFocus={scroll} />
         <button type="submit">등록</button>
       </form>
     </div>
