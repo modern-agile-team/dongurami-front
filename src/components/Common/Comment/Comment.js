@@ -177,11 +177,6 @@ function Comment({
               답글 쓰기
             </p>
           )}
-          {user && user.id !== comment.studentId && (
-            <p className={styles.reply} onClick={() => sendLetter(comment)}>
-              쪽지
-            </p>
-          )}
           <button
             className={`${styles.likeButton} ${
               comment.likedFlag && styles.like
