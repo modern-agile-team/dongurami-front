@@ -7,10 +7,17 @@ import MyItems from './MyItems';
 const MyPost = ({ matchTitle }) => {
   const [myPosts, setMyPosts] = useState();
   const [myComments, setMyComments] = useState();
-  const [category, setCategory] = useState(1);
+  const [category, setCategory] = useState(0);
   const [isHave, setIsHave] = useState(false);
   const router = useRouter();
-
+  const boardArr = [
+    '공지게시판',
+    '자유게시판',
+    'QnA게시판',
+    '홍보게시판',
+    '동아리공지게시판',
+    '동아리활동내용'
+  ];
   useEffect(() => {
     if (!router.isReady) return;
     getMyPosts(router.query.pid)
@@ -35,6 +42,7 @@ const MyPost = ({ matchTitle }) => {
                 setCategory(e.target.value);
               }}
             >
+              <option value={0}>전체보기</option>
               <option value={1}>공지게시판</option>
               <option value={2}>자유게시판</option>
               <option value={3}>QnA게시판</option>
@@ -50,6 +58,7 @@ const MyPost = ({ matchTitle }) => {
           </div>
         ) : (
           <MyItems
+            boardArr={boardArr}
             category={category}
             myPosts={myPosts}
             myComments={myComments}

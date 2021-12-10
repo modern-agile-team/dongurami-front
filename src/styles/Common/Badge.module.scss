@@ -2,15 +2,15 @@
   z-index: 99;
   display: flex;
   position: absolute;
-  bottom: 23px;
-  left: 23px;
   align-items: center;
   justify-content: center;
+  bottom: 20px;
+  left: 20px;
   border-radius: 50%;
-  background-color: red;
-  font-size: 10px;
+  background-color: rgb(226, 0, 0);
+  font-size: 70%;
   color: white;
-  width: 30%;
   height: 30%;
-  padding: 3px;
+  min-width: 30%;
+  padding: 3.5px;
 }

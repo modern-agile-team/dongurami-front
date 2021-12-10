@@ -50,13 +50,12 @@ const ModifyInfo = () => {
   }, [uRouter.query.pid]);
 
   const modifyBtn = async () => {
-    if (email.replace(/ /g, '').length <= 0) setEmail(placeholder[0]);
-    if (phoneNumber.replace(/ /g, '').length <= 0) {
-      setPhoneNumber(placeholder[1]);
-    }
     await modifyInfo(uRouter.query.pid, {
-      email,
-      phoneNumber,
+      email: email.replace(/ /g, '').length <= 0 ? placeholder[0] : email,
+      phoneNumber:
+        phoneNumber.replace(/ /g, '').length <= 0
+          ? placeholder[1]
+          : phoneNumber,
       grade,
       profileImageUrl: imgUrl,
       fileId

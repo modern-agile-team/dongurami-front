@@ -1,12 +1,12 @@
 .container {
   border: 1px solid gainsboro;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   overflow: hidden;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   &:hover {
-    filter: brightness(0.8)
+    filter: brightness(0.8);
   }
   & > img {
     width: 100%;
@@ -20,15 +20,24 @@
     padding: 1rem;
     & > .title {
       margin: 0;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
     }
     & > .name {
       margin: 0;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
       color: gray;
-      font-size: .75rem;
+      font-size: 0.75rem;
     }
     & > .emotion {
       float: right;
+      svg {
+        width: 12px;
+        height: 12px;
+        color: rgba(211, 47, 47, 0.616);
+      }
     }
   }
 }

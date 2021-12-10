@@ -1,6 +1,13 @@
 import styles from 'styles/Profile/MyPost.module.scss';
 
-const MyItems = ({ category, myPosts, myComments, router, matchTitle }) => {
+const MyItems = ({
+  boardArr,
+  category,
+  myPosts,
+  myComments,
+  router,
+  matchTitle
+}) => {
   if (!myPosts) return null;
   if (!myComments) return null;
 
@@ -37,7 +44,21 @@ const MyItems = ({ category, myPosts, myComments, router, matchTitle }) => {
         <div className={styles.itemContainer}>
           {myPosts.length !== 0 &&
             myPosts.map((post, index) => {
-              return (
+              return category == 0 ? (
+                <div
+                  className={styles.item}
+                  onClick={() => movePage(post)}
+                  key={index}
+                >
+                  <div className={styles.under}>
+                    <span>
+                      {boardArr[post.boardCategoryNum - 1]}) 글 제목 :{' '}
+                      {matchTitle(post.title, 7, 15, 25)}
+                    </span>
+                    <span className={styles.date}>{post.inDate}</span>
+                  </div>
+                </div>
+              ) : (
                 post.boardCategoryNum == category && (
                   <div
                     className={styles.item}
@@ -61,7 +82,24 @@ const MyItems = ({ category, myPosts, myComments, router, matchTitle }) => {
         <div className={styles.itemContainer}>
           {myComments.length !== 0 &&
             myComments.map((comment, index) => {
-              return (
+              return category == 0 ? (
+                <div
+                  className={styles.item}
+                  onClick={() => movePage(comment)}
+                  key={index}
+                >
+                  <span>
+                    {boardArr[comment.boardCategoryNum - 1]}) 글 제목 :{' '}
+                    {matchTitle(comment.title, 7, 15, 25)}
+                  </span>
+                  <div className={styles.under}>
+                    <span>
+                      내 댓글 : {matchTitle(comment.description, 7, 15, 25)}
+                    </span>
+                    <span className={styles.date}>{comment.inDate}</span>
+                  </div>
+                </div>
+              ) : (
                 comment.boardCategoryNum == category && (
                   <div
                     className={styles.item}
