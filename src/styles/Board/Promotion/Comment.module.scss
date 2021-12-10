@@ -170,8 +170,11 @@
     cursor: pointer;
     object-fit: cover;
   }
+  .profile {
+    width: 60px;
+    position: relative;
+  }
   & > div {
-    flex: 1;
     margin: 0 0.5rem;
     & > div:nth-of-type(1) {
       display: flex;
@@ -258,7 +261,6 @@
       cursor: pointer;
     }
     & > div {
-      flex: 1;
       margin: 0 0.5rem;
       & > div:nth-of-type(1) {
         display: flex;

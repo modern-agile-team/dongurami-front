@@ -8,7 +8,7 @@ import {
 import api from 'apis/post';
 import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import moment from 'moment';
-import Link from 'next/link';
+import Option from 'components/Common/letter/Option';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment, editComment } from 'apis/promotion';
 import { getPost } from 'redux/slices/post';
@@ -18,9 +18,13 @@ const Comment = ({
   comment,
   setParentCommentID,
   parentCommentID,
-  sendMessage
+  sendMessage,
+  openOptions,
+  setOpenOptions,
+  setIsComment
 }) => {
   const [isContentEditable, setIsContentEditable] = useState(false);
+  const [optionComment, setOptionComment] = useState(0);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
@@ -31,6 +35,10 @@ const Comment = ({
     if (!isContentEditable) return;
     descriptionDiv.current.focus();
   }, [isContentEditable]);
+
+  useEffect(() => {
+    if (openOptions === false) setOptionComment(0);
+  }, [openOptions]);
 
   function setEndOfContenteditable(contentEditableElement) {
     let range, selection;
@@ -90,7 +98,7 @@ const Comment = ({
     dispatch(getPost());
   };
 
-  const WithProfileLink = ({ children }) =>
+  /*const WithProfileLink = ({ children }) =>
     comment.writerHiddenFlag ? (
       children
     ) : (
@@ -98,24 +106,39 @@ const Comment = ({
         {children}
       </Link>
     );
+    */
 
   return (
     <>
       <div className={styles.comment}>
-        <WithProfileLink>
+        <div className={styles.profile}>
           <img
             src={
               comment.profileImageUrl ??
               'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
             }
             alt="profile"
+            onClick={() => {
+              setOptionComment(comment.no);
+              setIsComment(true);
+              setOpenOptions(!openOptions);
+            }}
           />
-        </WithProfileLink>
+          {openOptions && comment.no === optionComment && (
+            <Option
+              setOpenOptions={setOpenOptions}
+              comment={comment}
+              sendMessage={sendMessage}
+              routePath={`/profile/${comment.studentId}`}
+              setOptionComment={setOptionComment}
+              setIsComment={setIsComment}
+            />
+          )}
+        </div>
         <div>
           <div>
-            <WithProfileLink>
-              <p>{comment.studentName}</p>
-            </WithProfileLink>
+            <p>{comment.studentName}</p>
+
             {Boolean(post.isWriter) && <p>작성자</p>}
             {Boolean(comment.isWriter) && (
               <div className={styles.button}>
@@ -144,11 +167,6 @@ const Comment = ({
                 onClick={() => setParentCommentID(comment.no)}
               >
                 답글 쓰기
-              </p>
-            )}
-            {user && user.id !== comment.studentId && (
-              <p className={styles.reply} onClick={() => sendMessage(comment)}>
-                쪽지
               </p>
             )}
             <button
