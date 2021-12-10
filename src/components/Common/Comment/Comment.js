@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import moment from 'moment';
 import Link from 'next/link';
 import { AiFillHeart } from 'react-icons/ai';
+import Option from '../letter/Option';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
 function setEndOfContenteditable(contentEditableElement) {
@@ -20,18 +21,31 @@ function setEndOfContenteditable(contentEditableElement) {
   selection.addRange(range); //make the range you have just created the visible selection
 }
 
-function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
+function Comment({
+  comment,
+  parentCommentID,
+  setParentCommentID,
+  sendLetter,
+  setIsComment,
+  openOptions,
+  setOpenOptions
+}) {
   const dispatch = useDispatch();
   const router = useRouter();
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
   const descriptionDiv = useRef();
   const [isContentEditable, setIsContentEditable] = useState(false);
+  const [optionComment, setOptionComment] = useState(0);
 
   useEffect(() => {
     if (!isContentEditable) return;
     descriptionDiv.current.focus();
   }, [isContentEditable]);
+
+  useEffect(() => {
+    if (openOptions === false) setOptionComment(0);
+  }, [openOptions]);
 
   const onEdit = async () => {
     if (isContentEditable) {
@@ -50,8 +64,7 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
         commentID: comment.no,
         description: descriptionDiv.current.textContent,
         parentCommentID,
-        clubNum: router.query.id,
-        hiddenFlag: Number(comment.writerHiddenFlag)
+        clubNum: router.query.id
       });
       dispatch(getPost());
     }
@@ -92,31 +105,47 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
     />
   );
 
-  const WithProfileLink = ({ children }) => (
-    (comment.writerHiddenFlag) ?
-    children :
-    (<Link href={`/profile/${comment.studentId}`} passHref>
-      {children}
-    </Link>)
-  );
+  const WithProfileLink = ({ children }) =>
+    comment.writerHiddenFlag ? (
+      children
+    ) : (
+      <Link href={`/profile/${comment.studentId}`} passHref>
+        {children}
+      </Link>
+    );
 
   return (
     <div className={styles.comment}>
-      <WithProfileLink>
+      <div className={styles.profile}>
         <img
           src={
             comment.profileImageUrl ??
             'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
           }
           alt="profile"
+          onClick={() => {
+            setOptionComment(comment.no);
+            setIsComment(true);
+            setOpenOptions(!openOptions);
+          }}
         />
-      </WithProfileLink>
+        {openOptions && comment.no === optionComment && (
+          <Option
+            setOpenOptions={setOpenOptions}
+            comment={comment}
+            sendMessage={sendLetter}
+            routePath={`/profile/${comment.studentId}`}
+            setOptionComment={setOptionComment}
+            setIsComment={setIsComment}
+          />
+        )}
+      </div>
+
       <div>
         <div>
-          <WithProfileLink>
-            <p className={styles.profileImage}>{comment.studentName}</p>
-          </WithProfileLink>
-          {(post.studentId === comment.studentId) && <p>작성자</p>}
+          <p className={styles.profileImage}>{comment.studentName}</p>
+
+          {post.studentId === comment.studentId && <p>작성자</p>}
           {Boolean(comment.isWriter) && (
             <div>
               <button onClick={onEdit} className={styles['action-button']}>

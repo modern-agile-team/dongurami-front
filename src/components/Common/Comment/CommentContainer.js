@@ -5,7 +5,13 @@ import ReplyContainer from './ReplyContainer';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-function CommentContainer({ comments, sendLetter }) {
+function CommentContainer({
+  comments,
+  sendLetter,
+  setIsComment,
+  setOpenOptions,
+  openOptions
+}) {
   const user = useSelector((state) => state.user);
   const [parentCommentID, setParentCommentID] = useState();
 
@@ -27,6 +33,9 @@ function CommentContainer({ comments, sendLetter }) {
                   comment={comment}
                   parentCommentID={comment.groupNo}
                   sendLetter={sendLetter}
+                  setIsComment={setIsComment}
+                  setOpenOptions={setOpenOptions}
+                  openOptions={openOptions}
                 />
               </ReplyContainer>
             ) : (
@@ -34,6 +43,9 @@ function CommentContainer({ comments, sendLetter }) {
                 comment={comment}
                 setParentCommentID={toggleParentCommentID}
                 sendLetter={sendLetter}
+                setIsComment={setIsComment}
+                setOpenOptions={setOpenOptions}
+                openOptions={openOptions}
               />
             )}
             {comment.groupNo === parentCommentID &&

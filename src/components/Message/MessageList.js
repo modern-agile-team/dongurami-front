@@ -24,7 +24,6 @@ const MessageList = () => {
   const router = useRouter();
 
   let isRecipientId = '';
-  let isWriterHidden = '';
 
   const getLetterDatas = async () => {
     if (user) {
@@ -39,7 +38,6 @@ const MessageList = () => {
     setLoading(true);
     if (user) {
       await getDetailMessages(user.id, letterNo).then((response) => {
-        console.log(response);
         setDetailMessage(response.data.letters);
         isRecipientId = response.data.letters.find(
           (el) => el.senderId !== user.id
@@ -87,7 +85,7 @@ const MessageList = () => {
     if (router?.query.id && user?.id) inquiryMessage(router.query.id);
     else getLetterDatas();
   }, [user, router]);
-
+  console.log(detailMessage);
   return (
     <div className={styles.container}>
       <div className={styles.entireMessage}>

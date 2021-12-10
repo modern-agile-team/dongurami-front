@@ -8,8 +8,11 @@
     cursor: pointer;
     object-fit: cover;
   }
+  .profile {
+    width: 60px;
+    position: relative;
+  }
   & > div {
-    flex: 1;
     & > div:nth-of-type(1) {
       display: flex;
       align-items: center;
@@ -17,7 +20,7 @@
       @media screen and (max-width: 768px) {
         gap: 0;
       }
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
       font-size: min(1rem, 4vmin);
       & > p {
         margin: 0;
@@ -33,7 +36,7 @@
       display: flex;
       gap: 1rem;
       p {
-        margin: .5rem 0;
+        margin: 0.5rem 0;
         font-size: small;
       }
       .reply {
@@ -60,11 +63,11 @@
 }
 
 .likeButton {
-  padding: 0 .25rem;
+  padding: 0 0.25rem;
   margin: auto 0;
   display: flex;
   border: 1px solid gray;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   background-color: white;
   color: gray;
   cursor: pointer;

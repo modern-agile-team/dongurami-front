@@ -128,7 +128,15 @@ const Comment = ({
         </div>
         <div>
           <div>
-            <p>{comment.studentName}</p>
+            <p
+              onClick={() => {
+                setOptionComment(comment.no);
+                setIsComment(true);
+                setOpenOptions(!openOptions);
+              }}
+            >
+              {comment.studentName}
+            </p>
 
             {Boolean(post.isWriter) && <p>작성자</p>}
             {Boolean(comment.isWriter) && (
