@@ -125,12 +125,14 @@
   }
 }
 .likeButton {
-  padding: 0.25rem 0.5rem;
+  padding: 6px 10px;
+  margin: auto 0;
   display: flex;
-  border: 1px solid gray;
-  border-radius: 0.25rem;
+  border: 0.5px solid lightgray;
+  border-radius: 3px;
   background-color: white;
   color: gray;
+  cursor: pointer;
   &:hover {
     color: indianred;
     background-color: white;
@@ -138,12 +140,19 @@
   & > svg {
     display: block;
     margin: auto;
+    margin-right: 4px;
+    width: 11px;
+    height: 11px;
   }
 }
 
 .like {
-  color: white;
-  background-color: indianred;
+  color: black;
+  background-color: rgba(211, 47, 47, 0.076);
+  border-color: rgba(211, 47, 47, 0.178);
+  svg {
+    color: rgb(211, 47, 47);
+  }
 }
 
 @media screen and (max-width: 1024px) {

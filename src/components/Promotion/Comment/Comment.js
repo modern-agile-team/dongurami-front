@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment, editComment } from 'apis/promotion';
 import { getPost } from 'redux/slices/post';
 import { useRouter } from 'next/router';
+import { FaHeart } from 'react-icons/fa';
 
 const Comment = ({
   comment,
@@ -174,7 +175,7 @@ const Comment = ({
               }`}
               onClick={onClickLike}
             >
-              <AiFillHeart />
+              <FaHeart />
               <span>{comment.emotionCount}</span>
             </button>
           </div>

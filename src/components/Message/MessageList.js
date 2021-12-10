@@ -85,7 +85,7 @@ const MessageList = () => {
     if (router?.query.id && user?.id) inquiryMessage(router.query.id);
     else getLetterDatas();
   }, [user, router]);
-  console.log(detailMessage);
+
   return (
     <div className={styles.container}>
       <div className={styles.entireMessage}>
