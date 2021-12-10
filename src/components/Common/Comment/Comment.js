@@ -50,7 +50,8 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
         commentID: comment.no,
         description: descriptionDiv.current.textContent,
         parentCommentID,
-        clubNum: router.query.id
+        clubNum: router.query.id,
+        hiddenFlag: Number(comment.writerHiddenFlag)
       });
       dispatch(getPost());
     }
