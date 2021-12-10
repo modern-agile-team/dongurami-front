@@ -22,21 +22,25 @@ const WriteScrpas = () => {
   }, [data.scrapNum]);
 
   const onSubmit = async () => {
-    if (data.scrapNum !== undefined) {
-      addScrapPost(data.clubNum, data.scrapNum, {
-        title,
-        scrapDescription: description,
-        boardDescription
-      })
-        .then((res) => alert(res.data.msg))
-        .catch((err) => alert(err.response.data.msg));
-      router.push(`/profile/${data.pid}`);
+    if (title.length > 255) {
+      alert('제목은 255자 이하여야합니다.');
     } else {
-      await addPost(data.pid, data.clubNum, {
-        title,
-        description
-      }).catch((err) => alert(err.response.data.msg));
-      router.push(`/profile/${data.pid}?category=scrap`);
+      if (data.scrapNum !== undefined) {
+        addScrapPost(data.clubNum, data.scrapNum, {
+          title,
+          scrapDescription: description,
+          boardDescription
+        })
+          .then((res) => alert(res.data.msg))
+          .catch((err) => alert(err.response.data.msg));
+        router.push(`/profile/${data.pid}`);
+      } else {
+        await addPost(data.pid, data.clubNum, {
+          title,
+          description
+        }).catch((err) => alert(err.response.data.msg));
+        router.push(`/profile/${data.pid}?category=scrap`);
+      }
     }
   };
 
