@@ -45,6 +45,7 @@ function ReduxWrapper({ children }) {
 function App({ Component, pageProps }) {
   const [scrollY, setScrollY] = useState(0);
   const [token, setToken] = useState();
+  const [open, setOpen] = useState(false);
   const [alarmList, setAlarmList] = useState([]);
   const [messageList, setMessageList] = useState([]);
 
@@ -100,6 +101,10 @@ function App({ Component, pageProps }) {
     scrollPosition();
   }, [scrollY]);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pageProps]);
+
   return (
     <Provider store={store}>
       <ReduxWrapper>
@@ -109,6 +114,8 @@ function App({ Component, pageProps }) {
           messageList={messageList}
           getAlarmData={getAlarmData}
           getMessage={getMessage}
+          open={open}
+          setOpen={setOpen}
         />
         <Component {...pageProps} />
         {scrollY > 550 && (

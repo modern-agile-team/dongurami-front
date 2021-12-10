@@ -1,5 +1,6 @@
 .container {
   width: 60%;
+  min-height: calc(82vh - 60px - 18px);
   margin: 0 auto;
   margin-bottom: 1rem;
   display: flex;

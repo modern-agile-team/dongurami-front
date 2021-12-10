@@ -46,18 +46,18 @@ const api = {
       });
     }
   },
-  putComment: ({ category, pid, commentID, description, parentCommentID, clubNum }) => {
+  putComment: ({ category, pid, commentID, description, parentCommentID, clubNum, hiddenFlag }) => {
     if (category === 'clubNotice') {
       if (parentCommentID) {
-        return axios.put(`/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}/${commentID}`, { description });
+        return axios.put(`/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}/${commentID}`, { description, hiddenFlag });
       } else {
-        return axios.put(`/api/club/board/clubNotice/${clubNum}/${pid}/${commentID}`, { description });
+        return axios.put(`/api/club/board/clubNotice/${clubNum}/${pid}/${commentID}`, { description, hiddenFlag });
       }
     }
     if (parentCommentID) {
-      return axios.put(`/api/board/${category}/${pid}/${parentCommentID}/${commentID}`, { description });
+      return axios.put(`/api/board/${category}/${pid}/${parentCommentID}/${commentID}`, { description, hiddenFlag });
     } else {
-      return axios.put(`/api/board/${category}/${pid}/${commentID}`, { description });
+      return axios.put(`/api/board/${category}/${pid}/${commentID}`, { description, hiddenFlag });
     }
   },
   deleteComment: ({ category, pid, commentID, parentCommentID, clubNum }) => {
