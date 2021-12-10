@@ -39,18 +39,12 @@ const MessageList = () => {
     setLoading(true);
     if (user) {
       await getDetailMessages(user.id, letterNo).then((response) => {
+        console.log(response);
         setDetailMessage(response.data.letters);
-        console.log(response.data.letters);
-
         isRecipientId = response.data.letters.find(
           (el) => el.senderId !== user.id
         );
 
-        isWriterHidden = response.data.letters.find(
-          (el) => el.senderId === '익명' && el.name !== '익명'
-        );
-
-        if (isWriterHidden) console.log('있습니다');
         if (isRecipientId) {
           setRecipientId(isRecipientId.senderId);
         } else {

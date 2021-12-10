@@ -149,13 +149,9 @@ const PromotionContainer = () => {
     }
   };
 
-  const forbiddenScroll = () => {
-    scrollPosition = window.pageYOffset;
-  };
-
   useEffect(() => {
     firstGetDatas();
-    console.log(1);
+
     window.addEventListener('scroll', infiniteScroll);
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
@@ -163,14 +159,6 @@ const PromotionContainer = () => {
   }, [searchItem, isSearch]);
 
   useEffect(() => {
-    const body = document.querySelector('body');
-
-    window.addEventListener('scroll', forbiddenScroll);
-    /*if (openModal) {
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${window.scrollY}px`;
-    }
-    */
     document.body.style.overflow = openModal ? 'hidden' : 'auto';
 
     if (Object.keys(router.query).length > 0) {

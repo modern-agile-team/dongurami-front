@@ -63,7 +63,7 @@ const Promotion = ({
         )}
         <div
           className={styles.creationInfo}
-          onClick={(e) => {
+          onClick={() => {
             setPostId(pId);
 
             router.push(

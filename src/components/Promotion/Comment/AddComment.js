@@ -12,8 +12,6 @@ function AddComment({ postId, parentCommentID, scroll, reply }) {
   const dispatch = useDispatch();
   const ref = useRef();
   const inputRef = useRef();
-  const category = 'promotion';
-  const pid = postId;
   const onChange = (e) => {
     setDescription(e.target.value);
   };
@@ -52,8 +50,8 @@ function AddComment({ postId, parentCommentID, scroll, reply }) {
           <input
             type="checkbox"
             id={`anon${parentCommentID}`}
-            value={isAnon}
-            onChange={(e) => setIsAnon(e.target.value)}
+            checked={isAnon}
+            onChange={(e) => setIsAnon(e.target.checked)}
           />
         </div>
       </div>

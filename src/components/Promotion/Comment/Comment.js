@@ -65,7 +65,8 @@ const Comment = ({
         comment.no,
         parentCommentID,
         descriptionDiv.current.textContent,
-        post.no
+        post.no,
+        Number(comment.writerHiddenFlag)
       ).then((response) => {
         if (response.data.success) dispatch(getPost());
         else alert(response.data.msg);
@@ -97,16 +98,6 @@ const Comment = ({
     }
     dispatch(getPost());
   };
-
-  /*const WithProfileLink = ({ children }) =>
-    comment.writerHiddenFlag ? (
-      children
-    ) : (
-      <Link href={`/profile/${comment.studentId}`} passHref>
-        {children}
-      </Link>
-    );
-    */
 
   return (
     <>

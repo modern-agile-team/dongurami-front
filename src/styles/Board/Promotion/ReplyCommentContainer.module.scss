@@ -22,32 +22,42 @@
   & > svg {
     margin-left: 1rem;
     margin-bottom: 1rem;
+    min-width: 28px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .container {
-    display: flex;
     background-color: white;
     filter: brightness(0.95);
     border-radius: 1rem;
     align-items: center;
     padding: 1rem 0;
     width: 100%;
+
     & > svg {
-      margin-left: 1rem;
-      margin-bottom: 1rem;
     }
     & > div:nth-of-type(1) {
-      & > div:nth-of-type(1) {
-        & > p {
-          margin: 0;
-        }
-        & > p:nth-of-type(2) {
-          color: #90e2d6;
-          border: 2px solid #90e2d6;
-          border-radius: 1rem;
-          padding: 0 1rem;
+      display: flex;
+
+      & > div:nth-of-type(2) {
+        margin: 0;
+
+        & > div:nth-of-type(1) {
+          & > p {
+            margin: 0;
+            width: 6em;
+          }
+
+          & > p:nth-of-type(2) {
+            color: #90e2d6;
+            border: 2px solid #90e2d6;
+            border-radius: 1rem;
+            padding: 0 1rem;
+            width: 3.7em;
+          }
+          & > div:nth-of-type(1) {
+          }
         }
       }
     }

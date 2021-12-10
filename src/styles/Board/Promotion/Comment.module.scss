@@ -153,11 +153,11 @@
     }
   }
 
-  .like {
-    color: white;
-    background-color: indianred;
+  .like {olor: indianred;
   }
 }
+    color: white;
+    background-c
 */
 
 .comment {
@@ -181,6 +181,190 @@
       align-items: center;
       gap: 1rem;
       margin-bottom: 0.5rem;
+      @media screen and (max-width: 768px) {
+        gap: 0;
+      }
+      font-size: min(1rem, 4vmin);
+      & > p {
+        margin: 0;
+      }
+      & > p:nth-of-type(2) {
+        color: #90e2d6;
+        border: 2px solid #90e2d6;
+        border-radius: 1rem;
+        padding: 0 1rem;
+        margin-left: 10px;
+      }
+    }
+    & > div:nth-of-type(3) {
+      display: flex;
+      gap: 1rem;
+      p {
+        margin: 0.5rem 0;
+        font-size: small;
+      }
+      .reply {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.comment .action-button {
+  border: none;
+  background: inherit;
+  cursor: pointer;
+  &:hover {
+    color: lightgray;
+  }
+}
+
+.profileImage {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.likeButton {
+  padding: 0 0.25rem;
+  margin: auto 0;
+  display: flex;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+  background-color: white;
+  color: gray;
+  cursor: pointer;
+  &:hover {
+    color: indianred;
+    background-color: white;
+  }
+  & > svg {
+    display: block;
+    margin: auto;
+  }
+}
+
+.like {
+  color: white;
+  background-color: indianred;
+}
+
+.commentText {
+  word-break: break-all;
+}
+
+/*
+@media screen and (max-width: 480px) {
+  .comment {
+    display: flex;
+    width: 100%;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    & > div {
+      margin: 0 0.5rem;
+      & > div:nth-of-type(1) {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        & > p {
+          margin: 0;
+          width: 4.5em;
+          font-size: 15px;
+        }
+        & > p:nth-of-type(2) {
+          color: #90e2d6;
+          border: 2px solid #90e2d6;
+          border-radius: 1rem;
+          width: 36px;
+          font-size: 11px;
+        }
+        .button {
+          width: 2em;
+        }
+        & > div:nth-of-type(1) {
+        }
+      }
+      & > div:nth-of-type(3) {
+        display: flex;
+        gap: 1rem;
+        p {
+          margin: 0.5rem 0;
+          font-size: 12px;
+        }
+        .reply {
+          cursor: pointer;
+        }
+      }
+    }
+    .commentText {
+      word-break: break-all;
+      margin-right: 6px;
+    }
+  }
+
+  .comment .action-button {
+    border: none;
+    background: inherit;
+    cursor: pointer;
+    &:hover {
+      color: lightgray;
+    }
+  }
+
+  .likeButton {
+    padding: 0 0.25rem;
+    margin: auto 0;
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 0.25rem;
+    background-color: white;
+    color: gray;
+    &:hover {
+      color: indianred;
+      background-color: white;
+    }
+    & > svg {
+      display: block;
+      margin: auto;
+    }
+  }
+
+  .like {
+    color: white;
+    background-color: indianred;
+  }
+}
+
+/*
+.comment {
+  display: flex;
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 10px;
+    cursor: pointer;
+    object-fit: cover;
+  }
+  & > div {
+    flex: 1;
+    & > div:nth-of-type(1) {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      @media screen and (max-width: 768px) {
+        gap: 0;
+      }
+      margin-bottom: 0.5rem;
+      font-size: min(1rem, 4vmin);
       & > p {
         margin: 0;
       }
@@ -248,92 +432,4 @@
 .commentText {
   word-break: break-all;
 }
-
-@media screen and (max-width: 480px) {
-  .comment {
-    display: flex;
-    width: 100%;
-    img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin: 0 10px;
-      cursor: pointer;
-    }
-    & > div {
-      margin: 0 0.5rem;
-      & > div:nth-of-type(1) {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        margin-bottom: 0.5rem;
-        width: 100%;
-
-        & > p {
-          margin: 0;
-          width: 4.5em;
-          font-size: 15px;
-        }
-        & > p:nth-of-type(2) {
-          color: #90e2d6;
-          border: 2px solid #90e2d6;
-          border-radius: 1rem;
-          width: 36px;
-          font-size: 12px;
-        }
-        .button {
-          width: 51px;
-        }
-        & > div:nth-of-type(1) {
-        }
-      }
-      & > div:nth-of-type(3) {
-        display: flex;
-        gap: 1rem;
-        p {
-          margin: 0.5rem 0;
-          font-size: 12px;
-        }
-        .reply {
-          cursor: pointer;
-        }
-      }
-    }
-    .commentText {
-      word-break: break-all;
-      margin-right: 6px;
-    }
-  }
-
-  .comment .action-button {
-    border: none;
-    background: inherit;
-    cursor: pointer;
-    &:hover {
-      color: lightgray;
-    }
-  }
-
-  .likeButton {
-    padding: 0 0.25rem;
-    margin: auto 0;
-    display: flex;
-    border: 1px solid gray;
-    border-radius: 0.25rem;
-    background-color: white;
-    color: gray;
-    &:hover {
-      color: indianred;
-      background-color: white;
-    }
-    & > svg {
-      display: block;
-      margin: auto;
-    }
-  }
-
-  .like {
-    color: white;
-    background-color: indianred;
-  }
-}
+*/

@@ -34,15 +34,22 @@ export function deletePost(postId) {
   return axios.delete(`api/board/promotion/${postId}`);
 }
 
-export function editComment(commentNo, parentCommentID, description, postId) {
+export function editComment(
+  commentNo,
+  parentCommentID,
+  description,
+  postId,
+  hiddenFlag
+) {
   if (parentCommentID) {
     return axios.put(
       `/api/board/promotion/${postId}/${parentCommentID}/${commentNo}`,
-      { description }
+      { description, hiddenFlag }
     );
   }
   return axios.put(`/api/board/promotion/${postId}/${commentNo}`, {
-    description
+    description,
+    hiddenFlag
   });
 }
 
@@ -56,7 +63,6 @@ export function deleteComment(commentNo, parentCommentID, postId) {
 }
 
 export function addComment(postId, description, parentCommentID, hiddenFlag) {
- 
   if (parentCommentID) {
     return axios.post(`/api/board/promotion/${postId}/${parentCommentID}`, {
       description,

@@ -33,7 +33,6 @@ export function replyLetter(
   letterNo,
   userId
 ) {
-  console.log(writerHiddenFlag);
   return axios.post(`api/letter/${userId}/${letterNo}`, {
     recipientId,
     description,
