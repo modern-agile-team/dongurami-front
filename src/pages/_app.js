@@ -43,6 +43,7 @@ function ReduxWrapper({ children }) {
 function App({ Component, pageProps }) {
   const [scrollY, setScrollY] = useState(0);
   const [token, setToken] = useState();
+  const [open, setOpen] = useState(false);
 
   // localStorage의 JWT값 불러와 token state에 저장
   useEffect(() => {
@@ -76,10 +77,14 @@ function App({ Component, pageProps }) {
     scrollPosition();
   }, [scrollY]);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pageProps]);
+
   return (
     <Provider store={store}>
       <ReduxWrapper>
-        <Header token={token} />
+        <Header token={token} open={open} setOpen={setOpen} />
         <Component {...pageProps} />
         {scrollY > 550 && (
           <div className="toTheTop" onClick={scrollToTop}>

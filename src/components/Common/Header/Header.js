@@ -11,8 +11,7 @@ import { getUserData } from 'apis/user';
 import Alarm from '../Alarm';
 import MessageAlarm from '../letter';
 
-function Header({ token }) {
-  const [open, setOpen] = useState(false);
+function Header({ token, open, setOpen }) {
   const [user, setUser] = useState();
   const [userProflie, setUserProfile] = useState();
 
@@ -46,7 +45,7 @@ function Header({ token }) {
           setUser(res.data.user.id);
           setUserProfile(res.data.user.profilePath);
         })
-        .catch((err) => {
+        .catch((_) => {
           window.localStorage.removeItem('jwt');
           window.location.reload();
         });

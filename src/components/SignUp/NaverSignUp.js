@@ -22,6 +22,7 @@ export const NaverSignUp = () => {
   };
   const getUser = () => {
     const token = window.location.href.split('=')[1].split('&')[0];
+    console.log(token);
     getNaverOauth(token)
       .then((res) => {
         router.push('/');
@@ -178,11 +179,16 @@ export const NaverSignUp = () => {
           <input
             className={styles.inputNum}
             type="number"
+            onKeyDown={(e) =>
+              (e.key === 'e' || e.key === '.') && e.preventDefault()
+            }
             placeholder="학번"
-            onChange={onChange}
+            onChange={(e) => {
+              onChange(e);
+              checkID();
+            }}
             name="id"
             value={id}
-            onBlur={checkID}
           />
           <select
             className={styles.select}
