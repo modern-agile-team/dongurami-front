@@ -9,7 +9,7 @@ import api from 'apis/post';
 import dynamic from 'next/dynamic';
 import { useSelector, useDispatch } from 'react-redux';
 import { IoIosArrowForward } from 'react-icons/io';
-import { AiFillHeart } from 'react-icons/ai';
+import { FaHeart } from 'react-icons/fa';
 import getToken from 'utils/getToken';
 import moment from 'moment';
 import Option from 'components/Common/letter/Option';
@@ -121,7 +121,7 @@ const Post = ({ postId, getData, post, sendMessage, setOpenMessage }) => {
           className={`${styles.likeButton} ${post.likedFlag && styles.like}`}
           onClick={onClickLike}
         >
-          <AiFillHeart />
+          <FaHeart />
           <span>&nbsp;{post.emotionCount}</span>
         </button>
         {post.comments && (
