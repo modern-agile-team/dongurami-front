@@ -22,7 +22,6 @@ export const NaverSignUp = () => {
   };
   const getUser = () => {
     const token = window.location.href.split('=')[1].split('&')[0];
-    console.log(token);
     getNaverOauth(token)
       .then((res) => {
         router.push('/');
