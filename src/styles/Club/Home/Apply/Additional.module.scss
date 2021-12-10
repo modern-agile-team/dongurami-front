@@ -8,9 +8,6 @@
     li {
       list-style: none;
       margin: 2vh 0;
-      span {
-        font-family: 'twayair';
-      }
     }
   }
   textarea {
@@ -20,10 +17,27 @@
     border-radius: 6px;
     border: 2px solid #64beb18c;
   }
+}
 
+.question {
+  display: flex;
+  align-items: center;
+  input {
+    width: 100%;
+  }
+  span {
+    font-family: 'twayair';
+  }
+}
+
+.icons {
+  display: flex;
   svg {
     cursor: pointer;
     margin-left: 5px;
+    &:hover {
+      color: lightgray;
+    }
   }
   #remove {
     &:hover {
@@ -54,5 +68,9 @@
       width: 90%;
       height: 3vh;
     }
+  }
+  .question {
+    width: 90%;
+    justify-content: space-between;
   }
 }
