@@ -7,7 +7,7 @@ import { getPost } from 'redux/slices/post';
 import { useRouter } from 'next/router';
 import moment from 'moment';
 import Link from 'next/link';
-import { AiFillHeart } from 'react-icons/ai';
+import { FaHeart } from 'react-icons/fa';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
 function setEndOfContenteditable(contentEditableElement) {
@@ -92,13 +92,14 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
     />
   );
 
-  const WithProfileLink = ({ children }) => (
-    (comment.writerHiddenFlag) ?
-    children :
-    (<Link href={`/profile/${comment.studentId}`} passHref>
-      {children}
-    </Link>)
-  );
+  const WithProfileLink = ({ children }) =>
+    comment.writerHiddenFlag ? (
+      children
+    ) : (
+      <Link href={`/profile/${comment.studentId}`} passHref>
+        {children}
+      </Link>
+    );
 
   return (
     <div className={styles.comment}>
@@ -116,7 +117,7 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
           <WithProfileLink>
             <p className={styles.profileImage}>{comment.studentName}</p>
           </WithProfileLink>
-          {(post.studentId === comment.studentId) && <p>작성자</p>}
+          {post.studentId === comment.studentId && <p>작성자</p>}
           {Boolean(comment.isWriter) && (
             <div>
               <button onClick={onEdit} className={styles['action-button']}>
@@ -159,7 +160,7 @@ function Comment({ comment, parentCommentID, setParentCommentID, sendLetter }) {
             }`}
             onClick={onClickLike}
           >
-            <AiFillHeart />
+            <FaHeart />
             <span>{comment.emotionCount}</span>
           </button>
         </div>

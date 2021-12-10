@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getPost, setCategory } from 'redux/slices/post';
 import moment from 'moment';
-import { AiFillHeart } from 'react-icons/ai';
+import { FaHeart } from 'react-icons/fa';
 import Option from 'components/Common/letter/Option';
 import { DonguramiFillButton } from 'components/Common/DonguramiButton';
 
@@ -126,7 +126,9 @@ function Post({
                   <Link href={editHref} passHref>
                     <DonguramiFillButton>수정하기</DonguramiFillButton>
                   </Link>
-                  <DonguramiFillButton onClick={onDelete}>삭제하기</DonguramiFillButton>
+                  <DonguramiFillButton onClick={onDelete}>
+                    삭제하기
+                  </DonguramiFillButton>
                 </>
               )}
               <div>{moment(post.inDate).format('YYYY-MM-DD')}</div>
@@ -140,7 +142,7 @@ function Post({
           className={`${styles.likeButton} ${post.likedFlag && styles.like}`}
           onClick={onClickLike}
         >
-          <AiFillHeart />
+          <FaHeart />
           <span>&nbsp;{post.emotionCount}</span>
         </button>
         {post.comments && (
