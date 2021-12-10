@@ -12,6 +12,7 @@ const ClubInfo = ({ infos, onChangeLogo }) => {
     { gender: '여자', '인원(명)': result.genderWomen },
     { gender: '남자', '인원(명)': result.genderMan }
   ];
+
   return (
     <div className={styles.container}>
       <div className={styles.desc}>
@@ -24,7 +25,7 @@ const ClubInfo = ({ infos, onChangeLogo }) => {
         <LeaderInfo infos={infos.leaderInfo[0]} />
         <div className={styles.population}>
           <ResponsiveBar
-            data={data}
+            data={[...data]}
             keys={['인원(명)']}
             indexBy="gender"
             colors="gray"
@@ -41,9 +42,7 @@ const ClubInfo = ({ infos, onChangeLogo }) => {
         {infos.result[0].logoUrl === null ? (
           <BsImage />
         ) : (
-          <div className={styles.img}>
-            <img src={infos.result[0].logoUrl} alt={result.fileId} />
-          </div>
+          <img src={infos.result[0].logoUrl} alt={result.fileId} />
         )}
         {client.leader === 1 && <LogoUpdate onChangeLogo={onChangeLogo} />}
       </div>

@@ -32,10 +32,10 @@ const Activities = () => {
         category: 'clubActivity',
         sort: 'inDate',
         order: 'DESC',
-        clubNum
+        clubNum: Number(router.query.id)
       })
     );
-  }, [clubNum, dispatch]);
+  }, [router, dispatch]);
 
   const onClick = (id) => {
     router.push({
@@ -44,7 +44,7 @@ const Activities = () => {
         ...router.query,
         pid: id
       }
-    });
+    }, undefined, { scroll: false });
   };
   const closeModal = () => {
     router.push({
@@ -52,7 +52,7 @@ const Activities = () => {
       query: {
         id: router.query.id
       }
-    });
+    }, undefined, { scroll: false });
   };
 
   const isModalOpened = Boolean(selectedID);
