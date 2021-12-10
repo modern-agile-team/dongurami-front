@@ -27,8 +27,11 @@ function Edit({ pid }) {
   useEffect(() => {
     document.body.style.overflow = 'visible';
   }, []);
-
   const onSubmit = async () => {
+    if (title.length > 60) {
+      alert('제목은 60글자 이하로 작성해주세요');
+      return;
+    }
     if (!title.length && !description.length) {
       alert('제목 및 글 내용을 작성해주세요');
       return;

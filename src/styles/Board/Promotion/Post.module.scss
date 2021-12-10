@@ -17,6 +17,7 @@
   h1 {
     margin-bottom: 0%;
     width: 28vw;
+    word-break: break-all;
   }
   & > div:nth-of-type(2) {
     img {
@@ -41,7 +42,7 @@
     margin-bottom: 1rem;
     margin-top: 3rem;
     span {
-      font-weight: 400;
+      font-weight: 800;
       margin-left: 5px;
     }
     svg {
@@ -145,7 +146,7 @@
   background-color: indianred;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .container {
     margin-top: 1em;
     width: 100%;
@@ -158,5 +159,67 @@
     h1 {
       width: 62vw;
     }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    .wrap {
+    }
+    * {
+    }
+    h1 {
+    }
+    & > div:nth-of-type(2) {
+      img {
+      }
+    }
+  }
+
+  .infoWrap {
+    .club {
+      span {
+        width: 100%;
+        font-size: 12px;
+      }
+      svg {
+      }
+    }
+    .boardInfo {
+      .profile {
+        img {
+        }
+        span {
+        }
+      }
+    }
+  }
+
+  .options {
+  }
+
+  .title {
+    .info {
+      .hit {
+      }
+    }
+    .buttons {
+      button {
+      }
+    }
+  }
+  .header {
+  }
+
+  .description {
+    p {
+    }
+    img {
+    }
+  }
+  .likeButton {
+  }
+
+  .like {
   }
 }

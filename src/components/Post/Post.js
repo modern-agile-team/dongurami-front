@@ -29,6 +29,7 @@ function Post({
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [openOptions, setOpenOptions] = useState(false);
+  const [isComment, setIsComment] = useState(false);
 
   useEffect(() => {
     dispatch(setCategory(category));
@@ -97,7 +98,7 @@ function Post({
                 alt="profileImage"
                 onClick={() => setOpenOptions(!openOptions)}
               />
-              {openOptions && user && (
+              {openOptions && !isComment && (
                 <Option
                   setOpenOptions={setOpenOptions}
                   setOpenMessage={setOpenMessage}
@@ -146,7 +147,13 @@ function Post({
           <span>&nbsp;{post.emotionCount}</span>
         </button>
         {post.comments && (
-          <CommentContainer comments={post.comments} sendLetter={sendLetter} />
+          <CommentContainer
+            comments={post.comments}
+            sendLetter={sendLetter}
+            setIsComment={setIsComment}
+            openOptions={openOptions}
+            setOpenOptions={setOpenOptions}
+          />
         )}
       </div>
     </div>

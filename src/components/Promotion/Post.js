@@ -18,15 +18,9 @@ const ReactQuill = dynamic(import('react-quill'), {
   ssr: false
 });
 
-const Post = ({
-  postId,
-  getData,
-  post,
-  sendMessage,
-  getPostData,
-  setOpenMessage
-}) => {
+const Post = ({ postId, getData, post, sendMessage, setOpenMessage }) => {
   const [openOptions, setOpenOptions] = useState(false);
+  const [isComment, setIsComment] = useState(false);
   const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
     post;
   const category = 'promotion';
@@ -88,8 +82,7 @@ const Post = ({
           </div>
           <div className={styles.infoWrap}>
             <div className={styles.club} onClick={onClick}>
-              {clubName}
-              <span>바로가기</span>
+              <span>{clubName} 바로가기</span>
               <IoIosArrowForward size={25} />
             </div>
             <div className={styles.boardInfo}>
@@ -102,7 +95,7 @@ const Post = ({
                   }
                   alt="profile"
                 />
-                {openOptions && user && (
+                {openOptions && !isComment && (
                   <Option
                     setOpenOptions={setOpenOptions}
                     setOpenMessage={setOpenMessage}
@@ -138,6 +131,9 @@ const Post = ({
             studentId={studentId}
             getData={getData}
             sendMessage={sendMessage}
+            openOptions={openOptions}
+            setOpenOptions={setOpenOptions}
+            setIsComment={setIsComment}
           />
         )}
       </div>

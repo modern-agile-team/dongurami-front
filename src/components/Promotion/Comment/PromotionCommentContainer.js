@@ -10,7 +10,10 @@ const PromotionCommentContainer = ({
   postId,
   getData,
   studentId,
-  sendMessage
+  sendMessage,
+  openOptions,
+  setOpenOptions,
+  setIsComment
 }) => {
   const user = useSelector((state) => state.user);
   const [parentCommentID, setParentCommentID] = useState();
@@ -35,6 +38,9 @@ const PromotionCommentContainer = ({
                     studentId={studentId}
                     parentCommentID={comment.groupNo}
                     sendMessage={sendMessage}
+                    openOptions={openOptions}
+                    setOpenOptions={setOpenOptions}
+                    setIsComment={setIsComment}
                   />
                 </ReplyCommentContainer>
               ) : (
@@ -42,6 +48,9 @@ const PromotionCommentContainer = ({
                   comment={comment}
                   setParentCommentID={toggleParentCommentId}
                   sendMessage={sendMessage}
+                  openOptions={openOptions}
+                  setOpenOptions={setOpenOptions}
+                  setIsComment={setIsComment}
                 />
               )}
               {comment.groupNo === parentCommentID &&
@@ -52,6 +61,7 @@ const PromotionCommentContainer = ({
                       postId={postId}
                       parentCommentID={parentCommentID}
                       scroll
+                      reply
                     />
                   </ReplyCommentContainer>
                 )}

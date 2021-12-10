@@ -4,15 +4,14 @@ import { addComment } from 'apis/promotion';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 
-function AddComment({ postId, parentCommentID, scroll }) {
+function AddComment({ postId, parentCommentID, scroll, reply }) {
   const [description, setDescription] = useState('');
   const [isAnon, setIsAnon] = useState(false);
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const ref = useRef();
-  const category = 'promotion';
-  const pid = postId;
+  const inputRef = useRef();
   const onChange = (e) => {
     setDescription(e.target.value);
   };
@@ -29,7 +28,7 @@ function AddComment({ postId, parentCommentID, scroll }) {
       parentCommentID,
       Number(Boolean(isAnon))
     ).then((res) => {
-      if (res.data.success) dispatch(getPost({ category, pid: post.no }));
+      if (res.data.success) dispatch(getPost());
       else alert(res.data.msg);
     });
     setDescription('');
@@ -39,6 +38,7 @@ function AddComment({ postId, parentCommentID, scroll }) {
     if (scroll) {
       ref.current.scrollIntoView();
     }
+    if (reply) inputRef.current.focus();
   }, [scroll]);
 
   return (
@@ -50,8 +50,8 @@ function AddComment({ postId, parentCommentID, scroll }) {
           <input
             type="checkbox"
             id={`anon${parentCommentID}`}
-            value={isAnon}
-            onChange={(e) => setIsAnon(e.target.value)}
+            checked={isAnon}
+            onChange={(e) => setIsAnon(e.target.checked)}
           />
         </div>
       </div>
@@ -61,6 +61,7 @@ function AddComment({ postId, parentCommentID, scroll }) {
           placeholder="댓글을 남겨보세요"
           value={description}
           onChange={onChange}
+          ref={inputRef}
         />
         <button type="submit">등록</button>
       </form>

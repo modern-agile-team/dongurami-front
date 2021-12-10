@@ -4,13 +4,22 @@ import { useRef, useEffect } from 'react';
 import router from 'next/router';
 import { useSelector } from 'react-redux';
 
-const Option = ({ setOpenOptions, setOpenMessage, routePath }) => {
+const Option = ({
+  setOpenOptions,
+  setOpenMessage,
+  routePath,
+  comment,
+  sendMessage,
+  setOptionComment,
+  setIsComment
+}) => {
   const ref = useRef(null);
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
 
   function handleClickOutside(event) {
     if (ref.current && !ref.current.contains(event.target)) {
+      if (comment) setIsComment(false);
       setOpenOptions(false);
     }
   }
@@ -25,8 +34,16 @@ const Option = ({ setOpenOptions, setOpenMessage, routePath }) => {
     <div className={styles.container}>
       <div className={styles.rect} />
       <ul ref={ref} className={styles.dropdownMenu}>
-        {user?.id !== post?.studentId && (
-          <li className={styles.send} onClick={() => setOpenMessage(true)}>
+        {user && (
+          <li
+            className={styles.send}
+            onClick={() => {
+              if (setOpenMessage) setOpenMessage(true);
+              else if (sendMessage) {
+                sendMessage(comment);
+              }
+            }}
+          >
             <FiMail />
             쪽지 보내기
           </li>

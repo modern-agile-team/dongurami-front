@@ -50,7 +50,7 @@ const TypeSearch = ({
               value={searchKeyword}
               onChange={onChange}
             />
-            <FaSearch />
+            <FaSearch onClick={onSubmit} />
           </form>
         </div>
         {user && (

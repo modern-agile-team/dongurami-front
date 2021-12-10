@@ -8,7 +8,7 @@ import {
 import api from 'apis/post';
 import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import moment from 'moment';
-import Link from 'next/link';
+import Option from 'components/Common/letter/Option';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteComment, editComment } from 'apis/promotion';
 import { getPost } from 'redux/slices/post';
@@ -18,9 +18,13 @@ const Comment = ({
   comment,
   setParentCommentID,
   parentCommentID,
-  sendMessage
+  sendMessage,
+  openOptions,
+  setOpenOptions,
+  setIsComment
 }) => {
   const [isContentEditable, setIsContentEditable] = useState(false);
+  const [optionComment, setOptionComment] = useState(0);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
@@ -31,6 +35,10 @@ const Comment = ({
     if (!isContentEditable) return;
     descriptionDiv.current.focus();
   }, [isContentEditable]);
+
+  useEffect(() => {
+    if (openOptions === false) setOptionComment(0);
+  }, [openOptions]);
 
   function setEndOfContenteditable(contentEditableElement) {
     let range, selection;
@@ -44,11 +52,21 @@ const Comment = ({
 
   const onEdit = async () => {
     if (isContentEditable) {
+      if (descriptionDiv.current.textContent.length === 0) {
+        descriptionDiv.current.focus();
+        return;
+      }
+      if (descriptionDiv.current.textContent.length > 255) {
+        alert('댓글을 255자 이하로 작성해 주세요!');
+        descriptionDiv.current.focus();
+        return;
+      }
       await editComment(
         comment.no,
         parentCommentID,
         descriptionDiv.current.textContent,
-        post.no
+        post.no,
+        Number(comment.writerHiddenFlag)
       ).then((response) => {
         if (response.data.success) dispatch(getPost());
         else alert(response.data.msg);
@@ -84,23 +102,45 @@ const Comment = ({
   return (
     <>
       <div className={styles.comment}>
-        <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
+        <div className={styles.profile}>
           <img
             src={
               comment.profileImageUrl ??
               'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
             }
             alt="profile"
+            onClick={() => {
+              setOptionComment(comment.no);
+              setIsComment(true);
+              setOpenOptions(!openOptions);
+            }}
           />
-        </Link>
+          {openOptions && comment.no === optionComment && (
+            <Option
+              setOpenOptions={setOpenOptions}
+              comment={comment}
+              sendMessage={sendMessage}
+              routePath={`/profile/${comment.studentId}`}
+              setOptionComment={setOptionComment}
+              setIsComment={setIsComment}
+            />
+          )}
+        </div>
         <div>
           <div>
-            <Link href={{ pathname: `profile/${comment.studentId}` }} passHref>
-              <p>{comment.studentName}</p>
-            </Link>
+            <p
+              onClick={() => {
+                setOptionComment(comment.no);
+                setIsComment(true);
+                setOpenOptions(!openOptions);
+              }}
+            >
+              {comment.studentName}
+            </p>
+
             {Boolean(post.isWriter) && <p>작성자</p>}
             {Boolean(comment.isWriter) && (
-              <div>
+              <div className={styles.button}>
                 <button onClick={onEdit} className={styles['action-button']}>
                   {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
                 </button>
@@ -114,6 +154,7 @@ const Comment = ({
             ref={descriptionDiv}
             contentEditable={isContentEditable}
             suppressContentEditableWarning={true}
+            className={styles.commentText}
           >
             {comment.description}
           </div>
@@ -125,11 +166,6 @@ const Comment = ({
                 onClick={() => setParentCommentID(comment.no)}
               >
                 답글 쓰기
-              </p>
-            )}
-            {user && user.id !== comment.studentId && (
-              <p className={styles.reply} onClick={() => sendMessage(comment)}>
-                쪽지
               </p>
             )}
             <button

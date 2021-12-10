@@ -26,7 +26,10 @@ const DetailMessageListContainer = ({
       <div className={styles.header}>
         {router?.query.id && (
           <div className={styles.contain}>
-            <h3>{recipient}</h3>
+            <h3>
+              {recipient}
+              {detailMessage[0].myHiddenFlag === 0 ? '(익명)' : ''}
+            </h3>
             <div className={styles.option}>
               {isMounted && <ReactTooltip effect="solid" />}
               <IoPaperPlaneOutline

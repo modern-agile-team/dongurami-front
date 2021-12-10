@@ -18,6 +18,7 @@ const MessageList = () => {
   const [groupNo, setGroupNo] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isHidden, setIsHidden] = useState(0);
 
   const user = useSelector((state) => state.user);
   const router = useRouter();
@@ -50,6 +51,7 @@ const MessageList = () => {
 
         setGroupNo(response.data.letters[0].groupNo);
         setRecipient(response.data.letters[0].name);
+        setIsHidden(response.data.letters[0].hiddenFlag);
         setLoading(false);
       });
     }
@@ -83,6 +85,7 @@ const MessageList = () => {
     if (router?.query.id && user?.id) inquiryMessage(router.query.id);
     else getLetterDatas();
   }, [user, router]);
+  console.log(detailMessage);
   return (
     <div className={styles.container}>
       <div className={styles.entireMessage}>
@@ -104,6 +107,7 @@ const MessageList = () => {
             setOpenModal={setOpenModal}
             onDelete={onDelete}
             messages={messages}
+            isHidden={isHidden}
           />
         )}
       </div>
