@@ -45,7 +45,7 @@ function AddComment({ parentCommentID, scroll }) {
         </div>
       </div>
       <form onSubmit={onSubmit}>
-        <input type="text" placeholder="댓글을 남겨보세요" value={description} onChange={onChange} />
+        <input type="text" placeholder="댓글을 남겨보세요" value={description} onChange={onChange} autoFocus={scroll} />
         <button type="submit">등록</button>
       </form>
     </div>
