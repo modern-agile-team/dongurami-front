@@ -10,7 +10,6 @@ const Option = ({
   routePath,
   comment,
   sendMessage,
-  setOptionComment,
   setIsComment
 }) => {
   const ref = useRef(null);
@@ -38,6 +37,7 @@ const Option = ({
           <li
             className={styles.send}
             onClick={() => {
+              setOpenOptions(false);
               if (setOpenMessage) setOpenMessage(true);
               else if (sendMessage) {
                 sendMessage(comment);
