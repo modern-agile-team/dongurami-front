@@ -27,6 +27,7 @@ function Write({ category }) {
       return;
     }
     await postPost(category, { title, description, hiddenFlag: Boolean(isAnon) }, router.query.id);
+    if (category === 'clubActivity') alert('글 작성 완료!');
     if (['clubNotice', 'clubActivity'].includes(category)) router.back();
     else {
       router.push(`/${category}`);

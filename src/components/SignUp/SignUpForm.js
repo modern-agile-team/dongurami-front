@@ -129,6 +129,8 @@ function SignUpForm() {
       setCheckSignUp('학번은 9자이어야 합니다.');
     } else if (names === '') {
       setCheckSignUp('이름을 입력해주세요.');
+    } else if (names.length > 5) {
+      setCheckSignUp('이름은 5글자 이하만 가능합니다.');
     } else if (names.includes(' ')) {
       setCheckSignUp('이름엔 공백이 없어야 합니다.');
     } else if (major === '' || major === '학과 선택') {
