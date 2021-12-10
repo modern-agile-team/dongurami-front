@@ -118,7 +118,7 @@ const Comment = ({
             </WithProfileLink>
             {Boolean(post.isWriter) && <p>작성자</p>}
             {Boolean(comment.isWriter) && (
-              <div>
+              <div className={styles.button}>
                 <button onClick={onEdit} className={styles['action-button']}>
                   {isContentEditable ? <AiOutlineCheck /> : <AiOutlineEdit />}
                 </button>

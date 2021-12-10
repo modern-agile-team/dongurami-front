@@ -18,11 +18,13 @@ const MessageList = () => {
   const [groupNo, setGroupNo] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isHidden, setIsHidden] = useState(0);
 
   const user = useSelector((state) => state.user);
   const router = useRouter();
 
   let isRecipientId = '';
+  let isWriterHidden = '';
 
   const getLetterDatas = async () => {
     if (user) {
@@ -38,10 +40,17 @@ const MessageList = () => {
     if (user) {
       await getDetailMessages(user.id, letterNo).then((response) => {
         setDetailMessage(response.data.letters);
+        console.log(response.data.letters);
+
         isRecipientId = response.data.letters.find(
           (el) => el.senderId !== user.id
         );
 
+        isWriterHidden = response.data.letters.find(
+          (el) => el.senderId === '익명' && el.name !== '익명'
+        );
+
+        if (isWriterHidden) console.log('있습니다');
         if (isRecipientId) {
           setRecipientId(isRecipientId.senderId);
         } else {
@@ -50,6 +59,7 @@ const MessageList = () => {
 
         setGroupNo(response.data.letters[0].groupNo);
         setRecipient(response.data.letters[0].name);
+        setIsHidden(response.data.letters[0].hiddenFlag);
         setLoading(false);
       });
     }
@@ -83,6 +93,7 @@ const MessageList = () => {
     if (router?.query.id && user?.id) inquiryMessage(router.query.id);
     else getLetterDatas();
   }, [user, router]);
+
   return (
     <div className={styles.container}>
       <div className={styles.entireMessage}>
@@ -104,6 +115,7 @@ const MessageList = () => {
             setOpenModal={setOpenModal}
             onDelete={onDelete}
             messages={messages}
+            isHidden={isHidden}
           />
         )}
       </div>
