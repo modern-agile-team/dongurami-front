@@ -9,6 +9,7 @@ import moment from 'moment';
 import Link from 'next/link';
 import { AiFillHeart } from 'react-icons/ai';
 import Option from '../letter/Option';
+import { FaHeart } from 'react-icons/fa';
 
 // https://newbedev.com/how-to-move-cursor-to-end-of-contenteditable-entity
 function setEndOfContenteditable(contentEditableElement) {
@@ -144,7 +145,6 @@ function Comment({
       <div>
         <div>
           <p className={styles.profileImage}>{comment.studentName}</p>
-
           {post.studentId === comment.studentId && <p>작성자</p>}
           {Boolean(comment.isWriter) && (
             <div>
@@ -183,7 +183,7 @@ function Comment({
             }`}
             onClick={onClickLike}
           >
-            <AiFillHeart />
+            <FaHeart />
             <span>{comment.emotionCount}</span>
           </button>
         </div>

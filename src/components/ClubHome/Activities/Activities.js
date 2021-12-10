@@ -38,21 +38,29 @@ const Activities = () => {
   }, [router, dispatch]);
 
   const onClick = (id) => {
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query,
-        pid: id
-      }
-    }, undefined, { scroll: false });
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          pid: id
+        }
+      },
+      undefined,
+      { scroll: false }
+    );
   };
   const closeModal = () => {
-    router.push({
-      pathname: router.pathname,
-      query: {
-        id: router.query.id
-      }
-    }, undefined, { scroll: false });
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          id: router.query.id
+        }
+      },
+      undefined,
+      { scroll: false }
+    );
   };
 
   const isModalOpened = Boolean(selectedID);

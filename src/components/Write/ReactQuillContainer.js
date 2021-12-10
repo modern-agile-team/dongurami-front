@@ -1,15 +1,16 @@
 import { getS3PresignedURL, uploadImage } from 'apis/image';
 import dynamic from 'next/dynamic';
+import { useCallback } from 'react';
 import { useMemo, useRef } from 'react';
 
 const ReactQuill = dynamic(
   async () => {
     const { default: RQ } = await import('react-quill');
-    return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
+    return function comp({ forwardedRef, ...props }) {
+      return <RQ ref={forwardedRef} {...props} />;
+    };
   },
-  {
-    ssr: false
-  }
+  { ssr: false }
 );
 
 const formats = [
@@ -29,21 +30,21 @@ const formats = [
   'video'
 ];
 
-function ReactQuillContainer({ description, setDescription }) {
+function ReactQuillContainer({ description, setDescription, setIsImageUploading }) {
   const quillRef = useRef();
 
-  const imageHandler = () => {
+  const imageHandler = useCallback(() => {
     const input = document.createElement('input');
 
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
-    input.style.display = 'none';
 
     document.body.appendChild(input);
 
     input.click();
 
     input.onchange = async () => {
+      setIsImageUploading(true);
       const [file] = input.files;
       const { preSignedPutUrl: presignedURL, readObjectUrl: imageURL } = (
         await getS3PresignedURL(file.name)
@@ -54,9 +55,11 @@ function ReactQuillContainer({ description, setDescription }) {
       quillRef.current.getEditor().insertEmbed(range.index, 'image', imageURL);
       quillRef.current.getEditor().setSelection(range.index + 1);
 
-      document.body.removeChild(input);
+      document.body.querySelector(':scope > input').remove()
+      
+      setIsImageUploading(false);
     };
-  };
+  }, [setIsImageUploading]);
 
   const modules = useMemo(
     () => ({
@@ -76,7 +79,7 @@ function ReactQuillContainer({ description, setDescription }) {
         handlers: { image: imageHandler }
       }
     }),
-    []
+    [imageHandler]
   );
 
   return (
