@@ -1,21 +1,35 @@
 .comment {
   display: flex;
   img {
-    width: 50px;
-    height: 50px;
+    margin: 4px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    margin: 0 10px;
     cursor: pointer;
     object-fit: cover;
+    @media screen and (max-width: 480px) {
+      margin: 4px;
+      width: 45px;
+      height: 45px;
+    }
   }
   & > div {
     flex: 1;
     margin: 0 0.5rem;
+    font-size: 85%;
+    & > div {
+      @media screen and (max-width: 480px) {
+        font-size: 3.5vw;
+        p {
+          font-size: 1vw;
+        }
+      }
+    }
     & > div:nth-of-type(1) {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
       & > p {
         margin: 0;
       }
@@ -29,9 +43,12 @@
     & > div:nth-of-type(3) {
       display: flex;
       gap: 1rem;
+      @media screen and (max-width: 480px) {
+        gap: 8px;
+      }
       p {
-        margin: .5rem 0;
-        font-size: small;
+        margin: 0.5rem 0;
+        font-size: 80%;
       }
       .reply {
         cursor: pointer;
@@ -57,11 +74,11 @@
 }
 
 .likeButton {
-  padding: 0 .25rem;
+  padding: 1px 6px;
   margin: auto 0;
   display: flex;
-  border: 1px solid gray;
-  border-radius: .25rem;
+  border: 0.5px solid lightgray;
+  border-radius: 3px;
   background-color: white;
   color: gray;
   cursor: pointer;
@@ -72,12 +89,19 @@
   & > svg {
     display: block;
     margin: auto;
+    margin-right: 4px;
+    width: 11px;
+    height: 11px;
   }
 }
 
 .like {
-  color: white;
-  background-color: indianred;
+  color: black;
+  background-color: rgba(211, 47, 47, 0.076);
+  border-color: rgba(211, 47, 47, 0.178);
+  svg {
+    color: rgb(211, 47, 47);
+  }
 }
 
 .commentText {
