@@ -14,7 +14,8 @@ function SendMessage({
   inquiryMessage,
   otherId,
   letterNo,
-  user
+  user,
+  isActivities
 }) {
   const [description, setDescription] = useState('');
   const [isCheck, setIsCheck] = useState(false);
@@ -74,9 +75,10 @@ function SendMessage({
     if (isCheck) writerHiddenFlag = 1;
     if (!detailMessage && !letter) {
       if (!Number(post?.studentId) && !clubLeader) recipientId = '';
-      else if (!post?.length && clubLeader) recipientId = clubLeader[0].id;
+      else if (!post?.length && clubLeader && !isActivities)
+        recipientId = clubLeader[0].id;
       else recipientId = post?.studentId;
-      boardNo = post?.length ? post.no : '';
+      boardNo = post ? post.no : '';
       boardFlag = 1;
 
       await sendLetter(
