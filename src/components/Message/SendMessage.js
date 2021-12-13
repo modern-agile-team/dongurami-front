@@ -14,7 +14,8 @@ function SendMessage({
   inquiryMessage,
   otherId,
   letterNo,
-  user
+  user,
+  isActivities
 }) {
   const [description, setDescription] = useState('');
   const [isCheck, setIsCheck] = useState(false);
@@ -52,6 +53,7 @@ function SendMessage({
       clubLeaderIsWriter === 1 ||
       letter?.isWriter === 1
     ) {
+      if (isActivities && !post?.isWriter && clubLeaderIsWriter === 1) return 1;
       alert('자신에게는 보낼 수 없습니다');
       return 0;
     }
@@ -74,11 +76,12 @@ function SendMessage({
     if (isCheck) writerHiddenFlag = 1;
     if (!detailMessage && !letter) {
       if (!Number(post?.studentId) && !clubLeader) recipientId = '';
-      else if (!post?.length && clubLeader) recipientId = clubLeader[0].id;
+      else if (!post?.length && clubLeader && !isActivities)
+        recipientId = clubLeader[0].id;
       else recipientId = post?.studentId;
-      boardNo = post?.length ? post.no : '';
+      boardNo = post ? post.no : '';
       boardFlag = 1;
-      console.log('작성자');
+
       await sendLetter(
         recipientId,
         description,
@@ -89,7 +92,6 @@ function SendMessage({
       ).then((response) => {
         if (response.data.success) {
           alert('쪽지가 전송되었습니다');
-          console.log(response.data.success);
           onClose();
           setDescription('');
         }
@@ -99,7 +101,6 @@ function SendMessage({
       else recipientId = otherId;
       boardFlag = detailMessage.boardFlag;
       boardNo = detailMessage.boardNo;
-      console.log('쪽지함');
       await replyLetter(
         recipientId,
         description,
@@ -120,7 +121,6 @@ function SendMessage({
       commentNo = letter.no;
       boardNo = post.no;
       boardFlag = 0;
-      console.log('댓글');
       await sendLetter(
         recipientId,
         description,
