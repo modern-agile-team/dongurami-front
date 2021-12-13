@@ -25,6 +25,7 @@
       font-size: min(1rem, 4vmin);
       & > p {
         margin: 0;
+        cursor: pointer;
       }
       & > p:nth-of-type(2) {
         color: #90e2d6;

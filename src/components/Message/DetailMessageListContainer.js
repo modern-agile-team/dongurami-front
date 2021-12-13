@@ -28,7 +28,7 @@ const DetailMessageListContainer = ({
           <div className={styles.contain}>
             <h3>
               {recipient}
-              {detailMessage[0]?.myHiddenFlag === 0 ? '(익명)' : ''}
+              {detailMessage[0]?.myHiddenFlag === 1 ? '(익명)' : ''}
             </h3>
             <div className={styles.option}>
               {isMounted && <ReactTooltip effect="solid" />}

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Modal from './Modal';
 import Promotion from './Promotion';
 import SendMessage from 'components/Message/SendMessage';
+import { Spinner } from 'components/SignUp/Spinner';
 
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
 
@@ -19,15 +20,15 @@ const PromotionContainer = () => {
   const [isSearch, setIssearch] = useState(false);
   const [search, setSearch] = useState(false);
   const [letter, setLetter] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  let isLoading = false;
+  let scrollLoading = false;
   let itemNo = 0;
-  let scrollPosition = 0;
 
   const getDatas = async () => {
     try {
-      isLoading = true;
+      scrollLoading = true;
       if (searchItem !== '전체' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
@@ -75,21 +76,18 @@ const PromotionContainer = () => {
     } catch (err) {
       alert(err.response.data.msg);
     }
-    isLoading = false;
+    scrollLoading = false;
   };
 
   const firstGetDatas = async () => {
     itemNo = 0;
     try {
-      isLoading = true;
+      setIsLoading(true);
+      scrollLoading = true;
       if (searchItem !== '전체' && searchItem) {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
           if (result.length) itemNo = result[result.length - 1].no;
-          else {
-            alert('게시글이 존재하지 않습니다');
-            router.reload();
-          }
 
           setBoardData(result);
         });
@@ -98,10 +96,7 @@ const PromotionContainer = () => {
           const result = response.data.boards;
 
           if (result.length) itemNo = result[result.length - 1].no;
-          else {
-            alert('게시글이 존재하지 않습니다');
-            router.reload();
-          }
+
           setBoardData(result);
         });
       } else if (
@@ -119,7 +114,8 @@ const PromotionContainer = () => {
     } catch (err) {
       alert(err.response.data.msg);
     }
-    isLoading = false;
+    setIsLoading(false);
+    scrollLoading = false;
   };
 
   const onSearch = () => {
@@ -144,7 +140,10 @@ const PromotionContainer = () => {
     const scrollHeight = documentElement.scrollHeight;
     const scrollTop = documentElement.scrollTop;
     const clientHeight = documentElement.clientHeight;
-    if (scrollTop + clientHeight + 200 >= scrollHeight && isLoading === false) {
+    if (
+      scrollTop + clientHeight + 200 >= scrollHeight &&
+      scrollLoading === false
+    ) {
       getDatas();
     }
   };
@@ -180,25 +179,39 @@ const PromotionContainer = () => {
       />
 
       <div className={styles.section}>
-        <div className={styles.sectionwrap}>
-          {boardData.map((el) => {
-            return (
-              <Promotion
-                pId={el.no}
-                key={el.no}
-                date={el.inDate}
-                clubName={el.clubName}
-                name={el.studentName}
-                img={el.url}
-                clubNo={el.clubNo}
-                category={el.category}
-                title={el.title}
-                emotionCount={el.emotionCount}
-                setPostId={setPostId}
-              />
-            );
-          })}
-        </div>
+        {isLoading ? (
+          <div className={styles.loadingContainer}>
+            <Spinner />
+          </div>
+        ) : (
+          <>
+            {boardData.length ? (
+              <div className={styles.sectionwrap}>
+                {boardData.map((el) => {
+                  return (
+                    <Promotion
+                      pId={el.no}
+                      key={el.no}
+                      date={el.inDate}
+                      clubName={el.clubName}
+                      name={el.studentName}
+                      img={el.url}
+                      clubNo={el.clubNo}
+                      category={el.category}
+                      title={el.title}
+                      emotionCount={el.emotionCount}
+                      setPostId={setPostId}
+                    />
+                  );
+                })}
+              </div>
+            ) : (
+              <div className={styles.emptyBoard}>
+                <p>게시글이 존재하지 않습니다</p>
+              </div>
+            )}
+          </>
+        )}
       </div>
       {openModal && (
         <Modal

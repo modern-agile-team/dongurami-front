@@ -1,13 +1,11 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
-import Post from './Post';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { MdClose } from 'react-icons/md';
 import { useRouter } from 'next/router';
+import Post from './Post';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
@@ -45,32 +43,8 @@ const Modal = ({ postId, sendMessage, setOpenMessage }) => {
       <button className={styles.closeBtn}>
         <MdClose />
       </button>
-      <div className={styles.image} onClick={(e) => e.stopPropagation()}>
-        {images.length && (
-          <Swiper
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            slidesOffsetBefore={0}
-          >
-            {images.map((image, index) => {
-              return (
-                <div key={index} className={styles.banner}>
-                  <SwiperSlide className={styles.slider}>
-                    <img
-                      src={image.imgPath}
-                      alt="이미지"
-                      className="detail-image"
-                    />
-                  </SwiperSlide>
-                </div>
-              );
-            })}
-          </Swiper>
-        )}
-      </div>
-
       <Post
+        images={images}
         postId={postId}
         post={post}
         sendMessage={sendMessage}
