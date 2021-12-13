@@ -88,11 +88,6 @@ const PromotionContainer = () => {
         await getData(searchItem, itemNo).then((response) => {
           const result = response.data.boards;
           if (result.length) itemNo = result[result.length - 1].no;
-          /* else {
-            alert('게시글이 존재하지 않습니다');
-            router.reload();
-          }
-          */
 
           setBoardData(result);
         });
@@ -103,11 +98,7 @@ const PromotionContainer = () => {
           if (result.length) itemNo = result[result.length - 1].no;
 
           setBoardData(result);
-        }); /* else {
-          alert('게시글이 존재하지 않습니다');
-          router.reload();
-        }
-        */
+        });
       } else if (
         searchItem === '전체' ||
         (search === false && searchItem === '')
