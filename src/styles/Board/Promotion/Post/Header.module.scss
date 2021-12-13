@@ -1,0 +1,83 @@
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .info {
+    text-align: right;
+    .hit {
+      vertical-align: text-bottom;
+      color: rgb(71, 71, 71);
+    }
+  }
+  .buttons {
+    button {
+      background-color: #f2f2f2;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      cursor: pointer;
+      margin-left: 5px;
+      margin-bottom: 1rem;
+      border: 0.5px solid rgb(231, 231, 231);
+    }
+  }
+}
+.header {
+  border-bottom: 1px solid #a7a7a7;
+}
+.infoWrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -2%;
+  .club {
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: #c2f2dc93;
+    padding: 10px;
+    padding-left: 16px;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    span {
+      font-weight: 800;
+      margin-left: 5px;
+    }
+    svg {
+      color: white;
+    }
+  }
+  .boardInfo {
+    .profile {
+      position: relative;
+      display: flex;
+      align-items: center;
+      img {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+      span {
+        cursor: pointer;
+      }
+    }
+
+    text-align: right;
+    margin-top: 3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .infoWrap {
+    .club {
+      span {
+        width: 100%;
+        font-size: 12px;
+      }
+    }
+  }
+}
