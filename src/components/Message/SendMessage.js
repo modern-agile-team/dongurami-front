@@ -78,7 +78,7 @@ function SendMessage({
       else recipientId = post?.studentId;
       boardNo = post?.length ? post.no : '';
       boardFlag = 1;
-      console.log('작성자');
+
       await sendLetter(
         recipientId,
         description,
@@ -89,7 +89,6 @@ function SendMessage({
       ).then((response) => {
         if (response.data.success) {
           alert('쪽지가 전송되었습니다');
-          console.log(response.data.success);
           onClose();
           setDescription('');
         }
@@ -99,7 +98,6 @@ function SendMessage({
       else recipientId = otherId;
       boardFlag = detailMessage.boardFlag;
       boardNo = detailMessage.boardNo;
-      console.log('쪽지함');
       await replyLetter(
         recipientId,
         description,
@@ -120,7 +118,6 @@ function SendMessage({
       commentNo = letter.no;
       boardNo = post.no;
       boardFlag = 0;
-      console.log('댓글');
       await sendLetter(
         recipientId,
         description,
