@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getBoardPosts } from 'redux/slices/board';
+import SendMessage from 'components/Message/SendMessage';
 
 const Activities = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const Activities = () => {
   const posts = useSelector((state) => state.board.posts);
   const user = useSelector((state) => state.user);
   const clubName = useSelector((state) => state.clubhome.info?.result[0].name);
+  const [messageOpen, setMessageOpen] = useState(false);
 
   const clubNum = Number(router.query.id);
   const selectedID = Number(router.query.pid);
@@ -94,8 +96,15 @@ const Activities = () => {
       </div>
       {isModalOpened && (
         <Modal show={isModalOpened} onClose={closeModal}>
-          <ActivityPost pid={selectedID} closeModal={closeModal} />
+          <ActivityPost
+            pid={selectedID}
+            closeModal={closeModal}
+            setOpenMessage={setMessageOpen}
+          />
         </Modal>
+      )}
+      {messageOpen && (
+        <SendMessage show={messageOpen} onClose={() => setMessageOpen(false)} />
       )}
     </div>
   );

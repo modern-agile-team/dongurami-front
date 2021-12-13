@@ -38,6 +38,7 @@ const MessageList = () => {
     setLoading(true);
     if (user) {
       await getDetailMessages(user.id, letterNo).then((response) => {
+        console.log(response);
         setDetailMessage(response.data.letters);
         isRecipientId = response.data.letters.find(
           (el) => el.senderId !== user.id
@@ -48,10 +49,11 @@ const MessageList = () => {
         } else {
           setRecipientId(response.data.letters[0].recipientId);
         }
+        if (response.data.letters[0].otherHiddenFlag) setRecipient('익명');
+        else setRecipient(response.data.letters[0].name);
 
         setGroupNo(response.data.letters[0].groupNo);
-        setRecipient(response.data.letters[0].name);
-        setIsHidden(response.data.letters[0].hiddenFlag);
+
         setLoading(false);
       });
     }
@@ -107,7 +109,6 @@ const MessageList = () => {
             setOpenModal={setOpenModal}
             onDelete={onDelete}
             messages={messages}
-            isHidden={isHidden}
           />
         )}
       </div>

@@ -31,7 +31,10 @@ const MobileDetailMessage = ({
             {router?.query.id && (
               <div className={styles.contain}>
                 <ImArrowLeft size={20} onClick={onClick} />
-                <h3>{recipient}</h3>
+                <h3>
+                  {recipient}
+                  {detailMessage[0]?.myHiddenFlag === 1 ? '(익명)' : ''}
+                </h3>
                 <div className={styles.option}>
                   <IoPaperPlaneOutline
                     size={20}

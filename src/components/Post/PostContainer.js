@@ -11,7 +11,7 @@ function PostContainer({ category }) {
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
   const [openModal, setOpenModal] = useState(false);
-  const [letter, setLetter] = useState([]);
+  const [letter, setLetter] = useState(false);
 
   const sendLetter = (comment) => {
     setLetter(comment);
