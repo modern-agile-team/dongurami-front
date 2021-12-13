@@ -313,7 +313,7 @@
 
 @media screen and (max-width: 480px) {
   .container {
-    height: 100%;
+    min-height: 80vh;
     .entireMessage {
       display: none;
     }
@@ -324,7 +324,7 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      height: 100vh;
+      height: 100%;
       .emptylettercontainer {
         width: 100%;
         height: 100vh;
