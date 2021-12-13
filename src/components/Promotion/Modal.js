@@ -5,7 +5,6 @@ import { getPost } from 'redux/slices/post';
 import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { MdClose } from 'react-icons/md';
 import { useRouter } from 'next/router';
-import Poster from './Post/Poster';
 import Post from './Post';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
@@ -44,8 +43,8 @@ const Modal = ({ postId, sendMessage, setOpenMessage }) => {
       <button className={styles.closeBtn}>
         <MdClose />
       </button>
-      <Poster images={images} />
       <Post
+        images={images}
         postId={postId}
         post={post}
         sendMessage={sendMessage}

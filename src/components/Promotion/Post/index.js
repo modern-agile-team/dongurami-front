@@ -8,10 +8,20 @@ import { useSelector, useDispatch } from 'react-redux';
 import getToken from 'utils/getToken';
 import Header from './Header';
 import Description from './Description';
+import Poster from './Poster';
 
-const Post = ({ postId, getData, post, sendMessage, setOpenMessage }) => {
+const Post = ({
+  postId,
+  getData,
+  post,
+  sendMessage,
+  setOpenMessage,
+  images
+}) => {
   const [openOptions, setOpenOptions] = useState(false);
   const [isComment, setIsComment] = useState(false);
+  const [mediaQuery, setMediaQuery] = useState(null);
+
   const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
     post;
   const category = 'promotion';
@@ -23,6 +33,14 @@ const Post = ({ postId, getData, post, sendMessage, setOpenMessage }) => {
   useEffect(() => {
     dispatch(setCategory(category));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (window.matchMedia('(max-width: 1024px)').matches) {
+      setMediaQuery('mobile');
+    } else {
+      setMediaQuery('deskTop');
+    }
+  }, []);
 
   const onClick = () => {
     if (!getToken()) alert('로그인 후 이용해주세요.');
@@ -50,7 +68,9 @@ const Post = ({ postId, getData, post, sendMessage, setOpenMessage }) => {
 
   return (
     <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+      {mediaQuery === 'deskTop' && <Poster images={images} />}
       <div className={styles.wrap}>
+        {mediaQuery === 'mobile' && <Poster images={images} />}
         <Header
           title={title}
           user={user}
