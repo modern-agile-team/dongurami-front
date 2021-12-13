@@ -3,8 +3,6 @@
   justify-content: center;
   align-items: center;
   width: 40%;
-  margin-left: 3%;
-
   & > div:nth-of-type(1) {
     display: flex;
     justify-content: center;
@@ -37,13 +35,15 @@
   }
   img {
     border-radius: 16px;
-
     width: 60%;
   }
 }
 @media (max-width: 1024px) {
   .image {
-    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
     & > div:nth-of-type(1) {
       & > div:nth-of-type(1) {
         position: absolute;
@@ -59,26 +59,19 @@
       }
     }
   }
-
   .slider {
     margin: 0;
     margin-top: 1em;
     img {
-      width: 80%;
+      width: 50%;
     }
   }
 }
 
-@media (max-width: 768px) and (max-height: 500px) {
-  .image {
-    width: 100%;
-  }
-
+@media (max-width: 768px) {
   .slider {
+    width: 100%;
     margin: 0;
     margin-top: 1em;
-    img {
-      display: none;
-    }
   }
 }

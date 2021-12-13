@@ -31,13 +31,14 @@
   .background {
     flex-direction: column;
     justify-content: flex-start;
-    .closeBtn {
-      right: 2vh;
-    }
+  }
+  .closeBtn {
+    top: 10px;
+    right: 10px;
   }
 }
 
-@media (max-width: 768px) and (max-height: 500px) {
+@media (max-width: 768px) {
   .background {
     flex-direction: column;
     justify-content: flex-start;

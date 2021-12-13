@@ -72,7 +72,11 @@
 }
 
 @media screen and (max-width: 480px) {
+  .title {
+    padding: 0 1em;
+  }
   .infoWrap {
+    padding: 0 1em;
     .club {
       span {
         width: 100%;
