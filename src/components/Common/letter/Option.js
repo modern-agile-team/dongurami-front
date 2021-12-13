@@ -37,11 +37,12 @@ const Option = ({
           <li
             className={styles.send}
             onClick={() => {
-              setOpenOptions(false);
-              if (setOpenMessage) setOpenMessage(true);
+              if (setOpenMessage && !sendMessage) setOpenMessage(true);
               else if (sendMessage) {
+                console.log('댓글 값');
                 sendMessage(comment);
               }
+              setOpenOptions(false);
             }}
           >
             <FiMail />

@@ -14,7 +14,8 @@ function SendMessage({
   inquiryMessage,
   otherId,
   letterNo,
-  user
+  user,
+  isActivities
 }) {
   const [description, setDescription] = useState('');
   const [isCheck, setIsCheck] = useState(false);
@@ -52,6 +53,7 @@ function SendMessage({
       clubLeaderIsWriter === 1 ||
       letter?.isWriter === 1
     ) {
+      if (isActivities && !post?.isWriter && clubLeaderIsWriter === 1) return 1;
       alert('자신에게는 보낼 수 없습니다');
       return 0;
     }
@@ -65,17 +67,21 @@ function SendMessage({
     let commentNo = '';
     let boardNo = 0;
 
+    if (letter) console.log(letter);
+
     if (!submitCheck()) {
       return;
     }
 
     if (isCheck) writerHiddenFlag = 1;
-    if (!detailMessage && (!letter || !letter?.length)) {
+    if (!detailMessage && !letter) {
       if (!Number(post?.studentId) && !clubLeader) recipientId = '';
-      else if (!post?.length && clubLeader) recipientId = clubLeader[0].id;
+      else if (!post?.length && clubLeader && !isActivities)
+        recipientId = clubLeader[0].id;
       else recipientId = post?.studentId;
-      boardNo = post?.length ? post.no : '';
+      boardNo = post ? post.no : '';
       boardFlag = 1;
+
       await sendLetter(
         recipientId,
         description,
@@ -109,7 +115,7 @@ function SendMessage({
           setDescription('');
         }
       });
-    } else if (letter.length) {
+    } else if (letter) {
       if (!Number(letter.studentId)) recipientId = '';
       else recipientId = letter.studentId;
       commentNo = letter.no;
