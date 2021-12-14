@@ -54,6 +54,8 @@ function SendMessage({
       letter?.isWriter === 1
     ) {
       if (isActivities && !post?.isWriter && clubLeaderIsWriter === 1) return 1;
+      else if (letter && letter?.isWriter === 0 && post?.isWriter === 1)
+        return 1;
       alert('자신에게는 보낼 수 없습니다');
       return 0;
     }
@@ -67,8 +69,6 @@ function SendMessage({
     let commentNo = '';
     let boardNo = 0;
 
-    if (letter) console.log(letter);
-
     if (!submitCheck()) {
       return;
     }
@@ -81,6 +81,7 @@ function SendMessage({
       else recipientId = post?.studentId;
       boardNo = post ? post.no : '';
       boardFlag = 1;
+      console.log('작성자');
 
       await sendLetter(
         recipientId,
@@ -101,6 +102,7 @@ function SendMessage({
       else recipientId = otherId;
       boardFlag = detailMessage.boardFlag;
       boardNo = detailMessage.boardNo;
+      console.log('쪽지함');
       await replyLetter(
         recipientId,
         description,
@@ -121,6 +123,7 @@ function SendMessage({
       commentNo = letter.no;
       boardNo = post.no;
       boardFlag = 0;
+      console.log('댓글');
       await sendLetter(
         recipientId,
         description,
