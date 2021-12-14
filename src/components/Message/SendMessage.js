@@ -54,6 +54,8 @@ function SendMessage({
       letter?.isWriter === 1
     ) {
       if (isActivities && !post?.isWriter && clubLeaderIsWriter === 1) return 1;
+      else if (letter && letter?.isWriter === 0 && post?.isWriter === 1)
+        return 1;
       alert('자신에게는 보낼 수 없습니다');
       return 0;
     }
@@ -66,8 +68,6 @@ function SendMessage({
     let recipientId = '';
     let commentNo = '';
     let boardNo = 0;
-
-    if (letter) console.log(letter);
 
     if (!submitCheck()) {
       return;
