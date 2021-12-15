@@ -48,7 +48,7 @@ function AddComment({ parentCommentID, scroll }) {
     )
       setIsClubNotice(true);
   }, [scroll]);
-  console.log();
+
   return (
     <div ref={ref} className={styles.container}>
       <div className={styles.topBar}>
