@@ -1,4 +1,4 @@
-import MessageList from 'components/Message/MessageList';
+import MessageList from 'components/User/Message/MessageList';
 import Head from 'next/head';
 
 function message() {

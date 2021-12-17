@@ -1,4 +1,4 @@
-import Frame from 'components/ClubHome/common/frame';
+import Frame from 'components/Club/ClubHome/common/frame';
 import Head from 'next/head';
 
 const ClubHome = () => {

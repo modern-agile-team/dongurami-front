@@ -1,4 +1,4 @@
-import FindPW from '../components/Find/FindPW';
+import FindPW from 'components/User/Find/FindPW';
 import Head from 'next/head';
 
 export const findPW = () => {

@@ -1,4 +1,4 @@
-import Manager from 'components/ClubHome/Manager';
+import Manager from 'components/Club/ClubHome/Manager';
 import Head from 'next/head';
 export const manager = () => {
   return (

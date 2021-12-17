@@ -1,4 +1,4 @@
-import ChangePassword from '../components/ChangePassword/ChagePassWord';
+import ChangePassword from 'components/User/ChangePassword/ChagePassWord';
 import Head from 'next/head';
 
 export default function test() {
