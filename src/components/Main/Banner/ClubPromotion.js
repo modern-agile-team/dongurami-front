@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../styles/Main/ClubPromotion.module.scss';
+import styles from 'styles/Main/ClubPromotion.module.scss';
 import Link from 'next/link';
 import { Fade } from 'react-awesome-reveal';
 
