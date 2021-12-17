@@ -1,4 +1,4 @@
-import styles from '../../styles/Main/OurIntro.module.scss';
+import styles from '../../../styles/Main/OurIntro.module.scss';
 import React from 'react';
 import { Fade } from 'react-awesome-reveal';
 
