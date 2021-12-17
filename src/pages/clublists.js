@@ -1,4 +1,4 @@
-import ClubListContainer from '../components/ClubLists/ClubListContainer';
+import ClubListContainer from 'components/Club/ClubLists/ClubListContainer';
 import Head from 'next/head';
 
 function clublists() {

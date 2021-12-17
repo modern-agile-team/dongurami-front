@@ -1,4 +1,4 @@
-import WriteScraps from 'components/Profile/ScrapPosts/WriteScraps';
+import WriteScraps from 'components/User/Profile/ScrapPosts/WriteScraps';
 import Head from 'next/head';
 
 const writescraps = () => {

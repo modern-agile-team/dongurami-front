@@ -1,4 +1,4 @@
-import FindID from '../components/Find/FindID';
+import FindID from 'components/User/Find/FindID';
 import Head from 'next/head';
 
 export const findID = () => {

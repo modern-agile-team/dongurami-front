@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../../styles/Board/Promotion/PromotionContainer.module.scss';
+import styles from 'styles/Board/Promotion/PromotionContainer.module.scss';
 import TypeSearch from './TypeSearch';
 import { useRouter } from 'next/router';
 import Modal from './Modal';
 import Promotion from './Promotion';
-import SendMessage from 'components/Message/SendMessage';
-import { Spinner } from 'components/SignUp/Spinner';
+import SendMessage from 'components/User/Message/SendMessage';
+import { Spinner } from 'components/User/SignUp/Spinner';
 
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
 

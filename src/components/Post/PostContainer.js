@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Post from 'components/Post/Post';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
-import SendMessage from 'components/Message/SendMessage';
+import SendMessage from 'components/User/Message/SendMessage';
 
 function PostContainer({ category }) {
   const router = useRouter();
