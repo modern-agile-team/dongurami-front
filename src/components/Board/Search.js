@@ -1,4 +1,4 @@
-import styles from '../../styles/Board/Board/Search.module.scss';
+import styles from 'styles/Board/Board/Search.module.scss';
 import { BsSearch } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 import { useState } from 'react';

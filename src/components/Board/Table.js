@@ -1,7 +1,7 @@
 import moment from 'moment';
-import Link from "next/link";
-import { useRouter } from "next/router";
-import styles from "../../styles/Board/Board/Table.module.scss";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styles from 'styles/Board/Board/Table.module.scss';
 
 function NoticeTable({ posts, page, category }) {
   const router = useRouter();
@@ -21,18 +21,26 @@ function NoticeTable({ posts, page, category }) {
       </thead>
       <tbody>
         {postsByPage.map((post) => (
-          <Link key={post.no} href={{
-            pathname: (category === 'clubNotice') ?
-              `${router.pathname}/notice/${post.no}` : `${router.pathname}/${post.no}`,
-            query: router.query
-          }} passHref>
+          <Link
+            key={post.no}
+            href={{
+              pathname:
+                category === 'clubNotice'
+                  ? `${router.pathname}/notice/${post.no}`
+                  : `${router.pathname}/${post.no}`,
+              query: router.query
+            }}
+            passHref
+          >
             <tr key={post.no}>
               <td>{post.no}</td>
               <td>
                 <div className={styles.titleContainer}>
                   <div className={styles.title}>{post.title}</div>
                   &nbsp;
-                  <div className={styles.commentCount}>{`[${post.commentCount}]`}</div>
+                  <div
+                    className={styles.commentCount}
+                  >{`[${post.commentCount}]`}</div>
                 </div>
               </td>
               <td>{post.studentName}</td>
