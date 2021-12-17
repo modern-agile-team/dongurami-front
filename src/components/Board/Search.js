@@ -1,6 +1,6 @@
-import styles from "../../styles/Board/Board/Search.module.scss";
+import styles from '../../styles/Board/Board/Search.module.scss';
 import { BsSearch } from 'react-icons/bs';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
@@ -38,7 +38,9 @@ function NoticeSearch() {
       </select>
       <form onSubmit={onSubmit}>
         <input value={keyword} onChange={onKeywordChange} />
-        <button type="submit"><BsSearch color="black" /></button>
+        <button type="submit">
+          <BsSearch color="black" />
+        </button>
       </form>
     </div>
   );
