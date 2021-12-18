@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../styles/Main/ServiceLogo.module.scss';
+import styles from 'styles/Main/ServiceLogo.module.scss';
 import Reveal from 'react-awesome-reveal';
 import { keyframes } from '@emotion/react';
 
