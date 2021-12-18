@@ -1,9 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import ApplyHeader from './ApplyHeader';
-import styles from 'styles/Club/Home/Apply/Apply.module.scss';
-import ApplyQuestions from './ApplyQuestions';
-import Additional from './Additional';
-import ApplySubmit from './ApplySubmit';
 import { useRouter } from 'next/router';
 import {
   getApply,
@@ -13,6 +9,7 @@ import {
   postSubmit
 } from 'apis/clubhome';
 import { useSelector } from 'react-redux';
+import ApplyBody from './ApplyBody';
 
 const Apply = () => {
   const [userInfo, setUserInfo] = useState({
@@ -120,7 +117,6 @@ const Apply = () => {
   };
 
   const onResumeSubmit = () => {
-    console.log(addQuestion, questions, userInfo);
     if (
       addQuestion.length === questions.length &&
       userInfo.phoneNumber !== '' &&
@@ -170,31 +166,22 @@ const Apply = () => {
   return (
     <>
       <ApplyHeader clubName={clubName} />
-      <div className={styles.container}>
-        <ApplyQuestions
-          onUserInfoChange={onUserInfoChange}
-          userInfo={userInfo}
-        />
-        <Additional
-          onAnswerInputChange={onAnswerInputChange}
-          isUpdate={isUpdate}
-          onUpdate={onUpdateQuestionClick}
-          onRemove={onRemove}
-          questions={questions}
-          onUpdateInputChange={onUpdateInputChange}
-          leader={leader}
-          userInfo={userInfo}
-        />
-        <ApplySubmit
-          newQuestionInput={newQuestionInput}
-          handleChange={handleChange}
-          onQuestionAdd={onQuestionAdd}
-          iconSize={iconSize}
-          onResumeSubmit={onResumeSubmit}
-          leader={leader}
-          userInfo={userInfo}
-        />
-      </div>
+      <ApplyBody
+        onUserInfoChange={onUserInfoChange}
+        userInfo={userInfo}
+        onAnswerInputChange={onAnswerInputChange}
+        isUpdate={isUpdate}
+        onUpdateQuestionClick={onUpdateQuestionClick}
+        onRemove={onRemove}
+        questions={questions}
+        onUpdateInputChange={onUpdateInputChange}
+        leader={leader}
+        newQuestionInput={newQuestionInput}
+        handleChange={handleChange}
+        onQuestionAdd={onQuestionAdd}
+        iconSize={iconSize}
+        onResumeSubmit={onResumeSubmit}
+      />
     </>
   );
 };

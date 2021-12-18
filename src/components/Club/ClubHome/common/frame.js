@@ -6,7 +6,7 @@ import Review from '../Review/Review';
 import Calendar from '../Calendar';
 import ClubNotice from '../Notice/ClubNotice';
 import { useCallback, useEffect, useState } from 'react';
-import Apply from '../Apply/Apply';
+import Apply from '../Apply';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClubInfo } from 'redux/slices/clubhome';
