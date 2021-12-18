@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
 import { HiPencil } from 'react-icons/hi';
 import { getMember } from 'apis/manager';
-
 import {
   AiOutlineHome,
   AiOutlineNotification,
