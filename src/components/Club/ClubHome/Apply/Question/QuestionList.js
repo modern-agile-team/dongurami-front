@@ -19,6 +19,7 @@ const QuestionList = ({
         {questions.map((question, index) => {
           return (
             <Question
+              key={question.no}
               question={question}
               index={index}
               isUpdate={isUpdate}
