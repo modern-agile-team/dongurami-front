@@ -6,11 +6,11 @@ import Review from '../Review/Review';
 import Calendar from '../Calendar';
 import ClubNotice from '../Notice/ClubNotice';
 import { useCallback, useEffect, useState } from 'react';
-import Apply from '../Apply/Apply';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClubInfo } from 'redux/slices/clubhome';
 import { changeComp } from 'redux/slices/chageComp';
+import Apply from '../Apply';
 
 const Frame = () => {
   const [isVisit, setIsVisit] = useState(false);

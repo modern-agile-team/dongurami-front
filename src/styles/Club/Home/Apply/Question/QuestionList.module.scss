@@ -1,0 +1,27 @@
+.additional {
+  display: flex;
+  margin-left: 2em;
+  ul {
+    width: 95%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .additional {
+    justify-content: flex-start;
+    ul {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .additional {
+    justify-content: flex-start;
+    ul {
+      width: 100%;
+    }
+  }
+}
