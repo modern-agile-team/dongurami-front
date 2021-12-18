@@ -1,16 +1,16 @@
-import styles from 'styles/Club/Home/Common/frame.module.scss';
-import SideBar from './SideBar';
-import ClubIntro from '../Intro/ClubIntro';
-import Activities from '../Activities/Activities';
-import Review from '../Review/Review';
-import Calendar from '../Calendar';
-import ClubNotice from '../Notice/ClubNotice';
 import { useCallback, useEffect, useState } from 'react';
+import { getClubInfo } from 'redux/slices/clubhome';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { getClubInfo } from 'redux/slices/clubhome';
 import { changeComp } from 'redux/slices/chageComp';
+import ClubIntro from '../Intro/ClubIntro';
+import ClubNotice from '../Notice/ClubNotice';
+import Activities from '../Activities/Activities';
+import Calendar from '../Calendar';
+import Review from '../Review/Review';
 import Apply from '../Apply';
+import SideBar from './SideBar';
+import styles from 'styles/Club/Home/Common/frame.module.scss';
 
 const Frame = () => {
   const [isVisit, setIsVisit] = useState(false);
