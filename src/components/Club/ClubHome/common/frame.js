@@ -47,14 +47,12 @@ const Frame = () => {
   }, [dispatch, clubId]);
 
   return (
-    <>
-      <div className={styles.container}>
-        <SideBar comp={comp} />
-        <div className={styles.wrap}>
-          <ClubMenu comp={comp} />
-        </div>
+    <div className={styles.container}>
+      <SideBar comp={comp} />
+      <div className={styles.wrap}>
+        <ClubMenu comp={comp} />
       </div>
-    </>
+    </div>
   );
 };
 
