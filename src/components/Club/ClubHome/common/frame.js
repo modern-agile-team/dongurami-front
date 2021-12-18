@@ -3,7 +3,7 @@ import SideBar from './SideBar';
 import ClubIntro from '../Intro/ClubIntro';
 import Activities from '../Activities/Activities';
 import Review from '../Review/Review';
-import Calendar from '../Daily/Calendar';
+import Calendar from '../Calendar';
 import ClubNotice from '../Notice/ClubNotice';
 import { useCallback, useEffect, useState } from 'react';
 import Apply from '../Apply/Apply';

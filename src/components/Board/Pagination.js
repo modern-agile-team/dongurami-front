@@ -1,5 +1,5 @@
 import { GrPrevious, GrNext } from 'react-icons/gr';
-import styles from "../../styles/Board/Board/Pagination.module.scss";
+import styles from 'styles/Board/Board/Pagination.module.scss';
 
 function Pagination({ posts, page, setPage }) {
   const lastPage = Math.ceil(posts.length / 10);
@@ -7,7 +7,12 @@ function Pagination({ posts, page, setPage }) {
   const Item = ({ itemPage }) => {
     return (
       <li>
-        <button onClick={() => { setPage(itemPage) }} className={(page === itemPage) ? styles.selected : ''}>
+        <button
+          onClick={() => {
+            setPage(itemPage);
+          }}
+          className={page === itemPage ? styles.selected : ''}
+        >
           {itemPage}
         </button>
       </li>
@@ -16,7 +21,11 @@ function Pagination({ posts, page, setPage }) {
   const NextPage = () => {
     return (
       <li>
-        <button onClick={() => { (page < lastPage) && setPage(page + 1) }}>
+        <button
+          onClick={() => {
+            page < lastPage && setPage(page + 1);
+          }}
+        >
           <GrNext />
         </button>
       </li>
@@ -25,7 +34,11 @@ function Pagination({ posts, page, setPage }) {
   const PreviousPage = () => {
     return (
       <li>
-        <button onClick={() => { (page > 1) && setPage(page - 1) }}>
+        <button
+          onClick={() => {
+            page > 1 && setPage(page - 1);
+          }}
+        >
           <GrPrevious />
         </button>
       </li>
@@ -43,10 +56,12 @@ function Pagination({ posts, page, setPage }) {
     return (
       <ul className={styles.pagination}>
         <PreviousPage />
-        {Array.from(new Array(lastPage), (_, i) => <Item key={i} itemPage={i + 1} />)}
+        {Array.from(new Array(lastPage), (_, i) => (
+          <Item key={i} itemPage={i + 1} />
+        ))}
         <NextPage />
       </ul>
-    )
+    );
   } else if (page < 5) {
     return (
       <ul className={styles.pagination}>
@@ -60,7 +75,7 @@ function Pagination({ posts, page, setPage }) {
         <Item itemPage={lastPage} />
         <NextPage />
       </ul>
-    )
+    );
   } else if (page >= 5 && page <= lastPage - 4) {
     return (
       <ul className={styles.pagination}>
@@ -74,7 +89,7 @@ function Pagination({ posts, page, setPage }) {
         <Item itemPage={lastPage} />
         <NextPage />
       </ul>
-    )
+    );
   } else if (page > lastPage - 4) {
     return (
       <ul className={styles.pagination}>

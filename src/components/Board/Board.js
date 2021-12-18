@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Table from './Table';
 import Pagination from './Pagination';
 import Search from './Search';
-import styles from '../../styles/Board/Board/Board.module.scss';
+import styles from 'styles/Board/Board/Board.module.scss';
 import { getBoardPosts } from 'redux/slices/board';
 import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
@@ -31,7 +31,7 @@ function Board({ category }) {
   useEffect(() => {
     if (!sort || !order) return;
     if (!router.isReady) return;
-    dispatch(getBoardPosts({ category, sort, order, type, keyword, clubNum }))
+    dispatch(getBoardPosts({ category, sort, order, type, keyword, clubNum }));
   }, [router, category, sort, order, type, keyword, clubNum, dispatch]);
 
   const setPageToUrl = (nextPage) => {
@@ -76,14 +76,26 @@ function Board({ category }) {
     <div className={styles.container}>
       <div className={styles.innerContainer}>
         <h1>
-          <Link href={{ pathname: router.pathname, query: { ...(router.query.id && {id: router.query.id}) } }} passHref>
+          <Link
+            href={{
+              pathname: router.pathname,
+              query: { ...(router.query.id && { id: router.query.id }) }
+            }}
+            passHref
+          >
             <a>{title[category]}</a>
           </Link>
         </h1>
         <hr />
         <div className={styles.orderBy}>
-          {(canWrite) && (
-            <Link href={{ pathname: `${router.pathname}/write`, query: router.query }} passHref>
+          {canWrite && (
+            <Link
+              href={{
+                pathname: `${router.pathname}/write`,
+                query: router.query
+              }}
+              passHref
+            >
               <DonguramiOutlineButton>✏️ 글쓰기</DonguramiOutlineButton>
             </Link>
           )}
