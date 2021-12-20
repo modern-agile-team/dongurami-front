@@ -1,53 +1,31 @@
 import styles from 'styles/Club/Home/Schedule/ScheduleModify.module.scss';
 import { MdClose } from 'react-icons/md';
-import { useEffect, useState } from 'react';
-import { getInfo, modifySchedule } from 'apis/calendar';
+import { useEffect } from 'react';
+
 import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 const ScheduleModify = ({
-  Qdata,
-  today,
-  setSchedule,
   color,
   colors,
   title,
   period,
-  no,
   setPop,
-  pop
+  pop,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  colorCode,
+  setColorCode,
+  setNewTitle,
+  onClickModifyBtn
 }) => {
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-  const [colorCode, setColorCode] = useState();
-  const [newTitle, setNewTitle] = useState();
-
   useEffect(() => {
     setStartDate(period[0]);
     setEndDate(period[1]);
     setNewTitle(title);
     setColorCode(color);
   }, [pop, color, period, title]);
-
-  const axiosPUT = async () => {
-    if (newTitle.replace(/ /g, '').length === 0) setNewTitle(title);
-    if (newTitle.length > 50) alert('제목은 50자 이하여야 합니다.');
-    else {
-      await modifySchedule(Qdata.id, no, {
-        colorCode: colorCode,
-        title: newTitle,
-        startDate: startDate,
-        endDate: endDate,
-        url: `clubhome/${Qdata.id}`,
-        notiCategoryNum: 5
-      })
-        .then((res) => console.log(res))
-        .catch((err) => alert(err.response.data.msg));
-      await getInfo(Qdata.id, today.format('YYYY-MM'))
-        .then((res) => setSchedule(res.data.result))
-        .catch((err) => alert(err.reponse.data.msg));
-    }
-  };
-  if (pop !== 'ScheduleModify') return null;
 
   return (
     <div className={styles.wrap} onClick={() => setPop('Calendar')}>
@@ -103,7 +81,7 @@ const ScheduleModify = ({
               className={styles.modifyBtn}
               onClick={() => {
                 if (Date.parse(startDate) <= Date.parse(endDate)) {
-                  axiosPUT();
+                  onClickModifyBtn();
                   setPop('Calendar');
                 } else alert('날짜를 확인해주세요');
               }}

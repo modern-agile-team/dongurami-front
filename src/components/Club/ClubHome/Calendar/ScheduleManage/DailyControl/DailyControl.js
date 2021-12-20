@@ -3,50 +3,17 @@ import { HiPencil } from 'react-icons/hi';
 import { FaTrashAlt } from 'react-icons/fa';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { MdClose } from 'react-icons/md';
-import { getInfo, deleteSchedule, importantSchedule } from 'apis/calendar';
 
 const DailyControl = ({
-  setTitle,
-  setPeriod,
-  setNo,
   schedule,
   date,
   setPop,
   pop,
-  setColor,
-  today,
-  setSchedule,
-  Qdata,
-  inDate
+  inDate,
+  onClickPencil,
+  onDeleteSchedule,
+  importantModify
 }) => {
-  const getData = () => {
-    getInfo(Qdata.id, today.format('YYYY-MM'))
-      .then((res) => setSchedule(res.data.result))
-      .catch((err) => alert(err.response.data.msg));
-  };
-  const onClickModify = (schedule) => {
-    setTitle(schedule.title);
-    setPeriod([schedule.startDate, schedule.endDate]);
-    setNo(schedule.no);
-    setColor(schedule.colorCode);
-    setPop('ScheduleModify');
-  };
-
-  const onDeleteSchedule = async (el) => {
-    await deleteSchedule(Qdata.id, el)
-      .then((res) => console.log(res))
-      .catch((err) => alert(err.response.data.msg));
-    await getData();
-  };
-
-  const importantModify = (schedule, e) => {
-    importantSchedule(Qdata.id, schedule, { important: e }).then((res) =>
-      getData()
-    );
-  };
-
-  if (pop !== 'DailyControl') return null;
-
   return (
     <div className={styles.wrap} onClick={() => setPop('Calendar')}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -79,7 +46,7 @@ const DailyControl = ({
                     </div>
                     <div className={styles.edit}>
                       <HiPencil
-                        onClick={() => onClickModify(eachScedule)}
+                        onClick={() => onClickPencil(eachScedule)}
                         className={styles.pencil}
                       />
                       <FaTrashAlt

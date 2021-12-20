@@ -1,21 +1,16 @@
-import moment from 'moment';
-import React, { useCallback } from 'react';
+import React from 'react';
 import styles from 'styles/Club/Home/Schedule/Table.module.scss';
 import MonthDays from './MonthDays';
 
-const MakeTd = ({ inDate, setDate, setPop, schedule, today, week }) => {
-  const checkFlag = useCallback(
-    (days) => {
-      if (moment().format('YYYYMMDD') === days.format('YYYYMMDD')) {
-        return 'today';
-      } else if (days.format('MM') !== today.format('MM')) {
-        return 'other';
-      }
-      return 'month';
-    },
-    [today]
-  );
-
+const MakeTd = ({
+  inDate,
+  setDate,
+  setPop,
+  schedule,
+  today,
+  week,
+  checkFlag
+}) => {
   return (
     <tr className={styles.num} key={week}>
       {Array(7)
