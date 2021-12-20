@@ -1,4 +1,4 @@
-import Frame from 'components/Club/ClubHome/common/frame';
+import Club from 'components/Club/Home';
 import Head from 'next/head';
 
 const ClubHome = () => {
@@ -7,7 +7,7 @@ const ClubHome = () => {
       <Head>
         <title>동그라미 | 동아리 홈</title>
       </Head>
-      <Frame />
+      <Club />
     </>
   );
 };
