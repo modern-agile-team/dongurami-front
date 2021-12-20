@@ -8,7 +8,8 @@ const RightContainer = ({
   momentTime,
   today,
   setPop,
-  calendarArr
+  calendarArr,
+  weekDays
 }) => {
   return (
     <div className={styles.right}>
@@ -18,7 +19,7 @@ const RightContainer = ({
         today={today}
         setPop={setPop}
       />
-      <Table calendarArr={calendarArr} />
+      <Table calendarArr={calendarArr} weekDays={weekDays} />
     </div>
   );
 };

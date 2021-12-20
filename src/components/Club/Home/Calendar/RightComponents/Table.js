@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from 'styles/Club/Home/Schedule/Table.module.scss';
-const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
-const Table = ({ calendarArr }) => {
+
+const Table = ({ calendarArr, weekDays }) => {
   return (
     <div className={styles.wrap}>
       <div className={styles.weekDays}>
