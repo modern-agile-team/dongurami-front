@@ -2,7 +2,7 @@ import styles from 'styles/Club/Home/Schedule/Calendar.module.scss';
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import DailyModal from './ScheduleManage/DailyModal';
-import Schedule from './Schedule';
+import Schedule from './Schedule/Schedule';
 import DailyControl from './ScheduleManage/DailyControl/DailyControl';
 import RightContainer from './RightContainer';
 import MakeTd from './RightComponents/MakeTd';
