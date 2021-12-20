@@ -1,0 +1,17 @@
+.find {
+  width: 60%;
+  padding-top: 1rem;
+  font-size: 85%;
+  margin: 0 auto;
+  text-align: left;
+  color: #777777;
+  @media screen and (max-width: 768px) {
+    font-size: 80%;
+  }
+  span {
+    cursor: pointer;
+  }
+  .findID {
+    margin-right: 1.5rem;
+  }
+}

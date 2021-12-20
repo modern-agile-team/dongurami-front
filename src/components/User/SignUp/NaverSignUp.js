@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { postNaverSignUp } from 'apis/user';
 import { getNaverOauth } from 'apis/user';
-import { Spinner } from './Spinner';
+import { Spinner } from 'components/Common/Spinner';
 
 export const NaverSignUp = () => {
   const [id, setId] = useState('');

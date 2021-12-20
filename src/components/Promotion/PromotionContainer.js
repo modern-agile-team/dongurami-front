@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Modal from './Modal';
 import Promotion from './Promotion';
 import SendMessage from 'components/User/Message/SendMessage';
-import { Spinner } from 'components/User/SignUp/Spinner';
+import { Spinner } from 'components/Common/Spinner';
 
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
 
