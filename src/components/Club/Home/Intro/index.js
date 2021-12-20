@@ -13,6 +13,8 @@ const Intro = ({ visitTime }) => {
   const [isDescriptionUpdate, setIsDescriptionUpdate] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [introDesc, setIntroDesc] = useState('');
+  const [openOptions, setOpenOptions] = useState(false);
+  const [openMessage, setOpenMessage] = useState(false);
 
   const router = useRouter();
   const clubId = router.query.id;
@@ -101,7 +103,14 @@ const Intro = ({ visitTime }) => {
         <Skeleton />
       ) : (
         <>
-          <Info infos={clubInfo} onChangeLogo={onChangeLogo} />
+          <Info
+            infos={clubInfo}
+            onChangeLogo={onChangeLogo}
+            openOptions={openOptions}
+            setOpenOptions={setOpenOptions}
+            openMessage={openMessage}
+            setOpenMessage={setOpenMessage}
+          />
           <Desc
             infos={clubInfo}
             onDescSubnmit={onDescSubnmit}

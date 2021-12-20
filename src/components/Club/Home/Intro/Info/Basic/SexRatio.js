@@ -1,11 +1,10 @@
 import styles from 'styles/Club/Home/Intro/ClubInfo.module.scss';
 import { ResponsiveBar } from '@nivo/bar';
 
-const SexRatio = ({ infos }) => {
-  const result = infos.result[0];
+const SexRatio = ({ clubs }) => {
   const data = [
-    { gender: '여자', '인원(명)': result.genderWomen },
-    { gender: '남자', '인원(명)': result.genderMan }
+    { gender: '여자', '인원(명)': clubs.genderWomen },
+    { gender: '남자', '인원(명)': clubs.genderMan }
   ];
 
   return (
