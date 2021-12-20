@@ -1,12 +1,5 @@
-.body {
-  display: flex;
-  flex-direction: column;
-  h1 {
-    margin: 0 auto;
-    font-size: 240%;
-    font-weight: 400;
-    margin-bottom: 35px;
-  }
+.wrap {
+  text-align: center;
   input[type='number']::-webkit-outer-spin-button,
   input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;

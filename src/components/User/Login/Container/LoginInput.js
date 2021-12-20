@@ -1,10 +1,9 @@
 import React from 'react';
-import styles from 'styles/User/Login/Container/LoginHeader.module.scss';
+import styles from 'styles/User/Login/Container/LoginInput.module.scss';
 
-export const LoginHeader = ({ id, password, onInputChange, onKeyPress }) => {
+export const LoginInput = ({ id, password, onInputChange, onKeyPress }) => {
   return (
-    <div className={styles.body}>
-      <h1>로그인</h1>
+    <div className={styles.wrap}>
       <input
         className={styles.idInput}
         type="Number"

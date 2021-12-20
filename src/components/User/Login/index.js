@@ -4,10 +4,10 @@ import { useRouter } from 'next/router';
 import { postLogin } from 'apis/user';
 import { useDispatch } from 'react-redux';
 import { getUser } from 'redux/slices/user';
-import { LoginHeader } from './Container/LoginHeader';
 import { FindInfoRoute } from './Container/FindInfoRoute';
 import { LoginBtns } from './Container/LoginBtns';
 import { SignUpRoute } from './Container/SignUpRoute';
+import { LoginInput } from './Container/LoginInput';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -45,12 +45,15 @@ export const Login = () => {
   return (
     <div className={styles.wrap}>
       <div className={styles.login}>
-        <LoginHeader
-          id={id}
-          password={password}
-          onInputChange={onInputChange}
-          onKeyPress={onKeyPress}
-        />
+        <div className={styles.body}>
+          <h1>로그인</h1>
+          <LoginInput
+            id={id}
+            password={password}
+            onInputChange={onInputChange}
+            onKeyPress={onKeyPress}
+          />
+        </div>
         <FindInfoRoute />
         <div className={styles.buttons}>
           <LoginBtns onSubmit={onSubmit} />
