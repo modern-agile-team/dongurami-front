@@ -8,7 +8,6 @@ const DailyControl = ({
   schedule,
   date,
   setPop,
-  pop,
   inDate,
   onClickPencil,
   onDeleteSchedule,

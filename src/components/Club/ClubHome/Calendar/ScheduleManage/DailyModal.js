@@ -4,32 +4,36 @@ import { MdClose } from 'react-icons/md';
 import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 const DailyModal = ({
+  color,
   colors,
+  title,
+  period,
+  colorCode,
+  setColorCode,
+  setNewTitle,
+  onClickModifyBtn,
   setPop,
-  pop,
   today,
   startDate,
   setStartDate,
   endDate,
   setEndDate,
-  color,
   setColor,
-  startInput,
-  endInput,
   titleRef,
-  onAddBtn
+  onAddBtn,
+  pop,
+  addSet,
+  modifySet
 }) => {
   useEffect(() => {
-    setStartDate(today.format('YYYY-MM-DD'));
-    setEndDate(today.format('YYYY-MM-DD'));
-    setColor('#FFFFFF');
+    pop === 'DailyModal' ? addSet() : modifySet();
   }, [today]);
 
   return (
     <div className={styles.wrap} onClick={() => setPop('Calendar')}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          <h3>일정 작성</h3>
+          <h3>{pop === 'DailyModal' ? '일정 추가' : '일정 수정'}</h3>
         </div>
         <MdClose
           className={styles.closeBtn}
@@ -40,16 +44,12 @@ const DailyModal = ({
           <input
             id="startDate"
             type="date"
-            // value={today.format('YYYY-MM-DD')}
-            ref={startInput}
             onChange={(e) => setStartDate(e.target.value)}
           />
           <p>끝나는 날짜</p>
           <input
             id="endDate"
             type="date"
-            // value={today.format('YYYY-MM-DD')}
-            ref={endInput}
             onChange={(e) => setEndDate(e.target.value)}
           />{' '}
           <br /> <br />

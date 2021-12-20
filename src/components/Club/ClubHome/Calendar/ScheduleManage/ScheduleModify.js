@@ -1,7 +1,6 @@
 import styles from 'styles/Club/Home/Schedule/ScheduleModify.module.scss';
 import { MdClose } from 'react-icons/md';
 import { useEffect } from 'react';
-
 import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 const ScheduleModify = ({
@@ -25,7 +24,7 @@ const ScheduleModify = ({
     setEndDate(period[1]);
     setNewTitle(title);
     setColorCode(color);
-  }, [pop, color, period, title]);
+  }, [color, period, title]);
 
   return (
     <div className={styles.wrap} onClick={() => setPop('Calendar')}>

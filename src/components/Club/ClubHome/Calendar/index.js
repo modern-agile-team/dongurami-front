@@ -29,9 +29,8 @@ const Calendar = () => {
   const [title, setTitle] = useState(null);
   const [color, setColor] = useState('#FFFFFF');
   const [nowDay, setNowDay] = useState('');
+  const [category, setCategory] = useState();
 
-  const startInput = useRef();
-  const endInput = useRef();
   const titleRef = useRef();
   const router = useRouter();
 
@@ -92,6 +91,17 @@ const Calendar = () => {
   //DailyControl
 
   //DailyModal
+  const addSet = () => {
+    setStartDate(today.format('YYYY-MM-DD'));
+    setEndDate(today.format('YYYY-MM-DD'));
+    setColor('#FFFFFF');
+  };
+  const modifySet = () => {
+    setStartDate(period[0]);
+    setEndDate(period[1]);
+    setNewTitle(title);
+    setColorCode(color);
+  };
   //일정 추가 버튼
   const onAddBtn = (e) => {
     e.stopPropagation();
@@ -231,7 +241,7 @@ const Calendar = () => {
           weekDays={weekDays}
         />
       </div>
-      {pop === 'DailyModal' && (
+      {(pop === 'DailyModal' || pop === 'ScheduleModify') && (
         <DailyModal
           colors={colors}
           setPop={setPop}
@@ -243,11 +253,12 @@ const Calendar = () => {
           setEndDate={setEndDate}
           color={color}
           setColor={setColor}
-          startInput={startInput}
-          endInput={endInput}
-          titleRef={titleRef}
           onClickAdd={onClickAdd}
           onAddBtn={onAddBtn}
+          titleRef={titleRef}
+          pop={pop}
+          addSet={addSet}
+          modifySet={modifySet}
         />
       )}
       {pop === 'DailyControl' && (
@@ -255,14 +266,13 @@ const Calendar = () => {
           schedule={schedule}
           date={date}
           setPop={setPop}
-          pop={pop}
           inDate={inDate}
           onClickPencil={onClickPencil}
           onDeleteSchedule={onDeleteSchedule}
           importantModify={importantModify}
         />
       )}
-      {pop === 'ScheduleModify' && (
+      {/* {pop === 'ScheduleModify' && (
         <ScheduleModify
           title={title}
           period={period}
@@ -279,7 +289,7 @@ const Calendar = () => {
           setNewTitle={setNewTitle}
           onClickModifyBtn={onClickModifyBtn}
         />
-      )}
+      )} */}
     </>
   );
 };
