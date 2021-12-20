@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from 'styles/Club/Home/Apply/ApplySubmit.module.scss';
-import { IoIosAddCircleOutline, IoIosCheckmark } from 'react-icons/io';
+import styles from 'styles/Club/Home/Apply/Submit/ApplySubmit.module.scss';
+import { IoIosCheckmark } from 'react-icons/io';
+import NewQuestion from './NewQuestion';
 
 const ApplySubmit = ({
   newQuestionInput,
@@ -14,11 +15,12 @@ const ApplySubmit = ({
   return (
     <>
       {userInfo.id === leader ? (
-        <div className={styles.leader}>
-          <span>새로운 질문</span>
-          <input ref={newQuestionInput} type="text" onChange={handleChange} />
-          <IoIosAddCircleOutline onClick={onQuestionAdd} size={iconSize} />
-        </div>
+        <NewQuestion
+          newQuestionInput={newQuestionInput}
+          handleChange={handleChange}
+          onQuestionAdd={onQuestionAdd}
+          iconSize={iconSize}
+        />
       ) : (
         <div className={styles.submit}>
           <IoIosCheckmark size={iconSize} onClick={onResumeSubmit} />

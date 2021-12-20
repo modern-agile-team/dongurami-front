@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from 'styles/Club/Home/Apply/ApplyQuestions.module.scss';
+import styles from 'styles/Club/Home/Apply/Question/BasicInfo.module.scss';
 
-const ApplyQuestions = ({ onUserInfoChange, userInfo }) => {
+const BasicInfo = ({ onUserInfoChange, userInfo }) => {
   const [male, female] = [1, 2];
   return (
     <div className={styles.questions}>
@@ -65,4 +65,4 @@ const ApplyQuestions = ({ onUserInfoChange, userInfo }) => {
   );
 };
 
-export default ApplyQuestions;
+export default BasicInfo;
