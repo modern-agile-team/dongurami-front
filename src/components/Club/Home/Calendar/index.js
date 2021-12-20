@@ -4,7 +4,6 @@ import moment from 'moment';
 import DailyModal from './ScheduleManage/DailyModal';
 import Schedule from './Schedule';
 import DailyControl from './ScheduleManage/DailyControl/DailyControl';
-import ScheduleModify from './ScheduleManage/ScheduleModify';
 import RightContainer from './RightContainer';
 import MakeTd from './RightComponents/MakeTd';
 import { useRouter } from 'next/router';
@@ -29,68 +28,20 @@ const Calendar = () => {
   const [title, setTitle] = useState(null);
   const [color, setColor] = useState('#FFFFFF');
   const [nowDay, setNowDay] = useState('');
-  const [category, setCategory] = useState();
 
   const titleRef = useRef();
   const router = useRouter();
 
   const today = momentTime;
 
-  //ScheduleModify
+  //DailyModal
+
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [colorCode, setColorCode] = useState();
   const [newTitle, setNewTitle] = useState();
   //수정버튼 함수
-  const onClickModifyBtn = async () => {
-    if (newTitle.replace(/ /g, '').length === 0) setNewTitle(title);
-    if (newTitle.length > 50) alert('제목은 50자 이하여야 합니다.');
-    else {
-      await modifySchedule(Qdata.id, no, {
-        colorCode: colorCode,
-        title: newTitle,
-        startDate: startDate,
-        endDate: endDate,
-        url: `clubhome/${Qdata.id}`,
-        notiCategoryNum: 5
-      })
-        .then((res) => console.log(res))
-        .catch((err) => alert(err.response.data.msg));
-      await getInfo(Qdata.id, today.format('YYYY-MM'))
-        .then((res) => setSchedule(res.data.result))
-        .catch((err) => alert(err.reponse.data.msg));
-    }
-  };
-  //ScheduleModify
 
-  //DailyControl
-  const getData = () => {
-    getInfo(Qdata.id, today.format('YYYY-MM'))
-      .then((res) => setSchedule(res.data.result))
-      .catch((err) => alert(err.response.data.msg));
-  };
-  const onClickPencil = (schedule) => {
-    setTitle(schedule.title);
-    setPeriod([schedule.startDate, schedule.endDate]);
-    setNo(schedule.no);
-    setColor(schedule.colorCode);
-    setPop('ScheduleModify');
-  };
-  const onDeleteSchedule = async (el) => {
-    await deleteSchedule(Qdata.id, el)
-      .then((res) => console.log(res))
-      .catch((err) => alert(err.response.data.msg));
-    await getData();
-  };
-
-  const importantModify = (schedule, e) => {
-    importantSchedule(Qdata.id, schedule, { important: e }).then((res) =>
-      getData()
-    );
-  };
-  //DailyControl
-
-  //DailyModal
   const addSet = () => {
     setStartDate(today.format('YYYY-MM-DD'));
     setEndDate(today.format('YYYY-MM-DD'));
@@ -101,6 +52,17 @@ const Calendar = () => {
     setEndDate(period[1]);
     setNewTitle(title);
     setColorCode(color);
+  };
+
+  const onModifyBtn = () => {
+    if (Date.parse(startDate) <= Date.parse(endDate)) {
+      onClickModifyBtn();
+      setPop('Calendar');
+    } else alert('날짜를 확인해주세요');
+  };
+  const onClickColorBtn = (color) => {
+    setColor(`${color}`);
+    setColorCode(`${color}`);
   };
   //일정 추가 버튼
   const onAddBtn = (e) => {
@@ -137,7 +99,56 @@ const Calendar = () => {
       setPop('Calendar');
     }
   };
+
+  const onClickModifyBtn = async () => {
+    if (newTitle.replace(/ /g, '').length === 0) setNewTitle(title);
+    if (newTitle.length > 50) alert('제목은 50자 이하여야 합니다.');
+    else {
+      await modifySchedule(Qdata.id, no, {
+        colorCode: colorCode,
+        title: newTitle,
+        startDate: startDate,
+        endDate: endDate,
+        url: `clubhome/${Qdata.id}`,
+        notiCategoryNum: 5
+      })
+        .then((res) => console.log(res))
+        .catch((err) => alert(err.response.data.msg));
+      await getInfo(Qdata.id, today.format('YYYY-MM'))
+        .then((res) => setSchedule(res.data.result))
+        .catch((err) => alert(err.reponse.data.msg));
+    }
+  };
   //DailyModal
+
+  //DailyControl
+  const getData = () => {
+    getInfo(Qdata.id, today.format('YYYY-MM'))
+      .then((res) => setSchedule(res.data.result))
+      .catch((err) => alert(err.response.data.msg));
+  };
+  const onClickPencil = (schedule) => {
+    setTitle(schedule.title);
+    setPeriod([schedule.startDate, schedule.endDate]);
+    setNo(schedule.no);
+    setColor(schedule.colorCode);
+    setPop('ScheduleModify');
+  };
+
+  const onDeleteSchedule = async (el) => {
+    await deleteSchedule(Qdata.id, el)
+      .then((res) => console.log(res))
+      .catch((err) => alert(err.response.data.msg));
+    await getData();
+  };
+
+  const importantModify = (schedule, e) => {
+    importantSchedule(Qdata.id, schedule, { important: e }).then((res) =>
+      getData()
+    );
+  };
+  //DailyControl
+
   const Qdata = router.query;
   const colors = ['#F9AE7B', '#FEDD01', '#E3E931', '#B5EAFF', '#E9D9EF'];
   const todayData = useSelector((state) => state.calendar.info);
@@ -258,6 +269,10 @@ const Calendar = () => {
           titleRef={titleRef}
           addSet={addSet}
           modifySet={modifySet}
+          onModifyBtn={onModifyBtn}
+          onClickColorBtn={onClickColorBtn}
+          setNewTitle={setNewTitle}
+          title={title}
         />
       )}
       {pop === 'DailyControl' && (
@@ -270,25 +285,7 @@ const Calendar = () => {
           onDeleteSchedule={onDeleteSchedule}
           importantModify={importantModify}
         />
-      )}
-      {/* {pop === 'ScheduleModify' && (
-        <ScheduleModify
-          title={title}
-          period={period}
-          setPop={setPop}
-          pop={pop}
-          color={color}
-          colors={colors}
-          startDate={startDate}
-          setStartDate={setStartDate}
-          endDate={endDate}
-          setEndDate={setEndDate}
-          colorCode={colorCode}
-          setColorCode={setColorCode}
-          setNewTitle={setNewTitle}
-          onClickModifyBtn={onClickModifyBtn}
-        />
-      )} */}
+      )}{' '}
     </>
   );
 };

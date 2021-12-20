@@ -7,25 +7,22 @@ const DailyModal = ({
   color,
   colors,
   title,
-  period,
-  colorCode,
-  setColorCode,
   setNewTitle,
-  onClickModifyBtn,
   setPop,
   today,
   startDate,
   setStartDate,
   endDate,
   setEndDate,
-  setColor,
   titleRef,
   onAddBtn,
   pop,
   addSet,
-  modifySet
+  modifySet,
+  onModifyBtn,
+  onClickColorBtn
 }) => {
-  useEffect(() => {
+  useEffect(async () => {
     pop === 'DailyModal' ? addSet() : modifySet();
   }, [today]);
 
@@ -57,9 +54,12 @@ const DailyModal = ({
           <p>일정 제목</p>
           <input
             type="text"
-            placeholder="일정 제목을 입력하세요"
+            placeholder={
+              pop === 'DailyModal' ? '일정 제목을 입력하세요' : `${title}`
+            }
             className={styles.titleInput}
             ref={titleRef}
+            onChange={(e) => setNewTitle(e.target.value)}
           />
           <br />
           <div>
@@ -70,7 +70,7 @@ const DailyModal = ({
                   className={styles.colorBtn}
                   key={index}
                   style={{ background: color }}
-                  onClick={() => setColor(`${color}`)}
+                  onClick={() => onClickColorBtn(color)}
                 ></button>
               );
             })}
@@ -80,11 +80,14 @@ const DailyModal = ({
             <span className={styles.sample} style={{ background: color }}>
               색상 미리보기
             </span>
+
             <DonguramiOutlineButton
               className={styles.addBtn}
-              onClick={(e) => onAddBtn(e)}
+              onClick={(e) =>
+                pop === 'DailyModal' ? onAddBtn(e) : onModifyBtn()
+              }
             >
-              ✏️ 추가
+              ✏️ 확인
             </DonguramiOutlineButton>
           </div>
         </div>
