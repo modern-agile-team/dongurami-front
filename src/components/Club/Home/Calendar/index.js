@@ -256,7 +256,6 @@ const Calendar = () => {
           onClickAdd={onClickAdd}
           onAddBtn={onAddBtn}
           titleRef={titleRef}
-          pop={pop}
           addSet={addSet}
           modifySet={modifySet}
         />
