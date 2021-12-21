@@ -8,6 +8,7 @@ import { modifyInfo, getUserInfo } from 'apis/profile';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
 
 const ModifyInfo = () => {
+  const gradeArr = [1, 2, 3, 4];
   const [userInfo, setUserInfo] = useState({});
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -99,6 +100,7 @@ const ModifyInfo = () => {
             userInfo={userInfo}
             grade={grade}
             setGrade={setGrade}
+            gradeArr={gradeArr}
           />
           <MutableData
             userInfo={userInfo}
