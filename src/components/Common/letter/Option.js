@@ -39,7 +39,6 @@ const Option = ({
             onClick={() => {
               if (setOpenMessage && !sendMessage) setOpenMessage(true);
               else if (sendMessage) {
-                console.log('댓글 값');
                 sendMessage(comment);
               }
               setOpenOptions(false);

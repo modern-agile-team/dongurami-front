@@ -1,5 +1,4 @@
 import styles from '../../styles/Message/DetailMessageList.module.scss';
-import { FaLongArrowAltRight, FaLongArrowAltLeft } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 const DetailMessageList = ({ message }) => {
