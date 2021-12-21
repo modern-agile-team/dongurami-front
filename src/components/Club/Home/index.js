@@ -3,7 +3,7 @@ import { getClubInfo } from 'redux/slices/clubhome';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeComp } from 'redux/slices/chageComp';
-import ClubIntro from './Intro/ClubIntro';
+import Intro from './Intro';
 import ClubNotice from './Notice/ClubNotice';
 import Activities from './Activities/Activities';
 import Calendar from './Calendar';
@@ -27,7 +27,7 @@ const Club = () => {
   }
 
   const ClubMenu = useCallback(() => {
-    if (comp === 1) return <ClubIntro isVisit={isVisit} />;
+    if (comp === 1) return <Intro isVisit={isVisit} />;
     else if (comp === 2) return <ClubNotice />;
     else if (comp === 3) return <Activities />;
     else if (comp === 4) return <Calendar />;

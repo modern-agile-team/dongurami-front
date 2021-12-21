@@ -1,11 +1,14 @@
 import styles from 'styles/Club/Home/Intro/LeaderInfo.module.scss';
-import { useState } from 'react';
 import Option from 'components/Common/letter/Option';
 import SendMessage from 'components/User/Message/SendMessage';
 
-const LeaderInfo = ({ infos }) => {
-  const [openOptions, setOpenOptions] = useState(false);
-  const [openMessage, setOpenMessage] = useState(false);
+const LeaderInfo = ({
+  infos,
+  openOptions,
+  setOpenOptions,
+  openMessage,
+  setOpenMessage
+}) => {
   return (
     <div className={styles.leaderInfo}>
       {!infos.profileImageUrl ? (
