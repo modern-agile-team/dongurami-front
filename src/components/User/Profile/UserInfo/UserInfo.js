@@ -1,9 +1,10 @@
 import styles from 'styles/Profile/UserInfo.module.scss';
-import { FaGraduationCap, FaUserCircle } from 'react-icons/fa';
 import { FiMail } from 'react-icons/fi';
 import Link from 'next/link';
 import ClubModal from './ClubModal';
 import LeaveModal from './LeaveModal';
+import OnlyMe from './OnlyMe';
+import Immutable from './Immutable';
 
 const UserInfo = ({
   logout,
@@ -26,14 +27,7 @@ const UserInfo = ({
           alt="profileImg"
         />
         <div className={styles.bottom}>
-          <div className={styles.name}>
-            <FaUserCircle className={styles.icon} />
-            <span> {profile.name}</span>
-          </div>
-          <div className={styles.major}>
-            <FaGraduationCap className={styles.icon} />
-            <span> {profile.major}</span>
-          </div>
+          <Immutable profile={profile} />
           {userInfo.id === profile.id && (
             <div>
               <FiMail className={styles.icon} />
@@ -60,29 +54,18 @@ const UserInfo = ({
             onClickQuitClubSpan={onClickQuitClubSpan}
           />
           {userInfo.id === profile.id && (
-            <div className={styles.onlyMe}>
-              {clubNo !== 0 && (
-                <span onClick={() => setLeaveIsOpen(!leaveIsOpen)}>
-                  동아리탈퇴
-                </span>
-              )}
-              <Link
-                className={styles.linkClub}
-                href={{
-                  pathname: `/modifyinfo/${userInfo.id}`
-                }}
-                passHref
-              >
-                <span>개인정보수정</span>
-              </Link>
-              <span onClick={() => logout()}>로그아웃</span>
-            </div>
+            <OnlyMe
+              clubNo={clubNo}
+              setLeaveIsOpen={setLeaveIsOpen}
+              leaveIsOpen={leaveIsOpen}
+              logout={logout}
+              id={userInfo.id}
+            />
           )}
         </div>
       </div>
     </div>
   );
-  return null;
 };
 
 export default UserInfo;

@@ -5,7 +5,6 @@ const ProfileHeader = ({ userInfo, profile, router, moveComp, compObj }) => {
   return (
     <div className={styles.profileHeader}>
       <HeaderBtns pageName={undefined} router={router} moveComp={moveComp} />
-
       {userInfo.id === profile.id &&
         Object.keys(compObj).map((comp, idx) => {
           return (

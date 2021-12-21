@@ -5,36 +5,12 @@ const MyItems = ({
   category,
   myPosts,
   myComments,
-  router,
-  matchTitle
+  matchTitle,
+  movePageFromMyItem
 }) => {
   if (!myPosts) return null;
   if (!myComments) return null;
 
-  const movePage = (el) => {
-    switch (el.boardCategoryNum) {
-      case 5:
-        router.push(`/clubhome/${el.clubNo}/notice/${el.no}`);
-        break;
-      case 6:
-        router.push(`/clubhome/${el.clubNo}?pid=${el.no}`);
-        break;
-      case 4:
-        router.push(`/promotion?id=${el.no}`);
-        break;
-      case 3:
-        router.push(`/questionAndAnswer/${el.no}`);
-        break;
-      case 2:
-        router.push(`/free/${el.no}`);
-        break;
-      case 1:
-        router.push(`/notice/${el.no}`);
-        break;
-      default:
-        break;
-    }
-  };
   return (
     <div className={styles.body}>
       <div className={styles.halfBody}>
@@ -47,12 +23,12 @@ const MyItems = ({
               return category == 0 ? (
                 <div
                   className={styles.item}
-                  onClick={() => movePage(post)}
+                  onClick={() => movePageFromMyItem(post)}
                   key={index}
                 >
                   <div className={styles.under}>
                     <span>
-                      {boardArr[post.boardCategoryNum - 1]}) 글 제목 :{' '}
+                      {boardArr[post.boardCategoryNum]}) 글 제목 :{' '}
                       {matchTitle(post.title, 7, 15, 25)}
                     </span>
                     <span className={styles.date}>{post.inDate}</span>
@@ -62,7 +38,7 @@ const MyItems = ({
                 post.boardCategoryNum == category && (
                   <div
                     className={styles.item}
-                    onClick={() => movePage(post)}
+                    onClick={() => movePageFromMyItem(post)}
                     key={index}
                   >
                     <div className={styles.under}>
@@ -85,11 +61,11 @@ const MyItems = ({
               return category == 0 ? (
                 <div
                   className={styles.item}
-                  onClick={() => movePage(comment)}
+                  onClick={() => movePageFromMyItem(comment)}
                   key={index}
                 >
                   <span>
-                    {boardArr[comment.boardCategoryNum - 1]}) 글 제목 :{' '}
+                    {boardArr[comment.boardCategoryNum]}) 글 제목 :{' '}
                     {matchTitle(comment.title, 7, 15, 25)}
                   </span>
                   <div className={styles.under}>
@@ -103,7 +79,7 @@ const MyItems = ({
                 comment.boardCategoryNum == category && (
                   <div
                     className={styles.item}
-                    onClick={() => movePage(comment)}
+                    onClick={() => movePageFromMyItem(comment)}
                     key={index}
                   >
                     <span>

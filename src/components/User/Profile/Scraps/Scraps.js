@@ -1,20 +1,18 @@
 import styles from 'styles/Profile/Scraps.module.scss';
-import { AiOutlineFileText } from 'react-icons/ai';
-import Link from 'next/dist/client/link';
 import { useEffect } from 'react';
-import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
+import ScrapHeader from './ScrapHeader';
+import ScrapItems from './ScrapItems';
 
 function Scraps({
   profile,
-  userInfo,
   getScraps,
   setDataArr,
   dataArr,
   id,
   clubNo,
-  setClubNo,
   matchTitle,
-  joinedClubs
+  joinedClubs,
+  selectClub
 }) {
   useEffect(() => {
     if (profile.id && clubNo) {
@@ -34,69 +32,24 @@ function Scraps({
     <div className={styles.wrap}>
       <div className={styles.container}>
         <div className={styles.headerBox}>
-          <div className={styles.header}>
-            {profile.id === userInfo.id && (
-              <Link
-                href={{
-                  pathname: `/profile/${id}/${clubNo}/writescraps`
-                }}
-              >
-                <DonguramiOutlineButton>✏️글작성</DonguramiOutlineButton>
-              </Link>
-            )}
-            <select
-              onChange={(e) => {
-                setClubNo(e.target.value);
-                getScraps(profile.id, e.target.value)
-                  .then((res) => {
-                    setDataArr(
-                      res.data.scraps
-                        .concat(res.data.boards)
-                        .sort(
-                          (a, b) => Date.parse(b.inDate) - Date.parse(a.inDate)
-                        )
-                    );
-                  })
-                  .catch((err) => alert(err.reponse.data.msg));
-              }}
-            >
-              {joinedClubs.length && joinedClubs.map((el) => el)}
-            </select>
-          </div>
+          <ScrapHeader
+            id={id}
+            clubNo={clubNo}
+            selectClub={selectClub}
+            joinedClubs={joinedClubs}
+          />
         </div>
         <div className={styles.postItem}>
           {dataArr.map((post, index) => {
             return (
-              <Link
+              <ScrapItems
                 key={index}
-                href={
-                  post.scrapNo === undefined
-                    ? {
-                        pathname: `/profile/${id}/${clubNo}/${post.boardNo}`,
-                        query: { no: 'board' }
-                      }
-                    : {
-                        pathname: `/profile/${id}/${clubNo}/${post.scrapNo}`,
-                        query: { no: 'scrap' }
-                      }
-                }
-              >
-                <div className={styles.items}>
-                  {post.imgPath === '' || post.imgPath === null ? (
-                    <AiOutlineFileText className={styles.baseImg} />
-                  ) : (
-                    <img
-                      className={styles.thumbnail}
-                      src={post.imgPath}
-                      alt="thumbnail"
-                    />
-                  )}
-                  <br />
-                  <span className={styles.itemTitle}>
-                    {matchTitle(post.title, 5, 6, 8)}
-                  </span>
-                </div>
-              </Link>
+                post={post}
+                index={index}
+                id={id}
+                clubNo={clubNo}
+                matchTitle={matchTitle}
+              />
             );
           })}
         </div>

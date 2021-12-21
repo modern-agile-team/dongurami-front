@@ -19,15 +19,18 @@ const ModifyInfo = () => {
   const [placeholder, setPlaceholder] = useState();
   const uRouter = useRouter();
 
-  const onChangeImg = async (e) => {
-    const file = e.target.files[0];
-    setFileId(file.name);
-    const { preSignedPutUrl: presignedURL, readObjectUrl: imgURL } = (
-      await getS3PresignedURL(file.name)
-    ).data;
-    await uploadImage(presignedURL, file);
-    setImgUrl(imgURL);
-  };
+  const onChangeImg = useCallback(
+    async (e) => {
+      const file = e.target.files[0];
+      setFileId(file.name);
+      const { preSignedPutUrl: presignedURL, readObjectUrl: imgURL } = (
+        await getS3PresignedURL(file.name)
+      ).data;
+      await uploadImage(presignedURL, file);
+      setImgUrl(imgURL);
+    },
+    [imgUrl]
+  );
 
   const getData = useCallback(() => {
     getUserInfo(uRouter.query.pid)
@@ -50,7 +53,7 @@ const ModifyInfo = () => {
       .catch((err) => alert(err.response.data.msg));
   }, [uRouter.query.pid]);
 
-  const modifyBtn = async () => {
+  const modifyBtn = useCallback(async () => {
     await modifyInfo(uRouter.query.pid, {
       email: email.replace(/ /g, '').length <= 0 ? placeholder[0] : email,
       phoneNumber:
@@ -67,7 +70,16 @@ const ModifyInfo = () => {
         router.push(`/profile/${userInfo.id}`);
       })
       .catch((err) => alert(err.response.data.msg));
-  };
+  }, [
+    uRouter,
+    email,
+    placeholder,
+    phoneNumber,
+    imgUrl,
+    grade,
+    fileId,
+    userInfo
+  ]);
 
   useEffect(() => {
     if (!uRouter.isReady) return;
@@ -77,11 +89,11 @@ const ModifyInfo = () => {
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
-  const movePage = () => {
+  const movePage = useCallback(() => {
     if (userInfo.isNaverUser === 1) {
       alert('네이버 아이디로 가입한 회원은 비밀번호 변경을 할 수 없습니다.');
     } else router.push('/changepassword');
-  };
+  }, [userInfo, router]);
 
   return (
     <div className={styles.wrap}>

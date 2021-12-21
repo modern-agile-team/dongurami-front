@@ -11,6 +11,7 @@ import { signOut } from 'redux/slices/user';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
 
 function Profile() {
+  const compObj = { scrap: '스크랩', myPosts: '작성글' };
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
@@ -26,6 +27,7 @@ function Profile() {
   const [category, setCategory] = useState(0);
   const [isHave, setIsHave] = useState(false);
   const boardArr = [
+    '전체보기',
     '공지게시판',
     '자유게시판',
     'QnA게시판',
@@ -122,7 +124,43 @@ function Profile() {
     } else setLeaveIsOpen(false);
   };
 
-  const compObj = { scrap: '스크랩', myPosts: '프로필' };
+  const selectClub = (e) => {
+    setClubNo(e.target.value);
+    getScraps(profile.id, e.target.value)
+      .then((res) => {
+        setDataArr(
+          res.data.scraps
+            .concat(res.data.boards)
+            .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
+        );
+      })
+      .catch((err) => alert(err.reponse.data.msg));
+  };
+
+  const movePageFromMyItem = (el) => {
+    switch (el.boardCategoryNum) {
+      case 5:
+        router.push(`/clubhome/${el.clubNo}/notice/${el.no}`);
+        break;
+      case 6:
+        router.push(`/clubhome/${el.clubNo}?pid=${el.no}`);
+        break;
+      case 4:
+        router.push(`/promotion?id=${el.no}`);
+        break;
+      case 3:
+        router.push(`/questionAndAnswer/${el.no}`);
+        break;
+      case 2:
+        router.push(`/free/${el.no}`);
+        break;
+      case 1:
+        router.push(`/notice/${el.no}`);
+        break;
+      default:
+        break;
+    }
+  };
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -165,9 +203,7 @@ function Profile() {
       )}
       {router.query.category === 'scrap' && (
         <Scraps
-          userInfo={userInfo}
           profile={profile}
-          setClubNo={setClubNo}
           clubNo={clubNo}
           getScraps={getScraps}
           dataArr={dataArr}
@@ -175,6 +211,7 @@ function Profile() {
           id={id}
           matchTitle={matchTitle}
           joinedClubs={joinedClubs}
+          selectClub={selectClub}
         />
       )}
       {router.query.category === 'myPosts' && (
@@ -190,6 +227,7 @@ function Profile() {
           isHave={isHave}
           setIsHave={setIsHave}
           boardArr={boardArr}
+          movePageFromMyItem={movePageFromMyItem}
         />
       )}
     </div>
