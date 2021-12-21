@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from 'styles/Club/Home/Schedule/Calendar.module.scss';
-import Table from './RightComponents/Table';
-import Control from './RightComponents/Control';
+import Table from './Table';
+import Control from './Control';
 
 const RightContainer = ({
   setMoment,

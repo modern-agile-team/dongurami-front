@@ -1,10 +1,10 @@
 import styles from 'styles/Club/Home/Schedule/Calendar.module.scss';
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import moment from 'moment';
-import DailyModal from './ScheduleManage/DailyModal';
+import DailyModal from './ScheduleManage/DailyModal/DailyModal';
 import Schedule from './Schedule/Schedule';
 import DailyControl from './ScheduleManage/DailyControl/DailyControl';
-import RightContainer from './RightContainer';
+import RightContainer from './RightComponents/RightContainer';
 import MakeTd from './RightComponents/MakeTd';
 import { useRouter } from 'next/router';
 import {
@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Calendar = () => {
   const weekDays = ['일', '월', '화', '수', '목', '금', '토'];
+  const colors = ['#F9AE7B', '#FEDD01', '#E3E931', '#B5EAFF', '#E9D9EF'];
   const [momentTime, setMoment] = useState(moment());
   const [date, setDate] = useState('');
   const [pop, setPop] = useState('Calendar');
@@ -28,43 +29,67 @@ const Calendar = () => {
   const [title, setTitle] = useState(null);
   const [color, setColor] = useState('#FFFFFF');
   const [nowDay, setNowDay] = useState('');
-
-  const titleRef = useRef();
-  const router = useRouter();
-
-  const today = momentTime;
-
-  //DailyModal
-
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [colorCode, setColorCode] = useState();
   const [newTitle, setNewTitle] = useState();
-  //수정버튼 함수
 
+  const titleRef = useRef();
+  const router = useRouter();
+  const Qdata = router.query;
+
+  const todayData = useSelector((state) => state.calendar.info);
+  const dispatch = useDispatch();
+
+  const today = momentTime;
+  const firstWeek = today.clone().startOf('month').week();
+  const lastWeek =
+    today.clone().endOf('month').week() === 1
+      ? 53
+      : today.clone().endOf('month').week();
+  const nowMonth = moment().format('YYYY-MM');
+
+  //달 기준 일정 정보 불러오기
+  const getData = () => {
+    getInfo(Qdata.id, today.format('YYYY-MM'))
+      .then((res) => setSchedule(res.data.result))
+      .catch((err) => {
+        alert(err.response.data.msg);
+        if (err.response.status === 401) moveLogin();
+        else if (err.response.status === 403) moveHome();
+      });
+  };
+  //
+  //일정 추가시 초기 설정
   const addSet = () => {
     setStartDate(today.format('YYYY-MM-DD'));
     setEndDate(today.format('YYYY-MM-DD'));
     setColor('#FFFFFF');
   };
+  //
+  //일정 수정시 초기 설정
   const modifySet = () => {
     setStartDate(period[0]);
     setEndDate(period[1]);
     setNewTitle(title);
     setColorCode(color);
   };
-
+  //
+  //수정 버튼
   const onModifyBtn = () => {
-    if (Date.parse(startDate) <= Date.parse(endDate)) {
-      onClickModifyBtn();
-      setPop('Calendar');
-    } else alert('날짜를 확인해주세요');
+    if (Date.parse(startDate) <= Date.parse(endDate)) onClickModifyBtn();
+    else alert('날짜를 확인해주세요');
   };
+  //
+
+  //일정 추가, 수정에서 색깔 버튼
   const onClickColorBtn = (color) => {
     setColor(`${color}`);
     setColorCode(`${color}`);
   };
-  //일정 추가 버튼
+  //
+
+  //추가 버튼
   const onAddBtn = (e) => {
     e.stopPropagation();
     if (
@@ -78,8 +103,9 @@ const Calendar = () => {
       alert('제목을 확인해주세요');
     }
   };
+  //
   //일정 추가 함수
-  const onClickAdd = async () => {
+  const onClickAdd = useCallback(async () => {
     if (titleRef.current.value.length > 50)
       alert('제목은 50자 이하여야 합니다.');
     else {
@@ -91,16 +117,14 @@ const Calendar = () => {
         url: `clubhome/${Qdata.id}`,
         notiCategoryNum: 4
       })
-        .then((res) => console.log(res))
+        .then(() => setPop('Calendar'))
         .catch((err) => alert(err.response.data.msg));
-      await getInfo(Qdata.id, today.format('YYYY-MM'))
-        .then((res) => setSchedule(res.data.result))
-        .catch((err) => alert(err.response.data.msg));
-      setPop('Calendar');
+      await getData();
     }
-  };
-
-  const onClickModifyBtn = async () => {
+  }, [titleRef, Qdata, color, startDate, endDate]);
+  //
+  //일정 수정 함수
+  const onClickModifyBtn = useCallback(async () => {
     if (newTitle.replace(/ /g, '').length === 0) setNewTitle(title);
     if (newTitle.length > 50) alert('제목은 50자 이하여야 합니다.');
     else {
@@ -112,91 +136,58 @@ const Calendar = () => {
         url: `clubhome/${Qdata.id}`,
         notiCategoryNum: 5
       })
-        .then((res) => console.log(res))
+        .then(() => setPop('Calendar'))
         .catch((err) => alert(err.response.data.msg));
-      await getInfo(Qdata.id, today.format('YYYY-MM'))
-        .then((res) => setSchedule(res.data.result))
-        .catch((err) => alert(err.reponse.data.msg));
+      await getData();
     }
-  };
-  //DailyModal
+  }, [newTitle, title, Qdata, no, colorCode, startDate, endDate]);
+  //
 
-  //DailyControl
-  const getData = () => {
-    getInfo(Qdata.id, today.format('YYYY-MM'))
-      .then((res) => setSchedule(res.data.result))
-      .catch((err) => alert(err.response.data.msg));
-  };
-  const onClickPencil = (schedule) => {
+  //수정 모달 띄우기 전 초기값 설정(빈값 들어왔을 때)
+  const onClickPencil = useCallback((schedule) => {
     setTitle(schedule.title);
     setPeriod([schedule.startDate, schedule.endDate]);
     setNo(schedule.no);
     setColor(schedule.colorCode);
     setPop('ScheduleModify');
-  };
+  }, []);
+  //
 
-  const onDeleteSchedule = async (el) => {
-    await deleteSchedule(Qdata.id, el)
-      .then((res) => console.log(res))
-      .catch((err) => alert(err.response.data.msg));
-    await getData();
-  };
+  //삭제 버튼 함수
+  const onDeleteSchedule = useCallback(
+    async (el) => {
+      await deleteSchedule(Qdata.id, el)
+        .then(() => getData())
+        .catch((err) => alert(err.response.data.msg));
+    },
+    [Qdata]
+  );
+  //
 
-  const importantModify = (schedule, e) => {
-    importantSchedule(Qdata.id, schedule, { important: e }).then((res) =>
-      getData()
-    );
-  };
-  //DailyControl
-
-  const Qdata = router.query;
-  const colors = ['#F9AE7B', '#FEDD01', '#E3E931', '#B5EAFF', '#E9D9EF'];
-  const todayData = useSelector((state) => state.calendar.info);
-  const dispatch = useDispatch();
+  //별 버튼 함수
+  const importantModify = useCallback(
+    (schedule, e) => {
+      importantSchedule(Qdata.id, schedule, { important: e }).then(() =>
+        getData()
+      );
+    },
+    [Qdata]
+  );
+  //
 
   const moveLogin = useCallback(() => router.push('/LoginPage'), [router]);
   const moveHome = useCallback(() => location.reload(), []);
 
-  const yearMonth = today.format('YYYY-MM');
-  const firstWeek = today.clone().startOf('month').week();
-  const lastWeek =
-    today.clone().endOf('month').week() === 1
-      ? 53
-      : today.clone().endOf('month').week();
-
-  const nowMonth = moment().format('YYYY-MM');
-
-  useEffect(() => {
-    if (today.format('YYYY-MM') === nowMonth)
-      setNowDay(moment().format('YYYY-MM-DD'));
-    if (!router.isReady) return;
-    dispatch(getSchedule({ clubId: Qdata.id, today: nowMonth }));
-    getInfo(Qdata.id, yearMonth)
-      .then((res) => setSchedule(res.data.result))
-      .catch((err) => {
-        alert(err.response.data.msg);
-        if (err.response.status === 401) moveLogin();
-        else if (err.response.status === 403) moveHome();
-      });
-  }, [
-    today,
-    nowMonth,
-    router,
-    Qdata.id,
-    yearMonth,
-    moveLogin,
-    moveHome,
-    dispatch,
-    todayData
-  ]);
-
+  //기간 안에 날짜가 있는지 확인 (return bool)
   const inDate = useCallback((startDate, selectedDate, endDate) => {
     return (
       Date.parse(startDate) <= Date.parse(selectedDate) &&
       Date.parse(selectedDate) <= Date.parse(endDate)
     );
   }, []);
+  //
 
+  //td 만들때 오늘인지 이번달인지 다른달인지 확인하는 flag 생성 함수
   const checkFlag = useCallback(
     (days) => {
       if (moment().format('YYYYMMDD') === days.format('YYYYMMDD')) {
@@ -208,6 +199,7 @@ const Calendar = () => {
     },
     [today]
   );
+  //
 
   //달력만드는 함수
   const calendarArr = useCallback(() => {
@@ -229,6 +221,15 @@ const Calendar = () => {
     }
     return result;
   }, [firstWeek, lastWeek, schedule, today, setPop, setDate, inDate]);
+  //
+
+  useEffect(() => {
+    if (today.format('YYYY-MM') === nowMonth)
+      setNowDay(moment().format('YYYY-MM-DD'));
+    if (!router.isReady) return;
+    dispatch(getSchedule({ clubId: Qdata.id, today: nowMonth }));
+    getData();
+  }, [today, nowMonth, router, Qdata.id, moveLogin, moveHome, dispatch]);
 
   if (!todayData) return null;
 
