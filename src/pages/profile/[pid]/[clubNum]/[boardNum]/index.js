@@ -1,4 +1,4 @@
-import PostContainer from 'components/User/Profile/ScrapPosts/PostContainer';
+import PostContainer from 'components/User/Profile/Scraps/PostContainer';
 import Head from 'next/head';
 
 const mypost = () => {

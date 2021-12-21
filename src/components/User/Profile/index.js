@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import Scraps from './Scraps';
+import Scraps from './Scraps/Scraps';
 import styles from 'styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo/UserInfo';
-import MyPost from './MyPost';
+import MyPost from './MyPost/MyPost';
 import { useRouter } from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';
@@ -11,7 +11,6 @@ import { signOut } from 'redux/slices/user';
 
 function Profile() {
   const dispatch = useDispatch();
-  const [comp, setComp] = useState('프로필');
   const [userInfo, setUserInfo] = useState({});
   const [profile, setProfile] = useState({});
   const [id, setId] = useState('');
