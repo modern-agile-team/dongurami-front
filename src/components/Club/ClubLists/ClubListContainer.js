@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import TypeSearch from './TypeSearch';
 import styles from 'styles/Club/Lists/ClubLists.module.scss';
-import ClubList from './ClubList';
-import { getDatas, searchDatas } from 'apis/clublist';
+import ClubListItem from './ClubList';
 
 const ClubListContainer = ({ clubData, onCategorySearch, onSearch }) => {
   return (
@@ -12,7 +11,7 @@ const ClubListContainer = ({ clubData, onCategorySearch, onSearch }) => {
         <div className={styles.activities}>
           {clubData.map((el) => {
             return (
-              <ClubList
+              <ClubListItem
                 img={el.logoUrl}
                 title={el.name}
                 categories={el.category}
