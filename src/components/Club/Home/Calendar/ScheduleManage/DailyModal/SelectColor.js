@@ -11,7 +11,7 @@ const SelectColors = ({ colors, onClickColorBtn }) => {
             key={index}
             style={{ background: color }}
             onClick={() => onClickColorBtn(color)}
-          ></button>
+          />
         );
       })}
     </div>

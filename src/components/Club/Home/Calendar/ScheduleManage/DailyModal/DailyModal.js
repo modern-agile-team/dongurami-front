@@ -25,7 +25,7 @@ const DailyModal = ({
   onModifyBtn,
   onClickColorBtn
 }) => {
-  useEffect(async () => {
+  useEffect(() => {
     pop === 'DailyModal' ? addSet() : modifySet();
   }, [today]);
 
