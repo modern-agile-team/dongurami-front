@@ -1,0 +1,19 @@
+.wrap {
+  text-align: center;
+  .name {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 90%;
+    width: 60%;
+    height: 3.3rem;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1.4px solid #dadada;
+    border-radius: 0px;
+    outline-style: none;
+  }
+  .email {
+    @extend .name;
+    margin-bottom: 0%;
+  }
+}

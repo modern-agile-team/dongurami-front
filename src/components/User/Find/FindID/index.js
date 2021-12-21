@@ -1,7 +1,9 @@
-import styles from 'styles/User/Find/FindID.module.scss';
-import Link from 'next/link';
+import styles from 'styles/User/Find/FindID/FindID.module.scss';
 import { useState } from 'react';
 import { postFindID } from 'apis/user';
+import { FindIdInput } from 'components/User/Find/FindID/Container/FindIdInput';
+import { FindPwRoute } from 'components/User/Find/FindID/Container/FindPwRoute';
+import { FindIdButton } from 'components/User/Find/FindID/Container/FindIdButton';
 
 export const FindID = () => {
   const [name, setName] = useState('');
@@ -34,30 +36,15 @@ export const FindID = () => {
       <div className={styles.find}>
         <div className={styles.body}>
           <h1>아이디 찾기</h1>
-          <input
-            className={styles.name}
-            type="text"
-            placeholder="이름"
-            name="name"
-            onChange={onChange}
-          />
-          <input
-            className={styles.email}
-            type="text"
-            placeholder="이메일"
-            name="email"
+          <FindIdInput
+            name={name}
+            email={email}
             onChange={onChange}
             onKeyPress={onKeyPress}
           />
         </div>
-        <div className={styles.findPW}>
-          <Link href="/findPW" passHref>
-            <span>비밀번호 찾기</span>
-          </Link>
-        </div>
-        <div className={styles.btnWrap}>
-          <button onClick={onSubmit}>아이디 찾기</button>
-        </div>
+        <FindPwRoute />
+        <FindIdButton onSubmit={onSubmit} />
       </div>
     </div>
   );

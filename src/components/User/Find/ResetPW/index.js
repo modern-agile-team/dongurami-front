@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import styles from 'styles/User/Find/ResetPW.module.scss';
+import styles from 'styles/User/Find/ResetPW/ResetPW.module.scss';
 import { patchResetPW } from 'apis/user';
 import { useRouter } from 'next/router';
+import { ResetPwInput } from './Container/ResetPwInput';
+import { ResetPwButton } from './Container/ResetPwButton';
 
 function ResetPW() {
   const [id, setId] = useState('');
@@ -53,33 +55,14 @@ function ResetPW() {
       <div className={styles.resetPW}>
         <div className={styles.body}>
           <h1>새 비밀번호 설정</h1>
-          <input
-            type="number"
-            placeholder="학번"
-            name="id"
-            value={id}
-            onChange={onChange}
-          />
-          <input
-            type="password"
-            placeholder="새로운 비밀번호"
-            name="newPassword"
-            value={newPassword}
-            onChange={onChange}
-          />
-          <input
-            type="password"
-            placeholder="새로운 비밀번호 확인"
-            name="checkNewPassword"
-            value={checkNewPassword}
+          <ResetPwInput
+            id={id}
+            newPassword={newPassword}
+            checkNewPassword={checkNewPassword}
             onChange={onChange}
           />
         </div>
-        <div className={styles.btnWrap}>
-          <button type="submit" onClick={onSubmit}>
-            변경하기
-          </button>
-        </div>
+        <ResetPwButton onSubmit={onSubmit} />
       </div>
     </div>
   );
