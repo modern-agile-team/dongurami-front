@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useMemo } from 'react';
 import Scraps from './Scraps/Scraps';
 import styles from 'styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo/UserInfo';
@@ -19,6 +19,20 @@ function Profile() {
   const [token, setToken] = useState(getToken());
   const [isOpen, setIsOpen] = useState(false);
   const [leaveIsOpen, setLeaveIsOpen] = useState(false);
+  // 작성글 state들
+  const [myPosts, setMyPosts] = useState();
+  const [myComments, setMyComments] = useState();
+  const [category, setCategory] = useState(0);
+  const [isHave, setIsHave] = useState(false);
+  const boardArr = [
+    '공지게시판',
+    '자유게시판',
+    'QnA게시판',
+    '홍보게시판',
+    '동아리공지게시판',
+    '동아리활동내용'
+  ];
+  //
 
   const router = useRouter();
 
@@ -36,6 +50,19 @@ function Profile() {
       }
     });
   };
+
+  const joinedClubs = useMemo(() => {
+    if (Object.keys(profile).length > 0) {
+      return profile.clubs.map((club, index) => {
+        return (
+          <option value={club.no} key={index}>
+            {club.name}
+          </option>
+        );
+      });
+    }
+    return [];
+  }, [profile]);
 
   const logout = useCallback(() => {
     window.localStorage.removeItem('jwt');
@@ -75,6 +102,19 @@ function Profile() {
         });
     }
   }, [router, token]);
+
+  const onClickQuitClubSpan = (name, number) => {
+    if (window.confirm(`정말로 ${name}에서 탈퇴하시겠습니까?`)) {
+      quitClub(profile.id, number)
+        .then((res) => {
+          window.localStorage.setItem('jwt', res.data.jwt);
+          alert(res.data.msg);
+          location.reload();
+        })
+        .catch((err) => alert(err.response.data.msg));
+      setLeaveIsOpen(!setLeaveIsOpen);
+    } else setLeaveIsOpen(false);
+  };
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -152,6 +192,7 @@ function Profile() {
           leaveIsOpen={leaveIsOpen}
           setLeaveIsOpen={setLeaveIsOpen}
           clubNo={clubNo}
+          onClickQuitClubSpan={onClickQuitClubSpan}
         />
       )}
       {router.query.category === 'scrap' && (
@@ -165,10 +206,23 @@ function Profile() {
           setDataArr={setDataArr}
           id={id}
           matchTitle={matchTitle}
+          joinedClubs={joinedClubs}
         />
       )}
       {router.query.category === 'myPosts' && (
-        <MyPost matchTitle={matchTitle} />
+        <MyPost
+          matchTitle={matchTitle}
+          router={router}
+          myPosts={myPosts}
+          setMyPosts={setMyPosts}
+          myComments={myComments}
+          setMyComments={setMyComments}
+          category={category}
+          setCategory={setCategory}
+          isHave={isHave}
+          setIsHave={setIsHave}
+          boardArr={boardArr}
+        />
       )}
     </div>
   );

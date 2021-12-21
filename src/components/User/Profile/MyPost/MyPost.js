@@ -1,23 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getMyPosts } from 'apis/profile';
 import styles from 'styles/Profile/MyPost.module.scss';
-import { useRouter } from 'next/router';
 import MyItems from './MyItems';
 
-const MyPost = ({ matchTitle }) => {
-  const [myPosts, setMyPosts] = useState();
-  const [myComments, setMyComments] = useState();
-  const [category, setCategory] = useState(0);
-  const [isHave, setIsHave] = useState(false);
-  const router = useRouter();
-  const boardArr = [
-    '공지게시판',
-    '자유게시판',
-    'QnA게시판',
-    '홍보게시판',
-    '동아리공지게시판',
-    '동아리활동내용'
-  ];
+const MyPost = ({
+  matchTitle,
+  router,
+  myPosts,
+  setMyPosts,
+  myComments,
+  setMyComments,
+  category,
+  setCategory,
+  isHave,
+  setIsHave,
+  boardArr
+}) => {
   useEffect(() => {
     if (!router.isReady) return;
     getMyPosts(router.query.pid)

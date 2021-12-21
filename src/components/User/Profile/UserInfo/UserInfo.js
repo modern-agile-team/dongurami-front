@@ -14,7 +14,8 @@ const UserInfo = ({
   setIsOpen,
   leaveIsOpen,
   setLeaveIsOpen,
-  clubNo
+  clubNo,
+  onClickQuitClubSpan
 }) => {
   return (
     <div className={styles.wrap}>
@@ -56,6 +57,7 @@ const UserInfo = ({
             setLeaveIsOpen={setLeaveIsOpen}
             leaveIsOpen={leaveIsOpen}
             profile={profile}
+            onClickQuitClubSpan={onClickQuitClubSpan}
           />
           {userInfo.id === profile.id && (
             <div className={styles.onlyMe}>
