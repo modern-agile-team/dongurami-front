@@ -8,6 +8,7 @@ import { getScraps, getUserInfo } from 'apis/profile';
 import getToken from 'utils/getToken';
 import { useDispatch } from 'react-redux';
 import { signOut } from 'redux/slices/user';
+import ProfileHeader from './ProfileHeader/ProfileHeader';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -42,13 +43,18 @@ function Profile() {
     });
   };
   const moveComp = (pageName) => {
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query,
-        category: pageName
-      }
-    });
+    if (pageName === undefined) moveInfo();
+    else if (pageName === 'scrap' && profile.clubs.length <= 0)
+      alert('가입된 동아리가 없습니다.');
+    else {
+      router.push({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          category: pageName
+        }
+      });
+    }
   };
 
   const joinedClubs = useMemo(() => {
@@ -116,6 +122,8 @@ function Profile() {
     } else setLeaveIsOpen(false);
   };
 
+  const compObj = { scrap: '스크랩', myPosts: '프로필' };
+
   useEffect(() => {
     if (!router.isReady) return;
     fetchUserInfo();
@@ -133,53 +141,13 @@ function Profile() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.profileHeader}>
-        <button
-          style={
-            router.query.category !== undefined
-              ? { background: '#f2f2f2' }
-              : null
-          }
-          className={styles.profileBtn}
-          onClick={() => {
-            moveInfo();
-          }}
-        >
-          프로필
-        </button>
-        {userInfo.id === profile.id && (
-          <button
-            style={
-              router.query.category !== 'scrap'
-                ? { background: '#f2f2f2' }
-                : null
-            }
-            className={styles.scrapBtn}
-            onClick={() => {
-              if (profile.clubs.length > 0) {
-                moveComp('scrap');
-              } else alert('가입된 동아리가 없습니다.');
-            }}
-          >
-            스크랩
-          </button>
-        )}
-        {userInfo.id === profile.id && (
-          <button
-            style={
-              router.query.category !== 'myPosts'
-                ? { background: '#f2f2f2' }
-                : null
-            }
-            className={styles.myPost}
-            onClick={() => {
-              moveComp('myPosts');
-            }}
-          >
-            작성글
-          </button>
-        )}
-      </div>
+      <ProfileHeader
+        profile={profile}
+        userInfo={userInfo}
+        router={router}
+        moveComp={moveComp}
+        compObj={compObj}
+      />
       {router.query.category === undefined && (
         <UserInfo
           logout={logout}
