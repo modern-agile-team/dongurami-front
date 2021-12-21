@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import getToken from 'utils/getToken';
 import { BsImage } from 'react-icons/bs';
 
-const ClubList = ({ img, categories, title, clubNo }) => {
+const ClubListItem = ({ img, categories, title, clubNo }) => {
   const router = useRouter();
 
   const onClick = () => {
@@ -25,4 +25,4 @@ const ClubList = ({ img, categories, title, clubNo }) => {
   );
 };
 
-export default ClubList;
+export default ClubListItem;

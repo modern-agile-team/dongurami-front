@@ -1,4 +1,4 @@
-import ClubListContainer from 'components/Club/ClubLists/ClubListContainer';
+import ClubList from 'components/Club/ClubLists';
 import Head from 'next/head';
 
 function clublists() {
@@ -7,7 +7,7 @@ function clublists() {
       <Head>
         <title>동그라미 | 동아리 목록</title>
       </Head>
-      <ClubListContainer />
+      <ClubList />
     </>
   );
 }
