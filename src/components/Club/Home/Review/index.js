@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from 'styles/Club/Home/Review/Review.module.scss';
-import ReviewFilter from './ReviewFilter';
+import Sorting from './List/Sorting';
 import ReviewHeader from './ReviewHeader';
 import ReviewWrite from './ReviewWrite';
-import ReviewMine from './ReviewMine';
-import ReviewList from './ReviewList';
+import ReviewMine from './List/ReviewMine';
+import ReviewList from './List/ReviewList';
 import { getReview, postReview, deleteReview, putReview } from 'apis/clubhome';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -15,10 +15,13 @@ const Review = () => {
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
   const [starState, setStarState] = useState(new Array(5).fill(false)); // 별점 상태
   const [studentId, setStudentId] = useState('');
+  const [openSelect, setOpenSelect] = useState(false);
+  const [standard, setStandard] = useState('최신 순');
 
   const router = useRouter();
 
   const inputRef = useRef();
+  const sortRef = useRef(null);
 
   const clubInfo = useSelector((state) => state.clubhome.info.result[0]);
 
@@ -125,8 +128,8 @@ const Review = () => {
     setReviewInput(e.target.value);
   };
 
-  // 필터링
-  const onFilterChange = (e) => {
+  // 후기 정렬
+  const sortReview = (e) => {
     const filter = e.target.value;
     const oldestOrder = [...reviewList].sort((a, b) => {
       if (filter === 0) return a.no - b.no;
@@ -134,31 +137,24 @@ const Review = () => {
       else if (filter === 2) return b.score - a.score;
       else return a.score - b.score;
     });
-    // const latestOrder = [...reviewList].sort((a, b) => {
-    //   return b.no - a.no;
-    // });
-    // const rateHigh = [...reviewList].sort((a, b) => {
-    //   return b.score - a.score;
-    // });
-    // const rateLow = [...reviewList].sort((a, b) => {
-    //   return a.score - b.score;
-    // });
-    // switch (filter) {
-    //   case 0:
-    //     setReviewList(oldestOrder);
-    //     break;
-    //   case 1:
-    //     setReviewList(latestOrder);
-    //     break;
-    //   case 2:
-    //     setReviewList(rateHigh);
-    //     break;
-    //   case 3:
-    //     setReviewList(rateLow);
-    //     break;
-    // }
     setReviewList(oldestOrder);
   };
+
+  const openSelectBox = () => {
+    setOpenSelect(!openSelect);
+  };
+
+  const changeStandard = (e) => {
+    setStandard(e.target.innerHTML);
+    sortReview(e);
+    setOpenSelect(!openSelect);
+  };
+
+  function handleClickOutside(event) {
+    if (sortRef.current && !sortRef.current.contains(event.target)) {
+      setOpenSelect(false);
+    }
+  }
 
   useEffect(() => {
     getReviewData();
@@ -177,7 +173,14 @@ const Review = () => {
         onReviewSubmit={onReviewSubmit}
         inputRef={inputRef}
       />
-      <ReviewFilter onFilterChange={onFilterChange} />
+      <Sorting
+        openSelect={openSelect}
+        standard={standard}
+        openSelectBox={openSelectBox}
+        changeStandard={changeStandard}
+        handleClickOutside={handleClickOutside}
+        sortRef={sortRef}
+      />
       {reviewMine.length ? (
         <ReviewMine
           onReviewDelete={onReviewDelete}

@@ -7,7 +7,7 @@ import Intro from './Intro';
 import ClubNotice from './Notice/ClubNotice';
 import Activities from './Activities/Activities';
 import Calendar from './Calendar';
-import Review from './Review/Review';
+import Review from './Review';
 import Apply from './Apply';
 import SideBar from './SideBar';
 import styles from 'styles/Club/Home/Common/frame.module.scss';
