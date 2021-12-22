@@ -1,4 +1,4 @@
-import Board from 'components/Board/Board';
+import Board from 'components/Board';
 import Head from 'next/head';
 
 function search() {

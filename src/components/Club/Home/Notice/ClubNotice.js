@@ -1,4 +1,4 @@
-import Board from 'components/Board/Board';
+import Board from 'components/Board';
 import styles from 'styles/Club/Home/Notice/ClubNotice.module.scss';
 
 function ClubNotice() {

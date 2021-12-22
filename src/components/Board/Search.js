@@ -1,11 +1,9 @@
 import styles from 'styles/Board/Board/Search.module.scss';
 import { BsSearch } from 'react-icons/bs';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-function NoticeSearch() {
-  const router = useRouter();
+function Search({ router }) {
   const [keyword, setKeyword] = useState('');
   const [type, setType] = useState('title');
 
@@ -46,4 +44,4 @@ function NoticeSearch() {
   );
 }
 
-export default NoticeSearch;
+export default Search;
