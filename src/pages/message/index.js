@@ -1,4 +1,4 @@
-import MessageList from 'components/User/Message/MessageList';
+import MessageListContainer from 'components/User/Message/MessageList';
 import Head from 'next/head';
 
 function message() {
@@ -7,7 +7,7 @@ function message() {
       <Head>
         <title>동그라미 | 쪽지함</title>
       </Head>
-      <MessageList />
+      <MessageListContainer />
     </>
   );
 }
