@@ -18,10 +18,10 @@ const ReviewMine = ({ description, score, inDate, onReviewDelete }) => {
           </div>
         </div>
         <div className={styles.star}>
-          {notStars.map((el, i) => {
+          {notStars.map((__, i) => {
             return <AiOutlineStar key={5 - i} />;
           })}
-          {stars.map((el, i) => {
+          {stars.map((__, i) => {
             return <AiFillStar key={i} />;
           })}
           <div className={styles.update}>
