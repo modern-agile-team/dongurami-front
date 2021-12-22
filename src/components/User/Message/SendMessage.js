@@ -1,10 +1,11 @@
 import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { MdClose } from 'react-icons/md';
 import { sendLetter, replyLetter } from 'apis/message';
-import SendMessage from './SendMessage';
+import styles from 'styles/Message/SendMessage.module.scss';
 import router from 'next/router';
 
-function SendMessageContainer({
+function SendMessage({
   show,
   onClose,
   letter,
@@ -32,7 +33,6 @@ function SendMessageContainer({
   };
 
   const onChange = (e) => {
-    console.log('dkssudd');
     setDescription(e.target.value);
   };
 
@@ -139,26 +139,35 @@ function SendMessageContainer({
   };
 
   return (
-    <SendMessage
-      show={show}
-      onClose={onClose}
-      letter={letter}
-      detailMessage={detailMessage}
-      inquiryMessage={inquiryMessage}
-      otherId={otherId}
-      letterNo={letterNo}
-      user={user}
-      isActivities={isActivities}
-      isCheck={isCheck}
-      setIsCheck={setIsCheck}
-      onChange={onChange}
+    <div
+      className={show ? styles.open : styles.close}
+      ref={modalContainer}
       onClick={onClick}
-      onSubmit={onSubmit}
-      checkHandler={checkHandler}
-      modalContainer={modalContainer}
-      description={description}
-    />
+    >
+      <button onClick={onClose}>
+        <MdClose />
+      </button>
+      <div>
+        <div className={styles.title}>
+          <p>쪽지보내기</p>
+          <input type="checkbox" checked={isCheck} onChange={checkHandler} />
+          익명
+        </div>
+        <div className={styles.text}>
+          <form>
+            <textarea
+              placeholder="내용을 입력해주세요"
+              value={description}
+              onChange={onChange}
+            />
+          </form>
+        </div>
+        <div className={styles.btn}>
+          <button onClick={onSubmit}>전송</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
-export default SendMessageContainer;
+export default SendMessage;

@@ -2,9 +2,15 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { getMessages, getDetailMessages, deleteMessage } from 'apis/message';
-import MessageList from './MessageList';
+import MobileEntireMessage from './MobileEntireMessage';
+import styles from 'styles/Message/MessageList.module.scss';
+import SendMessage from './SendMessage';
+import Spinner from './Spiner';
+import DetailMessageListContainer from './DetailMessageListContainer';
+import EntireMessageList from './EntireMessageList';
+import MobileDetailMessage from './MobileDetailMessage';
 
-const MessageListContainer = () => {
+const MessageList = () => {
   const [messages, setMessages] = useState([]);
   const [recipientId, setRecipientId] = useState('');
   const [detailMessage, setDetailMessage] = useState([]);
@@ -12,6 +18,7 @@ const MessageListContainer = () => {
   const [groupNo, setGroupNo] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isHidden, setIsHidden] = useState(0);
 
   const user = useSelector((state) => state.user);
   const router = useRouter();
@@ -31,6 +38,7 @@ const MessageListContainer = () => {
     setLoading(true);
     if (user) {
       await getDetailMessages(user.id, letterNo).then((response) => {
+        console.log(response);
         setDetailMessage(response.data.letters);
         isRecipientId = response.data.letters.find(
           (el) => el.senderId !== user.id
@@ -81,19 +89,56 @@ const MessageListContainer = () => {
   }, [user, router]);
 
   return (
-    <MessageList
-      messages={messages}
-      recipientId={recipientId}
-      detailMessage={detailMessage}
-      recipient={recipient}
-      isLoading={isLoading}
-      openModal={openModal}
-      setOpenModal={setOpenModal}
-      inquiryMessage={inquiryMessage}
-      onClickInquiry={onClickInquiry}
-      onDelete={onDelete}
-    />
+    <div className={styles.container}>
+      <div className={styles.entireMessage}>
+        <EntireMessageList
+          messages={messages}
+          onClickInquiry={onClickInquiry}
+        />
+      </div>
+      <div className={styles.detailMessage}>
+        {isLoading ? (
+          <div className={styles.loadingcontainer}>
+            <Spinner />
+          </div>
+        ) : (
+          <DetailMessageListContainer
+            detailMessage={detailMessage}
+            recipient={recipient}
+            inquiryMessage={inquiryMessage}
+            setOpenModal={setOpenModal}
+            onDelete={onDelete}
+            messages={messages}
+          />
+        )}
+      </div>
+      {router.query.id ? (
+        <MobileDetailMessage
+          detailMessage={detailMessage}
+          recipient={recipient}
+          inquiryMessage={inquiryMessage}
+          setOpenModal={setOpenModal}
+          onDelete={onDelete}
+          messages={messages}
+          isLoading={isLoading}
+        />
+      ) : (
+        <MobileEntireMessage
+          messages={messages}
+          onClickInquiry={onClickInquiry}
+        />
+      )}
+      <SendMessage
+        show={openModal}
+        onClose={() => setOpenModal(false)}
+        detailMessage={detailMessage[0]}
+        letterNo={router.query.id}
+        inquiryMessage={inquiryMessage}
+        otherId={recipientId}
+        user={user}
+      />
+    </div>
   );
 };
 
-export default MessageListContainer;
+export default MessageList;
