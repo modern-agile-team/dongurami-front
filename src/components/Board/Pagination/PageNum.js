@@ -60,6 +60,7 @@ const PageNum = ({ lastPage, setPage, page }) => {
           .map((_, idx) => {
             return (
               <Item
+                key={idx}
                 itemPage={lastPage + idx - 4}
                 setPage={setPage}
                 page={page}
