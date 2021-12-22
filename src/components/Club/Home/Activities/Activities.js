@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getBoardPosts } from 'redux/slices/board';
-import SendMessage from 'components/User/Message/SendMessage';
+import SendMessageContainer from 'components/User/Message/SendMessage';
 
 const Activities = () => {
   const router = useRouter();
@@ -105,7 +105,7 @@ const Activities = () => {
         </Modal>
       )}
       {messageOpen && (
-        <SendMessage
+        <SendMessageContainer
           show={messageOpen}
           onClose={() => setMessageOpen(false)}
           isActivities={isActivities}
