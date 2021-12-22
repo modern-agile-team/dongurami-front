@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Post from 'components/Post/Post';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
-import SendMessageContainer from 'components/User/Message/SendMessage';
+import SendMessage from 'components/User/Message/SendMessage';
 
 function PostContainer({ category }) {
   const router = useRouter();
@@ -36,7 +36,7 @@ function PostContainer({ category }) {
         setOpenMessage={setOpenModal}
       />
       {openModal && (
-        <SendMessageContainer
+        <SendMessage
           show={openModal}
           onClose={() => setOpenModal(false)}
           letter={letter}
