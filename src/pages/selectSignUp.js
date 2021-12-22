@@ -1,4 +1,4 @@
-import { SelectSignUp } from 'components/User/SignUp/SelectSignUp';
+import { SelectSignUp } from 'components/User/SignUp/BasicSignUp/SelectSignUp';
 import Head from 'next/head';
 
 function selectSignUp() {

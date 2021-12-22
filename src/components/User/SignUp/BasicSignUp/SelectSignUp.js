@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from 'styles/User/SignUp/SelectSignUp.module.scss';
-import OAuth from './OAuth';
+import styles from 'styles/User/SignUp/BasicSignUp/SelectSignUp.module.scss';
+import OAuth from '../NaverOauth/OAuth';
 import Link from 'next/link';
 
 export const SelectSignUp = () => {

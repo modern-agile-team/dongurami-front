@@ -1,0 +1,44 @@
+.wrap {
+  input {
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 60%;
+    height: 50px;
+    border: none;
+    border-radius: 0px;
+    border-bottom: 1.4px solid #dadada;
+    outline-style: none;
+    margin-bottom: 3%;
+    @media screen and (max-width: 480px) {
+      font-size: 75%;
+      width: 80%;
+    }
+  }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  select {
+    font-family: 'Noto Sans KR', sans-serif;
+    width: 63%;
+    height: 50px;
+    margin-top: 2%;
+    border: 1.5px solid #dadada;
+    border-radius: 5px;
+    @media screen and (max-width: 480px) {
+      font-size: 80%;
+      width: 82%;
+    }
+    option {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+  }
+  .notSame {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 75%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+    color: red;
+  }
+}
