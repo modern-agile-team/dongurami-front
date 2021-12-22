@@ -18,7 +18,8 @@ const PromotionContainer = ({
   isLoading,
   letter,
   boardData,
-  openModal
+  openModal,
+  sendMessage
 }) => {
   const [openMessage, setOpenMessage] = useState(false);
   const [postId, setPostId] = useState(0);

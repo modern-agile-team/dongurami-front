@@ -10,12 +10,12 @@ const PromotionItem = ({ setPostId, displayedAt, post }) => {
       <div
         className={styles.img}
         onClick={() => {
-          setPostId(post.id);
+          setPostId(post.no);
 
           router.push(
             {
               pathname: router.pathname,
-              query: { id: pId }
+              query: { id: post.no }
             },
             undefined,
             { scroll: false }
@@ -33,12 +33,12 @@ const PromotionItem = ({ setPostId, displayedAt, post }) => {
         <div
           className={styles.creationInfo}
           onClick={() => {
-            setPostId(pId);
+            setPostId(post.no);
 
             router.push(
               {
                 pathname: router.pathname,
-                query: { id: pId }
+                query: { id: post.no }
               },
               undefined,
               { scroll: false }
