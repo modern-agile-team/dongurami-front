@@ -1,8 +1,7 @@
 import { FaUserCircle, FaGraduationCap } from 'react-icons/fa';
 import styles from 'styles/Profile/ModifyInfo.module.scss';
 
-const ImmutableData = ({ userInfo, setGrade, grade }) => {
-  const gradeArr = [1, 2, 3, 4];
+const ImmutableData = ({ userInfo, setGrade, grade, gradeArr }) => {
   return (
     <>
       <div className={styles.name}>
