@@ -1,4 +1,4 @@
-import styles from '../../../styles/Common/Alarm/AlarmContainer.module.scss';
+import styles from 'styles/Common/Alarm/AlarmContainer.module.scss';
 import { FaTrashAlt } from 'react-icons/fa';
 import AlarmBody from './AlarmBody';
 import { useEffect, useState } from 'react';

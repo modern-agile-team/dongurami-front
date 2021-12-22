@@ -1,4 +1,4 @@
-import styles from '../../../styles/Common/Alarm/AlarmContainer.module.scss';
+import styles from 'styles/Common/Alarm/AlarmContainer.module.scss';
 import { FiDelete } from 'react-icons/fi';
 
 const AlarmList = ({

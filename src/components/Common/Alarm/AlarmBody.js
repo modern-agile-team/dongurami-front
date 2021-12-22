@@ -1,4 +1,4 @@
-import styles from '../../../styles/Common/Alarm/AlarmContainer.module.scss';
+import styles from 'styles/Common/Alarm/AlarmContainer.module.scss';
 import AlarmList from './AlarmList';
 
 const AlarmBody = ({

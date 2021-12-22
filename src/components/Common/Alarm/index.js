@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BiBell } from 'react-icons/bi';
 import { putAlarm, patchAlarm } from 'apis/alarm';
-import styles from '../../../styles/Common/Header/Header.module.scss';
+import styles from 'styles/Common/Header/Header.module.scss';
 import AlarmContainer from './AlarmContainer';
 import Badge from '../Badge';
 import { useDispatch } from 'react-redux';
