@@ -32,6 +32,7 @@ function SendMessageContainer({
   };
 
   const onChange = (e) => {
+    console.log('dkssudd');
     setDescription(e.target.value);
   };
 
