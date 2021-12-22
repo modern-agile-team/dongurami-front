@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Table from './Table';
@@ -34,15 +34,20 @@ function Board({ category }) {
     dispatch(getBoardPosts({ category, sort, order, type, keyword, clubNum }));
   }, [router, category, sort, order, type, keyword, clubNum, dispatch]);
 
-  const setPageToUrl = (nextPage) => {
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query,
-        page: nextPage
-      }
-    });
-  };
+  const lastPage = Math.ceil(posts.length / 10);
+
+  const setPageToUrl = useCallback(
+    (nextPage) => {
+      router.push({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: nextPage
+        }
+      });
+    },
+    [router]
+  );
   const onOrderChange = (e) => {
     const value = e.target.value.split(' ');
     router.push({
@@ -106,8 +111,8 @@ function Board({ category }) {
           </select>
         </div>
         <Table posts={posts} page={page} category={category} />
-        <Pagination posts={posts} page={page} setPage={setPageToUrl} />
-        <Search />
+        <Pagination lastPage={lastPage} page={page} setPage={setPageToUrl} />
+        <Search router={router} />
       </div>
     </div>
   );

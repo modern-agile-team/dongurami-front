@@ -1,9 +1,7 @@
 import { GrPrevious, GrNext } from 'react-icons/gr';
 import styles from 'styles/Board/Board/Pagination.module.scss';
 
-function Pagination({ posts, page, setPage }) {
-  const lastPage = Math.ceil(posts.length / 10);
-
+function Pagination({ lastPage, page, setPage }) {
   const Item = ({ itemPage }) => {
     return (
       <li>

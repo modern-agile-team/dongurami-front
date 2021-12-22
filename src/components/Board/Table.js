@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from 'styles/Board/Board/Table.module.scss';
 
-function NoticeTable({ posts, page, category }) {
+function Table({ posts, page, category }) {
   const router = useRouter();
   const postsByPage = posts.slice(10 * (page - 1), 10 * page);
 
@@ -55,4 +55,4 @@ function NoticeTable({ posts, page, category }) {
   );
 }
 
-export default NoticeTable;
+export default Table;
