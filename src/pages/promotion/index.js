@@ -1,4 +1,4 @@
-import PromotionPage from 'components/Promotion';
+import Promotion from 'components/Promotion';
 import Head from 'next/head';
 
 function promotion() {
@@ -7,7 +7,7 @@ function promotion() {
       <Head>
         <title>동그라미 | 홍보 게시판</title>
       </Head>
-      <PromotionPage />
+      <Promotion />
     </>
   );
 }
