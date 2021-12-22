@@ -19,8 +19,7 @@ const Alarm = ({ alarmList, getAlarmData }) => {
   const router = useRouter();
 
   const showMoreAlarm = () => {
-    const temp = alarmShow;
-    setAlarmShow(temp + 10);
+    setAlarmShow(alarmShow + 10);
   };
 
   const moveWhenClickAlarm = async (url, alarmNumber, comp) => {
