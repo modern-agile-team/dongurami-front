@@ -7,9 +7,10 @@ const AlarmContainer = ({
   alarmList,
   showMoreAlarm,
   onAlarmDeleteAll,
-  onAlarmPatch,
   alarmShow,
-  getAlarmData
+  moveWhenClickAlarm,
+  clickDeleteIcon,
+  alarmCategoriNum
 }) => {
   const [isDelete, setIsDelete] = useState(false);
 
@@ -28,12 +29,12 @@ const AlarmContainer = ({
           </div>
         </div>
         <AlarmBody
-          setIsDelete={setIsDelete}
           alarmList={alarmList}
           alarmShow={alarmShow}
           showMoreAlarm={showMoreAlarm}
-          getAlarmData={getAlarmData}
-          onAlarmPatch={onAlarmPatch}
+          moveWhenClickAlarm={moveWhenClickAlarm}
+          clickDeleteIcon={clickDeleteIcon}
+          alarmCategoriNum={alarmCategoriNum}
         />
       </div>
     </>
