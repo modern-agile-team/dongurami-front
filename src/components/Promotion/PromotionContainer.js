@@ -3,7 +3,7 @@ import styles from 'styles/Board/Promotion/PromotionContainer.module.scss';
 import TypeSearch from './TypeSearch';
 import Modal from './Modal';
 import PromotionItem from './Promotion';
-import SendMessage from 'components/User/Message/SendMessage';
+import SendMessageContainer from 'components/User/Message/SendMessage';
 import { Spinner } from 'components/Common/Spinner';
 
 const PromotionContainer = ({
@@ -19,9 +19,10 @@ const PromotionContainer = ({
   letter,
   boardData,
   openModal,
-  sendMessage
+  sendMessage,
+  openMessage,
+  setOpenMessage
 }) => {
-  const [openMessage, setOpenMessage] = useState(false);
   const [postId, setPostId] = useState(0);
 
   return (
@@ -71,7 +72,7 @@ const PromotionContainer = ({
           setOpenMessage={setOpenMessage}
         />
       )}
-      <SendMessage
+      <SendMessageContainer
         show={openMessage}
         onClose={() => setOpenMessage(false)}
         letter={letter}

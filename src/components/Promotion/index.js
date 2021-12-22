@@ -15,6 +15,7 @@ const PromotionPage = () => {
   const [search, setSearch] = useState(false);
   const [letter, setLetter] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [openMessage, setOpenMessage] = useState(false);
   const router = useRouter();
 
   let scrollLoading = false;
@@ -195,6 +196,8 @@ const PromotionPage = () => {
       isLoading={isLoading}
       letter={letter}
       openModal={openModal}
+      openMessage={openMessage}
+      setOpenMessage={setOpenMessage}
     />
   );
 };
