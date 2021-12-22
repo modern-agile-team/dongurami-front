@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from 'styles/Board/Promotion/PromotionContainer.module.scss';
 import TypeSearch from './TypeSearch';
 import Modal from './Modal';
-import PromotionItem from './Promotion';
+import PromotionItem from './PromotionItem';
 import SendMessageContainer from 'components/User/Message/SendMessage';
 import { Spinner } from 'components/Common/Spinner';
 
