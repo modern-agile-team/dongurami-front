@@ -1,4 +1,4 @@
-import Profile from 'components/User/Profile/Profile';
+import Profile from 'components/User/Profile';
 import Head from 'next/head';
 
 function userinfo() {
