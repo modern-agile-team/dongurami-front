@@ -1,13 +1,13 @@
-import Link from 'next/link';
 import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import Table from './Table';
-import Pagination from './Pagination';
+import Table from './Table/Table';
+import Pagination from './Pagination/Pagination';
 import Search from './Search';
+import OrderBy from './BoardHeader/OrderBy';
+import HeaderBtn from './BoardHeader/HeaderBtn';
 import styles from 'styles/Board/Board/Board.module.scss';
 import { getBoardPosts } from 'redux/slices/board';
-import { DonguramiOutlineButton } from 'components/Common/DonguramiButton';
 
 function getQuery(router) {
   return {
@@ -27,6 +27,7 @@ function Board({ category }) {
   const dispatch = useDispatch();
 
   const { page, sort, order, type, keyword, clubNum } = getQuery(router);
+  const thName = ['번호', '제목', '작성자', '작성일', '조회수', '좋아요'];
 
   useEffect(() => {
     if (!sort || !order) return;
@@ -48,18 +49,21 @@ function Board({ category }) {
     },
     [router]
   );
-  const onOrderChange = (e) => {
-    const value = e.target.value.split(' ');
-    router.push({
-      pathname: router.pathname,
-      query: {
-        ...router.query,
-        page: 1,
-        sort: value[0],
-        order: value[1]
-      }
-    });
-  };
+  const onOrderChange = useCallback(
+    (e) => {
+      const value = e.target.value.split(' ');
+      router.push({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          sort: value[0],
+          order: value[1]
+        }
+      });
+    },
+    [router]
+  );
 
   const title = {
     notice: '공지 게시판',
@@ -75,42 +79,30 @@ function Board({ category }) {
     return false;
   })();
 
+  const postsByPage = posts.slice(10 * (page - 1), 10 * page);
+
   if (!posts) return null;
 
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <h1>
-          <Link
-            href={{
-              pathname: router.pathname,
-              query: { ...(router.query.id && { id: router.query.id }) }
-            }}
-            passHref
-          >
-            <a>{title[category]}</a>
-          </Link>
-        </h1>
+        <HeaderBtn router={router} title={title[category]} />
         <hr />
-        <div className={styles.orderBy}>
-          {canWrite && (
-            <Link
-              href={{
-                pathname: `${router.pathname}/write`,
-                query: router.query
-              }}
-              passHref
-            >
-              <DonguramiOutlineButton>✏️ 글쓰기</DonguramiOutlineButton>
-            </Link>
-          )}
-          <select value={`${sort} ${order}`} onChange={onOrderChange}>
-            <option value="inDate DESC">최근순</option>
-            <option value="inDate ASC">오래된순</option>
-            <option value="hit DESC">조회수순</option>
-          </select>
-        </div>
-        <Table posts={posts} page={page} category={category} />
+        <OrderBy
+          canWrite={canWrite}
+          router={router}
+          sort={sort}
+          order={order}
+          onOrderChange={onOrderChange}
+        />
+        <Table
+          posts={posts}
+          page={page}
+          category={category}
+          router={router}
+          postsByPage={postsByPage}
+          thName={thName}
+        />
         <Pagination lastPage={lastPage} page={page} setPage={setPageToUrl} />
         <Search router={router} />
       </div>
