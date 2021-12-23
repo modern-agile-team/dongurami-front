@@ -130,7 +130,7 @@ function Profile() {
   const setNewToken = (res) => {
     window.localStorage.setItem('jwt', res.data.jwt);
     alert(res.data.msg);
-    location.reload();
+    router.reload();
   };
 
   const selectClub = (e) => {
