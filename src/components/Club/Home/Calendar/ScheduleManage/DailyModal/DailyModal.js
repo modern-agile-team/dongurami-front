@@ -20,13 +20,13 @@ const DailyModal = ({
   titleRef,
   onAddBtn,
   pop,
-  addSet,
-  modifySet,
+  setDefaultAdd,
+  setDefaultModify,
   onModifyBtn,
   onClickColorBtn
 }) => {
   useEffect(() => {
-    pop === 'DailyModal' ? addSet() : modifySet();
+    pop === 'DailyModal' ? setDefaultAdd() : setDefaultModify();
   }, [today]);
 
   return (
