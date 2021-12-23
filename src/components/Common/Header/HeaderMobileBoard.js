@@ -1,22 +1,7 @@
 import React from 'react';
 import styles from '../../../styles/Common/Header/HeaderMobileBoard.module.scss';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
 
-export const HeaderMobileBoard = () => {
-  const [nowPath, setNowPath] = useState('');
-
-  const router = useRouter();
-
-  //현재경로 표시
-  useEffect(() => {
-    setNowPath(router.pathname);
-  }, [router.pathname]);
-
-  useEffect(() => {
-    window.localStorage.setItem('nowPath', nowPath);
-  }, [nowPath]);
-
+export const HeaderMobileBoard = ({ nowPath, router }) => {
   return (
     <div className={styles.container}>
       <ul className={styles.mobile}>

@@ -11,20 +11,37 @@ import { getUserData } from 'apis/user';
 import Alarm from '../Alarm';
 import MessageAlarm from '../letter';
 
-function Header({ token, alarmList, messageList, getAlarmData, getMessage, open, setOpen }) {
+function Header({
+  token,
+  alarmList,
+  messageList,
+  getAlarmData,
+  getMessage,
+  open,
+  setOpen
+}) {
   const [user, setUser] = useState();
   const [userProflie, setUserProfile] = useState();
+  const [nowPath, setNowPath] = useState('');
 
-  const closeRef = useRef(null);
   const router = useRouter();
+  const closeRef = useRef(null);
 
+  //현재경로 표시
+  useEffect(() => {
+    setNowPath(router.pathname);
+  }, [router.pathname]);
+
+  useEffect(() => {
+    window.localStorage.setItem('nowPath', nowPath);
+  }, [nowPath]);
+
+  //영역밖 클릭 시 사이드바 제거
   function handleClickOutside(event) {
     if (closeRef.current && !closeRef.current.contains(event.target)) {
       setOpen(false);
     }
   }
-
-  //영역밖 클릭 시 사이드바 제거
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -65,8 +82,8 @@ function Header({ token, alarmList, messageList, getAlarmData, getMessage, open,
           <Hamburger rounded toggled={open} toggle={setOpen} size={25} />
           <div className={styles.topMenu}>
             <ul className={styles.menus} id={open ? styles.show : styles.hide}>
-              <HeaderMobileBoard />
-              <HeaderBoard />
+              <HeaderMobileBoard nowPath={nowPath} router={router} />
+              <HeaderBoard nowPath={nowPath} router={router} />
             </ul>
             {token ? (
               <div
@@ -100,7 +117,7 @@ function Header({ token, alarmList, messageList, getAlarmData, getMessage, open,
                 className={styles.users}
                 id={open ? styles.show : styles.hide}
               >
-                <HeaderUser />
+                <HeaderUser nowPath={nowPath} router={router} />
               </div>
             )}
           </div>
