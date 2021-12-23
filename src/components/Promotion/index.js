@@ -5,7 +5,7 @@ import moment from 'moment';
 
 import { getData, getBoardData, getSearchData } from 'apis/promotion';
 
-const PromotionPage = () => {
+const Promotion = () => {
   const [openModal, setOpenModal] = useState(false);
   const [boardData, setBoardData] = useState([]);
   const [searchItem, setSearchItem] = useState('');
@@ -202,4 +202,4 @@ const PromotionPage = () => {
   );
 };
 
-export default PromotionPage;
+export default Promotion;
