@@ -1,4 +1,4 @@
-import SignUpForm from 'components/User/SignUp/SignUpForm';
+import SignUpForm from 'components/User/SignUp';
 import Head from 'next/head';
 
 function signup() {

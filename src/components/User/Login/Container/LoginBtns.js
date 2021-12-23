@@ -1,4 +1,4 @@
-import OAuth from 'components/User/SignUp/OAuth';
+import OAuth from 'components/User/SignUp/NaverOauth/OAuth';
 import React from 'react';
 import styles from 'styles/User/Login/Container/LoginBtns.module.scss';
 

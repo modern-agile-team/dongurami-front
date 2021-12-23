@@ -17,32 +17,6 @@
     font-weight: 400;
     margin-bottom: 10%;
   }
-  input {
-    font-family: 'Noto Sans KR', sans-serif;
-    width: 60%;
-    height: 50px;
-    border: none;
-    border-radius: 0px;
-    border-bottom: 1.4px solid #dadada;
-    outline-style: none;
-    margin-bottom: 3%;
-  }
-  input[type='number']::-webkit-outer-spin-button,
-  input[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  select {
-    font-family: 'Noto Sans KR', sans-serif;
-    width: 63%;
-    height: 50px;
-    margin-top: 2%;
-    border: 1.5px solid #dadada;
-    border-radius: 5px;
-    option {
-      font-family: 'Noto Sans KR', sans-serif;
-    }
-  }
   .feedback {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 65%;
@@ -51,14 +25,6 @@
     margin-bottom: 4%;
     text-align: start;
     color: rgb(51, 51, 160);
-  }
-  .notSame {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 75%;
-    display: flex;
-    justify-content: center;
-    margin-top: 2%;
-    color: red;
   }
   .button {
     font-family: 'Noto Sans KR', sans-serif;
@@ -76,28 +42,6 @@
   .button:hover {
     filter: brightness(98%);
   }
-  .login {
-    span {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 80%;
-    }
-    margin-top: 10%;
-    margin-bottom: 5%;
-    .loginRouting {
-      cursor: pointer;
-      font-style: oblique;
-      color: rgb(99, 99, 99);
-      &:hover {
-        color: #90cec7;
-      }
-    }
-  }
-}
-
-.input::-webkit-inner-spin-button,
-.input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -116,14 +60,6 @@
       h1 {
         margin-bottom: 15%;
       }
-      input {
-        font-size: 75%;
-        width: 80%;
-      }
-      select {
-        font-size: 80%;
-        width: 82%;
-      }
       .feedback {
         width: 81%;
       }
@@ -131,11 +67,6 @@
         font-size: 90%;
         width: 80%;
         margin-top: 10%;
-      }
-      .login {
-        span {
-          font-size: 70%;
-        }
       }
     }
   }

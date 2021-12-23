@@ -1,44 +1,31 @@
-import React from 'react';
-import styles from 'styles/User/SignUp/NaverSignUp.module.scss';
+import styles from 'styles/User/SignUp/SignUpForm.module.scss';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { postNaverSignUp } from 'apis/user';
-import { getNaverOauth } from 'apis/user';
-import { Spinner } from 'components/Common/Spinner';
+import { postSignUp } from 'apis/user';
+import getToken from 'utils/getToken';
+import { SignUpInput } from './BasicSignUp/SignUpInput';
+import { LoginRoute } from './BasicSignUp/LoginRoute';
 
-export const NaverSignUp = () => {
+function SignUpForm() {
   const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [repassword, setRepassword] = useState('');
   const [names, setNames] = useState('');
   const [email, setEmail] = useState('');
   const [major, setMajor] = useState('');
-  const [majorNum, setMajorNum] = useState('');
   const [checkSignUp, setCheckSignUp] = useState('');
-  const [uniqueId, setUniqueId] = useState();
-  const [checkClientInfo, setCheckClientInfo] = useState(true);
+  const [emailCheck, setEmailCheck] = useState();
+  const [majorNum, setMajorNum] = useState('');
 
-  //네이버 oAuth의 프로필 정보 가져오기
-  const UserProfile = () => {
-    location.href.includes('access_token') && getUser();
-  };
-  const getUser = () => {
-    const token = window.location.href.split('=')[1].split('&')[0];
-    getNaverOauth(token)
-      .then((res) => {
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (getToken()) {
+        alert('로그인이 되어있습니다.\n메인 페이지로 이동합니다.');
         router.push('/');
-        localStorage.setItem('jwt', res.data.jwt);
-      })
-      .catch((err) => {
-        if (err.response.status === 400) {
-          setCheckClientInfo(false);
-          setNames(err.response.data.name);
-          setEmail(err.response.data.email);
-          setUniqueId(err.response.data.snsId);
-        } else if (err.response.status === 401) {
-          alert('인증 유효시간이 지났습니다.\n재인증 해주세요.');
-        }
-      });
-  };
-  useEffect(UserProfile, []);
+      }
+    }, 1000);
+    return () => clearInterval(countdown);
+  }, []);
 
   const majorCategory = [
     { value: '00', label: '학과 선택' },
@@ -93,22 +80,14 @@ export const NaverSignUp = () => {
   const onChange = (e) => {
     const { name, value } = e.target;
 
-    switch (name) {
-      case 'id':
-        setId(value);
-        break;
-      case 'names':
-        setNames(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'major':
-        setMajorNum(value);
-        setMajor(majorCategory.find((el) => el.value === value)?.label);
-        break;
-      default:
-        break;
+    if (name === 'id') setId(value);
+    if (name === 'password') setPassword(value);
+    if (name === 'repassword') setRepassword(value);
+    if (name === 'names') setNames(value);
+    if (name === 'email') setEmail(value);
+    if (name === 'major') {
+      setMajorNum(value);
+      setMajor(majorCategory.find((el) => el.value === value)?.label);
     }
   };
 
@@ -125,7 +104,7 @@ export const NaverSignUp = () => {
     setMajor(majorCategory.find((el) => el.value === majorNum)?.label);
   };
 
-  const FeedbackMessage = () => {
+  const feedbackMessage = () => {
     return (
       <div className={styles.feedback}>
         &#8251;&#32;자신의 학과가 맞는지 확인해 주세요.
@@ -133,81 +112,85 @@ export const NaverSignUp = () => {
     );
   };
 
+  const checkEmail = () => {
+    const regExp =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    let result = regExp.test(email);
+    setEmailCheck(result);
+  };
+
   const router = useRouter();
 
   const onSubmit = (e) => {
     e.preventDefault();
+    checkEmail();
     if (id === '') {
       setCheckSignUp('학번을 입력해 주세요.');
     } else if (id.length !== 9) {
       setCheckSignUp('학번은 9자이어야 합니다.');
+    } else if (names === '') {
+      setCheckSignUp('이름을 입력해주세요.');
+    } else if (names.length > 5) {
+      setCheckSignUp('이름은 5글자 이하만 가능합니다.');
+    } else if (names.includes(' ')) {
+      setCheckSignUp('이름엔 공백이 없어야 합니다.');
     } else if (major === '' || major === '학과 선택') {
       setCheckSignUp('학과를 선택해주세요.');
+    } else if (email === '') {
+      setCheckSignUp('이메일을 입력해 주세요.');
+    } else if (emailCheck === false) {
+      setCheckSignUp('이메일 형식을 맞춰 입력해 주세요.');
+    } else if (password === '') {
+      setCheckSignUp('비밀번호를 입력해 주세요.');
+    } else if (password.length < 8) {
+      setCheckSignUp('비밀번호는 8자 이상이어야 합니다.');
+    } else if (password !== repassword) {
+      setCheckSignUp('비밀번호가 맞지 않습니다.');
     } else {
-      naverSignUp();
+      postSignUp({
+        id,
+        password,
+        name: names,
+        email,
+        major
+      })
+        .then((res) => {
+          if (res.data.success === true) {
+            alert(res.data.msg);
+            router.push('/LoginPage');
+          } else {
+            alert(res.data.msg);
+          }
+        })
+        .catch((err) => alert(err.response.data.msg));
     }
   };
 
-  //네이버로 회원가입 하기
-  const naverSignUp = () => {
-    postNaverSignUp({
-      id,
-      name: names,
-      email,
-      major,
-      snsId: uniqueId
-    })
-      .then((res) => {
-        alert('회원가입이 완료되었습니다.');
-        router.push('/');
-        localStorage.setItem('jwt', res.data.jwt);
-      })
-      .catch((err) => {
-        alert(err.response.data.msg);
-      });
-  };
-
   return (
-    <div className={styles.form}>
-      {checkClientInfo ? (
-        <Spinner />
-      ) : (
-        <div className={styles.container}>
-          <h1>추가 정보 기입</h1>
-          <p>학번을 추가 입력하면 회원가입이 완료됩니다.</p>
-          <input
-            className={styles.inputNum}
-            type="number"
-            onKeyDown={(e) =>
-              (e.key === 'e' || e.key === '.') && e.preventDefault()
-            }
-            placeholder="학번"
-            onChange={(e) => {
-              onChange(e);
-              checkID();
-            }}
-            name="id"
-            value={id}
-          />
-          <select
-            className={styles.select}
-            onChange={onChange}
-            name="major"
-            value={majorNum}
-          >
-            {majorCategory.map((majorCategory, index) => (
-              <option id={index} key={index} value={majorCategory.value}>
-                {majorCategory.label}
-              </option>
-            ))}
-          </select>
-          {major === undefined || majorNum === '' ? '' : FeedbackMessage()}
-          <span className={styles.notSame}>{checkSignUp}</span>
-          <button className={styles.button} onClick={onSubmit}>
-            가입하기
-          </button>
-        </div>
-      )}
-    </div>
+    <form className={styles.form}>
+      <div className={styles.container}>
+        <h1>회원가입</h1>
+        <SignUpInput
+          names={names}
+          email={email}
+          id={id}
+          password={password}
+          repassword={repassword}
+          majorNum={majorNum}
+          majorCategory={majorCategory}
+          major={major}
+          checkSignUp={checkSignUp}
+          feedbackMessage={feedbackMessage}
+          checkID={checkID}
+          onChange={onChange}
+        />
+        <button className={styles.button} onClick={onSubmit}>
+          가입하기
+        </button>
+        <LoginRoute />
+      </div>
+    </form>
   );
-};
+}
+
+export default SignUpForm;
