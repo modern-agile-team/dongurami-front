@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../styles/Common/Header/HeaderMobileBoard.module.scss';
+import styles from 'styles/Common/Header/HeaderMobileBoard.module.scss';
 
 export const HeaderMobileBoard = ({ nowPath, router }) => {
   return (

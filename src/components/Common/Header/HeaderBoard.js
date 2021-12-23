@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../styles/Common/Header/HeaderBoard.module.scss';
+import styles from 'styles/Common/Header/HeaderBoard.module.scss';
 
 export const HeaderBoard = ({ nowPath, router }) => {
   return (

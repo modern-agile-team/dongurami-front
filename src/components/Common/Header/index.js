@@ -1,4 +1,4 @@
-import styles from '../../../styles/Common/Header/Header.module.scss';
+import styles from 'styles/Common/Header/Header.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import Hamburger from 'hamburger-react';

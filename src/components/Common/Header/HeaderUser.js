@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../styles/Common/Header/HeaderUser.module.scss';
+import styles from 'styles/Common/Header/HeaderUser.module.scss';
 
 export const HeaderUser = ({ nowPath, router }) => {
   return (
