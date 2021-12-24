@@ -105,39 +105,47 @@ const Calendar = () => {
   };
   //
   //일정 추가 함수
+  const postData = () => {
+    addSchedule(Qdata.id, {
+      colorCode: color,
+      title: titleRef.current.value,
+      startDate,
+      endDate,
+      url: `clubhome/${Qdata.id}`,
+      notiCategoryNum: 4
+    })
+      .then(() => setPop('Calendar'))
+      .catch((err) => alert(err.response.data.msg));
+  };
+
   const onClickAdd = useCallback(async () => {
     if (titleRef.current.value.length > 50)
       alert('제목은 50자 이하여야 합니다.');
     else {
-      await addSchedule(Qdata.id, {
-        colorCode: color,
-        title: titleRef.current.value,
-        startDate,
-        endDate,
-        url: `clubhome/${Qdata.id}`,
-        notiCategoryNum: 4
-      })
-        .then(() => setPop('Calendar'))
-        .catch((err) => alert(err.response.data.msg));
+      await postData();
       await getData();
     }
   }, [titleRef, Qdata, color, startDate, endDate]);
   //
   //일정 수정 함수
+  const putData = () => {
+    modifySchedule(Qdata.id, no, {
+      colorCode,
+      title: newTitle,
+      startDate,
+      endDate,
+      url: `clubhome/${Qdata.id}`,
+      notiCategoryNum: 5
+    })
+      .then(() => setPop('Calendar'))
+      .catch((err) => alert(err.response.data.msg));
+  };
+
   const onClickModifyBtn = useCallback(async () => {
     if (newTitle.replace(/ /g, '').length === 0) setNewTitle(title);
     if (newTitle.length > 50) alert('제목은 50자 이하여야 합니다.');
     else {
-      await modifySchedule(Qdata.id, no, {
-        colorCode,
-        title: newTitle,
-        startDate,
-        endDate,
-        url: `clubhome/${Qdata.id}`,
-        notiCategoryNum: 5
-      })
-        .then(() => setPop('Calendar'))
-        .catch((err) => alert(err.response.data.msg));
+      await putData();
       await getData();
     }
   }, [newTitle, title, Qdata, no, colorCode, startDate, endDate]);
