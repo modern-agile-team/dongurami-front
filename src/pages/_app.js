@@ -11,7 +11,7 @@ import 'swiper/components/pagination/pagination.scss';
 import { useRouter } from 'next/router';
 import { changeComp } from 'redux/slices/chageComp';
 import * as gtag from '../lib/gtags';
-import Header from 'components/Common/Header/Header';
+import Header from 'components/Common/Header';
 import Footer from 'components/Common/Footer';
 import getToken from 'utils/getToken';
 import { getAlarm } from 'apis/alarm';
