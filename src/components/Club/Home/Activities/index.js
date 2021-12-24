@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getBoardPosts } from 'redux/slices/board';
 import SendMessageContainer from 'components/User/Message/SendMessage';
+import api from 'apis/post';
 
 const Activities = () => {
   const router = useRouter();
@@ -20,6 +21,7 @@ const Activities = () => {
   const [messageOpen, setMessageOpen] = useState(false);
   const [isActivities, setIsActivities] = useState(true);
 
+  const post = useSelector((state) => state.post);
   const clubNum = Number(router.query.id);
   const selectedID = Number(router.query.pid);
 
@@ -28,6 +30,19 @@ const Activities = () => {
     if (clubNum && user.club.every(({ no }) => no !== clubNum)) return false;
     return true;
   })();
+
+  const onDelete = async () => {
+    await api.deletePost('clubActivity', post.no, router.query.id);
+    dispatch(
+      getBoardPosts({
+        category: 'clubActivity',
+        sort: 'inDate',
+        order: 'DESC',
+        clubNum
+      })
+    );
+    closeModal();
+  };
 
   useEffect(() => {
     dispatch(
@@ -53,6 +68,7 @@ const Activities = () => {
       { scroll: false }
     );
   };
+
   const closeModal = () => {
     router.push(
       {
@@ -99,7 +115,8 @@ const Activities = () => {
         <Modal show={isModalOpened} onClose={closeModal}>
           <ActivityPost
             pid={selectedID}
-            closeModal={closeModal}
+            post={post}
+            onDelete={onDelete}
             setOpenMessage={setMessageOpen}
           />
         </Modal>

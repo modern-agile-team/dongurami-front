@@ -1,36 +1,17 @@
 import Post from 'components/Post/Post';
 import { useEffect } from 'react';
 import styles from 'styles/Club/Home/Activities/ActivityPost.module.scss';
-import { useSelector } from 'react-redux';
-import api from 'apis/post';
 import { useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
-import { getBoardPosts } from 'redux/slices/board';
 import { useRouter } from 'next/router';
 
-function ActivityPost({ pid, closeModal, setOpenMessage }) {
+function ActivityPost({ pid, setOpenMessage, post, onDelete }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const post = useSelector((state) => state.post);
-
-  const clubNum = Number(router.query.id);
 
   useEffect(() => {
     dispatch(getPost({ category: 'clubActivity', pid }));
   }, [pid, dispatch]);
-
-  const onDelete = async () => {
-    await api.deletePost('clubActivity', post.no, router.query.id);
-    dispatch(
-      getBoardPosts({
-        category: 'clubActivity',
-        sort: 'inDate',
-        order: 'DESC',
-        clubNum
-      })
-    );
-    closeModal();
-  };
 
   if (!post?.description) return null;
 
