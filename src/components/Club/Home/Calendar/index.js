@@ -61,14 +61,14 @@ const Calendar = () => {
   };
   //
   //일정 추가시 초기 설정
-  const addSet = () => {
+  const setDefaultAdd = () => {
     setStartDate(today.format('YYYY-MM-DD'));
     setEndDate(today.format('YYYY-MM-DD'));
     setColor('#FFFFFF');
   };
   //
   //일정 수정시 초기 설정
-  const modifySet = () => {
+  const setDefaultModify = () => {
     setStartDate(period[0]);
     setEndDate(period[1]);
     setNewTitle(title);
@@ -112,8 +112,8 @@ const Calendar = () => {
       await addSchedule(Qdata.id, {
         colorCode: color,
         title: titleRef.current.value,
-        startDate: startDate,
-        endDate: endDate,
+        startDate,
+        endDate,
         url: `clubhome/${Qdata.id}`,
         notiCategoryNum: 4
       })
@@ -166,8 +166,8 @@ const Calendar = () => {
 
   //별 버튼 함수
   const importantModify = useCallback(
-    (schedule, e) => {
-      importantSchedule(Qdata.id, schedule, { important: e }).then(() =>
+    (schedule, important) => {
+      importantSchedule(Qdata.id, schedule, { important }).then(() =>
         getData()
       );
     },
@@ -265,11 +265,10 @@ const Calendar = () => {
           setEndDate={setEndDate}
           color={color}
           setColor={setColor}
-          onClickAdd={onClickAdd}
           onAddBtn={onAddBtn}
           titleRef={titleRef}
-          addSet={addSet}
-          modifySet={modifySet}
+          setDefaultAdd={setDefaultAdd}
+          setDefaultModify={setDefaultModify}
           onModifyBtn={onModifyBtn}
           onClickColorBtn={onClickColorBtn}
           setNewTitle={setNewTitle}
