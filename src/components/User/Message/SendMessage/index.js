@@ -32,7 +32,6 @@ function SendMessageContainer({
   };
 
   const onChange = (e) => {
-    console.log('dkssudd');
     setDescription(e.target.value);
   };
 
@@ -61,7 +60,54 @@ function SendMessageContainer({
     return 1;
   };
 
-  const onSubmit = async () => {
+  const sendWriter = async (
+    recipientId,
+    description,
+    boardNo,
+    commentNo,
+    boardFlag,
+    writerHiddenFlag
+  ) => {
+    await sendLetter(
+      recipientId,
+      description,
+      boardNo,
+      commentNo,
+      boardFlag,
+      writerHiddenFlag
+    ).then((response) => {
+      if (response.data.success) {
+        alert('쪽지가 전송되었습니다');
+        onClose();
+        setDescription('');
+      }
+    });
+  };
+
+  const replySend = async (
+    recipientId,
+    description,
+    writerHiddenFlag,
+    letterNo,
+    userId
+  ) => {
+    await replyLetter(
+      recipientId,
+      description,
+      writerHiddenFlag,
+      letterNo,
+      userId
+    ).then((response) => {
+      if (response.data.success) {
+        alert('쪽지가 전송되었습니다');
+        onClose();
+        inquiryMessage(router.query.id);
+        setDescription('');
+      }
+    });
+  };
+
+  const onSubmit = () => {
     let boardFlag = 0;
     let writerHiddenFlag = 0;
     let recipientId = '';
@@ -81,60 +127,35 @@ function SendMessageContainer({
       boardNo = post ? post.no : '';
       boardFlag = 1;
 
-      await sendLetter(
+      sendWriter(
         recipientId,
         description,
         boardNo,
         commentNo,
         boardFlag,
         writerHiddenFlag
-      ).then((response) => {
-        if (response.data.success) {
-          alert('쪽지가 전송되었습니다');
-          onClose();
-          setDescription('');
-        }
-      });
+      );
     } else if (!letter && detailMessage) {
       if (!Number(otherId)) recipientId = '';
       else recipientId = otherId;
       boardFlag = detailMessage.boardFlag;
       boardNo = detailMessage.boardNo;
-      await replyLetter(
-        recipientId,
-        description,
-        writerHiddenFlag,
-        letterNo,
-        userId
-      ).then((response) => {
-        if (response.data.success) {
-          alert('쪽지가 전송되었습니다');
-          onClose();
-          inquiryMessage(router.query.id);
-          setDescription('');
-        }
-      });
+
+      replySend(recipientId, description, writerHiddenFlag, letterNo, userId);
     } else if (letter) {
       if (!Number(letter.studentId)) recipientId = '';
       else recipientId = letter.studentId;
       commentNo = letter.no;
       boardNo = post.no;
       boardFlag = 0;
-      await sendLetter(
+      sendWriter(
         recipientId,
         description,
         boardNo,
         commentNo,
         boardFlag,
         writerHiddenFlag
-      ).then((response) => {
-        if (response.data.success) {
-          alert('쪽지가 전송되었습니다');
-          onClose();
-
-          setDescription('');
-        }
-      });
+      );
     }
   };
 

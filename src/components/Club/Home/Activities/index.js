@@ -19,7 +19,6 @@ const Activities = () => {
   const user = useSelector((state) => state.user);
   const clubName = useSelector((state) => state.clubhome.info?.result[0].name);
   const [messageOpen, setMessageOpen] = useState(false);
-  const [isActivities, setIsActivities] = useState(true);
 
   const post = useSelector((state) => state.post);
   const clubNum = Number(router.query.id);
@@ -125,7 +124,7 @@ const Activities = () => {
         <SendMessageContainer
           show={messageOpen}
           onClose={() => setMessageOpen(false)}
-          isActivities={isActivities}
+          isActivities={true}
         />
       )}
     </div>
