@@ -39,11 +39,14 @@ function Profile() {
 
   const router = useRouter();
 
+  //userInfo 컴포넌트로 이동
   const moveInfo = () => {
     router.replace({
       pathname: `/profile/${router.query.pid}`
     });
   };
+  //
+  // 전달된 변수에따라 페이지 이동
   const moveComp = (pageName) => {
     if (pageName === undefined) moveInfo();
     else if (pageName === 'scrap' && profile.clubs.length <= 0)
@@ -58,7 +61,8 @@ function Profile() {
       });
     }
   };
-
+  //
+  //가입된 동아리 목록
   const joinedClubs = useMemo(() => {
     if (Object.keys(profile).length > 0) {
       return profile.clubs.map((club, index) => {
@@ -71,6 +75,7 @@ function Profile() {
     }
     return [];
   }, [profile]);
+  //
 
   const logout = useCallback(() => {
     window.localStorage.removeItem('jwt');
@@ -81,6 +86,7 @@ function Profile() {
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
+  //미디어쿼리 값에 따라 보여주는 글자 수 변경
   const matchTitle = useCallback((title, mobile, pad, deskTop) => {
     if (matchMedia('screen and (max-width: 280px)').matches) {
       return title.length >= mobile
@@ -93,17 +99,18 @@ function Profile() {
       ? title.substring(0, deskTop - 2) + '..'
       : title;
   }, []);
+  //
 
-  const setState = (data) => {
+  const setDefaultData = (data) => {
     setUserInfo(data.userInfo);
     setProfile(data.profile);
     setClubNo(data.profile.clubs.length === 0 ? 0 : data.profile.clubs[0].no);
   };
 
-  const fetchUserInfo = useCallback(async () => {
+  const getUser = useCallback(async () => {
     if (router.query.pid) {
       await getUserInfo(router.query.pid, token)
-        .then((res) => setState(res.data))
+        .then((res) => setDefaultData(res.data))
         .catch((err) => {
           alert(err.response.data.msg);
           router.back();
@@ -114,14 +121,16 @@ function Profile() {
   const onClickQuitClubSpan = (name, number) => {
     if (window.confirm(`정말로 ${name}에서 탈퇴하시겠습니까?`)) {
       quitClub(profile.id, number)
-        .then((res) => {
-          window.localStorage.setItem('jwt', res.data.jwt);
-          alert(res.data.msg);
-          location.reload();
-        })
-        .catch((err) => alert(err.response.data.msg));
-      setLeaveIsOpen(!setLeaveIsOpen);
+        .then((res) => setNewToken(res))
+        .catch((err) => alert(err.response.data.msg))
+        .finally(() => setLeaveIsOpen(!setLeaveIsOpen));
     } else setLeaveIsOpen(false);
+  };
+
+  const setNewToken = (res) => {
+    window.localStorage.setItem('jwt', res.data.jwt);
+    alert(res.data.msg);
+    router.reload();
   };
 
   const selectClub = (e) => {
@@ -164,7 +173,7 @@ function Profile() {
 
   useEffect(() => {
     if (!router.isReady) return;
-    fetchUserInfo();
+    getUser();
   }, [router, token]);
 
   useEffect(() => {

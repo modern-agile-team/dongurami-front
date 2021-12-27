@@ -1,0 +1,19 @@
+.login {
+  span {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 80%;
+    @media screen and (max-width: 480px) {
+      font-size: 70%;
+    }
+  }
+  margin-top: 10%;
+  margin-bottom: 5%;
+  .loginRouting {
+    cursor: pointer;
+    font-style: oblique;
+    color: rgb(99, 99, 99);
+    &:hover {
+      color: #90cec7;
+    }
+  }
+}

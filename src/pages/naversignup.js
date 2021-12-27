@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { NaverSignUp } from 'components/User/SignUp/NaverSignUp';
+import { NaverSignUp } from 'components/User/SignUp/NaverOauth/NaverSignUp';
 
 function signup() {
   return (
