@@ -80,14 +80,28 @@ function SignUpForm() {
   const onChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'id') setId(value);
-    if (name === 'password') setPassword(value);
-    if (name === 'repassword') setRepassword(value);
-    if (name === 'names') setNames(value);
-    if (name === 'email') setEmail(value);
-    if (name === 'major') {
-      setMajorNum(value);
-      setMajor(majorCategory.find((el) => el.value === value)?.label);
+    switch (name) {
+      case 'id':
+        setId(value);
+        break;
+      case 'names':
+        setNames(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      case 'repassword':
+        setRepassword(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'major':
+        setMajorNum(value);
+        setMajor(majorCategory.find((el) => el.value === value)?.label);
+        break;
+      default:
+        break;
     }
   };
 
@@ -121,25 +135,23 @@ function SignUpForm() {
 
   const router = useRouter();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    checkEmail();
-    if (id === '') {
-      setCheckSignUp('학번을 입력해 주세요.');
-    } else if (id.length !== 9) {
-      setCheckSignUp('학번은 9자이어야 합니다.');
-    } else if (names === '') {
+  const checkChanges = () => {
+    if (names === '') {
       setCheckSignUp('이름을 입력해주세요.');
     } else if (names.length > 5) {
       setCheckSignUp('이름은 5글자 이하만 가능합니다.');
     } else if (names.includes(' ')) {
       setCheckSignUp('이름엔 공백이 없어야 합니다.');
-    } else if (major === '' || major === '학과 선택') {
-      setCheckSignUp('학과를 선택해주세요.');
     } else if (email === '') {
       setCheckSignUp('이메일을 입력해 주세요.');
     } else if (emailCheck === false) {
       setCheckSignUp('이메일 형식을 맞춰 입력해 주세요.');
+    } else if (id === '') {
+      setCheckSignUp('학번을 입력해 주세요.');
+    } else if (id.length !== 9) {
+      setCheckSignUp('학번은 9자이어야 합니다.');
+    } else if (major === '' || major === '학과 선택') {
+      setCheckSignUp('학과를 선택해주세요.');
     } else if (password === '') {
       setCheckSignUp('비밀번호를 입력해 주세요.');
     } else if (password.length < 8) {
@@ -164,6 +176,12 @@ function SignUpForm() {
         })
         .catch((err) => alert(err.response.data.msg));
     }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    checkEmail();
+    checkChanges();
   };
 
   return (
