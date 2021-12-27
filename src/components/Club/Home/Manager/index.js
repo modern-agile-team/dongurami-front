@@ -52,7 +52,6 @@ export const Manager = () => {
     );
   };
 
-  // 동아리원 정보 GET
   const getMembersData = useCallback(async () => {
     getMember(clubId)
       .then((res) => setStates(res.data))
@@ -85,7 +84,12 @@ export const Manager = () => {
     [applicantInfo.length, router, getMembersData]
   );
 
-  // 가입 승인 POST
+  const acceptApply = async (body) => {
+    await postApply(...body)
+      .then((res) => handleAfterApply(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+  };
+
   const onApplyAccept = async (e) => {
     if (!e.target.id) return;
     const body = [
@@ -96,13 +100,18 @@ export const Manager = () => {
       },
       clubId
     ];
-    confirm('가입을 승인합니까?') &&
-      (await postApply(...body)
-        .then((res) => handleAfterApply(res.data.msg))
-        .catch((err) => alert(err.response.data.msg)));
+    confirm('가입을 승인합니까?') && acceptApply(body);
   };
 
-  // 가입 거절 PUT
+  const rejectApply = useCallback(
+    async (body) => {
+      await putApply(...body)
+        .then((res) => handleAfterApply(res.data.msg))
+        .catch((err) => alert(err.response.data.msg));
+    },
+    [handleAfterApply]
+  );
+
   const onApplyReject = useCallback(
     async (e) => {
       if (!e.target.id) return;
@@ -114,16 +123,18 @@ export const Manager = () => {
         },
         clubId
       ];
-      confirm('가입을 거절합니까?') &&
-        (await putApply(...body)
-          .then((res) => handleAfterApply(res.data.msg))
-          .catch((err) => alert(err.response.data.msg)));
+      confirm('가입을 거절합니까?') && rejectApply(body);
       await getMembersData();
     },
-    [clubId, getMembersData, handleAfterApply, applicantInfo]
+    [clubId, getMembersData, applicantInfo, rejectApply]
   );
 
-  // 회장 양도 PUT
+  const handOverLeader = async (body) => {
+    await putLeader(...body)
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg));
+  };
+
   const onLeaderChange = async (memberIndex) => {
     const newLeader = changeLeaderRef.current;
     const body = [
@@ -132,26 +143,20 @@ export const Manager = () => {
       },
       clubId
     ];
-    confirm('회장을 양도하시겠습니까?') &&
-      (await putLeader(...body)
-        .then((res) => alert(res.data.msg))
-        .catch((err) => alert(err.response.data.msg)));
+    confirm('회장을 양도하시겠습니까?') && handOverLeader(body);
     await getMembersData();
   };
 
   const changeAdminOptions = () => {
-    const result = [];
-    members.forEach((member, index) => {
-      result.push({
+    return members.map((member, index) => {
+      return {
         id: member.id,
         joinAdminFlag: applyAuth[index],
         boardAdminFlag: boardAuth[index]
-      });
+      };
     });
-    return result;
   };
 
-  // 기능 권한 변경 PUT
   const changeMembersAuth = async () => {
     if (applyAuth.length === 0) return;
     const body = [
@@ -166,7 +171,6 @@ export const Manager = () => {
     await getMembersData();
   };
 
-  // 동아리원 추방 DELETE
   const exileMember = async (index) => {
     const studentID = changeLeaderRef.current[index].id;
     const studentName =
@@ -195,6 +199,7 @@ export const Manager = () => {
     setBoardAuth(setAuths(boardAuthRef));
   }, []);
   //-------------------------------------------------------------//
+
   useEffect(() => {
     applicantInfo.length > 0 && setApplicantInfo(applicantInfo);
   }, [applicantInfo]);
