@@ -1,10 +1,12 @@
 import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { MdClose } from 'react-icons/md';
 import { sendLetter, replyLetter } from 'apis/message';
-import SendMessage from './SendMessage';
+
+import styles from '../../styles/Message/SendMessage.module.scss';
 import router from 'next/router';
 
-function SendMessageContainer({
+function SendMessage({
   show,
   onClose,
   letter,
@@ -35,7 +37,7 @@ function SendMessageContainer({
     setDescription(e.target.value);
   };
 
-  const checkHandler = () => {
+  const checkHandler = (e) => {
     setIsCheck(!isCheck);
   };
 
@@ -52,67 +54,20 @@ function SendMessageContainer({
       letter?.isWriter === 1
     ) {
       if (isActivities && !post?.isWriter && clubLeaderIsWriter === 1) return 1;
-      else if (letter && letter?.isWriter === 0 && post?.isWriter === 1)
-        return 1;
       alert('자신에게는 보낼 수 없습니다');
       return 0;
     }
     return 1;
   };
 
-  const sendWriter = async (
-    recipientId,
-    description,
-    boardNo,
-    commentNo,
-    boardFlag,
-    writerHiddenFlag
-  ) => {
-    await sendLetter(
-      recipientId,
-      description,
-      boardNo,
-      commentNo,
-      boardFlag,
-      writerHiddenFlag
-    ).then((response) => {
-      if (response.data.success) {
-        alert('쪽지가 전송되었습니다');
-        onClose();
-        setDescription('');
-      }
-    });
-  };
-
-  const replySend = async (
-    recipientId,
-    description,
-    writerHiddenFlag,
-    letterNo,
-    userId
-  ) => {
-    await replyLetter(
-      recipientId,
-      description,
-      writerHiddenFlag,
-      letterNo,
-      userId
-    ).then((response) => {
-      if (response.data.success) {
-        alert('쪽지가 전송되었습니다');
-        onClose();
-        inquiryMessage(router.query.id);
-        setDescription('');
-      }
-    });
-  };
-
-  const onSubmit = () => {
+  const onSubmit = async () => {
     let boardFlag = 0;
     let writerHiddenFlag = 0;
     let recipientId = '';
     let commentNo = '';
     let boardNo = 0;
+
+    if (letter) console.log(letter);
 
     if (!submitCheck()) {
       return;
@@ -127,59 +82,93 @@ function SendMessageContainer({
       boardNo = post ? post.no : '';
       boardFlag = 1;
 
-      sendWriter(
+      await sendLetter(
         recipientId,
         description,
         boardNo,
         commentNo,
         boardFlag,
         writerHiddenFlag
-      );
+      ).then((response) => {
+        if (response.data.success) {
+          alert('쪽지가 전송되었습니다');
+          onClose();
+          setDescription('');
+        }
+      });
     } else if (!letter && detailMessage) {
       if (!Number(otherId)) recipientId = '';
       else recipientId = otherId;
       boardFlag = detailMessage.boardFlag;
       boardNo = detailMessage.boardNo;
-
-      replySend(recipientId, description, writerHiddenFlag, letterNo, userId);
+      await replyLetter(
+        recipientId,
+        description,
+        writerHiddenFlag,
+        letterNo,
+        userId
+      ).then((response) => {
+        if (response.data.success) {
+          alert('쪽지가 전송되었습니다');
+          onClose();
+          inquiryMessage(router.query.id);
+          setDescription('');
+        }
+      });
     } else if (letter) {
       if (!Number(letter.studentId)) recipientId = '';
       else recipientId = letter.studentId;
       commentNo = letter.no;
       boardNo = post.no;
       boardFlag = 0;
-      sendWriter(
+      await sendLetter(
         recipientId,
         description,
         boardNo,
         commentNo,
         boardFlag,
         writerHiddenFlag
-      );
+      ).then((response) => {
+        if (response.data.success) {
+          alert('쪽지가 전송되었습니다');
+          onClose();
+
+          setDescription('');
+        }
+      });
     }
   };
 
   return (
-    <SendMessage
-      show={show}
-      onClose={onClose}
-      letter={letter}
-      detailMessage={detailMessage}
-      inquiryMessage={inquiryMessage}
-      otherId={otherId}
-      letterNo={letterNo}
-      user={user}
-      isActivities={isActivities}
-      isCheck={isCheck}
-      setIsCheck={setIsCheck}
-      onChange={onChange}
+    <div
+      className={show ? styles.open : styles.close}
+      ref={modalContainer}
       onClick={onClick}
-      onSubmit={onSubmit}
-      checkHandler={checkHandler}
-      modalContainer={modalContainer}
-      description={description}
-    />
+    >
+      <button onClick={onClose}>
+        <MdClose />
+      </button>
+      <div>
+        <div className={styles.title}>
+          <p>쪽지보내기</p>
+          <input type="checkbox" checked={isCheck} onChange={checkHandler} />
+          익명
+        </div>
+        <div className={styles.text}>
+          <form>
+            <textarea
+              placeholder="내용을 입력해주세요"
+              value={description}
+              onChange={onChange}
+            />
+          </form>
+        </div>
+        <div className={styles.btn}>
+          <button onClick={onSubmit}>전송</button>
+        </div>
+      </div>
+    </div>
   );
 }
 
-export default SendMessageContainer;
+export default SendMessage;
