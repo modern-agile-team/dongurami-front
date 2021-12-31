@@ -37,14 +37,6 @@
 </p>
 
 <h3 align="center">  
- BackEnd
-</h3>
-<p align="center">  
-  <img src= "https://img.shields.io/badge/Node-green?logo=node-dot-js&logoColor=white"/>
-  <img src= "https://img.shields.io/badge/Express-blue?logo=express"/>
-</p>
-
-<h3 align="center">  
   Cooperation
 </h3>
 <p align="center">
@@ -52,6 +44,25 @@
   <img src= "https://img.shields.io/badge/Git-FF4500?logo=git&logoColor=white"/>
   <img src="https://img.shields.io/badge/KakaoWork-white?logo=kakao&logoColor=yellow"/>
 </p>
+<br/>
+<br/>
+
+## Next.js
+> * Next는 SSR을 함으로써 CSR을 하는 React에 비해 **높은 SEO와 초기 렌더링 시점을 앞당길 수 있음**
+> * **동적 라우팅** pages/post/[id] -> post/1로 접근 가능
+
+<br/>
+
+## SCSS(Module)
+> * **변수**(Variable) & **중첩**(Nesting) & **임포트**(Import)
+
+<br/>
+
+## Redux-Toolkit
+> - **action type**이나 **action creator**를 따로 생성해주지 않아도 됨
+> - **redux thunk**가 내장되어 비동기 지원
+> - **mutable** 객체 사용 가능
+
 <br/>
 <br/>
 
@@ -125,7 +136,7 @@
 
 ## 📄 Git Flow
 
-![git flow](https://user-images.githubusercontent.com/75289370/120147819-3cd1ef80-c222-11eb-86b6-e8146cdbabbe.png)
+![Git Flow](https://user-images.githubusercontent.com/63432381/147808486-ddcb4190-0772-42bb-8854-e2cf89e894c0.png)
 
 <br/>
 <br/>
@@ -140,8 +151,8 @@
 <br/>
        
 ## 📄 커밋 전략
-
-![image](https://user-images.githubusercontent.com/75289370/120154537-f59c2c80-c22a-11eb-89b1-5b9ebd5f19b0.png)
+       
+![Commit Stratage](https://user-images.githubusercontent.com/63432381/147808512-2a696e77-2e23-4608-9715-9d257baf6e0d.png)
 
 <br/>
 <br/>
