@@ -1,10 +1,11 @@
 import styles from 'styles/Board/Promotion/Post/Poster.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Spinner } from 'components/Common/Spinner';
 
 const Poster = ({ images }) => {
   return (
     <div className={styles.image} onClick={(e) => e.stopPropagation()}>
-      {images.length && (
+      {images.length ? (
         <Swiper
           slidesPerView={1}
           navigation
@@ -25,6 +26,8 @@ const Poster = ({ images }) => {
             );
           })}
         </Swiper>
+      ) : (
+        <Spinner />
       )}
     </div>
   );
