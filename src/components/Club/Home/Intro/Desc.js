@@ -28,11 +28,11 @@ const Desc = ({
   isDescriptionUpdate,
   onDescSubnmit,
   setIntroDesc,
-  infos,
+  clubs,
   introDesc
 }) => {
-  const result = infos.result[0];
-  const client = infos.clientInfo;
+  const result = clubs.info.result.clubInfo;
+  const client = clubs.info.result.clientInfo;
   return (
     <div className={styles.intro}>
       <span>동아리 소개</span>

@@ -18,7 +18,8 @@ const Club = () => {
   const dispatch = useDispatch();
 
   const comp = useSelector((state) => state.changeComp.comp);
-
+  const clubs = useSelector((state) => state.clubhome);
+  console.log(clubs.info);
   const router = useRouter();
   const clubId = router.query.id;
 
@@ -27,13 +28,13 @@ const Club = () => {
   }
 
   const ClubMenu = useCallback(() => {
-    if (comp === 1) return <Intro isVisit={isVisit} />;
-    else if (comp === 2) return <ClubNotice />;
-    else if (comp === 3) return <Activities />;
-    else if (comp === 4) return <Calendar />;
-    else if (comp === 5) return <Review />;
-    else if (comp === 6) return <Apply />;
-  }, [comp, isVisit]);
+    if (comp === 1) return <Intro isVisit={isVisit} clubs={clubs} />;
+    else if (comp === 2) return <ClubNotice clubs={clubs} />;
+    else if (comp === 3) return <Activities clubs={clubs} />;
+    else if (comp === 4) return <Calendar clubs={clubs} />;
+    else if (comp === 5) return <Review clubs={clubs} />;
+    else if (comp === 6) return <Apply clubs={clubs} />;
+  }, [comp, isVisit, clubs]);
 
   useEffect(() => {
     if (comp === false) {
@@ -46,13 +47,16 @@ const Club = () => {
     dispatch(getClubInfo(clubId));
   }, [dispatch, clubId]);
 
+  if (clubs.info === undefined) return null;
   return (
     <>
       <div className={styles.container}>
         <SideBar comp={comp} />
-        <div className={styles.wrap}>
-          <ClubMenu comp={comp} />
-        </div>
+        {clubs.info !== undefined && (
+          <div className={styles.wrap}>
+            <ClubMenu comp={comp} />
+          </div>
+        )}
       </div>
     </>
   );

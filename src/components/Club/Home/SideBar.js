@@ -92,7 +92,7 @@ const SideBar = ({ comp }) => {
   return (
     <div className={hide ? styles.hide : styles.sideBar} id={styles.open}>
       <div className={styles.menu} id={styles.show}>
-        {boards(clubName.result[0].name).map((board, i) => {
+        {boards(clubName.result.clubInfo.name).map((board, i) => {
           return (
             <div
               className={styles.board}
