@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 45vw;
+  border: 2px solid #3fcdb83a;
+  border-radius: 16px;
+  padding: 1em;
+  margin-bottom: 4em;
+  box-shadow: 0px 8px 8px 3px rgba(0, 0, 0, 0.1);
+
+  input {
+    border-radius: 6px;
+    border: 2px solid #64beb18c;
+    height: 3em;
+    padding-left: 10px;
+  }
+
+  select {
+    border-radius: 6px;
+    border: 2px solid #64beb18c;
+    height: 3em;
+    background-color: white;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-top: -2em;
+    width: 90%;
+    border: none;
+    font-size: 90%;
+    padding-top: 3em;
+    input {
+      height: 2em;
+    }
+  }
+}

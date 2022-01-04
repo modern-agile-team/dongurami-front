@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ClubListContainer from './ClubListContainer';
 import { getDatas, searchDatas } from 'apis/clublist';
+import ClubListContainer from './ClubListContainer';
 
-const ClubList = () => {
+const ClubLists = () => {
   const [clubData, setClubData] = useState([]);
   const [originData, setOriginData] = useState([]);
 
@@ -15,14 +15,13 @@ const ClubList = () => {
 
   const onSearch = async (data) => {
     await searchDatas(data).then((response) => {
-      if (response.data.result.length === 0) {
+      if (response.data.clubs.length === 0) {
         alert('검색결과가 없습니다');
         return;
       }
-      setClubData(response.data.result);
+      setClubData(response.data.clubs);
     });
   };
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -39,11 +38,10 @@ const ClubList = () => {
   return (
     <ClubListContainer
       clubData={clubData}
-      originData={originData}
       onCategorySearch={onCategorySearch}
       onSearch={onSearch}
     />
   );
 };
 
-export default ClubList;
+export default ClubLists;

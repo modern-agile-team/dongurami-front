@@ -1,6 +1,5 @@
 import MobileEntireMessage from './MobileEntireMessage';
 import styles from 'styles/Message/MessageList.module.scss';
-
 import Spinner from './Spiner';
 import DetailMessageListContainer from './DetailMessageListContainer';
 import EntireMessageList from './EntireMessageList';

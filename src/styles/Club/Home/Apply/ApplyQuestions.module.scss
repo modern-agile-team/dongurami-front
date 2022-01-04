@@ -1,0 +1,43 @@
+.questions {
+  display: flex;
+  margin-left: 2em;
+  ul {
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      margin: 2vh 0;
+      span {
+        font-family: 'twayair';
+      }
+    }
+  }
+  p {
+    margin: 5px 0;
+    color: gray;
+  }
+  input,
+  select,
+  option {
+    margin-top: 1em;
+  }
+}
+
+@media (max-width: 1024px) {
+  .questions {
+    justify-content: flex-start;
+    ul {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .questions {
+    justify-content: flex-start;
+    ul {
+      width: 100%;
+    }
+  }
+}

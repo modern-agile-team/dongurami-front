@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import ClubListContainer from './ClubListContainer';
+import TypeSearch from './TypeSearch';
+import styles from '../../styles/Club/Lists/ClubLists.module.scss';
+import ClubList from './ClubList';
 import { getDatas, searchDatas } from 'apis/clublist';
 
-const ClubList = () => {
+const ClubListContainer = () => {
   const [clubData, setClubData] = useState([]);
   const [originData, setOriginData] = useState([]);
 
@@ -15,11 +17,11 @@ const ClubList = () => {
 
   const onSearch = async (data) => {
     await searchDatas(data).then((response) => {
-      if (response.data.result.length === 0) {
+      if (response.data.clubs.length === 0) {
         alert('검색결과가 없습니다');
         return;
       }
-      setClubData(response.data.result);
+      setClubData(response.data.clubs);
     });
   };
 
@@ -37,13 +39,26 @@ const ClubList = () => {
   }, []);
 
   return (
-    <ClubListContainer
-      clubData={clubData}
-      originData={originData}
-      onCategorySearch={onCategorySearch}
-      onSearch={onSearch}
-    />
+    <>
+      <TypeSearch onCategorySearch={onCategorySearch} onSearch={onSearch} />
+      <div className={styles.container}>
+        <div className={styles.activities}>
+          {clubData.map((el) => {
+            return (
+              <ClubList
+                img={el.logoUrl}
+                title={el.name}
+                categories={el.category}
+                key={el.no}
+                clubNo={el.no}
+                clubName={el.name}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </>
   );
 };
 
-export default ClubList;
+export default ClubListContainer;

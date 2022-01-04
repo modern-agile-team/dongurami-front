@@ -5,5 +5,5 @@ export function getDatas() {
 }
 
 export function searchDatas(data) {
-  return axios.get(`api/search/club-list/category?name=${data}`);
+  return axios.get(`api/search/club-list/keyword?name=${data}`);
 }
