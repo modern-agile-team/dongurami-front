@@ -9,7 +9,7 @@ import { getReview, postReview, deleteReview, putReview } from 'apis/clubhome';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-const Review = () => {
+const Review = ({ clubs }) => {
   const [reviewInput, setReviewInput] = useState(''); // 후기 글
   const [reviewList, setReviewList] = useState([]); // 후기 리스트
   const [reviewRate, setReviewRate] = useState(0); // 별점 점수
@@ -22,8 +22,6 @@ const Review = () => {
 
   const inputRef = useRef();
   const sortRef = useRef(null);
-
-  const clubInfo = useSelector((state) => state.clubhome.info.result[0]);
 
   // 별점 평균
   const reviewAvg = (reviews) => {
@@ -162,7 +160,7 @@ const Review = () => {
 
   return (
     <div className={styles.container}>
-      <ReviewHeader reviewAvg={reviewAvg(reviewList)} clubInfo={clubInfo} />
+      <ReviewHeader reviewAvg={reviewAvg(reviewList)} clubInfo={clubs} />
       <ReviewWrite
         onReviewUpdate={onReviewUpdate}
         isReviewMine={reviewMine.length}

@@ -31,7 +31,7 @@ const Club = () => {
     if (comp === 1) return <Intro isVisit={isVisit} clubs={clubs} />;
     else if (comp === 2) return <ClubNotice clubs={clubs} />;
     else if (comp === 3) return <Activities clubs={clubs} />;
-    else if (comp === 4) return <Calendar clubs={clubs} />;
+    else if (comp === 4) return <Calendar />;
     else if (comp === 5) return <Review clubs={clubs} />;
     else if (comp === 6) return <Apply clubs={clubs} />;
   }, [comp, isVisit, clubs]);
