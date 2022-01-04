@@ -13,7 +13,6 @@ const Info = ({
   const leader = clubs.info.result.leaderInfo;
   const clubInfo = clubs.info.result.clubInfo;
   const client = clubs.info.result.clientInfo;
-  console.log(client);
   return (
     <div className={styles.container}>
       <BasicInfo
