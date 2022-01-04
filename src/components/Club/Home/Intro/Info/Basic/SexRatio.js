@@ -3,8 +3,8 @@ import { ResponsiveBar } from '@nivo/bar';
 
 const SexRatio = ({ clubs }) => {
   const data = [
-    { gender: '여자', '인원(명)': clubs.genderWomen },
-    { gender: '남자', '인원(명)': clubs.genderMan }
+    { gender: '여자', '인원(명)': clubs.gender.women },
+    { gender: '남자', '인원(명)': clubs.gender.man }
   ];
 
   return (

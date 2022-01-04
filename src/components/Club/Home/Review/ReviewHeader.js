@@ -7,7 +7,7 @@ const ReviewHeader = ({ reviewAvg, clubInfo }) => {
   return (
     <div className={styles.header}>
       <div>
-        <span>{clubInfo.name}</span>
+        <span>{clubInfo.info.result.clubInfo.name}</span>
       </div>
       <div className={styles.star}>
         <AiFillStar />

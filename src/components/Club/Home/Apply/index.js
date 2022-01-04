@@ -8,10 +8,9 @@ import {
   putApply,
   postSubmit
 } from 'apis/clubhome';
-import { useSelector } from 'react-redux';
 import ApplyBody from './ApplyBody';
 
-const Apply = () => {
+const Apply = ({ clubs }) => {
   const [userInfo, setUserInfo] = useState({
     name: '',
     id: '',
@@ -30,8 +29,6 @@ const Apply = () => {
   const { grade, sex, phoneNumber } = userInfo;
 
   const router = useRouter();
-
-  const clubName = useSelector((state) => state.clubhome.info.result[0].name);
 
   const newQuestionInput = useRef();
 
@@ -165,7 +162,7 @@ const Apply = () => {
 
   return (
     <>
-      <ApplyHeader clubName={clubName} />
+      <ApplyHeader clubName={clubs} />
       <ApplyBody
         onUserInfoChange={onUserInfoChange}
         userInfo={userInfo}

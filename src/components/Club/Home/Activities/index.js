@@ -12,12 +12,11 @@ import { getBoardPosts } from 'redux/slices/board';
 import SendMessageContainer from 'components/User/Message/SendMessage';
 import api from 'apis/post';
 
-const Activities = () => {
+const Activities = ({ clubs }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.board.posts);
   const user = useSelector((state) => state.user);
-  const clubName = useSelector((state) => state.clubhome.info?.result[0].name);
   const [messageOpen, setMessageOpen] = useState(false);
 
   const post = useSelector((state) => state.post);
@@ -88,7 +87,7 @@ const Activities = () => {
   return (
     <div className={styles.container}>
       <div id={styles.clubName}>
-        <p>{clubName}의 활동</p>
+        <p>{clubs.info.result.clubInfo.name}의 활동</p>
       </div>
       {canWrite && (
         <div id={styles.add}>

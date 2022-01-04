@@ -3,28 +3,27 @@ import ClubLogo from './Logo/ClubLogo';
 import BasicInfo from './Basic/BasicInfo';
 
 const Info = ({
-  infos,
+  clubs,
   onChangeLogo,
   openOptions,
   setOpenOptions,
   openMessage,
   setOpenMessage
 }) => {
-  const leader = infos.leaderInfo[0];
-  const clubs = infos.result[0];
-  const client = infos.clientInfo;
-
+  const leader = clubs.info.result.leaderInfo;
+  const clubInfo = clubs.info.result.clubInfo;
+  const client = clubs.info.result.clientInfo;
   return (
     <div className={styles.container}>
       <BasicInfo
-        clubs={clubs}
+        clubs={clubInfo}
         leader={leader}
         openOptions={openOptions}
         setOpenOptions={setOpenOptions}
         openMessage={openMessage}
         setOpenMessage={setOpenMessage}
       />
-      <ClubLogo clubs={clubs} client={client} onChangeLogo={onChangeLogo} />
+      <ClubLogo clubs={clubInfo} client={client} onChangeLogo={onChangeLogo} />
     </div>
   );
 };

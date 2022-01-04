@@ -9,7 +9,7 @@ import { getClubInfo, putDesc } from 'redux/slices/clubhome';
 import { patchIntroDesc, putLogo } from 'apis/clubhome';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
 
-const Intro = ({ visitTime }) => {
+const Intro = ({ visitTime, clubs }) => {
   const [isDescriptionUpdate, setIsDescriptionUpdate] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [introDesc, setIntroDesc] = useState('');
@@ -21,7 +21,6 @@ const Intro = ({ visitTime }) => {
 
   const dispatch = useDispatch();
 
-  const clubInfo = useSelector((state) => state.clubhome.info);
   const error = useSelector((err) => err.clubhome.error);
 
   const toggleDescription = () => {
@@ -41,7 +40,7 @@ const Intro = ({ visitTime }) => {
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
     patchIntroduction({
-      leader: clubInfo.clientInfo.leader,
+      leader: clubs.info.result.clientInfo.leaderFlag,
       introduce: introDesc
     }).then(() => {
       alert('동아리 소개글이 수정되었습니다.');
@@ -58,7 +57,7 @@ const Intro = ({ visitTime }) => {
     ).data;
     await uploadImage(presignedURL, file);
     await putClubLogo({
-      leader: clubInfo.clientInfo.leader,
+      leader: clubs.info.result.clientInfo.leaderFlag,
       logoUrl: `${imageURL}`
     });
     dispatch(getClubInfo(clubId));
@@ -88,14 +87,14 @@ const Intro = ({ visitTime }) => {
   }, [printError]);
 
   useEffect(() => {
-    if (clubInfo) setIntroDesc(clubInfo.result[0].introduce);
-  }, [clubInfo]);
+    if (clubs) setIntroDesc(clubs.info.result.clubInfo.introduce);
+  }, [clubs]);
 
   useEffect(() => {
     document.body.style.overflow = 'visible';
   }, []);
 
-  if (!clubInfo) return null;
+  if (!clubs) return null;
 
   return (
     <div className={styles.container}>
@@ -104,7 +103,7 @@ const Intro = ({ visitTime }) => {
       ) : (
         <>
           <Info
-            infos={clubInfo}
+            clubs={clubs}
             onChangeLogo={onChangeLogo}
             openOptions={openOptions}
             setOpenOptions={setOpenOptions}
@@ -112,7 +111,7 @@ const Intro = ({ visitTime }) => {
             setOpenMessage={setOpenMessage}
           />
           <Desc
-            infos={clubInfo}
+            clubs={clubs}
             onDescSubnmit={onDescSubnmit}
             toggleDescription={toggleDescription}
             isDescriptionUpdate={isDescriptionUpdate}
