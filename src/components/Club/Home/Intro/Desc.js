@@ -50,7 +50,7 @@ const Desc = ({
           />
         )}
       </div>
-      {client.leader === 1 ? (
+      {client.leaderFlag ? (
         <div className={styles.button}>
           <Button
             isDescriptionUpdate={isDescriptionUpdate}

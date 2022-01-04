@@ -40,7 +40,7 @@ const Intro = ({ visitTime, clubs }) => {
   // 동아리 소개 수정
   const onDescSubnmit = async () => {
     patchIntroduction({
-      leader: clubs.clientInfo.leaderFlag,
+      leader: clubs.info.result.clientInfo.leaderFlag,
       introduce: introDesc
     }).then(() => {
       alert('동아리 소개글이 수정되었습니다.');
@@ -57,7 +57,7 @@ const Intro = ({ visitTime, clubs }) => {
     ).data;
     await uploadImage(presignedURL, file);
     await putClubLogo({
-      leader: clubs.clientInfo.leaderFlag,
+      leader: clubs.info.result.clientInfo.leaderFlag,
       logoUrl: `${imageURL}`
     });
     dispatch(getClubInfo(clubId));

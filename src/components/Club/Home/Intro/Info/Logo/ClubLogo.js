@@ -10,7 +10,7 @@ const ClubLogo = ({ clubs, client, onChangeLogo }) => {
       ) : (
         <img src={clubs.logoUrl} alt={clubs.fileId} />
       )}
-      {client.leader === 1 && <LogoUpdate onChangeLogo={onChangeLogo} />}
+      {client.leaderFlag && <LogoUpdate onChangeLogo={onChangeLogo} />}
     </div>
   );
 };

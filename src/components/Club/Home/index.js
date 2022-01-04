@@ -19,7 +19,6 @@ const Club = () => {
 
   const comp = useSelector((state) => state.changeComp.comp);
   const clubs = useSelector((state) => state.clubhome);
-  console.log(clubs.info);
   const router = useRouter();
   const clubId = router.query.id;
 
