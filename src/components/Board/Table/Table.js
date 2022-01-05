@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from 'styles/Board/Board/Table.module.scss';
+import moment from 'moment';
 import Th from './Th';
-import Tr from './Tr';
 
 function Table({ postsByPage, category, router, thName }) {
   return (
@@ -20,7 +20,22 @@ function Table({ postsByPage, category, router, thName }) {
             }}
             passHref
           >
-            <Tr post={post} />
+            <tr key={post.no}>
+              <td>{post.no}</td>
+              <td>
+                <div className={styles.titleContainer}>
+                  <div className={styles.title}>{post.title}</div>
+                  &nbsp;
+                  <div
+                    className={styles.commentCount}
+                  >{`[${post.commentCount}]`}</div>
+                </div>
+              </td>
+              <td>{post.studentName}</td>
+              <td>{moment(post.inDate).format('MM-DD')}</td>
+              <td>{post.hit}</td>
+              <td>{post.emotionCount}</td>
+            </tr>
           </Link>
         ))}
       </tbody>
