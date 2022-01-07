@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BiBell } from 'react-icons/bi';
-import { putAlarm, patchAlarm } from 'apis/alarm';
 import styles from 'styles/Common/Header/Header.module.scss';
 import AlarmContainer from './AlarmContainer';
 import Badge from '../Badge';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { changeComp } from 'redux/slices/chageComp';
+import { deleteAllAlarm, deleteOneAlarm } from 'apis/alarm';
 
 const Alarm = ({ alarmList, getAlarmData }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,14 +29,13 @@ const Alarm = ({ alarmList, getAlarmData }) => {
   };
 
   const clickDeleteIcon = (alarmNumber) => {
-    setIsDelete(true);
     onAlarmPatch(alarmNumber);
   };
 
   // 알람 전체 삭제
   const onAlarmDeleteAll = async () => {
     confirm('전체 알람을 삭제하시겠습니까?') &&
-      (await putAlarm()
+      (await deleteAllAlarm()
         .then((res) => alert(res.data.msg))
         .catch((err) => alert(err.response.data.msg)));
     getAlarmData();
@@ -44,7 +43,7 @@ const Alarm = ({ alarmList, getAlarmData }) => {
 
   // 알람 일부 삭제
   const onAlarmPatch = async (notiNum) => {
-    await patchAlarm(notiNum).catch((err) => alert(err.response.data));
+    await deleteOneAlarm(notiNum).catch((err) => alert(err.response.data));
     getAlarmData();
   };
 
