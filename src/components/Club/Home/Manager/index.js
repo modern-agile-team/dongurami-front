@@ -12,6 +12,7 @@ import {
 } from 'apis/manager';
 import { useRouter } from 'next/router';
 import _ from 'lodash';
+import { sendClubJoinResult } from 'apis/alarm';
 
 export const Manager = () => {
   const [members, setMembers] = useState();
@@ -88,6 +89,7 @@ export const Manager = () => {
     await postApply(...body)
       .then((res) => handleAfterApply(res.data.msg))
       .catch((err) => alert(err.response.data.msg));
+    sendClubJoinResult(...[{ ...body[0], notiCategoryNum: 2 }, body[1]]);
   };
 
   const onApplyAccept = async (e) => {
@@ -106,6 +108,7 @@ export const Manager = () => {
       await putApply(...body)
         .then((res) => handleAfterApply(res.data.msg))
         .catch((err) => alert(err.response.data.msg));
+      sendClubJoinResult(...[{ ...body[0], notiCategoryNum: 3 }, body[1]]);
     },
     [handleAfterApply]
   );
