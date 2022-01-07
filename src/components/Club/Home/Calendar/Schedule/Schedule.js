@@ -22,7 +22,7 @@ const Schedule = ({ inDate, todayData, schedule, nowDay }) => {
       <div className={styles.todaySchedule}>
         <h3>✔ 오늘의 일정</h3>
         <div className={styles.scheduleWrap}>
-          {todayData.result.map((eachSchedule) => {
+          {todayData.schedule.map((eachSchedule) => {
             return (
               inDate(eachSchedule.startDate, nowDay, eachSchedule.endDate) && (
                 <ScheduleBox
