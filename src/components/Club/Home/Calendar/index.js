@@ -52,7 +52,9 @@ const Calendar = () => {
   //달 기준 일정 정보 불러오기
   const getData = () => {
     getInfo(Qdata.id, today.format('YYYY-MM'))
-      .then((res) => setSchedule(res.data.schedule))
+      .then((res) => {
+        setSchedule(res.data.schedule);
+      })
       .catch((err) => {
         alert(err.response.data.msg);
         if (err.response.status === 401) moveLogin();
