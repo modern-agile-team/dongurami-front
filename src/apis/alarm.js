@@ -17,6 +17,5 @@ export const deleteOneAlarm = (data) => {
 
 // 동아리 가입 결과 알림 API
 export const sendClubJoinResult = (body, clubNum) => {
-  console.log(body, clubNum);
   return instance.post(`api/notification/join-club/result/${clubNum}`, body);
 };
