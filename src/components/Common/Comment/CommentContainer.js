@@ -1,4 +1,4 @@
-import style from '../../../styles/Common/Comment/CommentContainer.module.scss';
+import style from 'styles/Common/Comment/CommentContainer.module.scss';
 import Comment from './Comment';
 import AddComment from './AddComment';
 import ReplyContainer from './ReplyContainer';

@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import api from 'apis/post';
-import styles from '../../../styles/Common/Comment/AddComment.module.scss';
+import styles from 'styles/Common/Comment/AddComment.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { useRouter } from 'next/router';
+import { makeCommentAlarm } from 'apis/board';
 
 function AddComment({ parentCommentID, scroll }) {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function AddComment({ parentCommentID, scroll }) {
       clubNum: router.query.id,
       hiddenFlag: Number(Boolean(isAnon))
     });
+    await makeCommentAlarm(post.category, post.no, description);
     setDescription('');
     dispatch(getPost());
   };
