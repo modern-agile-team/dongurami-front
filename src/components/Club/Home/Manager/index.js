@@ -94,9 +94,7 @@ export const Manager = () => {
     if (!e.target.id) return;
     const body = [
       {
-        applicant: applicantInfo[e.target.id].id,
-        url: `clubhome/${clubId}`,
-        notiCategoryNum: 2
+        applicant: applicantInfo[e.target.id].id
       },
       clubId
     ];
@@ -117,9 +115,7 @@ export const Manager = () => {
       if (!e.target.id) return;
       const body = [
         {
-          applicant: applicantInfo[e.target.id].id,
-          url: `clubhome/${clubId}`,
-          notiCategoryNum: 3
+          applicant: applicantInfo[e.target.id].id
         },
         clubId
       ];
