@@ -14,3 +14,8 @@ export const putAlarm = () => {
 export const patchAlarm = (data) => {
   return instance.patch(`api/notification/${data}`);
 };
+
+// 동아리 가입 결과 알림 API
+export const sendClubJoinResult = (clubNum, body) => {
+  return instance.post(`api/notification/join-club/result/${clubNum}`, body);
+};
