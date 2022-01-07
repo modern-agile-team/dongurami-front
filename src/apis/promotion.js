@@ -53,15 +53,6 @@ export function editComment(
   });
 }
 
-export function deleteComment(commentNo, parentCommentID, postId) {
-  if (parentCommentID) {
-    return axios.delete(
-      `/api/board/promotion/${postId}/${parentCommentID}/${commentNo}`
-    );
-  }
-  return axios.delete(`api/board/promotion/${postId}/${commentNo}`);
-}
-
 export function addComment(postId, description, parentCommentID, hiddenFlag) {
   if (parentCommentID) {
     return axios.post(`/api/board/promotion/${postId}/${parentCommentID}`, {
@@ -77,4 +68,19 @@ export function addComment(postId, description, parentCommentID, hiddenFlag) {
     notiCategoryNum: 0,
     hiddenFlag
   });
+}
+export function addCommentAlarm(postId, cmtDescription, parentCommentID) {
+  if (parentCommentID)
+    return axios.post(
+      `api/notification/reply-comment/promotion/${postId}/${parentCommentID}`,
+      {
+        replyCmtDescription: cmtDescription,
+        notiCategoryNum: 1
+      }
+    );
+  else
+    return axios.post(`api/notification/comment/promotion/${postId}`, {
+      cmtDescription,
+      notiCategoryNum: 0
+    });
 }
