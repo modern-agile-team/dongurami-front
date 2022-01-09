@@ -93,3 +93,23 @@ export function addCommentAlarm(postId, cmtDescription, parentCommentID) {
       notiCategoryNum: 0
     });
 }
+
+export function likePostAlarm(postId) {
+  return axios.post(`api/notification/like/board/promotion/${postId}`, {
+    notiCategoryNum: 9
+  });
+}
+
+export function likeCommentAlarm(cmtNum, reply) {
+  if (reply)
+    return axios.post(
+      `api/notification/like/reply-comment/promotion/${cmtNum}`,
+      {
+        notiCategoryNum: 11
+      }
+    );
+  else
+    return axios.post(`api/notification/like/comment/promotion/${cmtNum}`, {
+      notiCategoryNum: 10
+    });
+}

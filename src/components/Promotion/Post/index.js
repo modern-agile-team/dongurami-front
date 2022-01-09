@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from 'styles/Board/Promotion/Post/Post.module.scss';
 import { useRouter } from 'next/router';
-import { deletePost } from 'apis/promotion';
+import { deletePost, likePostAlarm } from 'apis/promotion';
 import { getPost, setCategory } from 'redux/slices/post';
 import api from 'apis/post';
 import { useSelector, useDispatch } from 'react-redux';
@@ -52,7 +52,10 @@ const Post = ({
     if (post.likedFlag) {
       await api.unLikePost(post.no);
     } else {
-      await api.likePost({ pid: post.no, url: router.asPath });
+      await api.likePost({ pid: post.no, url: router.asPath }).then((res) => {
+        if (res.data.success)
+          likePostAlarm(postId).then((res) => console.log(res));
+      });
     }
     dispatch(getPost());
   };
