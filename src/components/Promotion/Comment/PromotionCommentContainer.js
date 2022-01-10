@@ -41,6 +41,7 @@ const PromotionCommentContainer = ({
                     openOptions={openOptions}
                     setOpenOptions={setOpenOptions}
                     setIsComment={setIsComment}
+                    reply
                   />
                 </ReplyCommentContainer>
               ) : (
