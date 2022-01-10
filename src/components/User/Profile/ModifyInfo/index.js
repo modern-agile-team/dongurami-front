@@ -6,6 +6,7 @@ import MutableData from './MutableData';
 import router, { useRouter } from 'next/router';
 import { modifyInfo, getUserInfo } from 'apis/profile';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
+import { getUserData } from 'apis/user';
 
 const ModifyInfo = () => {
   const gradeArr = [1, 2, 3, 4];
@@ -17,6 +18,7 @@ const ModifyInfo = () => {
   const [imgUrl, setImgUrl] = useState();
   const [fileId, setFileId] = useState();
   const [placeholder, setPlaceholder] = useState();
+  const [userId, setUserId] = useState();
   const uRouter = useRouter();
 
   const onChangeImg = useCallback(
@@ -32,10 +34,14 @@ const ModifyInfo = () => {
     [imgUrl]
   );
 
+  const getUserId = () => {
+    getUserData().then((res) => setUserId(res.data.id));
+  };
+
   const getData = useCallback(() => {
     getUserInfo(uRouter.query.pid)
       .then((res) => {
-        if (res.data.profile.id !== res.data.userInfo.id) {
+        if (res.data.profile.id !== userId) {
           alert('본인의 정보가 아닙니다.');
           router.back();
         } else {
@@ -84,13 +90,14 @@ const ModifyInfo = () => {
   useEffect(() => {
     if (!uRouter.isReady) return;
     getData();
+    getUserId();
   }, [uRouter, getData]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
   const movePage = useCallback(() => {
-    if (userInfo.isNaverUser === 1) {
+    if (userInfo.naverUserFlag) {
       alert('네이버 아이디로 가입한 회원은 비밀번호 변경을 할 수 없습니다.');
     } else router.push('/changepassword');
   }, [userInfo, router]);
@@ -102,7 +109,6 @@ const ModifyInfo = () => {
           setImgUrl={setImgUrl}
           onChangeImg={onChangeImg}
           imgUrl={imgUrl}
-          userInfo={userInfo}
           setIsOpen={setIsOpen}
           isOpen={isOpen}
           baseImg={baseImg}

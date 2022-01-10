@@ -5,6 +5,7 @@ import UserInfo from './UserInfo/UserInfo';
 import MyPost from './MyPost/MyPost';
 import { useRouter } from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
+import { getUserData } from 'apis/user';
 import getToken from 'utils/getToken';
 import { useDispatch } from 'react-redux';
 import { signOut } from 'redux/slices/user';
@@ -102,12 +103,17 @@ function Profile() {
   //
 
   const setDefaultData = (data) => {
-    setUserInfo(data.userInfo);
     setProfile(data.profile);
     setClubNo(data.profile.clubs.length === 0 ? 0 : data.profile.clubs[0].no);
   };
 
-  const getUser = useCallback(async () => {
+  const getUserId = () => {
+    getUserData()
+      .then((res) => setUserInfo(res.data))
+      .catch((err) => console.log('비로그인회원'));
+  };
+
+  const getProfile = useCallback(async () => {
     if (router.query.pid) {
       await getUserInfo(router.query.pid, token)
         .then((res) => setDefaultData(res.data))
@@ -173,9 +179,9 @@ function Profile() {
 
   useEffect(() => {
     if (!router.isReady) return;
-    getUser();
+    getProfile();
+    getUserId();
   }, [router, token]);
-
   useEffect(() => {
     if (!router.isReady) return;
     setId(router.query.pid);
