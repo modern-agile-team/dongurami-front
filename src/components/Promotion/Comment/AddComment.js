@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from '../../../styles/Board/Promotion/AddComment.module.scss';
-import { addComment } from 'apis/promotion';
+import { addComment, addCommentAlarm } from 'apis/promotion';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 
-function AddComment({ postId, parentCommentID, scroll, reply }) {
+function AddComment({ parentCommentID, scroll, reply }) {
   const [description, setDescription] = useState('');
   const [isAnon, setIsAnon] = useState(false);
   const user = useSelector((state) => state.user);
@@ -28,8 +28,10 @@ function AddComment({ postId, parentCommentID, scroll, reply }) {
       parentCommentID,
       Number(Boolean(isAnon))
     ).then((res) => {
-      if (res.data.success) dispatch(getPost());
-      else alert(res.data.msg);
+      if (res.data.success) {
+        dispatch(getPost());
+        addCommentAlarm(post.no, description, parentCommentID);
+      } else alert(res.data.msg);
     });
     setDescription('');
   };
