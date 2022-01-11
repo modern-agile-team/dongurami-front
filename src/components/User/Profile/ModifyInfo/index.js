@@ -18,7 +18,7 @@ const ModifyInfo = () => {
   const [imgUrl, setImgUrl] = useState();
   const [fileId, setFileId] = useState();
   const [placeholder, setPlaceholder] = useState();
-  const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState('');
   const uRouter = useRouter();
 
   const onChangeImg = useCallback(
@@ -33,31 +33,34 @@ const ModifyInfo = () => {
     },
     [imgUrl]
   );
-
-  const getUserId = () => {
-    getUserData().then((res) => setUserId(res.data.id));
+  const getUserId = async () => {
+    const getUser = await getUserData();
+    if (getUser.data) setUserId(getUser.data.user.id);
   };
 
-  const getData = useCallback(() => {
-    getUserInfo(uRouter.query.pid)
-      .then((res) => {
-        if (res.data.profile.id !== userId) {
-          alert('본인의 정보가 아닙니다.');
-          router.back();
-        } else {
-          setUserInfo(res.data.profile);
-          setEmail(res.data.profile.email);
-          setPhoneNumber(res.data.profile.phoneNumber);
-          setGrade(res.data.profile.grade);
-          setImgUrl(res.data.profile.profileImageUrl);
-          setPlaceholder([
-            res.data.profile.email,
-            res.data.profile.phoneNumber
-          ]);
-        }
-      })
-      .catch((err) => alert(err.response.data.msg));
-  }, [uRouter.query.pid]);
+  const getData = useCallback(
+    (id) => {
+      getUserInfo(uRouter.query.pid)
+        .then((res) => {
+          if (res.data.profile.id != id) {
+            alert('본인의 정보가 아닙니다.');
+            router.back();
+          } else {
+            setUserInfo(res.data.profile);
+            setEmail(res.data.profile.email);
+            setPhoneNumber(res.data.profile.phoneNumber);
+            setGrade(res.data.profile.grade);
+            setImgUrl(res.data.profile.profileImageUrl);
+            setPlaceholder([
+              res.data.profile.email,
+              res.data.profile.phoneNumber
+            ]);
+          }
+        })
+        .catch((err) => alert(err.response.data.msg));
+    },
+    [uRouter.query.pid]
+  );
 
   const modifyBtn = useCallback(async () => {
     await modifyInfo(uRouter.query.pid, {
@@ -89,9 +92,9 @@ const ModifyInfo = () => {
 
   useEffect(() => {
     if (!uRouter.isReady) return;
-    getData();
     getUserId();
-  }, [uRouter, getData]);
+    if (userId.length > 4) getData(userId);
+  }, [uRouter, getData, getUserId]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';

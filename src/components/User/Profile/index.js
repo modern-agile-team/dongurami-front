@@ -14,7 +14,7 @@ import ProfileHeader from './ProfileHeader/ProfileHeader';
 function Profile() {
   const compObj = { scrap: '스크랩', myPosts: '작성글' };
   const dispatch = useDispatch();
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({ id: '' });
   const [profile, setProfile] = useState({});
   const [id, setId] = useState('');
   const [clubNo, setClubNo] = useState(0);
@@ -107,10 +107,9 @@ function Profile() {
     setClubNo(data.profile.clubs.length === 0 ? 0 : data.profile.clubs[0].no);
   };
 
-  const getUserId = () => {
-    getUserData()
-      .then((res) => setUserInfo(res.data))
-      .catch((err) => console.log('비로그인회원'));
+  const getUserId = async () => {
+    const getUser = await getUserData();
+    if (getUser.data) setUserInfo(getUser.data.user);
   };
 
   const getProfile = useCallback(async () => {
@@ -177,11 +176,12 @@ function Profile() {
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!router.isReady) return;
     getProfile();
-    getUserId();
-  }, [router, token]);
+    await getUserId();
+  }, [getProfile, getUserId]);
+
   useEffect(() => {
     if (!router.isReady) return;
     setId(router.query.pid);
