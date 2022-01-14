@@ -55,9 +55,19 @@ export function putPost(category, pid, body, clubNum) {
   return axios.put(`/api/board/${category}/${pid}`, body);
 }
 
-export function makeCommentAlarm(category, pid, cmtDescription) {
-  return axios.post(`api/notification/comment/${category}/${pid}`, {
-    cmtDescription,
-    notiCategoryNum: 0
-  });
+export function makeCommentAlarm(category, pid, cmtDescription, cmtNum) {
+  console.log(category, pid, cmtDescription, cmtNum);
+  const notiCategoryNum = cmtNum === undefined ? 0 : 1;
+  return notiCategoryNum
+    ? axios.post(
+        `api/notification/reply-comment/${category}/${pid}/${cmtNum}`,
+        {
+          replyCmtDescription: cmtDescription,
+          notiCategoryNum
+        }
+      )
+    : axios.post(`api/notification/comment/${category}/${pid}`, {
+        cmtDescription,
+        notiCategoryNum
+      });
 }
