@@ -9,12 +9,11 @@ const ApplySubmit = ({
   onQuestionAdd,
   iconSize,
   onResumeSubmit,
-  leader,
-  userInfo
+  leader
 }) => {
   return (
     <>
-      {userInfo.id === leader ? (
+      {leader ? (
         <NewQuestion
           newQuestionInput={newQuestionInput}
           handleChange={handleChange}
