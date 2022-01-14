@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styles from '../../styles/Board/Post/PostContent.module.scss';
-import api from 'apis/post';
+import api, { likeAlarm } from 'apis/post';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getPost, setCategory } from 'redux/slices/post';
@@ -58,6 +58,7 @@ function Post({
       await api.unLikePost(post.no);
     } else {
       await api.likePost({ pid: post.no, url: router.asPath });
+      await likeAlarm(category, post.no);
     }
     dispatch(getPost());
   };

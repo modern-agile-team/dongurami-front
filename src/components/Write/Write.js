@@ -34,9 +34,7 @@ function Write({ category }) {
       if (category === 'notice') {
         noticeAlarm(res.data.boardNum, title);
       } else if (category === 'clubNotice') {
-        clubNoticeAlarm(router.query.id, res.data.boardNum, title).catch(
-          (err) => console.log(err)
-        );
+        clubNoticeAlarm(router.query.id, res.data.boardNum, title);
       }
     });
     if (category === 'clubActivity') alert('글 작성 완료!');
