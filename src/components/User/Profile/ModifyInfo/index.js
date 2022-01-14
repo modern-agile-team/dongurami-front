@@ -6,6 +6,7 @@ import MutableData from './MutableData';
 import router, { useRouter } from 'next/router';
 import { modifyInfo, getUserInfo } from 'apis/profile';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
+import { getUserData } from 'apis/user';
 
 const ModifyInfo = () => {
   const gradeArr = [1, 2, 3, 4];
@@ -17,6 +18,7 @@ const ModifyInfo = () => {
   const [imgUrl, setImgUrl] = useState();
   const [fileId, setFileId] = useState();
   const [placeholder, setPlaceholder] = useState();
+  const [userId, setUserId] = useState('');
   const uRouter = useRouter();
 
   const onChangeImg = useCallback(
@@ -31,27 +33,34 @@ const ModifyInfo = () => {
     },
     [imgUrl]
   );
+  const getUserId = async () => {
+    const getUser = await getUserData();
+    if (getUser.data) setUserId(getUser.data.user.id);
+  };
 
-  const getData = useCallback(() => {
-    getUserInfo(uRouter.query.pid)
-      .then((res) => {
-        if (res.data.profile.id !== res.data.userInfo.id) {
-          alert('본인의 정보가 아닙니다.');
-          router.back();
-        } else {
-          setUserInfo(res.data.profile);
-          setEmail(res.data.profile.email);
-          setPhoneNumber(res.data.profile.phoneNumber);
-          setGrade(res.data.profile.grade);
-          setImgUrl(res.data.profile.profileImageUrl);
-          setPlaceholder([
-            res.data.profile.email,
-            res.data.profile.phoneNumber
-          ]);
-        }
-      })
-      .catch((err) => alert(err.response.data.msg));
-  }, [uRouter.query.pid]);
+  const getData = useCallback(
+    (id) => {
+      getUserInfo(uRouter.query.pid)
+        .then((res) => {
+          if (res.data.profile.id != id) {
+            alert('본인의 정보가 아닙니다.');
+            router.back();
+          } else {
+            setUserInfo(res.data.profile);
+            setEmail(res.data.profile.email);
+            setPhoneNumber(res.data.profile.phoneNumber);
+            setGrade(res.data.profile.grade);
+            setImgUrl(res.data.profile.profileImageUrl);
+            setPlaceholder([
+              res.data.profile.email,
+              res.data.profile.phoneNumber
+            ]);
+          }
+        })
+        .catch((err) => alert(err.response.data.msg));
+    },
+    [uRouter.query.pid]
+  );
 
   const modifyBtn = useCallback(async () => {
     await modifyInfo(uRouter.query.pid, {
@@ -83,14 +92,15 @@ const ModifyInfo = () => {
 
   useEffect(() => {
     if (!uRouter.isReady) return;
-    getData();
-  }, [uRouter, getData]);
+    getUserId();
+    if (userId.length > 4) getData(userId);
+  }, [uRouter, getData, getUserId]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
 
   const movePage = useCallback(() => {
-    if (userInfo.isNaverUser === 1) {
+    if (userInfo.naverUserFlag) {
       alert('네이버 아이디로 가입한 회원은 비밀번호 변경을 할 수 없습니다.');
     } else router.push('/changepassword');
   }, [userInfo, router]);
@@ -102,7 +112,6 @@ const ModifyInfo = () => {
           setImgUrl={setImgUrl}
           onChangeImg={onChangeImg}
           imgUrl={imgUrl}
-          userInfo={userInfo}
           setIsOpen={setIsOpen}
           isOpen={isOpen}
           baseImg={baseImg}

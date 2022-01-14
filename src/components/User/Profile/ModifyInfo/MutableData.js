@@ -7,7 +7,7 @@ const MutableData = ({ userInfo, setEmail, setPhoneNumber }) => {
     <>
       <div className={styles.email}>
         <IoIosMail />
-        {userInfo.isNaverUser === 1 ? (
+        {userInfo.naverUserFlag ? (
           <span>{userInfo.email}</span>
         ) : (
           <input
