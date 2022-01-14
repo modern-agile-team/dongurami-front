@@ -32,7 +32,7 @@ export const getUserData = () => {
 
 //비밀번호 변경
 export const patchChangePW = (data) => {
-  return instance.patch('api/reset-password', data);
+  return instance.patch('api/change-password', data);
 };
 
 //oAuth
