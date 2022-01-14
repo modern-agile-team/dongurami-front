@@ -3,7 +3,7 @@ import Container from './Container';
 import WriteContent from './WriteContent';
 import Modal from 'components/Common/Modal';
 import WritePromotion from './WritePromotion';
-import { noticeAlarm, postPost } from 'apis/board';
+import { clubNoticeAlarm, noticeAlarm, postPost } from 'apis/board';
 import { useRouter } from 'next/router';
 
 function Write({ category }) {
@@ -30,9 +30,15 @@ function Write({ category }) {
       category,
       { title, description, hiddenFlag: Boolean(isAnon) },
       router.query.id
-    ).then(
-      (res) => category === 'notice' && noticeAlarm(res.data.boardNum, title)
-    );
+    ).then((res) => {
+      if (category === 'notice') {
+        noticeAlarm(res.data.boardNum, title);
+      } else if (category === 'clubNotice') {
+        clubNoticeAlarm(router.query.id, res.data.boardNum, title).catch(
+          (err) => console.log(err)
+        );
+      }
+    });
     if (category === 'clubActivity') alert('글 작성 완료!');
     if (['clubNotice', 'clubActivity'].includes(category)) router.back();
     else {

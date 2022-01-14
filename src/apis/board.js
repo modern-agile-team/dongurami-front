@@ -54,7 +54,6 @@ export function putPost(category, pid, body, clubNum) {
 }
 
 export function makeCommentAlarm(category, pid, cmtDescription, cmtNum) {
-  console.log(category, pid, cmtDescription, cmtNum);
   const notiCategoryNum = cmtNum === undefined ? 0 : 1;
   return notiCategoryNum
     ? axios.post(
@@ -75,4 +74,11 @@ export function noticeAlarm(boardNum, boardTitle) {
     boardTitle,
     notiCategoryNum: 12
   });
+}
+
+export function clubNoticeAlarm(clubNum, boardNum, boardTitle) {
+  return axios.post(
+    `/api/notification/board/club-notice/${clubNum}/${boardNum}`,
+    { boardTitle, notiCategoryNum: 6 }
+  );
 }
