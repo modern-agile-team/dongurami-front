@@ -12,7 +12,8 @@ import {
   modifySchedule,
   deleteSchedule,
   importantSchedule,
-  addSchedule
+  addSchedule,
+  postAlarm
 } from 'apis/calendar';
 import { getSchedule } from 'redux/slices/calendar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -106,19 +107,18 @@ const Calendar = () => {
   //
   //일정 추가 함수
   const onClickAdd = useCallback(async () => {
-    if (titleRef.current.value.length > 50)
-      alert('제목은 50자 이하여야 합니다.');
+    let title = titleRef.current.value;
+    if (title.length > 50) alert('제목은 50자 이하여야 합니다.');
     else {
       await addSchedule(Qdata.id, {
         colorCode: color,
-        title: titleRef.current.value,
+        title: title,
         startDate,
-        endDate,
-        url: `clubhome/${Qdata.id}`,
-        notiCategoryNum: 4
+        endDate
       })
         .then(() => setPop('Calendar'))
         .catch((err) => alert(err.response.data.msg));
+      await postAlarm(Qdata.id, title, true);
       await getData();
     }
   }, [titleRef, Qdata, color, startDate, endDate]);
@@ -132,12 +132,11 @@ const Calendar = () => {
         colorCode: colorCode,
         title: newTitle,
         startDate: startDate,
-        endDate: endDate,
-        url: `clubhome/${Qdata.id}`,
-        notiCategoryNum: 5
+        endDate: endDate
       })
         .then(() => setPop('Calendar'))
         .catch((err) => alert(err.response.data.msg));
+      await postAlarm(Qdata.id, newTitle, false);
       await getData();
     }
   }, [newTitle, title, Qdata, no, colorCode, startDate, endDate]);
