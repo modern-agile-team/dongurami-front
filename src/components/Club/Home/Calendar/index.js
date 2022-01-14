@@ -107,12 +107,12 @@ const Calendar = () => {
   //
   //일정 추가 함수
   const onClickAdd = useCallback(async () => {
-    let title = titleRef.current.value;
+    const title = titleRef.current.value;
     if (title.length > 50) alert('제목은 50자 이하여야 합니다.');
     else {
       await addSchedule(Qdata.id, {
         colorCode: color,
-        title: title,
+        title,
         startDate,
         endDate
       })
@@ -132,7 +132,7 @@ const Calendar = () => {
         colorCode: colorCode,
         title: newTitle,
         startDate: startDate,
-        endDate: endDate
+        endDate
       })
         .then(() => setPop('Calendar'))
         .catch((err) => alert(err.response.data.msg));
