@@ -26,8 +26,7 @@ export function searchPosts({ category, clubNum, ...params }) {
 export function postPost(category, body, clubNum) {
   if (category === 'clubNotice') {
     return axios.post(`/api/club/board/clubNotice/${clubNum}`, {
-      ...body,
-      notiCategoryNum: 6
+      ...body
     });
   }
   if (category === 'clubActivity') {
@@ -38,8 +37,7 @@ export function postPost(category, body, clubNum) {
   }
   if (category === 'notice') {
     return axios.post(`/api/board/${category}`, {
-      ...body,
-      notiCategoryNum: 12
+      ...body
     });
   }
   return axios.post(`/api/board/${category}`, { ...body });
@@ -70,4 +68,11 @@ export function makeCommentAlarm(category, pid, cmtDescription, cmtNum) {
         cmtDescription,
         notiCategoryNum
       });
+}
+
+export function noticeAlarm(boardNum, boardTitle) {
+  return axios.post(`/api/notification/board/notice/${boardNum}`, {
+    boardTitle,
+    notiCategoryNum: 12
+  });
 }

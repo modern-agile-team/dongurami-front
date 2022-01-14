@@ -71,6 +71,7 @@ function Board({ category }) {
     clubNotice: '동아리 공지 게시판',
     questionAndAnswer: 'Q&A 게시판'
   };
+
   const canWrite = (() => {
     if (!user) return false;
     if (['free', 'questionAndAnswer'].includes(category)) return true;
