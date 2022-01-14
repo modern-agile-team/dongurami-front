@@ -5,6 +5,7 @@ import UserInfo from './UserInfo/UserInfo';
 import MyPost from './MyPost/MyPost';
 import { useRouter } from 'next/router';
 import { getScraps, getUserInfo } from 'apis/profile';
+import { getUserData } from 'apis/user';
 import getToken from 'utils/getToken';
 import { useDispatch } from 'react-redux';
 import { signOut } from 'redux/slices/user';
@@ -13,7 +14,7 @@ import ProfileHeader from './ProfileHeader/ProfileHeader';
 function Profile() {
   const compObj = { scrap: '스크랩', myPosts: '작성글' };
   const dispatch = useDispatch();
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({ id: '' });
   const [profile, setProfile] = useState({});
   const [id, setId] = useState('');
   const [clubNo, setClubNo] = useState(0);
@@ -102,12 +103,16 @@ function Profile() {
   //
 
   const setDefaultData = (data) => {
-    setUserInfo(data.userInfo);
     setProfile(data.profile);
     setClubNo(data.profile.clubs.length === 0 ? 0 : data.profile.clubs[0].no);
   };
 
-  const getUser = useCallback(async () => {
+  const getUserId = async () => {
+    const getUser = await getUserData();
+    if (getUser.data) setUserInfo(getUser.data.user);
+  };
+
+  const getProfile = useCallback(async () => {
     if (router.query.pid) {
       await getUserInfo(router.query.pid, token)
         .then((res) => setDefaultData(res.data))
@@ -171,10 +176,11 @@ function Profile() {
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!router.isReady) return;
-    getUser();
-  }, [router, token]);
+    getProfile();
+    await getUserId();
+  }, [getProfile, getUserId]);
 
   useEffect(() => {
     if (!router.isReady) return;
