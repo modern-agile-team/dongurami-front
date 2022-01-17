@@ -4,7 +4,7 @@ import styles from 'styles/Profile/Profile.module.scss';
 import UserInfo from './UserInfo/UserInfo';
 import MyPost from './MyPost/MyPost';
 import { useRouter } from 'next/router';
-import { getScraps, getUserInfo } from 'apis/profile';
+import { getScraps, getUserInfo, quitAlarm, quitClub } from 'apis/profile';
 import { getUserData } from 'apis/user';
 import getToken from 'utils/getToken';
 import { useDispatch } from 'react-redux';
@@ -128,7 +128,10 @@ function Profile() {
       quitClub(profile.id, number)
         .then((res) => setNewToken(res))
         .catch((err) => alert(err.response.data.msg))
-        .finally(() => setLeaveIsOpen(!setLeaveIsOpen));
+        .finally(() => {
+          quitAlarm(number);
+          setLeaveIsOpen(!setLeaveIsOpen);
+        });
     } else setLeaveIsOpen(false);
   };
 
