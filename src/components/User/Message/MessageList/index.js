@@ -73,6 +73,10 @@ const MessageListContainer = () => {
 
   useEffect(() => {
     getLetterDatas();
+    if (!user) {
+      alert('로그인 후 이용해주세요');
+      router.back();
+    }
   }, [user]);
 
   useEffect(() => {
