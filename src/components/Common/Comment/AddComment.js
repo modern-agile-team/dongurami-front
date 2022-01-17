@@ -19,6 +19,7 @@ function AddComment({ parentCommentID, scroll }) {
   const onChange = (e) => {
     setDescription(e.target.value);
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (description.trim() === '') return;
@@ -35,7 +36,13 @@ function AddComment({ parentCommentID, scroll }) {
       clubNum: router.query.id,
       hiddenFlag: Number(Boolean(isAnon))
     });
-    await makeCommentAlarm(post.category, post.no, description);
+    await makeCommentAlarm(
+      post.category,
+      post.no,
+      description,
+      parentCommentID
+    ).catch((err) => console.log(err.response));
+
     setDescription('');
     dispatch(getPost());
   };

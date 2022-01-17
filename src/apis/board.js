@@ -26,8 +26,7 @@ export function searchPosts({ category, clubNum, ...params }) {
 export function postPost(category, body, clubNum) {
   if (category === 'clubNotice') {
     return axios.post(`/api/club/board/clubNotice/${clubNum}`, {
-      ...body,
-      notiCategoryNum: 6
+      ...body
     });
   }
   if (category === 'clubActivity') {
@@ -38,8 +37,7 @@ export function postPost(category, body, clubNum) {
   }
   if (category === 'notice') {
     return axios.post(`/api/board/${category}`, {
-      ...body,
-      notiCategoryNum: 12
+      ...body
     });
   }
   return axios.post(`/api/board/${category}`, { ...body });
@@ -55,9 +53,32 @@ export function putPost(category, pid, body, clubNum) {
   return axios.put(`/api/board/${category}/${pid}`, body);
 }
 
-export function makeCommentAlarm(category, pid, cmtDescription) {
-  return axios.post(`api/notification/comment/${category}/${pid}`, {
-    cmtDescription,
-    notiCategoryNum: 0
+export function makeCommentAlarm(category, pid, cmtDescription, cmtNum) {
+  const notiCategoryNum = cmtNum === undefined ? 0 : 1;
+  return notiCategoryNum
+    ? axios.post(
+        `api/notification/reply-comment/${category}/${pid}/${cmtNum}`,
+        {
+          replyCmtDescription: cmtDescription,
+          notiCategoryNum
+        }
+      )
+    : axios.post(`api/notification/comment/${category}/${pid}`, {
+        cmtDescription,
+        notiCategoryNum
+      });
+}
+
+export function noticeAlarm(boardNum, boardTitle) {
+  return axios.post(`/api/notification/board/notice/${boardNum}`, {
+    boardTitle,
+    notiCategoryNum: 12
   });
+}
+
+export function clubNoticeAlarm(clubNum, boardNum, boardTitle) {
+  return axios.post(
+    `/api/notification/board/club-notice/${clubNum}/${boardNum}`,
+    { boardTitle, notiCategoryNum: 6 }
+  );
 }
