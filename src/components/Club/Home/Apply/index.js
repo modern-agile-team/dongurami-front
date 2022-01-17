@@ -24,7 +24,7 @@ const Apply = ({ clubs }) => {
   const [isUpdate, setIsUpdate] = useState([]);
   const [addQuestion, setAddQuestion] = useState([]);
   const [updateQuestion, setUpdateQuestion] = useState('');
-  const [leader, setLeader] = useState('');
+  const [leader, setLeader] = useState(false);
 
   const { grade, sex, phoneNumber } = userInfo;
 
@@ -39,16 +39,16 @@ const Apply = ({ clubs }) => {
     getApply(router.query.id)
       .then((res) => {
         setUserInfo({
-          name: res.data.clientInfo[0].name,
-          id: res.data.clientInfo[0].id,
-          major: res.data.clientInfo[0].major,
-          grade: res.data.clientInfo[0].grade,
-          sex: res.data.clientInfo[0].gender,
-          phoneNumber: res.data.clientInfo[0].phoneNumber
+          name: res.data.result.clientInfo.name,
+          id: res.data.result.clientInfo.id,
+          major: res.data.result.clientInfo.major,
+          grade: res.data.result.clientInfo.grade,
+          sex: res.data.result.clientInfo.gender,
+          phoneNumber: res.data.result.clientInfo.phoneNumber
         });
-        setLeader(res.data.leader);
-        setIsUpdate(new Array(res.data.questions.length).fill(false));
-        setQuestions(res.data.questions);
+        setLeader(res.data.result.clientInfo.leaderFlag);
+        setIsUpdate(new Array(res.data.result.questions.length).fill(false));
+        setQuestions(res.data.result.questions);
       })
       .catch((err) => alert(err.response.data.msg));
   }, [router.query.id]);

@@ -10,7 +10,6 @@ const Question = ({
   onUpdateInputChange,
   onAnswerInputChange,
   leader,
-  userInfo,
   onUpdate,
   onRemove
 }) => {
@@ -27,7 +26,7 @@ const Question = ({
         ) : (
           <span>{question.description}</span>
         )}
-        {leader === userInfo.id && (
+        {leader && (
           <div className={styles.icons}>
             <HiPencil onClick={() => onUpdate(index, question.no)} />
             <FaTrashAlt

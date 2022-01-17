@@ -39,7 +39,6 @@ const ApplyBody = ({
         iconSize={iconSize}
         onResumeSubmit={onResumeSubmit}
         leader={leader}
-        userInfo={userInfo}
       />
     </div>
   );
