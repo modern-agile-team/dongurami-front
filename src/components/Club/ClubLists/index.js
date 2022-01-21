@@ -27,7 +27,7 @@ const ClubList = () => {
     const getData = async () => {
       try {
         const response = await getDatas();
-        setClubData(response.data.result);
+        setClubData(response.data.clubList);
         setOriginData(response.data.result);
       } catch (e) {
         console.log(e);
