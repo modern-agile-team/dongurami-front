@@ -10,7 +10,8 @@ function SendMessage({
   checkHandler,
   onSubmit,
   modalContainer,
-  description
+  description,
+  isReply
 }) {
   return (
     <div
@@ -24,8 +25,16 @@ function SendMessage({
       <div>
         <div className={styles.title}>
           <p>쪽지보내기</p>
-          <input type="checkbox" checked={isCheck} onChange={checkHandler} />
-          익명
+          {isReply ? null : (
+            <div className={styles.checkbox}>
+              <input
+                type="checkbox"
+                checked={isCheck}
+                onChange={checkHandler}
+              />
+              <span>익명</span>
+            </div>
+          )}
         </div>
         <div className={styles.text}>
           <form>

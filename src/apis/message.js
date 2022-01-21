@@ -26,17 +26,9 @@ export function sendLetter(
   return axios.post('api/letter', body);
 }
 
-export function replyLetter(
-  recipientId,
-  description,
-  writerHiddenFlag,
-  letterNo,
-  userId
-) {
+export function replyLetter(description, letterNo, userId) {
   return axios.post(`api/letter/${userId}/${letterNo}`, {
-    recipientId,
-    description,
-    writerHiddenFlag
+    description
   });
 }
 
@@ -47,10 +39,8 @@ export function getMessages(id) {
 export function getDetailMessages(id, letterNo) {
   return axios.get(`api/letter/${id}/${letterNo}`);
 }
-export function deleteMessage(recipientId, id, groupNo) {
-  return axios.put(`api/letter/${recipientId}/${id}`, {
-    groupNo
-  });
+export function deleteMessage(recipientId, id) {
+  return axios.delete(`api/letter/${recipientId}/${id}`);
 }
 
 export function deleteMessageAlarm() {

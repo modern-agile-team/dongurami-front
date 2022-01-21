@@ -13,7 +13,8 @@ function SendMessageContainer({
   otherId,
   letterNo,
   user,
-  isActivities
+  isActivities,
+  reply
 }) {
   const [description, setDescription] = useState('');
   const [isCheck, setIsCheck] = useState(false);
@@ -23,7 +24,7 @@ function SendMessageContainer({
     (state) => state.clubhome.info?.clientInfo.leader
   );
   const userId = user?.id;
-
+  const isReply = reply;
   const modalContainer = useRef();
 
   const onClick = (e) => {
@@ -84,20 +85,8 @@ function SendMessageContainer({
     });
   };
 
-  const replySend = async (
-    recipientId,
-    description,
-    writerHiddenFlag,
-    letterNo,
-    userId
-  ) => {
-    await replyLetter(
-      recipientId,
-      description,
-      writerHiddenFlag,
-      letterNo,
-      userId
-    ).then((response) => {
+  const replySend = async (description, letterNo, userId) => {
+    await replyLetter(description, letterNo, userId).then((response) => {
       if (response.data.success) {
         alert('쪽지가 전송되었습니다');
         onClose();
@@ -141,7 +130,7 @@ function SendMessageContainer({
       boardFlag = detailMessage.boardFlag;
       boardNo = detailMessage.boardNo;
 
-      replySend(recipientId, description, writerHiddenFlag, letterNo, userId);
+      replySend(description, letterNo, userId);
     } else if (letter) {
       if (!Number(letter.studentId)) recipientId = '';
       else recipientId = letter.studentId;
@@ -178,6 +167,7 @@ function SendMessageContainer({
       checkHandler={checkHandler}
       modalContainer={modalContainer}
       description={description}
+      isReply={isReply}
     />
   );
 }
