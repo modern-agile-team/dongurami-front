@@ -10,7 +10,6 @@ const MessageListContainer = () => {
   const [recipientId, setRecipientId] = useState('');
   const [detailMessage, setDetailMessage] = useState([]);
   const [recipient, setRecipient] = useState('');
-  const [groupNo, setGroupNo] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
