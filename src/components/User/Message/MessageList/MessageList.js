@@ -72,6 +72,7 @@ const MessageList = ({
         inquiryMessage={inquiryMessage}
         otherId={recipientId}
         user={user}
+        reply
       />
     </div>
   );
