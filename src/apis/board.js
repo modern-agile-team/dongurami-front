@@ -37,7 +37,22 @@ export function postPost(category, body, clubNum) {
     });
   }
   if (category === 'promotion') {
-    return instance.post(`/api/board/promotion`, { clubNo: clubNum, ...body });
+    const { title, description, images, clubNo } = body;
+    return instance
+      .post(`/api/board/promotion`, {
+        title,
+        description,
+        hiddenFlag: 0,
+        clubNo
+      })
+      .then((response) => {
+        if (response.data.success) {
+          return instance.post(
+            `/api/image?boardCategory=promotion&boardNum=${response.data.boardNum}`,
+            { images }
+          );
+        }
+      });
   }
   if (category === 'notice') {
     return instance.post(`/api/board/${category}`, {
