@@ -23,11 +23,21 @@ export function getBoardPost(postId) {
 }
 
 export function putPost(postId, title, description, images) {
-  return axios.put(`api/board/promotion/${postId}`, {
-    title,
-    description,
-    images
-  });
+  return axios
+    .put(`api/board/promotion/${postId}`, {
+      title,
+      description
+    })
+    .then((response) => {
+      if (response.data.success) {
+        return axios.put(
+          `/api/image?boardCategory=promotion&boardNum=${postId}`,
+          {
+            images
+          }
+        );
+      }
+    });
 }
 
 export function deletePost(postId) {

@@ -170,7 +170,7 @@ const Promotion = () => {
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
-  }, [searchItem, isSearch]);
+  }, [searchItem, isSearch, router]);
 
   useEffect(() => {
     document.body.style.overflow = openModal ? 'hidden' : 'auto';

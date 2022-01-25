@@ -73,7 +73,7 @@ const PromotionItem = ({ setPostId, displayedAt, post }) => {
         <div className={styles.extraInfo}>
           <span className={styles.none}></span>
           <span className={styles.hashtag}>#{post.category}</span>
-          <span className={styles.time}>{displayedAt(post.date)}</span>
+          <span className={styles.time}>{displayedAt(post.inDate)}</span>
         </div>
       </div>
     </div>
