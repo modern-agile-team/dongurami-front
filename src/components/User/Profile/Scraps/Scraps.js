@@ -24,7 +24,7 @@ function Scraps({
               .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
           );
         })
-        .catch((err) => alert(err.response.data.msg));
+        .catch((err) => console.log(err));
     }
   }, [clubNo, getScraps, profile.id, setDataArr]);
 
