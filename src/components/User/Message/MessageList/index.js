@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { getMessages, getDetailMessages, deleteMessage } from 'apis/message';
 import MessageList from './MessageList';
+import getToken from 'utils/getToken';
 
 const MessageListContainer = () => {
   const [messages, setMessages] = useState([]);
   const [recipientId, setRecipientId] = useState('');
   const [detailMessage, setDetailMessage] = useState([]);
   const [recipient, setRecipient] = useState('');
-  const [groupNo, setGroupNo] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -23,7 +23,7 @@ const MessageListContainer = () => {
       await getMessages(user.id).then((response) => {
         if (response.data.success) {
           setMessages(response.data.letters);
-        } else return;
+        }
       });
     }
   };
@@ -64,7 +64,7 @@ const MessageListContainer = () => {
 
   const onDelete = async (id) => {
     if (confirm('대화내용을 전부 삭제하시겠습니까?') === true) {
-      await deleteMessage(recipientId, id, groupNo).then((response) => {
+      await deleteMessage(recipientId, id).then((response) => {
         alert(response.data.msg);
         router.replace(`message`);
       });
@@ -72,11 +72,11 @@ const MessageListContainer = () => {
   };
 
   useEffect(() => {
-    getLetterDatas();
-    if (!user) {
+    if (!getToken()) {
       alert('로그인 후 이용해주세요');
       router.back();
     }
+    getLetterDatas();
   }, [user]);
 
   useEffect(() => {
