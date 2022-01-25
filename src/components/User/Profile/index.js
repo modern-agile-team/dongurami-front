@@ -146,7 +146,7 @@ function Profile() {
     getScraps(profile.id, e.target.value)
       .then((res) => {
         setDataArr(
-          res.data.esult.scraps
+          res.data.result.scraps
             .concat(res.data.result.myPagePosts)
             .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
         );
