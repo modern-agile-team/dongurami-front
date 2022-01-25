@@ -107,7 +107,7 @@ function Post({
                 />
               )}
 
-              <div className={styles.profileLink}>{post.name}</div>
+              <div className={styles.profileLink}>{post.studentName}</div>
             </div>
             <div>
               {category === 'clubActivity' &&
