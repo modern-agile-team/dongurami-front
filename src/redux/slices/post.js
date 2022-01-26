@@ -22,23 +22,6 @@ const postSlice = createSlice({
       state.category = action.payload;
     }
   },
-  // extraReducers: {
-  //   [getPost.pending.type]: (state, action) => {
-  //     state.loading = true;
-  //   },
-  //   [getPost.fulfilled.type]: (state, action) => {
-  //     state.loading = false;
-  //     return {
-  //       ...action.payload.board,
-  //       category: state.category,
-  //       comments: action.payload.comments,
-  //       images: action.payload.images
-  //     };
-  //   },
-  //   [getPost.rejected.type]: (state, action) => {
-  //     state.loading = false;
-  //   }
-  // }
   extraReducers: (builder) => {
     builder.addCase(getPost.pending, (_) => {
       return {
