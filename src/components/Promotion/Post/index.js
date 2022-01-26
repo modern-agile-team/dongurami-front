@@ -9,6 +9,7 @@ import getToken from 'utils/getToken';
 import Header from './Header';
 import Description from './Description';
 import Poster from './Poster';
+import { Spinner } from 'components/Common/Spinner';
 
 const Post = ({
   postId,
@@ -26,6 +27,7 @@ const Post = ({
     post;
   const category = 'promotion';
 
+  const isLoading = useSelector((state) => state.post.loading);
   const user = useSelector((state) => state.user);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -72,38 +74,42 @@ const Post = ({
   return (
     <div className={styles.container} onClick={(e) => e.stopPropagation()}>
       {mediaQuery === 'deskTop' && <Poster images={images} />}
-      <div className={styles.wrap}>
-        {mediaQuery === 'mobile' && <Poster images={images} />}
-        <Header
-          title={title}
-          user={user}
-          studentId={studentId}
-          hit={hit}
-          onClick={onClick}
-          clubName={clubName}
-          post={post}
-          openOptions={openOptions}
-          inDate={inDate}
-          setOpenOptions={setOpenOptions}
-          isComment={isComment}
-          setOpenMessage={setOpenMessage}
-          name={name}
-          onDelete={onDelete}
-          router={router}
-        />
-        <Description
-          description={description}
-          post={post}
-          postId={postId}
-          studentId={studentId}
-          onClickLike={onClickLike}
-          getData={getData}
-          sendMessage={sendMessage}
-          openOptions={openOptions}
-          setOpenOptions={setOpenOptions}
-          setIsComment={setIsComment}
-        />
-      </div>
+      {isLoading ? (
+        <></>
+      ) : (
+        <div className={styles.wrap}>
+          {mediaQuery === 'mobile' && <Poster images={images} />}
+          <Header
+            title={title}
+            user={user}
+            studentId={studentId}
+            hit={hit}
+            onClick={onClick}
+            clubName={clubName}
+            post={post}
+            openOptions={openOptions}
+            inDate={inDate}
+            setOpenOptions={setOpenOptions}
+            isComment={isComment}
+            setOpenMessage={setOpenMessage}
+            name={name}
+            onDelete={onDelete}
+            router={router}
+          />
+          <Description
+            description={description}
+            post={post}
+            postId={postId}
+            studentId={studentId}
+            onClickLike={onClickLike}
+            getData={getData}
+            sendMessage={sendMessage}
+            openOptions={openOptions}
+            setOpenOptions={setOpenOptions}
+            setIsComment={setIsComment}
+          />
+        </div>
+      )}
     </div>
   );
 };
