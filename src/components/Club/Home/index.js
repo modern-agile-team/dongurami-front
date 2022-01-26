@@ -11,10 +11,9 @@ import Review from './Review';
 import Apply from './Apply';
 import SideBar from './SideBar';
 import styles from 'styles/Club/Home/Common/frame.module.scss';
+import Skeleton from './Skeleton';
 
 const Club = () => {
-  const [isVisit, setIsVisit] = useState(false);
-
   const dispatch = useDispatch();
 
   const comp = useSelector((state) => state.changeComp.comp);
@@ -27,19 +26,13 @@ const Club = () => {
   }
 
   const ClubMenu = useCallback(() => {
-    if (comp === 1) return <Intro isVisit={isVisit} clubs={clubs} />;
+    if (comp === 1) return <Intro clubs={clubs} />;
     else if (comp === 2) return <ClubNotice clubs={clubs} />;
     else if (comp === 3) return <Activities clubs={clubs} />;
     else if (comp === 4) return <Calendar />;
     else if (comp === 5) return <Review clubs={clubs} />;
     else if (comp === 6) return <Apply clubs={clubs} />;
-  }, [comp, isVisit, clubs]);
-
-  useEffect(() => {
-    if (comp === false) {
-      setIsVisit(true);
-    }
-  }, [comp, isVisit]);
+  }, [comp, clubs]);
 
   useEffect(() => {
     if (!clubId) return;
@@ -53,7 +46,7 @@ const Club = () => {
         <SideBar comp={comp} />
         {clubs.info !== undefined && (
           <div className={styles.wrap}>
-            <ClubMenu comp={comp} />
+            {clubs.loading ? <Skeleton /> : <ClubMenu comp={comp} />}
           </div>
         )}
       </div>

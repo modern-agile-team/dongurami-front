@@ -19,7 +19,7 @@ const clubInfoSlice = createSlice({
       state.loading = true;
     },
     [getClubInfo.fulfilled.type]: (state, action) => {
-      state.loading = true;
+      state.loading = false;
       state.info = action.payload;
     },
     [getClubInfo.rejected.type]: (state, action) => {
