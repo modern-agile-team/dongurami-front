@@ -37,7 +37,7 @@ const api = {
     if (category === 'clubNotice') {
       if (parentCommentID) {
         return axios.post(
-          `/api/club/comment?boardCategory=clubNotice&boardNum=${pid}/${clubNum}/${pid}/${parentCommentID}`,
+          `/api/club/board/${clubNum}/comment/reply-comment?boardCategory=clubNotice&boardNum=${pid}&cmtNum=${parentCommentID}`,
           {
             description,
             hiddenFlag
@@ -45,7 +45,7 @@ const api = {
         );
       } else {
         return axios.post(
-          `/api/club/comment?boardCategory=clubNotice&boardNum=${pid}/${clubNum}/${pid}`,
+          `/api/club/board/${clubNum}/comment?boardCategory=clubNotice&boardNum=${pid}`,
           {
             description,
             hiddenFlag
@@ -83,12 +83,12 @@ const api = {
     if (category === 'clubNotice') {
       if (parentCommentID) {
         return axios.put(
-          `/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}/${commentID}`,
+          `/api/club/board/${clubNum}/comment/reply-comment/?boardCategory=clubNotice&boardNum=${pid}&cmtNum=${parentCommentID}&replyCmtNum=${commentID}`,
           { description, hiddenFlag }
         );
       } else {
         return axios.put(
-          `/api/club/board/clubNotice/${clubNum}/${pid}/${commentID}`,
+          `/api/club/board/${clubNum}/comment?boardCategory=clubNotice&boardNum=${pid}&cmtNum=${commentID}`,
           { description, hiddenFlag }
         );
       }
@@ -112,11 +112,11 @@ const api = {
     if (category === 'clubNotice') {
       if (parentCommentID) {
         return axios.delete(
-          `/api/club/board/clubNotice/${clubNum}/${pid}/${parentCommentID}/${commentID}`
+          `/api/club/board/${clubNum}/comment/reply-comment/?boardCategory=clubNotice&boardNum=${pid}&cmtNum=${parentCommentID}&replyCmtNum=${commentID}`
         );
       } else {
         return axios.delete(
-          `/api/club/board/clubNotice/${clubNum}/${pid}/${commentID}`
+          `/api/club/board/${clubNum}/comment?boardCategory=clubNotice&boardNum=${pid}&cmtNum=${commentID}`
         );
       }
     }

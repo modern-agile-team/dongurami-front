@@ -21,12 +21,10 @@ const MyPost = ({
     if (!router.isReady) return;
     getMyPosts(router.query.pid)
       .then((res) => {
-        if (res.data.msg.length < 18) {
-          res.data.comments.length + res.data.boards.length > 0 &&
-            setIsHave(true);
-          setMyPosts(res.data.boards);
-          setMyComments(res.data.comments);
-        }
+        res.data.result.comments.length + res.data.result.boards.length > 0 &&
+          setIsHave(true);
+        setMyPosts(res.data.result.boards);
+        setMyComments(res.data.result.comments);
       })
       .catch((err) => alert(err.response.data.msg));
   }, [router]);

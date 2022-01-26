@@ -7,13 +7,13 @@ const ScrapItems = ({ post, index, id, clubNo, matchTitle }) => {
     <Link
       key={index}
       href={
-        post.scrapNo === undefined
+        post.scrapNum === undefined
           ? {
-              pathname: `/profile/${id}/${clubNo}/${post.boardNo}`,
+              pathname: `/profile/${id}/${clubNo}/${post.boardNum}`,
               query: { no: 'board' }
             }
           : {
-              pathname: `/profile/${id}/${clubNo}/${post.scrapNo}`,
+              pathname: `/profile/${id}/${clubNo}/${post.scrapNum}`,
               query: { no: 'scrap' }
             }
       }

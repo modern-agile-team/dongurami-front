@@ -17,7 +17,7 @@ const PostContainer = () => {
 
   const getScrapPost = async () => {
     await getSPost(...queryData)
-      .then((res) => setPost(res.data.scrap))
+      .then((res) => setPost(res.data.result))
       .catch((err) => alert(err.response.data.msg));
   };
 
