@@ -3,15 +3,13 @@ import Info from './Info';
 import Desc from './Desc';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Skeleton from './Skeleton';
 import { useDispatch, useSelector } from 'react-redux';
 import { getClubInfo, putDesc } from 'redux/slices/clubhome';
 import { patchIntroDesc, putLogo } from 'apis/clubhome';
 import { getS3PresignedURL, uploadImage } from 'apis/image';
 
-const Intro = ({ visitTime, clubs }) => {
+const Intro = ({ clubs }) => {
   const [isDescriptionUpdate, setIsDescriptionUpdate] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [introDesc, setIntroDesc] = useState('');
   const [openOptions, setOpenOptions] = useState(false);
   const [openMessage, setOpenMessage] = useState(false);
@@ -78,11 +76,6 @@ const Intro = ({ visitTime, clubs }) => {
   }, [error, router]);
 
   useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), visitTime === 0 ? 500 : 50);
-  }, [visitTime]);
-
-  useEffect(() => {
     printError();
   }, [printError]);
 
@@ -98,28 +91,22 @@ const Intro = ({ visitTime, clubs }) => {
 
   return (
     <div className={styles.container}>
-      {isLoading ? (
-        <Skeleton />
-      ) : (
-        <>
-          <Info
-            clubs={clubs}
-            onChangeLogo={onChangeLogo}
-            openOptions={openOptions}
-            setOpenOptions={setOpenOptions}
-            openMessage={openMessage}
-            setOpenMessage={setOpenMessage}
-          />
-          <Desc
-            clubs={clubs}
-            onDescSubnmit={onDescSubnmit}
-            toggleDescription={toggleDescription}
-            isDescriptionUpdate={isDescriptionUpdate}
-            introDesc={introDesc}
-            setIntroDesc={setIntroDesc}
-          />
-        </>
-      )}
+      <Info
+        clubs={clubs}
+        onChangeLogo={onChangeLogo}
+        openOptions={openOptions}
+        setOpenOptions={setOpenOptions}
+        openMessage={openMessage}
+        setOpenMessage={setOpenMessage}
+      />
+      <Desc
+        clubs={clubs}
+        onDescSubnmit={onDescSubnmit}
+        toggleDescription={toggleDescription}
+        isDescriptionUpdate={isDescriptionUpdate}
+        introDesc={introDesc}
+        setIntroDesc={setIntroDesc}
+      />
     </div>
   );
 };
