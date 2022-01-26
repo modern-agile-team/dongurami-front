@@ -112,7 +112,7 @@ function Profile() {
     if (getUser.data) setUserInfo(getUser.data.user);
   };
 
-  const getProfile = useCallback(async () => {
+  const getProfile = async () => {
     if (router.query.pid) {
       await getUserInfo(router.query.pid, token)
         .then((res) => setDefaultData(res.data))
@@ -121,7 +121,7 @@ function Profile() {
           router.back();
         });
     }
-  }, [router, token]);
+  };
 
   const onClickQuitClubSpan = (name, number) => {
     if (window.confirm(`정말로 ${name}에서 탈퇴하시겠습니까?`)) {
@@ -136,7 +136,7 @@ function Profile() {
   };
 
   const setNewToken = (res) => {
-    window.localStorage.setItem('jwt', res.data.jwt);
+    window.localStorage.setItem('jwt', res.data.result);
     alert(res.data.msg);
     router.reload();
   };
@@ -146,8 +146,8 @@ function Profile() {
     getScraps(profile.id, e.target.value)
       .then((res) => {
         setDataArr(
-          res.data.scraps
-            .concat(res.data.boards)
+          res.data.result.scraps
+            .concat(res.data.result.myPagePosts)
             .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
         );
       })
@@ -157,10 +157,10 @@ function Profile() {
   const movePageFromMyItem = (el) => {
     switch (el.boardCategoryNum) {
       case 5:
-        router.push(`/clubhome/${el.clubNo}/notice/${el.no}`);
+        router.push(`/clubhome/${el.clubNum}/notice/${el.no}`);
         break;
       case 6:
-        router.push(`/clubhome/${el.clubNo}?pid=${el.no}`);
+        router.push(`/clubhome/${el.clubNum}?pid=${el.no}`);
         break;
       case 4:
         router.push(`/promotion?id=${el.no}`);
@@ -183,7 +183,7 @@ function Profile() {
     if (!router.isReady) return;
     getProfile();
     await getUserId();
-  }, [getProfile, getUserId]);
+  }, [router]);
 
   useEffect(() => {
     if (!router.isReady) return;

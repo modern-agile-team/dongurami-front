@@ -26,9 +26,9 @@ const Edit = () => {
   const getScrapPost = () => {
     getSPost(...queryData)
       .then((res) => {
-        setPost(res.data.scrap);
-        setDescription(res.data.scrap.scrapDescription);
-        setTitle(res.data.scrap.title);
+        setPost(res.data.result);
+        setDescription(res.data.result.scrapDescription);
+        setTitle(res.data.result.title);
       })
       .catch((err) => alert(err.reponse.data.msg));
   };
@@ -42,14 +42,14 @@ const Edit = () => {
           title,
           description
         })
-          .then((res) => alert('수정이 완료되었습니다.'))
+          .then((_) => alert('수정이 완료되었습니다.'))
           .catch((err) => alert(err.response.data.msg));
       else if (data.no === 'board')
         modifyBPost(...queryData, {
           title,
           description
         })
-          .then((res) => alert('수정이 완료되었습니다.'))
+          .then((_) => alert('수정이 완료되었습니다.'))
           .catch((err) => alert(err.response.data.msg));
       router.push(`/profile/${data.pid}`);
     }
