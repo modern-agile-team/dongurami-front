@@ -16,29 +16,30 @@ const getPost = createAsyncThunk('post/getPost', async (arg, { getState }) => {
 
 const postSlice = createSlice({
   name: 'post',
-  initialState: {},
+  initialState: { loading: true },
   reducers: {
     setCategory(state, action) {
       state.category = action.payload;
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(getPost.pending, (_) => {
+    builder.addCase(getPost.pending, (state) => {
       return {
+        ...state,
         loading: true
       };
     });
     builder.addCase(getPost.fulfilled, (state, action) => {
       return {
-        loading: false,
         ...action.payload.board,
         category: state.category,
         comments: action.payload.comments,
-        images: action.payload.images
+        images: action.payload.images,
+        loading: false
       };
     });
     builder.addCase(getPost.rejected, () => {
-      return { loading: false };
+      return {};
     });
   }
 });
