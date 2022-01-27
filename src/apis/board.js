@@ -101,3 +101,10 @@ export function clubNoticeAlarm(clubNum, boardNum, boardTitle) {
     { boardTitle, notiCategoryNum: 6 }
   );
 }
+
+export function addThumbNail(boardNum, body) {
+  return instance.post(
+    `/api/image?boardCategory=clubActivity&boardNum=${boardNum}`,
+    body
+  );
+}

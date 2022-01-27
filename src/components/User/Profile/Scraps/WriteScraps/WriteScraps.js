@@ -31,15 +31,17 @@ const WriteScrpas = () => {
           scrapDescription: description,
           boardDescription
         })
-          .then((res) => alert(res.data.msg))
+          .then((res) => {
+            alert(res.data.msg);
+          })
           .catch((err) => alert(err.response.data.msg));
-        router.push(`/profile/${data.pid}`);
+        // router.push(`/profile/${data.pid}`);
       } else {
         await addPost(data.pid, data.clubNum, {
           title,
-          description
+          descriptionx
         }).catch((err) => alert(err.response.data.msg));
-        router.push(`/profile/${data.pid}?category=scrap`);
+        // router.push(`/profile/${data.pid}?category=scrap`);
       }
     }
   };

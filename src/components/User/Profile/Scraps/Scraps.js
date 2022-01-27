@@ -19,8 +19,8 @@ function Scraps({
       getScraps(profile.id, clubNo)
         .then((res) => {
           setDataArr(
-            res.data.scraps
-              .concat(res.data.boards)
+            res.data.result.scraps
+              .concat(res.data.result.myPagePosts)
               .sort((a, b) => Date.parse(b.inDate) - Date.parse(a.inDate))
           );
         })
