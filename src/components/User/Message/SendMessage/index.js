@@ -19,10 +19,13 @@ function SendMessageContainer({
   const [description, setDescription] = useState('');
   const [isCheck, setIsCheck] = useState(false);
   const post = useSelector((state) => state.post);
-  const clubLeader = useSelector((state) => state.clubhome.info?.leaderInfo);
-  const clubLeaderIsWriter = useSelector(
-    (state) => state.clubhome.info?.clientInfo.leader
+  const clubLeader = useSelector(
+    (state) => state.clubhome.info?.result.leaderInfo
   );
+  const clubLeaderIsWriter = useSelector(
+    (state) => state.clubhome.info?.result.clientInfo.leaderFlag
+  );
+
   const userId = user?.id;
   const isReply = reply;
   const modalContainer = useRef();
@@ -49,10 +52,11 @@ function SendMessageContainer({
       return 0;
     } else if (
       post?.isWriter === 1 ||
-      clubLeaderIsWriter === 1 ||
+      clubLeaderIsWriter === true ||
       letter?.isWriter === 1
     ) {
-      if (isActivities && !post?.isWriter && clubLeaderIsWriter === 1) return 1;
+      if (isActivities && !post?.isWriter && clubLeaderIsWriter === true)
+        return 1;
       else if (letter && letter?.isWriter === 0 && post?.isWriter === 1)
         return 1;
       alert('자신에게는 보낼 수 없습니다');
