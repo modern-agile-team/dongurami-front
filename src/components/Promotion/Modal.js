@@ -2,12 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
-import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { MdClose } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Post from './Post';
-
-SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
 const Modal = ({ postId, sendMessage, setOpenMessage }) => {
   const [images, setImages] = useState([]);
