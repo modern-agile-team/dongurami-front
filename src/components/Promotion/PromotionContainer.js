@@ -21,7 +21,8 @@ const PromotionContainer = ({
   openModal,
   sendMessage,
   openMessage,
-  setOpenMessage
+  setOpenMessage,
+  firstGetDatas
 }) => {
   const [postId, setPostId] = useState(0);
 
@@ -70,6 +71,7 @@ const PromotionContainer = ({
           postId={postId}
           sendMessage={sendMessage}
           setOpenMessage={setOpenMessage}
+          firstGetDatas={firstGetDatas}
         />
       )}
       <SendMessageContainer

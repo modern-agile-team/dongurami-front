@@ -165,12 +165,11 @@ const Promotion = () => {
 
   useEffect(() => {
     firstGetDatas();
-
     window.addEventListener('scroll', infiniteScroll);
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
     };
-  }, [searchItem, isSearch, router]);
+  }, [searchItem, isSearch]);
 
   useEffect(() => {
     document.body.style.overflow = openModal ? 'hidden' : 'auto';
@@ -181,6 +180,7 @@ const Promotion = () => {
       setOpenModal(false);
     }
   }, [openModal, router]);
+
   return (
     <PromotionContainer
       setSearchItem={setSearchItem}
@@ -198,6 +198,8 @@ const Promotion = () => {
       openModal={openModal}
       openMessage={openMessage}
       setOpenMessage={setOpenMessage}
+      setOpenModal={setOpenModal}
+      firstGetDatas={firstGetDatas}
     />
   );
 };

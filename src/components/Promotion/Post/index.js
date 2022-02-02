@@ -9,7 +9,6 @@ import getToken from 'utils/getToken';
 import Header from './Header';
 import Description from './Description';
 import Poster from './Poster';
-import { Spinner } from 'components/Common/Spinner';
 
 const Post = ({
   postId,
@@ -17,14 +16,24 @@ const Post = ({
   post,
   sendMessage,
   setOpenMessage,
-  images
+  images,
+  firstGetDatas
 }) => {
   const [openOptions, setOpenOptions] = useState(false);
   const [isComment, setIsComment] = useState(false);
   const [mediaQuery, setMediaQuery] = useState(null);
+  const [loadingCount, setLoadingCount] = useState(0);
 
-  const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
-    post;
+  const {
+    clubName,
+    hit,
+    title,
+    inDate,
+    description,
+    studentId,
+    clubNo,
+    studentName
+  } = post;
   const category = 'promotion';
 
   const isLoading = useSelector((state) => state.post.loading);
@@ -44,6 +53,10 @@ const Post = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (!isLoading) setLoadingCount((prev) => prev + 1);
+  }, [isLoading]);
+
   const onClick = () => {
     if (!getToken()) alert('로그인 후 이용해주세요.');
     else router.push(`/clubhome/${clubNo}`);
@@ -56,17 +69,18 @@ const Post = ({
     } else {
       await api.likePost({ pid: post.no, url: router.asPath }).then((res) => {
         if (res.data.success)
-          likePostAlarm(postId).then((res) => console.log(res));
+          likePostAlarm(post.no).then((res) => console.log(res));
       });
     }
     dispatch(getPost());
   };
 
   const onDelete = async () => {
-    await deletePost(postId).then((res) => {
+    await deletePost(post.no).then((res) => {
       if (res.data.success) {
         alert('글 삭제가 완료되었습니다');
         router.replace(`promotion`);
+        firstGetDatas();
       }
     });
   };
@@ -74,7 +88,7 @@ const Post = ({
   return (
     <div className={styles.container} onClick={(e) => e.stopPropagation()}>
       {mediaQuery === 'deskTop' && <Poster images={images} />}
-      {isLoading ? (
+      {loadingCount === 0 ? (
         <></>
       ) : (
         <div className={styles.wrap}>
@@ -92,7 +106,7 @@ const Post = ({
             setOpenOptions={setOpenOptions}
             isComment={isComment}
             setOpenMessage={setOpenMessage}
-            name={name}
+            name={studentName}
             onDelete={onDelete}
             router={router}
           />
