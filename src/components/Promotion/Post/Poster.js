@@ -1,5 +1,8 @@
 import styles from 'styles/Board/Promotion/Post/Poster.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
 const Poster = ({ images }) => {
   return (

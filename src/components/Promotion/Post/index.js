@@ -16,18 +16,27 @@ const Post = ({
   post,
   sendMessage,
   setOpenMessage,
-  images
+  images,
+  firstGetDatas
 }) => {
   const [openOptions, setOpenOptions] = useState(false);
   const [isComment, setIsComment] = useState(false);
   const [mediaQuery, setMediaQuery] = useState(null);
-  const [isLoading, setIsLoading] = useState(0);
+  const [loadingCount, setLoadingCount] = useState(0);
 
-  const { clubName, hit, title, inDate, description, studentId, clubNo, name } =
-    post;
+  const {
+    clubName,
+    hit,
+    title,
+    inDate,
+    description,
+    studentId,
+    clubNo,
+    studentName
+  } = post;
   const category = 'promotion';
 
-  const loading = useSelector((state) => state.post.loading);
+  const isLoading = useSelector((state) => state.post.loading);
   const user = useSelector((state) => state.user);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -45,8 +54,8 @@ const Post = ({
   }, []);
 
   useEffect(() => {
-    if (!loading) setIsLoading((prev) => prev + 1);
-  }, [loading]);
+    if (!isLoading) setLoadingCount((prev) => prev + 1);
+  }, [isLoading]);
 
   const onClick = () => {
     if (!getToken()) alert('로그인 후 이용해주세요.');
@@ -60,17 +69,18 @@ const Post = ({
     } else {
       await api.likePost({ pid: post.no, url: router.asPath }).then((res) => {
         if (res.data.success)
-          likePostAlarm(postId).then((res) => console.log(res));
+          likePostAlarm(post.no).then((res) => console.log(res));
       });
     }
     dispatch(getPost());
   };
 
   const onDelete = async () => {
-    await deletePost(postId).then((res) => {
+    await deletePost(post.no).then((res) => {
       if (res.data.success) {
         alert('글 삭제가 완료되었습니다');
         router.replace(`promotion`);
+        firstGetDatas();
       }
     });
   };
@@ -78,7 +88,7 @@ const Post = ({
   return (
     <div className={styles.container} onClick={(e) => e.stopPropagation()}>
       {mediaQuery === 'deskTop' && <Poster images={images} />}
-      {isLoading === 1 ? (
+      {loadingCount === 0 ? (
         <></>
       ) : (
         <div className={styles.wrap}>
@@ -96,7 +106,7 @@ const Post = ({
             setOpenOptions={setOpenOptions}
             isComment={isComment}
             setOpenMessage={setOpenMessage}
-            name={name}
+            name={studentName}
             onDelete={onDelete}
             router={router}
           />
