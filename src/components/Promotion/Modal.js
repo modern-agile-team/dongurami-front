@@ -6,7 +6,7 @@ import { MdClose } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Post from './Post';
 
-const Modal = ({ postId, sendMessage, setOpenMessage }) => {
+const Modal = ({ postId, sendMessage, setOpenMessage, firstGetDatas }) => {
   const [images, setImages] = useState([]);
   const category = 'promotion';
   const dispatch = useDispatch();
@@ -47,9 +47,10 @@ const Modal = ({ postId, sendMessage, setOpenMessage }) => {
         sendMessage={sendMessage}
         getPostData={getPostData}
         setOpenMessage={setOpenMessage}
+        firstGetDatas={firstGetDatas}
       />
     </div>
   );
 };
 
-export default React.memo(Modal);
+export default Modal;
