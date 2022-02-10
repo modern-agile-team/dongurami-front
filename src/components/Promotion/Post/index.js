@@ -17,12 +17,12 @@ const Post = ({
   sendMessage,
   setOpenMessage,
   images,
-  firstGetDatas
+  firstGetDatas,
+  isPostLoading
 }) => {
   const [openOptions, setOpenOptions] = useState(false);
   const [isComment, setIsComment] = useState(false);
   const [mediaQuery, setMediaQuery] = useState(null);
-  const [loadingCount, setLoadingCount] = useState(0);
 
   const {
     clubName,
@@ -35,8 +35,6 @@ const Post = ({
     studentName
   } = post;
   const category = 'promotion';
-
-  const isLoading = useSelector((state) => state.post.loading);
   const user = useSelector((state) => state.user);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -52,10 +50,6 @@ const Post = ({
       setMediaQuery('deskTop');
     }
   }, []);
-
-  useEffect(() => {
-    if (!isLoading) setLoadingCount((prev) => prev + 1);
-  }, [isLoading]);
 
   const onClick = () => {
     if (!getToken()) alert('로그인 후 이용해주세요.');
@@ -88,7 +82,7 @@ const Post = ({
   return (
     <div className={styles.container} onClick={(e) => e.stopPropagation()}>
       {mediaQuery === 'deskTop' && <Poster images={images} />}
-      {loadingCount === 0 ? (
+      {isPostLoading ? (
         <></>
       ) : (
         <div className={styles.wrap}>

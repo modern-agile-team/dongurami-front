@@ -8,6 +8,7 @@ import Post from './Post';
 
 const Modal = ({ postId, sendMessage, setOpenMessage, firstGetDatas }) => {
   const [images, setImages] = useState([]);
+  const [isPostLoading, setIsPostLoading] = useState(false);
   const category = 'promotion';
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
@@ -15,6 +16,7 @@ const Modal = ({ postId, sendMessage, setOpenMessage, firstGetDatas }) => {
   let pid = postId;
 
   const getPostData = async () => {
+    setIsPostLoading(true);
     if (postId) {
       await dispatch(getPost({ category, pid })).then((response) => {
         setImages(response.payload.images);
@@ -25,7 +27,9 @@ const Modal = ({ postId, sendMessage, setOpenMessage, firstGetDatas }) => {
         setImages(response.payload.images);
       });
     }
+    setIsPostLoading(false);
   };
+
   useEffect(() => {
     getPostData();
   }, [dispatch]);
@@ -48,6 +52,7 @@ const Modal = ({ postId, sendMessage, setOpenMessage, firstGetDatas }) => {
         getPostData={getPostData}
         setOpenMessage={setOpenMessage}
         firstGetDatas={firstGetDatas}
+        isPostLoading={isPostLoading}
       />
     </div>
   );
