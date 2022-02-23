@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Post from 'components/Post/Post';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
@@ -29,12 +28,14 @@ function PostContainer({ category }) {
 
   return (
     <>
-      <Post
-        category={category}
-        post={post}
-        sendLetter={sendLetter}
-        setOpenMessage={setOpenModal}
-      />
+      {!post.loading && (
+        <Post
+          category={category}
+          post={post}
+          sendLetter={sendLetter}
+          setOpenMessage={setOpenModal}
+        />
+      )}
       {openModal && (
         <SendMessageContainer
           show={openModal}
