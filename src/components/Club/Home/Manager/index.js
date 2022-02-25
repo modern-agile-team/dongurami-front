@@ -37,19 +37,15 @@ export const Manager = () => {
 
   const setStates = (data) => {
     const newData = _.cloneDeep(data);
-    setApplicantQNA(newData.applicant.questionsAnswers);
-    setApplicantInfo(newData.applicant.applicantInfo);
-    setLeader(newData.clubAdminOption.leader);
-    setMembers(newData.clubAdminOption.memberAndAuthList);
+    setApplicantQNA(newData.applicants.questionsAnswers);
+    setApplicantInfo(newData.applicants.applicantInfo);
+    setLeader(newData.memberInfo.leader);
+    setMembers(newData.memberInfo.memberAndAuthList);
     setApplyAuth(
-      newData.clubAdminOption.memberAndAuthList.map(
-        (auth) => auth.joinAdminFlag
-      )
+      newData.memberInfo.memberAndAuthList.map((auth) => auth.joinAdminFlag)
     );
     setBoardAuth(
-      newData.clubAdminOption.memberAndAuthList.map(
-        (auth) => auth.boardAdminFlag
-      )
+      newData.memberInfo.memberAndAuthList.map((auth) => auth.boardAdminFlag)
     );
   };
 
