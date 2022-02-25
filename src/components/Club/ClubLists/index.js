@@ -7,6 +7,7 @@ const ClubList = () => {
   const [originData, setOriginData] = useState([]);
 
   const onCategorySearch = (element) => {
+    console.log(originData);
     const searchData = originData.filter((el) => el.category === element);
 
     if (element === '전체') setClubData(originData);
@@ -28,7 +29,7 @@ const ClubList = () => {
       try {
         const response = await getDatas();
         setClubData(response.data.clubList);
-        setOriginData(response.data.result);
+        setOriginData(response.data.clubList);
       } catch (e) {
         console.log(e);
       }
