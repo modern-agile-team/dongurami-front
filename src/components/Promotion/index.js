@@ -108,10 +108,8 @@ const Promotion = () => {
         });
       } else if (search) {
         await getSearchData(type, searchKeyword, itemNo).then((response) => {
-          const result = response.data.boards;
-
+          const result = response.data.result;
           if (result.length) itemNo = result[result.length - 1].no;
-
           setBoardData(result);
         });
       } else if (
@@ -127,7 +125,7 @@ const Promotion = () => {
         });
       }
     } catch (err) {
-      alert(err.response.data.msg);
+      alert(err);
     }
     setIsLoading(false);
     scrollLoading = false;
