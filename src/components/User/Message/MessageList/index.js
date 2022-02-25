@@ -43,9 +43,6 @@ const MessageListContainer = () => {
         }
         if (response.data.letters[0].otherHiddenFlag) setRecipient('익명');
         else setRecipient(response.data.letters[0].name);
-
-        setGroupNo(response.data.letters[0].groupNo);
-
         setLoading(false);
       });
     }
