@@ -4,6 +4,7 @@ import Post from 'components/Post/Post';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import SendMessageContainer from 'components/User/Message/SendMessage';
+import { Spinner } from 'components/Common/Spinner';
 
 function PostContainer({ category }) {
   const router = useRouter();
@@ -28,7 +29,9 @@ function PostContainer({ category }) {
 
   return (
     <>
-      {!post.loading && (
+      {post.loading ? (
+        <Spinner />
+      ) : (
         <Post
           category={category}
           post={post}

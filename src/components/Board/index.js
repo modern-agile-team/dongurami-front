@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import Table from './Table/Table';
@@ -8,6 +8,7 @@ import OrderBy from './BoardHeader/OrderBy';
 import HeaderBtn from './BoardHeader/HeaderBtn';
 import styles from 'styles/Board/Board/Board.module.scss';
 import { getBoardPosts } from 'redux/slices/board';
+import { Spinner } from 'components/Common/Spinner';
 
 function getQuery(router) {
   return {
@@ -21,6 +22,8 @@ function getQuery(router) {
 }
 
 function Board({ category }) {
+  const [isLoading, setIsLoading] = useState(true);
+
   const router = useRouter();
   const posts = useSelector((state) => state.board.posts);
   const user = useSelector((state) => state.user);
@@ -82,7 +85,10 @@ function Board({ category }) {
 
   const postsByPage = posts.slice(10 * (page - 1), 10 * page);
 
-  if (!posts) return null;
+  useEffect(() => {
+    if (postsByPage.length > 0) setIsLoading(false);
+    else setIsLoading(true);
+  }, [postsByPage]);
 
   return (
     <div className={styles.container}>
@@ -96,14 +102,18 @@ function Board({ category }) {
           order={order}
           onOrderChange={onOrderChange}
         />
-        <Table
-          posts={posts}
-          page={page}
-          category={category}
-          router={router}
-          postsByPage={postsByPage}
-          thName={thName}
-        />
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <Table
+            posts={posts}
+            page={page}
+            category={category}
+            router={router}
+            postsByPage={postsByPage}
+            thName={thName}
+          />
+        )}
         <Pagination lastPage={lastPage} page={page} setPage={setPageToUrl} />
         <Search router={router} />
       </div>
