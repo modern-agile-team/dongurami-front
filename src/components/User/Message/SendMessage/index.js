@@ -80,13 +80,15 @@ function SendMessageContainer({
       commentNo,
       boardFlag,
       writerHiddenFlag
-    ).then((response) => {
-      if (response.data.success) {
-        alert('쪽지가 전송되었습니다');
-        onClose();
-        setDescription('');
-      }
-    });
+    )
+      .then((response) => {
+        if (response.data.success) {
+          alert('쪽지가 전송되었습니다');
+          onClose();
+          setDescription('');
+        }
+      })
+      .catch((err) => alert(err.response.data.msg));
   };
 
   const replySend = async (description, letterNo, userId) => {
@@ -115,7 +117,7 @@ function SendMessageContainer({
     if (!detailMessage && !letter) {
       if (!Number(post?.studentId) && !clubLeader) recipientId = '';
       else if (!post?.length && clubLeader && !isActivities)
-        recipientId = clubLeader[0].id;
+        recipientId = clubLeader.id;
       else recipientId = post?.studentId;
       boardNo = post ? post.no : '';
       boardFlag = 1;
