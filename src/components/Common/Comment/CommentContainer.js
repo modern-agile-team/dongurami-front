@@ -51,7 +51,7 @@ function CommentContainer({
             {comment.groupNo === parentCommentID &&
               comments[index + 1]?.depth !== 1 && (
                 <ReplyContainer>
-                  <AddComment parentCommentID={parentCommentID} scroll />
+                  <AddComment parentCommentID={parentCommentID} />
                 </ReplyContainer>
               )}
           </React.Fragment>
