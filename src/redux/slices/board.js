@@ -24,8 +24,8 @@ const getBoardPosts = createAsyncThunk(
         }
       );
     }
-
-    return response.data.boards;
+    if (type && keyword) return response.data.result;
+    else return response.data.boards;
   }
 );
 
