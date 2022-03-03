@@ -37,9 +37,9 @@ const Option = ({
           <li
             className={styles.send}
             onClick={() => {
+              console.log(comment);
               if (setOpenMessage && !sendMessage) setOpenMessage(true);
               else if (sendMessage) {
-                console.log('댓글 값');
                 sendMessage(comment);
               }
               setOpenOptions(false);
@@ -49,11 +49,15 @@ const Option = ({
             쪽지 보내기
           </li>
         )}
-        {post?.studentId !== '익명' && (
-          <li className={styles.profile} onClick={() => router.push(routePath)}>
-            프로필
-          </li>
-        )}
+        {post?.studentId !== '익명' ||
+          (comment?.writerHiddenFlag === 0 && (
+            <li
+              className={styles.profile}
+              onClick={() => router.push(routePath)}
+            >
+              프로필
+            </li>
+          ))}
       </ul>
     </div>
   );
