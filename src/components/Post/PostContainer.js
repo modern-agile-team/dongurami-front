@@ -12,6 +12,7 @@ function PostContainer({ category }) {
   const post = useSelector((state) => state.post);
   const [openModal, setOpenModal] = useState(false);
   const [letter, setLetter] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const sendLetter = (comment) => {
     setLetter(comment);
@@ -25,11 +26,17 @@ function PostContainer({ category }) {
     );
   }, [category, router, dispatch]);
 
+  useEffect(() => {
+    if (post.no && Number(router.query.pid) === Number(post.no)) {
+      setIsLoading(false);
+    } else setIsLoading(true);
+  }, [post.no, router.query.pid]);
+
   if (!post?.description) return null;
 
   return (
     <>
-      {post.loading ? (
+      {isLoading ? (
         <Spinner />
       ) : (
         <Post
