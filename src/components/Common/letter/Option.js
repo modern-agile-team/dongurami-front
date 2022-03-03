@@ -49,7 +49,7 @@ const Option = ({
             쪽지 보내기
           </li>
         )}
-        {post?.studentId !== '익명1' && (
+        {post?.studentId !== '익명' && (
           <li className={styles.profile} onClick={() => router.push(routePath)}>
             프로필
           </li>
