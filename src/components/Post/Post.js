@@ -147,7 +147,7 @@ function Post({
           <FaHeart />
           <span>&nbsp;{post.emotionCount}</span>
         </button>
-        {post.comments && (
+        {category !== 'clubActivity' && post.comments && (
           <CommentContainer
             comments={post.comments}
             sendLetter={sendLetter}
