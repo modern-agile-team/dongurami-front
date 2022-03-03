@@ -1,7 +1,6 @@
 import styles from 'styles/Board/Board/Search.module.scss';
 import { BsSearch } from 'react-icons/bs';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function Search({ router }) {
   const [keyword, setKeyword] = useState('');
