@@ -35,13 +35,13 @@ const WriteScrpas = () => {
             alert(res.data.msg);
           })
           .catch((err) => alert(err.response.data.msg));
-        // router.push(`/profile/${data.pid}`);
+        router.push(`/profile/${data.pid}`);
       } else {
         await addPost(data.pid, data.clubNum, {
           title,
-          descriptionx
+          description
         }).catch((err) => alert(err.response.data.msg));
-        // router.push(`/profile/${data.pid}?category=scrap`);
+        router.push(`/profile/${data.pid}?category=scrap`);
       }
     }
   };
