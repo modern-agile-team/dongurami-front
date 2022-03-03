@@ -92,9 +92,9 @@ const ModifyInfo = () => {
 
   useEffect(() => {
     if (!uRouter.isReady) return;
-    getUserId();
     if (userId.length > 4) getData(userId);
-  }, [uRouter, getData, getUserId]);
+    getUserId();
+  }, [uRouter, getData, userId]);
 
   const baseImg =
     'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg';
@@ -103,7 +103,7 @@ const ModifyInfo = () => {
     if (userInfo.naverUserFlag) {
       alert('네이버 아이디로 가입한 회원은 비밀번호 변경을 할 수 없습니다.');
     } else router.push('/changepassword');
-  }, [userInfo, router]);
+  }, [userInfo]);
 
   return (
     <div className={styles.wrap}>
