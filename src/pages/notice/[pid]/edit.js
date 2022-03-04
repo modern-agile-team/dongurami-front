@@ -1,4 +1,4 @@
-import Edit from '../../../components/Write/Edit';
+import Edit from 'components/Write/Edit';
 import Head from 'next/head';
 
 function Write() {

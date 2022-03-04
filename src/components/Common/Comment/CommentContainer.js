@@ -1,4 +1,4 @@
-import style from '../../../styles/Common/Comment/CommentContainer.module.scss';
+import style from 'styles/Common/Comment/CommentContainer.module.scss';
 import Comment from './Comment';
 import AddComment from './AddComment';
 import ReplyContainer from './ReplyContainer';
@@ -51,7 +51,7 @@ function CommentContainer({
             {comment.groupNo === parentCommentID &&
               comments[index + 1]?.depth !== 1 && (
                 <ReplyContainer>
-                  <AddComment parentCommentID={parentCommentID} scroll />
+                  <AddComment parentCommentID={parentCommentID} />
                 </ReplyContainer>
               )}
           </React.Fragment>

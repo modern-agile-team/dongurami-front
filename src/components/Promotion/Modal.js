@@ -2,15 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styles from '../../styles/Board/Promotion/Modal.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPost } from 'redux/slices/post';
-import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
 import { MdClose } from 'react-icons/md';
 import { useRouter } from 'next/router';
 import Post from './Post';
 
-SwiperCore.use([Navigation, Pagination, Scrollbar]);
-
-const Modal = ({ postId, sendMessage, setOpenMessage }) => {
+const Modal = ({ postId, sendMessage, setOpenMessage, firstGetDatas }) => {
   const [images, setImages] = useState([]);
+  const [isPostLoading, setIsPostLoading] = useState(false);
   const category = 'promotion';
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post);
@@ -18,6 +16,7 @@ const Modal = ({ postId, sendMessage, setOpenMessage }) => {
   let pid = postId;
 
   const getPostData = async () => {
+    setIsPostLoading(true);
     if (postId) {
       await dispatch(getPost({ category, pid })).then((response) => {
         setImages(response.payload.images);
@@ -28,7 +27,9 @@ const Modal = ({ postId, sendMessage, setOpenMessage }) => {
         setImages(response.payload.images);
       });
     }
+    setIsPostLoading(false);
   };
+
   useEffect(() => {
     getPostData();
   }, [dispatch]);
@@ -50,9 +51,11 @@ const Modal = ({ postId, sendMessage, setOpenMessage }) => {
         sendMessage={sendMessage}
         getPostData={getPostData}
         setOpenMessage={setOpenMessage}
+        firstGetDatas={firstGetDatas}
+        isPostLoading={isPostLoading}
       />
     </div>
   );
 };
 
-export default React.memo(Modal);
+export default Modal;

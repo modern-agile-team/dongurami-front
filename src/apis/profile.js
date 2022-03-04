@@ -73,3 +73,9 @@ export const quitClub = (id, clubNum) => {
 export const getMyPosts = (id) => {
   return instance.get(`/api/my-page/${id}/my-post`);
 };
+
+export const quitAlarm = (clubNum) => {
+  return instance.post(`/api/notification/resign-club/${clubNum}`, {
+    notiCategoryNum: 8
+  });
+};

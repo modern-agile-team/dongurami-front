@@ -1,0 +1,14 @@
+.signup {
+  span {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 80%;
+  }
+  .signupBtn {
+    cursor: pointer;
+    font-style: oblique;
+    color: rgb(99, 99, 99);
+    &:hover {
+      color: #90cec7;
+    }
+  }
+}

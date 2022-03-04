@@ -10,7 +10,7 @@ import styles from '../../../styles/Board/Promotion/Comment.module.scss';
 import moment from 'moment';
 import Option from 'components/Common/letter/Option';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteComment, editComment } from 'apis/promotion';
+import { deleteComment, editComment, likeCommentAlarm } from 'apis/promotion';
 import { getPost } from 'redux/slices/post';
 import { useRouter } from 'next/router';
 import { FaHeart } from 'react-icons/fa';
@@ -22,7 +22,8 @@ const Comment = ({
   sendMessage,
   openOptions,
   setOpenOptions,
-  setIsComment
+  setIsComment,
+  reply
 }) => {
   const [isContentEditable, setIsContentEditable] = useState(false);
   const [optionComment, setOptionComment] = useState(0);
@@ -91,11 +92,15 @@ const Comment = ({
     if (comment.likedFlag) {
       await api.unLikeComment({ commentID: comment.no, parentCommentID });
     } else {
-      await api.likeComment({
-        commentID: comment.no,
-        parentCommentID,
-        url: router.asPath
-      });
+      await api
+        .likeComment({
+          commentID: comment.no,
+          parentCommentID,
+          url: router.asPath
+        })
+        .then((res) => {
+          if (res.data.success) likeCommentAlarm(comment.no, reply);
+        });
     }
     dispatch(getPost());
   };

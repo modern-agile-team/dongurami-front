@@ -1,11 +1,8 @@
-import styles from "../../styles/Board/Board/Search.module.scss";
+import styles from 'styles/Board/Board/Search.module.scss';
 import { BsSearch } from 'react-icons/bs';
-import { useRouter } from "next/router";
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-function NoticeSearch() {
-  const router = useRouter();
+function Search({ router }) {
   const [keyword, setKeyword] = useState('');
   const [type, setType] = useState('title');
 
@@ -38,10 +35,12 @@ function NoticeSearch() {
       </select>
       <form onSubmit={onSubmit}>
         <input value={keyword} onChange={onKeywordChange} />
-        <button type="submit"><BsSearch color="black" /></button>
+        <button type="submit">
+          <BsSearch color="black" />
+        </button>
       </form>
     </div>
   );
 }
 
-export default NoticeSearch;
+export default Search;

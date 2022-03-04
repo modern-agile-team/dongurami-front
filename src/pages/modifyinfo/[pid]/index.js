@@ -1,4 +1,4 @@
-import ModifyInfo from 'components/Profile/ModifyInfo/ModifyInfo';
+import ModifyInfo from 'components/User/Profile/ModifyInfo';
 import Head from 'next/head';
 
 const modifyinfo = () => {

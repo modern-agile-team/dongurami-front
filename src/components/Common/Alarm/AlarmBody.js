@@ -1,12 +1,13 @@
-import styles from '../../../styles/Common/Alarm/AlarmContainer.module.scss';
+import styles from 'styles/Common/Alarm/AlarmContainer.module.scss';
 import AlarmList from './AlarmList';
 
 const AlarmBody = ({
   alarmList,
   alarmShow,
   showMoreAlarm,
-  onAlarmPatch,
-  setIsDelete
+  moveWhenClickAlarm,
+  clickDeleteIcon,
+  alarmCategoriNum
 }) => {
   return (
     <div className={styles.alarms}>
@@ -16,8 +17,9 @@ const AlarmBody = ({
             <AlarmList
               key={alarm.no}
               alarm={alarm}
-              onAlarmPatch={onAlarmPatch}
-              setIsDelete={setIsDelete}
+              moveWhenClickAlarm={moveWhenClickAlarm}
+              clickDeleteIcon={clickDeleteIcon}
+              alarmCategoriNum={alarmCategoriNum}
             />
           );
         })

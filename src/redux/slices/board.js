@@ -8,17 +8,26 @@ const getBoardPosts = createAsyncThunk(
     dispatch(boardSlice.actions.clear());
     let response;
     if (type && keyword) {
-      response = await searchPosts({ category, sort, order, type, keyword, clubNum });
+      response = await searchPosts({
+        category,
+        sort,
+        order,
+        type,
+        keyword,
+        clubNum
+      });
     } else {
-      response = await getPosts({ category, sort, order, clubNum })
-        .catch(async () => {
+      response = await getPosts({ category, sort, order, clubNum }).catch(
+        async () => {
           alert('동아리에 가입된 사람만 접근할 수 있습니다!');
           dispatch(changeComp(1));
-        });
+        }
+      );
     }
-    return response.data.boards;
+    if (type && keyword) return response.data.result;
+    else return response.data.boards;
   }
-)
+);
 
 const boardSlice = createSlice({
   name: 'board',

@@ -3,7 +3,12 @@ import Container from './Container';
 import WriteContent from './WriteContent';
 import Modal from 'components/Common/Modal';
 import WritePromotion from './WritePromotion';
-import { postPost } from 'apis/board';
+import {
+  addThumbNail,
+  clubNoticeAlarm,
+  noticeAlarm,
+  postPost
+} from 'apis/board';
 import { useRouter } from 'next/router';
 
 function Write({ category }) {
@@ -26,8 +31,25 @@ function Write({ category }) {
       setShowModal(true);
       return;
     }
-    await postPost(category, { title, description, hiddenFlag: Boolean(isAnon) }, router.query.id);
-    if (category === 'clubActivity') alert('글 작성 완료!');
+    await postPost(
+      category,
+      { title, description, hiddenFlag: Boolean(isAnon) },
+      router.query.id
+    ).then((res) => {
+      if (category === 'notice') {
+        noticeAlarm(res.data.boardNum, title);
+      } else if (category === 'clubNotice') {
+        clubNoticeAlarm(router.query.id, res.data.boardNum, title);
+      } else if (category === 'clubActivity') {
+        const images = [description.match(/<img src="([^']*?)"/i)[1]];
+        if (images.length) {
+          addThumbNail(res.data.boardNum, { images }).catch((err) =>
+            console.log(err)
+          );
+          alert('글 작성 완료!');
+        }
+      }
+    });
     if (['clubNotice', 'clubActivity'].includes(category)) router.back();
     else {
       router.push(`/${category}`);

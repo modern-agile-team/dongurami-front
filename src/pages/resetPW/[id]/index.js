@@ -1,4 +1,4 @@
-import ResetPW from '../../../components/Find/ResetPW';
+import ResetPW from 'components/User/Find/ResetPW';
 import Head from 'next/head';
 
 export const resetPW = () => {

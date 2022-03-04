@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Post from 'components/Post/Post';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
-import SendMessage from 'components/Message/SendMessage';
+import SendMessageContainer from 'components/User/Message/SendMessage';
+import { Spinner } from 'components/Common/Spinner';
 
 function PostContainer({ category }) {
   const router = useRouter();
@@ -12,6 +12,7 @@ function PostContainer({ category }) {
   const post = useSelector((state) => state.post);
   const [openModal, setOpenModal] = useState(false);
   const [letter, setLetter] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const sendLetter = (comment) => {
     setLetter(comment);
@@ -25,18 +26,28 @@ function PostContainer({ category }) {
     );
   }, [category, router, dispatch]);
 
+  useEffect(() => {
+    if (post.no && Number(router.query.pid) === Number(post.no)) {
+      setIsLoading(false);
+    } else setIsLoading(true);
+  }, [post.no, router.query.pid]);
+
   if (!post?.description) return null;
 
   return (
     <>
-      <Post
-        category={category}
-        post={post}
-        sendLetter={sendLetter}
-        setOpenMessage={setOpenModal}
-      />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Post
+          category={category}
+          post={post}
+          sendLetter={sendLetter}
+          setOpenMessage={setOpenModal}
+        />
+      )}
       {openModal && (
-        <SendMessage
+        <SendMessageContainer
           show={openModal}
           onClose={() => setOpenModal(false)}
           letter={letter}

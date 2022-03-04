@@ -1,4 +1,4 @@
-import Edit from 'components/Profile/ScrapPosts/Edit';
+import Edit from 'components/User/Profile/Scraps/WriteScraps/Edit';
 import Head from 'next/head';
 
 const edit = () => {

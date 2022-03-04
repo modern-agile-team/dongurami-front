@@ -9,6 +9,14 @@ export const addSchedule = (clubNo, body) => {
   return instance.post(`api/club/schedule/${clubNo}`, body);
 };
 
+//생성, 수정 시 알람
+export const postAlarm = (clubNo, scheduleTitle, isAdd) => {
+  return instance.post(`api/notification/schedule/${clubNo}`, {
+    scheduleTitle,
+    notiCategoryNum: isAdd ? 4 : 5
+  });
+};
+
 //일정삭제
 export const deleteSchedule = (clubNo, el) => {
   return instance.delete(`api/club/schedule/${clubNo}/${el.no}`);

@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineCheck, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
-import api from 'apis/post';
+import api, { likeCommentAlarm } from 'apis/post';
 import styles from '../../../styles/Common/Comment/Comment.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPost } from 'redux/slices/post';
 import { useRouter } from 'next/router';
 import moment from 'moment';
-import Link from 'next/link';
-import { AiFillHeart } from 'react-icons/ai';
 import Option from '../letter/Option';
 import { FaHeart } from 'react-icons/fa';
 
@@ -92,28 +90,10 @@ function Comment({
         parentCommentID,
         url: router.asPath
       });
+      await likeCommentAlarm(post.category, comment.no);
     }
     dispatch(getPost());
   };
-
-  const profileImage = (
-    <img
-      src={
-        comment.profileImageUrl ??
-        'https://blog.kakaocdn.net/dn/c3vWTf/btqUuNfnDsf/VQMbJlQW4ywjeI8cUE91OK/img.jpg'
-      }
-      alt="profile"
-    />
-  );
-
-  const WithProfileLink = ({ children }) =>
-    comment.writerHiddenFlag ? (
-      children
-    ) : (
-      <Link href={`/profile/${comment.studentId}`} passHref>
-        {children}
-      </Link>
-    );
 
   return (
     <div className={styles.comment}>

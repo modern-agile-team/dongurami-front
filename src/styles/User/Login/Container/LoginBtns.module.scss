@@ -1,0 +1,22 @@
+.loginBtn {
+  margin-bottom: 1.5em;
+  width: 60%;
+  height: 50px;
+  font-size: 100%;
+  border-radius: 5px;
+  border: 1.5px solid #90cec7cb;
+  background-color: #fff;
+  color: #3fcdb8;
+  cursor: pointer;
+  @media screen and (max-width: 480px) {
+    margin-bottom: 2rem;
+    height: 40px;
+    button {
+      height: 40px;
+      margin-bottom: 5%;
+    }
+  }
+  &:hover {
+    filter: brightness(96%);
+  }
+}
