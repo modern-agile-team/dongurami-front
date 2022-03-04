@@ -104,6 +104,7 @@ function Post({
                   setOpenOptions={setOpenOptions}
                   setOpenMessage={setOpenMessage}
                   routePath={`/profile/${post.studentId}`}
+                  isPost
                 />
               )}
 

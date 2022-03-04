@@ -62,6 +62,7 @@ const Header = ({
                 setOpenOptions={setOpenOptions}
                 setOpenMessage={setOpenMessage}
                 routePath={`/profile/${post.studentId}`}
+                isPost
               />
             )}
             <span onClick={() => setOpenOptions(!openOptions)}>{name}</span>
