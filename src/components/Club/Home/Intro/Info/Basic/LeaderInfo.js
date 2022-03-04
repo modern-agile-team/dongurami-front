@@ -29,6 +29,7 @@ const LeaderInfo = ({
           setOpenOptions={setOpenOptions}
           setOpenMessage={setOpenMessage}
           routePath={`/profile/${infos.id}`}
+          clubLeader
         />
       )}
       {openMessage && (

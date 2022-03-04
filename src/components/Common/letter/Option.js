@@ -10,7 +10,9 @@ const Option = ({
   routePath,
   comment,
   sendMessage,
-  setIsComment
+  setIsComment,
+  isPost,
+  clubLeader
 }) => {
   const ref = useRef(null);
   const user = useSelector((state) => state.user);
@@ -37,7 +39,6 @@ const Option = ({
           <li
             className={styles.send}
             onClick={() => {
-              console.log(comment);
               if (setOpenMessage && !sendMessage) setOpenMessage(true);
               else if (sendMessage) {
                 sendMessage(comment);
@@ -49,15 +50,13 @@ const Option = ({
             쪽지 보내기
           </li>
         )}
-        {post?.studentId !== '익명' ||
-          (comment?.writerHiddenFlag === 0 && (
-            <li
-              className={styles.profile}
-              onClick={() => router.push(routePath)}
-            >
-              프로필
-            </li>
-          ))}
+        {((isPost && post?.studentName !== '익명') ||
+          comment?.writerHiddenFlag === 0 ||
+          clubLeader) && (
+          <li className={styles.profile} onClick={() => router.push(routePath)}>
+            프로필
+          </li>
+        )}
       </ul>
     </div>
   );
