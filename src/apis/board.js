@@ -85,7 +85,8 @@ export function makeCommentAlarm({
         `api/notification/reply-comment/${category}/${pid}/${cmtNum}`,
         {
           replyCmtDescription: cmtDescription,
-          notiCategoryNum
+          notiCategoryNum,
+          hiddenFlag
         }
       )
     : instance.post(`api/notification/comment/${category}/${pid}`, {
