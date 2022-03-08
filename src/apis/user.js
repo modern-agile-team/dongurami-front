@@ -37,7 +37,7 @@ export const patchChangePW = (data) => {
 
 //oAuth
 export const getNaverOauth = (token) => {
-  return instance.get(`api/naver/login?token=${token}`);
+  return instance.get(`api/naver/login?${token}`);
 };
 
 //네이버로 회원가입
