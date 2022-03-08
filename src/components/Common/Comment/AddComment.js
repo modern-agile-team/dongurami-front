@@ -38,12 +38,13 @@ function AddComment({ parentCommentID, scroll }) {
         hiddenFlag: Number(Boolean(isAnon))
       })
       .catch((err) => console.log(err.response));
-    await makeCommentAlarm(
-      post.category,
-      post.no,
-      description,
-      parentCommentID
-    ).catch((err) => console.log(err.response));
+    await makeCommentAlarm({
+      category: post.category,
+      pid: post.no,
+      cmtDescription: description,
+      cmtNum: parentCommentID,
+      hiddenFlag: Number(Boolean(isAnon))
+    }).catch((err) => console.log(err.response));
 
     setDescription('');
     dispatch(getPost());

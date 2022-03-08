@@ -22,8 +22,7 @@ function getQuery(router) {
 }
 
 function Board({ category }) {
-  const [isLoading, setIsLoading] = useState(true);
-
+  const isLoading = useSelector((state) => state.board.loading);
   const router = useRouter();
   const posts = useSelector((state) => state.board.posts);
   const user = useSelector((state) => state.user);
@@ -84,11 +83,6 @@ function Board({ category }) {
   })();
 
   const postsByPage = posts.slice(10 * (page - 1), 10 * page);
-
-  useEffect(() => {
-    if (postsByPage.length > 0) setIsLoading(false);
-    else setIsLoading(true);
-  }, [postsByPage]);
 
   return (
     <div className={styles.container}>

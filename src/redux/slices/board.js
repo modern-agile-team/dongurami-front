@@ -31,15 +31,24 @@ const getBoardPosts = createAsyncThunk(
 
 const boardSlice = createSlice({
   name: 'board',
-  initialState: { posts: [] },
+  initialState: { posts: [], loading: true },
   reducers: {
     clear() {
-      return { posts: [] };
+      return { posts: [], loading: true };
     }
   },
   extraReducers: (builder) => {
     builder.addCase(getBoardPosts.fulfilled, (state, action) => {
-      state.posts = action.payload;
+      return {
+        posts: action.payload,
+        loading: false
+      };
+    });
+    builder.addCase(getBoardPosts.pending, (state) => {
+      return {
+        ...state,
+        loading: true
+      };
     });
   }
 });
