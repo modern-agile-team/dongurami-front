@@ -72,7 +72,13 @@ export function putPost(category, pid, body, clubNum) {
   return instance.put(`/api/board/${category}/${pid}`, body);
 }
 
-export function makeCommentAlarm(category, pid, cmtDescription, cmtNum) {
+export function makeCommentAlarm({
+  category,
+  pid,
+  cmtDescription,
+  cmtNum,
+  hiddenFlag
+}) {
   const notiCategoryNum = cmtNum === undefined ? 0 : 1;
   return notiCategoryNum
     ? instance.post(
@@ -84,7 +90,8 @@ export function makeCommentAlarm(category, pid, cmtDescription, cmtNum) {
       )
     : instance.post(`api/notification/comment/${category}/${pid}`, {
         cmtDescription,
-        notiCategoryNum
+        notiCategoryNum,
+        hiddenFlag
       });
 }
 
