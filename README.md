@@ -150,7 +150,7 @@
 <br/>
 <br/>
        
-## 📄 커밋 전략
+## 📄 커밋 전략♡
        
 ![Commit Stratage](https://user-images.githubusercontent.com/63432381/147808512-2a696e77-2e23-4608-9715-9d257baf6e0d.png)
 
